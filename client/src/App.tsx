@@ -31,7 +31,7 @@ function App() {
         // switchable
       >
         <TooltipProvider>
-          <Toaster />
+          <Toaster richColors />
           <Router />
         </TooltipProvider>
       </ThemeProvider>
