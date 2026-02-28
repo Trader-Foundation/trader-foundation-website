@@ -40,8 +40,8 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-  --font-sans: 'Libre Franklin', sans-serif;
-  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'DM Sans', sans-serif;
+  --font-heading: 'Sen', sans-serif;
   --color-gold: oklch(0.75 0.06 80);
   --color-gold-light: oklch(0.85 0.04 80);
   --color-gold-dark: oklch(0.60 0.07 80);
@@ -91,10 +91,11 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-family: 'Libre Franklin', sans-serif;
+    font-family: 'DM Sans', sans-serif;
   }
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-family: 'Sen', sans-serif;
+    font-weight: 700;
   }
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),

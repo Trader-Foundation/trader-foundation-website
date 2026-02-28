@@ -1,7 +1,6 @@
 /*
  * Navigation Component — Trader Foundation
- * Design: "The Academy" — Ivy League Digital Campus
- * Transparent navbar that solidifies on scroll, gold logo accent, clean serif/sans pairing
+ * Fonts: Sen (bold headings), DM Sans (body/nav links) — matching GOAT Academy style
  */
 
 import { useState, useEffect } from 'react';
@@ -47,18 +46,18 @@ export default function Navigation() {
             />
             <div className="flex flex-col leading-tight">
               <span
-                className={`text-[0.65rem] font-semibold tracking-[0.35em] uppercase transition-colors duration-500 ${
+                className={`text-[0.65rem] font-bold tracking-[0.35em] uppercase transition-colors duration-500 ${
                   scrolled ? 'text-[#1a1a1a]' : 'text-white'
                 }`}
-                style={{ fontFamily: "'Libre Franklin', sans-serif" }}
+                style={{ fontFamily: "'DM Sans', sans-serif" }}
               >
                 Trader
               </span>
               <span
-                className={`text-[1.1rem] font-medium tracking-[0.15em] transition-colors duration-500 ${
+                className={`text-[1.15rem] font-extrabold tracking-[0.08em] uppercase transition-colors duration-500 ${
                   scrolled ? 'text-[#1a1a1a]' : 'text-white'
                 }`}
-                style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 600 }}
+                style={{ fontFamily: "'Sen', sans-serif" }}
               >
                 Foundation
               </span>
@@ -71,12 +70,12 @@ export default function Navigation() {
               <a
                 key={link.label}
                 href={link.href}
-                className={`relative text-[0.8rem] font-medium tracking-[0.1em] uppercase transition-colors duration-300 after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1.5px] after:bg-[#c7ab77] after:transition-all after:duration-300 hover:after:w-full ${
+                className={`relative text-[0.85rem] font-medium transition-colors duration-300 after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1.5px] after:bg-[#c7ab77] after:transition-all after:duration-300 hover:after:w-full ${
                   scrolled
                     ? 'text-[#2c2c2c] hover:text-[#c7ab77]'
                     : 'text-white/90 hover:text-white'
                 }`}
-                style={{ fontFamily: "'Libre Franklin', sans-serif" }}
+                style={{ fontFamily: "'DM Sans', sans-serif" }}
               >
                 {link.label}
               </a>
@@ -87,8 +86,8 @@ export default function Navigation() {
           <div className="hidden md:block">
             <a
               href="#masterclass"
-              className="inline-flex items-center gap-2 px-6 py-2.5 bg-[#c7ab77] text-[#111] text-[0.75rem] font-semibold tracking-[0.15em] uppercase transition-all duration-300 hover:bg-[#b89a66] hover:shadow-lg"
-              style={{ fontFamily: "'Libre Franklin', sans-serif" }}
+              className="inline-flex items-center gap-2 px-6 py-2.5 bg-[#c7ab77] text-[#111] text-[0.8rem] font-bold tracking-wide rounded-sm transition-all duration-300 hover:bg-[#b89a66] hover:shadow-lg"
+              style={{ fontFamily: "'DM Sans', sans-serif" }}
             >
               Watch The Masterclass
             </a>
@@ -119,8 +118,8 @@ export default function Navigation() {
               key={link.label}
               href={link.href}
               onClick={() => setMobileOpen(false)}
-              className="block text-[0.8rem] font-medium tracking-[0.1em] uppercase text-[#2c2c2c] hover:text-[#c7ab77] transition-colors"
-              style={{ fontFamily: "'Libre Franklin', sans-serif" }}
+              className="block text-[0.85rem] font-medium text-[#2c2c2c] hover:text-[#c7ab77] transition-colors"
+              style={{ fontFamily: "'DM Sans', sans-serif" }}
             >
               {link.label}
             </a>
@@ -128,8 +127,8 @@ export default function Navigation() {
           <a
             href="#masterclass"
             onClick={() => setMobileOpen(false)}
-            className="block text-center px-6 py-3 bg-[#c7ab77] text-[#111] text-[0.75rem] font-semibold tracking-[0.15em] uppercase"
-            style={{ fontFamily: "'Libre Franklin', sans-serif" }}
+            className="block text-center px-6 py-3 bg-[#c7ab77] text-[#111] text-[0.8rem] font-bold tracking-wide rounded-sm"
+            style={{ fontFamily: "'DM Sans', sans-serif" }}
           >
             Watch The Masterclass
           </a>

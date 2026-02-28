@@ -1,7 +1,6 @@
 /*
  * CTA Section — Trader Foundation
- * Design: Dark background with centered CTA, gold accents
- * Purpose: Final conversion push — watch the masterclass / book a call
+ * Fonts: Sen (headings), DM Sans (body)
  */
 
 import { useEffect, useRef, useState } from 'react';
@@ -37,53 +36,41 @@ export default function CTASection() {
       ref={sectionRef}
       className="relative py-28 sm:py-36 overflow-hidden"
     >
-      {/* Background */}
       <div className="absolute inset-0">
-        <img
-          src={HERO_BG}
-          alt=""
-          className="w-full h-full object-cover"
-        />
+        <img src={HERO_BG} alt="" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-[#0a0a0a]/80" />
       </div>
 
       <div className="relative z-10 max-w-[800px] mx-auto px-6 lg:px-8 text-center">
-        {/* Gold line */}
-        <div
-          className={`w-16 h-[2px] bg-[#c7ab77] mx-auto mb-8 transition-all duration-700 ${
-            isVisible ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'
-          }`}
-        />
-
         <span
-          className={`text-[0.7rem] font-semibold tracking-[0.3em] uppercase text-[#c7ab77] transition-all duration-700 delay-100 ${
+          className={`text-[0.75rem] font-bold tracking-[0.2em] uppercase text-[#c7ab77] transition-all duration-700 delay-100 ${
             isVisible ? 'opacity-100' : 'opacity-0'
           }`}
-          style={{ fontFamily: "'Libre Franklin', sans-serif" }}
+          style={{ fontFamily: "'DM Sans', sans-serif" }}
         >
           Your Next Step
         </span>
 
         <h2
-          className={`mt-6 text-[2rem] sm:text-[2.8rem] lg:text-[3.5rem] font-light text-white leading-[1.15] transition-all duration-700 delay-200 ${
+          className={`mt-6 text-[2rem] sm:text-[2.5rem] lg:text-[3.2rem] font-extrabold text-white leading-[1.15] transition-all duration-700 delay-200 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
           }`}
-          style={{ fontFamily: "'Cormorant Garamond', serif" }}
+          style={{ fontFamily: "'Sen', sans-serif" }}
         >
           Ready to Build a Skill
           <br />
           That Lasts a{' '}
-          <span className="font-semibold italic text-[#c7ab77]">Lifetime</span>?
+          <span className="text-[#c7ab77]">Lifetime</span>?
         </h2>
 
         <p
           className={`mt-6 text-white/50 text-base sm:text-lg leading-relaxed max-w-xl mx-auto transition-all duration-700 delay-300 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
           }`}
-          style={{ fontFamily: "'Libre Franklin', sans-serif", fontWeight: 300 }}
+          style={{ fontFamily: "'DM Sans', sans-serif" }}
         >
-          Watch our masterclass to discover how hardworking professionals are learning
-          to trade confidently in just 10 minutes a day — without quitting their careers.
+          Watch our masterclass to see how busy professionals are learning
+          to trade confidently in just 10 minutes a day.
         </p>
 
         <div
@@ -93,16 +80,16 @@ export default function CTASection() {
         >
           <a
             href="#"
-            className="group inline-flex items-center gap-3 px-10 py-4 bg-[#c7ab77] text-[#111] text-[0.8rem] font-semibold tracking-[0.2em] uppercase transition-all duration-300 hover:bg-[#b89a66] hover:shadow-[0_8px_30px_rgba(199,171,119,0.3)]"
-            style={{ fontFamily: "'Libre Franklin', sans-serif" }}
+            className="group inline-flex items-center gap-3 px-10 py-4 bg-[#c7ab77] text-[#111] text-[0.85rem] font-bold tracking-wide rounded-sm transition-all duration-300 hover:bg-[#b89a66] hover:shadow-[0_8px_30px_rgba(199,171,119,0.3)]"
+            style={{ fontFamily: "'DM Sans', sans-serif" }}
           >
             <Play size={16} />
             Watch The Masterclass
           </a>
           <a
             href="#"
-            className="group inline-flex items-center gap-3 px-10 py-4 border border-white/20 text-white text-[0.8rem] font-medium tracking-[0.15em] uppercase transition-all duration-300 hover:border-[#c7ab77]/50 hover:text-[#c7ab77]"
-            style={{ fontFamily: "'Libre Franklin', sans-serif" }}
+            className="group inline-flex items-center gap-3 px-10 py-4 border border-white/20 text-white text-[0.85rem] font-medium tracking-wide rounded-sm transition-all duration-300 hover:border-[#c7ab77]/50 hover:text-[#c7ab77]"
+            style={{ fontFamily: "'DM Sans', sans-serif" }}
           >
             Book a Call
             <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />

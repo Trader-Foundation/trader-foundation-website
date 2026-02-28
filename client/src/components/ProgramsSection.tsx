@@ -1,7 +1,7 @@
 /*
  * Programs Section — Trader Foundation
- * Design: Dark background section with cards, gold accents
- * Purpose: Showcase what the academy offers, build value
+ * Fonts: Sen (headings), DM Sans (body) — bold, clean
+ * Copy: Direct, no fluff
  */
 
 import { useEffect, useRef, useState } from 'react';
@@ -13,32 +13,32 @@ const features = [
   {
     icon: BookOpen,
     title: 'Comprehensive Curriculum',
-    description: 'From the basics of options to advanced swing trading strategies — structured learning that builds on itself.',
+    description: 'From options basics to advanced swing trading — structured learning that builds on itself.',
   },
   {
     icon: LineChart,
     title: 'Live Trading Rooms',
-    description: 'Watch real trades unfold in real time. Learn to read the market alongside experienced coaches.',
+    description: 'Watch real trades unfold in real time alongside experienced coaches.',
   },
   {
     icon: Clock,
     title: '10-Minute Strategy',
-    description: 'Our swing trading approach fits into your lunch break. Screen stocks, set your play, and let the market work for you.',
+    description: 'Screen stocks, set your play, and let the market work. Fits into your lunch break.',
   },
   {
     icon: TrendingUp,
     title: 'Time Machine Review',
-    description: 'Practice trades are reviewed before you risk real capital. We make sure you truly understand before going live.',
+    description: 'Practice trades reviewed before you risk real capital. Learn before you earn.',
   },
   {
     icon: Headphones,
     title: 'Direct Coach Access',
-    description: 'Real 1-on-1 sessions with your personal coach — not group calls. Your questions, your trades, your progress.',
+    description: 'Real 1-on-1 sessions with your personal coach. Your questions, your trades.',
   },
   {
     icon: Award,
     title: 'Lifetime Community',
-    description: 'Join a network of serious traders. Daily mastermind meetings, shared insights, and ongoing support.',
+    description: 'Daily mastermind meetings, shared insights, and ongoing support from serious traders.',
   },
 ];
 
@@ -72,49 +72,39 @@ export default function ProgramsSection() {
     >
       {/* Background image with overlay */}
       <div className="absolute inset-0 opacity-[0.06]">
-        <img
-          src={CHARTS_IMG}
-          alt=""
-          className="w-full h-full object-cover"
-        />
+        <img src={CHARTS_IMG} alt="" className="w-full h-full object-cover" />
       </div>
 
-      {/* Top gold line */}
       <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#c7ab77]/30 to-transparent" />
 
       <div className="relative z-10 max-w-[1320px] mx-auto px-6 lg:px-8">
         {/* Section Header */}
         <div className="max-w-3xl mx-auto text-center mb-20">
-          <div
-            className={`w-12 h-[2px] bg-[#c7ab77] mx-auto mb-6 transition-all duration-700 ${
-              isVisible ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'
-            }`}
-          />
           <span
-            className={`text-[0.7rem] font-semibold tracking-[0.3em] uppercase text-[#c7ab77] transition-all duration-700 delay-100 ${
+            className={`text-[0.75rem] font-bold tracking-[0.2em] uppercase text-[#c7ab77] transition-all duration-700 delay-100 ${
               isVisible ? 'opacity-100' : 'opacity-0'
             }`}
-            style={{ fontFamily: "'Libre Franklin', sans-serif" }}
+            style={{ fontFamily: "'DM Sans', sans-serif" }}
           >
             What We Offer
           </span>
           <h2
-            className={`mt-4 text-[2.2rem] sm:text-[2.8rem] lg:text-[3.2rem] font-light text-white leading-[1.15] transition-all duration-700 delay-200 ${
+            className={`mt-4 text-[2rem] sm:text-[2.5rem] lg:text-[3rem] font-extrabold text-white leading-[1.15] transition-all duration-700 delay-200 ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
             }`}
-            style={{ fontFamily: "'Cormorant Garamond', serif" }}
+            style={{ fontFamily: "'Sen', sans-serif" }}
           >
             Everything You Need to{' '}
-            <span className="font-semibold italic text-[#c7ab77]">Trade With Confidence</span>
+            <span className="text-[#c7ab77]">Trade With Confidence</span>
           </h2>
           <p
             className={`mt-6 text-white/50 text-base sm:text-lg leading-relaxed transition-all duration-700 delay-300 ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
             }`}
-            style={{ fontFamily: "'Libre Franklin', sans-serif", fontWeight: 300 }}
+            style={{ fontFamily: "'DM Sans', sans-serif" }}
           >
-            The Trading Clarity System is designed to take you from wherever you are now
-            to becoming a confident, independent trader — step by step.
+            The Trading Clarity System takes you from wherever you are now
+            to confident, independent trader — step by step.
           </p>
         </div>
 
@@ -123,28 +113,23 @@ export default function ProgramsSection() {
           {features.map((feature, index) => (
             <div
               key={feature.title}
-              className={`group relative p-8 border border-white/[0.06] bg-white/[0.02] backdrop-blur-sm transition-all duration-500 hover:border-[#c7ab77]/30 hover:bg-white/[0.04] ${
+              className={`group relative p-8 border border-white/[0.06] bg-white/[0.02] backdrop-blur-sm rounded-sm transition-all duration-500 hover:border-[#c7ab77]/30 hover:bg-white/[0.04] ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               }`}
               style={{ transitionDelay: `${300 + index * 100}ms` }}
             >
-              {/* Gold top accent on hover */}
               <div className="absolute top-0 left-0 right-0 h-[2px] bg-[#c7ab77] scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
 
-              <feature.icon
-                size={28}
-                className="text-[#c7ab77] mb-5"
-                strokeWidth={1.2}
-              />
+              <feature.icon size={28} className="text-[#c7ab77] mb-5" strokeWidth={1.2} />
               <h3
-                className="text-[1.2rem] font-semibold text-white mb-3"
-                style={{ fontFamily: "'Cormorant Garamond', serif" }}
+                className="text-[1.1rem] font-bold text-white mb-3"
+                style={{ fontFamily: "'Sen', sans-serif" }}
               >
                 {feature.title}
               </h3>
               <p
                 className="text-white/45 text-[0.85rem] leading-relaxed"
-                style={{ fontFamily: "'Libre Franklin', sans-serif", fontWeight: 300 }}
+                style={{ fontFamily: "'DM Sans', sans-serif" }}
               >
                 {feature.description}
               </p>
@@ -160,15 +145,14 @@ export default function ProgramsSection() {
         >
           <a
             href="#masterclass"
-            className="inline-flex items-center gap-3 px-10 py-4 bg-[#c7ab77] text-[#111] text-[0.8rem] font-semibold tracking-[0.2em] uppercase transition-all duration-300 hover:bg-[#b89a66] hover:shadow-[0_8px_30px_rgba(199,171,119,0.25)]"
-            style={{ fontFamily: "'Libre Franklin', sans-serif" }}
+            className="inline-flex items-center gap-3 px-10 py-4 bg-[#c7ab77] text-[#111] text-[0.85rem] font-bold tracking-wide rounded-sm transition-all duration-300 hover:bg-[#b89a66] hover:shadow-[0_8px_30px_rgba(199,171,119,0.25)]"
+            style={{ fontFamily: "'DM Sans', sans-serif" }}
           >
             Start Your Journey
           </a>
         </div>
       </div>
 
-      {/* Bottom gold line */}
       <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#c7ab77]/30 to-transparent" />
     </section>
   );
