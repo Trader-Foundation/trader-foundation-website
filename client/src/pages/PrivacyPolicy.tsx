@@ -22,8 +22,6 @@ export default function PrivacyPolicy() {
         to the collection and use of information in accordance with this Privacy Policy.
       </p>
 
-      <h2>Interpretation and Definitions</h2>
-
       <h3>Interpretation</h3>
       <p>
         The words of which the initial letter is capitalized have meanings defined under the following
@@ -40,7 +38,7 @@ export default function PrivacyPolicy() {
         </li>
         <li>
           <strong>Company</strong> (referred to as either "the Company", "We", "Us" or "Our" in this
-          Agreement) refers to Trader Foundation LLC, 425 Allentown Dr Allentown PA 18109.
+          Agreement) refers to Trader Foundation LLC.
         </li>
         <li>
           <strong>Cookies</strong> are small files that are placed on Your computer, mobile device or
@@ -82,8 +80,6 @@ export default function PrivacyPolicy() {
           applicable.
         </li>
       </ul>
-
-      <h2>Collecting and Using Your Personal Data</h2>
 
       <h3>Types of Data Collected</h3>
 
