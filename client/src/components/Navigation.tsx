@@ -85,7 +85,7 @@ export default function Navigation() {
           {/* CTA Button */}
           <div className="hidden md:block">
             <a
-              href="#masterclass"
+              href="https://start.traderfoundation.co/trade"
               className="inline-flex items-center gap-2 px-6 py-2.5 bg-[#c7ab77] text-[#111] text-[0.8rem] font-bold tracking-wide rounded-sm transition-all duration-300 hover:bg-[#b89a66] hover:shadow-lg"
               style={{ fontFamily: "'DM Sans', sans-serif" }}
             >

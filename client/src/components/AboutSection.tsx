@@ -88,7 +88,7 @@ export default function AboutSection() {
             style={{ fontFamily: "'DM Sans', sans-serif" }}
           >
             Built for hardworking professionals who are tired of courses that over-promise
-            and under-deliver. We teach a real, repeatable skill — not shortcuts.
+            and under-deliver. We teach a real, repeatable skill,  not shortcuts.
           </p>
         </div>
 
