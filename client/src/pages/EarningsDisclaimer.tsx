@@ -1,5 +1,6 @@
 /*
  * Earnings Disclaimer — Trader Foundation Academy
+ * Content provided by the client
  */
 
 import LegalPageLayout from '@/components/LegalPageLayout';
@@ -7,92 +8,134 @@ import LegalPageLayout from '@/components/LegalPageLayout';
 export default function EarningsDisclaimer() {
   return (
     <LegalPageLayout title="Earnings Disclaimer" breadcrumb="Earnings Disclaimer">
+
       <p>
-        <strong>
-          The information provided by Trader Foundation LLC ("Company", "we", "our", "us") on
-          https://trader.foundation/ (the "Site") is for general informational and educational
-          purposes only. All information on the Site is provided in good faith, however we make no
-          representation or warranty of any kind, express or implied, regarding the accuracy,
-          adequacy, validity, reliability, availability, or completeness of any information on the
-          Site.
-        </strong>
+        If you do not agree with the terms of this disclaimer, please exit this site immediately. Your
+        continued use of this website or the information provided here signifies your consent to these
+        terms.
       </p>
 
-      <h2>No Earnings Guarantees</h2>
+      <h2>No Professional-Client Relationship</h2>
       <p>
-        You acknowledge that there are no guarantees of specific results or earnings made by Trader
-        Foundation LLC. You understand that results vary and depend on many factors including but not
-        limited to your background, experience, and work ethic. Every business and trading endeavor
-        involves risk, and requires consistent effort and action. If you are not willing to accept
-        that, this program is not for you.
+        Your use of this website — including the application of any suggestions found here or the use
+        of any resources — does not create a professional-client relationship between you and Trader
+        Foundation LLC or any of its professionals.
+      </p>
+      <p>
+        Trader Foundation LLC cannot accept you as a client unless and until we determine a proper fit
+        and finalize arrangements, such as fees. As such, you acknowledge and agree that using this
+        website does not establish any professional-client relationship.
       </p>
 
-      <h2>Not Financial Advice</h2>
+      <h2>User Responsibility</h2>
       <p>
-        The content on this website, including but not limited to text, graphics, images, and other
-        material, is for informational and educational purposes only. It is not intended to be a
-        substitute for professional financial advice. Always seek the advice of a qualified financial
-        advisor with any questions you may have regarding your financial situation. Never disregard
-        professional financial advice or delay in seeking it because of something you have read on
-        this website.
+        By using this website, you accept full responsibility for your actions. You agree to take full
+        accountability for any harm or damage you experience due to the use, or non-use, of the
+        information on this website or any downloadable resources. It is your responsibility to
+        exercise sound judgment and conduct your own research before taking any action or implementing
+        any advice provided here.
       </p>
 
-      <h2>Testimonials and Examples</h2>
+      <h2>Errors and Omissions</h2>
       <p>
-        Any earnings or income statements, or earnings or income examples, are only estimates of what
-        we think you could potentially earn. There is no assurance you will do as well. If you rely
-        upon our figures, you must accept the risk of not doing as well.
-      </p>
-      <p>
-        Where specific income figures are used, and attributed to an individual or business, those
-        persons or businesses have earned that amount. There is no assurance you will do as well.
-        If you rely upon our figures, you must accept the risk of not doing as well.
-      </p>
-      <p>
-        Any and all claims or representations, as to income earnings on this website, are not to be
-        considered as average earnings. Testimonials are not representative of all client experiences.
-        Individual results will vary. The testimonials displayed are given verbatim except for
-        correction of grammatical or typing errors. Some have been shortened, meaning not the whole
-        message received by the testimony writer is displayed.
+        While we have made every effort to ensure the accuracy of the information on this website, we
+        cannot guarantee that it is free from errors or that it is completely up-to-date. The internet
+        is a vast resource, and not all information is reliable. You agree to verify the information
+        from this website through your own due diligence before making any decisions or taking any
+        action.
       </p>
 
-      <h2>Forward-Looking Statements</h2>
+      <h2>Reviews</h2>
       <p>
-        Materials on this Site may contain information that includes or is based upon forward-looking
-        statements within the meaning of the securities litigation reform act of 1995. Forward-looking
-        statements give our expectations or forecasts of future events. You can identify these
-        statements by the fact that they do not relate strictly to historical or current facts. They
-        use words such as "anticipate", "estimate", "expect", "project", "intend", "plan", "believe",
-        and other words and terms of similar meaning in connection with a description of potential
-        earnings or financial performance.
+        Occasionally, we may provide reviews of services, books, software, or products, reflecting our
+        honest opinion. Some products may have been provided at a discount or free of charge in
+        exchange for a review. Despite these discounts, we aim to offer unbiased feedback. However, you
+        should not rely solely on these reviews and should conduct your own research before making any
+        purchasing decisions.
       </p>
 
-      <h2>Due Diligence</h2>
+      <h2>No Endorsements</h2>
       <p>
-        You are advised to do your own due diligence when it comes to making financial and business
-        decisions and should use caution and seek the advice of qualified professionals. You should
-        check with your accountant, lawyer, or professional advisor before acting on any information
-        provided by Trader Foundation LLC. You alone are responsible and accountable for your decisions,
-        actions, and results in life, and by your use of this website, you agree not to attempt to hold
-        us liable for any such decisions, actions, or results, at any time, under any circumstance.
+        From time to time, Trader Foundation LLC may refer to other products, services, professionals,
+        or resources. These references are provided for informational purposes only and should not be
+        seen as endorsements or guarantees of accuracy. You are responsible for performing your own
+        evaluation and decision-making regarding these references.
       </p>
 
-      <h2>Assumption of Risk</h2>
+      <h2>Testimonials</h2>
       <p>
-        Trading and investing involve substantial risk. You should be aware of the real risk of loss in
-        following any strategy or investment discussed on this website. Strategies or investments
-        discussed may fluctuate in price or value. Investors may get back less than invested. Investments
-        or strategies mentioned on this website may not be suitable for you. This material does not take
-        into account your particular investment objectives, financial situation, or needs and is not
-        intended as a recommendation appropriate for you. You must make an independent decision regarding
-        investments or strategies mentioned on this website. Before acting on information on this website,
-        you should consider whether it is suitable for your particular circumstances and strongly consider
-        seeking advice from your own financial or investment adviser.
+        Certain areas of this website may contain testimonials from past clients or customers. These
+        testimonials reflect real experiences, but they do not guarantee that you will achieve the same
+        results. We may edit testimonials for brevity, and in some cases, we may change names for
+        privacy reasons.
+      </p>
+      <p>
+        By reading these testimonials, you acknowledge that they represent the individual experiences
+        of others, and your results may vary, potentially yielding less or no success at all.
       </p>
 
-      <p className="mt-12 text-sm text-[#999]">
-        <em>Last updated: March 2026</em>
+      <h2>Earnings Disclaimer</h2>
+      <p>
+        From time to time, we may share the successes of past or current clients. However, you
+        understand that their results are not guaranteed to reflect your own. As with any business or
+        investment venture, your outcomes will depend on factors such as your knowledge, experience,
+        effort, and determination. There are no guarantees of income or success, and you accept the
+        inherent risks involved.
       </p>
+      <p>
+        Each individual's success is based on their specific circumstances, including background,
+        resources, motivation, and commitment.
+      </p>
+      <p>
+        Any use of the information, products, or services provided should be based on your own
+        investigation, and you agree that Trader Foundation LLC is not responsible for your success or
+        failure.
+      </p>
+
+      <h2>Past Results and Examples</h2>
+      <p>
+        You acknowledge that past performance is not a predictor of future outcomes. The results
+        achieved by others, including case studies and examples provided, are meant as educational
+        tools and should not be interpreted as advice or recommendations for similar actions in your
+        investments or business.
+      </p>
+
+      <h2>No Guarantees or Warranties</h2>
+      <p>
+        You acknowledge that Trader Foundation LLC does not provide any warranties or guarantees
+        regarding the results of your actions. All information, products, and services offered are
+        provided "as-is," with no express or implied guarantees.
+      </p>
+      <p>
+        The content on our website is meant as educational material to assist users with their
+        financial, business, and personal endeavors. However, your success or failure depends on
+        factors beyond our control, including your own efforts, knowledge, circumstances, and
+        commitment.
+      </p>
+
+      <h2>Limitation of Liability</h2>
+      <p>
+        You agree to release Trader Foundation LLC from any and all liability for any losses or
+        damages you may incur as a result of using the information provided on this website or from
+        any downloadable resources. We are not liable for any direct, indirect, incidental, or
+        consequential damages related to the use or performance of this website or its content.
+      </p>
+      <p>
+        Trader Foundation LLC makes no claims about the suitability, accuracy, or reliability of the
+        information, services, or products provided. Any use of the website or reliance on the
+        information provided is at your own risk.
+      </p>
+      <p>
+        If you are dissatisfied with any part of this website or the terms provided, your sole remedy
+        is to discontinue using the site.
+      </p>
+
+      <h2>Contact Us</h2>
+      <p>
+        If you have any questions regarding this disclaimer or the terms outlined, please contact us
+        through the contact form located on this website.
+      </p>
+
     </LegalPageLayout>
   );
 }
