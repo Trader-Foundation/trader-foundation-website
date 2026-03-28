@@ -126,15 +126,16 @@ export default function Footer() {
             className="text-white/30 text-xs leading-relaxed max-w-5xl"
             style={{ fontFamily: "'DM Sans', sans-serif" }}
           >
-            The content in this website is for informational and educational purposes only. It does
-            not constitute and should not be construed as financial or investment advice or an offer
-            to purchase or sell securities. The content is not personalized or tailored to a specific
-            person or group of persons, nor to their personal investment or financial needs. You
-            should consult a financial adviser or other investment professional authorized to provide
-            investment advice. Investing comes with risks, including the risk of loss. Presentations
-            of trades made by Trader Foundation or its personnel are not a guarantee that any
-            investment decision made by a student will be successful. Past performance is not a
-            guarantee of future performance.
+            This website and content are for informational purposes only. Trader Foundation LLC and
+            any subsidiaries (herein also referred to as Trader Foundation) are NOT registered as a
+            securities broker-dealer nor an investment advisor. No sponsorship of any company,
+            security, or trading platform/investment, nor accounting, legal, or tax advice, or
+            guarantee the adequacy, suitability, or completeness of any information. Always seek the
+            advice of a qualified securities professional before making any investment, and
+            investments and your understanding and ability to bear risk. Trader Foundation is not
+            liable for any damages. This site is not a part of the Facebook™ website or Facebook Inc.
+            Additionally, this site is NOT endorsed by Facebook™ in any way. FACEBOOK™ is a trademark
+            of FACEBOOK™, Inc.
           </p>
         </div>
 
