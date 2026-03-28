@@ -1,5 +1,5 @@
 /*
- * LegalPageLayout — Shared layout for all legal/policy pages
+ * LegalPageLayout, Shared layout for all legal/policy pages
  * Fonts: Sen (headings), DM Sans (body)
  * Colors: Black + Gold (#c7ab77) on warm ivory
  */

@@ -1,5 +1,5 @@
 /*
- * Footer — Trader Foundation
+ * Footer, Trader Foundation
  * Fonts: Sen (headings), DM Sans (body)
  */
 

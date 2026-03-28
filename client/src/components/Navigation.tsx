@@ -1,6 +1,6 @@
 /*
- * Navigation Component — Trader Foundation
- * Fonts: Sen (bold headings), DM Sans (body/nav links) — matching GOAT Academy style
+ * Navigation Component, Trader Foundation
+ * Fonts: Sen (bold headings), DM Sans (body/nav links), matching GOAT Academy style
  */
 
 import { useState, useEffect } from 'react';

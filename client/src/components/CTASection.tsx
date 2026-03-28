@@ -1,5 +1,5 @@
 /*
- * CTA Section — Trader Foundation
+ * CTA Section, Trader Foundation
  * Fonts: Sen (headings), DM Sans (body)
  */
 

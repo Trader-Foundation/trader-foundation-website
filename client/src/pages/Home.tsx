@@ -1,6 +1,6 @@
 /*
- * Home Page — Trader Foundation Academy
- * Design: "The Academy" — Ivy League Digital Campus
+ * Home Page, Trader Foundation Academy
+ * Design: "The Academy", Ivy League Digital Campus
  * Sections flow: Navigation → Hero → Stats → About → Programs → Results → CTA → Footer
  */
 

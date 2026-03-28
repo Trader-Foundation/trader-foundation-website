@@ -1,6 +1,6 @@
 /*
- * Hero Section — Trader Foundation
- * Fonts: Sen (bold headline), DM Sans (body) — punchy like GOAT Academy
+ * Hero Section, Trader Foundation
+ * Fonts: Sen (bold headline), DM Sans (body), punchy like GOAT Academy
  * Copy: Short, direct, no fluff. "Academy" emphasized.
  */
 
@@ -34,7 +34,7 @@ export default function HeroSection() {
       {/* Content */}
       <div className="relative z-10 max-w-[1320px] mx-auto px-6 lg:px-8 w-full pt-32 pb-24">
         <div className="max-w-2xl">
-          {/* Main Headline — bold, punchy, GOAT-style */}
+          {/* Main Headline, bold, punchy, GOAT-style */}
           <h1
             className={`transition-all duration-1000 delay-200 ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'

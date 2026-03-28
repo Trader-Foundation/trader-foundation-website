@@ -1,6 +1,6 @@
 /*
- * Programs Section — Trader Foundation
- * Fonts: Sen (headings), DM Sans (body) — bold, clean
+ * Programs Section, Trader Foundation
+ * Fonts: Sen (headings), DM Sans (body), bold, clean
  * Copy: Direct, no fluff
  */
 
@@ -13,7 +13,7 @@ const features = [
   {
     icon: BookOpen,
     title: 'Comprehensive Curriculum',
-    description: 'From options basics to advanced swing trading — structured learning that builds on itself.',
+    description: 'From options basics to advanced swing trading, structured learning that builds on itself.',
   },
   {
     icon: LineChart,
@@ -104,7 +104,7 @@ export default function ProgramsSection() {
             style={{ fontFamily: "'DM Sans', sans-serif" }}
           >
             The Trading Clarity System takes you from wherever you are now
-            to confident, independent trader — step by step.
+            to confident, independent trader, step by step.
           </p>
         </div>
 

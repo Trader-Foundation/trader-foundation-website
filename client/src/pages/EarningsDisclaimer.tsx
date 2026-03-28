@@ -1,5 +1,5 @@
 /*
- * Earnings Disclaimer — Trader Foundation Academy
+ * Earnings Disclaimer, Trader Foundation Academy
  * Content provided by the client
  */
 
@@ -17,8 +17,8 @@ export default function EarningsDisclaimer() {
 
       <h2>No Professional-Client Relationship</h2>
       <p>
-        Your use of this website — including the application of any suggestions found here or the use
-        of any resources — does not create a professional-client relationship between you and Trader
+        Your use of this website, including the application of any suggestions found here or the use
+        of any resources, does not create a professional-client relationship between you and Trader
         Foundation LLC or any of its professionals.
       </p>
       <p>

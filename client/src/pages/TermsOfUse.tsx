@@ -1,5 +1,5 @@
 /*
- * Terms of Service — Trader Foundation Academy
+ * Terms of Service, Trader Foundation Academy
  * Content provided by the client
  */
 
@@ -191,7 +191,7 @@ export default function TermsOfUse() {
         and email services, which allow feedback to us and real-time interaction between users, and
         other features which allow users to communicate with others. Responsibility for what is posted
         on bulletin boards, web logs, chat rooms, and other public posting areas on the Site, or sent
-        via any email services on the Site, lies with each user — you alone are responsible for the
+        via any email services on the Site, lies with each user, you alone are responsible for the
         material you post or send. We do not control the messages, information or files that you or
         others may provide through the Site. It is a condition of your use of the Site that you do
         not:

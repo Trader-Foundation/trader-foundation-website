@@ -1,6 +1,6 @@
 /*
- * About Section — Trader Foundation
- * Fonts: Sen (headings), DM Sans (body) — bold, clean, punchy
+ * About Section, Trader Foundation
+ * Fonts: Sen (headings), DM Sans (body), bold, clean, punchy
  * Copy: Direct, no fluff
  */
 
@@ -13,7 +13,7 @@ const pillars = [
   {
     icon: GraduationCap,
     title: '1-on-1 Mentorship',
-    description: 'Real individual coaching — not group calls disguised as personal attention.',
+    description: 'Real individual coaching, not group calls disguised as personal attention.',
   },
   {
     icon: Target,

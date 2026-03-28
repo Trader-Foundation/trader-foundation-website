@@ -1,5 +1,5 @@
 /*
- * Results Section — Trader Foundation
+ * Results Section, Trader Foundation
  * Fonts: Sen (headings), DM Sans (body)
  */
 
@@ -20,7 +20,7 @@ const testimonials = [
     initials: 'AS',
   },
   {
-    quote: "The daily mastermind sessions are invaluable. Being surrounded by serious traders who are all learning and growing together — it's like having a graduate cohort.",
+    quote: "The daily mastermind sessions are invaluable. Being surrounded by serious traders who are all learning and growing together, it's like having a graduate cohort.",
     name: 'Community Member',
     role: 'Project Manager',
     initials: 'CM',

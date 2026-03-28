@@ -1,5 +1,5 @@
 /*
- * Trading Disclaimer — Trader Foundation Academy
+ * Trading Disclaimer, Trader Foundation Academy
  * Content provided by the client
  */
 
@@ -66,7 +66,7 @@ export default function TradingDisclaimer() {
         planners.
       </p>
       <p>
-        Any examples of earnings, income, or performance results — whether hypothetical or actual —
+        Any examples of earnings, income, or performance results, whether hypothetical or actual -
         are provided for illustration only. Past successes or performance figures are not guarantees of
         future results.
       </p>
@@ -102,7 +102,7 @@ export default function TradingDisclaimer() {
         outcomes, and losses can exceed your initial investment.
       </p>
       <p>
-        You should only trade with risk capital — money you can afford to lose — since option trading
+        You should only trade with risk capital, money you can afford to lose, since option trading
         can result in losses that exceed your capital investment.
       </p>
       <p>

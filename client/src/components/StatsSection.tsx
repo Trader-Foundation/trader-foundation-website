@@ -1,6 +1,6 @@
 /*
- * Stats Section — Trader Foundation
- * Fonts: Sen (numbers), DM Sans (labels) — bold and punchy
+ * Stats Section, Trader Foundation
+ * Fonts: Sen (numbers), DM Sans (labels), bold and punchy
  * Animated counting numbers with gold accents
  */
 
