@@ -87,7 +87,7 @@ export default function CTASection() {
             Watch The Masterclass
           </a>
           <a
-            href="#"
+            href="https://start.traderfoundation.co/trade"
             className="group inline-flex items-center gap-3 px-10 py-4 border border-white/20 text-white text-[0.85rem] font-medium tracking-wide rounded-sm transition-all duration-300 hover:border-[#c7ab77]/50 hover:text-[#c7ab77]"
             style={{ fontFamily: "'DM Sans', sans-serif" }}
           >
