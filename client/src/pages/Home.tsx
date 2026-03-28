@@ -10,6 +10,7 @@ import StatsSection from '@/components/StatsSection';
 import AboutSection from '@/components/AboutSection';
 import ProgramsSection from '@/components/ProgramsSection';
 import ResultsSection from '@/components/ResultsSection';
+import PodcastSection from '@/components/PodcastSection';
 import CTASection from '@/components/CTASection';
 import Footer from '@/components/Footer';
 
@@ -22,6 +23,7 @@ export default function Home() {
       <AboutSection />
       <ProgramsSection />
       <ResultsSection />
+      <PodcastSection />
       <CTASection />
       <Footer />
     </div>
