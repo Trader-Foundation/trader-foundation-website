@@ -8,17 +8,11 @@ import { useEffect, useRef, useState } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 
-/* ── Placeholder avatar until real photos are provided ── */
-const PLACEHOLDER_AVATAR =
-  'data:image/svg+xml,' +
-  encodeURIComponent(
-    `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400">
-      <rect width="400" height="400" fill="#1a1a1a"/>
-      <circle cx="200" cy="155" r="65" fill="#c7ab77" opacity="0.3"/>
-      <ellipse cx="200" cy="340" rx="100" ry="80" fill="#c7ab77" opacity="0.2"/>
-      <text x="200" y="395" text-anchor="middle" fill="#c7ab77" font-family="sans-serif" font-size="14" opacity="0.6">Photo Coming Soon</text>
-    </svg>`
-  );
+/* ── Photo URLs ── */
+const VLAD_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/vlad_88bac4e2.jpg';
+const ELLIOT_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/elliot_7d09de2a.jpg';
+const ERIN_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/erin_93b42a5c.jpg';
+const LEO_PLACEHOLDER = 'data:image/svg+xml,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="400" height="500" viewBox="0 0 400 500"><rect width="400" height="500" fill="#1a1a1a"/><circle cx="200" cy="175" r="65" fill="#c7ab77" opacity="0.3"/><ellipse cx="200" cy="380" rx="100" ry="80" fill="#c7ab77" opacity="0.2"/><text x="200" y="470" text-anchor="middle" fill="#c7ab77" font-family="sans-serif" font-size="14" opacity="0.6">Photo Coming Soon</text></svg>`);
 
 /* ── Coach data ── */
 const coaches = [
@@ -26,7 +20,7 @@ const coaches = [
     name: 'Elliot Gumbs',
     title: 'Lead Mentor',
     experience: '10+ Years of Market Experience',
-    photo: PLACEHOLDER_AVATAR,
+    photo: ELLIOT_PHOTO,
     specialties: [
       'Options Trading Specialist: Expert in demystifying complex derivative strategies for retail traders.',
       'Lead Mentor at Trader Foundation: Instrumental in developing the "foundational" curriculum used by thousands of students.',
@@ -38,7 +32,7 @@ const coaches = [
     name: 'Erin Chawla',
     title: 'Senior Coach',
     experience: '11+ Years of Experience',
-    photo: PLACEHOLDER_AVATAR,
+    photo: ERIN_PHOTO,
     specialties: [
       'Correction Opportunity Specialist: Expert in identifying high-probability entry points during market pullbacks and structural corrections.',
       'High-Timeframe Precision: Focused exclusively on Weekly and Monthly charts to filter out market noise and capture major trend shifts.',
@@ -50,7 +44,7 @@ const coaches = [
     name: 'Leo Gonzalez',
     title: 'Senior Coach',
     experience: '13+ Years of Experience',
-    photo: PLACEHOLDER_AVATAR,
+    photo: LEO_PLACEHOLDER,
     specialties: [
       'Reversal Market Specialist: Expert in identifying trend exhaustion and pinpointing high-probability pivots before the broader market reacts.',
       'The "Paycheck Collector": Focused on generating consistent, repeatable cash flow through disciplined income-trading mechanics rather than speculative "moonshots."',
@@ -191,7 +185,7 @@ export default function About() {
               <div className="relative w-full max-w-[340px]">
                 <div className="absolute -inset-3 border border-[#c7ab77]/20 rounded-lg" />
                 <img
-                  src={PLACEHOLDER_AVATAR}
+                  src={VLAD_PHOTO}
                   alt="Vlad Tayman, Founder & CEO of Trader Foundation"
                   className="w-full aspect-[4/5] object-cover rounded-lg shadow-xl"
                 />
