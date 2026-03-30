@@ -21,11 +21,10 @@ const coaches = [
     title: 'Lead Mentor',
     experience: '10+ Years of Market Experience',
     photo: ELLIOT_PHOTO,
-    specialties: [
-      'Options Trading Specialist: Expert in demystifying complex derivative strategies for retail traders.',
-      'Lead Mentor at Trader Foundation: Instrumental in developing the "foundational" curriculum used by thousands of students.',
-      'Technical Analysis Pro: Specialized in price action and market structure to identify high-probability setups.',
-      'Community Pillar: Known for daily market meetups and real-time analysis that "lifts the fog" for developing traders.',
+    bio: [
+      'Options used to feel like a foreign language to me. I remember staring at chains of numbers, Greeks, and expiration dates thinking there had to be a simpler way to understand all of this. So I made it my mission to figure it out.',
+      'After a decade in the markets, I became the person I wish I had when I was starting out. I specialize in breaking down complex options strategies into plain English so that anyone, regardless of background, can trade with confidence.',
+      'As Lead Mentor at Trader Foundation, I helped build the curriculum that thousands of students now use every day. But what I am most proud of is the community. I host daily market meetups where we analyze setups together in real time. My students say I "lift the fog," and honestly, that is the best compliment I could ask for.',
     ],
   },
   {
@@ -33,11 +32,10 @@ const coaches = [
     title: 'Senior Coach',
     experience: '11+ Years of Experience',
     photo: ERIN_PHOTO,
-    specialties: [
-      'Correction Opportunity Specialist: Expert in identifying high-probability entry points during market pullbacks and structural corrections.',
-      'High-Timeframe Precision: Focused exclusively on Weekly and Monthly charts to filter out market noise and capture major trend shifts.',
-      'Strategic "Trigger" Execution: Known for disciplined execution, waiting for the exact technical alignment before deploying capital.',
-      'Wealth Generation Architect: Dedicated to long-term portfolio growth through swing trading methodologies and macro-cycle awareness.',
+    bio: [
+      'Most traders panic when the market pulls back. I get excited. After 11 years of studying market structure, I learned that corrections are not something to fear. They are where the best opportunities hide.',
+      'My approach is different from most. I only trade off Weekly and Monthly charts. No noise. No chasing. Just patience and precision. I wait for the exact moment when the technicals align, and then I execute. My students call it the "trigger" method, and it has changed the way they see the market.',
+      'What drives me is helping people build real, lasting wealth. Not through quick flips or day trading, but through disciplined swing trading and understanding where we are in the bigger cycle. If you are tired of reacting to the market and ready to start anticipating it, that is exactly what I teach.',
     ],
   },
   {
@@ -45,10 +43,10 @@ const coaches = [
     title: 'Senior Coach',
     experience: '13+ Years of Experience',
     photo: LEO_PLACEHOLDER,
-    specialties: [
-      'Reversal Market Specialist: Expert in identifying trend exhaustion and pinpointing high-probability pivots before the broader market reacts.',
-      'The "Paycheck Collector": Focused on generating consistent, repeatable cash flow through disciplined income-trading mechanics rather than speculative "moonshots."',
-      'Systematic Income Mentor: Dedicated to helping traders transition from gambling to a "business mindset," treating the markets as a reliable source of weekly or monthly income.',
+    bio: [
+      'For years, I watched traders blow up their accounts chasing the next big move. Meanwhile, I was quietly collecting consistent income from the market like clockwork. That is how I earned the nickname "The Paycheck Collector."',
+      'With 13 years of experience, I specialize in spotting reversals before the crowd catches on. I can read when a trend is exhausted and position myself at the pivot point. But what really sets my approach apart is the income side. I do not chase moonshots. I build trades designed to pay me week after week, month after month.',
+      'My mission at Trader Foundation is simple: help traders stop gambling and start treating the market like a business. If you want a reliable, repeatable system for generating cash flow, not just hoping for a lucky trade, that is what I am here to teach you.',
     ],
   },
 ];
@@ -273,24 +271,17 @@ export default function About() {
 
                   <div className="w-10 h-[1.5px] bg-[#c7ab77]/40 mb-5" />
 
-                  <ul className="space-y-3">
-                    {coach.specialties.map((s, j) => {
-                      const [label, ...rest] = s.split(':');
-                      const description = rest.join(':');
-                      return (
-                        <li key={j} className="flex items-start gap-2">
-                          <span className="text-[#c7ab77] mt-1.5 text-[0.5rem]">&#9670;</span>
-                          <p
-                            className="text-white/60 text-[0.8rem] leading-relaxed"
-                            style={{ fontFamily: "'DM Sans', sans-serif" }}
-                          >
-                            <span className="text-white/90 font-semibold">{label}:</span>
-                            {description}
-                          </p>
-                        </li>
-                      );
-                    })}
-                  </ul>
+                  <div className="space-y-4">
+                    {coach.bio.map((paragraph, j) => (
+                      <p
+                        key={j}
+                        className="text-white/60 text-[0.8rem] leading-relaxed"
+                        style={{ fontFamily: "'DM Sans', sans-serif" }}
+                      >
+                        {paragraph}
+                      </p>
+                    ))}
+                  </div>
                 </div>
               </div>
             ))}
