@@ -9,10 +9,10 @@ import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 
 /* ── Photo URLs ── */
-const VLAD_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/vlad_88bac4e2.jpg';
+const VLAD_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/vlad_processed_v2_9073b39a.jpg';
 const ELLIOT_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/elliot_7d09de2a.jpg';
 const ERIN_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/erin_93b42a5c.jpg';
-const LEO_PLACEHOLDER = 'data:image/svg+xml,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="400" height="500" viewBox="0 0 400 500"><rect width="400" height="500" fill="#1a1a1a"/><circle cx="200" cy="175" r="65" fill="#c7ab77" opacity="0.3"/><ellipse cx="200" cy="380" rx="100" ry="80" fill="#c7ab77" opacity="0.2"/><text x="200" y="470" text-anchor="middle" fill="#c7ab77" font-family="sans-serif" font-size="14" opacity="0.6">Photo Coming Soon</text></svg>`);
+const LEO_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/leo_processed_a5e3eabb.jpg';
 
 /* ── Coach data ── */
 const coaches = [
@@ -42,7 +42,7 @@ const coaches = [
     name: 'Leo Gonzalez',
     title: 'Senior Coach',
     experience: '13+ Years of Experience',
-    photo: LEO_PLACEHOLDER,
+    photo: LEO_PHOTO,
     bio: [
       'For years, I watched traders blow up their accounts chasing the next big move. Meanwhile, I was quietly collecting consistent income from the market like clockwork. That is how I earned the nickname "The Paycheck Collector."',
       'With 13 years of experience, I specialize in spotting reversals before the crowd catches on. I can read when a trend is exhausted and position myself at the pivot point. But what really sets my approach apart is the income side. I do not chase moonshots. I build trades designed to pay me week after week, month after month.',
