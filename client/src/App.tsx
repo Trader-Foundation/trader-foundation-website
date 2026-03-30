@@ -9,11 +9,13 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfUse from "./pages/TermsOfUse";
 import EarningsDisclaimer from "./pages/EarningsDisclaimer";
 import TradingDisclaimer from "./pages/TradingDisclaimer";
+import About from "./pages/About";
 
 function Router() {
   return (
     <Switch>
       <Route path={"/"} component={Home} />
+      <Route path={"/about"} component={About} />
       <Route path={"/privacy-policy"} component={PrivacyPolicy} />
       <Route path={"/terms-of-use"} component={TermsOfUse} />
       <Route path={"/earnings-disclaimer"} component={EarningsDisclaimer} />
