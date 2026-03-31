@@ -90,11 +90,11 @@ export default function Investing101() {
       </div>
 
       {/* ── Main Content Area ── */}
-      <div className="max-w-[1280px] mx-auto px-6 lg:px-8 py-16">
-        <div className="flex flex-col lg:flex-row gap-10">
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-8 py-16">
+        <div className="flex flex-col lg:flex-row gap-8">
 
           {/* ── Left Sidebar: Table of Contents (Pamphlet Style) ── */}
-          <nav className="hidden lg:block w-[260px] shrink-0">
+          <nav className="hidden lg:block w-[200px] shrink-0">
             <div className="lg:sticky lg:top-[140px] max-h-[calc(100vh-180px)] overflow-y-auto pr-2">
               <h2
                 className="text-xs font-bold text-[#999] mb-4 flex items-center gap-2 uppercase tracking-[0.15em]"
@@ -117,7 +117,7 @@ export default function Investing101() {
                       <span className="text-[0.7rem] font-bold w-4 text-right shrink-0 opacity-50">
                         {String(i + 1).padStart(2, '0')}
                       </span>
-                      <span className="text-[0.8rem] font-medium leading-snug">{label}</span>
+                      <span className="text-[0.75rem] font-medium leading-snug">{label}</span>
                     </button>
                   </li>
                 ))}
