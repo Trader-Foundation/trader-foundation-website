@@ -90,20 +90,20 @@ export default function Investing101() {
       </div>
 
       {/* ── Main Content Area ── */}
-      <div className="max-w-[1440px] mx-auto px-6 lg:px-8 py-16">
-        <div className="flex flex-col lg:flex-row gap-8">
+      <div className="max-w-[1280px] mx-auto px-6 lg:px-8 py-16">
+        <div className="flex flex-col lg:flex-row gap-10">
 
           {/* ── Left Sidebar: Table of Contents (Pamphlet Style) ── */}
-          <nav className="hidden lg:block w-[240px] shrink-0">
-            <div className="lg:sticky lg:top-[140px]">
+          <nav className="hidden lg:block w-[260px] shrink-0">
+            <div className="lg:sticky lg:top-[140px] max-h-[calc(100vh-180px)] overflow-y-auto pr-2">
               <h2
-                className="text-sm font-bold text-[#111] mb-5 flex items-center gap-2 uppercase tracking-wider"
+                className="text-xs font-bold text-[#999] mb-4 flex items-center gap-2 uppercase tracking-[0.15em]"
                 style={{ fontFamily: "'DM Sans', sans-serif" }}
               >
-                <span className="w-1 h-5 bg-[#c7ab77] rounded-full inline-block" />
+                <span className="w-1 h-4 bg-[#c7ab77] rounded-full inline-block" />
                 In This Guide
               </h2>
-              <ol className="space-y-1 border-l-2 border-[#e8e4dc] pl-0">
+              <ol className="space-y-0.5 border-l-2 border-[#e8e4dc] pl-0">
                 {TOC.map(({ id, label }, i) => (
                   <li key={id}>
                     <button
@@ -117,11 +117,49 @@ export default function Investing101() {
                       <span className="text-[0.7rem] font-bold w-4 text-right shrink-0 opacity-50">
                         {String(i + 1).padStart(2, '0')}
                       </span>
-                      <span className="text-[0.82rem] font-medium leading-tight">{label}</span>
+                      <span className="text-[0.8rem] font-medium leading-snug">{label}</span>
                     </button>
                   </li>
                 ))}
               </ol>
+              {/* Sidebar CTA - below TOC */}
+              <div className="mt-8 bg-[#111] rounded-lg overflow-hidden shadow-lg">
+                <img
+                  src={SIDEBAR_IMG}
+                  alt="Vlad Tayman teaching at Trader Foundation"
+                  className="w-full h-32 object-cover"
+                />
+                <div className="p-4 text-center">
+                  <p className="text-[#c7ab77] font-bold text-[0.7rem] uppercase tracking-wider mb-1" style={{ fontFamily: "'DM Sans', sans-serif" }}>Free Masterclass</p>
+                  <h3 className="text-sm font-bold text-white leading-tight mb-2" style={{ fontFamily: "'Sen', sans-serif" }}>Learn the Swing Trading System That Works</h3>
+                  <a
+                    href="https://start.traderfoundation.co/trade"
+                    className="block w-full py-2.5 bg-[#c7ab77] text-[#111] font-bold text-[0.78rem] tracking-wide rounded-sm transition-all duration-300 hover:bg-[#b89a66]"
+                    style={{ fontFamily: "'DM Sans', sans-serif" }}
+                  >
+                    Sign Me Up Now →
+                  </a>
+                </div>
+              </div>
+
+              {/* Quick Links */}
+              <div className="mt-5 border-t border-[#e8e4dc] pt-5">
+                <h4 className="text-[0.7rem] uppercase tracking-[0.15em] text-[#999] font-semibold mb-3" style={{ fontFamily: "'DM Sans', sans-serif" }}>Continue Learning</h4>
+                <div className="space-y-2">
+                  {[
+                    { label: 'Stocks & Index', href: '/stocks-and-index' },
+                    { label: 'Trading Tools', href: '/trading-tools' },
+                    { label: 'Options Trading', href: '/options-trading' },
+                    { label: 'Calculator', href: '/calculator' },
+                    { label: 'Results', href: '/results' },
+                  ].map((link) => (
+                    <a key={link.label} href={link.href} className="flex items-center gap-1.5 text-[0.78rem] text-[#666] hover:text-[#c7ab77] transition-colors font-medium" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                      <ArrowRight size={12} className="text-[#c7ab77] shrink-0" />
+                      {link.label}
+                    </a>
+                  ))}
+                </div>
+              </div>
             </div>
           </nav>
 
@@ -156,7 +194,7 @@ export default function Investing101() {
             </ol>
           </nav>
 
-          {/* ── Article Content (Center Column) ── */}
+          {/* ── Article Content (Right / Main Column) ── */}
           <article className="flex-1 min-w-0">
             <div style={{ fontFamily: "'DM Sans', sans-serif" }}>
 
@@ -556,78 +594,6 @@ export default function Investing101() {
               </section>
             </div>
           </article>
-
-          {/* ── Sidebar (Right Column) ── */}
-          <aside className="w-full lg:w-[340px] shrink-0">
-            <div className="lg:sticky lg:top-[140px]">
-              {/* Sidebar CTA Card */}
-              <div className="bg-[#111] rounded-lg overflow-hidden shadow-xl">
-                <img
-                  src={SIDEBAR_IMG}
-                  alt="Vlad Tayman teaching at Trader Foundation"
-                  className="w-full h-48 object-cover"
-                />
-                <div className="p-6 text-center">
-                  <p
-                    className="text-[#c7ab77] font-bold text-[0.82rem] uppercase tracking-wider mb-2"
-                    style={{ fontFamily: "'DM Sans', sans-serif" }}
-                  >
-                    Free Masterclass
-                  </p>
-                  <h3
-                    className="text-xl font-bold text-white leading-tight mb-3"
-                    style={{ fontFamily: "'Sen', sans-serif" }}
-                  >
-                    Learn the Swing Trading
-                    <br />
-                    System That Works
-                  </h3>
-                  <p
-                    className="text-white/50 text-[0.85rem] mb-5 leading-relaxed"
-                    style={{ fontFamily: "'DM Sans', sans-serif" }}
-                  >
-                    Designed for busy professionals who want to trade confidently in just 10 minutes a day — without quitting their job.
-                  </p>
-                  <a
-                    href="https://start.traderfoundation.co/trade"
-                    className="block w-full py-3.5 bg-[#c7ab77] text-[#111] font-bold text-[0.85rem] tracking-wide rounded-sm transition-all duration-300 hover:bg-[#b89a66]"
-                    style={{ fontFamily: "'DM Sans', sans-serif" }}
-                  >
-                    Sign Me Up Now →
-                  </a>
-                </div>
-              </div>
-
-              {/* Quick Links */}
-              <div className="mt-6 bg-white rounded-lg border border-[#e8e4dc] p-6 shadow-sm">
-                <h4
-                  className="text-[0.82rem] uppercase tracking-wider text-[#888] font-semibold mb-4"
-                  style={{ fontFamily: "'DM Sans', sans-serif" }}
-                >
-                  Continue Learning
-                </h4>
-                <div className="space-y-3">
-                  {[
-                    { label: 'Stocks & Index Investing', href: '/stocks-and-index' },
-                    { label: 'Trading Tools', href: '/trading-tools' },
-                    { label: 'Options Trading', href: '/options-trading' },
-                    { label: 'Compound Interest Calculator', href: '/calculator' },
-                    { label: 'Student Results', href: '/results' },
-                  ].map((link) => (
-                    <a
-                      key={link.label}
-                      href={link.href}
-                      className="flex items-center gap-2 text-[0.88rem] text-[#444] hover:text-[#c7ab77] transition-colors font-medium"
-                      style={{ fontFamily: "'DM Sans', sans-serif" }}
-                    >
-                      <ArrowRight size={14} className="text-[#c7ab77] shrink-0" />
-                      {link.label}
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </aside>
         </div>
       </div>
 
