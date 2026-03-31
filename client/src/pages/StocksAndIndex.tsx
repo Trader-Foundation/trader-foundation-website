@@ -75,26 +75,62 @@ export default function StocksAndIndex() {
       </div>
 
       {/* ── Main Content Area ── */}
-      <div className="max-w-[1200px] mx-auto px-6 lg:px-8 py-12">
-        <div className="flex flex-col lg:flex-row gap-12">
+      <div className="max-w-[1440px] mx-auto px-6 lg:px-8 py-12">
+        <div className="flex flex-col lg:flex-row gap-8">
 
-          {/* ── Article Content (Left Column) ── */}
-          <article className="flex-1 min-w-0" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+          {/* ── Left Sidebar: Table of Contents (Pamphlet Style) ── */}
+          <nav className="hidden lg:block w-[240px] shrink-0">
+            <div className="lg:sticky lg:top-[140px]">
+              {/* Page Title in sidebar */}
+              <h1
+                className="text-2xl font-extrabold text-[#111] leading-tight mb-6 border-b-2 border-[#c7ab77] pb-3"
+                style={{ fontFamily: "'Sen', sans-serif" }}
+              >
+                Stocks & Index Investing
+              </h1>
+              <h2
+                className="text-sm font-bold text-[#111] mb-5 flex items-center gap-2 uppercase tracking-wider"
+                style={{ fontFamily: "'DM Sans', sans-serif" }}
+              >
+                <span className="w-1 h-5 bg-[#c7ab77] rounded-full inline-block" />
+                In This Guide
+              </h2>
+              <ol className="space-y-1 border-l-2 border-[#e8e4dc] pl-0">
+                {TOC.map(({ id, label }, i) => (
+                  <li key={id}>
+                    <button
+                      onClick={() => scrollTo(id)}
+                      className={`flex items-center gap-2 text-left w-full py-2 pl-4 pr-2 transition-all duration-200 border-l-2 -ml-[2px] ${
+                        activeSection === id
+                          ? 'border-[#c7ab77] text-[#c7ab77] bg-[#c7ab77]/5'
+                          : 'border-transparent text-[#777] hover:text-[#c7ab77] hover:border-[#c7ab77]/40'
+                      }`}
+                    >
+                      <span className="text-[0.7rem] font-bold w-4 text-right shrink-0 opacity-50">
+                        {String(i + 1).padStart(2, '0')}
+                      </span>
+                      <span className="text-[0.82rem] font-medium leading-tight">{label}</span>
+                    </button>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </nav>
 
-            {/* Page Title */}
+          {/* ── Mobile TOC (visible on small screens only) ── */}
+          <div className="lg:hidden">
             <h1
-              className="text-4xl md:text-[2.8rem] font-extrabold text-[#111] leading-tight mb-8 border-b-2 border-[#c7ab77] pb-4 inline-block"
+              className="text-4xl font-extrabold text-[#111] leading-tight mb-6 border-b-2 border-[#c7ab77] pb-4 inline-block"
               style={{ fontFamily: "'Sen', sans-serif" }}
             >
               Stocks & Index Investing
             </h1>
-
-            {/* ── Table of Contents ── */}
-            <nav className="mb-12 bg-[#f9f9f9] border border-[#e8e8e8] rounded-md p-6">
+            <nav className="bg-[#f9f9f9] border border-[#e8e8e8] rounded-md p-6 mb-8">
               <h2
-                className="text-base font-bold text-[#111] mb-4"
-                style={{ fontFamily: "'Sen', sans-serif" }}
+                className="text-sm font-bold text-[#111] mb-4 flex items-center gap-2 uppercase tracking-wider"
+                style={{ fontFamily: "'DM Sans', sans-serif" }}
               >
+                <span className="w-1 h-5 bg-[#c7ab77] rounded-full inline-block" />
                 In This Guide
               </h2>
               <ol className="space-y-2">
@@ -106,21 +142,22 @@ export default function StocksAndIndex() {
                         activeSection === id ? 'text-[#c7ab77]' : 'text-[#555] hover:text-[#c7ab77]'
                       }`}
                     >
-                      <span className="text-[0.75rem] font-bold w-5 text-right shrink-0 opacity-50">
+                      <span className="text-[0.7rem] font-bold w-4 text-right shrink-0 opacity-50">
                         {String(i + 1).padStart(2, '0')}
                       </span>
-                      <ChevronRight
-                        size={14}
-                        className={`shrink-0 transition-transform duration-200 ${
-                          activeSection === id ? 'translate-x-0.5 text-[#c7ab77]' : 'text-[#ccc] group-hover:translate-x-0.5'
-                        }`}
-                      />
-                      <span className="text-[0.92rem] font-medium">{label}</span>
+                      <ChevronRight size={12} className={`shrink-0 transition-transform duration-200 ${
+                        activeSection === id ? 'translate-x-0.5 text-[#c7ab77]' : 'text-[#ccc]'
+                      }`} />
+                      <span className="text-[0.88rem] font-medium">{label}</span>
                     </button>
                   </li>
                 ))}
               </ol>
             </nav>
+          </div>
+
+          {/* ── Article Content (Center Column) ── */}
+          <article className="flex-1 min-w-0" style={{ fontFamily: "'DM Sans', sans-serif" }}>
 
 
             {/* ── Section 1: What Stocks Actually Represent ── */}
