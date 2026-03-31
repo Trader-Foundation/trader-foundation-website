@@ -15,6 +15,7 @@ import Calculator from "./pages/Calculator";
 import Investing101 from "./pages/Investing101";
 import ComingSoon from "./pages/ComingSoon";
 import StocksAndIndex from "./pages/StocksAndIndex";
+import TradingTools from "./pages/TradingTools";
 
 function Router() {
   return (
@@ -25,12 +26,7 @@ function Router() {
       <Route path={"/calculator"} component={Calculator} />
       <Route path={"/investing-101"} component={Investing101} />
       <Route path={"/stocks-and-index"} component={StocksAndIndex} />
-      <Route path={"/trading-tools"}>
-        <ComingSoon
-          title="Trading Tools"
-          subtitle="Discover the essential tools, platforms, and resources every trader needs — coming soon."
-        />
-      </Route>
+      <Route path={"/trading-tools"} component={TradingTools} />
       <Route path={"/options-trading"}>
         <ComingSoon
           title="Options Trading"
