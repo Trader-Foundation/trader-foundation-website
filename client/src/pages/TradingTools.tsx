@@ -200,7 +200,7 @@ export default function TradingTools() {
                 </div>
 
                 <p className="text-[1.05rem] leading-relaxed text-[#444]">
-                  There are several excellent brokerages available today, each with strengths depending on whether you prioritize charting depth, options pricing, or mobile convenience. Rather than recommending one over another, your 1-on-1 coach will help you evaluate which platform aligns with your trading style during onboarding — ensuring you start with the right foundation from day one.
+                  Some of the most popular brokerages our students explore include Charles Schwab (which includes the thinkorswim platform), Fidelity, Webull, Interactive Brokers, and Tastytrade. Each has strengths depending on whether you prioritize charting depth, options pricing, or mobile convenience. We do not endorse one over another — your 1-on-1 coach will help you evaluate which platform aligns with your trading style during onboarding, ensuring you start with the right foundation from day one.
                 </p>
               </section>
 
@@ -270,7 +270,7 @@ export default function TradingTools() {
                 </div>
 
                 <p className="text-[1.05rem] leading-relaxed text-[#444]">
-                  The charting platform you choose matters less than how you use it. Whether you prefer a browser-based solution you can access from any device, or a desktop application with deeper customization, the key is finding one that lets you set up custom watchlists, save chart layouts, and overlay the indicators listed above without clutter. Your coach will walk you through the platform that best fits your workflow — some students prefer simplicity, others want advanced customization, and both approaches work with our system.
+                  Popular charting platforms include TradingView (browser-based, accessible from any device), StockCharts (known for clean technical analysis layouts), and the built-in charting tools that come with brokerages like thinkorswim or Fidelity Active Trader Pro. Some students prefer the simplicity of a standalone charting tool, while others like having everything integrated within their brokerage. Either approach works with our system — your coach will walk you through whichever platform fits your workflow best.
                 </p>
               </section>
 
@@ -568,7 +568,7 @@ export default function TradingTools() {
                     {[
                       {
                         title: 'Price Alerts',
-                        desc: 'Set directly through your charting platform or brokerage app. When a stock touches a key support level or breaks through resistance, you get a text or push notification. No screen time required until the alert fires.',
+                        desc: 'Set through your charting platform (such as TradingView or StockCharts) or directly in your brokerage app. When a stock touches a key support level or breaks through resistance, you get a text or push notification. No screen time required until the alert fires.',
                       },
                       {
                         title: 'Bracket Orders',
