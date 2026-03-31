@@ -14,6 +14,7 @@ import Results from "./pages/Results";
 import Calculator from "./pages/Calculator";
 import Investing101 from "./pages/Investing101";
 import ComingSoon from "./pages/ComingSoon";
+import StocksAndIndex from "./pages/StocksAndIndex";
 
 function Router() {
   return (
@@ -23,12 +24,7 @@ function Router() {
       <Route path={"/results"} component={Results} />
       <Route path={"/calculator"} component={Calculator} />
       <Route path={"/investing-101"} component={Investing101} />
-      <Route path={"/stocks-and-index"}>
-        <ComingSoon
-          title="Stocks & Index"
-          subtitle="A comprehensive guide to stock market investing and index fund strategies is coming soon."
-        />
-      </Route>
+      <Route path={"/stocks-and-index"} component={StocksAndIndex} />
       <Route path={"/trading-tools"}>
         <ComingSoon
           title="Trading Tools"
