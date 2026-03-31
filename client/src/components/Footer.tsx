@@ -53,15 +53,21 @@ export default function Footer() {
               Quick Links
             </h4>
             <ul className="space-y-3">
-              {['About', 'Programs', 'Results', 'Blog'].map((link) => (
-                <li key={link}>
-                  <a
-                    href={`#${link.toLowerCase()}`}
-                    className="text-white/50 text-sm hover:text-[#c7ab77] transition-colors duration-300"
-                    style={{ fontFamily: "'DM Sans', sans-serif" }}
-                  >
-                    {link}
-                  </a>
+              {[
+                { label: 'About', href: '/about' },
+                { label: 'Programs', href: '/#programs' },
+                { label: 'Results', href: '/results' },
+                { label: 'Calculator', href: '/calculator' },
+              ].map((link) => (
+                <li key={link.label}>
+                  <Link href={link.href}>
+                    <span
+                      className="text-white/50 text-sm hover:text-[#c7ab77] transition-colors duration-300 cursor-pointer"
+                      style={{ fontFamily: "'DM Sans', sans-serif" }}
+                    >
+                      {link.label}
+                    </span>
+                  </Link>
                 </li>
               ))}
             </ul>

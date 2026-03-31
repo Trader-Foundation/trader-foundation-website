@@ -11,8 +11,8 @@ const LOGO_URL = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4
 const navLinks = [
   { label: 'About', href: '/about' },
   { label: 'Programs', href: '#programs' },
-  { label: 'Results', href: '#results' },
-  { label: 'Blog', href: '#blog' },
+  { label: 'Results', href: '/results' },
+  { label: 'Calculator', href: '/calculator' },
 ];
 
 export default function Navigation() {
