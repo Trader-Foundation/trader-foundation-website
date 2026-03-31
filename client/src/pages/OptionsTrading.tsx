@@ -227,9 +227,15 @@ function ChapterSafeStrategies() {
           <p className="text-[0.95rem] leading-relaxed text-[#555] mb-3">
             If you own 100 shares of a stock, you can sell a call option against those shares and collect the premium. If the stock stays below the strike price, you keep the premium and your shares. If it rises above the strike, you sell your shares at a profit and still keep the premium.
           </p>
-          <p className="text-[0.95rem] leading-relaxed text-[#555]">
+          <p className="text-[0.95rem] leading-relaxed text-[#555] mb-3">
             Think of it as renting out a property you own. The stock is the property, and the premium is the rent check. Whether the tenant stays or moves out, you collected the rent. This strategy works best on stable, blue-chip stocks that you are comfortable holding long-term.
           </p>
+          <div className="bg-[#faf8f4] border-l-4 border-[#c7ab77] rounded-r-lg p-5 mt-4">
+            <h5 className="text-[0.95rem] font-bold text-[#111] mb-2" style={{ fontFamily: "'Sen', sans-serif" }}>Where We Take It Further: Charting Your Covered Calls</h5>
+            <p className="text-[0.88rem] leading-relaxed text-[#555]">
+              Most programs teach covered calls as a mechanical strategy — own 100 shares, sell a call, collect the premium, repeat. At Trader Foundation, we take it to another level by layering <strong>technical analysis and charting</strong> into every covered call decision. Before selling a call, our coaches teach you to read the chart: identify support and resistance levels, analyze the trend direction, and evaluate where the stock is within its current range. This means you are not blindly picking strike prices — you are selecting strikes based on where the chart tells you the stock is likely to stall or reverse. The result is higher-quality premium collection, better strike selection, and fewer situations where your shares get called away at the wrong time. Charting transforms covered calls from a passive income strategy into a <strong>precision income engine</strong>.
+            </p>
+          </div>
         </div>
 
         <div className="bg-white rounded-lg border border-[#e8e4dc] p-6 shadow-sm">
