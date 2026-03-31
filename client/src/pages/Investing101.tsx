@@ -93,73 +93,32 @@ export default function Investing101() {
       <div className="max-w-[1400px] mx-auto px-6 lg:px-8 py-16">
         <div className="flex flex-col lg:flex-row gap-8">
 
-          {/* ── Left Sidebar: Table of Contents (Pamphlet Style) ── */}
+          {/* ── Left Sidebar: Table of Contents ONLY (sticky, always visible) ── */}
           <nav className="hidden lg:block w-[200px] shrink-0">
-            <div className="lg:sticky lg:top-[140px] max-h-[calc(100vh-180px)] overflow-y-auto pr-2">
+            <div className="sticky top-[100px]">
               <h2
-                className="text-xs font-bold text-[#999] mb-4 flex items-center gap-2 uppercase tracking-[0.15em]"
+                className="text-sm font-bold text-[#333] mb-4 uppercase tracking-wider"
                 style={{ fontFamily: "'DM Sans', sans-serif" }}
               >
-                <span className="w-1 h-4 bg-[#c7ab77] rounded-full inline-block" />
-                In This Guide
+                Table of Contents
               </h2>
-              <ol className="space-y-0.5 border-l-2 border-[#e8e4dc] pl-0">
-                {TOC.map(({ id, label }, i) => (
+              <ul className="space-y-1 border-l-2 border-[#e8e4dc] pl-0">
+                {TOC.map(({ id, label }) => (
                   <li key={id}>
                     <button
                       onClick={() => scrollTo(id)}
-                      className={`flex items-center gap-2 text-left w-full py-2 pl-4 pr-2 transition-all duration-200 border-l-2 -ml-[2px] ${
+                      className={`block text-left w-full py-1.5 pl-4 pr-2 transition-all duration-200 border-l-2 -ml-[2px] text-[0.82rem] leading-snug ${
                         activeSection === id
-                          ? 'border-[#c7ab77] text-[#c7ab77] bg-[#c7ab77]/5'
-                          : 'border-transparent text-[#777] hover:text-[#c7ab77] hover:border-[#c7ab77]/40'
+                          ? 'border-[#c7ab77] text-[#c7ab77] font-semibold'
+                          : 'border-transparent text-[#666] hover:text-[#c7ab77] hover:border-[#c7ab77]/40'
                       }`}
+                      style={{ fontFamily: "'DM Sans', sans-serif" }}
                     >
-                      <span className="text-[0.7rem] font-bold w-4 text-right shrink-0 opacity-50">
-                        {String(i + 1).padStart(2, '0')}
-                      </span>
-                      <span className="text-[0.75rem] font-medium leading-snug">{label}</span>
+                      {label}
                     </button>
                   </li>
                 ))}
-              </ol>
-              {/* Sidebar CTA - below TOC */}
-              <div className="mt-8 bg-[#111] rounded-lg overflow-hidden shadow-lg">
-                <img
-                  src={SIDEBAR_IMG}
-                  alt="Vlad Tayman teaching at Trader Foundation"
-                  className="w-full h-32 object-cover"
-                />
-                <div className="p-4 text-center">
-                  <p className="text-[#c7ab77] font-bold text-[0.7rem] uppercase tracking-wider mb-1" style={{ fontFamily: "'DM Sans', sans-serif" }}>Free Masterclass</p>
-                  <h3 className="text-sm font-bold text-white leading-tight mb-2" style={{ fontFamily: "'Sen', sans-serif" }}>Learn the Swing Trading System That Works</h3>
-                  <a
-                    href="https://start.traderfoundation.co/trade"
-                    className="block w-full py-2.5 bg-[#c7ab77] text-[#111] font-bold text-[0.78rem] tracking-wide rounded-sm transition-all duration-300 hover:bg-[#b89a66]"
-                    style={{ fontFamily: "'DM Sans', sans-serif" }}
-                  >
-                    Sign Me Up Now →
-                  </a>
-                </div>
-              </div>
-
-              {/* Quick Links */}
-              <div className="mt-5 border-t border-[#e8e4dc] pt-5">
-                <h4 className="text-[0.7rem] uppercase tracking-[0.15em] text-[#999] font-semibold mb-3" style={{ fontFamily: "'DM Sans', sans-serif" }}>Continue Learning</h4>
-                <div className="space-y-2">
-                  {[
-                    { label: 'Stocks & Index', href: '/stocks-and-index' },
-                    { label: 'Trading Tools', href: '/trading-tools' },
-                    { label: 'Options Trading', href: '/options-trading' },
-                    { label: 'Calculator', href: '/calculator' },
-                    { label: 'Results', href: '/results' },
-                  ].map((link) => (
-                    <a key={link.label} href={link.href} className="flex items-center gap-1.5 text-[0.78rem] text-[#666] hover:text-[#c7ab77] transition-colors font-medium" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-                      <ArrowRight size={12} className="text-[#c7ab77] shrink-0" />
-                      {link.label}
-                    </a>
-                  ))}
-                </div>
-              </div>
+              </ul>
             </div>
           </nav>
 
@@ -194,7 +153,7 @@ export default function Investing101() {
             </ol>
           </nav>
 
-          {/* ── Article Content (Right / Main Column) ── */}
+          {/* ── Article Content (Center Column) ── */}
           <article className="flex-1 min-w-0">
             <div style={{ fontFamily: "'DM Sans', sans-serif" }}>
 
@@ -594,6 +553,46 @@ export default function Investing101() {
               </section>
             </div>
           </article>
+
+          {/* ── Right Sidebar: CTA (sticky, always visible) ── */}
+          <aside className="hidden lg:block w-[280px] shrink-0">
+            <div className="sticky top-[100px]">
+              <div className="bg-[#111] rounded-lg overflow-hidden shadow-xl">
+                <img
+                  src={SIDEBAR_IMG}
+                  alt="Vlad Tayman teaching at Trader Foundation"
+                  className="w-full h-44 object-cover"
+                />
+                <div className="p-5 text-center">
+                  <p
+                    className="text-[#c7ab77] font-bold text-[0.78rem] uppercase tracking-wider mb-2"
+                    style={{ fontFamily: "'DM Sans', sans-serif" }}
+                  >
+                    Free Masterclass!
+                  </p>
+                  <h3
+                    className="text-lg font-bold text-white leading-tight mb-3"
+                    style={{ fontFamily: "'Sen', sans-serif" }}
+                  >
+                    Wall Street Secrets for Financial Freedom
+                  </h3>
+                  <p
+                    className="text-white/50 text-[0.82rem] mb-5 leading-relaxed"
+                    style={{ fontFamily: "'DM Sans', sans-serif" }}
+                  >
+                    This proven trading system can help beginners, busy professionals, retirees, and students achieve the financial freedom they deserve.
+                  </p>
+                  <a
+                    href="https://start.traderfoundation.co/trade"
+                    className="block w-full py-3 bg-[#c7ab77] text-[#111] font-bold text-[0.85rem] tracking-wide rounded-sm transition-all duration-300 hover:bg-[#b89a66]"
+                    style={{ fontFamily: "'DM Sans', sans-serif" }}
+                  >
+                    SIGN ME UP NOW &raquo;
+                  </a>
+                </div>
+              </div>
+            </div>
+          </aside>
         </div>
       </div>
 
