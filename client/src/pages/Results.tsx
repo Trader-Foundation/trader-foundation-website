@@ -20,6 +20,8 @@ const featuredVideo = {
   title: 'What People Have to Say About Us',
   description:
     'Hear directly from our students about how Trader Foundation transformed their approach to the markets and their lives.',
+  thumbnail:
+    'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/thumb-featured-6YEkiyfZoKQy5PqapuiZX4.webp',
 };
 
 const videoTestimonials = [
@@ -29,6 +31,8 @@ const videoTestimonials = [
     tagline: 'From Stressed to Blessed',
     highlight: 'First day yielded $12,000 — left retail to be a full-time dad',
     duration: '21:14',
+    thumbnail:
+      'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/thumb-zeke-Z6iHpZk4D9Kx7v9h5SrdGH.webp',
   },
   {
     vimeoId: '936218776',
@@ -36,6 +40,8 @@ const videoTestimonials = [
     tagline: 'From Beginner to Professional',
     highlight: 'Built a complete trading plan and now trades with confidence',
     duration: '30:51',
+    thumbnail:
+      'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/thumb-jason-93NwmsCwnfyeuWHmLGXgu2.webp',
   },
   {
     vimeoId: '936211466',
@@ -43,6 +49,8 @@ const videoTestimonials = [
     tagline: 'Turning Doubt Into Confidence',
     highlight: 'Went from inconsistent trades to a reliable weekly income',
     duration: '16:05',
+    thumbnail:
+      'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/thumb-shrey-kQvhCxm6ya6xyk8SrdfpLa.webp',
   },
   {
     vimeoId: '949813014',
@@ -50,6 +58,8 @@ const videoTestimonials = [
     tagline: 'Simplifying Trading for Real Results',
     highlight: 'Found clarity after years of trying different approaches',
     duration: '2:24',
+    thumbnail:
+      'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/thumb-lev-kjmSrQainqKDkYgUgkSsML.webp',
   },
 ];
 
@@ -102,10 +112,12 @@ function useFadeIn(threshold = 0.12) {
 function VimeoEmbed({
   vimeoId,
   title,
+  thumbnail,
   className = '',
 }: {
   vimeoId: string;
   title: string;
+  thumbnail?: string;
   className?: string;
 }) {
   const [loaded, setLoaded] = useState(false);
@@ -125,9 +137,9 @@ function VimeoEmbed({
       )}
       {!loaded && (
         <img
-          src={`https://vumbnail.com/${vimeoId}.jpg`}
+          src={thumbnail || `https://vumbnail.com/${vimeoId}.jpg`}
           alt={title}
-          className="w-full h-full object-cover opacity-60"
+          className="w-full h-full object-cover"
           loading="lazy"
         />
       )}
@@ -252,6 +264,7 @@ export default function Results() {
               <VimeoEmbed
                 vimeoId={featuredVideo.vimeoId}
                 title={featuredVideo.title}
+                thumbnail={featuredVideo.thumbnail}
                 className="aspect-video"
               />
             </div>
@@ -308,6 +321,7 @@ export default function Results() {
                 <VimeoEmbed
                   vimeoId={video.vimeoId}
                   title={`Interview with ${video.name}`}
+                  thumbnail={video.thumbnail}
                   className="aspect-video"
                 />
                 <div className="p-6">
