@@ -16,6 +16,7 @@ import Investing101 from "./pages/Investing101";
 import ComingSoon from "./pages/ComingSoon";
 import StocksAndIndex from "./pages/StocksAndIndex";
 import TradingTools from "./pages/TradingTools";
+import OptionsTrading from "./pages/OptionsTrading";
 
 function Router() {
   return (
@@ -27,12 +28,7 @@ function Router() {
       <Route path={"/investing-101"} component={Investing101} />
       <Route path={"/stocks-and-index"} component={StocksAndIndex} />
       <Route path={"/trading-tools"} component={TradingTools} />
-      <Route path={"/options-trading"}>
-        <ComingSoon
-          title="Options Trading"
-          subtitle="Learn the fundamentals of options trading, from basic calls and puts to advanced strategies — coming soon."
-        />
-      </Route>
+      <Route path={"/options-trading"} component={OptionsTrading} />
       <Route path={"/privacy-policy"} component={PrivacyPolicy} />
       <Route path={"/terms-of-use"} component={TermsOfUse} />
       <Route path={"/earnings-disclaimer"} component={EarningsDisclaimer} />
