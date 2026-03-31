@@ -22,7 +22,7 @@ const TOC = [
   { id: 'time-machine', label: 'The Time Machine: Practice Before You Risk' },
   { id: 'trading-journal', label: 'Your Trading Journal — The Most Underrated Tool' },
   { id: 'alerts-automation', label: 'Alerts & Automation for Busy Professionals' },
-  { id: 'platform-comparison', label: 'Platform Comparison at a Glance' },
+  { id: 'platform-comparison', label: 'Choosing Your Platform: What Actually Matters' },
 ];
 
 export default function TradingTools() {
@@ -200,7 +200,7 @@ export default function TradingTools() {
                 </div>
 
                 <p className="text-[1.05rem] leading-relaxed text-[#444]">
-                  The brokerages our students gravitate toward most frequently include TD Ameritrade (now part of Charles Schwab), Fidelity, and Webull. Each has strengths depending on whether you prioritize charting depth, options pricing, or mobile convenience. Your 1-on-1 coach will help you evaluate which platform aligns with your trading style during onboarding.
+                  There are several excellent brokerages available today, each with strengths depending on whether you prioritize charting depth, options pricing, or mobile convenience. Rather than recommending one over another, your 1-on-1 coach will help you evaluate which platform aligns with your trading style during onboarding — ensuring you start with the right foundation from day one.
                 </p>
               </section>
 
@@ -270,7 +270,7 @@ export default function TradingTools() {
                 </div>
 
                 <p className="text-[1.05rem] leading-relaxed text-[#444]">
-                  TradingView is the charting platform most of our students end up using, largely because of its browser-based accessibility and the depth of its free tier. You can set up custom watchlists, save chart layouts, and access it from any device without installing software. For students who prefer an integrated experience, the charting tools built into Schwab's thinkorswim platform are equally capable — though the learning curve is steeper.
+                  The charting platform you choose matters less than how you use it. Whether you prefer a browser-based solution you can access from any device, or a desktop application with deeper customization, the key is finding one that lets you set up custom watchlists, save chart layouts, and overlay the indicators listed above without clutter. Your coach will walk you through the platform that best fits your workflow — some students prefer simplicity, others want advanced customization, and both approaches work with our system.
                 </p>
               </section>
 
@@ -568,7 +568,7 @@ export default function TradingTools() {
                     {[
                       {
                         title: 'Price Alerts',
-                        desc: 'Set on TradingView or your brokerage app. When a stock touches a key support level or breaks through resistance, you get a text or push notification. No screen time required until the alert fires.',
+                        desc: 'Set directly through your charting platform or brokerage app. When a stock touches a key support level or breaks through resistance, you get a text or push notification. No screen time required until the alert fires.',
                       },
                       {
                         title: 'Bracket Orders',
@@ -601,7 +601,7 @@ export default function TradingTools() {
                 </p>
               </section>
 
-              {/* ── Section 8: Platform Comparison ── */}
+              {/* ── Section 8: Choosing Your Platform ── */}
               <section id="platform-comparison" className="mb-16 scroll-mt-36">
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-10 h-10 rounded-full bg-[#c7ab77]/10 flex items-center justify-center">
@@ -611,40 +611,55 @@ export default function TradingTools() {
                     className="text-2xl md:text-3xl font-bold text-[#111] m-0"
                     style={{ fontFamily: "'Sen', sans-serif" }}
                   >
-                    Platform Comparison at a Glance
+                    Choosing Your Platform: What Actually Matters
                   </h2>
                 </div>
 
-                <p className="text-[1.05rem] leading-relaxed text-[#444] mb-6">
-                  Below is a side-by-side comparison of the platforms our students use most frequently. Each has trade-offs, and the right choice depends on what you prioritize — whether that is charting depth, options pricing, or the simplicity of the mobile experience.
+                <p className="text-[1.05rem] leading-relaxed text-[#444] mb-4">
+                  There is no shortage of brokerages and charting platforms available today — and every one of them will tell you they are the best. The truth is that the "best" platform is the one that fits your workflow, your experience level, and the type of trading you are doing. What matters is not the brand name on the screen. It is whether the platform gives you what you need to execute our system efficiently.
                 </p>
 
-                <div className="bg-white rounded-lg border border-[#e8e4dc] overflow-hidden my-6 shadow-sm overflow-x-auto">
-                  <table className="w-full text-left min-w-[640px]">
+                <p className="text-[1.05rem] leading-relaxed text-[#444] mb-4">
+                  Rather than telling you which platform to use, here is what your platform needs to do well for the swing trading and options strategies we teach. Use this as a checklist when evaluating any brokerage or charting tool.
+                </p>
+
+                <h3
+                  className="text-xl font-bold text-[#111] mt-8 mb-3"
+                  style={{ fontFamily: "'Sen', sans-serif" }}
+                >
+                  Your Platform Checklist
+                </h3>
+
+                <div className="bg-white rounded-lg border border-[#e8e4dc] overflow-hidden my-6 shadow-sm">
+                  <table className="w-full text-left">
                     <thead>
                       <tr className="bg-[#111]">
                         <th className="px-5 py-3 text-[#c7ab77] text-[0.82rem] font-bold uppercase tracking-wider" style={{ fontFamily: "'DM Sans', sans-serif" }}>Feature</th>
-                        <th className="px-5 py-3 text-[#c7ab77] text-[0.82rem] font-bold uppercase tracking-wider" style={{ fontFamily: "'DM Sans', sans-serif" }}>Schwab / thinkorswim</th>
-                        <th className="px-5 py-3 text-[#c7ab77] text-[0.82rem] font-bold uppercase tracking-wider" style={{ fontFamily: "'DM Sans', sans-serif" }}>Fidelity</th>
-                        <th className="px-5 py-3 text-[#c7ab77] text-[0.82rem] font-bold uppercase tracking-wider" style={{ fontFamily: "'DM Sans', sans-serif" }}>Webull</th>
+                        <th className="px-5 py-3 text-[#c7ab77] text-[0.82rem] font-bold uppercase tracking-wider" style={{ fontFamily: "'DM Sans', sans-serif" }}>Why It Matters for Our System</th>
+                        <th className="px-5 py-3 text-[#c7ab77] text-[0.82rem] font-bold uppercase tracking-wider text-center" style={{ fontFamily: "'DM Sans', sans-serif" }}>Must-Have?</th>
                       </tr>
                     </thead>
-                    <tbody className="text-[0.85rem] text-[#444]">
+                    <tbody className="text-[0.88rem] text-[#444]">
                       {[
-                        { feature: 'Stock Commissions', schwab: '$0', fidelity: '$0', webull: '$0' },
-                        { feature: 'Options Per Contract', schwab: '$0.65', fidelity: '$0.65', webull: '$0' },
-                        { feature: 'Charting Quality', schwab: 'Excellent (thinkorswim)', fidelity: 'Very Good', webull: 'Good' },
-                        { feature: 'Options Chain Depth', schwab: 'Excellent', fidelity: 'Very Good', webull: 'Good' },
-                        { feature: 'Conditional Orders', schwab: 'Full support', fidelity: 'Full support', webull: 'Limited' },
-                        { feature: 'Mobile App', schwab: 'Good', fidelity: 'Very Good', webull: 'Excellent' },
-                        { feature: 'Paper Trading', schwab: 'Yes (built-in)', fidelity: 'No', webull: 'Yes (built-in)' },
-                        { feature: 'Best For', schwab: 'Advanced charting & options', fidelity: 'Research & reliability', webull: 'Mobile-first simplicity' },
+                        { feature: 'Commission-Free Options', why: 'Keeps your cost per trade low, especially when scaling into multiple positions', must: true },
+                        { feature: 'Clean Options Chain', why: 'You need to read strike prices, IV, delta, and open interest quickly and clearly', must: true },
+                        { feature: 'Conditional / Bracket Orders', why: 'Set profit targets and stop losses that execute automatically while you work', must: true },
+                        { feature: 'Daily & Weekly Charts', why: 'Swing trading relies on multi-day timeframes — not tick-by-tick data', must: true },
+                        { feature: 'Custom Screener Filters', why: 'Narrow thousands of stocks to 10–20 candidates in minutes', must: true },
+                        { feature: 'Price Alerts', why: 'Get notified when a stock hits your target level — no screen-watching required', must: true },
+                        { feature: 'Paper Trading Mode', why: 'Practice the Time Machine process and test strategies without risking capital', must: false },
+                        { feature: 'Mobile App', why: 'Check setups and manage positions on the go — especially useful for busy professionals', must: false },
                       ].map((row, i) => (
                         <tr key={i} className={i % 2 === 0 ? 'bg-[#faf9f6]' : 'bg-white'}>
                           <td className="px-5 py-3 font-semibold text-[#111]">{row.feature}</td>
-                          <td className="px-5 py-3">{row.schwab}</td>
-                          <td className="px-5 py-3">{row.fidelity}</td>
-                          <td className="px-5 py-3">{row.webull}</td>
+                          <td className="px-5 py-3">{row.why}</td>
+                          <td className="px-5 py-3 text-center">
+                            {row.must ? (
+                              <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-[#c7ab77]/15 text-[#c7ab77] text-xs font-bold">✓</span>
+                            ) : (
+                              <span className="text-[#999] text-xs">Nice to have</span>
+                            )}
+                          </td>
                         </tr>
                       ))}
                     </tbody>
@@ -653,7 +668,7 @@ export default function TradingTools() {
 
                 <div className="bg-[#fdf8f0] border border-[#e8d5b0] rounded-lg p-6 my-6">
                   <p className="text-[1.05rem] leading-relaxed text-[#444] mb-0">
-                    <strong>The Trader Foundation difference:</strong> Your platform is just a tool — what matters is how you use it. Every student gets a personal coach who helps them configure their platform, set up their screeners, and optimize their workflow during onboarding. Whether you choose Schwab, Fidelity, Webull, or something else entirely, we make sure you are set up for success from day one.{' '}
+                    <strong>The Trader Foundation difference:</strong> Your platform is just a tool — what matters is how you use it. Every student gets a personal coach who helps them configure their chosen platform, set up their screeners, and optimize their workflow during onboarding. Regardless of which brokerage or charting software you prefer, we make sure you are set up for success from day one.{' '}
                     <a href="/results" className="text-[#c7ab77] font-semibold hover:underline">
                       See what our students have achieved →
                     </a>
