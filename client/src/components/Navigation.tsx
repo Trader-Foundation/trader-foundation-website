@@ -101,7 +101,9 @@ export default function Navigation() {
               </a>
 
               <a
-                href="https://start.traderfoundation.co/trade"
+                href="https://www.skool.com/tfelite"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-[0.8rem] font-medium text-white/75 hover:text-white transition-colors duration-300"
                 style={{ fontFamily: "'DM Sans', sans-serif" }}
               >
@@ -218,7 +220,9 @@ export default function Navigation() {
           {/* Login + CTA */}
           <div className="border-t border-white/10 pt-3 mt-2 space-y-3">
             <a
-              href="https://start.traderfoundation.co/trade"
+              href="https://www.skool.com/tfelite"
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => setMobileOpen(false)}
               className="block py-2.5 text-[0.85rem] font-medium text-white/80 hover:text-[#c7ab77] transition-colors"
               style={{ fontFamily: "'DM Sans', sans-serif" }}
