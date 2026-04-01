@@ -39,7 +39,7 @@ const coaches = [
     title: 'Senior Coach',
     experience: '13+ Years of Experience',
     photo: LEO_PHOTO,
-    philosophy: '"I\'d rather help 1,000 people change their lives than make one more dollar for myself."',
+    philosophy: '"I do this genuinely because I can\'t wait for that moment when someone says — I got this."',
     bio: 'For years, I watched traders blow up their accounts chasing the next big move. Meanwhile, I was quietly collecting consistent income from the market like clockwork \u2014 that\'s how I earned the nickname "The Paycheck Collector." With 13 years of experience, I specialize in building trades designed to pay week after week. But what gets me out of bed isn\'t the income \u2014 it\'s knowing that every student I help is one more person who doesn\'t have to depend on a boss, a company, or a paycheck they can\'t control.',
   },
 ];
