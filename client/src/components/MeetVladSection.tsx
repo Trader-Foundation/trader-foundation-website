@@ -12,24 +12,28 @@ const VLAD_FAMILY = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RD
 
 const trustpilotReviews = [
   {
-    name: 'Michael R.',
+    name: 'Esther Kamau',
     rating: 5,
-    text: 'Vlad and his team genuinely care about your success. The 1-on-1 coaching changed everything for me. I finally understand how to read charts and manage risk properly.',
+    title: 'Yes! It\'s Worth it!',
+    text: 'I joined Trader Foundation with no prior trading experience. Through the structured training, weekly coaching sessions, and daily live sessions, I gradually built both technical skills and confidence. I have grown my initial capital by three times, applying the strategies and disciplined mindset taught by the coaches.',
   },
   {
-    name: 'Sarah K.',
+    name: 'Fred Nicora',
     rating: 5,
-    text: 'After losing money with day trading signals, I was skeptical. But the swing trading approach here actually fits my schedule as a nurse. Six months in and I\'m consistently profitable.',
+    title: 'A Great Experience from Ground Zero',
+    text: 'Starting at ground zero with my options trading journey, I examined several programs ranging from group chats to educational programs. Trader Foundation has enabled me to feel confident to dive into the deep end with strategies to succeed. The investment has paid off... big time!',
   },
   {
-    name: 'David L.',
+    name: 'Pranjul Srivastava',
     rating: 5,
-    text: 'The accountability and structure are what set this apart. My coach reviews every trade I make. You can\'t get that anywhere else at this level.',
+    title: 'Exceeded Expectations!',
+    text: 'I\'ve been trading options for quite some time and thought I knew a lot. Vlad and Elliot\'s knowledge and mentorship far exceeded anything I had imagined. Their strategies, especially the paycheck collector, is a game changer. I\'m less stressed about finances than I have ever been in my life.',
   },
   {
-    name: 'Jennifer M.',
+    name: 'Lisa',
     rating: 5,
-    text: 'I joined as a complete beginner. The foundation they build is incredible — I went from knowing nothing to confidently placing my own trades in under 3 months.',
+    title: 'Glad I Made the Decision to Join!',
+    text: 'This course introduces you to the fundamentals before guiding you into real trading. The coaches really want you to succeed. They answer every question and meet with you as needed. My understanding of options has been significantly enhanced. I know I made the right decision.',
   },
 ];
 
@@ -201,22 +205,29 @@ export default function MeetVladSection() {
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 {/* Stars */}
-                <div className="flex items-center gap-0.5 mb-4">
+                <div className="flex items-center gap-0.5 mb-3">
                   {[...Array(review.rating)].map((_, i) => (
                     <Star key={i} size={14} className="text-[#00b67a] fill-[#00b67a]" />
                   ))}
                 </div>
+                {/* Review Title */}
+                <p
+                  className="text-[#1a1a1a] font-bold text-[0.85rem] mb-2"
+                  style={{ fontFamily: "'Sen', sans-serif" }}
+                >
+                  {review.title}
+                </p>
                 {/* Review Text */}
                 <p
-                  className="text-[#333] text-[0.85rem] leading-relaxed mb-4"
+                  className="text-[#555] text-[0.8rem] leading-relaxed mb-4"
                   style={{ fontFamily: "'DM Sans', sans-serif" }}
                 >
                   "{review.text}"
                 </p>
                 {/* Reviewer Name */}
                 <p
-                  className="text-[#1a1a1a] font-bold text-sm"
-                  style={{ fontFamily: "'Sen', sans-serif" }}
+                  className="text-[#888] font-semibold text-xs uppercase tracking-wide"
+                  style={{ fontFamily: "'DM Sans', sans-serif" }}
                 >
                   {review.name}
                 </p>
