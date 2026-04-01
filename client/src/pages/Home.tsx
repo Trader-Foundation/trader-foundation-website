@@ -1,7 +1,7 @@
 /*
  * Home Page, Trader Foundation Academy
  * Design: "The Academy", Ivy League Digital Campus
- * Sections flow: Navigation → Hero → Stats → About → Programs → Results → CTA → Footer
+ * Sections flow: Navigation → Hero → Stats → Meet Vlad → Results → Podcast → Footer
  */
 
 import Navigation from '@/components/Navigation';
@@ -10,7 +10,6 @@ import StatsSection from '@/components/StatsSection';
 import MeetVladSection from '@/components/MeetVladSection';
 import ResultsSection from '@/components/ResultsSection';
 import PodcastSection from '@/components/PodcastSection';
-import CTASection from '@/components/CTASection';
 import Footer from '@/components/Footer';
 
 export default function Home() {
@@ -22,7 +21,6 @@ export default function Home() {
       <MeetVladSection />
       <ResultsSection />
       <PodcastSection />
-      <CTASection />
       <Footer />
     </div>
   );
