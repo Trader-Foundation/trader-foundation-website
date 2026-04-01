@@ -11,6 +11,7 @@ import MeetVladSection from '@/components/MeetVladSection';
 import ResultsSection from '@/components/ResultsSection';
 import PodcastSection from '@/components/PodcastSection';
 import Footer from '@/components/Footer';
+import EbookPopup from '@/components/EbookPopup';
 
 export default function Home() {
   return (
@@ -22,6 +23,7 @@ export default function Home() {
       <ResultsSection />
       <PodcastSection />
       <Footer />
+      <EbookPopup />
     </div>
   );
 }
