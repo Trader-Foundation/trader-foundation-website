@@ -23,23 +23,26 @@ const coaches = [
     title: 'Lead Mentor',
     experience: '10+ Years of Market Experience',
     photo: ELLIOT_PHOTO,
-    philosophy: '"I genuinely love the markets. Taking something complex and making it simple enough for anyone to understand — that\'s what gets me going."',
-    bio: 'Options used to feel like a foreign language to me. After a decade in the markets, I became the person I wish I had when I was starting out. I specialize in breaking down complex options strategies into plain English so that anyone can trade with confidence. As Lead Mentor, I built the curriculum thousands of students use every day and host daily market meetups where we analyze setups together in real time. But honestly, the reason I show up every day isn\'t the market — it\'s the people. Watching someone go from confused to confident is the most rewarding thing I\'ve ever done.',
+    philosophy: '"I genuinely love the markets. Taking something complex and making it simple enough for anyone to understand \u2014 that\'s what gets me going."',
+    cardQuote: '"Options don\'t have to be complicated. Once you see the pattern, you can\'t unsee it."',
+    bio: 'Options used to feel like a foreign language to me. After a decade in the markets, I became the person I wish I had when I was starting out. I specialize in breaking down complex options strategies into plain English so that anyone can trade with confidence. As Lead Mentor, I built the curriculum thousands of students use every day and host daily market meetups where we analyze setups together in real time. But honestly, the reason I show up every day isn\'t the market \u2014 it\'s the people. Watching someone go from confused to confident is the most rewarding thing I\'ve ever done.',
   },
   {
     name: 'Erin Chawla',
     title: 'Senior Coach \u00b7 Head of YouTube Education',
     experience: '11+ Years of Experience',
     photo: ERIN_PHOTO,
-    philosophy: '"Trading is like dating — choose the best and leave the rest."',
-    bio: 'My approach is different from most. I only trade off Weekly and Monthly charts. No noise. No chasing. Just patience and precision. What drives me isn\'t just the trades — it\'s the people behind them. I genuinely love helping others build real, lasting wealth through disciplined swing trading. Every free video I create, every question I answer, comes from the same place: I remember what it felt like to figure this out alone, and I don\'t want anyone else to go through that.',
+    philosophy: '"Trading is like dating \u2014 choose the best and leave the rest."',
+    cardQuote: '"Patience isn\'t boring \u2014 it\'s profitable. I only need a few great setups a month."',
+    bio: 'My approach is different from most. I only trade off Weekly and Monthly charts. No noise. No chasing. Just patience and precision. What drives me isn\'t just the trades \u2014 it\'s the people behind them. I genuinely love helping others build real, lasting wealth through disciplined swing trading. Every free video I create, every question I answer, comes from the same place: I remember what it felt like to figure this out alone, and I don\'t want anyone else to go through that.',
   },
   {
     name: 'Leo Gonzalez',
     title: 'Senior Coach',
     experience: '13+ Years of Experience',
     photo: LEO_PHOTO,
-    philosophy: '"I do this genuinely because I can\'t wait for that moment when someone says — I got this."',
+    philosophy: '"I do this genuinely because I can\'t wait for that moment when someone says \u2014 I got this."',
+    cardQuote: '"The market pays you like a business when you treat it like one. Consistent income, every single week."',
     bio: 'For years, I watched traders blow up their accounts chasing the next big move. Meanwhile, I was quietly collecting consistent income from the market like clockwork \u2014 that\'s how I earned the nickname "The Paycheck Collector." With 13 years of experience, I specialize in building trades designed to pay week after week. But what gets me out of bed isn\'t the income \u2014 it\'s knowing that every student I help is one more person who doesn\'t have to depend on a boss, a company, or a paycheck they can\'t control.',
   },
 ];
@@ -309,7 +312,7 @@ export default function About() {
                     style={{ backgroundColor: 'rgba(199, 171, 119, 0.06)', border: '1px solid rgba(199, 171, 119, 0.12)' }}
                   >
                     <p className="text-[#555] text-[0.78rem] leading-relaxed italic">
-                      {coach.philosophy}
+                      {coach.cardQuote}
                     </p>
                   </div>
 
