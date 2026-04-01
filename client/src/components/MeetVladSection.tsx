@@ -8,7 +8,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Star } from 'lucide-react';
 
-const VLAD_FAMILY = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/vlad-family_860d678c.jpg';
+const VLAD_FAMILY = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/vlad-family-cropped_bb850345.jpg';
 
 const trustpilotReviews = [
   {
@@ -110,7 +110,7 @@ export default function MeetVladSection() {
                   and build the skills to manage their own wealth — on their own terms.
                 </p>
                 <p>
-                  Over <strong>1,000 students</strong> and <strong>6+ years</strong> later, with a{' '}
+                  Over <strong>1,200 students</strong> and <strong>6+ years</strong> later, with a{' '}
                   <strong>BBB A+ accreditation</strong>, I can tell you this: the people who succeed here
                   aren't the ones looking for shortcuts. They're the ones who are{' '}
                   <strong>ready to learn</strong>.
