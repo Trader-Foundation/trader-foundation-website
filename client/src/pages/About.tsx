@@ -23,7 +23,7 @@ const coaches = [
     title: 'Lead Mentor',
     experience: '10+ Years of Market Experience',
     photo: ELLIOT_PHOTO,
-    philosophy: '"The best thing I can do with what I\'ve learned is give it away."',
+    philosophy: '"I genuinely love the markets. Taking something complex and making it simple enough for anyone to understand — that\'s what gets me going."',
     bio: 'Options used to feel like a foreign language to me. After a decade in the markets, I became the person I wish I had when I was starting out. I specialize in breaking down complex options strategies into plain English so that anyone can trade with confidence. As Lead Mentor, I built the curriculum thousands of students use every day and host daily market meetups where we analyze setups together in real time. But honestly, the reason I show up every day isn\'t the market — it\'s the people. Watching someone go from confused to confident is the most rewarding thing I\'ve ever done.',
   },
   {
@@ -31,7 +31,7 @@ const coaches = [
     title: 'Senior Coach \u00b7 Head of YouTube Education',
     experience: '11+ Years of Experience',
     photo: ERIN_PHOTO,
-    philosophy: '"I teach because I remember what it felt like to have no one to ask."',
+    philosophy: '"Trading is like dating — choose the best and leave the rest."',
     bio: 'My approach is different from most. I only trade off Weekly and Monthly charts. No noise. No chasing. Just patience and precision. What drives me isn\'t just the trades — it\'s the people behind them. I genuinely love helping others build real, lasting wealth through disciplined swing trading. Every free video I create, every question I answer, comes from the same place: I remember what it felt like to figure this out alone, and I don\'t want anyone else to go through that.',
   },
   {
