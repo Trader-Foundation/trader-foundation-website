@@ -13,7 +13,7 @@ export default function Footer() {
       <div className="h-[1px] bg-gradient-to-r from-transparent via-[#c7ab77]/50 to-transparent" />
 
       <div className="max-w-[1320px] mx-auto px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-12">
           {/* Brand Column */}
           <div className="md:col-span-2">
             <Link href="/">
@@ -56,7 +56,7 @@ export default function Footer() {
               {[
                 { label: 'About', href: '/about' },
                 { label: 'Results', href: '/results' },
-                { label: 'Compound Interest Calculator', href: '/calculator' },
+
               ].map((link) => (
                 <li key={link.label}>
                   <Link href={link.href}>
@@ -69,6 +69,50 @@ export default function Footer() {
                   </Link>
                 </li>
               ))}
+            </ul>
+          </div>
+
+          {/* Resources */}
+          <div>
+            <h4
+              className="text-[0.75rem] font-bold tracking-[0.15em] uppercase text-[#c7ab77] mb-6"
+              style={{ fontFamily: "'DM Sans', sans-serif" }}
+            >
+              Resources
+            </h4>
+            <ul className="space-y-3">
+              <li>
+                <a
+                  href="https://www.skool.com/tf-membership/classroom"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white/50 text-sm hover:text-[#c7ab77] transition-colors duration-300 cursor-pointer"
+                  style={{ fontFamily: "'DM Sans', sans-serif" }}
+                >
+                  Free Skool Community
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.youtube.com/@TheTraderFoundation"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white/50 text-sm hover:text-[#c7ab77] transition-colors duration-300 cursor-pointer"
+                  style={{ fontFamily: "'DM Sans', sans-serif" }}
+                >
+                  YouTube Channel
+                </a>
+              </li>
+              <li>
+                <Link href="/calculator">
+                  <span
+                    className="text-white/50 text-sm hover:text-[#c7ab77] transition-colors duration-300 cursor-pointer"
+                    style={{ fontFamily: "'DM Sans', sans-serif" }}
+                  >
+                    Compound Interest Calculator
+                  </span>
+                </Link>
+              </li>
             </ul>
           </div>
 

@@ -10,6 +10,7 @@ import StatsSection from '@/components/StatsSection';
 import MeetVladSection from '@/components/MeetVladSection';
 import PodcastSection from '@/components/PodcastSection';
 import Footer from '@/components/Footer';
+import ContactSection from '@/components/ContactSection';
 import EbookPopup from '@/components/EbookPopup';
 
 
@@ -21,6 +22,7 @@ export default function Home() {
       <StatsSection />
       <MeetVladSection />
       <PodcastSection />
+      <ContactSection />
       <Footer />
       <EbookPopup />
 
