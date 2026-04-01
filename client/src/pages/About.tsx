@@ -89,31 +89,31 @@ export default function About() {
       <Navigation />
 
       {/* ─── eBook Signup Hero ─── */}
-      <section className="relative pt-28 pb-16 bg-[#111] overflow-hidden">
+      <section className="relative pt-24 pb-10 bg-[#111] overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-[#111]" />
-        <div className="relative max-w-[1100px] mx-auto px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+        <div className="relative max-w-[900px] mx-auto px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
             {/* Left: Copy */}
             <div>
               <div className="flex items-center gap-2 mb-4">
                 <div
-                  className="flex h-8 w-8 items-center justify-center rounded"
+                  className="flex h-6 w-6 items-center justify-center rounded"
                   style={{ backgroundColor: 'rgba(199, 171, 119, 0.12)' }}
                 >
-                  <BookOpen className="h-4 w-4 text-[#c7ab77]" />
+                  <BookOpen className="h-3 w-3 text-[#c7ab77]" />
                 </div>
                 <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#c7ab77]">
                   Free Download
                 </span>
               </div>
               <h1
-                className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white leading-tight mb-4"
+                className="text-2xl md:text-3xl font-extrabold text-white leading-tight mb-3"
                 style={{ fontFamily: "'Sen', sans-serif" }}
               >
                 Get Your Free<br />
                 <span className="text-[#c7ab77]">Stock Predator E-Book</span>
               </h1>
-              <p className="text-white/60 text-base leading-relaxed mb-6 max-w-md">
+              <p className="text-white/60 text-sm leading-relaxed mb-4 max-w-md">
                 Learn what separates the 10% who profit from the 90% who lose.
                 Vlad Tayman's complete guide to pattern recognition, candlestick
                 charts, and options &mdash; <strong className="text-white/85">absolutely free.</strong>
@@ -138,7 +138,7 @@ export default function About() {
             >
               <iframe
                 src="https://link.sproutcloud.co/widget/form/zNekBbMTW3PeN6o7IEY0"
-                style={{ width: '100%', height: '408px', border: 'none', borderRadius: '3px' }}
+                style={{ width: '100%', height: '340px', border: 'none', borderRadius: '3px' }}
                 id="about-form-zNekBbMTW3PeN6o7IEY0"
                 data-layout='{"id":"INLINE"}'
                 data-trigger-type="alwaysShow"
@@ -148,7 +148,7 @@ export default function About() {
                 data-deactivation-type="neverDeactivate"
                 data-deactivation-value=""
                 data-form-name="erin new website form ebook signup"
-                data-height="408"
+                data-height="340"
                 data-layout-iframe-id="about-form-zNekBbMTW3PeN6o7IEY0"
                 data-form-id="zNekBbMTW3PeN6o7IEY0"
                 title="erin new website form ebook signup"
