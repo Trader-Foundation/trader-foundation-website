@@ -8,7 +8,6 @@ import Navigation from '@/components/Navigation';
 import HeroSection from '@/components/HeroSection';
 import StatsSection from '@/components/StatsSection';
 import MeetVladSection from '@/components/MeetVladSection';
-import ResultsSection from '@/components/ResultsSection';
 import PodcastSection from '@/components/PodcastSection';
 import Footer from '@/components/Footer';
 import EbookPopup from '@/components/EbookPopup';
@@ -21,7 +20,6 @@ export default function Home() {
       <HeroSection />
       <StatsSection />
       <MeetVladSection />
-      <ResultsSection />
       <PodcastSection />
       <Footer />
       <EbookPopup />
