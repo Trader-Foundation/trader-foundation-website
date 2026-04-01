@@ -11,7 +11,7 @@ import MeetVladSection from '@/components/MeetVladSection';
 import PodcastSection from '@/components/PodcastSection';
 import Footer from '@/components/Footer';
 import EbookPopup from '@/components/EbookPopup';
-import LiveChatWidget from '@/components/LiveChatWidget';
+
 
 export default function Home() {
   return (
@@ -23,7 +23,7 @@ export default function Home() {
       <PodcastSection />
       <Footer />
       <EbookPopup />
-      <LiveChatWidget />
+
     </div>
   );
 }

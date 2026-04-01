@@ -7,7 +7,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
-import LiveChatWidget from '@/components/LiveChatWidget';
+
 import { BookOpen, ArrowRight, Quote } from 'lucide-react';
 
 /* ── Photo URLs ── */
@@ -329,7 +329,7 @@ export default function About() {
       </section>
 
       <Footer />
-      <LiveChatWidget />
+
     </div>
   );
 }

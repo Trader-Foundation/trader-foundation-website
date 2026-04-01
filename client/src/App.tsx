@@ -17,6 +17,7 @@ import ComingSoon from "./pages/ComingSoon";
 import StocksAndIndex from "./pages/StocksAndIndex";
 import TradingTools from "./pages/TradingTools";
 import OptionsTrading from "./pages/OptionsTrading";
+import LiveChatWidget from "./components/LiveChatWidget";
 
 function Router() {
   return (
@@ -49,6 +50,7 @@ function App() {
         <TooltipProvider>
           <Toaster richColors />
           <Router />
+          <LiveChatWidget />
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>
