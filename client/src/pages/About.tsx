@@ -209,76 +209,46 @@ export default function About() {
         </div>
       </section>
 
-      {/* ─── Erin Spotlight ─── */}
-      <section className="py-20 bg-[#111]">
+      {/* ─── Our Philosophy ─── */}
+      <section className="py-16 bg-[#111]">
         <div
           ref={erinRef.ref}
-          className={`max-w-[1100px] mx-auto px-6 lg:px-8 transition-all duration-700 ${
+          className={`max-w-[900px] mx-auto px-6 lg:px-8 transition-all duration-700 ${
             erinRef.visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-14 items-center">
-            {/* Story (3 cols) */}
-            <div className="lg:col-span-3 order-2 lg:order-1">
-              <p className="text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-3">
-                From Corporate Finance to Trading Freedom
-              </p>
-              <h2 className="text-2xl md:text-3xl font-extrabold text-white leading-tight mb-6" style={{ fontFamily: "'Sen', sans-serif" }}>
-                How Erin Supercharged Her Career Through Trading
-              </h2>
+          <div className="text-center mb-10">
+            <p className="text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-3">
+              What We Believe
+            </p>
+            <h2 className="text-2xl md:text-3xl font-extrabold text-white leading-tight mb-4" style={{ fontFamily: "'Sen', sans-serif" }}>
+              Building Wealth Doesn't Need to Be Scary
+            </h2>
+            <p className="text-white/50 text-base leading-relaxed max-w-2xl mx-auto">
+              It can be exciting. It can be fun. And we welcome the process. Each of us brings something different to the table, but at the end of the day we all share the same goal &mdash; helping everyone build generational wealth. We genuinely love what we do, and that's what makes this community different.
+            </p>
+          </div>
 
-              {/* The contrast story */}
-              <div className="space-y-4 mb-6">
-                <div className="flex gap-3">
-                  <div className="mt-1.5 w-2 h-2 rounded-full bg-red-400/60 flex-shrink-0" />
-                  <p className="text-white/60 text-base leading-relaxed">
-                    <strong className="text-white/80">The Corporate Grind:</strong> Erin spent a decade in corporate finance at Fortune 500 companies. She watched talented people get laid off quarter after quarter &mdash; good people, loyal people, gone overnight. She was sick of the instability, sick of building someone else's dream while her own financial future hung on someone else's decision.
-                  </p>
-                </div>
-                <div className="flex gap-3">
-                  <div className="mt-1.5 w-2 h-2 rounded-full bg-[#c7ab77] flex-shrink-0" />
-                  <p className="text-white/60 text-base leading-relaxed">
-                    <strong className="text-white/80">The Discovery:</strong> Trading and investing started as a hobby &mdash; something she did on the side to take control of her own money. Then she stumbled upon Trader Foundation, and everything changed. What was once a curiosity became a passion. What was a passion became a skill. What was a skill became her exit plan.
-                  </p>
-                </div>
-                <div className="flex gap-3">
-                  <div className="mt-1.5 w-2 h-2 rounded-full bg-green-400/60 flex-shrink-0" />
-                  <p className="text-white/60 text-base leading-relaxed">
-                    <strong className="text-white/80">The Transformation:</strong> Erin supercharged her career through investing and trading, and now she teaches others to capitalize on the same skills that freed her. As Head of YouTube Education at Trader Foundation, she pours her energy into creating free content and growing the community &mdash; not because she has to, but because she genuinely loves watching people have that same "aha" moment she had. Helping others find their exit from the corporate cycle isn't just her job. It's her purpose.
-                  </p>
-                </div>
-              </div>
-
+          {/* Coach philosophy quotes */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {coaches.map((coach) => (
               <div
-                className="rounded-lg px-5 py-4"
-                style={{ backgroundColor: 'rgba(199, 171, 119, 0.06)', border: '1px solid rgba(199, 171, 119, 0.1)' }}
+                key={coach.name}
+                className="rounded-lg px-5 py-5 text-center"
+                style={{
+                  backgroundColor: 'rgba(199, 171, 119, 0.04)',
+                  border: '1px solid rgba(199, 171, 119, 0.1)',
+                }}
               >
-                <div className="flex gap-3 items-start">
-                  <Quote className="h-5 w-5 text-[#c7ab77]/50 flex-shrink-0 mt-0.5" />
-                  <p className="text-white/70 text-sm leading-relaxed italic">
-                    "I was so sick of layoffs. I decided trading wasn't just a hobby anymore &mdash; it was my exit. Now I get to help others find theirs. That's the part that makes me come alive every single day."
-                  </p>
-                </div>
-                <p className="text-[#c7ab77] text-xs font-semibold mt-2 ml-8">&mdash; Erin Chawla</p>
+                <Quote className="h-4 w-4 text-[#c7ab77]/40 mx-auto mb-3" />
+                <p className="text-white/70 text-sm leading-relaxed italic mb-3">
+                  {coach.philosophy}
+                </p>
+                <div className="w-8 h-[1px] bg-[#c7ab77]/20 mx-auto mb-2" />
+                <p className="text-white text-sm font-semibold">{coach.name}</p>
+                <p className="text-[#c7ab77] text-xs">{coach.title}</p>
               </div>
-            </div>
-
-            {/* Erin's photo (2 cols) */}
-            <div className="lg:col-span-2 flex flex-col items-center order-1 lg:order-2">
-              <div className="relative w-full max-w-[300px]">
-                <div className="absolute -inset-3 border border-[#c7ab77]/20 rounded-lg" />
-                <img
-                  src={ERIN_PHOTO}
-                  alt="Erin Chawla, Senior Coach & Head of YouTube Education"
-                  className="w-full aspect-[4/5] object-cover rounded-lg shadow-xl"
-                  style={{ filter: 'brightness(1.15) contrast(1.05)' }}
-                />
-              </div>
-              <h3 className="text-xl font-extrabold text-white mt-5" style={{ fontFamily: "'Sen', sans-serif" }}>
-                Erin Chawla
-              </h3>
-              <p className="text-[#c7ab77] text-sm font-medium">Senior Coach &middot; Head of YouTube Education</p>
-            </div>
+            ))}
           </div>
         </div>
       </section>
