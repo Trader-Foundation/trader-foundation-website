@@ -14,7 +14,6 @@ const LOGO_URL =
 const utilityLinks = [
   { label: 'About', href: '/about' },
   { label: 'Results', href: '/results' },
-  { label: 'Calculator', href: '/calculator' },
 ];
 
 /* ── Sub-navigation educational categories ── */
