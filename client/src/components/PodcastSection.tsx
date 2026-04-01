@@ -1,11 +1,11 @@
 /*
- * Podcast Section (Condensed), Trader Foundation
- * Compact: Spotify embed left, info + platform links + guest appearances right
+ * Podcast Section (Compact, No Embed), Trader Foundation
+ * Podcast cover + info + platform links + guest appearances
  * Fonts: Sen (headings), DM Sans (body)
  */
 
 import { useEffect, useRef, useState } from 'react';
-import { ExternalLink } from 'lucide-react';
+import { Mic, ExternalLink } from 'lucide-react';
 
 const guestAppearances = [
   { name: 'The Unstoppable Podcast', url: 'https://www.youtube.com/watch?v=dAeLX72hHNE' },
@@ -37,40 +37,50 @@ export default function PodcastSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-16 sm:py-20 bg-[#111] overflow-hidden"
+      className="relative py-14 sm:py-16 bg-[#111] overflow-hidden"
     >
       <div className="relative max-w-[1320px] mx-auto px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+        <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-center">
 
-          {/* Left: Spotify Embed */}
+          {/* Left: Podcast Cover */}
           <div
-            className={`transition-all duration-700 ${
+            className={`flex-shrink-0 transition-all duration-700 ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}
           >
-            <div className="rounded-xl overflow-hidden shadow-2xl shadow-black/30">
-              <iframe
-                style={{ borderRadius: '12px' }}
-                src="https://open.spotify.com/embed/show/6mSAc3Nuwvg8Jx2DkyeW2A?utm_source=generator&theme=0"
-                width="100%"
-                height="232"
-                frameBorder="0"
-                allowFullScreen
-                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                loading="lazy"
-                title="The Trader Foundation Podcast on Spotify"
-              />
+            <div className="w-40 h-40 sm:w-48 sm:h-48 rounded-xl bg-[#1a1a1a] border border-white/10 flex flex-col items-center justify-center shadow-xl">
+              <div className="w-10 h-10 rounded-full bg-[#c7ab77]/10 flex items-center justify-center mb-3">
+                <Mic size={20} className="text-[#c7ab77]" />
+              </div>
+              <span
+                className="text-[0.6rem] font-bold tracking-[0.2em] uppercase text-[#c7ab77] mb-1"
+                style={{ fontFamily: "'DM Sans', sans-serif" }}
+              >
+                Trader
+              </span>
+              <span
+                className="text-[0.6rem] font-bold tracking-[0.2em] uppercase text-[#c7ab77]"
+                style={{ fontFamily: "'DM Sans', sans-serif" }}
+              >
+                Foundation
+              </span>
+              <span
+                className="text-[0.5rem] font-bold tracking-[0.15em] uppercase text-white/40 mt-1"
+                style={{ fontFamily: "'DM Sans', sans-serif" }}
+              >
+                Podcast
+              </span>
             </div>
           </div>
 
           {/* Right: Info + Links */}
           <div
-            className={`transition-all duration-700 delay-200 ${
+            className={`flex-1 transition-all duration-700 delay-200 ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}
           >
             <h2
-              className="text-2xl sm:text-3xl font-extrabold text-white leading-tight mb-3"
+              className="text-xl sm:text-2xl font-extrabold text-white leading-tight mb-2"
               style={{ fontFamily: "'Sen', sans-serif" }}
             >
               The Trader Foundation Podcast
@@ -80,12 +90,11 @@ export default function PodcastSection() {
               className="text-[#999] text-sm leading-relaxed mb-5 max-w-lg"
               style={{ fontFamily: "'DM Sans', sans-serif" }}
             >
-              Hosted by Vlad Tayman — from 20 years in corporate America to professional trader.
-              Real market insights, trading education, and the mindset behind consistent results.
+              Hosted by Vlad Tayman — real market insights, trading education, and the mindset behind consistent results.
             </p>
 
             {/* Platform Links */}
-            <div className="flex flex-wrap gap-2.5 mb-6">
+            <div className="flex flex-wrap gap-2.5 mb-5">
               {/* Apple Podcasts */}
               <a
                 href="https://podcasts.apple.com/us/podcast/the-trader-foundation-podcast/id1871309774"
@@ -144,7 +153,7 @@ export default function PodcastSection() {
             {/* Guest Appearances — inline */}
             <div>
               <span
-                className="text-[0.65rem] font-bold tracking-[0.15em] uppercase text-[#c7ab77] block mb-2.5"
+                className="text-[0.65rem] font-bold tracking-[0.15em] uppercase text-[#c7ab77] block mb-2"
                 style={{ fontFamily: "'DM Sans', sans-serif" }}
               >
                 As heard on:
