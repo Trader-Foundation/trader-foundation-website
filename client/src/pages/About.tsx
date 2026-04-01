@@ -23,24 +23,24 @@ const coaches = [
     title: 'Lead Mentor',
     experience: '10+ Years of Market Experience',
     photo: ELLIOT_PHOTO,
-    philosophy: '"If you can\'t explain it simply, you don\'t understand it well enough."',
-    bio: 'Options used to feel like a foreign language to me. After a decade in the markets, I became the person I wish I had when I was starting out. I specialize in breaking down complex options strategies into plain English so that anyone can trade with confidence. As Lead Mentor, I built the curriculum thousands of students use every day and host daily market meetups where we analyze setups together in real time.',
+    philosophy: '"The best thing I can do with what I\'ve learned is give it away."',
+    bio: 'Options used to feel like a foreign language to me. After a decade in the markets, I became the person I wish I had when I was starting out. I specialize in breaking down complex options strategies into plain English so that anyone can trade with confidence. As Lead Mentor, I built the curriculum thousands of students use every day and host daily market meetups where we analyze setups together in real time. But honestly, the reason I show up every day isn\'t the market — it\'s the people. Watching someone go from confused to confident is the most rewarding thing I\'ve ever done.',
   },
   {
     name: 'Erin Chawla',
     title: 'Senior Coach \u00b7 Head of YouTube Education',
     experience: '11+ Years of Experience',
     photo: ERIN_PHOTO,
-    philosophy: '"Patience is not the ability to wait \u2014 it\'s the ability to keep a good attitude while waiting."',
-    bio: 'My approach is different from most. I only trade off Weekly and Monthly charts. No noise. No chasing. Just patience and precision. I wait for the exact moment when the technicals align, and then I execute. What drives me is helping people build real, lasting wealth through disciplined swing trading and understanding where we are in the bigger cycle.',
+    philosophy: '"I teach because I remember what it felt like to have no one to ask."',
+    bio: 'My approach is different from most. I only trade off Weekly and Monthly charts. No noise. No chasing. Just patience and precision. What drives me isn\'t just the trades — it\'s the people behind them. I genuinely love helping others build real, lasting wealth through disciplined swing trading. Every free video I create, every question I answer, comes from the same place: I remember what it felt like to figure this out alone, and I don\'t want anyone else to go through that.',
   },
   {
     name: 'Leo Gonzalez',
     title: 'Senior Coach',
     experience: '13+ Years of Experience',
     photo: LEO_PHOTO,
-    philosophy: '"Treat the market like a business, and it will pay you like one."',
-    bio: 'For years, I watched traders blow up their accounts chasing the next big move. Meanwhile, I was quietly collecting consistent income from the market like clockwork \u2014 that\'s how I earned the nickname "The Paycheck Collector." With 13 years of experience, I specialize in spotting reversals before the crowd catches on and building trades designed to pay week after week, month after month.',
+    philosophy: '"I\'d rather help 1,000 people change their lives than make one more dollar for myself."',
+    bio: 'For years, I watched traders blow up their accounts chasing the next big move. Meanwhile, I was quietly collecting consistent income from the market like clockwork \u2014 that\'s how I earned the nickname "The Paycheck Collector." With 13 years of experience, I specialize in building trades designed to pay week after week. But what gets me out of bed isn\'t the income \u2014 it\'s knowing that every student I help is one more person who doesn\'t have to depend on a boss, a company, or a paycheck they can\'t control.',
   },
 ];
 
@@ -198,8 +198,11 @@ export default function About() {
               <p className="text-[#444] text-base leading-relaxed mb-4">
                 That failure became fuel. Vlad tried every trading method until he discovered the approach that actually works. But here's what makes him different from every other trading educator: he spent two decades teaching Fortune 500 executives. Great traders don't always make great teachers &mdash; Vlad mastered both.
               </p>
+              <p className="text-[#444] text-base leading-relaxed mb-4">
+                But what truly drives Vlad isn't profit &mdash; it's people. He gives away more free education than most programs charge for because he genuinely believes everyone deserves access to real financial knowledge. From free YouTube content to the Stock Predator E-Book, Vlad's mission has always been the same: help as many people as possible take control of their financial future.
+              </p>
               <p className="text-[#555] text-sm leading-relaxed italic border-l-2 border-[#c7ab77]/40 pl-4">
-                "Trading isn't just my business &mdash; it's my vehicle for creating fulfillment, not just success."
+                "I don't do this for the money. I do this because I remember what it felt like to have no one in my corner. If I can be that person for someone else &mdash; that's everything."
               </p>
             </div>
           </div>
@@ -241,7 +244,7 @@ export default function About() {
                 <div className="flex gap-3">
                   <div className="mt-1.5 w-2 h-2 rounded-full bg-green-400/60 flex-shrink-0" />
                   <p className="text-white/60 text-base leading-relaxed">
-                    <strong className="text-white/80">The Transformation:</strong> Erin supercharged her career through investing and trading, and now she teaches others to capitalize on the same skills that freed her. As Head of YouTube Education at Trader Foundation, she's dedicated to growing the community and helping others find their own exit from the corporate cycle.
+                    <strong className="text-white/80">The Transformation:</strong> Erin supercharged her career through investing and trading, and now she teaches others to capitalize on the same skills that freed her. As Head of YouTube Education at Trader Foundation, she pours her energy into creating free content and growing the community &mdash; not because she has to, but because she genuinely loves watching people have that same "aha" moment she had. Helping others find their exit from the corporate cycle isn't just her job. It's her purpose.
                   </p>
                 </div>
               </div>
@@ -253,7 +256,7 @@ export default function About() {
                 <div className="flex gap-3 items-start">
                   <Quote className="h-5 w-5 text-[#c7ab77]/50 flex-shrink-0 mt-0.5" />
                   <p className="text-white/70 text-sm leading-relaxed italic">
-                    "I was so sick of layoffs. I decided trading wasn't just a hobby anymore &mdash; it was my exit. Now I get to help others find theirs."
+                    "I was so sick of layoffs. I decided trading wasn't just a hobby anymore &mdash; it was my exit. Now I get to help others find theirs. That's the part that makes me come alive every single day."
                   </p>
                 </div>
                 <p className="text-[#c7ab77] text-xs font-semibold mt-2 ml-8">&mdash; Erin Chawla</p>
