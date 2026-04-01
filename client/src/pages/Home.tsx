@@ -8,7 +8,6 @@ import Navigation from '@/components/Navigation';
 import HeroSection from '@/components/HeroSection';
 import StatsSection from '@/components/StatsSection';
 import MeetVladSection from '@/components/MeetVladSection';
-import AboutSection from '@/components/AboutSection';
 import ProgramsSection from '@/components/ProgramsSection';
 import ResultsSection from '@/components/ResultsSection';
 import PodcastSection from '@/components/PodcastSection';
@@ -22,7 +21,6 @@ export default function Home() {
       <HeroSection />
       <StatsSection />
       <MeetVladSection />
-      <AboutSection />
       <ProgramsSection />
       <ResultsSection />
       <PodcastSection />
