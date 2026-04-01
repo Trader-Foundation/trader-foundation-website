@@ -7,7 +7,7 @@
 import React, { useState } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
-import CompoundCalculator from '@/components/CompoundCalculator';
+
 import { ArrowRight, ArrowLeft, ChevronRight, Landmark, Layers, LineChart, PiggyBank, Compass, GraduationCap } from 'lucide-react';
 
 const SIDEBAR_IMG =
@@ -436,7 +436,6 @@ export default function Investing101() {
         </div>
       </div>
 
-      <CompoundCalculator />
       <Footer />
     </div>
   );

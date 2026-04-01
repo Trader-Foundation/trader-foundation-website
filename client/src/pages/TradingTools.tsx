@@ -304,7 +304,7 @@ function ChapterAlerts() {
       </div>
 
       <p className="text-[1.05rem] leading-relaxed text-[#444]">
-        The combination of alerts and conditional orders is what makes swing trading compatible with a full-time career. You do the analysis once, set your parameters, and let the system work. When your phone buzzes during a meeting, it usually means a trade has closed at your target — and you made money while doing your job. That is the workflow our students build toward from day one.
+        The combination of alerts and conditional orders is what makes swing trading compatible with a full-time career. You do the analysis once, set your parameters, and let the system work. When your phone buzzes during a meeting, it usually means a trade has closed at your target — and you made money while doing your job. That is the workflow our students build toward from day one. When that consistent income starts compounding, the results can be life-changing — <a href="/calculator" className="text-[#c7ab77] font-semibold hover:underline">see for yourself with our Compound Interest Calculator</a>.
       </p>
     </>
   );

@@ -8,7 +8,7 @@
 import React, { useState } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
-import CompoundCalculator from '@/components/CompoundCalculator';
+
 import { ArrowRight, ArrowLeft, ChevronRight, BarChart3, Shield, Layers, TrendingUp, LineChart, Landmark, Flame, Briefcase } from 'lucide-react';
 
 const SIDEBAR_IMG =
@@ -483,7 +483,6 @@ export default function StocksAndIndex() {
         </div>
       </div>
 
-      <CompoundCalculator />
       <Footer />
     </div>
   );

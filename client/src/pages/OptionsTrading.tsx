@@ -376,7 +376,7 @@ function ChapterRiskManagement() {
         Every trade at Trader Foundation has three numbers defined before the order is placed: the entry price, the profit target, and the stop loss. If the trade hits your target, you take the profit. If it hits your stop, you take the loss. There is no negotiating with the market, no "let me hold a little longer," no hoping it comes back. The plan is the plan.
       </p>
       <p className="text-[1.05rem] leading-relaxed text-[#444]">
-        Your coach reviews every trade plan with you — not after the fact, but before you place it. This accountability loop is what separates our students from self-taught traders who develop bad habits in isolation. When someone is watching, you follow the rules. When you follow the rules, you protect your capital. When you protect your capital, you stay in the game long enough for compounding to work.
+        Your coach reviews every trade plan with you — not after the fact, but before you place it. This accountability loop is what separates our students from self-taught traders who develop bad habits in isolation. When someone is watching, you follow the rules. When you follow the rules, you protect your capital. When you protect your capital, you stay in the game long enough for compounding to work. <a href="/calculator" className="text-[#c7ab77] font-semibold hover:underline">See how compounding transforms your trading income over time →</a>
       </p>
     </>
   );
