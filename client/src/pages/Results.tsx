@@ -74,10 +74,10 @@ const studentExperiences = [
   },
   {
     quote:
-      'Coaching hours are not capped, community goes live daily to evaluate the market, and you get access to multiple, highly skilled coaches who trade profitably in their own ways. Between private coaching, the structured course, and the daily live streams, it\'s possible to get 15-20 hours of guidance every week.',
-    name: 'Alick Yu',
-    role: 'Engineer',
-    initials: 'AY',
+      'My experience with Vlad and his team has been nothing short of incredible! This is a high level organization. Coaches Elliot, Erin, and Leo genuinely want to see you succeed and work with you one on one. It is the type of personal touch that you can only find with this group.',
+    name: 'Matt Couch',
+    role: 'Healthcare Sales Director',
+    initials: 'MC',
   },
   {
     quote:
@@ -85,13 +85,6 @@ const studentExperiences = [
     name: 'Chase Brey',
     role: 'IT Director',
     initials: 'CB',
-  },
-  {
-    quote:
-      'My experience with Vlad and his team has been nothing short of incredible! This is a high level organization. Coaches Elliot, Erin, and Leo genuinely want to see you succeed and work with you one on one. It is the type of personal touch that you can only find with this group.',
-    name: 'Matt Couch',
-    role: 'Healthcare Sales Director',
-    initials: 'MC',
   },
   {
     quote:
@@ -106,6 +99,13 @@ const studentExperiences = [
     name: 'Esther Kamau',
     role: 'Global Program Director',
     initials: 'EK',
+  },
+  {
+    quote:
+      'Coaching hours are not capped, community goes live daily to evaluate the market, and you get access to multiple, highly skilled coaches who trade profitably in their own ways. Between private coaching, the structured course, and the daily live streams, it\'s possible to get 15-20 hours of guidance every week.',
+    name: 'Alick Yu',
+    role: 'Engineer',
+    initials: 'AY',
   },
 ];
 
