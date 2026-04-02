@@ -1,8 +1,8 @@
 /*
- * LiveChatWidget — Persistent chat-style lead capture
+ * LiveChatWidget - Persistent chat-style lead capture
  * Design: Gold chat bubble in bottom-right, opens to a chat-like panel
  * with a welcome message and the SproutCloud form embedded
- * Same form as the eBook popup — all contacts go to the same funnel
+ * Same form as the eBook popup - all contacts go to the same funnel
  */
 
 import { useState, useEffect, useRef } from 'react';

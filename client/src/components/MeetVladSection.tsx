@@ -1,5 +1,5 @@
 /*
- * Meet Vlad Section — Homepage
+ * Meet Vlad Section - Homepage
  * Design: Two-column layout (text left, family photo right)
  * Modeled after GOAT Academy's "Who are Felix & Winston?" intro
  * Followed by TrustPilot reviews strip for social proof
@@ -92,18 +92,18 @@ export default function MeetVladSection() {
                 <p>
                   I still remember the moment everything clicked. I was sitting at my desk after another
                   14-hour day, watching my 401(k) statement show the same mediocre returns year after year.
-                  I had done everything "right" — the degree, the career, the savings — but I realized{' '}
+                  I had done everything "right" - the degree, the career, the savings - but I realized{' '}
                   <strong>nobody had ever taught me how to actually grow my wealth</strong>.
                 </p>
                 <p>
                   That frustration led me down a path most professionals know too well. I tried the stock
-                  signals. I tried the AI bots. I even tried day trading for a while — waking up at 4 AM,
+                  signals. I tried the AI bots. I even tried day trading for a while - waking up at 4 AM,
                   staring at candles, losing money I couldn't afford to lose. Every shortcut led to the
                   same place: <strong>back to square one</strong>.
                 </p>
                 <p>
-                  It wasn't until I discovered swing trading — and more importantly, learned to{' '}
-                  <strong>build a real foundation</strong> — that things changed. Not overnight. Not through
+                  It wasn't until I discovered swing trading - and more importantly, learned to{' '}
+                  <strong>build a real foundation</strong> - that things changed. Not overnight. Not through
                   some magic formula. Through discipline, proper education, and having someone hold me
                   accountable every step of the way.
                 </p>
@@ -111,7 +111,7 @@ export default function MeetVladSection() {
                   That's why I built <em><strong>Trader Foundation</strong></em>. Not as another course you
                   watch and forget. As a real academy where busy professionals get{' '}
                   <strong>truly individual 1-on-1 coaching</strong>, learn a proven swing trading strategy,
-                  and build the skills to manage their own wealth — on their own terms.
+                  and build the skills to manage their own wealth - on their own terms.
                 </p>
                 <p>
                   Over <strong>1,200 students</strong> and <strong>6+ years</strong> later, with a{' '}

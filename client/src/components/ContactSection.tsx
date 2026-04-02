@@ -1,5 +1,5 @@
 /*
- * ContactSection — Custom contact form (webhook to SproutCloud) + Where to Find Us
+ * ContactSection - Custom contact form (webhook to SproutCloud) + Where to Find Us
  * Design: Dark bg, gold accents, two-column layout
  */
 
@@ -68,13 +68,13 @@ export default function ContactSection() {
             style={{ fontFamily: "'DM Sans', sans-serif" }}
           >
             Whether you're curious about our programs, need help getting started,
-            or just want to say hello — we'd love to hear from you.
+            or just want to say hello - we'd love to hear from you.
           </p>
         </div>
 
         {/* Two-column layout */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14">
-          {/* Left — Custom Contact Form */}
+          {/* Left - Custom Contact Form */}
           <div>
             <h3
               className="text-lg font-extrabold text-white mb-4"
@@ -232,7 +232,7 @@ export default function ContactSection() {
             )}
           </div>
 
-          {/* Right — Where to Find Us */}
+          {/* Right - Where to Find Us */}
           <div>
             <h3
               className="text-lg font-extrabold text-white mb-4"
@@ -281,7 +281,7 @@ export default function ContactSection() {
                     className="text-white/50 text-sm"
                     style={{ fontFamily: "'DM Sans', sans-serif" }}
                   >
-                    United States — Serving Students Worldwide
+                    United States - Serving Students Worldwide
                   </p>
                 </div>
               </div>
@@ -318,7 +318,7 @@ export default function ContactSection() {
                     className="text-white/40 text-xs"
                     style={{ fontFamily: "'DM Sans', sans-serif" }}
                   >
-                    @TheTraderFoundation — Free education, market breakdowns & more
+                    @TheTraderFoundation - Free education, market breakdowns & more
                   </p>
                 </div>
               </a>
@@ -344,7 +344,7 @@ export default function ContactSection() {
                     className="text-white/40 text-xs"
                     style={{ fontFamily: "'DM Sans', sans-serif" }}
                   >
-                    @vladswingtrader — Behind the scenes & daily insights
+                    @vladswingtrader - Behind the scenes & daily insights
                   </p>
                 </div>
               </a>
@@ -361,7 +361,7 @@ export default function ContactSection() {
                   className="text-white/40 text-xs mb-3 leading-relaxed"
                   style={{ fontFamily: "'DM Sans', sans-serif" }}
                 >
-                  Connect with hundreds of traders in our Skool community — ask
+                  Connect with hundreds of traders in our Skool community - ask
                   questions, share wins, and learn together.
                 </p>
                 <a

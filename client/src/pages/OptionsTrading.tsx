@@ -1,8 +1,8 @@
 /**
- * Options Trading Page — Trader Foundation
+ * Options Trading Page - Trader Foundation
  * Chapter-based navigation: TOC on left, selected chapter content on right
- * Design: GOAT Academy style — clean, editorial, three-column layout
- * Content: 100% original — focused on Trader Foundation's safe options approach
+ * Design: GOAT Academy style - clean, editorial, three-column layout
+ * Content: 100% original - focused on Trader Foundation's safe options approach
  */
 
 import React, { useState } from 'react';
@@ -62,13 +62,13 @@ function ChapterWhatAreOptions() {
   return (
     <>
       <p className="text-[1.05rem] leading-relaxed text-[#444] mb-4">
-        An option is a contract. That is all it is. It gives you the right — but not the obligation — to buy or sell a stock at a specific price before a specific date. You are not buying the stock itself. You are buying the <em>opportunity</em> to act on it.
+        An option is a contract. That is all it is. It gives you the right - but not the obligation - to buy or sell a stock at a specific price before a specific date. You are not buying the stock itself. You are buying the <em>opportunity</em> to act on it.
       </p>
       <p className="text-[1.05rem] leading-relaxed text-[#444] mb-4">
         Think of it like putting a deposit on a house. You pay a small amount to lock in the purchase price for a set period. If the market moves in your favor, you exercise that right and profit from the difference. If it does not, you walk away and your loss is limited to the deposit you paid. That deposit is called the <strong>premium</strong>.
       </p>
       <p className="text-[1.05rem] leading-relaxed text-[#444] mb-4">
-        Options exist on virtually every major stock and index. They were originally created as hedging instruments — tools for large institutions to protect their portfolios against sudden drops. Over time, individual traders discovered that options could also be used to generate consistent income, amplify returns on smaller accounts, and define risk with precision.
+        Options exist on virtually every major stock and index. They were originally created as hedging instruments - tools for large institutions to protect their portfolios against sudden drops. Over time, individual traders discovered that options could also be used to generate consistent income, amplify returns on smaller accounts, and define risk with precision.
       </p>
 
       <div className="bg-[#111] rounded-lg p-8 my-8">
@@ -102,7 +102,7 @@ function ChapterWhatAreOptions() {
               </tr>
               <tr className="border-b border-white/5">
                 <td className="py-3 pr-4 text-white/80 font-medium">Time Sensitivity</td>
-                <td className="py-3 pr-4">None — hold indefinitely</td>
+                <td className="py-3 pr-4">None - hold indefinitely</td>
                 <td className="py-3">Contracts expire on a set date</td>
               </tr>
               <tr>
@@ -116,7 +116,7 @@ function ChapterWhatAreOptions() {
       </div>
 
       <p className="text-[1.05rem] leading-relaxed text-[#444]">
-        The reason options matter for busy professionals is simple: they let you do more with less. A stock that costs $150 per share might require $15,000 to buy 100 shares. An options contract on that same stock might cost $300 to $500 — and if the stock moves in your direction, the percentage return on that contract can be many times greater than owning the shares outright. That is the power of <strong>leverage with defined risk</strong>.
+        The reason options matter for busy professionals is simple: they let you do more with less. A stock that costs $150 per share might require $15,000 to buy 100 shares. An options contract on that same stock might cost $300 to $500 - and if the stock moves in your direction, the percentage return on that contract can be many times greater than owning the shares outright. That is the power of <strong>leverage with defined risk</strong>.
       </p>
     </>
   );
@@ -141,7 +141,7 @@ function ChapterCallsVsPuts() {
             A call gives you the right to <strong>buy</strong> a stock at a set price (the strike price) before the contract expires. You buy a call when you believe the stock will go <strong>up</strong>.
           </p>
           <p className="text-[0.95rem] leading-relaxed text-emerald-900/70">
-            <strong>Example:</strong> A stock trades at $100. You buy a $105 call for $2.50 per share ($250 total). If the stock rises to $115, your contract is worth at least $10 per share ($1,000). Your profit: $750 on a $250 investment — a 300% return. If the stock stays below $105, you lose the $250 premium. That is your maximum risk.
+            <strong>Example:</strong> A stock trades at $100. You buy a $105 call for $2.50 per share ($250 total). If the stock rises to $115, your contract is worth at least $10 per share ($1,000). Your profit: $750 on a $250 investment - a 300% return. If the stock stays below $105, you lose the $250 premium. That is your maximum risk.
           </p>
         </div>
 
@@ -153,10 +153,10 @@ function ChapterCallsVsPuts() {
             <h3 className="text-lg font-bold text-red-800" style={{ fontFamily: "'Sen', sans-serif" }}>Put Options</h3>
           </div>
           <p className="text-[0.95rem] leading-relaxed text-red-900/70 mb-3">
-            A put gives you the right to <strong>sell</strong> a stock at a set price before expiration. You buy a put when you believe the stock will go <strong>down</strong> — or when you want to protect shares you already own.
+            A put gives you the right to <strong>sell</strong> a stock at a set price before expiration. You buy a put when you believe the stock will go <strong>down</strong> - or when you want to protect shares you already own.
           </p>
           <p className="text-[0.95rem] leading-relaxed text-red-900/70">
-            <strong>Example:</strong> You own 100 shares of a stock at $100. You buy a $95 put for $1.50 ($150 total). If the stock drops to $80, your put lets you sell at $95 — saving you $1,500 in losses for a $150 insurance cost. Puts are the seatbelt of your portfolio.
+            <strong>Example:</strong> You own 100 shares of a stock at $100. You buy a $95 put for $1.50 ($150 total). If the stock drops to $80, your put lets you sell at $95 - saving you $1,500 in losses for a $150 insurance cost. Puts are the seatbelt of your portfolio.
           </p>
         </div>
       </div>
@@ -165,7 +165,7 @@ function ChapterCallsVsPuts() {
         At Trader Foundation, we use both calls and puts depending on market conditions. Our swing trading system identifies setups that typically play out over days to weeks. When we spot a bullish setup, we buy calls. When the market shows weakness or we want to protect gains, we use puts. The key difference from gambling is that every position has a <strong>defined entry, a defined exit, and a defined maximum loss</strong> before the trade is placed.
       </p>
       <p className="text-[1.05rem] leading-relaxed text-[#444]">
-        One critical detail beginners overlook: we buy options with <strong>longer expiration dates</strong> — typically 30 to 60 days out. This gives the trade room to develop. Cheap weekly options are tempting because they cost less, but they decay rapidly and leave almost no margin for error. Buying time is buying safety.
+        One critical detail beginners overlook: we buy options with <strong>longer expiration dates</strong> - typically 30 to 60 days out. This gives the trade room to develop. Cheap weekly options are tempting because they cost less, but they decay rapidly and leave almost no margin for error. Buying time is buying safety.
       </p>
     </>
   );
@@ -175,29 +175,29 @@ function ChapterWhyOptionsMatter() {
   return (
     <>
       <p className="text-[1.05rem] leading-relaxed text-[#444] mb-4">
-        If stocks are the highway, options are the express lane. They are not inherently risky — they are inherently <em>efficient</em>. The risk comes from how people use them, not from the instrument itself. A kitchen knife is dangerous in the wrong hands and indispensable in the right ones. Options work the same way.
+        If stocks are the highway, options are the express lane. They are not inherently risky - they are inherently <em>efficient</em>. The risk comes from how people use them, not from the instrument itself. A kitchen knife is dangerous in the wrong hands and indispensable in the right ones. Options work the same way.
       </p>
 
       <h3 className="text-xl font-bold text-[#111] mt-8 mb-4" style={{ fontFamily: "'Sen', sans-serif" }}>
         The Leverage Advantage
       </h3>
       <p className="text-[1.05rem] leading-relaxed text-[#444] mb-4">
-        Consider this scenario: you have $5,000 to invest. With stocks, you might buy 50 shares of a $100 stock. If it rises 5% to $105, you make $250 — a 5% return on your capital. With options, that same $5,000 could control the equivalent of 500 or more shares through contracts. A 5% move in the stock could translate to a 20%, 30%, or even 50% return on your options position, depending on the strike and expiration you chose.
+        Consider this scenario: you have $5,000 to invest. With stocks, you might buy 50 shares of a $100 stock. If it rises 5% to $105, you make $250 - a 5% return on your capital. With options, that same $5,000 could control the equivalent of 500 or more shares through contracts. A 5% move in the stock could translate to a 20%, 30%, or even 50% return on your options position, depending on the strike and expiration you chose.
       </p>
       <p className="text-[1.05rem] leading-relaxed text-[#444] mb-4">
-        This is not magic. It is mathematics. Each options contract represents 100 shares, so your capital stretches further. The tradeoff is time — options expire, stocks do not. That is why selecting the right expiration date is a skill we drill into every student from day one.
+        This is not magic. It is mathematics. Each options contract represents 100 shares, so your capital stretches further. The tradeoff is time - options expire, stocks do not. That is why selecting the right expiration date is a skill we drill into every student from day one.
       </p>
 
       <h3 className="text-xl font-bold text-[#111] mt-8 mb-4" style={{ fontFamily: "'Sen', sans-serif" }}>
         Income Generation Without Owning Shares
       </h3>
       <p className="text-[1.05rem] leading-relaxed text-[#444] mb-4">
-        Most people think of options as something you buy. But you can also <strong>sell</strong> options — and that is where consistent income enters the picture. When you sell a contract, you collect the premium upfront. If the stock stays within your predicted range, you keep that premium as profit. Strategies like covered calls and credit spreads are built on this principle, and they form the backbone of what we teach at Trader Foundation.
+        Most people think of options as something you buy. But you can also <strong>sell</strong> options - and that is where consistent income enters the picture. When you sell a contract, you collect the premium upfront. If the stock stays within your predicted range, you keep that premium as profit. Strategies like covered calls and credit spreads are built on this principle, and they form the backbone of what we teach at Trader Foundation.
       </p>
 
       <div className="bg-[#fdf6e9] border border-[#e8d5a8] rounded-lg p-6 my-8">
         <p className="text-[0.95rem] leading-relaxed text-[#6b5a2e] mb-0">
-          <strong>The Two-Pillar Principle:</strong> At Trader Foundation, we teach that trading generates supplemental income while investing builds lasting wealth. Options are the bridge between the two — they let you generate income through trading <em>and</em> protect your long-term investment portfolio. Our coach Erin used this exact approach to reach Coast FIRE, combining swing trading income with disciplined long-term investing.{' '}
+          <strong>The Two-Pillar Principle:</strong> At Trader Foundation, we teach that trading generates supplemental income while investing builds lasting wealth. Options are the bridge between the two - they let you generate income through trading <em>and</em> protect your long-term investment portfolio. Our coach Erin used this exact approach to reach Coast FIRE, combining swing trading income with disciplined long-term investing.{' '}
           <a href="/stocks-and-index" className="text-[#c7ab77] font-semibold hover:underline">Read more about the Two-Pillar approach →</a>
         </p>
       </div>
@@ -206,7 +206,7 @@ function ChapterWhyOptionsMatter() {
         Defined Risk: Know Your Worst Case Before You Enter
       </h3>
       <p className="text-[1.05rem] leading-relaxed text-[#444]">
-        When you buy an option, the most you can lose is the premium you paid. Period. There is no margin call, no surprise debt, no waking up to find your account negative. Compare that to shorting a stock, where losses are theoretically unlimited, or even holding shares through a 40% crash. Options let you participate in the market's upside while placing a hard floor under your downside. That is not gambling — that is <strong>risk engineering</strong>.
+        When you buy an option, the most you can lose is the premium you paid. Period. There is no margin call, no surprise debt, no waking up to find your account negative. Compare that to shorting a stock, where losses are theoretically unlimited, or even holding shares through a 40% crash. Options let you participate in the market's upside while placing a hard floor under your downside. That is not gambling - that is <strong>risk engineering</strong>.
       </p>
     </>
   );
@@ -216,13 +216,13 @@ function ChapterSafeStrategies() {
   return (
     <>
       <p className="text-[1.05rem] leading-relaxed text-[#444] mb-4">
-        The word "safe" and "options" rarely appear in the same sentence online. That is because most content about options focuses on high-risk, high-reward plays — buying cheap contracts that expire worthless 80% of the time. We take the opposite approach. Our strategies are designed to produce <strong>consistent, repeatable income</strong> with clearly defined risk on every trade.
+        The word "safe" and "options" rarely appear in the same sentence online. That is because most content about options focuses on high-risk, high-reward plays - buying cheap contracts that expire worthless 80% of the time. We take the opposite approach. Our strategies are designed to produce <strong>consistent, repeatable income</strong> with clearly defined risk on every trade.
       </p>
 
       <div className="space-y-6 my-8">
         <div className="bg-white rounded-lg border border-[#e8e4dc] p-6 shadow-sm">
           <h4 className="text-lg font-bold text-[#111] mb-3" style={{ fontFamily: "'Sen', sans-serif" }}>
-            Covered Calls — Earning Rent on Stocks You Own
+            Covered Calls - Earning Rent on Stocks You Own
           </h4>
           <p className="text-[0.95rem] leading-relaxed text-[#555] mb-3">
             If you own 100 shares of a stock, you can sell a call option against those shares and collect the premium. If the stock stays below the strike price, you keep the premium and your shares. If it rises above the strike, you sell your shares at a profit and still keep the premium.
@@ -233,35 +233,35 @@ function ChapterSafeStrategies() {
           <div className="bg-[#faf8f4] border-l-4 border-[#c7ab77] rounded-r-lg p-5 mt-4">
             <h5 className="text-[0.95rem] font-bold text-[#111] mb-2" style={{ fontFamily: "'Sen', sans-serif" }}>Where We Take It Further: Charting Your Covered Calls</h5>
             <p className="text-[0.88rem] leading-relaxed text-[#555]">
-              Most programs teach covered calls as a mechanical strategy — own 100 shares, sell a call, collect the premium, repeat. At Trader Foundation, we take it to another level by layering <strong>technical analysis and charting</strong> into every covered call decision. Before selling a call, our coaches teach you to read the chart: identify support and resistance levels, analyze the trend direction, and evaluate where the stock is within its current range. This means you are not blindly picking strike prices — you are selecting strikes based on where the chart tells you the stock is likely to stall or reverse. The result is higher-quality premium collection, better strike selection, and fewer situations where your shares get called away at the wrong time. Charting transforms covered calls from a passive income strategy into a <strong>precision income engine</strong>.
+              Most programs teach covered calls as a mechanical strategy - own 100 shares, sell a call, collect the premium, repeat. At Trader Foundation, we take it to another level by layering <strong>technical analysis and charting</strong> into every covered call decision. Before selling a call, our coaches teach you to read the chart: identify support and resistance levels, analyze the trend direction, and evaluate where the stock is within its current range. This means you are not blindly picking strike prices - you are selecting strikes based on where the chart tells you the stock is likely to stall or reverse. The result is higher-quality premium collection, better strike selection, and fewer situations where your shares get called away at the wrong time. Charting transforms covered calls from a passive income strategy into a <strong>precision income engine</strong>.
             </p>
           </div>
         </div>
 
         <div className="bg-white rounded-lg border border-[#e8e4dc] p-6 shadow-sm">
           <h4 className="text-lg font-bold text-[#111] mb-3" style={{ fontFamily: "'Sen', sans-serif" }}>
-            Credit Spreads — Collecting Premium with a Safety Net
+            Credit Spreads - Collecting Premium with a Safety Net
           </h4>
           <p className="text-[0.95rem] leading-relaxed text-[#555] mb-3">
-            A credit spread involves selling one option and buying another at a different strike price. The premium you collect from the sold option is greater than the cost of the bought option — so you receive a net credit. Your maximum loss is the difference between the two strikes minus the credit received.
+            A credit spread involves selling one option and buying another at a different strike price. The premium you collect from the sold option is greater than the cost of the bought option - so you receive a net credit. Your maximum loss is the difference between the two strikes minus the credit received.
           </p>
           <p className="text-[0.95rem] leading-relaxed text-[#555]">
-            This is one of the most popular strategies among our students because it requires less capital than covered calls, defines your maximum risk upfront, and profits when the stock stays within a predictable range. You do not need the stock to make a big move — you just need it to <em>not</em> move against you past your short strike.
+            This is one of the most popular strategies among our students because it requires less capital than covered calls, defines your maximum risk upfront, and profits when the stock stays within a predictable range. You do not need the stock to make a big move - you just need it to <em>not</em> move against you past your short strike.
           </p>
         </div>
 
         <div className="bg-white rounded-lg border border-[#e8e4dc] p-6 shadow-sm">
           <h4 className="text-lg font-bold text-[#111] mb-3" style={{ fontFamily: "'Sen', sans-serif" }}>
-            Protective Puts — Insurance for Your Portfolio
+            Protective Puts - Insurance for Your Portfolio
           </h4>
           <p className="text-[0.95rem] leading-relaxed text-[#555]">
-            If you hold a stock position and want to guard against a sudden drop, buying a put option acts as an insurance policy. You pay a small premium, and if the stock falls below your strike price, the put increases in value to offset your losses. This is how institutional investors protect billion-dollar portfolios — and you can use the exact same tool on a personal account.
+            If you hold a stock position and want to guard against a sudden drop, buying a put option acts as an insurance policy. You pay a small premium, and if the stock falls below your strike price, the put increases in value to offset your losses. This is how institutional investors protect billion-dollar portfolios - and you can use the exact same tool on a personal account.
           </p>
         </div>
       </div>
 
       <p className="text-[1.05rem] leading-relaxed text-[#444]">
-        Notice the pattern: every strategy above has a <strong>defined maximum loss</strong>. There are no open-ended risks, no hoping and praying. Each trade is structured before you enter it, with a clear plan for what happens if the market moves against you. That is the foundation of what we mean by "safe options" — not that you cannot lose, but that you always know exactly how much you can lose before you commit a single dollar.
+        Notice the pattern: every strategy above has a <strong>defined maximum loss</strong>. There are no open-ended risks, no hoping and praying. Each trade is structured before you enter it, with a clear plan for what happens if the market moves against you. That is the foundation of what we mean by "safe options" - not that you cannot lose, but that you always know exactly how much you can lose before you commit a single dollar.
       </p>
     </>
   );
@@ -280,11 +280,11 @@ function ChapterReadingTheChain() {
         </h3>
         <div className="space-y-5">
           {[
-            { term: 'Strike Price', desc: 'The price at which you can buy (call) or sell (put) the underlying stock. Strikes are listed in increments — $1, $2.50, or $5 apart depending on the stock price.' },
+            { term: 'Strike Price', desc: 'The price at which you can buy (call) or sell (put) the underlying stock. Strikes are listed in increments - $1, $2.50, or $5 apart depending on the stock price.' },
             { term: 'Expiration Date', desc: 'When the contract expires. We typically look at options 30 to 60 days out. Shorter expirations decay faster; longer ones cost more but give your trade room to breathe.' },
-            { term: 'Bid / Ask', desc: 'The bid is what buyers will pay. The ask is what sellers want. The difference (the spread) is your transaction cost. Tighter spreads mean more liquid options — always prefer these.' },
+            { term: 'Bid / Ask', desc: 'The bid is what buyers will pay. The ask is what sellers want. The difference (the spread) is your transaction cost. Tighter spreads mean more liquid options - always prefer these.' },
             { term: 'Volume & Open Interest', desc: 'Volume shows how many contracts traded today. Open interest shows total outstanding contracts. Higher numbers mean better liquidity and tighter spreads. Avoid contracts with open interest below 100.' },
-            { term: 'Implied Volatility (IV)', desc: 'A measure of how much the market expects the stock to move. Higher IV means more expensive premiums. We use IV to time entries — buying when IV is relatively low and selling when it is elevated.' },
+            { term: 'Implied Volatility (IV)', desc: 'A measure of how much the market expects the stock to move. Higher IV means more expensive premiums. We use IV to time entries - buying when IV is relatively low and selling when it is elevated.' },
           ].map((item, i) => (
             <div key={i} className="flex gap-4">
               <span className="text-[#c7ab77] font-bold text-[0.85rem] shrink-0 w-6 text-right" style={{ fontFamily: "'DM Sans', sans-serif" }}>{i + 1}.</span>
@@ -301,10 +301,10 @@ function ChapterReadingTheChain() {
         In the Money, At the Money, Out of the Money
       </h3>
       <p className="text-[1.05rem] leading-relaxed text-[#444] mb-4">
-        These three terms describe where the strike price sits relative to the current stock price. For a call option: if the stock trades at $100 and your strike is $95, you are <strong>in the money (ITM)</strong> — the option already has intrinsic value. If your strike is $100, you are <strong>at the money (ATM)</strong>. If your strike is $105, you are <strong>out of the money (OTM)</strong> — the stock needs to rise for your option to gain intrinsic value.
+        These three terms describe where the strike price sits relative to the current stock price. For a call option: if the stock trades at $100 and your strike is $95, you are <strong>in the money (ITM)</strong> - the option already has intrinsic value. If your strike is $100, you are <strong>at the money (ATM)</strong>. If your strike is $105, you are <strong>out of the money (OTM)</strong> - the stock needs to rise for your option to gain intrinsic value.
       </p>
       <p className="text-[1.05rem] leading-relaxed text-[#444]">
-        At Trader Foundation, your coach will walk you through exactly which strike and expiration to select based on the specific setup. This is not a one-size-fits-all formula — it depends on the stock, the volatility environment, and your account size. That is why 1-on-1 coaching matters. A YouTube video cannot adjust its advice to your situation. Your coach can.{' '}
+        At Trader Foundation, your coach will walk you through exactly which strike and expiration to select based on the specific setup. This is not a one-size-fits-all formula - it depends on the stock, the volatility environment, and your account size. That is why 1-on-1 coaching matters. A YouTube video cannot adjust its advice to your situation. Your coach can.{' '}
         <a href="/trading-tools" className="text-[#c7ab77] font-semibold hover:underline">See how our Trading Tools chapter covers options chains in more detail →</a>
       </p>
     </>
@@ -362,7 +362,7 @@ function ChapterRiskManagement() {
               <tr>
                 <td className="py-3 pr-4 text-white/80 font-medium">$50,000+</td>
                 <td className="py-3 pr-4">10% or less</td>
-                <td className="py-3">Capital protection is the priority — no single trade should threaten the account</td>
+                <td className="py-3">Capital protection is the priority - no single trade should threaten the account</td>
               </tr>
             </tbody>
           </table>
@@ -376,7 +376,7 @@ function ChapterRiskManagement() {
         Every trade at Trader Foundation has three numbers defined before the order is placed: the entry price, the profit target, and the stop loss. If the trade hits your target, you take the profit. If it hits your stop, you take the loss. There is no negotiating with the market, no "let me hold a little longer," no hoping it comes back. The plan is the plan.
       </p>
       <p className="text-[1.05rem] leading-relaxed text-[#444]">
-        Your coach reviews every trade plan with you — not after the fact, but before you place it. This accountability loop is what separates our students from self-taught traders who develop bad habits in isolation. When someone is watching, you follow the rules. When you follow the rules, you protect your capital. When you protect your capital, you stay in the game long enough for compounding to work. <a href="/calculator" className="text-[#c7ab77] font-semibold hover:underline">See how compounding transforms your trading income over time →</a>
+        Your coach reviews every trade plan with you - not after the fact, but before you place it. This accountability loop is what separates our students from self-taught traders who develop bad habits in isolation. When someone is watching, you follow the rules. When you follow the rules, you protect your capital. When you protect your capital, you stay in the game long enough for compounding to work. <a href="/calculator" className="text-[#c7ab77] font-semibold hover:underline">See how compounding transforms your trading income over time →</a>
       </p>
     </>
   );
@@ -386,7 +386,7 @@ function ChapterPsychology() {
   return (
     <>
       <p className="text-[1.05rem] leading-relaxed text-[#444] mb-4">
-        You can have the best strategy, the best tools, and the best coach — and still lose money if your emotions are running the show. Trading psychology is not a soft skill. It is the hardest part of this entire discipline, and it is the reason most self-taught traders eventually quit.
+        You can have the best strategy, the best tools, and the best coach - and still lose money if your emotions are running the show. Trading psychology is not a soft skill. It is the hardest part of this entire discipline, and it is the reason most self-taught traders eventually quit.
       </p>
 
       <h3 className="text-xl font-bold text-[#111] mt-8 mb-4" style={{ fontFamily: "'Sen', sans-serif" }}>
@@ -396,7 +396,7 @@ function ChapterPsychology() {
         Fear makes you exit winning trades too early and avoid perfectly good setups because the last trade was a loss. Greed makes you hold losing trades too long, add to positions that are going against you, and risk more than your plan allows because "this one is a sure thing." Neither emotion has a place in your trading process.
       </p>
       <p className="text-[1.05rem] leading-relaxed text-[#444] mb-4">
-        The antidote is not willpower — it is <strong>process</strong>. When your entry, exit, and position size are predetermined, there is nothing left for emotion to influence. You are executing a plan, not making decisions in the heat of the moment. That is why we insist on trade plans being written down and reviewed by your coach before execution.
+        The antidote is not willpower - it is <strong>process</strong>. When your entry, exit, and position size are predetermined, there is nothing left for emotion to influence. You are executing a plan, not making decisions in the heat of the moment. That is why we insist on trade plans being written down and reviewed by your coach before execution.
       </p>
 
       <div className="space-y-4 my-8">
@@ -419,7 +419,7 @@ function ChapterPsychology() {
       </div>
 
       <p className="text-[1.05rem] leading-relaxed text-[#444]">
-        The reason 1-on-1 coaching works so well for psychology is accountability. When you know your coach will see every trade, you think twice before making an impulsive decision. Over time, that external accountability becomes internal discipline — and that is when trading stops being stressful and starts being systematic.
+        The reason 1-on-1 coaching works so well for psychology is accountability. When you know your coach will see every trade, you think twice before making an impulsive decision. Over time, that external accountability becomes internal discipline - and that is when trading stops being stressful and starts being systematic.
       </p>
     </>
   );
@@ -438,10 +438,10 @@ function ChapterGettingStarted() {
         </h3>
         <div className="space-y-6">
           {[
-            { week: 'Week 1', title: 'Foundation & Setup', desc: 'Meet your personal coach. Set up your brokerage account. Learn the basics of reading charts and identifying swing trade setups. Begin paper trading with the Time Machine — our structured practice system that uses real historical data.' },
+            { week: 'Week 1', title: 'Foundation & Setup', desc: 'Meet your personal coach. Set up your brokerage account. Learn the basics of reading charts and identifying swing trade setups. Begin paper trading with the Time Machine - our structured practice system that uses real historical data.' },
             { week: 'Week 2', title: 'Options Fundamentals', desc: 'Understand calls, puts, strike selection, and expiration timing. Practice reading options chains. Submit your first paper trade plans to your coach for review. Learn position sizing based on your account.' },
             { week: 'Week 3', title: 'Strategy Application', desc: 'Apply covered calls or credit spreads in paper trading. Review your trade journal with your coach. Identify patterns in your decision-making. Begin to develop your personal trading rules.' },
-            { week: 'Week 4', title: 'Transition to Live Trading', desc: 'With your coach\'s approval, place your first live trade with real capital — small position, defined risk, full trade plan reviewed beforehand. Continue daily practice with the Time Machine alongside live positions.' },
+            { week: 'Week 4', title: 'Transition to Live Trading', desc: 'With your coach\'s approval, place your first live trade with real capital - small position, defined risk, full trade plan reviewed beforehand. Continue daily practice with the Time Machine alongside live positions.' },
           ].map((item, i) => (
             <div key={i} className="flex gap-5">
               <div className="shrink-0">
@@ -460,12 +460,12 @@ function ChapterGettingStarted() {
       </div>
 
       <p className="text-[1.05rem] leading-relaxed text-[#444] mb-4">
-        Notice that live trading does not begin until week four — and only with your coach's sign-off. We are not in a rush to get you placing trades. We are in a rush to get you placing <em>good</em> trades. The Time Machine practice system lets you analyze hundreds of historical setups before risking real money, building the pattern recognition and discipline that separate profitable traders from everyone else.
+        Notice that live trading does not begin until week four - and only with your coach's sign-off. We are not in a rush to get you placing trades. We are in a rush to get you placing <em>good</em> trades. The Time Machine practice system lets you analyze hundreds of historical setups before risking real money, building the pattern recognition and discipline that separate profitable traders from everyone else.
       </p>
 
       <div className="bg-[#fdf6e9] border border-[#e8d5a8] rounded-lg p-6 my-8">
         <p className="text-[0.95rem] leading-relaxed text-[#6b5a2e] mb-0">
-          <strong>Ready to start?</strong> Our free masterclass walks you through the complete swing trading system — how we find setups, how we use options for leverage, and how our students are building real wealth while keeping their day jobs. No fluff, no hype, just the strategy.
+          <strong>Ready to start?</strong> Our free masterclass walks you through the complete swing trading system - how we find setups, how we use options for leverage, and how our students are building real wealth while keeping their day jobs. No fluff, no hype, just the strategy.
         </p>
       </div>
 
@@ -530,7 +530,7 @@ export default function OptionsTrading() {
             Options <span className="text-[#c7ab77]">Trading</span>
           </h1>
           <p className="mt-3 text-white/60 text-lg max-w-2xl" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-            A clear-headed guide to using options for leverage, income, and portfolio protection — without the gambling.
+            A clear-headed guide to using options for leverage, income, and portfolio protection - without the gambling.
           </p>
         </div>
       </div>

@@ -1,5 +1,5 @@
 /*
- * Coming Soon Placeholder Page — Trader Foundation
+ * Coming Soon Placeholder Page - Trader Foundation
  * Reusable for sub-nav pages not yet built
  */
 

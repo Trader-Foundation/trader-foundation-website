@@ -1,5 +1,5 @@
 /*
- * Navigation Component — Trader Foundation
+ * Navigation Component - Trader Foundation
  * Two-tier header: top utility bar + sub-navigation bar (GOAT Academy style)
  * Fonts: Sen (bold headings), DM Sans (body/nav links)
  */

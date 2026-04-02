@@ -185,7 +185,7 @@ export default function Footer() {
           </p>
         </div>
 
-        {/* Bottom Bar — copyright + tiny legal links */}
+        {/* Bottom Bar - copyright + tiny legal links */}
         <div className="mt-6 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p
             className="text-white/20 text-[10px]"

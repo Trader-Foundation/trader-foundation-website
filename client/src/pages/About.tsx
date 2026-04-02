@@ -187,7 +187,7 @@ export default function About() {
               <p className="text-[#c7ab77] text-sm font-medium">Founder & CEO</p>
             </div>
 
-            {/* Story text (3 cols) — condensed */}
+            {/* Story text (3 cols) - condensed */}
             <div className="lg:col-span-3">
               <p className="text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-3">
                 The Founder
@@ -283,7 +283,7 @@ export default function About() {
                 className="group bg-white border border-[#e8e4dc] rounded-lg overflow-hidden transition-all duration-500 hover:border-[#c7ab77]/40 hover:shadow-[0_8px_40px_rgba(199,171,119,0.1)]"
                 style={{ transitionDelay: `${i * 100}ms` }}
               >
-                {/* Photo — brightened */}
+                {/* Photo - brightened */}
                 <div className="relative overflow-hidden">
                   <img
                     src={coach.photo}

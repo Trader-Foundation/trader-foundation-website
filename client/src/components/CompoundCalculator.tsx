@@ -1,5 +1,5 @@
 /*
- * CompoundCalculator — Reusable compound interest calculator widget
+ * CompoundCalculator - Reusable compound interest calculator widget
  * Can be embedded on any page (homepage, Investing 101, etc.)
  * Design: Dark panel with gold accents, matching Trader Foundation brand
  */
@@ -211,7 +211,7 @@ export default function CompoundCalculator() {
 
         {/* Calculator grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Left — Inputs */}
+          {/* Left - Inputs */}
           <div className="bg-[#151515] border border-white/5 rounded-xl p-5 sm:p-6 space-y-4">
             <h3 className="text-sm font-extrabold text-white mb-1"
               style={{ fontFamily: "'Sen', sans-serif" }}>
@@ -245,7 +245,7 @@ export default function CompoundCalculator() {
             </div>
           </div>
 
-          {/* Right — Results + Chart */}
+          {/* Right - Results + Chart */}
           <div className="space-y-5">
             {/* Results */}
             <div className="bg-[#151515] border border-[#c7ab77]/20 rounded-xl p-5 sm:p-6">

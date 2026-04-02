@@ -90,7 +90,7 @@ export default function PodcastSection() {
               className="text-[#999] text-sm leading-relaxed mb-5 max-w-lg"
               style={{ fontFamily: "'DM Sans', sans-serif" }}
             >
-              Hosted by Vlad Tayman — real market insights, trading education, and the mindset behind consistent results.
+              Hosted by Vlad Tayman - real market insights, trading education, and the mindset behind consistent results.
             </p>
 
             {/* Platform Links */}
@@ -150,7 +150,7 @@ export default function PodcastSection() {
               </a>
             </div>
 
-            {/* Guest Appearances — inline */}
+            {/* Guest Appearances - inline */}
             <div>
               <span
                 className="text-[0.65rem] font-bold tracking-[0.15em] uppercase text-[#c7ab77] block mb-2"
