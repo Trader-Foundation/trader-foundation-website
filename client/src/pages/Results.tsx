@@ -104,7 +104,7 @@ const studentExperiences = [
     quote:
       'I joined Trader Foundation with no prior trading experience. Through the structured training, weekly coaching sessions, and daily live sessions, I gradually built both technical skills and confidence. By July 2025, I had grown my initial capital by three times.',
     name: 'Esther Kamau',
-    role: 'Verified Student',
+    role: 'Global Program Director',
     initials: 'EK',
   },
 ];
