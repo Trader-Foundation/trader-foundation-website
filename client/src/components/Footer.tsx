@@ -187,11 +187,11 @@ export default function Footer() {
                   Have a question? Reach out — we'd love to hear from you.
                 </p>
                 <a
-                  href="mailto:support@traderfoundation.com"
+                  href="mailto:support@traderfoundation.net"
                   className="text-[#c7ab77] text-sm hover:text-[#b89a66] transition-colors"
                   style={{ fontFamily: "'DM Sans', sans-serif" }}
                 >
-                  support@traderfoundation.com
+                  support@traderfoundation.net
                 </a>
               </div>
               <div>

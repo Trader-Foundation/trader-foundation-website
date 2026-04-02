@@ -406,7 +406,7 @@ export default function TermsOfUse() {
       </p>
       <p>
         If you have any questions or concerns regarding our privacy policy please direct them to:{' '}
-        <a href="mailto:support@traderfoundation.com">support@traderfoundation.com</a>
+        <a href="mailto:support@traderfoundation.net">support@traderfoundation.net</a>
       </p>
 
     </LegalPageLayout>

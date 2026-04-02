@@ -115,11 +115,11 @@ export default function Contact() {
                         Email
                       </p>
                       <a
-                        href="mailto:support@traderfoundation.com"
+                        href="mailto:support@traderfoundation.net"
                         className="text-[#c7ab77] text-sm hover:underline"
                         style={{ fontFamily: "'DM Sans', sans-serif" }}
                       >
-                        support@traderfoundation.com
+                        support@traderfoundation.net
                       </a>
                     </div>
                   </div>

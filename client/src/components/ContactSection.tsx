@@ -256,11 +256,11 @@ export default function ContactSection() {
                     Email
                   </p>
                   <a
-                    href="mailto:support@traderfoundation.com"
+                    href="mailto:support@traderfoundation.net"
                     className="text-white/50 text-sm hover:text-[#c7ab77] transition-colors"
                     style={{ fontFamily: "'DM Sans', sans-serif" }}
                   >
-                    support@traderfoundation.com
+                    support@traderfoundation.net
                   </a>
                 </div>
               </div>
