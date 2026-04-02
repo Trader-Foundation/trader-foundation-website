@@ -5,7 +5,7 @@
  */
 
 import { useEffect, useRef, useState } from 'react';
-import { Mic, ExternalLink } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 
 const guestAppearances = [
   { name: 'The Unstoppable Podcast', url: 'https://www.youtube.com/watch?v=dAeLX72hHNE' },
@@ -48,28 +48,12 @@ export default function PodcastSection() {
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}
           >
-            <div className="w-40 h-40 sm:w-48 sm:h-48 rounded-xl bg-[#1a1a1a] border border-white/10 flex flex-col items-center justify-center shadow-xl">
-              <div className="w-10 h-10 rounded-full bg-[#c7ab77]/10 flex items-center justify-center mb-3">
-                <Mic size={20} className="text-[#c7ab77]" />
-              </div>
-              <span
-                className="text-[0.6rem] font-bold tracking-[0.2em] uppercase text-[#c7ab77] mb-1"
-                style={{ fontFamily: "'DM Sans', sans-serif" }}
-              >
-                Trader
-              </span>
-              <span
-                className="text-[0.6rem] font-bold tracking-[0.2em] uppercase text-[#c7ab77]"
-                style={{ fontFamily: "'DM Sans', sans-serif" }}
-              >
-                Foundation
-              </span>
-              <span
-                className="text-[0.5rem] font-bold tracking-[0.15em] uppercase text-white/40 mt-1"
-                style={{ fontFamily: "'DM Sans', sans-serif" }}
-              >
-                Podcast
-              </span>
+            <div className="w-40 h-40 sm:w-48 sm:h-48 rounded-xl overflow-hidden shadow-xl border border-white/10">
+              <img
+                src="https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/tf-podcast-logo_d2a32a20.jpeg"
+                alt="Trader Foundation Podcast"
+                className="w-full h-full object-cover"
+              />
             </div>
           </div>
 
