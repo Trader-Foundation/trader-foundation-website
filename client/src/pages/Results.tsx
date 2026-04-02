@@ -63,28 +63,49 @@ const videoTestimonials = [
   },
 ];
 
-/* ── Text testimonials (student experiences) ── */
+/* ── Text testimonials (student experiences) — all real TrustPilot reviews ── */
 const studentExperiences = [
   {
     quote:
-      "I was skeptical after losing money on other programs. The 1-on-1 coaching here changed everything. My coach reviewed every single trade until I truly understood.",
-    name: 'Recent Graduate',
-    role: 'IT Professional',
-    initials: 'RG',
+      'The program provides an excellent foundation for understanding options, strategy and pattern recognition. The real value is the access to the coaches. Erin, Elliot and Leo all have different trading styles, and patterns that they personally follow. My trading has improved dramatically as a result.',
+    name: 'Doug B.',
+    role: 'CFO',
+    initials: 'DB',
   },
   {
     quote:
-      "As an engineer working 60-hour weeks, I needed something that didn't require staring at charts all day. The swing trading approach fits perfectly into my lunch break.",
-    name: 'Active Student',
-    role: 'Software Engineer',
-    initials: 'AS',
+      'Coaching hours are not capped, community goes live daily to evaluate the market, and you get access to multiple, highly skilled coaches who trade profitably in their own ways. Between private coaching, the structured course, and the daily live streams, it\'s possible to get 15-20 hours of guidance every week.',
+    name: 'Alick Yu',
+    role: 'Engineer',
+    initials: 'AY',
   },
   {
     quote:
-      "The daily mastermind sessions are invaluable. Being surrounded by serious traders who are all learning and growing together — it's like having a graduate cohort.",
-    name: 'Community Member',
-    role: 'Project Manager',
-    initials: 'CM',
+      'A whole new world is opened up to me! I was stuck in the 9-to-5 prison of wage slavery. Trader Foundation helped me to find success on my terms. TF helped to hone my talents to grow those blessings to better provide for my family and our future.',
+    name: 'Chase Brey',
+    role: 'IT Director',
+    initials: 'CB',
+  },
+  {
+    quote:
+      'My experience with Vlad and his team has been nothing short of incredible! This is a high level organization. Coaches Elliot, Erin, and Leo genuinely want to see you succeed and work with you one on one. It is the type of personal touch that you can only find with this group.',
+    name: 'Matt Couch',
+    role: 'Healthcare Sales Director',
+    initials: 'MC',
+  },
+  {
+    quote:
+      'This course introduces you to the fundamentals before guiding you into real trading. The coaches really want you to succeed. They answer every question and meet with you as needed. They continually encourage you to practice until you feel comfortable trading with real money.',
+    name: 'Lisa',
+    role: 'IT Director',
+    initials: 'LI',
+  },
+  {
+    quote:
+      'I joined Trader Foundation with no prior trading experience. Through the structured training, weekly coaching sessions, and daily live sessions, I gradually built both technical skills and confidence. By July 2025, I had grown my initial capital by three times.',
+    name: 'Esther Kamau',
+    role: 'Verified Student',
+    initials: 'EK',
   },
 ];
 
@@ -379,13 +400,13 @@ export default function Results() {
               className="text-3xl md:text-4xl font-extrabold text-white leading-tight"
               style={{ fontFamily: "'Sen', sans-serif" }}
             >
-              Hear From Those Who{' '}
-              <span className="text-[#c7ab77]">Made the Commitment</span>
+              Professionals Who{' '}
+              <span className="text-[#c7ab77]">Took the Leap</span>
             </h2>
             <div className="w-20 h-[2px] bg-[#c7ab77] mx-auto mt-6" />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {studentExperiences.map((testimonial, index) => (
               <div
                 key={testimonial.name}
