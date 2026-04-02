@@ -7,7 +7,7 @@
 import { useEffect, useState } from 'react';
 import { Play } from 'lucide-react';
 
-const HERO_BG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/vlad-hero-teaching-FFg9K8Qa9Cq3VqjrYaHAtA.webp';
+const HERO_BG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/vlad-hero-v2-6zXiqgoqrruKE9oGNbtEsK.webp';
 const BBB_BADGE = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/bbb-badge-na8f3oFNHTxq7SUh5kdEVr.webp';
 
 export default function HeroSection() {
