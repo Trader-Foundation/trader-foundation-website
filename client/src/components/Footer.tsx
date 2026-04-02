@@ -57,7 +57,7 @@ export default function Footer() {
                 { label: 'About', href: '/about' },
                 { label: 'Results', href: '/results' },
                 { label: 'Contact', href: '/contact' },
-                { label: 'Calculator', href: '/calculator' },
+
               ].map((link) => (
                 <li key={link.label}>
                   <Link href={link.href}>
@@ -102,6 +102,15 @@ export default function Footer() {
                   style={{ fontFamily: "'DM Sans', sans-serif" }}
                 >
                   YouTube Channel
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/calculator"
+                  className="text-white/50 text-sm hover:text-[#c7ab77] transition-colors duration-300 cursor-pointer"
+                  style={{ fontFamily: "'DM Sans', sans-serif" }}
+                >
+                  Compound Wealth Calculator
                 </a>
               </li>
             </ul>
