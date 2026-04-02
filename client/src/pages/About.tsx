@@ -23,7 +23,7 @@ const coaches = [
     title: 'Lead Mentor',
     experience: '10+ Years of Market Experience',
     photo: ELLIOT_PHOTO,
-    philosophy: '"I genuinely love the markets. Taking something complex and making it simple enough for anyone to understand \u2014 that\'s what gets me going."',
+    philosophy: '"I love the markets. Taking something complex and making it simple enough for anyone to understand \u2014 that\'s what gets me going."',
     cardQuote: '"Options don\'t have to be complicated. Once you see the pattern, you can\'t unsee it."',
     bio: 'Options used to feel like a foreign language to me. After a decade in the markets, I became the person I wish I had when I was starting out. I specialize in breaking down complex options strategies into plain English so that anyone can trade with confidence. As Lead Mentor, I built the curriculum thousands of students use every day and host daily market meetups where we analyze setups together in real time. But honestly, the reason I show up every day isn\'t the market \u2014 it\'s the people. Watching someone go from confused to confident is the most rewarding thing I\'ve ever done.',
   },
@@ -289,7 +289,7 @@ export default function About() {
                     src={coach.photo}
                     alt={coach.name}
                     className="w-full aspect-[4/5] object-cover transition-transform duration-700 group-hover:scale-105"
-                    style={{ filter: 'brightness(1.15) contrast(1.05)' }}
+                    style={{ filter: 'brightness(1.35) contrast(1.05)' }}
                   />
                   <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-white to-transparent" />
                 </div>

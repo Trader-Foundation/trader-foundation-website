@@ -12,10 +12,10 @@ const VLAD_FAMILY = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RD
 
 const trustpilotReviews = [
   {
-    name: 'Esther Kamau',
+    name: 'Bobby Colucci',
     rating: 5,
-    title: 'Yes! It\'s Worth it!',
-    text: 'I joined Trader Foundation with no prior trading experience. Through the structured training, weekly coaching sessions, and daily live sessions, I gradually built both technical skills and confidence. I have grown my initial capital by three times, applying the strategies and disciplined mindset taught by the coaches.',
+    title: 'I Have Been Learning a Lot',
+    text: 'I have been learning a lot, and I have come a long way since I started my classes. Having access to a live person or persons has been incredibly encouraging. Elliot, Leo, and Erin have been great. Vlad is very smart, so pay attention.',
   },
   {
     name: 'Fred Nicora',
@@ -30,10 +30,10 @@ const trustpilotReviews = [
     text: 'I\'ve been trading options for quite some time and thought I knew a lot. Vlad and Elliot\'s knowledge and mentorship far exceeded anything I had imagined. Their strategies, especially the paycheck collector, is a game changer. I\'m less stressed about finances than I have ever been in my life.',
   },
   {
-    name: 'Lisa',
+    name: 'Jonas',
     rating: 5,
-    title: 'Glad I Made the Decision to Join!',
-    text: 'This course introduces you to the fundamentals before guiding you into real trading. The coaches really want you to succeed. They answer every question and meet with you as needed. My understanding of options has been significantly enhanced. I know I made the right decision.',
+    title: 'Well-Structured Training with Excellent Coaching Support',
+    text: 'The learning flow is clear and logical, which makes it much easier to understand concepts that are usually complex and intimidating for beginners. The company offers daily live sessions with coaches where stocks are reviewed in real time. Students are also encouraged to schedule one-on-one sessions with coaches for personalized guidance.',
   },
 ];
 
