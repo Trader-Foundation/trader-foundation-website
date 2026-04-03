@@ -15,6 +15,32 @@ const VLAD_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDB
 const ELLIOT_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/elliot_7d09de2a.jpg';
 const ERIN_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/erin_93b42a5c.jpg';
 const LEO_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/leo_professional_b52839af.png';
+const JHALIL_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/jhalil-team_380dedda.png';
+const STEVE_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/steve-lapa-team_baeaf108.png';
+const ARIANA_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/ariana-tayman-team_e13d7ff2.png';
+
+/* ── Leadership team data ── */
+const leadership = [
+  {
+    name: 'Jhalil',
+    title: 'Advisor',
+    photo: JHALIL_PHOTO,
+    bio: '20 years of leadership experience driving record-breaking results through personalized mentorship.',
+  },
+  {
+    name: 'Steve Lapa',
+    title: 'Head of Sales Development',
+    subtitle: 'Vice President',
+    photo: STEVE_PHOTO,
+    bio: '',
+  },
+  {
+    name: 'Ariana Tayman',
+    title: 'Head of Customer Support',
+    photo: ARIANA_PHOTO,
+    bio: 'Ensuring every client receives royal treatment from day one through their entire trading journey.',
+  },
+];
 
 /* ── Coach data with philosophies ── */
 const coaches = [
@@ -250,6 +276,62 @@ export default function About() {
                 <div className="w-8 h-[1px] bg-[#c7ab77]/20 mx-auto mb-2" />
                 <p className="text-white text-sm font-semibold">{coach.name}</p>
                 <p className="text-[#c7ab77] text-xs">{coach.title}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Leadership Team ─── */}
+      <section className="py-20 bg-[#faf9f6]">
+        <div className="max-w-[1100px] mx-auto px-6 lg:px-8">
+          <div className="text-center mb-14">
+            <p className="text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-3">
+              The Team Behind the Mission
+            </p>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-[#111] leading-tight" style={{ fontFamily: "'Sen', sans-serif" }}>
+              Meet the Team
+            </h2>
+            <div className="w-20 h-[2px] bg-[#c7ab77] mx-auto mt-6" />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
+            {leadership.map((member, i) => (
+              <div
+                key={member.name}
+                className="group bg-white border border-[#e8e4dc] rounded-lg overflow-hidden transition-all duration-500 hover:border-[#c7ab77]/40 hover:shadow-[0_8px_40px_rgba(199,171,119,0.1)]"
+                style={{ transitionDelay: `${i * 100}ms` }}
+              >
+                <div className="relative overflow-hidden">
+                  <img
+                    src={member.photo}
+                    alt={member.name}
+                    className="w-full aspect-[4/5] object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                    style={{ filter: 'brightness(1.15) contrast(1.05)' }}
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-white to-transparent" />
+                </div>
+                <div className="px-6 pb-6 -mt-4 relative">
+                  <h3 className="text-xl font-extrabold text-[#111] mb-1" style={{ fontFamily: "'Sen', sans-serif" }}>
+                    {member.name}
+                  </h3>
+                  <p className="text-[#c7ab77] text-sm font-semibold mb-1">
+                    {member.title}
+                  </p>
+                  {'subtitle' in member && member.subtitle && (
+                    <p className="text-[#888] text-xs font-medium tracking-wide mb-3">
+                      {member.subtitle}
+                    </p>
+                  )}
+                  {member.bio && (
+                    <>
+                      <div className="w-10 h-[1.5px] bg-[#c7ab77]/40 mb-4 mt-3" />
+                      <p className="text-[#555] text-[0.8rem] leading-relaxed">
+                        {member.bio}
+                      </p>
+                    </>
+                  )}
+                </div>
               </div>
             ))}
           </div>
