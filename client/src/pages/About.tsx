@@ -39,7 +39,7 @@ const leadership = [
     name: 'Jake Glass',
     title: 'Enrollment Specialist',
     subtitle: '11+ Years of Sales Experience',
-    photo: '',
+    photo: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/jake-glass-clean_a4ed787d.png',
     bio: 'With over a decade of experience in high-level sales and relationship management, Jake knows that the best results come from genuinely caring about the person on the other end. He takes the time to understand each individual\'s financial goals and helps them see exactly how Trader Foundation can transform their future.',
   },
   {
