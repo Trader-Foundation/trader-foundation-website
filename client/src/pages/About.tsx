@@ -55,27 +55,27 @@ const coaches = [
     title: 'Lead Mentor',
     experience: '10+ Years of Market Experience',
     photo: ELLIOT_PHOTO,
-    philosophy: '"I love the markets. Taking something complex and making it simple enough for anyone to understand \u2014 that\'s what gets me going."',
+    philosophy: '"I love the markets. Taking something complex and making it simple enough for anyone to understand, that\'s what gets me going."',
     cardQuote: '"Options don\'t have to be complicated. Once you see the pattern, you can\'t unsee it."',
-    bio: 'Options used to feel like a foreign language to me. After a decade in the markets, I became the person I wish I had when I was starting out. I specialize in breaking down complex options strategies into plain English so that anyone can trade with confidence. As Lead Mentor, I built the curriculum thousands of students use every day and host daily market meetups where we analyze setups together in real time. But honestly, the reason I show up every day isn\'t the market \u2014 it\'s the people. Watching someone go from confused to confident is the most rewarding thing I\'ve ever done.',
+    bio: 'Options used to feel like a foreign language to me. After a decade in the markets, I became the person I wish I had when I was starting out. I specialize in breaking down complex options strategies into plain English so that anyone can trade with confidence. As Lead Mentor, I built the curriculum thousands of students use every day and host daily market meetups where we analyze setups together in real time. But honestly, the reason I show up every day isn\'t the market, it\'s the people. Watching someone go from confused to confident is the most rewarding thing I\'ve ever done.',
   },
   {
     name: 'Erin Chawla',
     title: 'Senior Coach \u00b7 Head of YouTube Education',
     experience: '11+ Years of Experience',
     photo: ERIN_PHOTO,
-    philosophy: '"Trading is like dating \u2014 choose the best and leave the rest."',
-    cardQuote: '"Patience isn\'t boring \u2014 it\'s profitable. I only need a few great setups a month."',
-    bio: 'My approach is different from most. I only trade off Weekly and Monthly charts. No noise. No chasing. Just patience and precision. What drives me isn\'t just the trades \u2014 it\'s the people behind them. I genuinely love helping others build real, lasting wealth through disciplined swing trading. Every free video I create, every question I answer, comes from the same place: I remember what it felt like to figure this out alone, and I don\'t want anyone else to go through that.',
+    philosophy: '"Trading is like dating, choose the best and leave the rest."',
+    cardQuote: '"Patience isn\'t boring, it\'s profitable. I only need a few great setups a month."',
+    bio: 'My approach is different from most. I only trade off Weekly and Monthly charts. No noise. No chasing. Just patience and precision. What drives me isn\'t just the trades, it\'s the people behind them. I genuinely love helping others build real, lasting wealth through disciplined swing trading. Every free video I create, every question I answer, comes from the same place: I remember what it felt like to figure this out alone, and I don\'t want anyone else to go through that.',
   },
   {
     name: 'Leo Gonzalez',
     title: 'Senior Coach',
     experience: '13+ Years of Experience',
     photo: LEO_PHOTO,
-    philosophy: '"I do this genuinely because I can\'t wait for that moment when someone says \u2014 I got this."',
+    philosophy: '"I do this genuinely because I can\'t wait for that moment when someone says, I got this."',
     cardQuote: '"The market pays you like a business when you treat it like one. Consistent income, every single week."',
-    bio: 'For years, I watched traders blow up their accounts chasing the next big move. Meanwhile, I was quietly collecting consistent income from the market like clockwork \u2014 that\'s how I earned the nickname "The Paycheck Collector." With 13 years of experience, I specialize in building trades designed to pay week after week. But what gets me out of bed isn\'t the income \u2014 it\'s knowing that every student I help is one more person who doesn\'t have to depend on a boss, a company, or a paycheck they can\'t control.',
+    bio: 'For years, I watched traders blow up their accounts chasing the next big move. Meanwhile, I was quietly collecting consistent income from the market like clockwork, that\'s how I earned the nickname "The Paycheck Collector." With 13 years of experience, I specialize in building trades designed to pay week after week. But what gets me out of bed isn\'t the income, it\'s knowing that every student I help is one more person who doesn\'t have to depend on a boss, a company, or a paycheck they can\'t control.',
   },
 ];
 
@@ -151,7 +151,7 @@ export default function About() {
               <p className="text-white/60 text-sm leading-relaxed mb-4 max-w-md">
                 Learn what separates the 10% who profit from the 90% who lose.
                 Vlad Tayman's complete guide to pattern recognition, candlestick
-                charts, and options &mdash; <strong className="text-white/85">absolutely free.</strong>
+                charts, and options, <strong className="text-white/85">absolutely free.</strong>
               </p>
               <div className="flex flex-wrap gap-x-4 gap-y-1.5">
                 {['5 Modules', '64 Pages', 'Beginner Friendly'].map((item) => (
@@ -228,16 +228,16 @@ export default function About() {
                 From $150K in Losses to Building a Trading Academy
               </h2>
               <p className="text-[#444] text-base leading-relaxed mb-4">
-                After 20 years as a Director of Training at a Fortune 500 company, Vlad had the six-figure salary and the corner office &mdash; but he was burned out, missing his family, and dying inside. Then came the wake-up call: he lost $29,000 in 29 days trading penny stocks.
+                After 20 years as a Director of Training at a Fortune 500 company, Vlad had the six-figure salary and the corner office, but he was burned out, missing his family, and dying inside. Then came the wake-up call: he lost $29,000 in 29 days trading penny stocks.
               </p>
               <p className="text-[#444] text-base leading-relaxed mb-4">
-                That failure became fuel. Vlad tried every trading method until he discovered the approach that actually works. But here's what makes him different from every other trading educator: he spent two decades teaching Fortune 500 executives. Great traders don't always make great teachers &mdash; Vlad mastered both.
+                That failure became fuel. Vlad tried every trading method until he discovered the approach that actually works. But here's what makes him different from every other trading educator: he spent two decades teaching Fortune 500 executives. Great traders don't always make great teachers. Vlad mastered both.
               </p>
               <p className="text-[#444] text-base leading-relaxed mb-4">
-                But what truly drives Vlad isn't profit &mdash; it's people. He gives away more free education than most programs charge for because he genuinely believes everyone deserves access to real financial knowledge. From free YouTube content to the Stock Predator E-Book, Vlad's mission has always been the same: help as many people as possible take control of their financial future.
+                But what truly drives Vlad isn't profit, it's people. He gives away more free education than most programs charge for because he genuinely believes everyone deserves access to real financial knowledge. From free YouTube content to the Stock Predator E-Book, Vlad's mission has always been the same: help as many people as possible take control of their financial future.
               </p>
               <p className="text-[#555] text-sm leading-relaxed italic border-l-2 border-[#c7ab77]/40 pl-4">
-                "I don't do this for the money. I do this because I remember what it felt like to have no one in my corner. If I can be that person for someone else &mdash; that's everything."
+                "I don't do this for the money. I do this because I remember what it felt like to have no one in my corner. If I can be that person for someone else, that's everything."
               </p>
             </div>
           </div>
@@ -260,7 +260,7 @@ export default function About() {
               Building Wealth Doesn't Need to Be Scary
             </h2>
             <p className="text-white/50 text-base leading-relaxed max-w-2xl mx-auto">
-              It can be exciting. It can be fun. And we welcome the process. Each of us brings something different to the table, but at the end of the day we all share the same goal &mdash; helping everyone build generational wealth. We genuinely love what we do, and that's what makes this community different.
+              It can be exciting. It can be fun. And we welcome the process. Each of us brings something different to the table, but at the end of the day we all share the same goal, helping everyone build generational wealth. We genuinely love what we do, and that's what makes this community different.
             </p>
           </div>
 
