@@ -17,7 +17,7 @@ const ERIN_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDB
 const LEO_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/leo_professional_b52839af.png';
 const JHALIL_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/jhalil-new_9cefdb48.png';
 const STEVE_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/steve-lapa-new_ac25bb0c.png';
-const ARIANA_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/ariana-tayman-team_e13d7ff2.png';
+const ARIANA_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/ariana-white-bg_56fc0ce2.png';
 
 /* ── Leadership team data ── */
 const leadership = [
@@ -39,7 +39,7 @@ const leadership = [
     name: 'Jake Glass',
     title: 'Enrollment Specialist',
     subtitle: '11+ Years of Sales Experience',
-    photo: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/jake-glass-clean_a4ed787d.png',
+    photo: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/image(2)_664effb7.png',
     bio: 'With over a decade of experience in high-level sales and relationship management, Jake knows that the best results come from genuinely caring about the person on the other end. He takes the time to understand each individual\'s financial goals and helps them see exactly how Trader Foundation can transform their future.',
   },
   {
