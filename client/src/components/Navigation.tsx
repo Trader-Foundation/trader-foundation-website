@@ -100,7 +100,9 @@ export default function Navigation() {
               </a>
 
               <a
-                href="/book-a-call"
+                href="https://www.traderfoundation.co/trade"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-5 py-2 border border-[#c7ab77] text-[#c7ab77] text-[0.78rem] font-bold tracking-wide rounded-sm transition-all duration-300 hover:bg-[#c7ab77] hover:text-[#111]"
                 style={{ fontFamily: "'DM Sans', sans-serif" }}
               >
@@ -245,7 +247,9 @@ export default function Navigation() {
               Watch The Masterclass
             </a>
             <a
-              href="/book-a-call"
+              href="https://www.traderfoundation.co/trade"
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => setMobileOpen(false)}
               className="block text-center px-6 py-3 border border-[#c7ab77] text-[#c7ab77] text-[0.8rem] font-bold tracking-wide rounded-sm"
               style={{ fontFamily: "'DM Sans', sans-serif" }}
