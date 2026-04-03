@@ -224,30 +224,16 @@ export default function Contact() {
               Schedule a call with one of our team members. No pressure, just a transparent conversation about your trading goals.
             </p>
           </div>
-          <div
-            className="rounded-lg overflow-hidden"
-            style={{
-              backgroundColor: 'rgba(199, 171, 119, 0.04)',
-              border: '1px solid rgba(199, 171, 119, 0.15)',
-            }}
-          >
-            <iframe
-              src="https://link.sproutcloud.co/widget/form/DloSNqFvQ1ITZJRbgr3H"
-              style={{ width: '100%', height: '550px', border: 'none', borderRadius: '3px' }}
-              id="contact-booking-DloSNqFvQ1ITZJRbgr3H"
-              data-layout="{'id':'INLINE'}"
-              data-trigger-type="alwaysShow"
-              data-trigger-value=""
-              data-activation-type="alwaysActivated"
-              data-activation-value=""
-              data-deactivation-type="neverDeactivate"
-              data-deactivation-value=""
-              data-form-name="Booking Form ORGANIC VLAD"
-              data-height="487"
-              data-layout-iframe-id="contact-booking-DloSNqFvQ1ITZJRbgr3H"
-              data-form-id="DloSNqFvQ1ITZJRbgr3H"
-              title="Booking Form ORGANIC VLAD"
-            />
+          <div className="text-center">
+            <a
+              href="https://traderfoundation.fillout.com/t/w1vozRAz1uus?utm_source=Website"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-8 py-3.5 bg-[#c7ab77] text-[#111] text-[0.85rem] font-bold tracking-wide rounded-sm transition-all duration-300 hover:bg-[#b89a66] hover:shadow-lg"
+              style={{ fontFamily: "'DM Sans', sans-serif" }}
+            >
+              Book a Free Strategy Call
+            </a>
           </div>
         </div>
       </section>
