@@ -37,14 +37,15 @@ const leadership = [
   {
     name: 'Jake Glass',
     title: 'Enrollment Specialist',
+    subtitle: '11+ Years of Sales Experience',
     photo: '',
-    bio: '',
+    bio: 'With over a decade of experience in high-level sales and relationship management, Jake knows that the best results come from genuinely caring about the person on the other end. He takes the time to understand each individual\'s financial goals and helps them see exactly how Trader Foundation can transform their future.',
   },
   {
     name: 'Ariana Tayman',
     title: 'Head of Customer Support',
     photo: ARIANA_PHOTO,
-    bio: 'Ensuring every client receives royal treatment from day one through their entire trading journey.',
+    bio: 'Ariana is the first person you\'ll hear from and the one who makes sure no question goes unanswered. She genuinely cares about every student\'s experience, from the moment they join to every milestone along the way. Her mission is simple: make sure everyone in the Trader Foundation community feels supported, valued, and never alone on their journey.',
   },
 ];
 
