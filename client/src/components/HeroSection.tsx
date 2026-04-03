@@ -8,7 +8,22 @@ import { useEffect, useState } from 'react';
 import { Play } from 'lucide-react';
 
 const HERO_BG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/vlad-teaching-clean2_08a2b1d6.png';
-const BBB_BADGE = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/bbb-badge-na8f3oFNHTxq7SUh5kdEVr.webp';
+/* BBB Official Blue Torch - inline SVG */
+function BBBTorch({ className = '' }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 80 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      {/* Torch flame */}
+      <path d="M40 4c-4 8-16 16-16 28 0 10 6 16 12 18-2-4-3-8-1-14 2-6 8-14 12-18 2 8 0 16-2 20 6-4 11-12 11-20C56 10 46 4 40 4z" fill="#0072B1" />
+      <path d="M40 12c-2 6-10 12-10 20 0 6 4 10 8 12-1-3-2-6 0-10 1.5-4 5-10 8-13 1 6 0 12-1 15 4-3 7-8 7-14 0-6-6-12-12-10z" fill="#0089D0" />
+      {/* Torch base */}
+      <rect x="30" y="52" width="20" height="4" rx="1" fill="#0072B1" />
+      <rect x="33" y="56" width="14" height="3" rx="1" fill="#0072B1" />
+      <rect x="28" y="59" width="24" height="4" rx="1" fill="#0072B1" />
+      {/* BBB Text */}
+      <text x="40" y="78" textAnchor="middle" fill="#0072B1" fontFamily="Arial Black, Arial, sans-serif" fontWeight="900" fontSize="14">BBB</text>
+    </svg>
+  );
+}
 
 export default function HeroSection() {
   const [isVisible, setIsVisible] = useState(false);
@@ -92,11 +107,7 @@ export default function HeroSection() {
             }`}
           >
             <div className="flex items-center gap-3 px-4 py-2.5 bg-white/10 backdrop-blur-sm rounded-sm border border-white/10">
-              <img
-                src={BBB_BADGE}
-                alt="BBB A+ Accredited"
-                className="h-10 w-10 object-contain"
-              />
+              <BBBTorch className="h-10 w-10" />
               <div className="flex flex-col">
                 <span
                   className="text-white text-[0.7rem] font-bold tracking-wide"

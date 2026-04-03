@@ -445,12 +445,22 @@ export default function Results() {
               <TrustpilotStars className="h-4" />
             </div>
             <span className="text-white/20">|</span>
-            <span
-              className="text-white/60 text-sm"
-              style={{ fontFamily: "'DM Sans', sans-serif" }}
-            >
-              BBB A+ Accredited
-            </span>
+            <div className="flex items-center gap-2">
+              <svg className="h-6 w-5" viewBox="0 0 80 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M40 4c-4 8-16 16-16 28 0 10 6 16 12 18-2-4-3-8-1-14 2-6 8-14 12-18 2 8 0 16-2 20 6-4 11-12 11-20C56 10 46 4 40 4z" fill="#0072B1" />
+                <path d="M40 12c-2 6-10 12-10 20 0 6 4 10 8 12-1-3-2-6 0-10 1.5-4 5-10 8-13 1 6 0 12-1 15 4-3 7-8 7-14 0-6-6-12-12-10z" fill="#0089D0" />
+                <rect x="30" y="52" width="20" height="4" rx="1" fill="#0072B1" />
+                <rect x="33" y="56" width="14" height="3" rx="1" fill="#0072B1" />
+                <rect x="28" y="59" width="24" height="4" rx="1" fill="#0072B1" />
+                <text x="40" y="78" textAnchor="middle" fill="#0072B1" fontFamily="Arial Black, Arial, sans-serif" fontWeight="900" fontSize="14">BBB</text>
+              </svg>
+              <span
+                className="text-white/80 text-sm font-semibold"
+                style={{ fontFamily: "'DM Sans', sans-serif" }}
+              >
+                A+ Accredited
+              </span>
+            </div>
             <span className="text-white/20">|</span>
             <span
               className="text-white/60 text-sm"
