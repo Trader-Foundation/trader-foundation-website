@@ -35,6 +35,12 @@ const leadership = [
     bio: '',
   },
   {
+    name: 'Jake Glass',
+    title: 'Enrollment Specialist',
+    photo: '',
+    bio: '',
+  },
+  {
     name: 'Ariana Tayman',
     title: 'Head of Customer Support',
     photo: ARIANA_PHOTO,
@@ -303,12 +309,20 @@ export default function About() {
                 style={{ transitionDelay: `${i * 100}ms` }}
               >
                 <div className="relative overflow-hidden">
-                  <img
-                    src={member.photo}
-                    alt={member.name}
-                    className="w-full aspect-[4/5] object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                    style={{ filter: 'brightness(1.15) contrast(1.05)' }}
-                  />
+                  {member.photo ? (
+                    <img
+                      src={member.photo}
+                      alt={member.name}
+                      className="w-full aspect-[4/5] object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                      style={{ filter: 'brightness(1.15) contrast(1.05)' }}
+                    />
+                  ) : (
+                    <div className="w-full aspect-[4/5] bg-[#1a1a1a] flex items-center justify-center">
+                      <span className="text-5xl font-extrabold text-[#c7ab77]/60" style={{ fontFamily: "'Sen', sans-serif" }}>
+                        {member.name.split(' ').map((n: string) => n[0]).join('')}
+                      </span>
+                    </div>
+                  )}
                   <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-white to-transparent" />
                 </div>
                 <div className="px-6 pb-6 -mt-4 relative">
