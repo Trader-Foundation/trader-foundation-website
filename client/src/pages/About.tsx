@@ -24,13 +24,14 @@ const leadership = [
   {
     name: 'Jhalil Timazee',
     title: 'Enrollment Specialist',
+    subtitle: '20+ Years of Leadership Experience',
     photo: JHALIL_PHOTO,
-    bio: '20 years of leadership experience driving record-breaking results through personalized mentorship.',
+    bio: 'Two decades of leadership experience across multiple industries taught Jhalil one thing: people come first. He brings that same philosophy to Trader Foundation, taking the time to understand where each person is in their financial journey and helping them take the next step with confidence. His track record of driving record-breaking results comes from one simple approach, genuinely caring about the people he works with.',
   },
   {
     name: 'Steve Lapa',
-    title: 'Head of Sales Development',
-    subtitle: 'Vice President · 15+ Years of Experience',
+    title: 'Head of Sales Development, Vice President',
+    subtitle: '15+ Years of Experience',
     photo: STEVE_PHOTO,
     bio: '15+ years of leadership across finance, investments, and business development. Steve brings a consultative approach to every conversation, helping prospective students understand exactly how Trader Foundation can fit into their financial goals.',
   },
@@ -44,6 +45,7 @@ const leadership = [
   {
     name: 'Ariana Tayman',
     title: 'Head of Customer Support',
+    subtitle: '7+ Years of Experience',
     photo: ARIANA_PHOTO,
     bio: 'Ariana is the first person you\'ll hear from and the one who makes sure no question goes unanswered. She genuinely cares about every student\'s experience, from the moment they join to every milestone along the way. Her mission is simple: make sure everyone in the Trader Foundation community feels supported, valued, and never alone on their journey.',
   },
