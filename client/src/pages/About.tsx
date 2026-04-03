@@ -288,70 +288,6 @@ export default function About() {
         </div>
       </section>
 
-      {/* ─── Leadership Team ─── */}
-      <section className="py-20 bg-[#faf9f6]">
-        <div className="max-w-[1100px] mx-auto px-6 lg:px-8">
-          <div className="text-center mb-14">
-            <p className="text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-3">
-              The Team Behind the Mission
-            </p>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-[#111] leading-tight" style={{ fontFamily: "'Sen', sans-serif" }}>
-              Meet the Team
-            </h2>
-            <div className="w-20 h-[2px] bg-[#c7ab77] mx-auto mt-6" />
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8">
-            {leadership.map((member, i) => (
-              <div
-                key={member.name}
-                className="group bg-white border border-[#e8e4dc] rounded-lg overflow-hidden transition-all duration-500 hover:border-[#c7ab77]/40 hover:shadow-[0_8px_40px_rgba(199,171,119,0.1)]"
-                style={{ transitionDelay: `${i * 100}ms` }}
-              >
-                <div className="relative overflow-hidden">
-                  {member.photo ? (
-                    <img
-                      src={member.photo}
-                      alt={member.name}
-                      className="w-full aspect-[4/5] object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                      style={{ filter: 'brightness(1.15) contrast(1.05)' }}
-                    />
-                  ) : (
-                    <div className="w-full aspect-[4/5] bg-[#1a1a1a] flex items-center justify-center">
-                      <span className="text-5xl font-extrabold text-[#c7ab77]/60" style={{ fontFamily: "'Sen', sans-serif" }}>
-                        {member.name.split(' ').map((n: string) => n[0]).join('')}
-                      </span>
-                    </div>
-                  )}
-                  <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-white to-transparent" />
-                </div>
-                <div className="px-6 pb-6 -mt-4 relative">
-                  <h3 className="text-xl font-extrabold text-[#111] mb-1" style={{ fontFamily: "'Sen', sans-serif" }}>
-                    {member.name}
-                  </h3>
-                  <p className="text-[#c7ab77] text-sm font-semibold mb-1">
-                    {member.title}
-                  </p>
-                  {'subtitle' in member && member.subtitle && (
-                    <p className="text-[#888] text-xs font-medium tracking-wide mb-3">
-                      {member.subtitle}
-                    </p>
-                  )}
-                  {member.bio && (
-                    <>
-                      <div className="w-10 h-[1.5px] bg-[#c7ab77]/40 mb-4 mt-3" />
-                      <p className="text-[#555] text-[0.8rem] leading-relaxed">
-                        {member.bio}
-                      </p>
-                    </>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ─── Meet the Coaches ─── */}
       <section className="py-20 bg-[#faf9f6]">
         <div
@@ -417,6 +353,70 @@ export default function About() {
                   <p className="text-[#555] text-[0.8rem] leading-relaxed">
                     {coach.bio}
                   </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── The Team ─── */}
+      <section className="py-20 bg-[#faf9f6]">
+        <div className="max-w-[1100px] mx-auto px-6 lg:px-8">
+          <div className="text-center mb-14">
+            <p className="text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-3">
+              The Team Behind the Mission
+            </p>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-[#111] leading-tight" style={{ fontFamily: "'Sen', sans-serif" }}>
+              Meet the Team
+            </h2>
+            <div className="w-20 h-[2px] bg-[#c7ab77] mx-auto mt-6" />
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8">
+            {leadership.map((member, i) => (
+              <div
+                key={member.name}
+                className="group bg-white border border-[#e8e4dc] rounded-lg overflow-hidden transition-all duration-500 hover:border-[#c7ab77]/40 hover:shadow-[0_8px_40px_rgba(199,171,119,0.1)]"
+                style={{ transitionDelay: `${i * 100}ms` }}
+              >
+                <div className="relative overflow-hidden">
+                  {member.photo ? (
+                    <img
+                      src={member.photo}
+                      alt={member.name}
+                      className="w-full aspect-[4/5] object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                      style={{ filter: 'brightness(1.15) contrast(1.05)' }}
+                    />
+                  ) : (
+                    <div className="w-full aspect-[4/5] bg-[#1a1a1a] flex items-center justify-center">
+                      <span className="text-5xl font-extrabold text-[#c7ab77]/60" style={{ fontFamily: "'Sen', sans-serif" }}>
+                        {member.name.split(' ').map((n: string) => n[0]).join('')}
+                      </span>
+                    </div>
+                  )}
+                  <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-white to-transparent" />
+                </div>
+                <div className="px-6 pb-6 -mt-4 relative">
+                  <h3 className="text-xl font-extrabold text-[#111] mb-1" style={{ fontFamily: "'Sen', sans-serif" }}>
+                    {member.name}
+                  </h3>
+                  <p className="text-[#c7ab77] text-sm font-semibold mb-1">
+                    {member.title}
+                  </p>
+                  {'subtitle' in member && member.subtitle && (
+                    <p className="text-[#888] text-xs font-medium tracking-wide mb-3">
+                      {member.subtitle}
+                    </p>
+                  )}
+                  {member.bio && (
+                    <>
+                      <div className="w-10 h-[1.5px] bg-[#c7ab77]/40 mb-4 mt-3" />
+                      <p className="text-[#555] text-[0.8rem] leading-relaxed">
+                        {member.bio}
+                      </p>
+                    </>
+                  )}
                 </div>
               </div>
             ))}
