@@ -20,6 +20,7 @@ import OptionsTrading from "./pages/OptionsTrading";
 import LiveChatWidget from "./components/LiveChatWidget";
 import Contact from "./pages/Contact";
 import BookACall from "./pages/BookACall";
+import FAQ from "./pages/FAQ";
 
 function Router() {
   return (
@@ -27,6 +28,7 @@ function Router() {
       <Route path={"/"} component={Home} />
       <Route path={"/about"} component={About} />
       <Route path={"/results"} component={Results} />
+      <Route path={"/faq"} component={FAQ} />
       <Route path={"/contact"} component={Contact} />
       <Route path={"/book-a-call"} component={BookACall} />
       <Route path={"/calculator"} component={Calculator} />
