@@ -321,16 +321,7 @@ function FAQSection() {
 
         {/* FAQ Header */}
         <div className={`transition-all duration-700 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
-          <div className="flex items-center justify-center gap-4 mb-3">
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#c7ab77]" />
-            <p
-              className="text-[0.75rem] font-bold tracking-[0.3em] uppercase text-[#c7ab77]"
-              style={{ fontFamily: "'DM Sans', sans-serif" }}
-            >
-              Got Questions?
-            </p>
-            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#c7ab77]" />
-          </div>
+
           <h2
             className="text-[1.8rem] sm:text-[2.2rem] lg:text-[2.8rem] font-extrabold text-white leading-[1.15] mb-12 text-center tracking-tight"
             style={{ fontFamily: "'Sen', sans-serif" }}
