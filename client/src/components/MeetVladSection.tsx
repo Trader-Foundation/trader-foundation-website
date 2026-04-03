@@ -8,7 +8,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { TrustpilotLogo, TrustpilotStars } from './TrustpilotAssets';
 
-const VLAD_TEACHING = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/vlad-teaching-clean2_08a2b1d6.png';
+const VLAD_FAMILY = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/vlad-family-cropped_bb850345.jpg';
 
 const trustpilotReviews = [
   {
@@ -130,8 +130,8 @@ export default function MeetVladSection() {
             >
               <div className="relative">
                 <img
-                  src={VLAD_TEACHING}
-                  alt="Vlad Tayman teaching a student about stock chart analysis"
+                  src={VLAD_FAMILY}
+                  alt="Vlad Tayman with his family"
                   className="w-full h-auto rounded-sm shadow-xl"
                 />
                 {/* Gold corner accents */}
