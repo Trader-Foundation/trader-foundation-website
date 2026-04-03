@@ -41,12 +41,36 @@ export default function Home() {
 
       <PodcastSection />
 
-      {/* CTA after Podcast, gold accent, final push before footer */}
-      <MasterclassCTA
-        variant="dark"
-        headline="Your Next Step Starts Here"
-        subtext="Watch the masterclass to see if Trader Foundation is the right fit for you."
-      />
+      {/* Final CTA - Book a Call */}
+      <section className="py-16 bg-[#111]">
+        <div className="max-w-[800px] mx-auto px-6 lg:px-8 text-center">
+          <p
+            className="text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-3"
+            style={{ fontFamily: "'DM Sans', sans-serif" }}
+          >
+            Your Next Step
+          </p>
+          <h2
+            className="text-2xl md:text-3xl font-extrabold text-white leading-tight mb-4"
+            style={{ fontFamily: "'Sen', sans-serif" }}
+          >
+            Ready to Talk? Book a Strategy Call
+          </h2>
+          <p
+            className="text-white/60 text-base leading-relaxed mb-8 max-w-xl mx-auto"
+            style={{ fontFamily: "'DM Sans', sans-serif" }}
+          >
+            No pressure, no sales pitch. Just a transparent conversation with one of our team members to see if Trader Foundation is the right fit for you.
+          </p>
+          <a
+            href="/book-a-call"
+            className="inline-flex items-center gap-2 px-8 py-3.5 bg-[#c7ab77] text-[#111] text-[0.85rem] font-bold tracking-wide rounded-sm transition-all duration-300 hover:bg-[#b89a66] hover:shadow-lg"
+            style={{ fontFamily: "'DM Sans', sans-serif" }}
+          >
+            Book a Free Strategy Call
+          </a>
+        </div>
+      </section>
 
       <Footer />
       <EbookPopup />

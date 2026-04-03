@@ -201,6 +201,57 @@ export default function Contact() {
         </div>
       </section>
 
+      {/* ─── Book a Call Section ─── */}
+      <section className="py-16 bg-[#111]">
+        <div className="max-w-[800px] mx-auto px-6 lg:px-8">
+          <div className="text-center mb-8">
+            <p
+              className="text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-3"
+              style={{ fontFamily: "'DM Sans', sans-serif" }}
+            >
+              Prefer to Talk?
+            </p>
+            <h2
+              className="text-2xl md:text-3xl font-extrabold text-white leading-tight mb-3"
+              style={{ fontFamily: "'Sen', sans-serif" }}
+            >
+              Book a Free Strategy Call
+            </h2>
+            <p
+              className="text-white/60 text-base leading-relaxed max-w-xl mx-auto"
+              style={{ fontFamily: "'DM Sans', sans-serif" }}
+            >
+              Schedule a call with one of our team members. No pressure, just a transparent conversation about your trading goals.
+            </p>
+          </div>
+          <div
+            className="rounded-lg overflow-hidden"
+            style={{
+              backgroundColor: 'rgba(199, 171, 119, 0.04)',
+              border: '1px solid rgba(199, 171, 119, 0.15)',
+            }}
+          >
+            <iframe
+              src="https://link.sproutcloud.co/widget/form/DloSNqFvQ1ITZJRbgr3H"
+              style={{ width: '100%', height: '550px', border: 'none', borderRadius: '3px' }}
+              id="contact-booking-DloSNqFvQ1ITZJRbgr3H"
+              data-layout="{'id':'INLINE'}"
+              data-trigger-type="alwaysShow"
+              data-trigger-value=""
+              data-activation-type="alwaysActivated"
+              data-activation-value=""
+              data-deactivation-type="neverDeactivate"
+              data-deactivation-value=""
+              data-form-name="Booking Form ORGANIC VLAD"
+              data-height="487"
+              data-layout-iframe-id="contact-booking-DloSNqFvQ1ITZJRbgr3H"
+              data-form-id="DloSNqFvQ1ITZJRbgr3H"
+              title="Booking Form ORGANIC VLAD"
+            />
+          </div>
+        </div>
+      </section>
+
       <Footer />
     </div>
   );
