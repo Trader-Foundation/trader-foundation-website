@@ -22,8 +22,8 @@ const ARIANA_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/R
 /* ── Leadership team data ── */
 const leadership = [
   {
-    name: 'Jhalil',
-    title: 'Advisor',
+    name: 'Jhalil Timazee',
+    title: 'Enrollment Specialist',
     photo: JHALIL_PHOTO,
     bio: '20 years of leadership experience driving record-breaking results through personalized mentorship.',
   },
