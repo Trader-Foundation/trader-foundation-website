@@ -7,7 +7,10 @@
  */
 
 import { useEffect, useRef, useState } from 'react';
-import { Quote, Play, Star } from 'lucide-react';
+import { Quote, Play } from 'lucide-react';
+
+const TRUSTPILOT_LOGO_WHITE = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/trustpilot-logo-white_9d0d266c.svg';
+const TRUSTPILOT_STARS = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/trustpilot-stars_a78bc78f.svg';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 
@@ -218,23 +221,17 @@ export default function Results() {
 
           {/* Trust badges */}
           <div className="flex flex-wrap items-center justify-center gap-8 mt-10">
-            <div className="flex items-center gap-2">
-              <div className="flex">
-                {[...Array(5)].map((_, i) => (
-                  <Star
-                    key={i}
-                    size={16}
-                    className="text-[#c7ab77]"
-                    fill="#c7ab77"
-                  />
-                ))}
-              </div>
-              <span
-                className="text-white/60 text-sm"
-                style={{ fontFamily: "'DM Sans', sans-serif" }}
-              >
-                TrustPilot Rated
-              </span>
+            <div className="flex items-center gap-3">
+              <img
+                src={TRUSTPILOT_LOGO_WHITE}
+                alt="Trustpilot"
+                className="h-5"
+              />
+              <img
+                src={TRUSTPILOT_STARS}
+                alt="5 stars"
+                className="h-4"
+              />
             </div>
             <span className="text-white/20">|</span>
             <span

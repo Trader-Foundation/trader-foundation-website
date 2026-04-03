@@ -6,7 +6,9 @@
  */
 
 import { useEffect, useRef, useState } from 'react';
-import { Star } from 'lucide-react';
+
+const TRUSTPILOT_LOGO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/trustpilot-logo-black_ebaea425.svg';
+const TRUSTPILOT_STARS = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/trustpilot-stars_a78bc78f.svg';
 
 const VLAD_FAMILY = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/vlad-family-cropped_bb850345.jpg';
 
@@ -172,23 +174,19 @@ export default function MeetVladSection() {
         <div className="max-w-[1320px] mx-auto px-6 lg:px-8">
           {/* TrustPilot Header */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-            <div className="flex items-center gap-2">
-              <svg viewBox="0 0 24 24" className="w-7 h-7 text-[#00b67a]" fill="currentColor">
-                <path d="M12 0L15.09 7.36L23.18 8.18L17.09 13.64L18.82 21.82L12 17.77L5.18 21.82L6.91 13.64L0.82 8.18L8.91 7.36L12 0Z" />
-              </svg>
+            <img
+              src={TRUSTPILOT_LOGO}
+              alt="Trustpilot"
+              className="h-7"
+            />
+            <div className="flex items-center gap-3">
+              <img
+                src={TRUSTPILOT_STARS}
+                alt="5 stars"
+                className="h-6"
+              />
               <span
-                className="text-[#1a1a1a] font-bold text-xl"
-                style={{ fontFamily: "'Sen', sans-serif" }}
-              >
-                Trustpilot
-              </span>
-            </div>
-            <div className="flex items-center gap-1">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} size={18} className="text-[#00b67a] fill-[#00b67a]" />
-              ))}
-              <span
-                className="ml-2 text-[#555] text-sm"
+                className="text-[#555] text-sm"
                 style={{ fontFamily: "'DM Sans', sans-serif" }}
               >
                 Rated Excellent
@@ -206,9 +204,11 @@ export default function MeetVladSection() {
               >
                 {/* Stars */}
                 <div className="flex items-center gap-0.5 mb-3">
-                  {[...Array(review.rating)].map((_, i) => (
-                    <Star key={i} size={14} className="text-[#00b67a] fill-[#00b67a]" />
-                  ))}
+                  <img
+                    src={TRUSTPILOT_STARS}
+                    alt="5 stars"
+                    className="h-4"
+                  />
                 </div>
                 {/* Review Title */}
                 <p
@@ -255,9 +255,7 @@ export default function MeetVladSection() {
                 className="inline-flex items-center gap-1.5 text-[#888] text-xs hover:text-[#00b67a] transition-colors"
                 style={{ fontFamily: "'DM Sans', sans-serif" }}
               >
-                <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 text-[#00b67a]" fill="currentColor">
-                  <path d="M12 0L15.09 7.36L23.18 8.18L17.09 13.64L18.82 21.82L12 17.77L5.18 21.82L6.91 13.64L0.82 8.18L8.91 7.36L12 0Z" />
-                </svg>
+                <img src={TRUSTPILOT_STARS} alt="stars" className="h-3" />
                 Verify our 111 reviews on Trustpilot
                 <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
