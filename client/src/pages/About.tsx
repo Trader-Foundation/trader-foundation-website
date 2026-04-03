@@ -22,25 +22,11 @@ const ARIANA_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/R
 /* ── Leadership team data ── */
 const leadership = [
   {
-    name: 'Jhalil Timazee',
-    title: 'Enrollment Specialist',
-    subtitle: '20+ Years of Leadership Experience',
-    photo: JHALIL_PHOTO,
-    bio: 'Two decades of leadership experience across multiple industries taught Jhalil one thing: people come first. He brings that same philosophy to Trader Foundation, taking the time to understand where each person is in their financial journey and helping them take the next step with confidence. His track record of driving record-breaking results comes from one simple approach, genuinely caring about the people he works with.',
-  },
-  {
     name: 'Steve Lapa',
-    title: 'Head of Sales Development, Vice President',
+    title: 'Vice President',
     subtitle: '15+ Years of Experience',
     photo: STEVE_PHOTO,
     bio: '15+ years of leadership across finance, investments, and business development. Steve brings a consultative approach to every conversation, helping prospective students understand exactly how Trader Foundation can fit into their financial goals.',
-  },
-  {
-    name: 'Jake Glass',
-    title: 'Enrollment Specialist',
-    subtitle: '11+ Years of Sales Experience',
-    photo: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/image(2)_664effb7.png',
-    bio: 'With over a decade of experience in high-level sales and relationship management, Jake knows that the best results come from genuinely caring about the person on the other end. He takes the time to understand each individual\'s financial goals and helps them see exactly how Trader Foundation can transform their future.',
   },
   {
     name: 'Ariana Tayman',
@@ -48,6 +34,20 @@ const leadership = [
     subtitle: '7+ Years of Experience',
     photo: ARIANA_PHOTO,
     bio: 'Ariana is the first person you\'ll hear from and the one who makes sure no question goes unanswered. She genuinely cares about every student\'s experience, from the moment they join to every milestone along the way. Her mission is simple: make sure everyone in the Trader Foundation community feels supported, valued, and never alone on their journey.',
+  },
+  {
+    name: 'Jake Glass',
+    title: 'Enrollment Specialist',
+    subtitle: '11+ Years of Experience',
+    photo: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/image(2)_664effb7.png',
+    bio: 'With over a decade of experience in high-level sales and relationship management, Jake knows that the best results come from genuinely caring about the person on the other end. He takes the time to understand each individual\'s financial goals and helps them see exactly how Trader Foundation can transform their future.',
+  },
+  {
+    name: 'Jhalil Timazee',
+    title: 'Enrollment Specialist',
+    subtitle: '20+ Years of Leadership Experience',
+    photo: JHALIL_PHOTO,
+    bio: 'Two decades of leadership experience across multiple industries taught Jhalil one thing: people come first. He brings that same philosophy to Trader Foundation, taking the time to understand where each person is in their financial journey and helping them take the next step with confidence. His track record of driving record-breaking results comes from one simple approach, genuinely caring about the people he works with.',
   },
 ];
 
