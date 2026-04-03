@@ -23,7 +23,7 @@ export default function Home() {
       <HeroSection />
       <StatsSection />
 
-      {/* CTA after Stats - dark variant, no text, just the button */}
+      {/* CTA after Stats, dark variant, no text, just the button */}
       <MasterclassCTA
         variant="dark"
         headline="See How Busy Professionals Are Learning to Trade"
@@ -32,7 +32,7 @@ export default function Home() {
 
       <MeetVladSection />
 
-      {/* CTA after Meet Vlad + TrustPilot reviews - light variant to contrast */}
+      {/* CTA after Meet Vlad + TrustPilot reviews, light variant to contrast */}
       <MasterclassCTA
         variant="light"
         headline="Ready to Start Your Trading Journey?"
@@ -41,7 +41,7 @@ export default function Home() {
 
       <PodcastSection />
 
-      {/* CTA after Podcast - gold accent, final push before footer */}
+      {/* CTA after Podcast, gold accent, final push before footer */}
       <MasterclassCTA
         variant="dark"
         headline="Your Next Step Starts Here"

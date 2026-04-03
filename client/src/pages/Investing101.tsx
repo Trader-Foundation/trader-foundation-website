@@ -52,10 +52,10 @@ function ChapterWhyInvest() {
   return (
     <>
       <p className="text-[1.05rem] leading-relaxed text-[#444] mb-4">
-        Most people spend decades trading their time for a paycheck. The money comes in, covers expenses, and whatever is left sits in a checking account earning next to nothing. That cycle works until it does not - a job loss, an unexpected expense, or retirement arrives and the safety net is thinner than expected.
+        Most people spend decades trading their time for a paycheck. The money comes in, covers expenses, and whatever is left sits in a checking account earning next to nothing. That cycle works until it does not, a job loss, an unexpected expense, or retirement arrives and the safety net is thinner than expected.
       </p>
       <p className="text-[1.05rem] leading-relaxed text-[#444] mb-4">
-        Investing breaks that cycle. When you put capital into assets that appreciate - whether stocks, index funds, or options - your money starts working on your behalf, even while you sleep. The goal is not to get rich overnight. The goal is to build a financial foundation that gives you choices: the choice to retire when you want, to weather emergencies without panic, or to leave something meaningful for the next generation.
+        Investing breaks that cycle. When you put capital into assets that appreciate, whether stocks, index funds, or options, your money starts working on your behalf, even while you sleep. The goal is not to get rich overnight. The goal is to build a financial foundation that gives you choices: the choice to retire when you want, to weather emergencies without panic, or to leave something meaningful for the next generation.
       </p>
       <p className="text-[1.05rem] leading-relaxed text-[#444]">
         At Trader Foundation, we teach a specific approach: <strong>swing trading combined with safe options strategies</strong>. It is designed for people with full-time jobs, families, and limited screen time. You do not need to quit your day job or stare at charts for eight hours. You need a system, discipline, and the willingness to learn.
@@ -68,10 +68,10 @@ function ChapterHowMoneyGrows() {
   return (
     <>
       <p className="text-[1.05rem] leading-relaxed text-[#444] mb-4">
-        There is a reason experienced investors talk about "letting your money work for you." When you invest, your returns can generate their own returns - a process called compounding. It is not magic, but over a long enough timeline, the results can feel like it.
+        There is a reason experienced investors talk about "letting your money work for you." When you invest, your returns can generate their own returns, a process called compounding. It is not magic, but over a long enough timeline, the results can feel like it.
       </p>
       <p className="text-[1.05rem] leading-relaxed text-[#444] mb-4">
-        Think of it this way: you plant a tree. In year one, it produces a handful of seeds. You plant those seeds too. By year ten, you do not have one tree - you have a small forest. That is compounding in action. The earlier you start, the larger that forest becomes.
+        Think of it this way: you plant a tree. In year one, it produces a handful of seeds. You plant those seeds too. By year ten, you do not have one tree, you have a small forest. That is compounding in action. The earlier you start, the larger that forest becomes.
       </p>
 
       <div className="bg-[#111] rounded-lg p-8 my-8">
@@ -80,7 +80,7 @@ function ChapterHowMoneyGrows() {
         </h3>
         <div className="space-y-4">
           {[
-            { year: 'Year 1–5', title: 'The Foundation Phase', desc: 'Growth feels slow. Your contributions matter more than your returns. This is where most people give up - and where the disciplined separate themselves.' },
+            { year: 'Year 1–5', title: 'The Foundation Phase', desc: 'Growth feels slow. Your contributions matter more than your returns. This is where most people give up, and where the disciplined separate themselves.' },
             { year: 'Year 5–15', title: 'The Momentum Phase', desc: 'Returns start compounding noticeably. Your portfolio begins growing faster than your contributions alone could achieve.' },
             { year: 'Year 15–25', title: 'The Acceleration Phase', desc: 'This is where patience pays off. Your gains are now generating significant gains of their own. The snowball is rolling.' },
             { year: 'Year 25+', title: 'The Harvest Phase', desc: 'Your portfolio can potentially sustain your lifestyle. The choices you made decades ago are now funding your freedom.' },
@@ -112,7 +112,7 @@ function ChapterInflationTrap() {
   return (
     <>
       <p className="text-[1.05rem] leading-relaxed text-[#444] mb-4">
-        Here is an uncomfortable truth: if your money is sitting in a standard savings account, you are losing purchasing power every single year. Inflation - the gradual increase in the cost of goods and services - quietly eats away at the value of every dollar you hold.
+        Here is an uncomfortable truth: if your money is sitting in a standard savings account, you are losing purchasing power every single year. Inflation, the gradual increase in the cost of goods and services, quietly eats away at the value of every dollar you hold.
       </p>
       <p className="text-[1.05rem] leading-relaxed text-[#444] mb-4">
         A cup of coffee that cost $2.00 a decade ago might cost $3.50 today. Your salary may have increased, but has it kept up? For most people, the answer is no. The only reliable way to stay ahead of inflation is to put your capital into assets that grow faster than prices rise.
@@ -133,7 +133,7 @@ function ChapterInflationTrap() {
       </div>
 
       <p className="text-[1.05rem] leading-relaxed text-[#444]">
-        This does not mean you should throw every dollar into the stock market tomorrow. It means that <strong>doing nothing with your money is itself a decision</strong> - and it is one that costs you more each year. A thoughtful, diversified investment approach is how you protect what you have earned and give it room to grow.
+        This does not mean you should throw every dollar into the stock market tomorrow. It means that <strong>doing nothing with your money is itself a decision</strong>, and it is one that costs you more each year. A thoughtful, diversified investment approach is how you protect what you have earned and give it room to grow.
       </p>
     </>
   );
@@ -148,7 +148,7 @@ function ChapterAssetClasses() {
 
       <h3 className="text-xl font-bold text-[#111] mt-8 mb-3" style={{ fontFamily: "'Sen', sans-serif" }}>Individual Stocks</h3>
       <p className="text-[1.05rem] leading-relaxed text-[#444] mb-4">
-        When you buy a share of stock, you own a small piece of that company. If the company grows and becomes more profitable, the value of your share typically increases. Stocks carry more risk than some other assets because individual companies can underperform, but they also offer the highest potential for long-term growth. At Trader Foundation, our swing trading approach focuses on identifying high-probability stock setups using technical analysis - not guesswork.
+        When you buy a share of stock, you own a small piece of that company. If the company grows and becomes more profitable, the value of your share typically increases. Stocks carry more risk than some other assets because individual companies can underperform, but they also offer the highest potential for long-term growth. At Trader Foundation, our swing trading approach focuses on identifying high-probability stock setups using technical analysis, not guesswork.
       </p>
 
       <h3 className="text-xl font-bold text-[#111] mt-8 mb-3" style={{ fontFamily: "'Sen', sans-serif" }}>Index Funds & ETFs</h3>
@@ -159,13 +159,13 @@ function ChapterAssetClasses() {
 
       <h3 className="text-xl font-bold text-[#111] mt-8 mb-3" style={{ fontFamily: "'Sen', sans-serif" }}>Options Contracts</h3>
       <p className="text-[1.05rem] leading-relaxed text-[#444] mb-4">
-        Options give you the right to buy or sell a stock at a specific price within a set timeframe. They can be used conservatively - to protect your portfolio or generate income - or more aggressively for leveraged bets. Our program emphasizes <strong>safe options strategies</strong> that are designed to manage risk, not amplify it. If you are curious about how options fit into a disciplined trading plan, we cover that extensively in our curriculum.{' '}
+        Options give you the right to buy or sell a stock at a specific price within a set timeframe. They can be used conservatively, to protect your portfolio or generate income, or more aggressively for leveraged bets. Our program emphasizes <strong>safe options strategies</strong> that are designed to manage risk, not amplify it. If you are curious about how options fit into a disciplined trading plan, we cover that extensively in our curriculum.{' '}
         <a href="/options-trading" className="text-[#c7ab77] font-semibold hover:underline">Read our Options Trading overview →</a>
       </p>
 
       <h3 className="text-xl font-bold text-[#111] mt-8 mb-3" style={{ fontFamily: "'Sen', sans-serif" }}>Bonds & Fixed Income</h3>
       <p className="text-[1.05rem] leading-relaxed text-[#444]">
-        Bonds are essentially loans you make to a government or corporation in exchange for regular interest payments. They are generally lower risk and lower return than stocks, making them useful for balancing a portfolio - especially as you get closer to retirement or want to reduce volatility. They are not the focus of what we teach, but understanding where they fit helps you see the full picture.
+        Bonds are essentially loans you make to a government or corporation in exchange for regular interest payments. They are generally lower risk and lower return than stocks, making them useful for balancing a portfolio, especially as you get closer to retirement or want to reduce volatility. They are not the focus of what we teach, but understanding where they fit helps you see the full picture.
       </p>
     </>
   );
@@ -185,7 +185,7 @@ function ChapterRoadmap() {
             { title: 'Open the Right Account', desc: 'A 401(k) or IRA offers tax advantages for retirement savings. A standard brokerage account gives you flexibility to invest and withdraw on your own schedule. Many people use both.' },
             { title: 'Automate Your Contributions', desc: 'Set up recurring transfers so investing happens automatically. Removing the decision from each paycheck eliminates the temptation to skip months or time the market.' },
             { title: 'Learn Before You Leverage', desc: 'Paper trade or start with small positions before committing significant capital. At Trader Foundation, every student practices with our Time Machine review process before risking real money.' },
-            { title: 'Review, Do Not React', desc: 'Check your portfolio periodically - monthly or quarterly - but resist the urge to make changes based on daily headlines. Emotional decisions are the number one wealth destroyer for individual investors.' },
+            { title: 'Review, Do Not React', desc: 'Check your portfolio periodically, monthly or quarterly, but resist the urge to make changes based on daily headlines. Emotional decisions are the number one wealth destroyer for individual investors.' },
           ].map((item, i) => (
             <div key={i} className="flex items-start gap-4">
               <span className="w-8 h-8 rounded-full bg-[#111] flex items-center justify-center shrink-0 mt-0.5">
@@ -213,9 +213,9 @@ function ChapterMistakes() {
       <div className="space-y-4 mb-8">
         {[
           { mistake: 'Chasing hot tips from social media', fix: 'By the time a stock is trending on Twitter or TikTok, the move has usually already happened. A disciplined system based on technical analysis beats hype every time.' },
-          { mistake: 'Investing money you cannot afford to lose', fix: 'Build an emergency fund first - three to six months of expenses in cash. Only invest capital you will not need in the near term.' },
+          { mistake: 'Investing money you cannot afford to lose', fix: 'Build an emergency fund first, three to six months of expenses in cash. Only invest capital you will not need in the near term.' },
           { mistake: 'Trying to time the market perfectly', fix: 'Nobody consistently buys at the bottom and sells at the top. Consistent contributions over time outperform market timing in virtually every study.' },
-          { mistake: 'Ignoring risk management', fix: 'Every trade should have a plan for what happens if it goes wrong. Position sizing, stop losses, and defined-risk options strategies are not optional - they are essential.' },
+          { mistake: 'Ignoring risk management', fix: 'Every trade should have a plan for what happens if it goes wrong. Position sizing, stop losses, and defined-risk options strategies are not optional, they are essential.' },
           { mistake: 'Going it alone without a mentor', fix: 'Self-taught traders often develop bad habits that take years to unlearn. A structured program with 1-on-1 coaching accelerates your learning curve dramatically.' },
         ].map((item, i) => (
           <div key={i} className="bg-white rounded-lg border border-[#e8e4dc] p-6 shadow-sm">
@@ -283,7 +283,7 @@ export default function Investing101() {
             Investing <span className="text-[#c7ab77]">101</span>
           </h1>
           <p className="mt-3 text-white/60 text-lg max-w-2xl" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-            A practical, no-nonsense introduction to growing your wealth - written by traders, for future traders.
+            A practical, no-nonsense introduction to growing your wealth, written by traders, for future traders.
           </p>
         </div>
       </div>

@@ -29,7 +29,7 @@ const videoTestimonials = [
     vimeoId: '936212402',
     name: 'Zeke',
     tagline: 'From Stressed to Blessed',
-    highlight: 'First day yielded $12,000 - left retail to be a full-time dad',
+    highlight: 'First day yielded $12,000, left retail to be a full-time dad',
     duration: '21:14',
     thumbnail:
       'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/thumb-zeke-Z6iHpZk4D9Kx7v9h5SrdGH.webp',

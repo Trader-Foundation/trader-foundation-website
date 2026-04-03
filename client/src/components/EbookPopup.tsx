@@ -126,7 +126,7 @@ export default function EbookPopup() {
             <p className="mb-5 text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.6)' }}>
               Learn what separates the 10% who profit from the 90% who lose.
               Get Vlad Tayman's complete guide to stock pattern recognition,
-              candlestick charts, and options - <strong style={{ color: 'rgba(255,255,255,0.85)' }}>absolutely free.</strong>
+              candlestick charts, and options, <strong style={{ color: 'rgba(255,255,255,0.85)' }}>absolutely free.</strong>
             </p>
 
             {/* What's inside */}

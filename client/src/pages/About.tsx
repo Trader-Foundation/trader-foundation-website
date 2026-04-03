@@ -12,7 +12,7 @@ import { BookOpen, ArrowRight, Quote } from 'lucide-react';
 
 /* ── Photo URLs ── */
 const VLAD_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/vlad_processed_v2_9073b39a.jpg';
-const ELLIOT_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/elliot_7d09de2a.jpg';
+const ELLIOT_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/elliot-no-beard_50222be5.png';
 const ERIN_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/erin_93b42a5c.jpg';
 const LEO_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/leo_professional_b52839af.png';
 const JHALIL_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/jhalil-team_380dedda.png';
@@ -219,7 +219,7 @@ export default function About() {
               <p className="text-[#c7ab77] text-sm font-medium">Founder & CEO</p>
             </div>
 
-            {/* Story text (3 cols) - condensed */}
+            {/* Story text (3 cols), condensed */}
             <div className="lg:col-span-3">
               <p className="text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-3">
                 The Founder
@@ -379,7 +379,7 @@ export default function About() {
                 className="group bg-white border border-[#e8e4dc] rounded-lg overflow-hidden transition-all duration-500 hover:border-[#c7ab77]/40 hover:shadow-[0_8px_40px_rgba(199,171,119,0.1)]"
                 style={{ transitionDelay: `${i * 100}ms` }}
               >
-                {/* Photo - brightened */}
+                {/* Photo, brightened */}
                 <div className="relative overflow-hidden">
                   <img
                     src={coach.photo}
