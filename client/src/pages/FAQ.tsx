@@ -95,16 +95,7 @@ export default function FAQ() {
       <section className="relative pt-32 pb-12 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-[#111] via-[#0a0a0a] to-[#0a0a0a]" />
         <div className="relative max-w-[900px] mx-auto px-6 lg:px-8 text-center">
-          <div className="flex items-center justify-center gap-4 mb-4">
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#c7ab77]" />
-            <p
-              className="text-[0.7rem] font-bold tracking-[0.35em] uppercase text-[#c7ab77]"
-              style={{ fontFamily: "'DM Sans', sans-serif" }}
-            >
-              Got Questions? We've Got Answers.
-            </p>
-            <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#c7ab77]" />
-          </div>
+
           <h1
             className="text-4xl md:text-5xl lg:text-[3.5rem] font-extrabold text-white leading-tight mb-4 tracking-tight"
             style={{ fontFamily: "'Sen', sans-serif" }}
