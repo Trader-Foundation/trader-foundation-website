@@ -428,7 +428,7 @@ export default function Results() {
             className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6"
             style={{ fontFamily: "'Sen', sans-serif" }}
           >
-            Our Students&rsquo; <span className="text-[#c7ab77]">Results</span>
+            Our Students <span className="text-[#c7ab77]">Results</span>
           </h1>
           <p
             className="text-white/60 text-base md:text-lg max-w-2xl mx-auto leading-relaxed"
