@@ -445,21 +445,26 @@ export default function Results() {
               <TrustpilotStars className="h-4" />
             </div>
             <span className="text-white/20">|</span>
-            <div className="flex items-center gap-2">
-              <svg className="h-6 w-5" viewBox="0 0 80 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M40 4c-4 8-16 16-16 28 0 10 6 16 12 18-2-4-3-8-1-14 2-6 8-14 12-18 2 8 0 16-2 20 6-4 11-12 11-20C56 10 46 4 40 4z" fill="#0072B1" />
-                <path d="M40 12c-2 6-10 12-10 20 0 6 4 10 8 12-1-3-2-6 0-10 1.5-4 5-10 8-13 1 6 0 12-1 15 4-3 7-8 7-14 0-6-6-12-12-10z" fill="#0089D0" />
-                <rect x="30" y="52" width="20" height="4" rx="1" fill="#0072B1" />
-                <rect x="33" y="56" width="14" height="3" rx="1" fill="#0072B1" />
-                <rect x="28" y="59" width="24" height="4" rx="1" fill="#0072B1" />
-                <text x="40" y="78" textAnchor="middle" fill="#0072B1" fontFamily="Arial Black, Arial, sans-serif" fontWeight="900" fontSize="14">BBB</text>
-              </svg>
-              <span
-                className="text-white/80 text-sm font-semibold"
-                style={{ fontFamily: "'DM Sans', sans-serif" }}
-              >
-                A+ Accredited
-              </span>
+            <div className="flex items-center gap-0">
+              <div className="flex items-center gap-1.5 bg-[#003366] rounded-full px-3 py-1.5">
+                <svg className="h-5 w-3.5 shrink-0" viewBox="0 0 40 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M20 2c-2 4-8 8-8 14 0 5 3 8 6 9-1-2-1.5-4-.5-7 1-3 4-7 6-9 1 4 0 8-1 10 3-2 5.5-6 5.5-10C28 5 23 2 20 2z" fill="#4A9FD9" />
+                  <path d="M20 6c-1 3-5 6-5 10 0 3 2 5 4 6-.5-1.5-1-3 0-5 .75-2 2.5-5 4-6.5.5 3 0 6-.5 7.5 2-1.5 3.5-4 3.5-7 0-3-3-6-6-5z" fill="#6BB8E8" />
+                  <rect x="14" y="27" width="12" height="2.5" rx="0.5" fill="#4A9FD9" />
+                  <rect x="16" y="29.5" width="8" height="2" rx="0.5" fill="#4A9FD9" />
+                  <rect x="13" y="31.5" width="14" height="2.5" rx="0.5" fill="#4A9FD9" />
+                </svg>
+                <div className="flex flex-col leading-none">
+                  <span className="text-white text-[0.4rem] font-bold tracking-wider" style={{ fontFamily: "'DM Sans', sans-serif" }}>BETTER</span>
+                  <span className="text-white text-[0.4rem] font-bold tracking-wider" style={{ fontFamily: "'DM Sans', sans-serif" }}>BUSINESS</span>
+                  <span className="text-white text-[0.4rem] font-bold tracking-wider" style={{ fontFamily: "'DM Sans', sans-serif" }}>BUREAU</span>
+                </div>
+              </div>
+              <div className="-ml-2.5 flex items-center justify-center w-8 h-8 rounded-full bg-[#1a5ca8] border-2 border-white/20 z-10">
+                <div className="text-center leading-none">
+                  <span className="text-white text-[0.75rem] font-extrabold" style={{ fontFamily: "'Sen', sans-serif" }}>A+</span>
+                </div>
+              </div>
             </div>
             <span className="text-white/20">|</span>
             <span

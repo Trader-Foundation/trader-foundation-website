@@ -8,20 +8,36 @@ import { useEffect, useState } from 'react';
 import { Play } from 'lucide-react';
 
 const HERO_BG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/vlad-teaching-clean2_08a2b1d6.png';
-/* BBB Official Blue Torch - inline SVG */
-function BBBTorch({ className = '' }: { className?: string }) {
+/* BBB Official Badge - dark blue pill with torch + A+ circle */
+function BBBBadge() {
   return (
-    <svg className={className} viewBox="0 0 80 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-      {/* Torch flame */}
-      <path d="M40 4c-4 8-16 16-16 28 0 10 6 16 12 18-2-4-3-8-1-14 2-6 8-14 12-18 2 8 0 16-2 20 6-4 11-12 11-20C56 10 46 4 40 4z" fill="#0072B1" />
-      <path d="M40 12c-2 6-10 12-10 20 0 6 4 10 8 12-1-3-2-6 0-10 1.5-4 5-10 8-13 1 6 0 12-1 15 4-3 7-8 7-14 0-6-6-12-12-10z" fill="#0089D0" />
-      {/* Torch base */}
-      <rect x="30" y="52" width="20" height="4" rx="1" fill="#0072B1" />
-      <rect x="33" y="56" width="14" height="3" rx="1" fill="#0072B1" />
-      <rect x="28" y="59" width="24" height="4" rx="1" fill="#0072B1" />
-      {/* BBB Text */}
-      <text x="40" y="78" textAnchor="middle" fill="#0072B1" fontFamily="Arial Black, Arial, sans-serif" fontWeight="900" fontSize="14">BBB</text>
-    </svg>
+    <div className="flex items-center gap-0">
+      {/* Dark blue pill with torch + text */}
+      <div className="flex items-center gap-2 bg-[#003366] rounded-full px-4 py-2">
+        {/* Torch icon */}
+        <svg className="h-6 w-4 shrink-0" viewBox="0 0 40 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 2c-2 4-8 8-8 14 0 5 3 8 6 9-1-2-1.5-4-.5-7 1-3 4-7 6-9 1 4 0 8-1 10 3-2 5.5-6 5.5-10C28 5 23 2 20 2z" fill="#4A9FD9" />
+          <path d="M20 6c-1 3-5 6-5 10 0 3 2 5 4 6-.5-1.5-1-3 0-5 .75-2 2.5-5 4-6.5.5 3 0 6-.5 7.5 2-1.5 3.5-4 3.5-7 0-3-3-6-6-5z" fill="#6BB8E8" />
+          <rect x="14" y="27" width="12" height="2.5" rx="0.5" fill="#4A9FD9" />
+          <rect x="16" y="29.5" width="8" height="2" rx="0.5" fill="#4A9FD9" />
+          <rect x="13" y="31.5" width="14" height="2.5" rx="0.5" fill="#4A9FD9" />
+        </svg>
+        {/* Text */}
+        <div className="flex flex-col leading-none">
+          <span className="text-white text-[0.5rem] font-bold tracking-wider" style={{ fontFamily: "'DM Sans', sans-serif" }}>BETTER</span>
+          <span className="text-white text-[0.5rem] font-bold tracking-wider" style={{ fontFamily: "'DM Sans', sans-serif" }}>BUSINESS</span>
+          <span className="text-white text-[0.5rem] font-bold tracking-wider" style={{ fontFamily: "'DM Sans', sans-serif" }}>BUREAU</span>
+          <span className="text-white/50 text-[0.3rem] mt-0.5" style={{ fontFamily: "'DM Sans', sans-serif" }}>ACCREDITED BUSINESS</span>
+        </div>
+      </div>
+      {/* A+ circle */}
+      <div className="-ml-3 flex items-center justify-center w-10 h-10 rounded-full bg-[#1a5ca8] border-2 border-white/20 z-10">
+        <div className="text-center leading-none">
+          <span className="text-white text-[0.95rem] font-extrabold" style={{ fontFamily: "'Sen', sans-serif" }}>A+</span>
+          <span className="block text-white/70 text-[0.3rem] font-bold tracking-wide" style={{ fontFamily: "'DM Sans', sans-serif" }}>RATING</span>
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -106,23 +122,7 @@ export default function HeroSection() {
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
             }`}
           >
-            <div className="flex items-center gap-3 px-4 py-2.5 bg-white/10 backdrop-blur-sm rounded-sm border border-white/10">
-              <BBBTorch className="h-10 w-10" />
-              <div className="flex flex-col">
-                <span
-                  className="text-white text-[0.7rem] font-bold tracking-wide"
-                  style={{ fontFamily: "'DM Sans', sans-serif" }}
-                >
-                  BBB Accredited
-                </span>
-                <span
-                  className="text-[#c7ab77] text-[0.95rem] font-extrabold tracking-wide"
-                  style={{ fontFamily: "'Sen', sans-serif" }}
-                >
-                  A+ Rating
-                </span>
-              </div>
-            </div>
+            <BBBBadge />
           </div>
         </div>
       </div>
