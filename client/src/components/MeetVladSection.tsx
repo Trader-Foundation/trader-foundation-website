@@ -6,9 +6,7 @@
  */
 
 import { useEffect, useRef, useState } from 'react';
-
-const TRUSTPILOT_LOGO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/trustpilot-logo-black_ebaea425.svg';
-const TRUSTPILOT_STARS = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/trustpilot-stars_a78bc78f.svg';
+import { TrustpilotLogo, TrustpilotStars } from './TrustpilotAssets';
 
 const VLAD_FAMILY = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/vlad-family-cropped_bb850345.jpg';
 
@@ -174,17 +172,9 @@ export default function MeetVladSection() {
         <div className="max-w-[1320px] mx-auto px-6 lg:px-8">
           {/* TrustPilot Header */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-            <img
-              src={TRUSTPILOT_LOGO}
-              alt="Trustpilot"
-              className="h-7"
-            />
+            <TrustpilotLogo className="h-7" />
             <div className="flex items-center gap-3">
-              <img
-                src={TRUSTPILOT_STARS}
-                alt="5 stars"
-                className="h-6"
-              />
+              <TrustpilotStars className="h-6" />
               <span
                 className="text-[#555] text-sm"
                 style={{ fontFamily: "'DM Sans', sans-serif" }}
@@ -204,11 +194,7 @@ export default function MeetVladSection() {
               >
                 {/* Stars */}
                 <div className="flex items-center gap-0.5 mb-3">
-                  <img
-                    src={TRUSTPILOT_STARS}
-                    alt="5 stars"
-                    className="h-4"
-                  />
+                  <TrustpilotStars className="h-4" />
                 </div>
                 {/* Review Title */}
                 <p
@@ -255,7 +241,7 @@ export default function MeetVladSection() {
                 className="inline-flex items-center gap-1.5 text-[#888] text-xs hover:text-[#00b67a] transition-colors"
                 style={{ fontFamily: "'DM Sans', sans-serif" }}
               >
-                <img src={TRUSTPILOT_STARS} alt="stars" className="h-3" />
+                <TrustpilotStars className="h-3" />
                 Verify our 111 reviews on Trustpilot
                 <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />

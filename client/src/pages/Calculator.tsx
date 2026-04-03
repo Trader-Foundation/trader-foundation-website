@@ -456,7 +456,7 @@ export default function Calculator() {
             className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6"
             style={{ fontFamily: "'Sen', sans-serif" }}
           >
-            Compound Interest{' '}
+            Compound Wealth{' '}
             <span className="text-[#c7ab77]">Calculator</span>
           </h1>
           <p
