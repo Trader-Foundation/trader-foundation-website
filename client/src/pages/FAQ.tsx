@@ -103,12 +103,7 @@ export default function FAQ() {
             COMMON QUESTIONS{' '}
             <span className="text-[#c7ab77]">ANSWERED</span>
           </h1>
-          <p
-            className="text-white/50 text-base max-w-xl mx-auto leading-relaxed"
-            style={{ fontFamily: "'DM Sans', sans-serif" }}
-          >
-            Watch Vlad answer the most common questions, then explore each one below.
-          </p>
+
         </div>
       </section>
 
