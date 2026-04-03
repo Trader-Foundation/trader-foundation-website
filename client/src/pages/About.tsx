@@ -247,6 +247,25 @@ export default function About() {
         </div>
       </section>
 
+      {/* ─── Our Academy ─── */}
+      <section className="py-14 bg-[#faf9f6]">
+        <div className="max-w-[900px] mx-auto px-6 lg:px-8">
+          <p className="text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-3 text-center">Our Academy</p>
+          <h2 className="text-2xl md:text-3xl font-extrabold text-[#1a1a1a] leading-tight mb-6 text-center" style={{ fontFamily: "'Sen', sans-serif" }}>
+            A Boutique Trading Academy Built for Professionals
+          </h2>
+          <p className="text-[#444] text-base leading-relaxed mb-4 text-center">
+            We teach busy professionals how to trade stocks and options with confidence, using proven strategies that fit around a full-time career. Our mission is to make real financial education accessible to everyone, and to build a community where students don't just learn to trade, they learn to build lasting wealth.
+          </p>
+          <p className="text-[#444] text-base leading-relaxed mb-4 text-center">
+            Our coaches aren't hired instructors. They're former students who took the same course you're about to take, mastered the strategies, and came back to help others do the same. They are proof that it works. They've been exactly where you are. They know the challenges, the doubts, and the breakthroughs because they lived them.
+          </p>
+          <p className="text-[#444] text-base leading-relaxed text-center">
+            We're a boutique academy by design. Small class sizes. Direct access to coaches who genuinely care. A community where your mentors know your name. When you join Trader Foundation, you're not joining a program. You're joining a family.
+          </p>
+        </div>
+      </section>
+
       {/* ─── Our Philosophy ─── */}
       <section className="py-16 bg-[#111]">
         <div
