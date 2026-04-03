@@ -30,9 +30,9 @@ const leadership = [
   {
     name: 'Steve Lapa',
     title: 'Head of Sales Development',
-    subtitle: 'Vice President',
+    subtitle: 'Vice President · 15+ Years of Experience',
     photo: STEVE_PHOTO,
-    bio: '',
+    bio: '15+ years of leadership across finance, investments, and business development. Steve brings a consultative approach to every conversation, helping prospective students understand exactly how Trader Foundation can fit into their financial goals.',
   },
   {
     name: 'Jake Glass',
