@@ -32,6 +32,30 @@ export default function Home() {
 
       <MeetVladSection />
 
+      {/* Subtle Book a Call CTA after Meet the Team */}
+      <section className="py-10 bg-[#f5f3ee]">
+        <div className="max-w-[600px] mx-auto px-6 text-center">
+          <p
+            className="text-[#555] text-[0.9rem] leading-relaxed mb-5"
+            style={{ fontFamily: "'DM Sans', sans-serif" }}
+          >
+            Interested in learning more? Have a conversation with our team.
+          </p>
+          <a
+            href="https://traderfoundation.fillout.com/t/w1vozRAz1uus?utm_source=Website"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-7 py-3 border border-[#c7ab77]/40 text-[#c7ab77] text-[0.82rem] font-semibold tracking-wide rounded-sm transition-all duration-300 hover:bg-[#c7ab77] hover:text-[#111]"
+            style={{ fontFamily: "'DM Sans', sans-serif" }}
+          >
+            Book a Call
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+      </section>
+
       {/* CTA after Meet Vlad + TrustPilot reviews, light variant to contrast */}
       <MasterclassCTA
         variant="light"
