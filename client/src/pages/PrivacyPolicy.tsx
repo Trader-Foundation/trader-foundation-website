@@ -267,6 +267,12 @@ export default function PrivacyPolicy() {
         </li>
       </ul>
 
+      <h3>Text Messaging Opt-In Data</h3>
+      <p>
+        Text messaging originator opt-in data and consent will not be shared with any third parties,
+        excluding aggregators and providers of the Text Message services.
+      </p>
+
       <h2>Retention of Your Personal Data</h2>
       <p>
         The Company will retain Your Personal Data only for as long as is necessary for the purposes
