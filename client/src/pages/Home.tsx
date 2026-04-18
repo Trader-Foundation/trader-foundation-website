@@ -14,11 +14,13 @@ import PodcastSection from '@/components/PodcastSection';
 import Footer from '@/components/Footer';
 
 import EbookPopup from '@/components/EbookPopup';
+import SEO from '@/components/SEO';
 
 
 export default function Home() {
   return (
     <div className="min-h-screen">
+      <SEO path="/" />
       <Navigation />
       <HeroSection />
       <StatsSection />

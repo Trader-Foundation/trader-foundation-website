@@ -11,6 +11,7 @@ import { Quote, Play, ChevronDown } from 'lucide-react';
 
 import { TrustpilotLogoWhite, TrustpilotStars } from '@/components/TrustpilotAssets';
 import Navigation from '@/components/Navigation';
+import SEO from '@/components/SEO';
 import Footer from '@/components/Footer';
 
 const RESULTS_HERO_BG =
@@ -398,6 +399,7 @@ export default function Results() {
 
   return (
     <div className="min-h-screen bg-[#faf9f6]">
+      <SEO title="Student Results" description="See real results from Trader Foundation Academy students. Real trades, real profits, real transformations." path="/results" />
       <Navigation />
 
       {/* ─── Hero Banner ─── */}

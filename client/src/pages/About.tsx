@@ -6,6 +6,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Navigation from '@/components/Navigation';
+import SEO from '@/components/SEO';
 import Footer from '@/components/Footer';
 
 import { BookOpen, ArrowRight, Quote } from 'lucide-react';
@@ -124,6 +125,7 @@ export default function About() {
 
   return (
     <div className="min-h-screen bg-[#faf9f6]">
+      <SEO title="About Us" description="Meet the Trader Foundation Academy team — Vlad Tayman, Steve Lapa, Ariana Tayman, and Jake Glass. Learn about our mission to help traders succeed." path="/about" />
       <Navigation />
 
       {/* ─── eBook Signup Hero ─── */}

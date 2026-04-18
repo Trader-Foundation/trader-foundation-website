@@ -4,9 +4,12 @@
  */
 
 import LegalPageLayout from '@/components/LegalPageLayout';
+import SEO from '@/components/SEO';
 
 export default function PrivacyPolicy() {
   return (
+    <>
+    <SEO title="Privacy Policy" description="Privacy Policy for Trader Foundation Academy." path="/privacy-policy" />
     <LegalPageLayout title="Privacy Policy" breadcrumb="Privacy Policy">
       <p className="text-sm text-[#999] mb-6">
         <em>Last updated: January 13, 2023</em>
@@ -385,5 +388,6 @@ export default function PrivacyPolicy() {
         </li>
       </ul>
     </LegalPageLayout>
+    </>
   );
 }

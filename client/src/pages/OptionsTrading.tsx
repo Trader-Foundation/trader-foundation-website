@@ -7,6 +7,7 @@
 
 import React, { useState } from 'react';
 import Navigation from '@/components/Navigation';
+import SEO from '@/components/SEO';
 import Footer from '@/components/Footer';
 import { ArrowRight, ArrowLeft, ChevronRight, Shield, BookOpen, BarChart3, Target, Zap, Scale, Brain, TrendingUp } from 'lucide-react';
 
@@ -510,6 +511,7 @@ export default function OptionsTrading() {
 
   return (
     <div className="min-h-screen bg-[#faf9f6]">
+      <SEO title="Options Trading" description="Learn options trading strategies from Trader Foundation Academy." path="/options-trading" />
       <Navigation />
 
       {/* ── Breadcrumb ── */}

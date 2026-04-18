@@ -10,6 +10,7 @@ import { useEffect, useRef, useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 
 import Navigation from '@/components/Navigation';
+import SEO from '@/components/SEO';
 import Footer from '@/components/Footer';
 
 /* ── FAQ Data ── */
@@ -89,6 +90,7 @@ export default function FAQ() {
 
   return (
     <div className="min-h-screen bg-[#0a0a0a]">
+      <SEO title="FAQ" description="Answers to the most common questions about Trader Foundation Academy's trading program." path="/faq" />
       <Navigation />
 
       {/* ─── Hero ─── */}

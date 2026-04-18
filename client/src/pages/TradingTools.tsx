@@ -6,6 +6,7 @@
 
 import React, { useState } from 'react';
 import Navigation from '@/components/Navigation';
+import SEO from '@/components/SEO';
 import Footer from '@/components/Footer';
 import { ArrowRight, ArrowLeft, ChevronRight, MonitorSmartphone, BarChart3, BookOpen, Wrench, Target, Shield, Clock, Briefcase } from 'lucide-react';
 
@@ -395,6 +396,7 @@ export default function TradingTools() {
 
   return (
     <div className="min-h-screen bg-[#faf9f6]">
+      <SEO title="Trading Tools" description="Discover the best trading tools used by Trader Foundation Academy students." path="/trading-tools" />
       <Navigation />
 
       {/* ── Breadcrumb ── */}

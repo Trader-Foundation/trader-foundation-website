@@ -7,6 +7,7 @@
 
 import React, { useState } from 'react';
 import Navigation from '@/components/Navigation';
+import SEO from '@/components/SEO';
 import Footer from '@/components/Footer';
 
 import { ArrowRight, ArrowLeft, ChevronRight, BarChart3, Shield, Layers, TrendingUp, LineChart, Landmark, Flame, Briefcase } from 'lucide-react';
@@ -310,6 +311,7 @@ export default function StocksAndIndex() {
 
   return (
     <div className="min-h-screen bg-[#faf9f6]">
+      <SEO title="Stocks & Index Trading" description="Master stocks and index trading with Trader Foundation Academy." path="/stocks-and-index" />
       <Navigation />
 
       {/* ── Breadcrumb ── */}

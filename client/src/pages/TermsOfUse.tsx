@@ -4,9 +4,12 @@
  */
 
 import LegalPageLayout from '@/components/LegalPageLayout';
+import SEO from '@/components/SEO';
 
 export default function TermsOfUse() {
   return (
+    <>
+    <SEO title="Terms of Service" description="Terms of Service for Trader Foundation Academy." path="/terms-of-use" />
     <LegalPageLayout title="Terms of Service" breadcrumb="Terms of Service">
 
       <h2>General</h2>
@@ -410,5 +413,6 @@ export default function TermsOfUse() {
       </p>
 
     </LegalPageLayout>
+    </>
   );
 }

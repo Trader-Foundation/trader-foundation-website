@@ -9,6 +9,7 @@
 import { useState, useMemo, useEffect, useRef } from 'react';
 import { TrendingUp, DollarSign, Calendar, Percent, Info } from 'lucide-react';
 import Navigation from '@/components/Navigation';
+import SEO from '@/components/SEO';
 import Footer from '@/components/Footer';
 
 const VLAD_TEACHING =
@@ -435,6 +436,7 @@ export default function Calculator() {
 
   return (
     <div className="min-h-screen bg-[#faf9f6]">
+      <SEO title="Compound Wealth Calculator" description="Calculate your potential trading profits with our compound wealth calculator." path="/calculator" />
       <Navigation />
 
       {/* ─── Hero Banner ─── */}

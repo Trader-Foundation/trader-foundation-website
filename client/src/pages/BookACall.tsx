@@ -7,6 +7,7 @@
 
 import { useEffect } from 'react';
 import Navigation from '@/components/Navigation';
+import SEO from '@/components/SEO';
 import Footer from '@/components/Footer';
 
 const FILLOUT_URL = 'https://traderfoundation.fillout.com/t/w1vozRAz1uus?utm_source=Website';
@@ -18,6 +19,7 @@ export default function BookACall() {
 
   return (
     <div className="min-h-screen bg-[#111]">
+      <SEO title="Book a Strategy Call" description="Book a free strategy call with the Trader Foundation Academy team." path="/book-a-call" />
       <Navigation />
 
       {/* Hero */}

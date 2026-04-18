@@ -9,6 +9,7 @@
 import { useEffect } from 'react';
 import { Mail, Clock } from 'lucide-react';
 import Navigation from '@/components/Navigation';
+import SEO from '@/components/SEO';
 import Footer from '@/components/Footer';
 
 export default function Contact() {
@@ -25,6 +26,7 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen bg-[#faf9f6]">
+      <SEO title="Contact Us" description="Get in touch with the Trader Foundation Academy team." path="/contact" />
       <Navigation />
 
       {/* ─── Hero ─── */}

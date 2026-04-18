@@ -6,6 +6,7 @@
 
 import React, { useState } from 'react';
 import Navigation from '@/components/Navigation';
+import SEO from '@/components/SEO';
 import Footer from '@/components/Footer';
 
 import { ArrowRight, ArrowLeft, ChevronRight, Landmark, Layers, LineChart, PiggyBank, Compass, GraduationCap } from 'lucide-react';
@@ -263,6 +264,7 @@ export default function Investing101() {
 
   return (
     <div className="min-h-screen bg-[#faf9f6]">
+      <SEO title="Investing 101" description="Learn the fundamentals of investing with Trader Foundation Academy." path="/investing-101" />
       <Navigation />
 
       {/* ── Breadcrumb ── */}
