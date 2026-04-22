@@ -33,7 +33,7 @@ export default function WeeklyCheckin() {
   return (
     <div className="min-h-screen flex flex-col bg-[#111] text-white">
       <Helmet>
-        <title>Weekly Trading Log | Trader Foundation</title>
+        <title>Weekly Check-in form | Trader Foundation</title>
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
 
@@ -54,7 +54,7 @@ export default function WeeklyCheckin() {
             className="text-3xl md:text-4xl font-extrabold tracking-tight text-white"
             style={{ fontFamily: "'Sen', sans-serif" }}
           >
-            Weekly Trading Log
+            Weekly Check-in form
           </h1>
           <p className="mt-3 text-white/60 text-sm md:text-base">
             Submit your weekly check-in so we can review your trades and
