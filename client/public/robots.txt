@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /weeklycheckin
 
 Sitemap: https://www.trader.foundation/sitemap.xml

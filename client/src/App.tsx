@@ -22,6 +22,7 @@ import LiveChatWidget from "./components/LiveChatWidget";
 import Contact from "./pages/Contact";
 import BookACall from "./pages/BookACall";
 import FAQ from "./pages/FAQ";
+import WeeklyCheckin from "./pages/WeeklyCheckin";
 
 function Router() {
   return (
@@ -41,6 +42,7 @@ function Router() {
       <Route path={"/terms-of-use"} component={TermsOfUse} />
       <Route path={"/earnings-disclaimer"} component={EarningsDisclaimer} />
       <Route path={"/trading-disclaimer"} component={TradingDisclaimer} />
+      <Route path={"/weeklycheckin"} component={WeeklyCheckin} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
