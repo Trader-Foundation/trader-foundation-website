@@ -23,6 +23,7 @@ import Contact from "./pages/Contact";
 import BookACall from "./pages/BookACall";
 import FAQ from "./pages/FAQ";
 import WeeklyCheckin from "./pages/WeeklyCheckin";
+import StockRulebook from "./pages/StockRulebook";
 
 function Router() {
   return (
@@ -43,6 +44,7 @@ function Router() {
       <Route path={"/earnings-disclaimer"} component={EarningsDisclaimer} />
       <Route path={"/trading-disclaimer"} component={TradingDisclaimer} />
       <Route path={"/weeklycheckin"} component={WeeklyCheckin} />
+      <Route path={"/stock-rulebook"} component={StockRulebook} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
