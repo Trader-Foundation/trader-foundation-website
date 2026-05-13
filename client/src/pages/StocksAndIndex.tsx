@@ -13,7 +13,7 @@ import Footer from '@/components/Footer';
 import { ArrowRight, ArrowLeft, ChevronRight, BarChart3, Shield, Layers, TrendingUp, LineChart, Landmark, Flame, Briefcase } from 'lucide-react';
 
 const SIDEBAR_IMG =
-  'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/investing101-sidebar-C8V9kWAFyEQ4Vd9xJTZg4F.webp';
+  'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/vlad-teaching-clean2_08a2b1d6.png';
 
 /* ── Chapter data ── */
 const CHAPTERS = [
