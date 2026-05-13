@@ -37,13 +37,6 @@ const leadership = [
     bio: 'Ariana is the first person you\'ll hear from and the one who makes sure no question goes unanswered. She genuinely cares about every student\'s experience, from the moment they join to every milestone along the way. Her mission is simple: make sure everyone in the Trader Foundation community feels supported, valued, and never alone on their journey.',
   },
   {
-    name: 'Jake Glass',
-    title: 'Enrollment Specialist',
-    subtitle: '11+ Years of Experience',
-    photo: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/image(2)_664effb7.png',
-    bio: 'With over a decade of experience in high-level sales and relationship management, Jake knows that the best results come from genuinely caring about the person on the other end. He takes the time to understand each individual\'s financial goals and helps them see exactly how Trader Foundation can transform their future.',
-  },
-  {
     name: 'Jhalil Timazee',
     title: 'Enrollment Specialist',
     subtitle: '20+ Years of Leadership Experience',
@@ -125,7 +118,7 @@ export default function About() {
 
   return (
     <div className="min-h-screen bg-[#faf9f6]">
-      <SEO title="About Us" description="Meet the Trader Foundation Academy team — Vlad Tayman, Steve Lapa, Ariana Tayman, and Jake Glass. Learn about our mission to help traders succeed." path="/about" />
+      <SEO title="About Us" description="Meet the Trader Foundation Academy team — Vlad Tayman, Steve Lapa, Ariana Tayman, and Jhalil Timazee. Learn about our mission to help traders succeed." path="/about" />
       <Navigation />
 
       {/* ─── eBook Signup Hero ─── */}
