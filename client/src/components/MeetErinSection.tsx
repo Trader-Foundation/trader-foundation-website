@@ -1,14 +1,15 @@
 /*
- * Meet Vlad Section - Homepage
- * Design: Two-column layout (text left, family photo right)
- * Modeled after GOAT Academy's "Who are Felix & Winston?" intro
- * Followed by TrustPilot reviews strip for social proof
+ * Meet Erin Section - Homepage (v2)
+ * Design: Two-column layout (text left, photo right)
+ * Erin Chawla is the face of the brand; Vlad Tayman credited as founder.
+ * Followed by TrustPilot reviews strip for social proof.
  */
 
 import { useEffect, useRef, useState } from 'react';
 import { TrustpilotLogo, TrustpilotStars } from './TrustpilotAssets';
 
-const VLAD_FAMILY = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/vlad-family-cropped_bb850345.jpg';
+/* TODO[v2]: Replace with final Erin portrait for the "Who is Erin?" section. Using existing Erin headshot as placeholder. */
+const ERIN_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/erin_93b42a5c.jpg';
 
 const trustpilotReviews = [
   {
@@ -37,7 +38,7 @@ const trustpilotReviews = [
   },
 ];
 
-export default function MeetVladSection() {
+export default function MeetErinSection() {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
@@ -61,7 +62,7 @@ export default function MeetVladSection() {
 
   return (
     <>
-      {/* Meet Vlad Section */}
+      {/* Meet Erin Section */}
       <section
         ref={sectionRef}
         className="relative py-24 sm:py-32 bg-white"
@@ -74,7 +75,7 @@ export default function MeetVladSection() {
             }`}
             style={{ fontFamily: "'Sen', sans-serif" }}
           >
-            Who is <span className="text-[#c7ab77]">Vlad Tayman</span>?
+            Who is <span className="text-[#c7ab77]">Erin Chawla</span>?
           </h2>
 
           {/* Two-column: Story left, Photo right */}
@@ -85,39 +86,44 @@ export default function MeetVladSection() {
                 isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'
               }`}
             >
+              {/* TODO[v2]: Replace the five paragraphs below with Erin's final origin story copy.
+                  Placeholder copy written in her voice, based on her existing coach bio. */}
               <div
                 className="text-[#333] text-base sm:text-[1.05rem] leading-[1.85] space-y-6"
                 style={{ fontFamily: "'DM Sans', sans-serif" }}
               >
                 <p>
-                  I still remember the moment everything clicked. I was sitting at my desk after another
-                  14-hour day, watching my 401(k) statement show the same mediocre returns year after year.
-                  I had done everything "right", the degree, the career, the savings, but I realized{' '}
-                  <strong>nobody had ever taught me how to actually grow my wealth</strong>.
+                  I didn't grow up around the markets. Like a lot of people, I taught myself,
+                  alone, late at night, after work, making every mistake there is to make. I
+                  remember exactly what it felt like to <strong>figure this out with no one in
+                  my corner</strong>, and that feeling is the reason I do what I do today.
                 </p>
                 <p>
-                  That frustration led me down a path most professionals know too well. I tried the stock
-                  signals. I tried the AI bots. I even tried day trading for a while, waking up at 4 AM,
-                  staring at candles, losing money I couldn't afford to lose. Every shortcut led to the
-                  same place: <strong>back to square one</strong>.
+                  Early on I chased everything: day trading, hot tips, every alert and indicator
+                  I could find. It was exhausting, and it didn't work. The turning point came
+                  when I stopped trying to be in every trade and started being{' '}
+                  <strong>patient and selective</strong>. Trading is like dating, choose the
+                  best and leave the rest.
                 </p>
                 <p>
-                  It wasn't until I discovered swing trading, and more importantly, learned to{' '}
-                  <strong>build a real foundation</strong>, that things changed. Not overnight. Not through
-                  some magic formula. Through discipline, proper education, and having someone hold me
-                  accountable every step of the way.
+                  Now I trade almost entirely off the <strong>Weekly and Monthly charts</strong>.
+                  No noise. No chasing. Just a few high-quality setups a month, managed with
+                  discipline. It's calmer, it fits around a real life, and it's far more
+                  consistent than the chaos I started with.
                 </p>
                 <p>
-                  That's why I built <em><strong>Trader Foundation</strong></em>. Not as another course you
-                  watch and forget. As a real academy where busy professionals get{' '}
-                  <strong>truly individual 1-on-1 coaching</strong>, learn a proven swing trading strategy,
-                  and build the skills to manage their own wealth, on their own terms.
+                  As Head of YouTube Education for <em><strong>Trader Foundation</strong></em>, I
+                  put as much of this as I can out into the world for free, because I never want
+                  someone to feel as alone in this as I once did. Every video, every answered
+                  question, comes from that same place.
                 </p>
                 <p>
-                  Over <strong>1,200 students</strong> and <strong>6+ years</strong> later, with a{' '}
-                  <strong>BBB A+ accreditation</strong>, I can tell you this: the people who succeed here
-                  aren't the ones looking for shortcuts. They're the ones who are{' '}
-                  <strong>ready to learn</strong>.
+                  Trader Foundation was built by <strong>Vlad Tayman</strong> as a real academy,
+                  not another course you watch and forget, where busy professionals get genuine
+                  1-on-1 coaching and a proven swing trading strategy. With over{' '}
+                  <strong>1,200 students</strong>, <strong>6+ years</strong>, and a{' '}
+                  <strong>BBB A+ accreditation</strong> behind us, I'm proud to help carry that
+                  mission forward.
                 </p>
               </div>
             </div>
@@ -130,8 +136,8 @@ export default function MeetVladSection() {
             >
               <div className="relative">
                 <img
-                  src={VLAD_FAMILY}
-                  alt="Vlad Tayman with his family"
+                  src={ERIN_PHOTO}
+                  alt="Erin Chawla, Lead Trading Coach at Trader Foundation Academy"
                   className="w-full h-auto rounded-sm shadow-xl"
                 />
                 {/* Gold corner accents */}
@@ -149,13 +155,20 @@ export default function MeetVladSection() {
                     className="text-[#1a1a1a] font-bold text-lg"
                     style={{ fontFamily: "'Sen', sans-serif" }}
                   >
-                    Vlad Tayman
+                    Erin Chawla
                   </p>
+                  {/* TODO[v2]: Confirm Erin's official title. */}
                   <p
                     className="text-[#888] text-sm mt-1"
                     style={{ fontFamily: "'DM Sans', sans-serif" }}
                   >
-                    Founder, Trader Foundation Academy
+                    Lead Trading Coach, Trader Foundation Academy
+                  </p>
+                  <p
+                    className="text-[#aaa] text-xs mt-2"
+                    style={{ fontFamily: "'DM Sans', sans-serif" }}
+                  >
+                    Trader Foundation founded by Vlad Tayman
                   </p>
                 </div>
               </div>

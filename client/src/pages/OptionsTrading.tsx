@@ -11,8 +11,9 @@ import SEO from '@/components/SEO';
 import Footer from '@/components/Footer';
 import { ArrowRight, ArrowLeft, ChevronRight, Shield, BookOpen, BarChart3, Target, Zap, Scale, Brain, TrendingUp } from 'lucide-react';
 
+/* TODO[v2]: Replace with final Erin teaching photo. Using existing Erin headshot as placeholder. */
 const SIDEBAR_IMG =
-  'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/vlad-teaching-clean2_08a2b1d6.png';
+  'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/erin_93b42a5c.jpg';
 
 /* ── Chapter data ── */
 const CHAPTERS = [
@@ -658,7 +659,7 @@ export default function OptionsTrading() {
               <div className="bg-[#111] rounded-lg overflow-hidden shadow-xl">
                 <img
                   src={SIDEBAR_IMG}
-                  alt="Vlad Tayman teaching at Trader Foundation"
+                  alt="Erin Chawla, Lead Trading Coach at Trader Foundation"
                   className="w-full h-44 object-cover"
                 />
                 <div className="p-5 text-center">

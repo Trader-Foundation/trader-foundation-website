@@ -123,9 +123,10 @@ export default function EbookPopup() {
             </h2>
 
             {/* Subtext */}
+            {/* TODO[v2]: Confirm eBook framing for Erin as the brand face (authorship stays with Vlad Tayman). */}
             <p className="mb-5 text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.6)' }}>
               Learn what separates the 10% who profit from the 90% who lose.
-              Get Vlad Tayman's complete guide to stock pattern recognition,
+              Get Trader Foundation's complete guide to stock pattern recognition,
               candlestick charts, and options, <strong style={{ color: 'rgba(255,255,255,0.85)' }}>absolutely free.</strong>
             </p>
 

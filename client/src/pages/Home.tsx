@@ -1,14 +1,14 @@
 /*
  * Home Page, Trader Foundation Academy
  * Design: "The Academy", Ivy League Digital Campus
- * Sections flow: Navigation → Hero → Stats → CTA → Meet Vlad → CTA → Podcast → CTA → Footer
+ * Sections flow: Navigation → Hero → Stats → CTA → Meet Erin → CTA → Podcast → CTA → Footer
  * CTA frequency modeled after GOAT Academy - after every major section
  */
 
 import Navigation from '@/components/Navigation';
 import HeroSection from '@/components/HeroSection';
 import StatsSection from '@/components/StatsSection';
-import MeetVladSection from '@/components/MeetVladSection';
+import MeetErinSection from '@/components/MeetErinSection';
 import MasterclassCTA from '@/components/MasterclassCTA';
 import PodcastSection from '@/components/PodcastSection';
 import Footer from '@/components/Footer';
@@ -32,7 +32,7 @@ export default function Home() {
         subtext="Watch our free masterclass and discover a proven swing trading strategy that fits into your schedule."
       />
 
-      <MeetVladSection />
+      <MeetErinSection />
 
       {/* Subtle Book a Call CTA after Meet the Team */}
       <section className="py-10 bg-[#f5f3ee]">
@@ -58,7 +58,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA after Meet Vlad + TrustPilot reviews, light variant to contrast */}
+      {/* CTA after Meet Erin + TrustPilot reviews, light variant to contrast */}
       <MasterclassCTA
         variant="light"
         headline="Ready to Start Your Trading Journey?"

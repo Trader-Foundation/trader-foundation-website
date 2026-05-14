@@ -1,6 +1,7 @@
 /*
- * About Page, Trader Foundation Academy
- * Sections: eBook Signup → Condensed Vlad Story → Erin Spotlight → Meet the Coaches → Footer
+ * About Page, Trader Foundation Academy (v2)
+ * Sections: eBook Signup → Erin Spotlight → Vlad Founder Story → Our Academy → Our Philosophy → Meet the Coaches → Meet the Team → Footer
+ * Erin Chawla leads as the face of the brand; Vlad Tayman credited as founder.
  * Fonts: Sen (headings), DM Sans (body)
  */
 
@@ -111,6 +112,7 @@ function useFormScript() {
 
 /* ── Page ── */
 export default function About() {
+  const erinSpotlight = useFadeIn();
   const story = useFadeIn();
   const erinRef = useFadeIn();
   const team = useFadeIn();
@@ -118,7 +120,7 @@ export default function About() {
 
   return (
     <div className="min-h-screen bg-[#faf9f6]">
-      <SEO title="About Us" description="Meet the Trader Foundation Academy team — Vlad Tayman, Steve Lapa, Ariana Tayman, and Jhalil Timazee. Learn about our mission to help traders succeed." path="/about" />
+      <SEO title="About Us" description="Meet Erin Chawla and the Trader Foundation Academy team. Founded by Vlad Tayman, our mission is to help busy professionals learn to trade with confidence." path="/about" />
       <Navigation />
 
       {/* ─── eBook Signup Hero ─── */}
@@ -148,7 +150,7 @@ export default function About() {
               </h1>
               <p className="text-white/60 text-sm leading-relaxed mb-4 max-w-md">
                 Learn what separates the 10% who profit from the 90% who lose.
-                Vlad Tayman's complete guide to pattern recognition, candlestick
+                Trader Foundation's complete guide to pattern recognition, candlestick
                 charts, and options, <strong className="text-white/85">absolutely free.</strong>
               </p>
               <div className="flex flex-wrap gap-x-4 gap-y-1.5">
@@ -191,8 +193,61 @@ export default function About() {
         </div>
       </section>
 
-      {/* ─── Vlad's Story (Condensed) ─── */}
+      {/* ─── Erin Spotlight (Face of the Brand) ─── */}
+      {/* TODO[v2]: Replace placeholder copy/title with Erin's final bio. Photo uses existing Erin headshot placeholder. */}
       <section className="py-20 bg-[#faf9f6]">
+        <div
+          ref={erinSpotlight.ref}
+          className={`max-w-[1100px] mx-auto px-6 lg:px-8 transition-all duration-700 ${
+            erinSpotlight.visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-14 items-center">
+            {/* Erin's photo (2 cols) */}
+            <div className="lg:col-span-2 flex flex-col items-center">
+              <div className="relative w-full max-w-[300px]">
+                <div className="absolute -inset-3 border border-[#c7ab77]/20 rounded-lg" />
+                <img
+                  src={ERIN_PHOTO}
+                  alt="Erin Chawla, Lead Trading Coach at Trader Foundation"
+                  className="w-full aspect-[4/5] object-cover rounded-lg shadow-xl"
+                  style={{ filter: 'brightness(1.1)' }}
+                />
+              </div>
+              <h3 className="text-xl font-extrabold text-[#111] mt-5" style={{ fontFamily: "'Sen', sans-serif" }}>
+                Erin Chawla
+              </h3>
+              {/* TODO[v2]: Confirm Erin's official title. */}
+              <p className="text-[#c7ab77] text-sm font-medium">Lead Trading Coach</p>
+            </div>
+
+            {/* Story text (3 cols) */}
+            <div className="lg:col-span-3">
+              <p className="text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-3">
+                The Face of Trader Foundation
+              </p>
+              <h2 className="text-2xl md:text-3xl font-extrabold text-[#111] leading-tight mb-6" style={{ fontFamily: "'Sen', sans-serif" }}>
+                Patient, Selective, and Genuinely in Your Corner
+              </h2>
+              <p className="text-[#444] text-base leading-relaxed mb-4">
+                Erin taught herself to trade the hard way, alone, after work, making every mistake there is to make. That experience is the reason she shows up every day: she remembers exactly what it felt like to figure this out with no one in her corner.
+              </p>
+              <p className="text-[#444] text-base leading-relaxed mb-4">
+                Her approach is different from most. She trades almost entirely off the Weekly and Monthly charts. No noise, no chasing, just a few high-quality setups a month managed with discipline. As Head of YouTube Education, she puts as much of this as she can into the world for free.
+              </p>
+              <p className="text-[#444] text-base leading-relaxed mb-4">
+                Today Erin is the face of Trader Foundation, the academy founded by Vlad Tayman, carrying its mission forward to busy professionals who want a calmer, more consistent way to build wealth.
+              </p>
+              <p className="text-[#555] text-sm leading-relaxed italic border-l-2 border-[#c7ab77]/40 pl-4">
+                "Trading is like dating, choose the best and leave the rest. Patience isn't boring, it's profitable."
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Vlad's Story (Condensed) ─── */}
+      <section className="py-20 bg-white">
         <div
           ref={story.ref}
           className={`max-w-[1100px] mx-auto px-6 lg:px-8 transition-all duration-700 ${

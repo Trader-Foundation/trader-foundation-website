@@ -7,7 +7,8 @@
 import { useEffect, useState } from 'react';
 import { Play } from 'lucide-react';
 
-const HERO_BG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/vlad-teaching-clean2_08a2b1d6.png';
+/* TODO[v2]: Replace with final Erin hero/teaching photo. Using existing Erin headshot as placeholder. */
+const HERO_BG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/erin_93b42a5c.jpg';
 /* BBB Official Badge - dark blue pill with torch + A+ circle */
 function BBBBadge() {
   return (
