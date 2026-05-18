@@ -101,9 +101,19 @@ export default function HeroSection() {
             </span>
           </h1>
 
+          {/* Paycheck Collector tagline */}
+          <p
+            className={`mt-6 text-white/80 text-base sm:text-lg leading-relaxed max-w-xl transition-all duration-1000 delay-400 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+            }`}
+            style={{ fontFamily: "'DM Sans', sans-serif" }}
+          >
+            Home of the <span className="text-[#c7ab77] font-semibold">Paycheck Collector</span> &mdash; monthly options income, defined risk, in any market.
+          </p>
+
           {/* CTA Button */}
           <div
-            className={`mt-10 transition-all duration-1000 delay-500 ${
+            className={`mt-8 transition-all duration-1000 delay-500 ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
             }`}
           >

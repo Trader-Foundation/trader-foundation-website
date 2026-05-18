@@ -1,7 +1,7 @@
 /*
- * Home Page, Trader Foundation Academy
+ * Home Page, Trader Foundation Academy (v2)
  * Design: "The Academy", Ivy League Digital Campus
- * Sections flow: Navigation → Hero → Stats → CTA → Meet Erin → CTA → Podcast → CTA → Footer
+ * Sections flow: Nav → Hero → Stats → Who This Is For → CTA → Meet Erin → Method → Book Call → CTA → Guarantee → Podcast → CTA → Footer
  * CTA frequency modeled after GOAT Academy - after every major section
  */
 
@@ -16,6 +16,50 @@ import Footer from '@/components/Footer';
 import EbookPopup from '@/components/EbookPopup';
 import SEO from '@/components/SEO';
 
+import {
+  Briefcase,
+  Cpu,
+  Stethoscope,
+  Presentation,
+  Building2,
+  Shield,
+  Calendar,
+  TrendingUp,
+  Tag,
+  ShieldCheck,
+} from 'lucide-react';
+
+const audience = [
+  { Icon: Briefcase, label: 'Corporate Finance' },
+  { Icon: Cpu, label: 'Engineering' },
+  { Icon: Stethoscope, label: 'Medicine' },
+  { Icon: Presentation, label: 'Consulting' },
+  { Icon: Building2, label: 'Business Owners' },
+];
+
+const methodFeatures = [
+  {
+    Icon: Shield,
+    title: 'Defined Risk',
+    desc: 'You know your maximum loss before the trade is ever placed. No surprises, no margin calls.',
+  },
+  {
+    Icon: Calendar,
+    title: 'Monthly Income',
+    desc: 'Collect premium on a predictable cycle. Like a paycheck — hence the name.',
+  },
+  {
+    Icon: TrendingUp,
+    title: 'Bull or Bear Markets',
+    desc: "Premium gets paid regardless of direction. You profit from selling time, not from predicting where the market goes.",
+  },
+  {
+    Icon: Tag,
+    title: 'Buy Discounts in Downturns',
+    desc: 'When markets drop, the system positions you to acquire quality stocks at discount prices, getting paid premium while you wait for your buy levels.',
+  },
+];
+
 
 export default function Home() {
   return (
@@ -25,6 +69,50 @@ export default function Home() {
       <HeroSection />
       <StatsSection />
 
+      {/* ─── Who This Is For ─── */}
+      <section className="py-20 sm:py-24 bg-[#faf9f6]">
+        <div className="max-w-[1100px] mx-auto px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <p
+              className="text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-3"
+              style={{ fontFamily: "'DM Sans', sans-serif" }}
+            >
+              Who This Is For
+            </p>
+            <h2
+              className="text-3xl md:text-4xl font-extrabold text-[#111] leading-tight mb-5"
+              style={{ fontFamily: "'Sen', sans-serif" }}
+            >
+              You've Excelled at Your Career.<br className="hidden sm:block" />
+              {' '}Now Level Up Your Wealth.
+            </h2>
+            <p
+              className="text-[#444] text-base leading-relaxed max-w-2xl mx-auto"
+              style={{ fontFamily: "'DM Sans', sans-serif" }}
+            >
+              If you're already winning at what you do but you've quietly realized
+              you don't have a Plan B you actually own, you're in the right place.
+            </p>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-[900px] mx-auto">
+            {audience.map(({ Icon, label }) => (
+              <div
+                key={label}
+                className="bg-white border border-[#e8e4dc] rounded-lg p-5 text-center transition-colors duration-300 hover:border-[#c7ab77]/40"
+              >
+                <Icon className="h-7 w-7 text-[#c7ab77] mx-auto mb-3" strokeWidth={1.5} />
+                <p
+                  className="text-[#111] font-semibold text-sm leading-snug"
+                  style={{ fontFamily: "'DM Sans', sans-serif" }}
+                >
+                  {label}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA after Stats, dark variant, no text, just the button */}
       <MasterclassCTA
         variant="dark"
@@ -33,6 +121,56 @@ export default function Home() {
       />
 
       <MeetErinSection />
+
+      {/* ─── The Method: Paycheck Collector ─── */}
+      <section className="py-20 sm:py-24 bg-[#111]">
+        <div className="max-w-[1100px] mx-auto px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <p
+              className="text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-3"
+              style={{ fontFamily: "'DM Sans', sans-serif" }}
+            >
+              The Method
+            </p>
+            <h2
+              className="text-3xl md:text-4xl font-extrabold text-white leading-tight mb-5"
+              style={{ fontFamily: "'Sen', sans-serif" }}
+            >
+              The <span className="text-[#c7ab77]">Paycheck Collector</span>
+            </h2>
+            <p
+              className="text-white/70 text-base leading-relaxed max-w-2xl mx-auto"
+              style={{ fontFamily: "'DM Sans', sans-serif" }}
+            >
+              Sell options on liquid stocks and indices for a defined-risk premium every month.
+              The same financial principles you'd find in a corporate-finance risk model,
+              applied to a system anyone serious can learn.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+            {methodFeatures.map(({ Icon, title, desc }) => (
+              <div
+                key={title}
+                className="bg-white/[0.03] border border-[#c7ab77]/15 rounded-lg p-6 transition-colors duration-300 hover:border-[#c7ab77]/40"
+              >
+                <Icon className="h-8 w-8 text-[#c7ab77] mb-4" strokeWidth={1.5} />
+                <h3
+                  className="text-white text-lg font-bold mb-2"
+                  style={{ fontFamily: "'Sen', sans-serif" }}
+                >
+                  {title}
+                </h3>
+                <p
+                  className="text-white/60 text-sm leading-relaxed"
+                  style={{ fontFamily: "'DM Sans', sans-serif" }}
+                >
+                  {desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Subtle Book a Call CTA after Meet the Team */}
       <section className="py-10 bg-[#f5f3ee]">
@@ -64,6 +202,49 @@ export default function Home() {
         headline="Ready to Start Your Trading Journey?"
         subtext="Join 1,200+ professionals who chose mentorship over shortcuts."
       />
+
+      {/* ─── 90-Day Guarantee ─── */}
+      <section className="py-20 sm:py-24 bg-gradient-to-b from-[#faf9f6] to-[#f5f3ee]">
+        <div className="max-w-[850px] mx-auto px-6 lg:px-8 text-center">
+          <ShieldCheck className="h-12 w-12 text-[#c7ab77] mx-auto mb-5" strokeWidth={1.5} />
+          <p
+            className="text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-3"
+            style={{ fontFamily: "'DM Sans', sans-serif" }}
+          >
+            Our Guarantee
+          </p>
+          <h2
+            className="text-3xl md:text-4xl font-extrabold text-[#111] leading-tight mb-5"
+            style={{ fontFamily: "'Sen', sans-serif" }}
+          >
+            You Do the Work.<br className="hidden sm:block" />{' '}
+            We Get You There.
+          </h2>
+          <p
+            className="text-[#333] text-base sm:text-lg leading-relaxed mb-8"
+            style={{ fontFamily: "'DM Sans', sans-serif" }}
+          >
+            You follow the system. You show up to the coaching. And if you're not
+            profitable, <strong>you don't pay</strong>, and we keep coaching you
+            until you are.
+          </p>
+          <div className="inline-flex flex-wrap items-center justify-center gap-x-3 gap-y-2 px-6 py-3 bg-white border border-[#c7ab77]/30 rounded-full">
+            <span
+              className="text-[#c7ab77] text-sm font-semibold"
+              style={{ fontFamily: "'DM Sans', sans-serif" }}
+            >
+              90 Days of One-on-One Coaching
+            </span>
+            <span className="text-[#c7ab77]/50">·</span>
+            <span
+              className="text-[#c7ab77] text-sm font-semibold"
+              style={{ fontFamily: "'DM Sans', sans-serif" }}
+            >
+              Pay When You're Profitable
+            </span>
+          </div>
+        </div>
+      </section>
 
       <PodcastSection />
 
