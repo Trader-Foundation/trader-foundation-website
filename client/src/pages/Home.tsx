@@ -130,21 +130,23 @@ export default function Home() {
               className="text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-3"
               style={{ fontFamily: "'DM Sans', sans-serif" }}
             >
-              The Method
+              What We Teach
             </p>
             <h2
               className="text-3xl md:text-4xl font-extrabold text-white leading-tight mb-5"
               style={{ fontFamily: "'Sen', sans-serif" }}
             >
-              The <span className="text-[#c7ab77]">Paycheck Collector</span>
+              How to Build <span className="text-[#c7ab77]">Real Wealth</span>
             </h2>
             <p
               className="text-white/70 text-base leading-relaxed max-w-2xl mx-auto"
               style={{ fontFamily: "'DM Sans', sans-serif" }}
             >
-              Sell options on liquid stocks and indices for a defined-risk premium every month.
-              The same financial principles you'd find in a corporate-finance risk model,
-              applied to a system anyone serious can learn.
+              We don't teach a trade. We teach a discipline. The core method is the{' '}
+              <span className="text-white font-semibold">Paycheck Collector</span>, selling
+              options on liquid stocks and indices for a defined-risk premium every month.
+              Around it, you'll learn the risk management, position sizing, and long-term
+              discipline that turn a single strategy into a real, compounding portfolio.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
