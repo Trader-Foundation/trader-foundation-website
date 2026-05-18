@@ -10,7 +10,7 @@ import Navigation from '@/components/Navigation';
 import SEO from '@/components/SEO';
 import Footer from '@/components/Footer';
 
-import { BookOpen, ArrowRight, Quote } from 'lucide-react';
+import { BookOpen, ArrowRight, Quote, Instagram } from 'lucide-react';
 
 /* ── Photo URLs ── */
 const VLAD_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/vlad_processed_v2_9073b39a.jpg';
@@ -218,6 +218,16 @@ export default function About() {
                 Erin Chawla
               </h3>
               <p className="text-[#c7ab77] text-sm font-medium">Lead Coach and Partner</p>
+              <a
+                href="https://www.instagram.com/erin.chawla/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 mt-3 text-[#888] text-xs hover:text-[#c7ab77] transition-colors"
+                style={{ fontFamily: "'DM Sans', sans-serif" }}
+              >
+                <Instagram size={13} />
+                Follow Erin personally
+              </a>
             </div>
 
             {/* Story text (3 cols) */}
