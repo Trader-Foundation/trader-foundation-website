@@ -86,42 +86,45 @@ export default function MeetErinSection() {
                 isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'
               }`}
             >
-              {/* TODO[v2]: Confirm "Fortune Brand" vs "Fortune Brands" (using Erin's wording). */}
               <div
                 className="text-[#333] text-base sm:text-[1.05rem] leading-[1.85] space-y-6"
                 style={{ fontFamily: "'DM Sans', sans-serif" }}
               >
                 <p>
-                  My layoff landed the week I came back from maternity leave with a
-                  one-year-old at home. It didn't shake me. By then I'd already grown my net
-                  worth <strong>5x</strong> trading on the side, and I knew I had a Plan B that
-                  most people my age were still hoping for.
+                  I started at Trader Foundation as a student, same chair you might be sitting
+                  in. By then I'd been laid off <strong>three times in ten years</strong> and
+                  I was done. I wanted control of my own future, and I knew the corporate
+                  ladder wasn't going to give it to me.
                 </p>
                 <p>
-                  Before any of that, I'd built a career in corporate finance, places like{' '}
-                  <strong>GE</strong> and <strong>Fortune Brand</strong>. By 2020 I was a high
-                  performer with zero trading experience, and I wasn't trying to escape my
-                  life. I just wanted to level it up.
+                  I was skeptical, the way every serious person is when they first hear about
+                  trading. So I went to work. While I was at <strong>GE</strong> doing
+                  sixty-plus-hour weeks in corporate finance, I was studying trading on the
+                  side. By the end of it I'd <strong>5x'd my net worth</strong>, and I'd
+                  realized something simple: I love this stuff.
                 </p>
                 <p>
-                  Five years later, working sixty-hour weeks the whole way, I've kept that 5x
-                  going. I love this process enough that I was placing trades between
-                  contractions in the delivery room when my son was born. (Yes, really.)
+                  That's how I became a coach. I'd been the student. I knew what it felt like
+                  to sit across from someone who'd done it, and I wanted to be that person for
+                  the next one.
                 </p>
                 <p>
-                  Today I'm <strong>Lead Trading Coach</strong> at <em><strong>Trader
-                  Foundation</strong></em>, teaching a system called the{' '}
+                  Trader Foundation has been there through every life change since, the
+                  layoffs, the career pivots, my maternity leave, my son. The goal I started
+                  with hasn't changed: grow wealth like nothing else can. Trading made that
+                  real at a level I didn't think was possible going in.
+                </p>
+                <p>
+                  Now I'm <strong>Lead Trading Coach</strong> and the face of the brand, here
+                  to pass it on. The method we teach is called the{' '}
                   <strong>Paycheck Collector</strong>, selling options on liquid stocks and
-                  indices to pull in a defined-risk premium every month. Students get ninety
-                  days of one-on-one coaching shaped around their actual life: career,
-                  schedule, family, and goals.
-                </p>
-                <p>
-                  Trader Foundation was built by <strong>Vlad Tayman</strong> as a real
-                  academy, coaching that meets you where you are, not a course you watch once
-                  and forget. I've personally coached hundreds of students; the broader team
-                  has mentored <strong>over a thousand</strong>. We're{' '}
-                  <strong>BBB A+ accredited</strong> with <strong>six years</strong> behind us.
+                  indices for a defined-risk premium every month, inside ninety days of
+                  one-on-one coaching built around your real life.{' '}
+                  <em><strong>Trader Foundation</strong></em> was founded by{' '}
+                  <strong>Vlad Tayman</strong> as a real academy. I've personally coached
+                  hundreds of students; our broader team has mentored{' '}
+                  <strong>over a thousand</strong>. We're <strong>BBB A+ accredited</strong>{' '}
+                  with <strong>six years</strong> behind us.
                 </p>
 
                 {/* Signature pull-quote */}

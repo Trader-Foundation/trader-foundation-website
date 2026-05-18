@@ -194,7 +194,7 @@ export default function About() {
       </section>
 
       {/* ─── Erin Spotlight (Face of the Brand) ─── */}
-      {/* TODO[v2]: Replace placeholder Erin photo and confirm "Fortune Brand" wording. */}
+      {/* TODO[v2]: Replace placeholder Erin photo with final portrait. */}
       <section className="py-20 bg-[#faf9f6]">
         <div
           ref={erinSpotlight.ref}
@@ -229,19 +229,19 @@ export default function About() {
                 Built a Plan B Before I Knew I'd Need One
               </h2>
               <p className="text-[#444] text-base leading-relaxed mb-4">
-                My career started in corporate finance at companies like <strong>GE</strong> and <strong>Fortune Brand</strong>. I was a high performer with no interest in trading, until 2020, when I decided I wanted a real Plan B.
+                My career started in corporate finance at companies like <strong>GE</strong>, and on paper I was doing fine. But I'd been laid off <strong>three times in ten years</strong>, and that taught me what no one else was going to: I needed a Plan B I actually owned.
               </p>
               <p className="text-[#444] text-base leading-relaxed mb-4">
-                Five years and a lot of sixty-hour weeks later, I've grown my net worth <strong>5x</strong>. So when the layoff finally came, right as I was returning from maternity leave with a one-year-old at home, it didn't shake me. I already had what I'd been building all along.
+                I came to Trader Foundation as a student, skeptical the way every serious person is. I kept the full-time job and the sixty-plus-hour weeks and studied trading on the side. By the time my net worth was <strong>5x</strong> what I'd started with, I'd realized something simple: I love this stuff.
               </p>
               <p className="text-[#444] text-base leading-relaxed mb-4">
-                I love this process enough that I was placing trades between contractions in the delivery room when my son was born. (Yes, really.)
+                Eventually I joined the team as a coach, because I'd been the student, and I knew exactly what it felt like to sit across from someone who'd already done it. Trader Foundation has been there through every life change since, the layoffs, the career pivots, my maternity leave, my son.
               </p>
               <p className="text-[#444] text-base leading-relaxed mb-4">
-                Today I'm Lead Trading Coach at Trader Foundation, teaching a system called the <strong>Paycheck Collector</strong>: sell options on liquid stocks and indices for a defined-risk premium every month. Students get <strong>ninety days of one-on-one coaching</strong> tailored to their career, schedule, family, and goals.
+                My goal from day one hasn't changed: <strong>grow wealth like nothing else can</strong>. Trading made that real at a level I didn't think was possible going in, and now I get to help other people see it for themselves.
               </p>
               <p className="text-[#444] text-base leading-relaxed mb-4">
-                Trader Foundation was built by <strong>Vlad Tayman</strong> as a real academy, the opposite of a course you watch once and forget. I've personally coached hundreds of students; our broader team has mentored <strong>over a thousand</strong>. We're <strong>BBB A+ accredited</strong> with <strong>six years</strong> behind us.
+                Today I'm Lead Trading Coach and the face of the brand. The method I teach is called the <strong>Paycheck Collector</strong>, selling options on liquid stocks and indices for a defined-risk premium every month, inside <strong>ninety days of one-on-one coaching</strong> built around your real life. Trader Foundation was founded by <strong>Vlad Tayman</strong> as a real academy. I've personally coached hundreds of students; our broader team has mentored <strong>over a thousand</strong>. We're <strong>BBB A+ accredited</strong> with <strong>six years</strong> behind us.
               </p>
               <blockquote className="mt-5 border-l-2 border-[#c7ab77]/60 pl-5 italic text-[#555] text-base leading-relaxed">
                 "Trading is like dating, you choose the best."
