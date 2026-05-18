@@ -229,19 +229,19 @@ export default function About() {
                 Built a Plan B Before I Knew I'd Need One
               </h2>
               <p className="text-[#444] text-base leading-relaxed mb-4">
-                My career started in corporate finance at companies like <strong>GE</strong>, and on paper I was doing fine. But I'd been laid off <strong>three times in ten years</strong>, and that taught me what no one else was going to: I needed a Plan B I actually owned.
+                I've always excelled at what I do. My career started in corporate finance at companies like <strong>GE</strong>, sixty-plus-hour weeks, the whole picture, and on paper it was working. But after <strong>three layoffs in ten years</strong>, I'd stopped pretending the corporate ladder was a real plan. I needed something I actually owned.
               </p>
               <p className="text-[#444] text-base leading-relaxed mb-4">
-                I came to Trader Foundation as a student, skeptical the way every serious person is. I kept the full-time job and the sixty-plus-hour weeks and studied trading on the side. By the time my net worth was <strong>5x</strong> what I'd started with, I'd realized something simple: I love this stuff.
+                I came to Trader Foundation as a student, skeptical the way every serious person is. I kept the full-time job and studied trading on the side. By the time my net worth was <strong>5x</strong> what I'd started with, I'd realized something simple: I love this stuff.
               </p>
               <p className="text-[#444] text-base leading-relaxed mb-4">
-                Eventually I joined the team as a coach, because I'd been the student, and I knew exactly what it felt like to sit across from someone who'd already done it. Trader Foundation has been there through every life change since, the layoffs, the career pivots, my maternity leave, my son.
+                That's the progression: <strong>student, then coach, then the face of the brand, and now a partner</strong> in the business. Each step earned, because I'd been the student first and never forgot what that side of the table felt like. Trader Foundation has been there through every life change since, the layoffs, the career pivots, my maternity leave, my son.
               </p>
               <p className="text-[#444] text-base leading-relaxed mb-4">
-                My goal from day one hasn't changed: <strong>grow wealth like nothing else can</strong>. Trading made that real at a level I didn't think was possible going in, and now I get to help other people see it for themselves.
+                My goal from day one hasn't changed: <strong>grow wealth like nothing else can</strong>. Now I get to do that for my students, tailoring the trading to their real life and the ongoing changes that come with it.
               </p>
               <p className="text-[#444] text-base leading-relaxed mb-4">
-                Today I'm Lead Trading Coach and the face of the brand. The method I teach is called the <strong>Paycheck Collector</strong>, selling options on liquid stocks and indices for a defined-risk premium every month, inside <strong>ninety days of one-on-one coaching</strong> built around your real life. Trader Foundation was founded by <strong>Vlad Tayman</strong> as a real academy. I've personally coached hundreds of students; our broader team has mentored <strong>over a thousand</strong>. We're <strong>BBB A+ accredited</strong> with <strong>six years</strong> behind us.
+                The method I teach is called the <strong>Paycheck Collector</strong>, selling options on liquid stocks and indices for a defined-risk premium every month, inside <strong>ninety days of one-on-one coaching</strong> built around your real life. Trader Foundation was founded by <strong>Vlad Tayman</strong> as a real academy. I've personally coached hundreds of students; our broader team has mentored <strong>over a thousand</strong>. We're <strong>BBB A+ accredited</strong> with <strong>six years</strong> behind us.
               </p>
               <blockquote className="mt-5 border-l-2 border-[#c7ab77]/60 pl-5 italic text-[#555] text-base leading-relaxed">
                 "Trading is like dating, you choose the best."
