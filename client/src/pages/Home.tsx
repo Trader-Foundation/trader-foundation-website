@@ -13,7 +13,6 @@ import MasterclassCTA from '@/components/MasterclassCTA';
 import PodcastSection from '@/components/PodcastSection';
 import Footer from '@/components/Footer';
 
-import EbookPopup from '@/components/EbookPopup';
 import SEO from '@/components/SEO';
 
 
@@ -101,7 +100,6 @@ export default function Home() {
       </section>
 
       <Footer />
-      <EbookPopup />
 
     </div>
   );
