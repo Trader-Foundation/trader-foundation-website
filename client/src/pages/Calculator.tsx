@@ -745,7 +745,6 @@ export default function Calculator() {
                 >
                   Erin Chawla
                 </p>
-                {/* TODO[v2]: Confirm Erin's official title. */}
                 <p
                   className="text-white/70 text-xs"
                   style={{ fontFamily: "'DM Sans', sans-serif" }}

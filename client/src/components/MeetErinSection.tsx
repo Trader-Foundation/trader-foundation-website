@@ -86,45 +86,54 @@ export default function MeetErinSection() {
                 isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'
               }`}
             >
-              {/* TODO[v2]: Replace the five paragraphs below with Erin's final origin story copy.
-                  Placeholder copy written in her voice, based on her existing coach bio. */}
+              {/* TODO[v2]: Confirm "Fortune Brand" vs "Fortune Brands" (using Erin's wording). */}
               <div
                 className="text-[#333] text-base sm:text-[1.05rem] leading-[1.85] space-y-6"
                 style={{ fontFamily: "'DM Sans', sans-serif" }}
               >
                 <p>
-                  I didn't grow up around the markets. Like a lot of people, I taught myself,
-                  alone, late at night, after work, making every mistake there is to make. I
-                  remember exactly what it felt like to <strong>figure this out with no one in
-                  my corner</strong>, and that feeling is the reason I do what I do today.
+                  I got laid off coming back from maternity leave with a one-year-old at home,
+                  and I didn't care, because I'd already <strong>5x'd my wealth</strong> trading
+                  on the side.
                 </p>
                 <p>
-                  Early on I chased everything: day trading, hot tips, every alert and indicator
-                  I could find. It was exhausting, and it didn't work. The turning point came
-                  when I stopped trying to be in every trade and started being{' '}
-                  <strong>patient and selective</strong>. Trading is like dating, choose the
-                  best and leave the rest.
+                  Maybe layoffs haven't hit you yet. But you've watched them happen to people
+                  around you, and you've quietly realized you don't have a Plan B. I came to
+                  <em><strong> Trader Foundation</strong></em> in 2020 with zero trading
+                  experience. I'd spent my career in corporate finance at companies like{' '}
+                  <strong>GE</strong> and <strong>Fortune Brand</strong>, so I was already a
+                  high performer. I wasn't running from my life, I just wanted to level up.
                 </p>
                 <p>
-                  Now I trade almost entirely off the <strong>Weekly and Monthly charts</strong>.
-                  No noise. No chasing. Just a few high-quality setups a month, managed with
-                  discipline. It's calmer, it fits around a real life, and it's far more
-                  consistent than the chaos I started with.
+                  Since then I've 5x'd my wealth, all while working sixty-hour weeks. I was
+                  actually placing trades through contractions in the delivery room when I had
+                  my son, and I'm not exaggerating, that's how much I love this process.
                 </p>
                 <p>
-                  As Head of YouTube Education for <em><strong>Trader Foundation</strong></em>, I
-                  put as much of this as I can out into the world for free, because I never want
-                  someone to feel as alone in this as I once did. Every video, every answered
-                  question, comes from that same place.
+                  Today I'm the <strong>Lead Trading Coach</strong> at Trader Foundation, where
+                  I teach a method called the <strong>Paycheck Collector</strong>: you sell
+                  options on liquid stocks and indices and collect a premium every month with
+                  defined risk. Ninety days of one-on-one coaching, tailored to your career,
+                  your schedule, your family, and your goals.
                 </p>
                 <p>
                   Trader Foundation was built by <strong>Vlad Tayman</strong> as a real academy,
-                  not another course you watch and forget, where busy professionals get genuine
-                  1-on-1 coaching and a proven swing trading strategy. With over{' '}
-                  <strong>1,200 students</strong>, <strong>6+ years</strong>, and a{' '}
-                  <strong>BBB A+ accreditation</strong> behind us, I'm proud to help carry that
-                  mission forward.
+                  not another course you watch and forget. I've personally coached hundreds of
+                  students, and the broader team has mentored <strong>over a thousand</strong>.
+                  We're <strong>BBB A+ accredited</strong> with <strong>six years</strong> of
+                  doing this.
                 </p>
+
+                {/* Signature pull-quote */}
+                <blockquote
+                  className="mt-2 border-l-2 border-[#c7ab77]/60 pl-5 italic text-[#555] text-[1.05rem] leading-relaxed"
+                  style={{ fontFamily: "'DM Sans', sans-serif" }}
+                >
+                  "Trading is like dating, you choose the best."
+                  <span className="block mt-2 not-italic text-xs uppercase tracking-[0.18em] text-[#c7ab77]">
+                    — Erin Chawla
+                  </span>
+                </blockquote>
               </div>
             </div>
 
@@ -157,7 +166,6 @@ export default function MeetErinSection() {
                   >
                     Erin Chawla
                   </p>
-                  {/* TODO[v2]: Confirm Erin's official title. */}
                   <p
                     className="text-[#888] text-sm mt-1"
                     style={{ fontFamily: "'DM Sans', sans-serif" }}

@@ -194,7 +194,7 @@ export default function About() {
       </section>
 
       {/* ─── Erin Spotlight (Face of the Brand) ─── */}
-      {/* TODO[v2]: Replace placeholder copy/title with Erin's final bio. Photo uses existing Erin headshot placeholder. */}
+      {/* TODO[v2]: Replace placeholder Erin photo and confirm "Fortune Brand" wording. */}
       <section className="py-20 bg-[#faf9f6]">
         <div
           ref={erinSpotlight.ref}
@@ -202,7 +202,7 @@ export default function About() {
             erinSpotlight.visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-14 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-14 items-start">
             {/* Erin's photo (2 cols) */}
             <div className="lg:col-span-2 flex flex-col items-center">
               <div className="relative w-full max-w-[300px]">
@@ -217,7 +217,6 @@ export default function About() {
               <h3 className="text-xl font-extrabold text-[#111] mt-5" style={{ fontFamily: "'Sen', sans-serif" }}>
                 Erin Chawla
               </h3>
-              {/* TODO[v2]: Confirm Erin's official title. */}
               <p className="text-[#c7ab77] text-sm font-medium">Lead Trading Coach</p>
             </div>
 
@@ -227,20 +226,29 @@ export default function About() {
                 The Face of Trader Foundation
               </p>
               <h2 className="text-2xl md:text-3xl font-extrabold text-[#111] leading-tight mb-6" style={{ fontFamily: "'Sen', sans-serif" }}>
-                Patient, Selective, and Genuinely in Your Corner
+                Built a Plan B Before I Knew I'd Need One
               </h2>
               <p className="text-[#444] text-base leading-relaxed mb-4">
-                Erin taught herself to trade the hard way, alone, after work, making every mistake there is to make. That experience is the reason she shows up every day: she remembers exactly what it felt like to figure this out with no one in her corner.
+                I got laid off coming back from maternity leave with a one-year-old at home, and I didn't care, because I'd already <strong>5x'd my wealth</strong> trading on the side.
               </p>
               <p className="text-[#444] text-base leading-relaxed mb-4">
-                Her approach is different from most. She trades almost entirely off the Weekly and Monthly charts. No noise, no chasing, just a few high-quality setups a month managed with discipline. As Head of YouTube Education, she puts as much of this as she can into the world for free.
+                I came to Trader Foundation in 2020 with zero trading experience. I'd spent my career in corporate finance at companies like <strong>GE</strong> and <strong>Fortune Brand</strong>, so I was already a high performer. I wasn't running from my life, I just wanted to level up.
               </p>
               <p className="text-[#444] text-base leading-relaxed mb-4">
-                Today Erin is the face of Trader Foundation, the academy founded by Vlad Tayman, carrying its mission forward to busy professionals who want a calmer, more consistent way to build wealth.
+                Since then I've 5x'd my wealth, all while working sixty-hour weeks. I was actually placing trades through contractions in the delivery room when I had my son. That's how much I love this process.
               </p>
-              <p className="text-[#555] text-sm leading-relaxed italic border-l-2 border-[#c7ab77]/40 pl-4">
-                "Trading is like dating, choose the best and leave the rest. Patience isn't boring, it's profitable."
+              <p className="text-[#444] text-base leading-relaxed mb-4">
+                Today I'm Lead Trading Coach at Trader Foundation, where I teach a method called the <strong>Paycheck Collector</strong>: sell options on liquid stocks and indices and collect a premium every month with defined risk. Ninety days of one-on-one coaching, tailored to your career, your schedule, your family, and your goals.
               </p>
+              <p className="text-[#444] text-base leading-relaxed mb-4">
+                Trader Foundation was built by <strong>Vlad Tayman</strong> as a real academy, not another course you watch and forget. I've personally coached hundreds of students, and the broader team has mentored <strong>over a thousand</strong>. We're <strong>BBB A+ accredited</strong> with <strong>six years</strong> of doing this.
+              </p>
+              <blockquote className="mt-5 border-l-2 border-[#c7ab77]/60 pl-5 italic text-[#555] text-base leading-relaxed">
+                "Trading is like dating, you choose the best."
+                <span className="block mt-2 not-italic text-[0.7rem] uppercase tracking-[0.18em] text-[#c7ab77]">
+                  — Erin Chawla
+                </span>
+              </blockquote>
             </div>
           </div>
         </div>
