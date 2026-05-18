@@ -92,24 +92,30 @@ export default function MeetErinSection() {
                 style={{ fontFamily: "'DM Sans', sans-serif" }}
               >
                 <p>
-                  I spent my career in corporate finance at companies like{' '}
-                  <strong>GE</strong>, reading <strong>P&amp;Ls and analyzing risk for
-                  a living</strong>. Then came <strong>three layoffs in ten years</strong>,
-                  and I stopped pretending the corporate ladder was a real plan.
+                  I'm Erin, <strong>Lead Coach and Partner</strong> at Trader Foundation.
+                  Before this, I spent my career reading{' '}
+                  <strong>P&amp;Ls and analyzing risk</strong> in corporate finance at
+                  companies like <strong>GE</strong>, so when people call options trading{' '}
+                  <em>"gambling,"</em> I know they've never actually looked at the math.
                 </p>
                 <p>
-                  I came to Trader Foundation as a student, kept my day job, and went to
-                  work. By the time my net worth was <strong>5x</strong> what I'd started
-                  with, I'd realized I love this stuff. That's the progression:{' '}
-                  <strong>student, then coach, and now a partner</strong> in the business.
+                  My job now is to take everything I wish I'd had as a beginner and put
+                  it in front of the next person who's ready. That means real coaching,
+                  not another course you watch and forget, tailored to your career, your
+                  schedule, your family, and your goals.
                 </p>
                 <p>
-                  Today I teach the <strong>Paycheck Collector</strong>, selling options
-                  for a defined-risk premium every month, inside ninety days of one-on-one
-                  coaching. <em><strong>Trader Foundation</strong></em> was founded by{' '}
-                  <strong>Vlad Tayman</strong> as a real academy. We're{' '}
+                  I've personally coached hundreds of students. Our team has mentored{' '}
+                  <strong>over a thousand</strong>. We're{' '}
                   <strong>BBB A+ accredited</strong> with <strong>six years</strong>{' '}
-                  behind us and <strong>over a thousand</strong> students mentored.
+                  behind us. Trader Foundation was founded by{' '}
+                  <strong>Vlad Tayman</strong> as a real academy, and I'm proud to help
+                  carry it forward.
+                </p>
+                <p>
+                  When I'm not at my desk, I'm either traveling, exploring a new city, or
+                  chasing my son around the house. <strong>Salzburg, Austria</strong> is
+                  the top of my list.
                 </p>
 
                 <a
@@ -117,7 +123,7 @@ export default function MeetErinSection() {
                   className="inline-flex items-center gap-2 text-[#c7ab77] hover:text-[#b89a66] font-semibold text-sm transition-colors"
                   style={{ fontFamily: "'DM Sans', sans-serif" }}
                 >
-                  Read Erin's full story
+                  Read how Erin got here
                   <span aria-hidden="true">→</span>
                 </a>
 
