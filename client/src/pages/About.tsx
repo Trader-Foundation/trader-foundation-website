@@ -229,13 +229,13 @@ export default function About() {
                 Built a Plan B Before I Knew I'd Need One
               </h2>
               <p className="text-[#444] text-base leading-relaxed mb-4">
-                I've always excelled at what I do. My career started in corporate finance at companies like <strong>GE</strong>, sixty-plus-hour weeks, the whole picture, and on paper it was working. But after <strong>three layoffs in ten years</strong>, I'd stopped pretending the corporate ladder was a real plan. I needed something I actually owned.
+                I've always excelled at what I do. My career started in corporate finance at companies like <strong>GE</strong>, where I spent years reading <strong>P&amp;Ls and analyzing risk for a living</strong>. On paper it was working. But after <strong>three layoffs in ten years</strong>, I'd stopped pretending the corporate ladder was a real plan. I needed something I actually owned.
               </p>
               <p className="text-[#444] text-base leading-relaxed mb-4">
-                I came to Trader Foundation as a student, skeptical the way every serious person is. I kept the full-time job and studied trading on the side. By the time my net worth was <strong>5x</strong> what I'd started with, I'd realized something simple: I love this stuff.
+                I came to Trader Foundation as a student, skeptical the way every serious person is. I kept the full-time job and studied trading on the side. By the time my net worth was <strong>5x</strong> what I'd started with, I'd realized something simple: I love this stuff. And anyone who tells you options trading is <em>"gambling"</em> has never actually sat with the math, defined risk and a real system are the opposite of a gamble.
               </p>
               <p className="text-[#444] text-base leading-relaxed mb-4">
-                That's the progression: <strong>student, then coach, then the face of the brand, and now a partner</strong> in the business. Each step earned, because I'd been the student first and never forgot what that side of the table felt like. Trader Foundation has been there through every life change since, the layoffs, the career pivots, my maternity leave, my son.
+                That's the progression: <strong>student, then coach, then the face of the brand, and now a partner</strong> in the business. The partnership wasn't on offer when I started, I bet on it because I believe in what we're building, and what's possible inside this thing is usually bigger than people expect when they walk in. Trader Foundation has been there through every life change since, the layoffs, the career pivots, my maternity leave, my son.
               </p>
               <p className="text-[#444] text-base leading-relaxed mb-4">
                 My goal from day one hasn't changed: <strong>grow wealth like nothing else can</strong>. Now I get to do that for my students, tailoring the trading to their real life and the ongoing changes that come with it.

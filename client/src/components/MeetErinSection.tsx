@@ -91,24 +91,29 @@ export default function MeetErinSection() {
                 style={{ fontFamily: "'DM Sans', sans-serif" }}
               >
                 <p>
-                  I've always excelled at what I do. My career started in corporate finance at
-                  companies like <strong>GE</strong>, sixty-plus-hour weeks, the whole
-                  picture. On paper it was working. But after <strong>three layoffs in ten
-                  years</strong>, I stopped pretending the corporate ladder was a real plan.
-                  I needed something I actually owned.
+                  I've always excelled at what I do. My career started in corporate finance
+                  at companies like <strong>GE</strong>, where I spent years reading{' '}
+                  <strong>P&amp;Ls and analyzing risk for a living</strong>. On paper it was
+                  working. But after <strong>three layoffs in ten years</strong>, I'd
+                  stopped pretending the corporate ladder was a real plan. I needed
+                  something I actually owned.
                 </p>
                 <p>
                   I came to Trader Foundation the same way most of my students do, as a
                   student. I was skeptical the way every serious person is when they first
-                  hear about trading. So I kept the day job and went to work, studying it on
-                  the side. By the end I'd <strong>5x'd my net worth</strong>, and I'd
-                  realized something simple: I love this stuff.
+                  hear about trading, so I kept the day job and studied it on the side. By
+                  the end I'd <strong>5x'd my net worth</strong>, and I'd realized
+                  something simple: I love this stuff. And anyone who calls options trading{' '}
+                  <em>"gambling"</em> has never actually sat with the math. With defined
+                  risk and a real system, it's the opposite of a gamble, it's discipline
+                  applied to numbers.
                 </p>
                 <p>
                   That's the progression. <strong>Student, then coach, then the face of the
-                  brand, and now a partner</strong> in the business. Each step earned by
-                  being the person on the other side of the table that I would have wanted
-                  when I was starting out.
+                  brand, and now a partner</strong> in the business. The partnership wasn't
+                  on offer when I started. I bet on it because I believe in what we're
+                  building, and what's possible inside this thing is usually bigger than
+                  people expect when they walk in.
                 </p>
                 <p>
                   Trader Foundation has been there through every life change since, the
