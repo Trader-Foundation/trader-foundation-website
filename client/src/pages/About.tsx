@@ -229,19 +229,19 @@ export default function About() {
                 Built a Plan B Before I Knew I'd Need One
               </h2>
               <p className="text-[#444] text-base leading-relaxed mb-4">
-                I got laid off coming back from maternity leave with a one-year-old at home, and I didn't care, because I'd already <strong>5x'd my wealth</strong> trading on the side.
+                My career started in corporate finance at companies like <strong>GE</strong> and <strong>Fortune Brand</strong>. I was a high performer with no interest in trading, until 2020, when I decided I wanted a real Plan B.
               </p>
               <p className="text-[#444] text-base leading-relaxed mb-4">
-                I came to Trader Foundation in 2020 with zero trading experience. I'd spent my career in corporate finance at companies like <strong>GE</strong> and <strong>Fortune Brand</strong>, so I was already a high performer. I wasn't running from my life, I just wanted to level up.
+                Five years and a lot of sixty-hour weeks later, I've grown my net worth <strong>5x</strong>. So when the layoff finally came, right as I was returning from maternity leave with a one-year-old at home, it didn't shake me. I already had what I'd been building all along.
               </p>
               <p className="text-[#444] text-base leading-relaxed mb-4">
-                Since then I've 5x'd my wealth, all while working sixty-hour weeks. I was actually placing trades through contractions in the delivery room when I had my son. That's how much I love this process.
+                I love this process enough that I was placing trades between contractions in the delivery room when my son was born. (Yes, really.)
               </p>
               <p className="text-[#444] text-base leading-relaxed mb-4">
-                Today I'm Lead Trading Coach at Trader Foundation, where I teach a method called the <strong>Paycheck Collector</strong>: sell options on liquid stocks and indices and collect a premium every month with defined risk. Ninety days of one-on-one coaching, tailored to your career, your schedule, your family, and your goals.
+                Today I'm Lead Trading Coach at Trader Foundation, teaching a system called the <strong>Paycheck Collector</strong>: sell options on liquid stocks and indices for a defined-risk premium every month. Students get <strong>ninety days of one-on-one coaching</strong> tailored to their career, schedule, family, and goals.
               </p>
               <p className="text-[#444] text-base leading-relaxed mb-4">
-                Trader Foundation was built by <strong>Vlad Tayman</strong> as a real academy, not another course you watch and forget. I've personally coached hundreds of students, and the broader team has mentored <strong>over a thousand</strong>. We're <strong>BBB A+ accredited</strong> with <strong>six years</strong> of doing this.
+                Trader Foundation was built by <strong>Vlad Tayman</strong> as a real academy, the opposite of a course you watch once and forget. I've personally coached hundreds of students; our broader team has mentored <strong>over a thousand</strong>. We're <strong>BBB A+ accredited</strong> with <strong>six years</strong> behind us.
               </p>
               <blockquote className="mt-5 border-l-2 border-[#c7ab77]/60 pl-5 italic text-[#555] text-base leading-relaxed">
                 "Trading is like dating, you choose the best."

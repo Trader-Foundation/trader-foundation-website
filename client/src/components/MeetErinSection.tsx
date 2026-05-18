@@ -92,36 +92,36 @@ export default function MeetErinSection() {
                 style={{ fontFamily: "'DM Sans', sans-serif" }}
               >
                 <p>
-                  I got laid off coming back from maternity leave with a one-year-old at home,
-                  and I didn't care, because I'd already <strong>5x'd my wealth</strong> trading
-                  on the side.
+                  My layoff landed the week I came back from maternity leave with a
+                  one-year-old at home. It didn't shake me. By then I'd already grown my net
+                  worth <strong>5x</strong> trading on the side, and I knew I had a Plan B that
+                  most people my age were still hoping for.
                 </p>
                 <p>
-                  Maybe layoffs haven't hit you yet. But you've watched them happen to people
-                  around you, and you've quietly realized you don't have a Plan B. I came to
-                  <em><strong> Trader Foundation</strong></em> in 2020 with zero trading
-                  experience. I'd spent my career in corporate finance at companies like{' '}
-                  <strong>GE</strong> and <strong>Fortune Brand</strong>, so I was already a
-                  high performer. I wasn't running from my life, I just wanted to level up.
+                  Before any of that, I'd built a career in corporate finance, places like{' '}
+                  <strong>GE</strong> and <strong>Fortune Brand</strong>. By 2020 I was a high
+                  performer with zero trading experience, and I wasn't trying to escape my
+                  life. I just wanted to level it up.
                 </p>
                 <p>
-                  Since then I've 5x'd my wealth, all while working sixty-hour weeks. I was
-                  actually placing trades through contractions in the delivery room when I had
-                  my son, and I'm not exaggerating, that's how much I love this process.
+                  Five years later, working sixty-hour weeks the whole way, I've kept that 5x
+                  going. I love this process enough that I was placing trades between
+                  contractions in the delivery room when my son was born. (Yes, really.)
                 </p>
                 <p>
-                  Today I'm the <strong>Lead Trading Coach</strong> at Trader Foundation, where
-                  I teach a method called the <strong>Paycheck Collector</strong>: you sell
-                  options on liquid stocks and indices and collect a premium every month with
-                  defined risk. Ninety days of one-on-one coaching, tailored to your career,
-                  your schedule, your family, and your goals.
+                  Today I'm <strong>Lead Trading Coach</strong> at <em><strong>Trader
+                  Foundation</strong></em>, teaching a system called the{' '}
+                  <strong>Paycheck Collector</strong>, selling options on liquid stocks and
+                  indices to pull in a defined-risk premium every month. Students get ninety
+                  days of one-on-one coaching shaped around their actual life: career,
+                  schedule, family, and goals.
                 </p>
                 <p>
-                  Trader Foundation was built by <strong>Vlad Tayman</strong> as a real academy,
-                  not another course you watch and forget. I've personally coached hundreds of
-                  students, and the broader team has mentored <strong>over a thousand</strong>.
-                  We're <strong>BBB A+ accredited</strong> with <strong>six years</strong> of
-                  doing this.
+                  Trader Foundation was built by <strong>Vlad Tayman</strong> as a real
+                  academy, coaching that meets you where you are, not a course you watch once
+                  and forget. I've personally coached hundreds of students; the broader team
+                  has mentored <strong>over a thousand</strong>. We're{' '}
+                  <strong>BBB A+ accredited</strong> with <strong>six years</strong> behind us.
                 </p>
 
                 {/* Signature pull-quote */}
