@@ -7,8 +7,10 @@
 import { useEffect, useState } from 'react';
 import { Play } from 'lucide-react';
 
-/* TODO[v2]: Placeholder until Erin sends a landscape hero shot she likes. */
-const HERO_BG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/erin_93b42a5c.jpg';
+/* TODO[v2]: Drive URL is fragile for video streaming — move to GitHub /public or a
+   real video CDN (Cloudinary/Vimeo) before launch. Poster shows if the video can't load. */
+const HERO_VIDEO = 'https://drive.google.com/uc?export=download&id=1I_C0bOMaP806RrlsnGl_Vov_00MugI8-';
+const HERO_POSTER = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/erin_93b42a5c.jpg';
 /* BBB Official Badge - dark blue pill with torch + A+ circle */
 function BBBBadge() {
   return (
@@ -52,12 +54,18 @@ export default function HeroSection() {
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Background Image (will be replaced with video) */}
+      {/* Background Video with poster fallback */}
       <div className="absolute inset-0">
-        <img
-          src={HERO_BG}
-          alt=""
+        <video
+          src={HERO_VIDEO}
+          poster={HERO_POSTER}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
           className="w-full h-full object-cover"
+          aria-hidden="true"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a]/85 via-[#0a0a0a]/65 to-[#0a0a0a]/40" />
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#FAF9F6] to-transparent" />
