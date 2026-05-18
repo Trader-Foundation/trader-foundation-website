@@ -233,9 +233,6 @@ export default function About() {
 
             {/* Story text (3 cols) */}
             <div className="lg:col-span-3">
-              <p className="text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-3">
-                The Face of Trader Foundation
-              </p>
               <h2 className="text-2xl md:text-3xl font-extrabold text-[#111] leading-tight mb-6" style={{ fontFamily: "'Sen', sans-serif" }}>
                 Built a Plan B Before I Knew I'd Need One
               </h2>
