@@ -110,8 +110,8 @@ export default function MeetErinSection() {
                   applied to numbers.
                 </p>
                 <p>
-                  That's the progression. <strong>Student, then coach, then the face of the
-                  brand, and now a partner</strong> in the business. The partnership wasn't
+                  That's the progression. <strong>Student, then coach, and now a partner</strong>{' '}
+                  in the business. The partnership wasn't
                   on offer when I started. I bet on it because I believe in what we're
                   building, and what's possible inside this thing is usually bigger than
                   people expect when they walk in.
