@@ -8,8 +8,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { TrustpilotLogo, TrustpilotStars } from './TrustpilotAssets';
 
-/* TODO[v2]: Replace with final Erin portrait for the "Who is Erin?" section. Using existing Erin headshot as placeholder. */
-const ERIN_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/erin_93b42a5c.jpg';
+/* TODO[v2]: Replace with final Erin portrait. Currently a Google Drive proxy URL —
+   if it stops rendering, re-host on Imgur or commit to /public. */
+const ERIN_PHOTO = 'https://lh3.googleusercontent.com/d/1kilFVbY8Osz0x_Hr-f8iLxZ1xkW5g_YZ=s2000';
 
 const trustpilotReviews = [
   {
