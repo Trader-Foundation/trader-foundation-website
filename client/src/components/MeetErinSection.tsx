@@ -92,47 +92,34 @@ export default function MeetErinSection() {
                 style={{ fontFamily: "'DM Sans', sans-serif" }}
               >
                 <p>
-                  I've always excelled at what I do. My career started in corporate finance
-                  at companies like <strong>GE</strong>, where I spent years reading{' '}
-                  <strong>P&amp;Ls and analyzing risk for a living</strong>. On paper it was
-                  working. But after <strong>three layoffs in ten years</strong>, I'd
-                  stopped pretending the corporate ladder was a real plan. I needed
-                  something I actually owned.
+                  I spent my career in corporate finance at companies like{' '}
+                  <strong>GE</strong>, reading <strong>P&amp;Ls and analyzing risk for
+                  a living</strong>. Then came <strong>three layoffs in ten years</strong>,
+                  and I stopped pretending the corporate ladder was a real plan.
                 </p>
                 <p>
-                  I came to Trader Foundation the same way most of my students do, as a
-                  student. I was skeptical the way every serious person is when they first
-                  hear about trading, so I kept the day job and studied it on the side. By
-                  the end I'd <strong>5x'd my net worth</strong>, and I'd realized
-                  something simple: I love this stuff. And anyone who calls options trading{' '}
-                  <em>"gambling"</em> has never actually sat with the math. With defined
-                  risk and a real system, it's the opposite of a gamble, it's discipline
-                  applied to numbers.
+                  I came to Trader Foundation as a student, kept my day job, and went to
+                  work. By the time my net worth was <strong>5x</strong> what I'd started
+                  with, I'd realized I love this stuff. That's the progression:{' '}
+                  <strong>student, then coach, and now a partner</strong> in the business.
                 </p>
                 <p>
-                  That's the progression. <strong>Student, then coach, and now a partner</strong>{' '}
-                  in the business. The partnership wasn't
-                  on offer when I started. I bet on it because I believe in what we're
-                  building, and what's possible inside this thing is usually bigger than
-                  people expect when they walk in.
+                  Today I teach the <strong>Paycheck Collector</strong>, selling options
+                  for a defined-risk premium every month, inside ninety days of one-on-one
+                  coaching. <em><strong>Trader Foundation</strong></em> was founded by{' '}
+                  <strong>Vlad Tayman</strong> as a real academy. We're{' '}
+                  <strong>BBB A+ accredited</strong> with <strong>six years</strong>{' '}
+                  behind us and <strong>over a thousand</strong> students mentored.
                 </p>
-                <p>
-                  Trader Foundation has been there through every life change since, the
-                  layoffs, the career pivots, my maternity leave, my son. The goal hasn't
-                  changed since day one: <strong>grow wealth like nothing else can</strong>.
-                  Now I get to do that for my students, tailoring the trading to their real
-                  life and whatever the next chapter throws at them.
-                </p>
-                <p>
-                  The method we teach is called the <strong>Paycheck Collector</strong>,
-                  selling options on liquid stocks and indices for a defined-risk premium
-                  every month, inside ninety days of one-on-one coaching built around your
-                  real life. <em><strong>Trader Foundation</strong></em> was founded by{' '}
-                  <strong>Vlad Tayman</strong> as a real academy. I've personally coached
-                  hundreds of students; our broader team has mentored{' '}
-                  <strong>over a thousand</strong>. We're <strong>BBB A+ accredited</strong>{' '}
-                  with <strong>six years</strong> behind us.
-                </p>
+
+                <a
+                  href="/about"
+                  className="inline-flex items-center gap-2 text-[#c7ab77] hover:text-[#b89a66] font-semibold text-sm transition-colors"
+                  style={{ fontFamily: "'DM Sans', sans-serif" }}
+                >
+                  Read Erin's full story
+                  <span aria-hidden="true">→</span>
+                </a>
 
                 {/* Signature pull-quote */}
                 <blockquote
