@@ -113,9 +113,10 @@ export default function MeetErinSection() {
                   carry it forward.
                 </p>
                 <p>
-                  When I'm not at my desk, I'm either traveling, exploring a new city, or
-                  chasing my son around the house. <strong>Salzburg, Austria</strong> is
-                  the top of my list.
+                  Outside of trading, I'm a traveler, <strong>Korea, Austria, Germany,
+                  Italy</strong>, to name a few. <strong>Salzburg, Austria</strong> still
+                  holds the top spot. I'm drawn to old cities, classical music, and meals
+                  that take hours. When I'm home, my son keeps me on my toes.
                 </p>
 
                 <a
