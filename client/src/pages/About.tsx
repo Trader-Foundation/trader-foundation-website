@@ -251,12 +251,6 @@ export default function About() {
               <p className="text-[#444] text-base leading-relaxed mb-4">
                 The method I teach is called the <strong>Paycheck Collector</strong>, selling options on liquid stocks and indices for a defined-risk premium every month, inside <strong>ninety days of one-on-one coaching</strong> built around your real life. Trader Foundation was founded by <strong>Vlad Tayman</strong> as a real academy. I've personally coached hundreds of students; our broader team has mentored <strong>over a thousand</strong>. We're <strong>BBB A+ accredited</strong> with <strong>six years</strong> behind us.
               </p>
-              <blockquote className="mt-5 border-l-2 border-[#c7ab77]/60 pl-5 italic text-[#555] text-base leading-relaxed">
-                "Trading is like dating, you choose the best."
-                <span className="block mt-2 not-italic text-[0.7rem] uppercase tracking-[0.18em] text-[#c7ab77]">
-                  — Erin Chawla
-                </span>
-              </blockquote>
             </div>
           </div>
         </div>
