@@ -155,7 +155,7 @@ export default function MeetErinSection() {
               <div className="relative">
                 <img
                   src={ERIN_PHOTO}
-                  alt="Erin Chawla, Lead Trading Coach at Trader Foundation Academy"
+                  alt="Erin Chawla, Lead Coach and Partner at Trader Foundation Academy"
                   className="w-full h-auto rounded-sm shadow-xl"
                 />
                 {/* Gold corner accents */}
@@ -179,7 +179,7 @@ export default function MeetErinSection() {
                     className="text-[#888] text-sm mt-1"
                     style={{ fontFamily: "'DM Sans', sans-serif" }}
                   >
-                    Lead Trading Coach, Trader Foundation Academy
+                    Lead Coach and Partner, Trader Foundation Academy
                   </p>
                   <p
                     className="text-[#aaa] text-xs mt-2"

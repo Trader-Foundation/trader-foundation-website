@@ -544,7 +544,7 @@ export default function TradingTools() {
               <div className="bg-[#111] rounded-lg overflow-hidden shadow-xl">
                 <img
                   src={SIDEBAR_IMG}
-                  alt="Erin Chawla, Lead Trading Coach at Trader Foundation"
+                  alt="Erin Chawla, Lead Coach and Partner at Trader Foundation"
                   className="w-full h-44 object-cover"
                 />
                 <div className="p-5 text-center">

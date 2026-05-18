@@ -209,7 +209,7 @@ export default function About() {
                 <div className="absolute -inset-3 border border-[#c7ab77]/20 rounded-lg" />
                 <img
                   src={ERIN_PHOTO}
-                  alt="Erin Chawla, Lead Trading Coach at Trader Foundation"
+                  alt="Erin Chawla, Lead Coach and Partner at Trader Foundation"
                   className="w-full aspect-[4/5] object-cover rounded-lg shadow-xl"
                   style={{ filter: 'brightness(1.1)' }}
                 />
@@ -217,7 +217,7 @@ export default function About() {
               <h3 className="text-xl font-extrabold text-[#111] mt-5" style={{ fontFamily: "'Sen', sans-serif" }}>
                 Erin Chawla
               </h3>
-              <p className="text-[#c7ab77] text-sm font-medium">Lead Trading Coach</p>
+              <p className="text-[#c7ab77] text-sm font-medium">Lead Coach and Partner</p>
             </div>
 
             {/* Story text (3 cols) */}
