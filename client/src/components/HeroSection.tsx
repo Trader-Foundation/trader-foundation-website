@@ -7,9 +7,9 @@
 import { useEffect, useState } from 'react';
 import { Play } from 'lucide-react';
 
-/* TODO[v2]: Drive URL is fragile for video streaming — move to GitHub /public or a
-   real video CDN (Cloudinary/Vimeo) before launch. Poster shows if the video can't load. */
-const HERO_VIDEO = 'https://drive.google.com/uc?export=download&id=1LSLNBzSsJmi5r_3q9Jr4D3KZHaD9Qg8W';
+/* Vimeo background-mode embed: no controls, autoplay, muted, loop. */
+const HERO_VIMEO_URL =
+  'https://player.vimeo.com/video/1164088309?background=1&autoplay=1&loop=1&muted=1&byline=0&title=0&portrait=0';
 const HERO_POSTER = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/erin_93b42a5c.jpg';
 /* BBB Official Badge - dark blue pill with torch + A+ circle */
 function BBBBadge() {
@@ -54,18 +54,31 @@ export default function HeroSection() {
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Background Video with poster fallback */}
-      <div className="absolute inset-0">
-        <video
-          src={HERO_VIDEO}
-          poster={HERO_POSTER}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          className="w-full h-full object-cover"
+      {/* Background Vimeo video (background mode) with image fallback underneath */}
+      <div className="absolute inset-0 overflow-hidden">
+        {/* Static image sits underneath so the hero is never blank while Vimeo loads. */}
+        <img
+          src={HERO_POSTER}
+          alt=""
           aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        {/* Vimeo iframe sized to cover the section (16:9 cover trick). */}
+        <iframe
+          src={HERO_VIMEO_URL}
+          allow="autoplay; fullscreen; picture-in-picture"
+          frameBorder={0}
+          aria-hidden="true"
+          title="Erin teaching at Trader Foundation"
+          style={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: 'max(100%, 177.78vh)',
+            height: 'max(100%, 56.25vw)',
+            pointerEvents: 'none',
+          }}
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a]/85 via-[#0a0a0a]/65 to-[#0a0a0a]/40" />
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#FAF9F6] to-transparent" />
