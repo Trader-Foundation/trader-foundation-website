@@ -104,7 +104,10 @@ function useFormScript() {
 
 /* ── Page ── */
 export default function About() {
-  const erinSpotlight = useFadeIn();
+  const erinIntro = useFadeIn();
+  const erinBefore = useFadeIn();
+  const erinTurning = useFadeIn();
+  const erinToday = useFadeIn();
   const story = useFadeIn();
   const erinRef = useFadeIn();
   const team = useFadeIn();
@@ -185,63 +188,177 @@ export default function About() {
         </div>
       </section>
 
-      {/* ─── Erin Spotlight (Face of the Brand) ─── */}
-      {/* TODO[v2]: Replace placeholder Erin photo with final portrait. */}
+      {/* ─── Erin Bio Section 1: Meet Erin (intro card) ─── */}
       <section className="py-20 bg-[#faf9f6]">
         <div
-          ref={erinSpotlight.ref}
-          className={`max-w-[1100px] mx-auto px-6 lg:px-8 transition-all duration-700 ${
-            erinSpotlight.visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          ref={erinIntro.ref}
+          className={`max-w-[720px] mx-auto px-6 lg:px-8 text-center transition-all duration-700 ${
+            erinIntro.visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-14 items-start">
-            {/* Erin's photo (2 cols) */}
-            <div className="lg:col-span-2 flex flex-col items-center">
-              <div className="relative w-full max-w-[300px]">
-                <div className="absolute -inset-3 border border-[#c7ab77]/20 rounded-lg" />
-                <img
-                  src={ERIN_PHOTO}
-                  alt="Erin Chawla, Lead Coach and Partner at Trader Foundation"
-                  className="w-full aspect-[4/5] object-cover rounded-lg shadow-xl"
-                  style={{ filter: 'brightness(1.1)' }}
-                />
-              </div>
-              <h3 className="text-xl font-extrabold text-[#111] mt-5" style={{ fontFamily: "'Sen', sans-serif" }}>
-                Erin Chawla
-              </h3>
-              <p className="text-[#c7ab77] text-sm font-medium">Lead Coach and Partner</p>
-              <a
-                href="https://www.instagram.com/erin.chawla/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 mt-3 text-[#888] text-xs hover:text-[#c7ab77] transition-colors"
-                style={{ fontFamily: "'DM Sans', sans-serif" }}
-              >
-                <Instagram size={13} />
-                Follow Erin personally
-              </a>
-            </div>
+          <p className="text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-4" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+            About Erin
+          </p>
+          <div className="relative w-44 h-44 sm:w-52 sm:h-52 mx-auto mb-6">
+            <div className="absolute -inset-2 border border-[#c7ab77]/30 rounded-full" />
+            <img
+              src={ERIN_PHOTO}
+              alt="Erin Chawla, Lead Coach and Partner at Trader Foundation"
+              className="w-full h-full object-cover rounded-full shadow-xl"
+              style={{ filter: 'brightness(1.05)' }}
+            />
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#111] leading-tight mb-2" style={{ fontFamily: "'Sen', sans-serif" }}>
+            Erin Chawla
+          </h2>
+          <p className="text-[#c7ab77] font-semibold text-sm mb-4" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+            Lead Coach and Partner, Trader Foundation
+          </p>
+          <p className="text-[#555] text-base sm:text-lg leading-relaxed max-w-lg mx-auto" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+            Former corporate finance professional turned full-time trading coach. Built a Plan B before she knew she'd need one, and now teaches that path to busy professionals.
+          </p>
+          <a
+            href="https://www.instagram.com/erin.chawla/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 mt-5 text-[#888] text-xs hover:text-[#c7ab77] transition-colors"
+            style={{ fontFamily: "'DM Sans', sans-serif" }}
+          >
+            <Instagram size={13} />
+            Follow Erin personally
+          </a>
+        </div>
+      </section>
 
-            {/* Story text (3 cols) */}
-            <div className="lg:col-span-3">
+      {/* ─── Erin Bio Section 2: Before Trader Foundation ─── */}
+      <section className="py-20 bg-white border-t border-[#e8e4dc]">
+        <div
+          ref={erinBefore.ref}
+          className={`max-w-[1100px] mx-auto px-6 lg:px-8 transition-all duration-700 ${
+            erinBefore.visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-14 items-start">
+            <div className="lg:col-span-2">
+              <p className="text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-3" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                Before Trader Foundation
+              </p>
               <h2 className="text-2xl md:text-3xl font-extrabold text-[#111] leading-tight mb-6" style={{ fontFamily: "'Sen', sans-serif" }}>
-                Built a Plan B Before I Knew I'd Need One
+                A Career in Corporate Finance, Three Layoffs, and a Plan B That Never Came
               </h2>
               <p className="text-[#444] text-base leading-relaxed mb-4">
-                I've always excelled at what I do. My career started in corporate finance at companies like <strong>GE</strong>, where I spent years reading <strong>P&amp;Ls and analyzing risk for a living</strong>. On paper it was working. But after <strong>three layoffs in ten years</strong>, I'd stopped pretending the corporate ladder was a real plan. I needed something I actually owned.
+                I've always excelled at what I do. My career started in corporate finance at companies like <strong>GE</strong>, where I spent years reading <strong>P&amp;Ls and analyzing risk for a living</strong>. Sixty-plus-hour weeks, the whole picture. On paper, it was working.
+              </p>
+              <p className="text-[#444] text-base leading-relaxed">
+                But after <strong>three layoffs in ten years</strong>, I'd stopped pretending the corporate ladder was a real plan. The Plan B everyone talks about doesn't actually come from inside a corporation. I needed something I owned outright.
+              </p>
+            </div>
+            <div className="bg-[#faf9f6] border border-[#c7ab77]/20 rounded-lg p-6 lg:p-7">
+              <p className="text-[0.65rem] font-bold tracking-[0.18em] uppercase text-[#c7ab77] mb-3" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                Career Background
+              </p>
+              <div className="space-y-4">
+                <div>
+                  <p className="text-3xl font-extrabold text-[#111] leading-none" style={{ fontFamily: "'Sen', sans-serif" }}>3</p>
+                  <p className="text-[#555] text-xs mt-1" style={{ fontFamily: "'DM Sans', sans-serif" }}>Layoffs in 10 years</p>
+                </div>
+                <div>
+                  <p className="text-3xl font-extrabold text-[#111] leading-none" style={{ fontFamily: "'Sen', sans-serif" }}>60+</p>
+                  <p className="text-[#555] text-xs mt-1" style={{ fontFamily: "'DM Sans', sans-serif" }}>Hour weeks at GE</p>
+                </div>
+                <div>
+                  <p className="text-3xl font-extrabold text-[#111] leading-none" style={{ fontFamily: "'Sen', sans-serif" }}>11+</p>
+                  <p className="text-[#555] text-xs mt-1" style={{ fontFamily: "'DM Sans', sans-serif" }}>Years investing experience</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Erin Bio Section 3: The Turning Point (dark) ─── */}
+      <section className="py-20 bg-[#111]">
+        <div
+          ref={erinTurning.ref}
+          className={`max-w-[1100px] mx-auto px-6 lg:px-8 transition-all duration-700 ${
+            erinTurning.visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+            <div className="text-center lg:text-left">
+              <p className="text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-3" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                The Turning Point
+              </p>
+              <p className="text-[#c7ab77] text-[5rem] sm:text-[7rem] font-extrabold leading-none mb-2" style={{ fontFamily: "'Sen', sans-serif" }}>
+                5×
+              </p>
+              <p className="text-white/70 text-sm tracking-wide uppercase" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                Net Worth Growth
+              </p>
+            </div>
+            <div>
+              <h2 className="text-2xl md:text-3xl font-extrabold text-white leading-tight mb-6" style={{ fontFamily: "'Sen', sans-serif" }}>
+                From Skeptic to Coach
+              </h2>
+              <p className="text-white/70 text-base leading-relaxed mb-4">
+                I came to Trader Foundation as a student, skeptical the way every serious person is. I kept the full-time job and studied trading on the side. By the time my net worth was <strong className="text-white">5x</strong> what I'd started with, I'd realized something simple: I love this stuff.
+              </p>
+              <p className="text-white/70 text-base leading-relaxed">
+                Anyone who calls options trading <em className="text-white/85">"gambling"</em> has never actually sat with the math. With defined risk and a real system, it's the opposite of a gamble, it's discipline applied to numbers.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Erin Bio Section 4: Today ─── */}
+      <section className="py-20 bg-[#faf9f6]">
+        <div
+          ref={erinToday.ref}
+          className={`max-w-[1100px] mx-auto px-6 lg:px-8 transition-all duration-700 ${
+            erinToday.visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
+          <p className="text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-3 text-center" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+            Today
+          </p>
+          <h2 className="text-2xl md:text-3xl font-extrabold text-[#111] leading-tight mb-10 text-center" style={{ fontFamily: "'Sen', sans-serif" }}>
+            Student, Then Coach, and Now a Partner
+          </h2>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14">
+            <div>
+              <p className="text-[#444] text-base leading-relaxed mb-4">
+                The partnership wasn't on offer when I started. I bet on it because I believe in what we're building, and what's possible inside this thing is usually bigger than people expect when they walk in.
               </p>
               <p className="text-[#444] text-base leading-relaxed mb-4">
-                I came to Trader Foundation as a student, skeptical the way every serious person is. I kept the full-time job and studied trading on the side. By the time my net worth was <strong>5x</strong> what I'd started with, I'd realized something simple: I love this stuff. And anyone who tells you options trading is <em>"gambling"</em> has never actually sat with the math, defined risk and a real system are the opposite of a gamble.
+                Today I teach the <strong>Paycheck Collector</strong>: selling options on liquid stocks and indices for a defined-risk premium every month, inside <strong>ninety days of one-on-one coaching</strong> tailored to your real life. Trader Foundation has been there through every life change of mine since, the layoffs, the career pivots, my maternity leave, my son.
               </p>
-              <p className="text-[#444] text-base leading-relaxed mb-4">
-                That's the progression: <strong>student, then coach, and now a partner</strong> in the business. The partnership wasn't on offer when I started, I bet on it because I believe in what we're building, and what's possible inside this thing is usually bigger than people expect when they walk in. Trader Foundation has been there through every life change since, the layoffs, the career pivots, my maternity leave, my son.
+              <p className="text-[#444] text-base leading-relaxed">
+                Outside of trading, I'm a traveler, <strong>Korea, Austria, Germany, Italy</strong>, to name a few. <strong>Salzburg, Austria</strong> still holds the top spot. I'm drawn to old cities, classical music, and meals that take hours. When I'm home, my son keeps me on my toes.
               </p>
-              <p className="text-[#444] text-base leading-relaxed mb-4">
-                My goal from day one hasn't changed: <strong>grow wealth like nothing else can</strong>. Now I get to do that for my students, tailoring the trading to their real life and the ongoing changes that come with it.
+            </div>
+            <div className="bg-white border border-[#e8e4dc] rounded-lg p-7 lg:p-8 self-start">
+              <p className="text-[0.65rem] font-bold tracking-[0.18em] uppercase text-[#c7ab77] mb-4" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                With Trader Foundation
               </p>
-              <p className="text-[#444] text-base leading-relaxed mb-4">
-                The method I teach is called the <strong>Paycheck Collector</strong>, selling options on liquid stocks and indices for a defined-risk premium every month, inside <strong>ninety days of one-on-one coaching</strong> built around your real life. Trader Foundation was founded by <strong>Vlad Tayman</strong> as a real academy. I've personally coached hundreds of students; our broader team has mentored <strong>over a thousand</strong>. We're <strong>BBB A+ accredited</strong> with <strong>six years</strong> behind us.
-              </p>
+              <div className="space-y-5">
+                <div>
+                  <p className="text-3xl font-extrabold text-[#111] leading-none" style={{ fontFamily: "'Sen', sans-serif" }}>Hundreds</p>
+                  <p className="text-[#555] text-xs mt-1" style={{ fontFamily: "'DM Sans', sans-serif" }}>Students personally coached by Erin</p>
+                </div>
+                <div>
+                  <p className="text-3xl font-extrabold text-[#111] leading-none" style={{ fontFamily: "'Sen', sans-serif" }}>1,000+</p>
+                  <p className="text-[#555] text-xs mt-1" style={{ fontFamily: "'DM Sans', sans-serif" }}>Mentored across the team</p>
+                </div>
+                <div>
+                  <p className="text-3xl font-extrabold text-[#111] leading-none" style={{ fontFamily: "'Sen', sans-serif" }}>BBB A+</p>
+                  <p className="text-[#555] text-xs mt-1" style={{ fontFamily: "'DM Sans', sans-serif" }}>Accredited, six years in</p>
+                </div>
+                <div>
+                  <p className="text-3xl font-extrabold text-[#111] leading-none" style={{ fontFamily: "'Sen', sans-serif" }}>90 Days</p>
+                  <p className="text-[#555] text-xs mt-1" style={{ fontFamily: "'DM Sans', sans-serif" }}>One-on-one coaching, every student</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>

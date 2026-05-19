@@ -63,129 +63,92 @@ export default function MeetErinSection() {
 
   return (
     <>
-      {/* Meet Erin Section */}
+      {/* Meet Erin Section — compact intro card. Full bio lives on /about. */}
       <section
         ref={sectionRef}
-        className="relative py-24 sm:py-32 bg-white"
+        className="relative py-20 sm:py-24 bg-white"
       >
-        <div className="max-w-[1320px] mx-auto px-6 lg:px-8">
-          {/* Section Title */}
+        <div className="max-w-[720px] mx-auto px-6 lg:px-8 text-center">
+          {/* Eyebrow */}
+          <p
+            className={`text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-4 transition-all duration-700 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+            }`}
+            style={{ fontFamily: "'DM Sans', sans-serif" }}
+          >
+            Meet Your Coach
+          </p>
+
+          {/* Photo */}
+          <div
+            className={`relative w-44 h-44 sm:w-52 sm:h-52 mx-auto mb-6 transition-all duration-1000 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+            }`}
+          >
+            <div className="absolute -inset-2 border border-[#c7ab77]/30 rounded-full" />
+            <img
+              src={ERIN_PHOTO}
+              alt="Erin Chawla, Lead Coach and Partner at Trader Foundation Academy"
+              className="w-full h-full object-cover rounded-full shadow-xl"
+              style={{ filter: 'brightness(1.05)' }}
+            />
+          </div>
+
+          {/* Name + title */}
           <h2
-            className={`text-[2rem] sm:text-[2.5rem] lg:text-[3rem] font-extrabold text-[#1a1a1a] leading-[1.15] mb-16 transition-all duration-700 delay-100 ${
+            className={`text-3xl sm:text-4xl font-extrabold text-[#1a1a1a] leading-tight mb-2 transition-all duration-700 delay-100 ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
             }`}
             style={{ fontFamily: "'Sen', sans-serif" }}
           >
-            Who is <span className="text-[#c7ab77]">Erin Chawla</span>?
+            Erin Chawla
           </h2>
+          <p
+            className={`text-[#c7ab77] font-semibold text-sm mb-6 transition-all duration-700 delay-150 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+            }`}
+            style={{ fontFamily: "'DM Sans', sans-serif" }}
+          >
+            Lead Coach and Partner, Trader Foundation
+          </p>
 
-          {/* Two-column: Story left, Photo right */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-            {/* Story Column */}
-            <div
-              className={`transition-all duration-1000 delay-200 ${
-                isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'
-              }`}
-            >
-              <div
-                className="text-[#333] text-base sm:text-[1.05rem] leading-[1.85] space-y-6"
-                style={{ fontFamily: "'DM Sans', sans-serif" }}
-              >
-                <p>
-                  I'm Erin, <strong>Lead Coach and Partner</strong> at Trader Foundation.
-                  Before this, I spent my career reading{' '}
-                  <strong>P&amp;Ls and analyzing risk</strong> in corporate finance at
-                  companies like <strong>GE</strong>, so when people call options trading{' '}
-                  <em>"gambling,"</em> I know they've never actually looked at the math.
-                </p>
-                <p>
-                  My job now is to take everything I wish I'd had as a beginner and put
-                  it in front of the next person who's ready. That means real coaching,
-                  not another course you watch and forget, tailored to your career, your
-                  schedule, your family, and your goals.
-                </p>
-                <p>
-                  I've personally coached hundreds of students. Our team has mentored{' '}
-                  <strong>over a thousand</strong>. We're{' '}
-                  <strong>BBB A+ accredited</strong> with <strong>six years</strong>{' '}
-                  behind us. Trader Foundation was founded by{' '}
-                  <strong>Vlad Tayman</strong> as a real academy, and I'm proud to help
-                  carry it forward.
-                </p>
-                <p>
-                  Outside of trading, I'm a traveler, <strong>Korea, Austria, Germany,
-                  Italy</strong>, to name a few. <strong>Salzburg, Austria</strong> still
-                  holds the top spot. I'm drawn to old cities, classical music, and meals
-                  that take hours. When I'm home, my son keeps me on my toes.
-                </p>
+          {/* Short pitch */}
+          <p
+            className={`text-[#444] text-base sm:text-lg leading-relaxed mb-6 max-w-xl mx-auto transition-all duration-1000 delay-200 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+            }`}
+            style={{ fontFamily: "'DM Sans', sans-serif" }}
+          >
+            From corporate finance at <strong>GE</strong>, reading P&amp;Ls and analyzing
+            risk for a living, to teaching what I wish I'd had when I was starting out.
+            I've personally coached hundreds of students; our broader team has mentored{' '}
+            <strong>over a thousand</strong>.
+          </p>
 
-                <a
-                  href="/about"
-                  className="inline-flex items-center gap-2 text-[#c7ab77] hover:text-[#b89a66] font-semibold text-sm transition-colors"
-                  style={{ fontFamily: "'DM Sans', sans-serif" }}
-                >
-                  Read how Erin got here
-                  <span aria-hidden="true">→</span>
-                </a>
+          {/* Signature pull-quote */}
+          <blockquote
+            className={`mt-2 mb-8 italic text-[#555] text-[1.05rem] leading-relaxed transition-all duration-1000 delay-300 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+            }`}
+            style={{ fontFamily: "'DM Sans', sans-serif" }}
+          >
+            "Trading is like dating, you choose the best."
+            <span className="block mt-2 not-italic text-xs uppercase tracking-[0.18em] text-[#c7ab77]">
+              — Erin Chawla
+            </span>
+          </blockquote>
 
-                {/* Signature pull-quote */}
-                <blockquote
-                  className="mt-2 border-l-2 border-[#c7ab77]/60 pl-5 italic text-[#555] text-[1.05rem] leading-relaxed"
-                  style={{ fontFamily: "'DM Sans', sans-serif" }}
-                >
-                  "Trading is like dating, you choose the best."
-                  <span className="block mt-2 not-italic text-xs uppercase tracking-[0.18em] text-[#c7ab77]">
-                    — Erin Chawla
-                  </span>
-                </blockquote>
-              </div>
-            </div>
-
-            {/* Photo Column */}
-            <div
-              className={`transition-all duration-1000 delay-400 ${
-                isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'
-              }`}
-            >
-              <div className="relative">
-                <img
-                  src={ERIN_PHOTO}
-                  alt="Erin Chawla, Lead Coach and Partner at Trader Foundation Academy"
-                  className="w-full h-auto rounded-sm shadow-xl"
-                />
-                {/* Gold corner accents */}
-                <div className="absolute -top-3 -left-3 w-20 h-20">
-                  <div className="absolute top-0 left-0 w-full h-[2px] bg-[#c7ab77]" />
-                  <div className="absolute top-0 left-0 h-full w-[2px] bg-[#c7ab77]" />
-                </div>
-                <div className="absolute -bottom-3 -right-3 w-20 h-20">
-                  <div className="absolute bottom-0 right-0 w-full h-[2px] bg-[#c7ab77]" />
-                  <div className="absolute bottom-0 right-0 h-full w-[2px] bg-[#c7ab77]" />
-                </div>
-                {/* Caption */}
-                <div className="mt-6 text-center">
-                  <p
-                    className="text-[#1a1a1a] font-bold text-lg"
-                    style={{ fontFamily: "'Sen', sans-serif" }}
-                  >
-                    Erin Chawla
-                  </p>
-                  <p
-                    className="text-[#888] text-sm mt-1"
-                    style={{ fontFamily: "'DM Sans', sans-serif" }}
-                  >
-                    Lead Coach and Partner, Trader Foundation Academy
-                  </p>
-                  <p
-                    className="text-[#aaa] text-xs mt-2"
-                    style={{ fontFamily: "'DM Sans', sans-serif" }}
-                  >
-                    Trader Foundation founded by Vlad Tayman
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+          {/* CTA link to About */}
+          <a
+            href="/about"
+            className={`inline-flex items-center gap-2 px-6 py-3 border border-[#c7ab77]/40 text-[#c7ab77] text-sm font-semibold tracking-wide rounded-sm transition-all duration-300 hover:bg-[#c7ab77] hover:text-[#111] ${
+              isVisible ? 'opacity-100' : 'opacity-0'
+            }`}
+            style={{ fontFamily: "'DM Sans', sans-serif" }}
+          >
+            Read Erin's Full Story
+            <span aria-hidden="true">→</span>
+          </a>
         </div>
       </section>
 
