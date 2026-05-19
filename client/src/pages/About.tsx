@@ -268,7 +268,7 @@ export default function About() {
                 </div>
                 <div>
                   <p className="text-3xl font-extrabold text-[#111] leading-none" style={{ fontFamily: "'Sen', sans-serif" }}>11+</p>
-                  <p className="text-[#555] text-xs mt-1" style={{ fontFamily: "'DM Sans', sans-serif" }}>Years investing experience</p>
+                  <p className="text-[#555] text-xs mt-1" style={{ fontFamily: "'DM Sans', sans-serif" }}>Years experience</p>
                 </div>
               </div>
             </div>
