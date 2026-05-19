@@ -9,7 +9,7 @@ import { Play } from 'lucide-react';
 
 /* TODO[v2]: Drive URL is fragile for video streaming — move to GitHub /public or a
    real video CDN (Cloudinary/Vimeo) before launch. Poster shows if the video can't load. */
-const HERO_VIDEO = 'https://drive.google.com/uc?export=download&id=1I_C0bOMaP806RrlsnGl_Vov_00MugI8-';
+const HERO_VIDEO = 'https://drive.google.com/uc?export=download&id=1LSLNBzSsJmi5r_3q9Jr4D3KZHaD9Qg8W';
 const HERO_POSTER = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/erin_93b42a5c.jpg';
 /* BBB Official Badge - dark blue pill with torch + A+ circle */
 function BBBBadge() {
