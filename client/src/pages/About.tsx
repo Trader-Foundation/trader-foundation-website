@@ -334,7 +334,7 @@ export default function About() {
                 Today I teach the <strong>Paycheck Collector</strong>: selling options on liquid stocks and indices for a defined-risk premium every month, inside <strong>ninety days of one-on-one coaching</strong> tailored to your real life. Trader Foundation has been there through every life change of mine since, the layoffs, the career pivots, my maternity leave, my son.
               </p>
               <p className="text-[#444] text-base leading-relaxed">
-                Outside of trading, I'm a traveler, <strong>Korea, Austria, Germany, Italy</strong>, to name a few. <strong>Salzburg, Austria</strong> still holds the top spot. I'm drawn to old cities, classical music, and meals that take hours. When I'm home, my son keeps me on my toes.
+                Outside of trading, I'm a traveler, <strong>Korea, Austria, Germany, Italy</strong>, to name a few. <strong>Salzburg, Austria</strong> still holds the top spot. I'm drawn to old cities, classical music, and meals that take hours. When I'm home, my lovely husband and family are everything, and my son keeps me on my toes.
               </p>
             </div>
             <div className="bg-white border border-[#e8e4dc] rounded-lg p-7 lg:p-8 self-start">
