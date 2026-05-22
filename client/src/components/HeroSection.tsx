@@ -60,13 +60,13 @@ export default function HeroSection() {
           aria-hidden="true"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a]/85 via-[#0a0a0a]/65 to-[#0a0a0a]/40" />
+        <div className="absolute inset-0 bg-gradient-to-l from-[#0a0a0a]/85 via-[#0a0a0a]/55 to-[#0a0a0a]/20" />
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#FAF9F6] to-transparent" />
       </div>
 
       {/* Content */}
       <div className="relative z-10 max-w-[1320px] mx-auto px-6 lg:px-8 w-full pt-32 pb-24">
-        <div className="max-w-2xl">
+        <div className="max-w-2xl lg:ml-auto">
           {/* Main Headline, bold, punchy, GOAT-style */}
           <h1
             className={`transition-all duration-1000 delay-200 ${
