@@ -10,7 +10,7 @@ import { TrustpilotLogo, TrustpilotStars } from './TrustpilotAssets';
 
 /* TODO[v2]: Replace with final Erin portrait. Currently a Google Drive proxy URL —
    if it stops rendering, re-host on Imgur or commit to /public. */
-const ERIN_PHOTO = 'https://lh3.googleusercontent.com/d/1kilFVbY8Osz0x_Hr-f8iLxZ1xkW5g_YZ=s2000';
+const ERIN_PHOTO = 'https://lh3.googleusercontent.com/d/1xo4EmRKV1FeOtiktREK7wx_mjXt8Y-vU=s2000';
 
 const trustpilotReviews = [
   {
