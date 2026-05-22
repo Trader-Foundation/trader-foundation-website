@@ -117,18 +117,12 @@ export default function About() {
           </p>
           <div className="relative w-44 h-44 sm:w-52 sm:h-52 mx-auto mb-6">
             <div className="absolute -inset-2 border border-[#c7ab77]/30 rounded-full" />
-            <div className="w-full h-full rounded-full overflow-hidden shadow-xl">
-              <img
-                src={ERIN_PHOTO}
-                alt="Erin Chawla, Partner at Trader Foundation"
-                className="w-full h-full object-cover"
-                style={{
-                  objectPosition: 'center 22%',
-                  transform: 'scale(1.25)',
-                  transformOrigin: 'center 38%',
-                }}
-              />
-            </div>
+            <img
+              src={ERIN_PHOTO}
+              alt="Erin Chawla, Partner at Trader Foundation"
+              className="w-full h-full object-cover rounded-full shadow-xl"
+              style={{ objectPosition: 'center center' }}
+            />
           </div>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-[#111] leading-tight mb-2" style={{ fontFamily: "'Sen', sans-serif" }}>
             Erin Chawla
