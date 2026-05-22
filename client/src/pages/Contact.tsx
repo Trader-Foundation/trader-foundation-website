@@ -189,7 +189,7 @@ export default function Contact() {
                     <svg className="w-4 h-4 text-white group-hover:text-[#111] transition-colors" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
                   </a>
                   <a
-                    href="https://www.instagram.com/vladswingtrader/"
+                    href="https://www.instagram.com/tftradingacademy/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-10 h-10 flex items-center justify-center bg-[#111] rounded hover:bg-[#c7ab77] transition-colors duration-300 group"
@@ -228,7 +228,7 @@ export default function Contact() {
           </div>
           <div className="text-center">
             <a
-              href="https://traderfoundation.fillout.com/t/w1vozRAz1uus?utm_source=Website"
+              href="https://start.traderfoundation.co/trade-yt"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-8 py-3.5 bg-[#c7ab77] text-[#111] text-[0.85rem] font-bold tracking-wide rounded-sm transition-all duration-300 hover:bg-[#b89a66] hover:shadow-lg"

@@ -325,7 +325,7 @@ export default function ContactSection() {
 
               {/* Instagram */}
               <a
-                href="https://www.instagram.com/vladswingtrader/"
+                href="https://www.instagram.com/tftradingacademy/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-4 group"
@@ -344,7 +344,7 @@ export default function ContactSection() {
                     className="text-white/40 text-xs"
                     style={{ fontFamily: "'DM Sans', sans-serif" }}
                   >
-                    @vladswingtrader, Behind the scenes & daily insights
+                    @tftradingacademy, Behind the scenes & daily insights
                   </p>
                 </div>
               </a>

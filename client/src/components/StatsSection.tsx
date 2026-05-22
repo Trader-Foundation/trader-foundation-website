@@ -14,7 +14,6 @@ interface StatItem {
 
 const stats: StatItem[] = [
   { value: 1200, suffix: '+', label: 'Students' },
-  { value: 15, suffix: '+', label: 'Years Experience' },
   { value: 6, suffix: '+', label: 'Years in Business' },
 ];
 
@@ -122,7 +121,7 @@ export default function StatsSection() {
       <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#c7ab77]/40 to-transparent" />
 
       <div className="relative z-10 max-w-[1100px] mx-auto px-6 lg:px-8">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-12 sm:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-12 sm:gap-8 max-w-[640px] mx-auto">
           {stats.map((stat, index) => (
             <StatCounter
               key={stat.label}

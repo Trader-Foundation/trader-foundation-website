@@ -4,7 +4,7 @@
  */
 
 import { useEffect, useRef, useState } from 'react';
-import { Play, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 const HERO_BG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/hero-bg-CkKJ3vTSq2YDiMHhh77VL2.webp';
 
@@ -32,7 +32,7 @@ export default function CTASection() {
 
   return (
     <section
-      id="masterclass"
+      id="get-started"
       ref={sectionRef}
       className="relative py-28 sm:py-36 overflow-hidden"
     >
@@ -69,7 +69,7 @@ export default function CTASection() {
           }`}
           style={{ fontFamily: "'DM Sans', sans-serif" }}
         >
-          Watch our masterclass to see how busy professionals are learning
+          Book a call with our team to see how busy professionals are learning
           to trade confidently in just 10 minutes a day.
         </p>
 
@@ -79,18 +79,10 @@ export default function CTASection() {
           }`}
         >
           <a
-            href="https://start.traderfoundation.co/trade"
-            className="group inline-flex items-center gap-3 px-10 py-4 bg-[#c7ab77] text-[#111] text-[0.85rem] font-bold tracking-wide rounded-sm transition-all duration-300 hover:bg-[#b89a66] hover:shadow-[0_8px_30px_rgba(199,171,119,0.3)]"
-            style={{ fontFamily: "'DM Sans', sans-serif" }}
-          >
-            <Play size={16} />
-            Watch The Masterclass
-          </a>
-          <a
-            href="https://traderfoundation.fillout.com/t/w1vozRAz1uus?utm_source=Website"
+            href="https://start.traderfoundation.co/trade-yt"
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex items-center gap-3 px-10 py-4 border border-white/20 text-white text-[0.85rem] font-medium tracking-wide rounded-sm transition-all duration-300 hover:border-[#c7ab77]/50 hover:text-[#c7ab77]"
+            className="group inline-flex items-center gap-3 px-10 py-4 bg-[#c7ab77] text-[#111] text-[0.85rem] font-bold tracking-wide rounded-sm transition-all duration-300 hover:bg-[#b89a66] hover:shadow-[0_8px_30px_rgba(199,171,119,0.3)]"
             style={{ fontFamily: "'DM Sans', sans-serif" }}
           >
             Book a Call

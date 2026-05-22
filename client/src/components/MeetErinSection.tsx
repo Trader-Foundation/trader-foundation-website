@@ -1,14 +1,16 @@
 /*
- * Meet Vlad Section - Homepage
- * Design: Two-column layout (text left, family photo right)
- * Modeled after GOAT Academy's "Who are Felix & Winston?" intro
- * Followed by TrustPilot reviews strip for social proof
+ * Meet Erin Section - Homepage (v2)
+ * Design: Two-column layout (text left, photo right)
+ * Erin Chawla is the face of the brand; Vlad Tayman credited as founder.
+ * Followed by TrustPilot reviews strip for social proof.
  */
 
 import { useEffect, useRef, useState } from 'react';
 import { TrustpilotLogo, TrustpilotStars } from './TrustpilotAssets';
 
-const VLAD_FAMILY = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/vlad-family-cropped_bb850345.jpg';
+/* TODO[v2]: Replace with final Erin portrait. Currently a Google Drive proxy URL —
+   if it stops rendering, re-host on Imgur or commit to /public. */
+const ERIN_PHOTO = 'https://lh3.googleusercontent.com/d/1P2n8fVs_XSa81WqM8JPGSoJyT_iuNFy8=s2000';
 
 const trustpilotReviews = [
   {
@@ -16,6 +18,12 @@ const trustpilotReviews = [
     rating: 5,
     title: 'I Have Been Learning a Lot',
     text: 'I have been learning a lot, and I have come a long way since I started my classes. Having access to a live person or persons has been incredibly encouraging. Elliot, Leo, and Erin have been great. Vlad is very smart, so pay attention.',
+  },
+  {
+    name: 'Jonas',
+    rating: 5,
+    title: 'Well-Structured Training with Excellent Coaching Support',
+    text: 'The learning flow is clear and logical, which makes it much easier to understand concepts that are usually complex and intimidating for beginners. The company offers daily live sessions with coaches where stocks are reviewed in real time. Students are also encouraged to schedule one-on-one sessions with coaches for personalized guidance.',
   },
   {
     name: 'Fred Nicora',
@@ -29,15 +37,9 @@ const trustpilotReviews = [
     title: 'Exceeded Expectations!',
     text: 'I\'ve been trading options for quite some time and thought I knew a lot. Vlad and Elliot\'s knowledge and mentorship far exceeded anything I had imagined. Their strategies, especially the paycheck collector, is a game changer. I\'m less stressed about finances than I have ever been in my life.',
   },
-  {
-    name: 'Jonas',
-    rating: 5,
-    title: 'Well-Structured Training with Excellent Coaching Support',
-    text: 'The learning flow is clear and logical, which makes it much easier to understand concepts that are usually complex and intimidating for beginners. The company offers daily live sessions with coaches where stocks are reviewed in real time. Students are also encouraged to schedule one-on-one sessions with coaches for personalized guidance.',
-  },
 ];
 
-export default function MeetVladSection() {
+export default function MeetErinSection() {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
@@ -61,106 +63,102 @@ export default function MeetVladSection() {
 
   return (
     <>
-      {/* Meet Vlad Section */}
+      {/* Meet Erin Section — compact intro card. Full bio lives on /about. */}
       <section
         ref={sectionRef}
-        className="relative py-24 sm:py-32 bg-white"
+        className="relative py-20 sm:py-24 bg-white"
       >
-        <div className="max-w-[1320px] mx-auto px-6 lg:px-8">
-          {/* Section Title */}
+        <div className="max-w-[720px] mx-auto px-6 lg:px-8 text-center">
+          {/* Eyebrow */}
+          <p
+            className={`text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-4 transition-all duration-700 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+            }`}
+            style={{ fontFamily: "'DM Sans', sans-serif" }}
+          >
+            Meet Your Coach
+          </p>
+
+          {/* Photo */}
+          <div
+            className={`relative w-44 h-44 sm:w-52 sm:h-52 mx-auto mb-6 transition-all duration-1000 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+            }`}
+          >
+            <div className="absolute -inset-2 border border-[#c7ab77]/30 rounded-full" />
+            <img
+              src={ERIN_PHOTO}
+              alt="Erin Chawla, Partner at Trader Foundation Academy"
+              className="w-full h-full object-cover rounded-full shadow-xl"
+              style={{ objectPosition: '50% 60%' }}
+            />
+          </div>
+
+          {/* Name + title */}
           <h2
-            className={`text-[2rem] sm:text-[2.5rem] lg:text-[3rem] font-extrabold text-[#1a1a1a] leading-[1.15] mb-16 transition-all duration-700 delay-100 ${
+            className={`text-3xl sm:text-4xl font-extrabold text-[#1a1a1a] leading-tight mb-2 transition-all duration-700 delay-100 ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
             }`}
             style={{ fontFamily: "'Sen', sans-serif" }}
           >
-            Who is <span className="text-[#c7ab77]">Vlad Tayman</span>?
+            Erin Chawla
           </h2>
+          <p
+            className={`text-[#c7ab77] font-semibold text-sm mb-6 transition-all duration-700 delay-150 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+            }`}
+            style={{ fontFamily: "'DM Sans', sans-serif" }}
+          >
+            Partner, Trader Foundation
+          </p>
 
-          {/* Two-column: Story left, Photo right */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-            {/* Story Column */}
-            <div
-              className={`transition-all duration-1000 delay-200 ${
-                isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'
-              }`}
-            >
-              <div
-                className="text-[#333] text-base sm:text-[1.05rem] leading-[1.85] space-y-6"
-                style={{ fontFamily: "'DM Sans', sans-serif" }}
-              >
-                <p>
-                  I still remember the moment everything clicked. I was sitting at my desk after another
-                  14-hour day, watching my 401(k) statement show the same mediocre returns year after year.
-                  I had done everything "right", the degree, the career, the savings, but I realized{' '}
-                  <strong>nobody had ever taught me how to actually grow my wealth</strong>.
-                </p>
-                <p>
-                  That frustration led me down a path most professionals know too well. I tried the stock
-                  signals. I tried the AI bots. I even tried day trading for a while, waking up at 4 AM,
-                  staring at candles, losing money I couldn't afford to lose. Every shortcut led to the
-                  same place: <strong>back to square one</strong>.
-                </p>
-                <p>
-                  It wasn't until I discovered swing trading, and more importantly, learned to{' '}
-                  <strong>build a real foundation</strong>, that things changed. Not overnight. Not through
-                  some magic formula. Through discipline, proper education, and having someone hold me
-                  accountable every step of the way.
-                </p>
-                <p>
-                  That's why I built <em><strong>Trader Foundation</strong></em>. Not as another course you
-                  watch and forget. As a real academy where busy professionals get{' '}
-                  <strong>truly individual 1-on-1 coaching</strong>, learn a proven swing trading strategy,
-                  and build the skills to manage their own wealth, on their own terms.
-                </p>
-                <p>
-                  Over <strong>1,200 students</strong> and <strong>6+ years</strong> later, with a{' '}
-                  <strong>BBB A+ accreditation</strong>, I can tell you this: the people who succeed here
-                  aren't the ones looking for shortcuts. They're the ones who are{' '}
-                  <strong>ready to learn</strong>.
-                </p>
-              </div>
-            </div>
+          {/* Short pitch */}
+          <p
+            className={`text-[#444] text-base sm:text-lg leading-relaxed mb-4 max-w-xl mx-auto transition-all duration-1000 delay-200 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+            }`}
+            style={{ fontFamily: "'DM Sans', sans-serif" }}
+          >
+            From corporate finance at <strong>GE</strong>, reading P&amp;Ls and analyzing
+            risk for a living, to teaching what I wish I'd had when I was starting out.
+            I've personally coached hundreds of students; our broader team has mentored{' '}
+            <strong>over a thousand</strong>.
+          </p>
 
-            {/* Photo Column */}
-            <div
-              className={`transition-all duration-1000 delay-400 ${
-                isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'
-              }`}
-            >
-              <div className="relative">
-                <img
-                  src={VLAD_FAMILY}
-                  alt="Vlad Tayman with his family"
-                  className="w-full h-auto rounded-sm shadow-xl"
-                />
-                {/* Gold corner accents */}
-                <div className="absolute -top-3 -left-3 w-20 h-20">
-                  <div className="absolute top-0 left-0 w-full h-[2px] bg-[#c7ab77]" />
-                  <div className="absolute top-0 left-0 h-full w-[2px] bg-[#c7ab77]" />
-                </div>
-                <div className="absolute -bottom-3 -right-3 w-20 h-20">
-                  <div className="absolute bottom-0 right-0 w-full h-[2px] bg-[#c7ab77]" />
-                  <div className="absolute bottom-0 right-0 h-full w-[2px] bg-[#c7ab77]" />
-                </div>
-                {/* Caption */}
-                <div className="mt-6 text-center">
-                  <p
-                    className="text-[#1a1a1a] font-bold text-lg"
-                    style={{ fontFamily: "'Sen', sans-serif" }}
-                  >
-                    Vlad Tayman
-                  </p>
-                  <p
-                    className="text-[#888] text-sm mt-1"
-                    style={{ fontFamily: "'DM Sans', sans-serif" }}
-                  >
-                    Founder, Trader Foundation Academy
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+          {/* Founder bridge line */}
+          <p
+            className={`text-[#888] text-sm mb-6 max-w-xl mx-auto transition-all duration-1000 delay-200 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+            }`}
+            style={{ fontFamily: "'DM Sans', sans-serif" }}
+          >
+            Built on the foundation created by founder Vlad Tayman, taught by coaches who've lived it.
+          </p>
+
+          {/* Signature pull-quote */}
+          <blockquote
+            className={`mt-2 mb-8 italic text-[#555] text-[1.05rem] leading-relaxed transition-all duration-1000 delay-300 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+            }`}
+            style={{ fontFamily: "'DM Sans', sans-serif" }}
+          >
+            "Trading is like dating, you choose the best."
+            <span className="block mt-2 not-italic text-xs uppercase tracking-[0.18em] text-[#c7ab77]">
+              — Erin Chawla
+            </span>
+          </blockquote>
+
+          {/* CTA link to About */}
+          <a
+            href="/about"
+            className={`inline-flex items-center gap-2 px-6 py-3 border border-[#c7ab77]/40 text-[#c7ab77] text-sm font-semibold tracking-wide rounded-sm transition-all duration-300 hover:bg-[#c7ab77] hover:text-[#111] ${
+              isVisible ? 'opacity-100' : 'opacity-0'
+            }`}
+            style={{ fontFamily: "'DM Sans', sans-serif" }}
+          >
+            Read Erin's Full Story
+            <span aria-hidden="true">→</span>
+          </a>
         </div>
       </section>
 
@@ -171,7 +169,7 @@ export default function MeetVladSection() {
 
         <div className="max-w-[1320px] mx-auto px-6 lg:px-8">
           {/* TrustPilot Header */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-4">
             <TrustpilotLogo className="h-7" />
             <div className="flex items-center gap-3">
               <TrustpilotStars className="h-6" />
@@ -183,6 +181,16 @@ export default function MeetVladSection() {
               </span>
             </div>
           </div>
+
+          {/* Founder bridge note */}
+          <p
+            className="text-center text-[#888] text-xs sm:text-sm leading-relaxed max-w-2xl mx-auto mb-12"
+            style={{ fontFamily: "'DM Sans', sans-serif" }}
+          >
+            These reviews span our six years in business. Some mention our founder,
+            Vlad Tayman &mdash; today Erin is joined by coaches Elliot and Leo,
+            carrying the same system forward.
+          </p>
 
           {/* Reviews Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

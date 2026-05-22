@@ -5,16 +5,6 @@
  */
 
 import { useEffect, useRef, useState } from 'react';
-import { ExternalLink } from 'lucide-react';
-
-const guestAppearances = [
-  { name: 'The Unstoppable Podcast', url: 'https://www.youtube.com/watch?v=dAeLX72hHNE' },
-  { name: 'Speaking Podcast', url: 'https://open.spotify.com/episode/5Umj8YBXDbEwOdjlcMFZnB' },
-  { name: 'Social 333 Podcast', url: 'https://www.youtube.com/watch?v=iZ8fVeBRJBo' },
-  { name: 'Freedom Nation', url: 'https://freedomnationpodcast.com/episode/predictable-paychecks-from-trading-vlad-taimanon-on-building-stress-free-monthly-income-with-options' },
-  { name: 'Marathon Money', url: 'https://www.youtube.com/watch?v=Q6YjAlnc_HE' },
-  { name: 'Thunder Stock Show', url: 'https://podcasts.apple.com/cm/podcast/unlocking-the-american-dream-vlad-taymans-journey/id1656717958?i=1000748955574' },
-];
 
 export default function PodcastSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -74,7 +64,7 @@ export default function PodcastSection() {
               className="text-[#999] text-sm leading-relaxed mb-5 max-w-lg"
               style={{ fontFamily: "'DM Sans', sans-serif" }}
             >
-              Hosted by Vlad Tayman, real market insights, trading education, and the mindset behind consistent results.
+              Real market insights, trading education, and the mindset behind consistent results.
             </p>
 
             {/* Platform Links */}
@@ -134,34 +124,9 @@ export default function PodcastSection() {
               </a>
             </div>
 
-            {/* Guest Appearances, inline */}
-            <div>
-              <span
-                className="text-[0.65rem] font-bold tracking-[0.15em] uppercase text-[#c7ab77] block mb-2"
-                style={{ fontFamily: "'DM Sans', sans-serif" }}
-              >
-                As heard on:
-              </span>
-              <div className="flex flex-wrap gap-x-1.5 gap-y-1.5">
-                {guestAppearances.map((show, i) => (
-                  <span key={show.name} className="flex items-center">
-                    <a
-                      href={show.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-white/60 text-xs hover:text-[#c7ab77] transition-colors inline-flex items-center gap-1"
-                      style={{ fontFamily: "'DM Sans', sans-serif" }}
-                    >
-                      {show.name}
-                      <ExternalLink size={9} className="opacity-40" />
-                    </a>
-                    {i < guestAppearances.length - 1 && (
-                      <span className="text-white/20 mx-1.5">·</span>
-                    )}
-                  </span>
-                ))}
-              </div>
-            </div>
+            {/* TODO[v2]: Guest appearances list hidden because the existing entries are
+                Vlad's personal podcast interviews and contradict the brand-neutral
+                framing. Restore (or replace with brand-attributed press) when available. */}
           </div>
         </div>
       </div>

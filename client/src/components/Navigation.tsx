@@ -93,11 +93,13 @@ export default function Navigation() {
               ))}
 
               <a
-                href="https://start.traderfoundation.co/trade"
+                href="https://start.traderfoundation.co/trade-yt"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-5 py-2 bg-[#c7ab77] text-[#111] text-[0.78rem] font-bold tracking-wide rounded-sm transition-all duration-300 hover:bg-[#b89a66] hover:shadow-lg"
                 style={{ fontFamily: "'DM Sans', sans-serif" }}
               >
-                Watch The Masterclass
+                Book a Call
               </a>
 
 
@@ -231,12 +233,14 @@ export default function Navigation() {
               Login
             </a>
             <a
-              href="https://start.traderfoundation.co/trade"
+              href="https://start.traderfoundation.co/trade-yt"
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => setMobileOpen(false)}
               className="block text-center px-6 py-3 bg-[#c7ab77] text-[#111] text-[0.8rem] font-bold tracking-wide rounded-sm"
               style={{ fontFamily: "'DM Sans', sans-serif" }}
             >
-              Watch The Masterclass
+              Book a Call
             </a>
 
           </div>

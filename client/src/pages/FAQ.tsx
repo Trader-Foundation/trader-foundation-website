@@ -1,7 +1,7 @@
 /*
  * FAQ Page, Trader Foundation Academy
  * Design: Black & Gold Luxe style
- * Sections: Hero → Vimeo Video → FAQ Toggles → Book a Call CTA → Footer
+ * Sections: Hero → FAQ Toggles → Book a Call CTA → Footer
  * Fonts: Sen (headings), DM Sans (body)
  * Palette: #0a0a0a (black), #c7ab77 (gold), white text
  */
@@ -21,7 +21,7 @@ const faqItems = [
   },
   {
     question: 'I\'ve tried other trading methods and lost money. Why would this be different?',
-    answer: 'Because we don\'t sell shortcuts. AI bots, signals, and YouTube courses fail because they skip the foundation. We teach you the "why" behind the market, give you a proven system, and coach you 1-on-1 until you get it. We don\'t stop until you do.',
+    answer: 'Because we don\'t sell shortcuts. Our curriculum was built over a decade by our founder, Vlad Tayman, and is now delivered by Erin and our coaching team. AI bots, signals, and YouTube courses fail because they skip the foundation. We teach you the "why" behind the market, give you a proven system, and coach you 1-on-1 until you get it. We don\'t stop until you do.',
   },
   {
     question: 'I\'m worried I\'m not disciplined enough. What if I quit?',
@@ -29,7 +29,7 @@ const faqItems = [
   },
   {
     question: 'Do you have any free courses I can watch?',
-    answer: 'Yes. We offer the Stock Predator Course for free. It covers foundational trading concepts so you can experience our teaching style firsthand.',
+    answer: 'Yes. Our YouTube channel is packed with free trading education, market breakdowns, and lessons, so you can experience our teaching style firsthand before you ever join.',
   },
   {
     question: 'How much time do I need to commit?',
@@ -111,24 +111,7 @@ export default function FAQ() {
 
       {/* ─── Content ─── */}
       <section className="pb-24 bg-[#0a0a0a]" ref={sectionRef}>
-        <div className="max-w-[900px] mx-auto px-6 lg:px-8">
-          {/* Vimeo Video Embed */}
-          <div className={`mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
-            <div
-              className="relative w-full rounded-lg overflow-hidden border border-[#c7ab77]/20 shadow-2xl"
-              style={{ paddingTop: '56.25%' }}
-            >
-              <iframe
-                src="https://player.vimeo.com/video/850662205?h=&badge=0&autopause=0&player_id=0&app_id=58479"
-                className="absolute inset-0 w-full h-full"
-                frameBorder="0"
-                allow="autoplay; fullscreen; picture-in-picture"
-                allowFullScreen
-                title="Answering FAQs"
-              />
-            </div>
-          </div>
-
+        <div className="max-w-[900px] mx-auto px-6 lg:px-8 pt-16">
           {/* FAQ Items */}
           <div className={`transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
             {faqItems.map((item, index) => (
@@ -184,7 +167,7 @@ export default function FAQ() {
               Still have questions? Let's talk.
             </p>
             <a
-              href="https://traderfoundation.fillout.com/t/w1vozRAz1uus?utm_source=Website"
+              href="https://start.traderfoundation.co/trade-yt"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block px-10 py-4 bg-[#c7ab77] text-black font-bold text-sm tracking-wide uppercase hover:bg-[#d4bc8e] transition-all duration-300"

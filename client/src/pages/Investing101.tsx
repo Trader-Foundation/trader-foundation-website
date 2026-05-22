@@ -12,7 +12,7 @@ import Footer from '@/components/Footer';
 import { ArrowRight, ArrowLeft, ChevronRight, Landmark, Layers, LineChart, PiggyBank, Compass, GraduationCap } from 'lucide-react';
 
 const SIDEBAR_IMG =
-  'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/vlad-teaching-clean2_08a2b1d6.png';
+  'https://lh3.googleusercontent.com/d/18TURNIySi5cgBPXc7F0qPvWYPRszIebS=s2000';
 
 /* ── Chapter data ── */
 const CHAPTERS = [
@@ -393,11 +393,13 @@ export default function Investing101() {
                   </button>
                 ) : (
                   <a
-                    href="https://start.traderfoundation.co/trade"
+                    href="https://start.traderfoundation.co/trade-yt"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="flex items-center gap-2 text-[0.88rem] text-[#c7ab77] hover:text-[#b89a66] transition-colors font-semibold"
                     style={{ fontFamily: "'DM Sans', sans-serif" }}
                   >
-                    Watch The Free Masterclass
+                    Book a Call
                     <ArrowRight size={16} />
                   </a>
                 )}
@@ -411,12 +413,12 @@ export default function Investing101() {
               <div className="bg-[#111] rounded-lg overflow-hidden shadow-xl">
                 <img
                   src={SIDEBAR_IMG}
-                  alt="Vlad Tayman teaching at Trader Foundation"
-                  className="w-full h-44 object-cover"
+                  alt="Erin Chawla, Partner at Trader Foundation"
+                  className="w-full h-44 object-cover object-top"
                 />
                 <div className="p-5 text-center">
                   <p className="text-[#c7ab77] font-bold text-[0.78rem] uppercase tracking-wider mb-2" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-                    Free Masterclass!
+                    Free Strategy Call!
                   </p>
                   <h3 className="text-lg font-bold text-white leading-tight mb-3" style={{ fontFamily: "'Sen', sans-serif" }}>
                     Wall Street Secrets for Financial Freedom
@@ -425,11 +427,13 @@ export default function Investing101() {
                     This proven trading system can help beginners, busy professionals, retirees, and students achieve the financial freedom they deserve.
                   </p>
                   <a
-                    href="https://start.traderfoundation.co/trade"
+                    href="https://start.traderfoundation.co/trade-yt"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="block w-full py-3 bg-[#c7ab77] text-[#111] font-bold text-[0.85rem] tracking-wide rounded-sm transition-all duration-300 hover:bg-[#b89a66]"
                     style={{ fontFamily: "'DM Sans', sans-serif" }}
                   >
-                    SIGN ME UP NOW &raquo;
+                    BOOK MY CALL &raquo;
                   </a>
                 </div>
               </div>

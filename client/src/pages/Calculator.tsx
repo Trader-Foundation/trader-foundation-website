@@ -1,7 +1,7 @@
 /*
  * Compound Interest Calculator Page, Trader Foundation Academy
  * Design: "The Academy", Ivy League Digital Campus
- * Features: Interactive calculator with chart, Vlad teaching image, educational content
+ * Features: Interactive calculator with chart, Erin teaching image, educational content
  * Fonts: Sen (headings), DM Sans (body)
  * Palette: #111 (dark), #faf9f6 (ivory), #c7ab77 (gold), #1a1a1a (near-black)
  */
@@ -12,8 +12,9 @@ import Navigation from '@/components/Navigation';
 import SEO from '@/components/SEO';
 import Footer from '@/components/Footer';
 
-const VLAD_TEACHING =
-  'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/vlad-classroom-teaching-htYQHLLE6LXPsyrVmmpoZv.webp';
+/* TODO[v2]: Replace with final Erin teaching/classroom photo. Using existing Erin headshot as placeholder. */
+const ERIN_TEACHING =
+  'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/erin_93b42a5c.jpg';
 const CALCULATOR_HERO_BG =
   'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/calculator-hero-bg-f3Rq9By3EDjXhzwTJdmpaq.webp';
 
@@ -718,7 +719,7 @@ export default function Calculator() {
         </div>
       </section>
 
-      {/* ─── Vlad Teaching Section ─── */}
+      {/* ─── Erin Teaching Section ─── */}
       <section className="py-24 bg-[#faf9f6]">
         <div
           ref={educationSection.ref}
@@ -733,8 +734,8 @@ export default function Calculator() {
             <div className="relative">
               <div className="absolute -inset-4 border border-[#c7ab77]/20 rounded-xl" />
               <img
-                src={VLAD_TEACHING}
-                alt="Vlad Tayman teaching compound interest growth in a wealth management classroom"
+                src={ERIN_TEACHING}
+                alt="Erin Chawla teaching compound interest growth in a wealth management classroom"
                 className="w-full rounded-xl shadow-2xl"
               />
               <div className="absolute bottom-4 left-4 right-4 bg-[#111]/90 backdrop-blur-sm rounded-lg p-4 border border-[#c7ab77]/20">
@@ -742,13 +743,13 @@ export default function Calculator() {
                   className="text-[#c7ab77] text-xs font-bold tracking-wide uppercase mb-1"
                   style={{ fontFamily: "'DM Sans', sans-serif" }}
                 >
-                  Vlad Tayman
+                  Erin Chawla
                 </p>
                 <p
                   className="text-white/70 text-xs"
                   style={{ fontFamily: "'DM Sans', sans-serif" }}
                 >
-                  Founder & CEO, Trader Foundation
+                  Partner, Trader Foundation
                 </p>
               </div>
             </div>
@@ -798,11 +799,13 @@ export default function Calculator() {
               </p>
 
               <a
-                href="https://start.traderfoundation.co/trade"
+                href="https://start.traderfoundation.co/trade-yt"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-3 px-8 py-3.5 bg-[#c7ab77] text-[#111] text-[0.85rem] font-bold tracking-wide rounded-sm transition-all duration-300 hover:bg-[#b89a66] hover:shadow-[0_8px_30px_rgba(199,171,119,0.3)]"
                 style={{ fontFamily: "'DM Sans', sans-serif" }}
               >
-                Watch The Masterclass
+                Book a Call
               </a>
             </div>
           </div>
