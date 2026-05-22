@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 
 /* TODO[v2]: Hero photo via Drive proxy URL — re-host on a real CDN before launch. */
-const HERO_POSTER = 'https://lh3.googleusercontent.com/d/10E_nILZuLdivRy2W2X2J4_pxRM31RYR0=s2000';
+const HERO_POSTER = 'https://lh3.googleusercontent.com/d/1P2n8fVs_XSa81WqM8JPGSoJyT_iuNFy8=s2000';
 /* BBB Official Badge - dark blue pill with torch + A+ circle */
 function BBBBadge() {
   return (
