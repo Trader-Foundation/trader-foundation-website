@@ -10,7 +10,7 @@ import Navigation from '@/components/Navigation';
 import SEO from '@/components/SEO';
 import Footer from '@/components/Footer';
 
-import { BookOpen, ArrowRight, Quote, Instagram } from 'lucide-react';
+import { Quote, Instagram } from 'lucide-react';
 
 /* ── Photo URLs ── */
 const VLAD_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/vlad_processed_v2_9073b39a.jpg';
@@ -89,19 +89,6 @@ function useFadeIn(threshold = 0.15) {
   return { ref, visible };
 }
 
-/* ── SproutCloud form script loader ── */
-function useFormScript() {
-  useEffect(() => {
-    const existing = document.querySelector('script[src="https://link.sproutcloud.co/js/form_embed.js"]');
-    if (!existing) {
-      const script = document.createElement('script');
-      script.src = 'https://link.sproutcloud.co/js/form_embed.js';
-      script.async = true;
-      document.body.appendChild(script);
-    }
-  }, []);
-}
-
 /* ── Page ── */
 export default function About() {
   const erinIntro = useFadeIn();
@@ -111,85 +98,14 @@ export default function About() {
   const story = useFadeIn();
   const erinRef = useFadeIn();
   const team = useFadeIn();
-  useFormScript();
 
   return (
     <div className="min-h-screen bg-[#faf9f6]">
       <SEO title="About Us" description="Meet Erin Chawla and the Trader Foundation Academy team. Founded by Vlad Tayman, our mission is to help busy professionals learn to trade with confidence." path="/about" />
       <Navigation />
 
-      {/* ─── eBook Signup Hero ─── */}
-      <section className="relative pt-24 pb-10 bg-[#111] overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-[#111]" />
-        <div className="relative max-w-[900px] mx-auto px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-            {/* Left: Copy */}
-            <div>
-              <div className="flex items-center gap-2 mb-4">
-                <div
-                  className="flex h-6 w-6 items-center justify-center rounded"
-                  style={{ backgroundColor: 'rgba(199, 171, 119, 0.12)' }}
-                >
-                  <BookOpen className="h-3 w-3 text-[#c7ab77]" />
-                </div>
-                <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#c7ab77]">
-                  Free Download
-                </span>
-              </div>
-              <h1
-                className="text-2xl md:text-3xl font-extrabold text-white leading-tight mb-3"
-                style={{ fontFamily: "'Sen', sans-serif" }}
-              >
-                Get Your Free<br />
-                <span className="text-[#c7ab77]">Stock Predator E-Book</span>
-              </h1>
-              <p className="text-white/60 text-sm leading-relaxed mb-4 max-w-md">
-                Learn what separates the 10% who profit from the 90% who lose.
-                Trader Foundation's complete guide to pattern recognition, candlestick
-                charts, and options, <strong className="text-white/85">absolutely free.</strong>
-              </p>
-              <div className="flex flex-wrap gap-x-4 gap-y-1.5">
-                {['5 Modules', '64 Pages', 'Beginner Friendly'].map((item) => (
-                  <div key={item} className="flex items-center gap-1.5">
-                    <ArrowRight className="h-3 w-3 text-[#c7ab77]" />
-                    <span className="text-xs text-white/50">{item}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Right: SproutCloud Form */}
-            <div
-              className="rounded-lg overflow-hidden"
-              style={{
-                backgroundColor: 'rgba(255,255,255,0.03)',
-                border: '1px solid rgba(199, 171, 119, 0.15)',
-              }}
-            >
-              <iframe
-                src="https://link.sproutcloud.co/widget/form/zNekBbMTW3PeN6o7IEY0"
-                style={{ width: '100%', height: '340px', border: 'none', borderRadius: '3px' }}
-                id="about-form-zNekBbMTW3PeN6o7IEY0"
-                data-layout='{"id":"INLINE"}'
-                data-trigger-type="alwaysShow"
-                data-trigger-value=""
-                data-activation-type="alwaysActivated"
-                data-activation-value=""
-                data-deactivation-type="neverDeactivate"
-                data-deactivation-value=""
-                data-form-name="erin new website form ebook signup"
-                data-height="340"
-                data-layout-iframe-id="about-form-zNekBbMTW3PeN6o7IEY0"
-                data-form-id="zNekBbMTW3PeN6o7IEY0"
-                title="erin new website form ebook signup"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* ─── Erin Bio Section 1: Meet Erin (intro card) ─── */}
-      <section className="py-20 bg-[#faf9f6]">
+      <section className="pt-32 pb-20 bg-[#faf9f6]">
         <div
           ref={erinIntro.ref}
           className={`max-w-[720px] mx-auto px-6 lg:px-8 text-center transition-all duration-700 ${
@@ -208,9 +124,9 @@ export default function About() {
               style={{ filter: 'brightness(1.05)' }}
             />
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#111] leading-tight mb-2" style={{ fontFamily: "'Sen', sans-serif" }}>
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-[#111] leading-tight mb-2" style={{ fontFamily: "'Sen', sans-serif" }}>
             Erin Chawla
-          </h2>
+          </h1>
           <p className="text-[#c7ab77] font-semibold text-sm mb-4" style={{ fontFamily: "'DM Sans', sans-serif" }}>
             Lead Coach and Partner, Trader Foundation
           </p>
