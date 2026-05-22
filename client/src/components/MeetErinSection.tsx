@@ -20,6 +20,12 @@ const trustpilotReviews = [
     text: 'I have been learning a lot, and I have come a long way since I started my classes. Having access to a live person or persons has been incredibly encouraging. Elliot, Leo, and Erin have been great. Vlad is very smart, so pay attention.',
   },
   {
+    name: 'Jonas',
+    rating: 5,
+    title: 'Well-Structured Training with Excellent Coaching Support',
+    text: 'The learning flow is clear and logical, which makes it much easier to understand concepts that are usually complex and intimidating for beginners. The company offers daily live sessions with coaches where stocks are reviewed in real time. Students are also encouraged to schedule one-on-one sessions with coaches for personalized guidance.',
+  },
+  {
     name: 'Fred Nicora',
     rating: 5,
     title: 'A Great Experience from Ground Zero',
@@ -30,12 +36,6 @@ const trustpilotReviews = [
     rating: 5,
     title: 'Exceeded Expectations!',
     text: 'I\'ve been trading options for quite some time and thought I knew a lot. Vlad and Elliot\'s knowledge and mentorship far exceeded anything I had imagined. Their strategies, especially the paycheck collector, is a game changer. I\'m less stressed about finances than I have ever been in my life.',
-  },
-  {
-    name: 'Jonas',
-    rating: 5,
-    title: 'Well-Structured Training with Excellent Coaching Support',
-    text: 'The learning flow is clear and logical, which makes it much easier to understand concepts that are usually complex and intimidating for beginners. The company offers daily live sessions with coaches where stocks are reviewed in real time. Students are also encouraged to schedule one-on-one sessions with coaches for personalized guidance.',
   },
 ];
 
