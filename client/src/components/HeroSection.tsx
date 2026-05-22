@@ -60,7 +60,7 @@ export default function HeroSection() {
             alt="Erin Chawla, Partner at Trader Foundation"
             className="absolute inset-0 w-full h-full object-cover"
             style={{
-              objectPosition: 'center 20%',
+              objectPosition: '50% 45%',
               transform: 'scale(1.2)',
               transformOrigin: 'center top',
             }}
