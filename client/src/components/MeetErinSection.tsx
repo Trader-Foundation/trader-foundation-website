@@ -90,7 +90,7 @@ export default function MeetErinSection() {
               src={ERIN_PHOTO}
               alt="Erin Chawla, Partner at Trader Foundation Academy"
               className="w-full h-full object-cover rounded-full shadow-xl"
-              style={{ objectPosition: 'center 25%' }}
+              style={{ objectPosition: '35% 25%' }}
             />
           </div>
 
