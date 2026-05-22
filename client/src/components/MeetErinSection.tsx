@@ -169,7 +169,7 @@ export default function MeetErinSection() {
 
         <div className="max-w-[1320px] mx-auto px-6 lg:px-8">
           {/* TrustPilot Header */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-4">
             <TrustpilotLogo className="h-7" />
             <div className="flex items-center gap-3">
               <TrustpilotStars className="h-6" />
@@ -181,6 +181,16 @@ export default function MeetErinSection() {
               </span>
             </div>
           </div>
+
+          {/* Founder bridge note */}
+          <p
+            className="text-center text-[#888] text-xs sm:text-sm leading-relaxed max-w-2xl mx-auto mb-12"
+            style={{ fontFamily: "'DM Sans', sans-serif" }}
+          >
+            These reviews span our six years in business. Some mention our founder,
+            Vlad Tayman &mdash; today Erin leads the coaching alongside Elliot and Leo,
+            carrying the same system forward.
+          </p>
 
           {/* Reviews Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
