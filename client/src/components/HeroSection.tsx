@@ -54,12 +54,16 @@ export default function HeroSection() {
     <section className="relative min-h-screen flex overflow-hidden bg-[#2e2a22]">
       <div className="w-full grid grid-cols-1 lg:grid-cols-2">
         {/* Photo panel */}
-        <div className="relative h-[54vh] min-h-[380px] lg:h-auto lg:min-h-screen order-1 lg:order-2">
+        <div className="relative h-[54vh] min-h-[380px] lg:h-auto lg:min-h-screen order-1 lg:order-2 overflow-hidden">
           <img
             src={HERO_POSTER}
             alt="Erin Chawla, Partner at Trader Foundation"
             className="absolute inset-0 w-full h-full object-cover"
-            style={{ objectPosition: 'center 20%' }}
+            style={{
+              objectPosition: 'center 20%',
+              transform: 'scale(1.2)',
+              transformOrigin: 'center top',
+            }}
           />
           {/* Blend the photo's inner edge into the dark text panel */}
           <div className="absolute inset-0 lg:bg-gradient-to-r lg:from-[#2e2a22]/50 lg:via-transparent lg:to-transparent" />
