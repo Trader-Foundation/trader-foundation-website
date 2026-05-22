@@ -86,12 +86,18 @@ export default function MeetErinSection() {
             }`}
           >
             <div className="absolute -inset-2 border border-[#c7ab77]/30 rounded-full" />
-            <img
-              src={ERIN_PHOTO}
-              alt="Erin Chawla, Partner at Trader Foundation Academy"
-              className="w-full h-full object-cover rounded-full shadow-xl"
-              style={{ objectPosition: '35% 25%' }}
-            />
+            <div className="w-full h-full rounded-full overflow-hidden shadow-xl">
+              <img
+                src={ERIN_PHOTO}
+                alt="Erin Chawla, Partner at Trader Foundation Academy"
+                className="w-full h-full object-cover"
+                style={{
+                  objectPosition: 'center 22%',
+                  transform: 'scale(1.25)',
+                  transformOrigin: 'center 38%',
+                }}
+              />
+            </div>
           </div>
 
           {/* Name + title */}
