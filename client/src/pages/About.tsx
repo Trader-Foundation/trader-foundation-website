@@ -211,7 +211,7 @@ export default function About() {
                 5×
               </p>
               <p className="text-white/70 text-sm tracking-wide uppercase" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-                Net Worth Growth
+                Trading Portfolio Growth
               </p>
             </div>
             <div>
@@ -219,7 +219,7 @@ export default function About() {
                 From Skeptic to Coach
               </h2>
               <p className="text-white/70 text-base leading-relaxed mb-4">
-                I came to Trader Foundation as a student, skeptical the way every serious person is. I kept the full-time job and studied trading on the side. By the time my net worth was <strong className="text-white">5x</strong> what I'd started with, I'd realized something simple: I love this stuff.
+                I came to Trader Foundation as a student, skeptical the way every serious person is. I kept the full-time job and studied trading on the side. By the time my trading portfolio was <strong className="text-white">5x</strong> what I'd started with, I'd realized something simple: I love this stuff.
               </p>
               <p className="text-white/70 text-base leading-relaxed">
                 Anyone who calls options trading <em className="text-white/85">"gambling"</em> has never actually sat with the math. With defined risk and a real system, it's the opposite of a gamble, it's discipline applied to numbers.
