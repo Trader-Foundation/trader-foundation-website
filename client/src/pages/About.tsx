@@ -16,7 +16,7 @@ import { Quote, Instagram } from 'lucide-react';
 const VLAD_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/vlad_processed_v2_9073b39a.jpg';
 const ELLIOT_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/elliot-clean_38e2878f.png';
 /* TODO[v2]: Currently a Google Drive proxy URL — if it stops rendering, re-host. */
-const ERIN_PHOTO = 'https://lh3.googleusercontent.com/d/1kU5XpVc9DyXM6POWPtLaqW9v_ZZxzvKL=s2000';
+const ERIN_PHOTO = 'https://lh3.googleusercontent.com/d/1kK5lJiwskHwnx_pFDURtqfTIuusO27Uk=s2000';
 const LEO_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/leo_professional_b52839af.png';
 const JHALIL_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/jhalil-new_9cefdb48.png';
 const STEVE_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/steve-lapa-new_ac25bb0c.png';
