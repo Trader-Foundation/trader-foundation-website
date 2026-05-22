@@ -171,6 +171,12 @@ export default function Home() {
               >
                 HSA
               </p>
+              <p
+                className="text-[#aaa] text-[0.72rem] mt-1"
+                style={{ fontFamily: "'DM Sans', sans-serif" }}
+              >
+                Passively managed with our strategy
+              </p>
             </div>
           </div>
           <p
