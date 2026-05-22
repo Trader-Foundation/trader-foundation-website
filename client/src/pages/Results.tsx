@@ -269,8 +269,8 @@ export default function Results() {
             Trader Foundation has been changing lives for over six years. Many of our
             earlier students worked closely with our founder,{' '}
             <strong className="text-white/80">Vlad Tayman</strong> &mdash; today{' '}
-            <strong className="text-white/80">Erin Chawla</strong> leads the coaching
-            alongside Elliot and Leo, carrying that same system forward.
+            <strong className="text-white/80">Erin Chawla</strong> is joined by coaches
+            Elliot and Leo, carrying that same system forward.
           </p>
         </div>
       </section>

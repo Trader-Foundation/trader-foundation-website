@@ -128,7 +128,7 @@ export default function About() {
             Erin Chawla
           </h1>
           <p className="text-[#c7ab77] font-semibold text-sm mb-4" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-            Lead Coach and Partner, Trader Foundation
+            Partner, Trader Foundation
           </p>
           <p className="text-[#555] text-base sm:text-lg leading-relaxed max-w-lg mx-auto" style={{ fontFamily: "'DM Sans', sans-serif" }}>
             Former corporate finance professional turned full-time trading coach. Built a Plan B before she knew she'd need one, and now teaches that path to busy professionals.

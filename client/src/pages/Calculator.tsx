@@ -749,7 +749,7 @@ export default function Calculator() {
                   className="text-white/70 text-xs"
                   style={{ fontFamily: "'DM Sans', sans-serif" }}
                 >
-                  Lead Coach and Partner, Trader Foundation
+                  Partner, Trader Foundation
                 </p>
               </div>
             </div>

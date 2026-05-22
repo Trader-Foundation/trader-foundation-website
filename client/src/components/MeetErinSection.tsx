@@ -109,7 +109,7 @@ export default function MeetErinSection() {
             }`}
             style={{ fontFamily: "'DM Sans', sans-serif" }}
           >
-            Lead Coach and Partner, Trader Foundation
+            Partner, Trader Foundation
           </p>
 
           {/* Short pitch */}
@@ -188,7 +188,7 @@ export default function MeetErinSection() {
             style={{ fontFamily: "'DM Sans', sans-serif" }}
           >
             These reviews span our six years in business. Some mention our founder,
-            Vlad Tayman &mdash; today Erin leads the coaching alongside Elliot and Leo,
+            Vlad Tayman &mdash; today Erin is joined by coaches Elliot and Leo,
             carrying the same system forward.
           </p>
 
