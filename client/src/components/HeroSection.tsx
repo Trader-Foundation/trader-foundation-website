@@ -57,7 +57,7 @@ export default function HeroSection() {
         <div className="relative h-[54vh] min-h-[380px] lg:h-auto lg:min-h-screen order-1 lg:order-2">
           <img
             src={HERO_POSTER}
-            alt="Erin Chawla, Lead Coach and Partner at Trader Foundation"
+            alt="Erin Chawla, Partner at Trader Foundation"
             className="absolute inset-0 w-full h-full object-cover"
             style={{ objectPosition: 'center 20%' }}
           />
