@@ -526,7 +526,7 @@ export default function TradingTools() {
                   </button>
                 ) : (
                   <a
-                    href="https://traderfoundation.fillout.com/t/w1vozRAz1uus?utm_source=Website"
+                    href="https://start.traderfoundation.co/trade-yt"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 text-[0.88rem] text-[#c7ab77] hover:text-[#b89a66] transition-colors font-semibold"
@@ -560,7 +560,7 @@ export default function TradingTools() {
                     This proven trading system can help beginners, busy professionals, retirees, and students achieve the financial freedom they deserve.
                   </p>
                   <a
-                    href="https://traderfoundation.fillout.com/t/w1vozRAz1uus?utm_source=Website"
+                    href="https://start.traderfoundation.co/trade-yt"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="block w-full py-3 bg-[#c7ab77] text-[#111] font-bold text-[0.85rem] tracking-wide rounded-sm transition-all duration-300 hover:bg-[#b89a66]"

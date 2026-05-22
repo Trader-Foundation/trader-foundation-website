@@ -93,7 +93,7 @@ export default function Navigation() {
               ))}
 
               <a
-                href="https://traderfoundation.fillout.com/t/w1vozRAz1uus?utm_source=Website"
+                href="https://start.traderfoundation.co/trade-yt"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-5 py-2 bg-[#c7ab77] text-[#111] text-[0.78rem] font-bold tracking-wide rounded-sm transition-all duration-300 hover:bg-[#b89a66] hover:shadow-lg"
@@ -233,7 +233,7 @@ export default function Navigation() {
               Login
             </a>
             <a
-              href="https://traderfoundation.fillout.com/t/w1vozRAz1uus?utm_source=Website"
+              href="https://start.traderfoundation.co/trade-yt"
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setMobileOpen(false)}

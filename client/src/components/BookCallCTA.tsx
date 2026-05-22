@@ -61,7 +61,7 @@ export default function BookCallCTA({
         {!headline && !subtext && <div className="mb-0" />}
 
         <a
-          href="https://traderfoundation.fillout.com/t/w1vozRAz1uus?utm_source=Website"
+          href="https://start.traderfoundation.co/trade-yt"
           target="_blank"
           rel="noopener noreferrer"
           className={`group inline-flex items-center gap-3 px-10 py-4 text-[0.85rem] font-bold tracking-wide rounded-sm transition-all duration-300 ${

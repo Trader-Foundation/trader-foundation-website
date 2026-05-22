@@ -10,7 +10,7 @@ import Navigation from '@/components/Navigation';
 import SEO from '@/components/SEO';
 import Footer from '@/components/Footer';
 
-const FILLOUT_URL = 'https://traderfoundation.fillout.com/t/w1vozRAz1uus?utm_source=Website';
+const FILLOUT_URL = 'https://start.traderfoundation.co/trade-yt';
 
 export default function BookACall() {
   useEffect(() => {

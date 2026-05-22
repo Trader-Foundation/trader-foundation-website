@@ -167,7 +167,7 @@ export default function FAQ() {
               Still have questions? Let's talk.
             </p>
             <a
-              href="https://traderfoundation.fillout.com/t/w1vozRAz1uus?utm_source=Website"
+              href="https://start.traderfoundation.co/trade-yt"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block px-10 py-4 bg-[#c7ab77] text-black font-bold text-sm tracking-wide uppercase hover:bg-[#d4bc8e] transition-all duration-300"

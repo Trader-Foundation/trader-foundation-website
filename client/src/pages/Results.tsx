@@ -518,7 +518,7 @@ export default function Results() {
             their lives with personalized coaching from our experienced team.
           </p>
           <a
-            href="https://traderfoundation.fillout.com/t/w1vozRAz1uus?utm_source=Website"
+            href="https://start.traderfoundation.co/trade-yt"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-3 px-10 py-4 bg-[#c7ab77] text-[#111] text-[0.85rem] font-bold tracking-wide rounded-sm transition-all duration-300 hover:bg-[#b89a66] hover:shadow-[0_8px_30px_rgba(199,171,119,0.3)]"

@@ -518,7 +518,7 @@ export default function About() {
               Interested in learning more? Have a conversation with our team.
             </p>
             <a
-              href="https://traderfoundation.fillout.com/t/w1vozRAz1uus?utm_source=Website"
+              href="https://start.traderfoundation.co/trade-yt"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-8 py-3.5 bg-[#c7ab77] text-[#111] text-[0.85rem] font-bold tracking-wide rounded-sm transition-all duration-300 hover:bg-[#b89a66] hover:shadow-lg"
