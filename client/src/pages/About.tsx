@@ -121,7 +121,7 @@ export default function About() {
               src={ERIN_PHOTO}
               alt="Erin Chawla, Partner at Trader Foundation"
               className="w-full h-full object-cover rounded-full shadow-xl"
-              style={{ objectPosition: 'center center' }}
+              style={{ objectPosition: '50% 60%' }}
             />
           </div>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-[#111] leading-tight mb-2" style={{ fontFamily: "'Sen', sans-serif" }}>
