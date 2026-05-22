@@ -16,25 +16,12 @@ import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
 
 import {
-  Briefcase,
-  Cpu,
-  Stethoscope,
-  Presentation,
-  Building2,
   Shield,
   Calendar,
   TrendingUp,
   Tag,
   ShieldCheck,
 } from 'lucide-react';
-
-const audience = [
-  { Icon: Briefcase, label: 'Corporate Finance' },
-  { Icon: Cpu, label: 'Engineering' },
-  { Icon: Stethoscope, label: 'Medicine' },
-  { Icon: Presentation, label: 'Consulting' },
-  { Icon: Building2, label: 'Business Owners' },
-];
 
 const methodFeatures = [
   {
@@ -67,43 +54,6 @@ export default function Home() {
       <Navigation />
       <HeroSection />
       <StatsSection />
-
-      {/* ─── Who This Is For ─── */}
-      <section className="py-20 sm:py-24 bg-[#faf9f6]">
-        <div className="max-w-[1100px] mx-auto px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <p
-              className="text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-3"
-              style={{ fontFamily: "'DM Sans', sans-serif" }}
-            >
-              Who This Is For
-            </p>
-            <h2
-              className="text-3xl md:text-4xl font-extrabold text-[#111] leading-tight"
-              style={{ fontFamily: "'Sen', sans-serif" }}
-            >
-              You've Excelled at Your Career.<br className="hidden sm:block" />
-              {' '}Now Level Up Your Wealth.
-            </h2>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-[900px] mx-auto">
-            {audience.map(({ Icon, label }) => (
-              <div
-                key={label}
-                className="bg-white border border-[#e8e4dc] rounded-lg p-5 text-center transition-colors duration-300 hover:border-[#c7ab77]/40"
-              >
-                <Icon className="h-7 w-7 text-[#c7ab77] mx-auto mb-3" strokeWidth={1.5} />
-                <p
-                  className="text-[#111] font-semibold text-sm leading-snug"
-                  style={{ fontFamily: "'DM Sans', sans-serif" }}
-                >
-                  {label}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* CTA after Stats, dark variant */}
       <BookCallCTA
