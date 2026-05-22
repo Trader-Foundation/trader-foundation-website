@@ -70,6 +70,16 @@ export default function HeroSection() {
         {/* Text panel */}
         <div className="relative flex items-center order-2 lg:order-1 px-6 sm:px-10 lg:px-12 xl:px-20 pt-10 pb-24 lg:py-32">
           <div className="max-w-xl">
+            {/* Erin credibility kicker */}
+            <p
+              className={`mb-4 text-[#c7ab77] text-base sm:text-lg font-semibold italic transition-all duration-1000 delay-100 ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+              }`}
+              style={{ fontFamily: "'DM Sans', sans-serif" }}
+            >
+              She was the skeptic. Now she's the coach.
+            </p>
+
             {/* Main Headline */}
             <h1
               className={`transition-all duration-1000 delay-200 ${
