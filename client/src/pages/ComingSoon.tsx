@@ -53,11 +53,13 @@ export default function ComingSoon({ title, subtitle }: ComingSoonProps) {
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
-              href="https://start.traderfoundation.co/trade"
+              href="https://traderfoundation.fillout.com/t/w1vozRAz1uus?utm_source=Website"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-8 py-3.5 bg-[#c7ab77] text-[#111] font-bold text-[0.88rem] tracking-wide rounded-sm transition-all duration-300 hover:bg-[#b89a66] hover:shadow-lg"
               style={{ fontFamily: "'DM Sans', sans-serif" }}
             >
-              Watch The Masterclass
+              Book a Call
               <ArrowRight size={16} />
             </a>
             <a

@@ -9,7 +9,7 @@ import Navigation from '@/components/Navigation';
 import HeroSection from '@/components/HeroSection';
 import StatsSection from '@/components/StatsSection';
 import MeetErinSection from '@/components/MeetErinSection';
-import MasterclassCTA from '@/components/MasterclassCTA';
+import BookCallCTA from '@/components/BookCallCTA';
 import PodcastSection from '@/components/PodcastSection';
 import Footer from '@/components/Footer';
 
@@ -112,11 +112,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA after Stats, dark variant, no text, just the button */}
-      <MasterclassCTA
+      {/* CTA after Stats, dark variant */}
+      <BookCallCTA
         variant="dark"
         headline="See How Busy Professionals Are Learning to Trade"
-        subtext="Watch our free masterclass and discover a proven swing trading strategy that fits into your schedule."
+        subtext="Book a call with our team to see how a proven swing trading strategy can fit into your schedule."
       />
 
       <MeetErinSection />
@@ -198,7 +198,7 @@ export default function Home() {
       </section>
 
       {/* CTA after Meet Erin + TrustPilot reviews, light variant to contrast */}
-      <MasterclassCTA
+      <BookCallCTA
         variant="light"
         headline="Ready to Start Your Trading Journey?"
         subtext="Join 1,200+ professionals who chose mentorship over shortcuts."

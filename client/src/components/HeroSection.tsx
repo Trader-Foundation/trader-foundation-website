@@ -5,7 +5,7 @@
  */
 
 import { useEffect, useState } from 'react';
-import { Play } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 /* TODO[v2]: Hero photo via Drive proxy URL — re-host on a real CDN before launch. */
 const HERO_POSTER = 'https://lh3.googleusercontent.com/d/10E_nILZuLdivRy2W2X2J4_pxRM31RYR0=s2000';
@@ -122,12 +122,14 @@ export default function HeroSection() {
               }`}
             >
               <a
-                href="https://start.traderfoundation.co/trade"
+                href="https://traderfoundation.fillout.com/t/w1vozRAz1uus?utm_source=Website"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group inline-flex items-center gap-3 px-8 py-4 bg-[#c7ab77] text-[#111] text-[0.85rem] font-bold tracking-wide rounded-sm transition-all duration-300 hover:bg-[#b89a66] hover:shadow-[0_8px_30px_rgba(199,171,119,0.3)]"
                 style={{ fontFamily: "'DM Sans', sans-serif" }}
               >
-                <Play size={16} className="transition-transform duration-300 group-hover:scale-110" />
-                Watch The Masterclass
+                Book a Call
+                <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
               </a>
             </div>
 

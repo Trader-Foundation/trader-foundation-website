@@ -1,12 +1,11 @@
 /*
- * Reusable Masterclass CTA Strip
+ * Reusable Book a Call CTA Strip
  * Placed between major sections to drive conversions
- * Matches GOAT Academy's aggressive CTA frequency
  */
 
-import { Play } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
-interface MasterclassCTAProps {
+interface BookCallCTAProps {
   /** Visual variant */
   variant?: 'dark' | 'light' | 'gold';
   /** Optional headline override */
@@ -15,14 +14,13 @@ interface MasterclassCTAProps {
   subtext?: string;
 }
 
-export default function MasterclassCTA({
+export default function BookCallCTA({
   variant = 'dark',
   headline,
   subtext,
-}: MasterclassCTAProps) {
+}: BookCallCTAProps) {
   const isDark = variant === 'dark';
   const isGold = variant === 'gold';
-  const isLight = variant === 'light';
 
   return (
     <section
@@ -63,7 +61,9 @@ export default function MasterclassCTA({
         {!headline && !subtext && <div className="mb-0" />}
 
         <a
-          href="https://start.traderfoundation.co/trade"
+          href="https://traderfoundation.fillout.com/t/w1vozRAz1uus?utm_source=Website"
+          target="_blank"
+          rel="noopener noreferrer"
           className={`group inline-flex items-center gap-3 px-10 py-4 text-[0.85rem] font-bold tracking-wide rounded-sm transition-all duration-300 ${
             isDark || isGold
               ? 'bg-[#c7ab77] text-[#111] hover:bg-[#b89a66] hover:shadow-[0_8px_30px_rgba(199,171,119,0.3)]'
@@ -71,8 +71,8 @@ export default function MasterclassCTA({
           }`}
           style={{ fontFamily: "'DM Sans', sans-serif" }}
         >
-          <Play size={16} className="transition-transform duration-300 group-hover:scale-110" />
-          Watch The Masterclass
+          Book a Call
+          <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
         </a>
       </div>
 

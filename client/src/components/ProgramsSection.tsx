@@ -144,7 +144,7 @@ export default function ProgramsSection() {
           }`}
         >
           <a
-            href="#masterclass"
+            href="#get-started"
             className="inline-flex items-center gap-3 px-10 py-4 bg-[#c7ab77] text-[#111] text-[0.85rem] font-bold tracking-wide rounded-sm transition-all duration-300 hover:bg-[#b89a66] hover:shadow-[0_8px_30px_rgba(199,171,119,0.25)]"
             style={{ fontFamily: "'DM Sans', sans-serif" }}
           >
