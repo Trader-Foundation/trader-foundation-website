@@ -13,7 +13,7 @@ import { ArrowRight, ArrowLeft, ChevronRight, Shield, BookOpen, BarChart3, Targe
 
 /* TODO[v2]: Replace with final Erin teaching photo. Using existing Erin headshot as placeholder. */
 const SIDEBAR_IMG =
-  'https://lh3.googleusercontent.com/d/10E_nILZuLdivRy2W2X2J4_pxRM31RYR0=s2000';
+  'https://lh3.googleusercontent.com/d/18TURNIySi5cgBPXc7F0qPvWYPRszIebS=s2000';
 
 /* ── Chapter data ── */
 const CHAPTERS = [

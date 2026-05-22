@@ -12,7 +12,7 @@ import Footer from '@/components/Footer';
 import { ArrowRight, ArrowLeft, ChevronRight, Landmark, Layers, LineChart, PiggyBank, Compass, GraduationCap } from 'lucide-react';
 
 const SIDEBAR_IMG =
-  'https://lh3.googleusercontent.com/d/10E_nILZuLdivRy2W2X2J4_pxRM31RYR0=s2000';
+  'https://lh3.googleusercontent.com/d/18TURNIySi5cgBPXc7F0qPvWYPRszIebS=s2000';
 
 /* ── Chapter data ── */
 const CHAPTERS = [
