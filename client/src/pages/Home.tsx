@@ -140,7 +140,7 @@ export default function Home() {
           >
             Retirement accounts don't lie. The IRS sees these numbers too.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 gap-8 max-w-[640px] mx-auto">
             <div>
               <div className="rounded-lg overflow-hidden border border-[#e8e4dc] shadow-[0_8px_40px_rgba(0,0,0,0.08)] bg-white">
                 <img
