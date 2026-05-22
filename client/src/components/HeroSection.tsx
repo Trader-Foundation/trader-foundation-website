@@ -51,93 +51,99 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Background image (placeholder until Erin sends a hero asset she likes) */}
-      <div className="absolute inset-0">
-        <img
-          src={HERO_POSTER}
-          alt=""
-          aria-hidden="true"
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-l from-[#0a0a0a]/85 via-[#0a0a0a]/55 to-[#0a0a0a]/20" />
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#FAF9F6] to-transparent" />
-      </div>
+    <section className="relative min-h-screen flex overflow-hidden bg-[#0a0a0a]">
+      <div className="w-full grid grid-cols-1 lg:grid-cols-2">
+        {/* Photo panel */}
+        <div className="relative h-[54vh] min-h-[380px] lg:h-auto lg:min-h-screen order-1 lg:order-2">
+          <img
+            src={HERO_POSTER}
+            alt="Erin Chawla, Lead Coach and Partner at Trader Foundation"
+            className="absolute inset-0 w-full h-full object-cover object-top"
+          />
+          {/* Blend the photo's inner edge into the dark text panel */}
+          <div className="absolute inset-0 lg:bg-gradient-to-r lg:from-[#0a0a0a]/80 lg:via-transparent lg:to-transparent" />
+          {/* Mobile: fade photo bottom into the text panel */}
+          <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#0a0a0a] to-transparent lg:hidden" />
+        </div>
 
-      {/* Content */}
-      <div className="relative z-10 max-w-[1320px] mx-auto px-6 lg:px-8 w-full pt-32 pb-24">
-        <div className="max-w-2xl lg:ml-auto">
-          {/* Main Headline, bold, punchy, GOAT-style */}
-          <h1
-            className={`transition-all duration-1000 delay-200 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-            }`}
-          >
-            <span
-              className="block text-white text-[2.2rem] sm:text-[2.8rem] lg:text-[3.2rem] leading-[1.12] font-extrabold"
-              style={{ fontFamily: "'Sen', sans-serif" }}
+        {/* Text panel */}
+        <div className="relative flex items-center order-2 lg:order-1 px-6 sm:px-10 lg:px-12 xl:px-20 pt-10 pb-24 lg:py-32">
+          <div className="max-w-xl">
+            {/* Main Headline */}
+            <h1
+              className={`transition-all duration-1000 delay-200 ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+              }`}
             >
-              Take Control of Your Financial Future With Trader Foundation{' '}
-            </span>
-            <span
-              className="relative inline-block text-[#c7ab77] text-[2.2rem] sm:text-[2.8rem] lg:text-[3.2rem] leading-[1.12] font-extrabold"
-              style={{ fontFamily: "'Sen', sans-serif" }}
-            >
-              Academy
-              {/* Underline accent */}
-              <svg
-                className="absolute -bottom-2 left-0 w-full"
-                viewBox="0 0 200 8"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
+              <span
+                className="block text-white text-[2.2rem] sm:text-[2.8rem] lg:text-[3.2rem] leading-[1.12] font-extrabold"
+                style={{ fontFamily: "'Sen', sans-serif" }}
               >
-                <path
-                  d="M2 5.5C40 2 80 3 100 4.5C120 6 160 3 198 5"
-                  stroke="#c7ab77"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  opacity="0.8"
-                />
-              </svg>
-            </span>
-          </h1>
+                Take Control of Your Financial Future With Trader Foundation{' '}
+              </span>
+              <span
+                className="relative inline-block text-[#c7ab77] text-[2.2rem] sm:text-[2.8rem] lg:text-[3.2rem] leading-[1.12] font-extrabold"
+                style={{ fontFamily: "'Sen', sans-serif" }}
+              >
+                Academy
+                {/* Underline accent */}
+                <svg
+                  className="absolute -bottom-2 left-0 w-full"
+                  viewBox="0 0 200 8"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M2 5.5C40 2 80 3 100 4.5C120 6 160 3 198 5"
+                    stroke="#c7ab77"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    opacity="0.8"
+                  />
+                </svg>
+              </span>
+            </h1>
 
-          {/* Paycheck Collector tagline */}
-          <p
-            className={`mt-6 text-white/80 text-base sm:text-lg leading-relaxed max-w-xl transition-all duration-1000 delay-400 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-            }`}
-            style={{ fontFamily: "'DM Sans', sans-serif" }}
-          >
-            Home of the <span className="text-[#c7ab77] font-semibold">Paycheck Collector</span> &mdash; monthly options income, defined risk, in any market.
-          </p>
-
-          {/* CTA Button */}
-          <div
-            className={`mt-8 transition-all duration-1000 delay-500 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-            }`}
-          >
-            <a
-              href="https://start.traderfoundation.co/trade"
-              className="group inline-flex items-center gap-3 px-8 py-4 bg-[#c7ab77] text-[#111] text-[0.85rem] font-bold tracking-wide rounded-sm transition-all duration-300 hover:bg-[#b89a66] hover:shadow-[0_8px_30px_rgba(199,171,119,0.3)]"
+            {/* Paycheck Collector tagline */}
+            <p
+              className={`mt-6 text-white/80 text-base sm:text-lg leading-relaxed transition-all duration-1000 delay-400 ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+              }`}
               style={{ fontFamily: "'DM Sans', sans-serif" }}
             >
-              <Play size={16} className="transition-transform duration-300 group-hover:scale-110" />
-              Watch The Masterclass
-            </a>
-          </div>
+              Home of the <span className="text-[#c7ab77] font-semibold">Paycheck Collector</span> &mdash; monthly options income, defined risk, in any market.
+            </p>
 
-          {/* BBB Badge */}
-          <div
-            className={`mt-8 flex items-center gap-4 transition-all duration-1000 delay-700 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-            }`}
-          >
-            <BBBBadge />
+            {/* CTA Button */}
+            <div
+              className={`mt-8 transition-all duration-1000 delay-500 ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+              }`}
+            >
+              <a
+                href="https://start.traderfoundation.co/trade"
+                className="group inline-flex items-center gap-3 px-8 py-4 bg-[#c7ab77] text-[#111] text-[0.85rem] font-bold tracking-wide rounded-sm transition-all duration-300 hover:bg-[#b89a66] hover:shadow-[0_8px_30px_rgba(199,171,119,0.3)]"
+                style={{ fontFamily: "'DM Sans', sans-serif" }}
+              >
+                <Play size={16} className="transition-transform duration-300 group-hover:scale-110" />
+                Watch The Masterclass
+              </a>
+            </div>
+
+            {/* BBB Badge */}
+            <div
+              className={`mt-8 flex items-center gap-4 transition-all duration-1000 delay-700 ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+              }`}
+            >
+              <BBBBadge />
+            </div>
           </div>
         </div>
       </div>
+
+      {/* Bottom fade into page background */}
+      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#FAF9F6] to-transparent pointer-events-none" />
     </section>
   );
 }
