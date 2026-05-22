@@ -121,13 +121,8 @@ export default function About() {
               <img
                 src={ERIN_PHOTO}
                 alt="Erin Chawla, Partner at Trader Foundation"
-                className="w-full h-full"
-                style={{
-                  objectFit: 'cover',
-                  objectPosition: 'center center',
-                  transform: 'scale(1.6) translateY(12%)',
-                  transformOrigin: 'center center',
-                }}
+                className="w-full h-full object-cover"
+                style={{ objectPosition: 'center center' }}
               />
             </div>
           </div>
