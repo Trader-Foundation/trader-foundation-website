@@ -477,7 +477,7 @@ export default function About() {
           </div>
 
           {/* Coach cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 max-w-[800px] mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[600px] mx-auto">
             {coaches.map((coach, i) => (
               <div
                 key={coach.name}
