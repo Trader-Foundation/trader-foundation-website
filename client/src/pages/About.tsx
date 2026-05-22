@@ -477,11 +477,11 @@ export default function About() {
           </div>
 
           {/* Coach cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[600px] mx-auto">
+          <div className="flex flex-col sm:flex-row justify-center gap-8">
             {coaches.map((coach, i) => (
               <div
                 key={coach.name}
-                className="group bg-white border border-[#e8e4dc] rounded-lg overflow-hidden transition-all duration-500 hover:border-[#c7ab77]/40 hover:shadow-[0_8px_40px_rgba(199,171,119,0.1)]"
+                className="group w-full sm:w-[300px] bg-white border border-[#e8e4dc] rounded-lg overflow-hidden transition-all duration-500 hover:border-[#c7ab77]/40 hover:shadow-[0_8px_40px_rgba(199,171,119,0.1)]"
                 style={{ transitionDelay: `${i * 100}ms` }}
               >
                 {/* Photo, brightened */}
