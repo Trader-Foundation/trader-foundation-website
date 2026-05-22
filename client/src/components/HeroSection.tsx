@@ -59,11 +59,7 @@ export default function HeroSection() {
             src={HERO_POSTER}
             alt="Erin Chawla, Partner at Trader Foundation"
             className="absolute inset-0 w-full h-full object-cover"
-            style={{
-              objectPosition: '50% 45%',
-              transform: 'scale(1.0)',
-              transformOrigin: 'center top',
-            }}
+            style={{ objectPosition: '50% 25%' }}
           />
           {/* Blend the photo's inner edge into the dark text panel */}
           <div className="absolute inset-0 lg:bg-gradient-to-r lg:from-[#2e2a22]/50 lg:via-transparent lg:to-transparent" />
