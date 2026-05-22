@@ -138,10 +138,10 @@ export default function Home() {
             className="text-[#444] text-base sm:text-lg leading-relaxed max-w-2xl mx-auto mb-10"
             style={{ fontFamily: "'DM Sans', sans-serif" }}
           >
-            Retirement accounts don't lie. The IRS sees these numbers too. A Roth IRA up{' '}
-            <strong className="text-[#111]">142%</strong> and an HSA up{' '}
-            <strong className="text-[#111]">83%</strong> &mdash; real compounded growth from
-            one disciplined, repeatable system.
+            Actual Fidelity accounts. Roth IRA up <strong className="text-[#111]">142%</strong>.
+            HSA up <strong className="text-[#111]">83%</strong>. Both over 3 years, both
+            passively managed around a full-time career. This is what compounded growth looks
+            like when you follow a system.
           </p>
           <div className="grid grid-cols-1 gap-8 max-w-[640px] mx-auto">
             <div>
@@ -172,12 +172,6 @@ export default function Home() {
                 style={{ fontFamily: "'DM Sans', sans-serif" }}
               >
                 HSA &middot; <span className="text-[#c7ab77]">+83%</span>
-              </p>
-              <p
-                className="text-[#aaa] text-[0.72rem] mt-1"
-                style={{ fontFamily: "'DM Sans', sans-serif" }}
-              >
-                Passively managed with our strategy
               </p>
             </div>
           </div>
