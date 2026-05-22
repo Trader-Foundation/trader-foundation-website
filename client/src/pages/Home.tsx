@@ -24,6 +24,7 @@ import {
 } from 'lucide-react';
 
 const RESULTS_IMG = 'https://lh3.googleusercontent.com/d/1skCb7MH9xMEaZ_A7Kyz7hTbj-lH9Lgoh=s2000';
+const RESULTS_IMG_HSA = 'https://lh3.googleusercontent.com/d/1sPTy9s67vLGy7muQNYocEKCElrUrqBPU=s2000';
 
 const methodFeatures = [
   {
@@ -120,7 +121,7 @@ export default function Home() {
 
       {/* ─── Real Results ─── */}
       <section className="py-20 sm:py-24 bg-[#faf9f6]">
-        <div className="max-w-[820px] mx-auto px-6 lg:px-8 text-center">
+        <div className="max-w-[1000px] mx-auto px-6 lg:px-8 text-center">
           <p
             className="text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-3"
             style={{ fontFamily: "'DM Sans', sans-serif" }}
@@ -131,24 +132,49 @@ export default function Home() {
             className="text-3xl md:text-4xl font-extrabold text-[#111] leading-tight mb-5"
             style={{ fontFamily: "'Sen', sans-serif" }}
           >
-            Three Years in a Real Roth IRA
+            Real Accounts, Real Results
           </h2>
           <p
             className="text-[#444] text-base leading-relaxed max-w-xl mx-auto mb-10"
             style={{ fontFamily: "'DM Sans', sans-serif" }}
           >
-            A real Fidelity retirement account. This is what disciplined,
+            Actual Fidelity accounts. This is what disciplined,
             system-based trading looks like over time, not one lucky month.
           </p>
-          <div className="rounded-lg overflow-hidden border border-[#e8e4dc] shadow-[0_8px_40px_rgba(0,0,0,0.08)] bg-white">
-            <img
-              src={RESULTS_IMG}
-              alt="Three years of trading results in a Fidelity Roth IRA account"
-              className="w-full h-auto"
-            />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <div className="rounded-lg overflow-hidden border border-[#e8e4dc] shadow-[0_8px_40px_rgba(0,0,0,0.08)] bg-white">
+                <img
+                  src={RESULTS_IMG}
+                  alt="Trading results in a Fidelity Roth IRA account"
+                  className="w-full h-auto"
+                />
+              </div>
+              <p
+                className="text-[#888] text-xs font-semibold uppercase tracking-wider mt-3"
+                style={{ fontFamily: "'DM Sans', sans-serif" }}
+              >
+                Roth IRA
+              </p>
+            </div>
+            <div>
+              <div className="rounded-lg overflow-hidden border border-[#e8e4dc] shadow-[0_8px_40px_rgba(0,0,0,0.08)] bg-white">
+                <img
+                  src={RESULTS_IMG_HSA}
+                  alt="Trading results in a Fidelity HSA account"
+                  className="w-full h-auto"
+                />
+              </div>
+              <p
+                className="text-[#888] text-xs font-semibold uppercase tracking-wider mt-3"
+                style={{ fontFamily: "'DM Sans', sans-serif" }}
+              >
+                HSA
+              </p>
+            </div>
           </div>
           <p
-            className="text-[#999] text-xs leading-relaxed mt-5 max-w-xl mx-auto"
+            className="text-[#999] text-xs leading-relaxed mt-6 max-w-xl mx-auto"
             style={{ fontFamily: "'DM Sans', sans-serif" }}
           >
             Real Fidelity account results. Individual results vary; past performance does not guarantee future results.
