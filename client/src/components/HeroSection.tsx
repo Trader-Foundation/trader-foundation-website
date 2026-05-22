@@ -7,8 +7,8 @@
 import { useEffect, useState } from 'react';
 import { Play } from 'lucide-react';
 
-/* TODO[v2]: Placeholder hero image — awaiting a landscape shot Erin approves. */
-const HERO_POSTER = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/erin_93b42a5c.jpg';
+/* TODO[v2]: Hero photo via Drive proxy URL — re-host on a real CDN before launch. */
+const HERO_POSTER = 'https://lh3.googleusercontent.com/d/1aIrbckbZxr4z1k53frE0HFEhTH6uN1eq=s2000';
 /* BBB Official Badge - dark blue pill with torch + A+ circle */
 function BBBBadge() {
   return (
