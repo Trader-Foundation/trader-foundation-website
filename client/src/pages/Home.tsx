@@ -135,11 +135,10 @@ export default function Home() {
             Real Accounts, Real Results
           </h2>
           <p
-            className="text-[#444] text-base leading-relaxed max-w-xl mx-auto mb-10"
+            className="text-[#444] text-base sm:text-lg leading-relaxed max-w-xl mx-auto mb-10"
             style={{ fontFamily: "'DM Sans', sans-serif" }}
           >
-            Actual Fidelity accounts. This is what disciplined,
-            system-based trading looks like over time, not one lucky month.
+            Retirement accounts don't lie. The IRS sees these numbers too.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
