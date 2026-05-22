@@ -12,7 +12,7 @@ import { ArrowRight, ArrowLeft, ChevronRight, MonitorSmartphone, BarChart3, Book
 
 /* TODO[v2]: Replace with final Erin teaching photo. Using existing Erin headshot as placeholder. */
 const SIDEBAR_IMG =
-  'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/erin_93b42a5c.jpg';
+  'https://lh3.googleusercontent.com/d/10E_nILZuLdivRy2W2X2J4_pxRM31RYR0=s2000';
 
 /* ── Chapter data ── */
 const CHAPTERS = [
@@ -547,7 +547,7 @@ export default function TradingTools() {
                 <img
                   src={SIDEBAR_IMG}
                   alt="Erin Chawla, Lead Coach and Partner at Trader Foundation"
-                  className="w-full h-44 object-cover"
+                  className="w-full h-44 object-cover object-top"
                 />
                 <div className="p-5 text-center">
                   <p className="text-[#c7ab77] font-bold text-[0.78rem] uppercase tracking-wider mb-2" style={{ fontFamily: "'DM Sans', sans-serif" }}>
