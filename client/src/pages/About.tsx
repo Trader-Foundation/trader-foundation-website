@@ -1,6 +1,6 @@
 /*
  * About Page, Trader Foundation Academy (v2)
- * Sections: eBook Signup → Erin Spotlight → Vlad Founder Story → Our Academy → Our Philosophy → Meet the Coaches → Meet the Team → Footer
+ * Sections: Meet Erin → Before TF → Turning Point → Today → Founder Note → Our Academy → Our Philosophy → Meet the Coaches → Meet the Team → Footer
  * Erin Chawla leads as the face of the brand; Vlad Tayman credited as founder.
  * Fonts: Sen (headings), DM Sans (body)
  */
