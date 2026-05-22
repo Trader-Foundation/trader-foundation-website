@@ -114,7 +114,7 @@ export default function MeetErinSection() {
 
           {/* Short pitch */}
           <p
-            className={`text-[#444] text-base sm:text-lg leading-relaxed mb-6 max-w-xl mx-auto transition-all duration-1000 delay-200 ${
+            className={`text-[#444] text-base sm:text-lg leading-relaxed mb-4 max-w-xl mx-auto transition-all duration-1000 delay-200 ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
             }`}
             style={{ fontFamily: "'DM Sans', sans-serif" }}
@@ -123,6 +123,16 @@ export default function MeetErinSection() {
             risk for a living, to teaching what I wish I'd had when I was starting out.
             I've personally coached hundreds of students; our broader team has mentored{' '}
             <strong>over a thousand</strong>.
+          </p>
+
+          {/* Founder bridge line */}
+          <p
+            className={`text-[#888] text-sm mb-6 max-w-xl mx-auto transition-all duration-1000 delay-200 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+            }`}
+            style={{ fontFamily: "'DM Sans', sans-serif" }}
+          >
+            Built on the foundation created by founder Vlad Tayman, taught by coaches who've lived it.
           </p>
 
           {/* Signature pull-quote */}

@@ -259,6 +259,22 @@ export default function Results() {
         </div>
       </section>
 
+      {/* ─── Founder Bridge Intro ─── */}
+      <section className="pt-12 pb-2 bg-[#111]">
+        <div className="max-w-[760px] mx-auto px-6 lg:px-8 text-center">
+          <p
+            className="text-white/55 text-sm sm:text-base leading-relaxed"
+            style={{ fontFamily: "'DM Sans', sans-serif" }}
+          >
+            Trader Foundation has been changing lives for over six years. Many of our
+            earlier students worked closely with our founder,{' '}
+            <strong className="text-white/80">Vlad Tayman</strong> &mdash; today{' '}
+            <strong className="text-white/80">Erin Chawla</strong> leads the coaching
+            alongside Elliot and Leo, carrying that same system forward.
+          </p>
+        </div>
+      </section>
+
       {/* ─── Featured Video ─── */}
       <section className="py-20 bg-[#111]">
         <div
