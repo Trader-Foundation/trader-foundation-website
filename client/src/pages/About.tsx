@@ -364,51 +364,30 @@ export default function About() {
         </div>
       </section>
 
-      {/* ─── Vlad's Story (Condensed) ─── */}
-      <section className="py-20 bg-white">
+      {/* ─── Founder Note (Vlad — compact, secondary) ─── */}
+      <section className="py-14 bg-white">
         <div
           ref={story.ref}
-          className={`max-w-[1100px] mx-auto px-6 lg:px-8 transition-all duration-700 ${
+          className={`max-w-[760px] mx-auto px-6 lg:px-8 transition-all duration-700 ${
             story.visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-14 items-center">
-            {/* Vlad's photo (2 cols) */}
-            <div className="lg:col-span-2 flex flex-col items-center">
-              <div className="relative w-full max-w-[300px]">
-                <div className="absolute -inset-3 border border-[#c7ab77]/20 rounded-lg" />
-                <img
-                  src={VLAD_PHOTO}
-                  alt="Vlad Tayman, Founder & CEO of Trader Foundation"
-                  className="w-full aspect-[4/5] object-cover rounded-lg shadow-xl"
-                  style={{ filter: 'brightness(1.1)' }}
-                />
-              </div>
-              <h3 className="text-xl font-extrabold text-[#111] mt-5" style={{ fontFamily: "'Sen', sans-serif" }}>
-                Vlad Tayman
-              </h3>
-              <p className="text-[#c7ab77] text-sm font-medium">Founder & CEO</p>
-            </div>
-
-            {/* Story text (3 cols), condensed */}
-            <div className="lg:col-span-3">
-              <p className="text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-3">
+          <div className="flex flex-col sm:flex-row items-center gap-6 bg-[#faf9f6] border border-[#e8e4dc] rounded-xl p-6 sm:p-8">
+            <img
+              src={VLAD_PHOTO}
+              alt="Vlad Tayman, Founder of Trader Foundation"
+              className="w-24 h-24 rounded-full object-cover object-top shrink-0 shadow-md"
+              style={{ filter: 'brightness(1.05)' }}
+            />
+            <div className="text-center sm:text-left">
+              <p className="text-[0.7rem] font-bold tracking-[0.2em] uppercase text-[#c7ab77] mb-1" style={{ fontFamily: "'DM Sans', sans-serif" }}>
                 The Founder
               </p>
-              <h2 className="text-2xl md:text-3xl font-extrabold text-[#111] leading-tight mb-6" style={{ fontFamily: "'Sen', sans-serif" }}>
-                From $150K in Losses to Building a Trading Academy
-              </h2>
-              <p className="text-[#444] text-base leading-relaxed mb-4">
-                After 20 years as a Director of Training at a Fortune 500 company, Vlad had the six-figure salary and the corner office, but he was burned out, missing his family, and dying inside. Then came the wake-up call: he lost $29,000 in 29 days trading penny stocks.
-              </p>
-              <p className="text-[#444] text-base leading-relaxed mb-4">
-                That failure became fuel. Vlad tried every trading method until he discovered the approach that actually works. But here's what makes him different from every other trading educator: he spent two decades teaching Fortune 500 executives. Great traders don't always make great teachers. Vlad mastered both.
-              </p>
-              <p className="text-[#444] text-base leading-relaxed mb-4">
-                But what truly drives Vlad isn't profit, it's people. He gives away more free education than most programs charge for because he genuinely believes everyone deserves access to real financial knowledge. From free YouTube content to full courses, Vlad's mission has always been the same: help as many people as possible take control of their financial future.
-              </p>
-              <p className="text-[#555] text-sm leading-relaxed italic border-l-2 border-[#c7ab77]/40 pl-4">
-                "Everyone deserves to understand how money really works. Not just the theory, but the real skills to grow wealth on your own terms. The best moment is when a student stops relying on someone else and starts making confident financial decisions on their own. That's the transformation we're building here."
+              <h3 className="text-lg font-extrabold text-[#111] mb-2" style={{ fontFamily: "'Sen', sans-serif" }}>
+                Vlad Tayman
+              </h3>
+              <p className="text-[#555] text-sm leading-relaxed">
+                Trader Foundation was founded by Vlad Tayman. After two decades training Fortune 500 professionals and years mastering the markets himself, he built the academy on one belief: everyone deserves real financial education. He continues to lead the company behind the scenes while Erin carries the brand forward.
               </p>
             </div>
           </div>
