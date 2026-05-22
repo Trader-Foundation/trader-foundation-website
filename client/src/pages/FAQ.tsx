@@ -29,7 +29,7 @@ const faqItems = [
   },
   {
     question: 'Do you have any free courses I can watch?',
-    answer: 'Yes. We offer the Stock Predator Course for free. It covers foundational trading concepts so you can experience our teaching style firsthand.',
+    answer: 'Yes. Our YouTube channel is packed with free trading education, market breakdowns, and lessons, so you can experience our teaching style firsthand before you ever join.',
   },
   {
     question: 'How much time do I need to commit?',
