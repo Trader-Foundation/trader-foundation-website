@@ -135,10 +135,13 @@ export default function Home() {
             Real Accounts, Real Results
           </h2>
           <p
-            className="text-[#444] text-base sm:text-lg leading-relaxed max-w-xl mx-auto mb-10"
+            className="text-[#444] text-base sm:text-lg leading-relaxed max-w-2xl mx-auto mb-10"
             style={{ fontFamily: "'DM Sans', sans-serif" }}
           >
-            Retirement accounts don't lie. The IRS sees these numbers too.
+            Retirement accounts don't lie. The IRS sees these numbers too. A Roth IRA up{' '}
+            <strong className="text-[#111]">142%</strong> and an HSA up{' '}
+            <strong className="text-[#111]">83%</strong> &mdash; real compounded growth from
+            one disciplined, repeatable system.
           </p>
           <div className="grid grid-cols-1 gap-8 max-w-[640px] mx-auto">
             <div>
@@ -153,7 +156,7 @@ export default function Home() {
                 className="text-[#888] text-xs font-semibold uppercase tracking-wider mt-3"
                 style={{ fontFamily: "'DM Sans', sans-serif" }}
               >
-                Roth IRA
+                Roth IRA &middot; <span className="text-[#c7ab77]">+142%</span>
               </p>
             </div>
             <div>
@@ -168,7 +171,7 @@ export default function Home() {
                 className="text-[#888] text-xs font-semibold uppercase tracking-wider mt-3"
                 style={{ fontFamily: "'DM Sans', sans-serif" }}
               >
-                HSA
+                HSA &middot; <span className="text-[#c7ab77]">+83%</span>
               </p>
               <p
                 className="text-[#aaa] text-[0.72rem] mt-1"
