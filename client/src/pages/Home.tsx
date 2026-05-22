@@ -79,19 +79,12 @@ export default function Home() {
               Who This Is For
             </p>
             <h2
-              className="text-3xl md:text-4xl font-extrabold text-[#111] leading-tight mb-5"
+              className="text-3xl md:text-4xl font-extrabold text-[#111] leading-tight"
               style={{ fontFamily: "'Sen', sans-serif" }}
             >
               You've Excelled at Your Career.<br className="hidden sm:block" />
               {' '}Now Level Up Your Wealth.
             </h2>
-            <p
-              className="text-[#444] text-base leading-relaxed max-w-2xl mx-auto"
-              style={{ fontFamily: "'DM Sans', sans-serif" }}
-            >
-              If you're already winning at what you do but you've quietly realized
-              you don't have a Plan B you actually own, you're in the right place.
-            </p>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-[900px] mx-auto">
             {audience.map(({ Icon, label }) => (
