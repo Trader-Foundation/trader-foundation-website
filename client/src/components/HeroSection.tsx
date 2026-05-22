@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 import { Play } from 'lucide-react';
 
 /* TODO[v2]: Hero photo via Drive proxy URL — re-host on a real CDN before launch. */
-const HERO_POSTER = 'https://lh3.googleusercontent.com/d/1aIrbckbZxr4z1k53frE0HFEhTH6uN1eq=s2000';
+const HERO_POSTER = 'https://lh3.googleusercontent.com/d/1fFuKPwpWXuwzBbAfsB_ixMJK1RNs-scG=s2000';
 /* BBB Official Badge - dark blue pill with torch + A+ circle */
 function BBBBadge() {
   return (
