@@ -61,7 +61,7 @@ export default function HeroSection() {
             className="absolute inset-0 w-full h-full object-cover"
             style={{
               objectPosition: '50% 45%',
-              transform: 'scale(1.2)',
+              transform: 'scale(1.05)',
               transformOrigin: 'center top',
             }}
           />
