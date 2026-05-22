@@ -1,7 +1,7 @@
 /*
  * FAQ Page, Trader Foundation Academy
  * Design: Black & Gold Luxe style
- * Sections: Hero → Vimeo Video → FAQ Toggles → Book a Call CTA → Footer
+ * Sections: Hero → FAQ Toggles → Book a Call CTA → Footer
  * Fonts: Sen (headings), DM Sans (body)
  * Palette: #0a0a0a (black), #c7ab77 (gold), white text
  */
@@ -111,24 +111,7 @@ export default function FAQ() {
 
       {/* ─── Content ─── */}
       <section className="pb-24 bg-[#0a0a0a]" ref={sectionRef}>
-        <div className="max-w-[900px] mx-auto px-6 lg:px-8">
-          {/* Vimeo Video Embed */}
-          <div className={`mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
-            <div
-              className="relative w-full rounded-lg overflow-hidden border border-[#c7ab77]/20 shadow-2xl"
-              style={{ paddingTop: '56.25%' }}
-            >
-              <iframe
-                src="https://player.vimeo.com/video/850662205?h=&badge=0&autopause=0&player_id=0&app_id=58479"
-                className="absolute inset-0 w-full h-full"
-                frameBorder="0"
-                allow="autoplay; fullscreen; picture-in-picture"
-                allowFullScreen
-                title="Answering FAQs"
-              />
-            </div>
-          </div>
-
+        <div className="max-w-[900px] mx-auto px-6 lg:px-8 pt-16">
           {/* FAQ Items */}
           <div className={`transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
             {faqItems.map((item, index) => (
