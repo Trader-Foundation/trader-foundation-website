@@ -51,7 +51,7 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex overflow-hidden bg-[#1c1a14]">
+    <section className="relative min-h-screen flex overflow-hidden bg-[#2e2a22]">
       <div className="w-full grid grid-cols-1 lg:grid-cols-2">
         {/* Photo panel */}
         <div className="relative h-[54vh] min-h-[380px] lg:h-auto lg:min-h-screen order-1 lg:order-2">
@@ -62,9 +62,9 @@ export default function HeroSection() {
             style={{ objectPosition: 'center 20%' }}
           />
           {/* Blend the photo's inner edge into the dark text panel */}
-          <div className="absolute inset-0 lg:bg-gradient-to-r lg:from-[#1c1a14]/80 lg:via-transparent lg:to-transparent" />
+          <div className="absolute inset-0 lg:bg-gradient-to-r lg:from-[#2e2a22]/80 lg:via-transparent lg:to-transparent" />
           {/* Mobile: fade photo bottom into the text panel */}
-          <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#1c1a14] to-transparent lg:hidden" />
+          <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#2e2a22] to-transparent lg:hidden" />
         </div>
 
         {/* Text panel */}
