@@ -123,7 +123,6 @@ export default function EbookPopup() {
             </h2>
 
             {/* Subtext */}
-            {/* TODO[v2]: Confirm eBook framing for Erin as the brand face (authorship stays with Vlad Tayman). */}
             <p className="mb-5 text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.6)' }}>
               Learn what separates the 10% who profit from the 90% who lose.
               Get Trader Foundation's complete guide to stock pattern recognition,
@@ -176,7 +175,7 @@ export default function EbookPopup() {
             style={{ borderColor: 'rgba(199, 171, 119, 0.1)' }}
           >
             <p className="text-[11px]" style={{ color: 'rgba(255,255,255,0.3)' }}>
-              By Vlad Tayman · Founder of Trader Foundation · 64 Pages · 5 Modules
+              By Trader Foundation · 64 Pages · 5 Modules
             </p>
           </div>
         </div>
