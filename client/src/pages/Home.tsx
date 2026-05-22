@@ -23,6 +23,8 @@ import {
   ShieldCheck,
 } from 'lucide-react';
 
+const RESULTS_IMG = 'https://lh3.googleusercontent.com/d/1skCb7MH9xMEaZ_A7Kyz7hTbj-lH9Lgoh=s2000';
+
 const methodFeatures = [
   {
     Icon: Shield,
@@ -113,6 +115,44 @@ export default function Home() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ─── Real Results ─── */}
+      <section className="py-20 sm:py-24 bg-[#faf9f6]">
+        <div className="max-w-[820px] mx-auto px-6 lg:px-8 text-center">
+          <p
+            className="text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-3"
+            style={{ fontFamily: "'DM Sans', sans-serif" }}
+          >
+            Real Results
+          </p>
+          <h2
+            className="text-3xl md:text-4xl font-extrabold text-[#111] leading-tight mb-5"
+            style={{ fontFamily: "'Sen', sans-serif" }}
+          >
+            Three Years in a Real Roth IRA
+          </h2>
+          <p
+            className="text-[#444] text-base leading-relaxed max-w-xl mx-auto mb-10"
+            style={{ fontFamily: "'DM Sans', sans-serif" }}
+          >
+            A real Fidelity retirement account. This is what disciplined,
+            system-based trading looks like over time, not one lucky month.
+          </p>
+          <div className="rounded-lg overflow-hidden border border-[#e8e4dc] shadow-[0_8px_40px_rgba(0,0,0,0.08)] bg-white">
+            <img
+              src={RESULTS_IMG}
+              alt="Three years of trading results in a Fidelity Roth IRA account"
+              className="w-full h-auto"
+            />
+          </div>
+          <p
+            className="text-[#999] text-xs leading-relaxed mt-5 max-w-xl mx-auto"
+            style={{ fontFamily: "'DM Sans', sans-serif" }}
+          >
+            Real Fidelity account results. Individual results vary; past performance does not guarantee future results.
+          </p>
         </div>
       </section>
 

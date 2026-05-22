@@ -400,7 +400,7 @@ export default function Results() {
           {/* YouTube CTA */}
           <div className="text-center mt-12">
             <a
-              href="https://www.youtube.com/@TheTraderFoundation/playlists"
+              href="https://www.youtube.com/playlist?list=PLD1J5z-iFMHWO6DfOr8SmyfQZLBeoHMvh"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 text-[#c7ab77] hover:text-[#dfc48a] transition-colors duration-300 group"
