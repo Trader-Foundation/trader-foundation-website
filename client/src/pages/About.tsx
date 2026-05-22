@@ -16,7 +16,7 @@ import { Quote, Instagram } from 'lucide-react';
 const VLAD_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/vlad_processed_v2_9073b39a.jpg';
 const ELLIOT_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/elliot-clean_38e2878f.png';
 /* TODO[v2]: Currently a Google Drive proxy URL — if it stops rendering, re-host. */
-const ERIN_PHOTO = 'https://lh3.googleusercontent.com/d/1kK5lJiwskHwnx_pFDURtqfTIuusO27Uk=s2000';
+const ERIN_PHOTO = 'https://lh3.googleusercontent.com/d/10E_nILZuLdivRy2W2X2J4_pxRM31RYR0=s2000';
 const LEO_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/leo_professional_b52839af.png';
 const JHALIL_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/jhalil-new_9cefdb48.png';
 const STEVE_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/steve-lapa-new_ac25bb0c.png';
@@ -117,12 +117,19 @@ export default function About() {
           </p>
           <div className="relative w-44 h-44 sm:w-52 sm:h-52 mx-auto mb-6">
             <div className="absolute -inset-2 border border-[#c7ab77]/30 rounded-full" />
-            <img
-              src={ERIN_PHOTO}
-              alt="Erin Chawla, Partner at Trader Foundation"
-              className="w-full h-full object-cover rounded-full shadow-xl"
-              style={{ objectPosition: '50% 60%' }}
-            />
+            <div className="w-full h-full rounded-full overflow-hidden shadow-xl">
+              <img
+                src={ERIN_PHOTO}
+                alt="Erin Chawla, Partner at Trader Foundation"
+                className="w-full h-full"
+                style={{
+                  objectFit: 'cover',
+                  objectPosition: 'center center',
+                  transform: 'scale(1.6) translateY(12%)',
+                  transformOrigin: 'center center',
+                }}
+              />
+            </div>
           </div>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-[#111] leading-tight mb-2" style={{ fontFamily: "'Sen', sans-serif" }}>
             Erin Chawla
