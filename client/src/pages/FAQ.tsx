@@ -52,8 +52,12 @@ const faqItems = [
     answer: 'If you\'re not winning at least 70% of your trades within 90 days, you get every penny back. The condition: you follow the system, do the homework, attend your coaching sessions, and follow the rules. You commit, we commit.',
   },
   {
+    question: 'Do I need my own money to trade with?',
+    answer: 'Yes. To get the most out of the program, we ask that you have at least $15,000+ in starting trading capital. This is the money you\'ll trade with in your own account, it\'s separate from the cost of the program itself. The Paycheck Collector method relies on selling defined-risk options, and $15,000+ gives you enough room to apply the strategy properly while keeping your risk controlled.',
+  },
+  {
     question: 'How much does this cost?',
-    answer: 'This is a 4 to 5 figure investment. The exact price depends on the program level you choose and your specific situation. We\'ll discuss that on your call. We\'re looking for people who are serious and committed.',
+    answer: 'This is a 4 to 5 figure investment. The exact price depends on the program level you choose and your specific situation. We\'ll discuss that on your call. We\'re looking for people who are serious and committed. Please note this program investment is separate from the trading capital you\'ll use in your own brokerage account.',
   },
   {
     question: 'Do you offer payment plans or funding options?',

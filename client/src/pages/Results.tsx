@@ -526,6 +526,12 @@ export default function Results() {
           >
             Book a Call
           </a>
+          <p
+            className="mt-4 text-[#888] text-xs sm:text-[0.78rem]"
+            style={{ fontFamily: "'DM Sans', sans-serif" }}
+          >
+            For professionals ready to trade with $15,000+. Application required.
+          </p>
         </div>
       </section>
 
