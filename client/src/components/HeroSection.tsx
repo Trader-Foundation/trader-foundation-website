@@ -141,6 +141,12 @@ export default function HeroSection() {
                 Book a Call
                 <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
               </a>
+              <p
+                className="mt-3 text-white/55 text-xs sm:text-[0.78rem]"
+                style={{ fontFamily: "'DM Sans', sans-serif" }}
+              >
+                For professionals ready to trade with $15,000+. Application required.
+              </p>
             </div>
 
             {/* BBB Badge */}
