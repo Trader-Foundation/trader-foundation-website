@@ -386,7 +386,7 @@ export default function TermsOfUse() {
         </a>{' '}
         for details. Trader Foundation's Copyright Agent for notice of claims of copyright
         infringement or counter notices can be reached as follows:{' '}
-        <a href="mailto:support@traderfoundation.net">support@traderfoundation.net</a>
+        <a href="mailto:support@traderfoundation.com">support@traderfoundation.com</a>
       </p>
       <p>
         This Agreement shall be binding upon and inure to the benefit of Trader Foundation and our
@@ -409,7 +409,7 @@ export default function TermsOfUse() {
       </p>
       <p>
         If you have any questions or concerns regarding our privacy policy please direct them to:{' '}
-        <a href="mailto:support@traderfoundation.net">support@traderfoundation.net</a>
+        <a href="mailto:support@traderfoundation.com">support@traderfoundation.com</a>
       </p>
 
     </LegalPageLayout>

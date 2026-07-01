@@ -390,7 +390,7 @@ export default function PrivacyPolicy() {
       </p>
       <ul>
         <li>
-          By email: <a href="mailto:support@traderfoundation.net">support@traderfoundation.net</a>
+          By email: <a href="mailto:support@traderfoundation.com">support@traderfoundation.com</a>
         </li>
       </ul>
     </LegalPageLayout>
