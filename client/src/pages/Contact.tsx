@@ -14,6 +14,9 @@ import Footer from '@/components/Footer';
 
 export default function Contact() {
   useEffect(() => {
+    // Scroll to top on navigation (e.g. when arriving from the footer link)
+    window.scrollTo(0, 0);
+
     // Load SproutCloud form embed script
     const existing = document.querySelector('script[src="https://link.sproutcloud.co/js/form_embed.js"]');
     if (!existing) {
