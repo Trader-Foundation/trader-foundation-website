@@ -117,11 +117,11 @@ export default function Contact() {
                         Email
                       </p>
                       <a
-                        href="mailto:support@traderfoundation.net"
+                        href="mailto:support@traderfoundation.com"
                         className="text-[#c7ab77] text-sm hover:underline"
                         style={{ fontFamily: "'DM Sans', sans-serif" }}
                       >
-                        support@traderfoundation.net
+                        support@traderfoundation.com
                       </a>
                     </div>
                   </div>
