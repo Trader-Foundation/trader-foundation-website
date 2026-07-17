@@ -18,16 +18,15 @@ const RESULTS_HERO_BG =
   'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/results-hero-bg-CpFzyjQL6EaMaycvJfWQyx.webp';
 
 /* ── Real Accounts & Wins ──
-   One landscape hero (Erin's realized P&L) + 3 phone-view screenshots.
+   3 equal tiles in a single row: Erin, Kelly, Doug.
    Files must be set to "Anyone with the link" on Drive. */
-const heroAccount = {
-  id: '189us7YtGk2Vz65NlOUkKnoPme8-pe-fc',
-  name: 'Erin Chawla',
-  role: 'Partner · Coach',
-  caption: 'Realized profit and loss from Erin\'s personal trading account',
-};
-
-const phoneScreenshots = [
+const accountTiles = [
+  {
+    id: '189us7YtGk2Vz65NlOUkKnoPme8-pe-fc',
+    name: 'Erin Chawla',
+    role: 'Partner · Coach',
+    caption: 'Realized profit and loss from Erin\'s personal trading account',
+  },
   {
     id: '1Tbc4f26qRvGhjUU4pfn51Xh782SMz9AY',
     name: 'Kelly Myers',
@@ -485,45 +484,18 @@ export default function Results() {
             <div className="w-20 h-[2px] bg-[#c7ab77] mx-auto mt-6" />
           </div>
 
-          {/* Erin's landscape tile — inline, not hero */}
-          <div className="max-w-[560px] mx-auto mb-10">
-            <div className="bg-[#faf9f6] border border-[#e8e4dc] rounded-lg overflow-hidden hover:shadow-[0_6px_20px_rgba(0,0,0,0.05)] hover:border-[#c7ab77]/30 transition-all duration-300">
-              <div className="p-4 bg-white">
-                <img
-                  src={`https://lh3.googleusercontent.com/d/${heroAccount.id}=s1600`}
-                  alt={`${heroAccount.name} — ${heroAccount.role}`}
-                  className="w-full h-auto rounded"
-                  loading="lazy"
-                />
-              </div>
-              <div className="px-5 py-4 border-t border-[#e8e4dc]">
-                <div className="flex items-center justify-between mb-1">
-                  <p className="text-[#111] text-sm font-bold" style={{ fontFamily: "'Sen', sans-serif" }}>
-                    {heroAccount.name}
-                  </p>
-                  <p className="text-[#c7ab77] text-[0.65rem] font-bold tracking-[0.15em] uppercase" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-                    {heroAccount.role}
-                  </p>
-                </div>
-                <p className="text-[#555] text-xs leading-relaxed" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-                  {heroAccount.caption}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Phone tiles row — Kelly + Doug side by side */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8 max-w-[900px] mx-auto">
-            {phoneScreenshots.map((shot) => (
+          {/* All 3 tiles in a single equal row */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+            {accountTiles.map((shot) => (
               <div
                 key={shot.id}
                 className="bg-[#faf9f6] border border-[#e8e4dc] rounded-lg overflow-hidden hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] hover:border-[#c7ab77]/40 transition-all duration-300"
               >
-                <div className="p-4 bg-white flex items-center justify-center">
+                <div className="p-4 bg-white flex items-center justify-center min-h-[420px]">
                   <img
                     src={`https://lh3.googleusercontent.com/d/${shot.id}=s1600`}
                     alt={`${shot.name} — ${shot.role}`}
-                    className="max-h-[560px] w-auto h-auto rounded"
+                    className="max-h-[520px] w-auto h-auto rounded"
                     loading="lazy"
                   />
                 </div>
