@@ -40,12 +40,6 @@ const phoneScreenshots = [
     role: 'Student · Gains Message',
     caption: 'Doug sharing his gains',
   },
-  {
-    id: '1JDq5SM5darlBATWeelXrqMJy4dRanTqE',
-    name: 'Student Message',
-    role: 'Direct Message',
-    caption: 'Student confirming 75%+ win rate',
-  },
 ];
 
 /* ── Skool posts (community section, wider format) ── */
@@ -491,10 +485,10 @@ export default function Results() {
             <div className="w-20 h-[2px] bg-[#c7ab77] mx-auto mt-6" />
           </div>
 
-          {/* Landscape hero: Erin */}
-          <div className="max-w-[720px] mx-auto mb-10">
-            <div className="bg-[#faf9f6] border border-[#e8e4dc] rounded-lg overflow-hidden hover:shadow-[0_8px_40px_rgba(0,0,0,0.08)] hover:border-[#c7ab77]/40 transition-all duration-300">
-              <div className="p-5 bg-white">
+          {/* Erin's landscape tile — inline, not hero */}
+          <div className="max-w-[560px] mx-auto mb-10">
+            <div className="bg-[#faf9f6] border border-[#e8e4dc] rounded-lg overflow-hidden hover:shadow-[0_6px_20px_rgba(0,0,0,0.05)] hover:border-[#c7ab77]/30 transition-all duration-300">
+              <div className="p-4 bg-white">
                 <img
                   src={`https://lh3.googleusercontent.com/d/${heroAccount.id}=s1600`}
                   alt={`${heroAccount.name} — ${heroAccount.role}`}
@@ -502,24 +496,24 @@ export default function Results() {
                   loading="lazy"
                 />
               </div>
-              <div className="px-6 py-5 border-t border-[#e8e4dc]">
-                <div className="flex items-center justify-between mb-1.5">
-                  <p className="text-[#111] text-base font-bold" style={{ fontFamily: "'Sen', sans-serif" }}>
+              <div className="px-5 py-4 border-t border-[#e8e4dc]">
+                <div className="flex items-center justify-between mb-1">
+                  <p className="text-[#111] text-sm font-bold" style={{ fontFamily: "'Sen', sans-serif" }}>
                     {heroAccount.name}
                   </p>
-                  <p className="text-[#c7ab77] text-[0.7rem] font-bold tracking-[0.15em] uppercase" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                  <p className="text-[#c7ab77] text-[0.65rem] font-bold tracking-[0.15em] uppercase" style={{ fontFamily: "'DM Sans', sans-serif" }}>
                     {heroAccount.role}
                   </p>
                 </div>
-                <p className="text-[#555] text-sm leading-relaxed" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                <p className="text-[#555] text-xs leading-relaxed" style={{ fontFamily: "'DM Sans', sans-serif" }}>
                   {heroAccount.caption}
                 </p>
               </div>
             </div>
           </div>
 
-          {/* Phone tiles row */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          {/* Phone tiles row — Kelly + Doug side by side */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8 max-w-[900px] mx-auto">
             {phoneScreenshots.map((shot) => (
               <div
                 key={shot.id}
@@ -529,7 +523,7 @@ export default function Results() {
                   <img
                     src={`https://lh3.googleusercontent.com/d/${shot.id}=s1600`}
                     alt={`${shot.name} — ${shot.role}`}
-                    className="max-h-[520px] w-auto h-auto rounded"
+                    className="max-h-[560px] w-auto h-auto rounded"
                     loading="lazy"
                   />
                 </div>
