@@ -29,7 +29,7 @@ const faqItems: FaqItem[] = [
       {
         text: 'I have been learning a lot, and I have come a long way since I started my classes. Having access to a live person or persons has been incredibly encouraging.',
         name: 'Bobby Colucci',
-        source: 'Trustpilot',
+        source: 'Verified Student Review',
       },
     ],
   },
@@ -74,7 +74,7 @@ const faqItems: FaqItem[] = [
       {
         text: 'The company offers daily live sessions with coaches where stocks are reviewed in real time. Students are also encouraged to schedule one-on-one sessions with coaches for personalized guidance.',
         name: 'Jonas',
-        source: 'Trustpilot',
+        source: 'Verified Student Review',
       },
     ],
   },
@@ -116,7 +116,7 @@ const faqItems: FaqItem[] = [
       {
         text: 'Trader Foundation has enabled me to feel confident to dive into the deep end with strategies to succeed. The investment has paid off... big time!',
         name: 'Fred Nicora',
-        source: 'Trustpilot',
+        source: 'Verified Student Review',
       },
     ],
   },
@@ -236,7 +236,7 @@ export default function FAQ() {
                           className="mt-2 text-[#c7ab77] text-[0.7rem] font-semibold tracking-[0.15em] uppercase"
                           style={{ fontFamily: "'DM Sans', sans-serif" }}
                         >
-                          — {q.name} · {q.source}{q.source === 'Trustpilot' ? ' ★★★★★' : ''}
+                          — {q.name} · {q.source}
                         </p>
                       </div>
                     ))}
