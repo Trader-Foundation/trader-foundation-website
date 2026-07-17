@@ -23,7 +23,7 @@ const videoTestimonials = [
   },
   {
     id: '1eGC8oLbV8GZ6KuBKfyquPn1n19X8CKHb',
-    name: 'Shawna',
+    name: 'Shawna Jones',
   },
   {
     id: '1ZANlOgAQLYjFqQfy0UPQq4Iz49I9CJWH',
