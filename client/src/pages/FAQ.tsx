@@ -7,11 +7,29 @@
  */
 
 import { useEffect, useRef, useState } from 'react';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Play } from 'lucide-react';
 
 import Navigation from '@/components/Navigation';
 import SEO from '@/components/SEO';
 import Footer from '@/components/Footer';
+
+/* ── Video testimonials (Google Drive, portrait/mobile-shot) ──
+   Thumbnails served via lh3 proxy; clicking opens the video in a
+   new tab. Files must be set to "Anyone with the link" on Drive. */
+const videoTestimonials = [
+  {
+    id: '1dqb87PLU21iiLmNvieIUJCWI2hNsY9KT',
+    name: 'Student Testimonial',
+  },
+  {
+    id: '1eGC8oLbV8GZ6KuBKfyquPn1n19X8CKHb',
+    name: 'Student Testimonial',
+  },
+  {
+    id: '1ZANlOgAQLYjFqQfy0UPQq4Iz49I9CJWH',
+    name: 'Student Testimonial',
+  },
+];
 
 /* ── FAQ Data ── */
 type Quote = { text: string; name: string; source: string };
@@ -178,6 +196,51 @@ export default function FAQ() {
             <span className="text-[#c7ab77]">ANSWERED</span>
           </h1>
 
+        </div>
+      </section>
+
+      {/* ─── Video Testimonials (portrait, mobile-shot) ─── */}
+      <section className="pb-16 bg-[#0a0a0a]">
+        <div className="max-w-[900px] mx-auto px-6 lg:px-8">
+          <p
+            className="text-[0.7rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-3 text-center"
+            style={{ fontFamily: "'DM Sans', sans-serif" }}
+          >
+            Hear It From Them First
+          </p>
+          <h2
+            className="text-2xl md:text-3xl font-extrabold text-white leading-tight text-center mb-10"
+            style={{ fontFamily: "'Sen', sans-serif" }}
+          >
+            Quick Student Reactions
+          </h2>
+
+          <div className="grid grid-cols-3 gap-3 sm:gap-4 md:gap-6 max-w-[560px] mx-auto">
+            {videoTestimonials.map((video) => (
+              <a
+                key={video.id}
+                href={`https://drive.google.com/file/d/${video.id}/view`}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Play ${video.name}`}
+                className="group relative block bg-[#111] border border-[#c7ab77]/20 rounded-lg overflow-hidden hover:border-[#c7ab77]/60 transition-all duration-300"
+                style={{ aspectRatio: '9 / 16' }}
+              >
+                <img
+                  src={`https://lh3.googleusercontent.com/d/${video.id}=s800`}
+                  alt={video.name}
+                  className="absolute inset-0 w-full h-full object-cover"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors" />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-14 h-14 rounded-full bg-[#c7ab77]/90 group-hover:bg-[#c7ab77] flex items-center justify-center shadow-2xl transition-all duration-300 group-hover:scale-110">
+                    <Play size={22} className="text-[#111] ml-1" fill="#111" />
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
         </div>
       </section>
 
