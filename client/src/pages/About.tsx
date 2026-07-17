@@ -17,6 +17,10 @@ const VLAD_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDB
 const ELLIOT_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/elliot-clean_38e2878f.png';
 /* TODO[v2]: Currently a Google Drive proxy URL — if it stops rendering, re-host. */
 const ERIN_PHOTO = 'https://lh3.googleusercontent.com/d/1P2n8fVs_XSa81WqM8JPGSoJyT_iuNFy8=s2000';
+/* TODO[erin-results]: Replace FILE_ID below with the Google Drive file ID for Erin's
+   Fidelity balance screenshot ($79,162.09 / +122.91% over 3 years, Apr 2023 → Apr 2026).
+   Share the file "Anyone with the link" then swap the ID into the URL. */
+const ERIN_RESULTS_IMG = 'https://lh3.googleusercontent.com/d/FILE_ID_PLACEHOLDER=s2000';
 const LEO_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/leo_professional_b52839af.png';
 const JHALIL_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/jhalil-new_9cefdb48.png';
 const STEVE_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/steve-lapa-new_ac25bb0c.png';
@@ -95,6 +99,7 @@ export default function About() {
   const erinBefore = useFadeIn();
   const erinTurning = useFadeIn();
   const erinToday = useFadeIn();
+  const erinResults = useFadeIn();
   const story = useFadeIn();
   const erinRef = useFadeIn();
   const team = useFadeIn();
@@ -279,6 +284,61 @@ export default function About() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* ─── Erin's Results (Fidelity screenshot as proof) ─── */}
+      <section className="py-20 bg-white border-t border-[#e8e4dc]">
+        <div
+          ref={erinResults.ref}
+          className={`max-w-[1000px] mx-auto px-6 lg:px-8 transition-all duration-700 ${
+            erinResults.visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
+          <div className="text-center mb-10">
+            <p className="text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-3" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+              Erin's Results
+            </p>
+            <h2 className="text-2xl md:text-3xl font-extrabold text-[#111] leading-tight mb-4" style={{ fontFamily: "'Sen', sans-serif" }}>
+              Proof, Not Promises
+            </h2>
+            <p className="text-[#555] text-base leading-relaxed max-w-2xl mx-auto" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+              An actual Fidelity account. <strong>+122.91% over three years</strong>, managed passively around a full-time career using the same Paycheck Collector system I teach.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-8 items-center">
+            {/* Screenshot */}
+            <div className="md:col-span-3">
+              <div className="bg-[#faf9f6] border border-[#e8e4dc] rounded-lg p-4 shadow-sm">
+                <img
+                  src={ERIN_RESULTS_IMG}
+                  alt="Fidelity account balance: $79,162.09, up 122.91% over three years (Apr 2023 – Apr 2026)"
+                  className="w-full h-auto rounded"
+                />
+              </div>
+            </div>
+
+            {/* Stat callouts */}
+            <div className="md:col-span-2 space-y-5">
+              <div className="border-l-2 border-[#c7ab77] pl-4">
+                <p className="text-4xl font-extrabold text-[#111] leading-none" style={{ fontFamily: "'Sen', sans-serif" }}>+122.91%</p>
+                <p className="text-[#555] text-sm mt-1" style={{ fontFamily: "'DM Sans', sans-serif" }}>Three-year account growth</p>
+              </div>
+              <div className="border-l-2 border-[#c7ab77] pl-4">
+                <p className="text-4xl font-extrabold text-[#111] leading-none" style={{ fontFamily: "'Sen', sans-serif" }}>$15.1K → $79.1K</p>
+                <p className="text-[#555] text-sm mt-1" style={{ fontFamily: "'DM Sans', sans-serif" }}>Balance, Apr 2023 → Apr 2026</p>
+              </div>
+              <div className="border-l-2 border-[#c7ab77] pl-4">
+                <p className="text-4xl font-extrabold text-[#111] leading-none" style={{ fontFamily: "'Sen', sans-serif" }}>Passive</p>
+                <p className="text-[#555] text-sm mt-1" style={{ fontFamily: "'DM Sans', sans-serif" }}>Managed around a full-time career</p>
+              </div>
+            </div>
+          </div>
+
+          <p className="text-center text-[#888] text-[11px] leading-relaxed max-w-2xl mx-auto mt-10" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+            Individual account belonging to Erin Chawla. Personal results are not typical, are not a guarantee of future performance, and do not represent what any student will earn. Trading involves risk of loss. See our full earnings disclaimer.
+          </p>
         </div>
       </section>
 
