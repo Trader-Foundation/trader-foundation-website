@@ -7,7 +7,7 @@
  */
 
 import { useEffect, useRef, useState } from 'react';
-import { ChevronDown, Play } from 'lucide-react';
+import { ChevronDown, Play, X } from 'lucide-react';
 
 import Navigation from '@/components/Navigation';
 import SEO from '@/components/SEO';
@@ -157,6 +157,7 @@ const faqItems: FaqItem[] = [
 
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [openVideoId, setOpenVideoId] = useState<string | null>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -281,12 +282,11 @@ export default function FAQ() {
 
             <div className="grid grid-cols-3 gap-3 sm:gap-4 md:gap-6 max-w-[560px] mx-auto">
               {videoTestimonials.map((video) => (
-                <a
+                <button
                   key={video.id}
-                  href={`https://drive.google.com/file/d/${video.id}/view`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`Play ${video.name}`}
+                  type="button"
+                  onClick={() => setOpenVideoId(video.id)}
+                  aria-label={`Play video testimonial from ${video.name}`}
                   className="group relative block bg-[#111] border border-[#c7ab77]/20 rounded-lg overflow-hidden hover:border-[#c7ab77]/60 transition-all duration-300"
                   style={{ aspectRatio: '9 / 16' }}
                 >
@@ -302,7 +302,7 @@ export default function FAQ() {
                       <Play size={22} className="text-[#111] ml-1" fill="#111" />
                     </div>
                   </div>
-                </a>
+                </button>
               ))}
             </div>
           </div>
@@ -327,6 +327,38 @@ export default function FAQ() {
           </div>
         </div>
       </section>
+
+      {/* ─── Video Player Modal ─── */}
+      {openVideoId && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4"
+          onClick={() => setOpenVideoId(null)}
+          role="dialog"
+          aria-modal="true"
+        >
+          <button
+            type="button"
+            onClick={() => setOpenVideoId(null)}
+            aria-label="Close video"
+            className="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
+          >
+            <X size={20} />
+          </button>
+          <div
+            className="relative w-full max-w-[420px]"
+            onClick={(e) => e.stopPropagation()}
+            style={{ aspectRatio: '9 / 16' }}
+          >
+            <iframe
+              src={`https://drive.google.com/file/d/${openVideoId}/preview`}
+              title="Student video testimonial"
+              className="absolute inset-0 w-full h-full rounded-lg"
+              allow="autoplay"
+              allowFullScreen
+            />
+          </div>
+        </div>
+      )}
 
       <Footer />
     </div>
