@@ -19,15 +19,15 @@ import Footer from '@/components/Footer';
 const videoTestimonials = [
   {
     id: '1dqb87PLU21iiLmNvieIUJCWI2hNsY9KT',
-    name: 'Student Testimonial',
+    name: 'Kunal Jani',
   },
   {
     id: '1eGC8oLbV8GZ6KuBKfyquPn1n19X8CKHb',
-    name: 'Student Testimonial',
+    name: 'Shawna',
   },
   {
     id: '1ZANlOgAQLYjFqQfy0UPQq4Iz49I9CJWH',
-    name: 'Student Testimonial',
+    name: 'Danny Musaev',
   },
 ];
 
