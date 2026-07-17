@@ -17,41 +17,54 @@ import Footer from '@/components/Footer';
 const RESULTS_HERO_BG =
   'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/results-hero-bg-CpFzyjQL6EaMaycvJfWQyx.webp';
 
-/* ── Coach account screenshots (Google Drive lh3 proxy) ──
-   Both files must be set to "Anyone with the link" on Drive so the
-   lh3 proxy can serve them. */
-const coachAccounts = [
+/* ── Real account screenshots (Google Drive lh3 proxy) ──
+   Files must be set to "Anyone with the link" on Drive. Full-account
+   screenshots are intentionally rare — see "Real Accounts" section
+   copy for framing. */
+const realAccounts = [
   {
     id: '189us7YtGk2Vz65NlOUkKnoPme8-pe-fc',
     name: 'Erin Chawla',
-    role: 'Partner',
-    caption: 'Realized profit and loss from Erin\'s own trading account',
+    role: 'Partner · Coach',
+    caption: 'Realized profit and loss from Erin\'s personal trading account',
   },
   {
-    id: '1xLMnLvJirbHJr569Xe3CBA3jmUZNVgq-',
-    name: 'Elliot Gumbs',
-    role: 'Lead Mentor',
-    caption: 'Elliot trades the same system he teaches every day',
+    id: '1Tbc4f26qRvGhjUU4pfn51Xh782SMz9AY',
+    name: 'Kelly Myers',
+    role: 'Student · Robinhood',
+    caption: 'Kelly\'s Robinhood account after joining the program',
   },
 ];
 
 const communityPosts = [
   {
+    id: '120XYWJJNE-dllOMQ3gLFc_0dfnTnCdPe',
+    name: 'Doug Birnie',
+    source: 'Student Message',
+    caption: 'Doug sharing his gains',
+  },
+  {
+    id: '1xLMnLvJirbHJr569Xe3CBA3jmUZNVgq-',
+    name: 'Elliot Gumbs',
+    source: 'Skool Post',
+    caption: 'Elliot posting a trade from his own account',
+  },
+  {
     id: '1y72LN9dC0GeNo0o38M2Ew4ninD-lxCcg',
     name: 'Kelly Myers',
-    source: 'Skool Community',
-    caption: 'Kelly sharing her account progress with the community',
+    source: 'Skool Post',
+    caption: 'Kelly sharing account progress with the community',
   },
   {
     id: '1KVy8Lj3VTwNb8-E6OzXniT9O16xcuAcI',
     name: 'Mark Cunningham',
-    source: 'Skool Community',
+    source: 'Skool Post',
     caption: 'Student update from the community',
   },
   {
     id: '18KjlalRZfxEyDpbdLdcN6lya8smzx-Mj',
     name: 'Isaac Rorholm',
-    source: 'Skool Community',
+    source: 'Skool Post',
     caption: '19-year seasoned options trader',
   },
   {
@@ -467,43 +480,46 @@ export default function Results() {
         </div>
       </section>
 
-      {/* ─── Coach Accounts (screenshots) ─── */}
+      {/* ─── Real Accounts (screenshots — hero tiles) ─── */}
       <section className="py-24 bg-white border-t border-[#e8e4dc]">
         <div className="max-w-[1000px] mx-auto px-6 lg:px-8">
           <div className="text-center mb-14">
             <p className="text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-3" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-              Skin in the Game
+              Real Accounts
             </p>
             <h2 className="text-3xl md:text-4xl font-extrabold text-[#111] leading-tight" style={{ fontFamily: "'Sen', sans-serif" }}>
-              Our Coaches Trade the Same System They Teach
+              What a Real Account Looks Like
             </h2>
+            <p className="text-[#555] text-sm sm:text-base leading-relaxed max-w-xl mx-auto mt-5" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+              Most people share individual wins, not full accounts &mdash; account balances are private. When we do get permission, here's what it looks like.
+            </p>
             <div className="w-20 h-[2px] bg-[#c7ab77] mx-auto mt-6" />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-            {coachAccounts.map((shot) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10">
+            {realAccounts.map((shot) => (
               <div
                 key={shot.id}
-                className="bg-[#faf9f6] border border-[#e8e4dc] rounded-lg overflow-hidden hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] hover:border-[#c7ab77]/30 transition-all duration-300"
+                className="bg-[#faf9f6] border border-[#e8e4dc] rounded-lg overflow-hidden hover:shadow-[0_8px_40px_rgba(0,0,0,0.08)] hover:border-[#c7ab77]/40 transition-all duration-300"
               >
-                <div className="p-4 bg-white">
+                <div className="p-5 bg-white">
                   <img
                     src={`https://lh3.googleusercontent.com/d/${shot.id}=s1600`}
-                    alt={`${shot.name} — ${shot.role} account`}
+                    alt={`${shot.name} — ${shot.role}`}
                     className="w-full h-auto rounded"
                     loading="lazy"
                   />
                 </div>
-                <div className="px-5 py-4 border-t border-[#e8e4dc]">
-                  <div className="flex items-center justify-between mb-1">
-                    <p className="text-[#111] text-sm font-bold" style={{ fontFamily: "'Sen', sans-serif" }}>
+                <div className="px-6 py-5 border-t border-[#e8e4dc]">
+                  <div className="flex items-center justify-between mb-1.5">
+                    <p className="text-[#111] text-base font-bold" style={{ fontFamily: "'Sen', sans-serif" }}>
                       {shot.name}
                     </p>
-                    <p className="text-[#c7ab77] text-[0.65rem] font-bold tracking-[0.15em] uppercase" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    <p className="text-[#c7ab77] text-[0.7rem] font-bold tracking-[0.15em] uppercase" style={{ fontFamily: "'DM Sans', sans-serif" }}>
                       {shot.role}
                     </p>
                   </div>
-                  <p className="text-[#555] text-xs leading-relaxed" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                  <p className="text-[#555] text-sm leading-relaxed" style={{ fontFamily: "'DM Sans', sans-serif" }}>
                     {shot.caption}
                   </p>
                 </div>
@@ -512,7 +528,7 @@ export default function Results() {
           </div>
 
           <p className="text-center text-[#888] text-[11px] leading-relaxed max-w-2xl mx-auto mt-10" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-            Individual coach accounts. Personal results are not typical, are not a guarantee of future performance, and do not represent what any student will earn. Trading involves risk of loss.
+            Individual accounts belonging to a coach and a student, shared with permission. Personal results are not typical, are not a guarantee of future performance, and do not represent what any student will earn. Trading involves risk of loss.
           </p>
         </div>
       </section>
@@ -525,12 +541,15 @@ export default function Results() {
               Straight From the Community
             </p>
             <h2 className="text-3xl md:text-4xl font-extrabold text-[#111] leading-tight" style={{ fontFamily: "'Sen', sans-serif" }}>
-              Real Posts, Real Conversations
+              Wins, Posts &amp; Conversations
             </h2>
+            <p className="text-[#555] text-sm sm:text-base leading-relaxed max-w-xl mx-auto mt-5" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+              Individual trade wins, Skool posts, direct messages &mdash; the day-to-day of a real community celebrating each other.
+            </p>
             <div className="w-20 h-[2px] bg-[#c7ab77] mx-auto mt-6" />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {communityPosts.map((post) => (
               <div
                 key={post.id}
