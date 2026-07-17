@@ -97,6 +97,13 @@ const faqItems: FaqItem[] = [
   {
     question: 'What\'s your guarantee?',
     answer: 'If you\'re not winning at least 70% of your trades within 90 days, you get every penny back. The condition: you follow the system, do the homework, attend your coaching sessions, and follow the rules. You commit, we commit.',
+    quotes: [
+      {
+        text: 'I\'ve won an overwhelming number of trades compared to my losers. The ones I\'ve lost, maybe a few — compared to nearly a hundred that I won. It\'s made a huge difference to me.',
+        name: 'Charles Brey',
+        source: 'Student Testimonial',
+      },
+    ],
   },
   {
     question: 'Do I need my own money to trade with?',
