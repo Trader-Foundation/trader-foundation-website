@@ -17,43 +17,44 @@ import Footer from '@/components/Footer';
 const RESULTS_HERO_BG =
   'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/results-hero-bg-CpFzyjQL6EaMaycvJfWQyx.webp';
 
-/* ── Real account screenshots (Google Drive lh3 proxy) ──
-   Files must be set to "Anyone with the link" on Drive. Full-account
-   screenshots are intentionally rare — see "Real Accounts" section
-   copy for framing. */
-const realAccounts = [
-  {
-    id: '189us7YtGk2Vz65NlOUkKnoPme8-pe-fc',
-    name: 'Erin Chawla',
-    role: 'Partner · Coach',
-    caption: 'Realized profit and loss from Erin\'s personal trading account',
-  },
+/* ── Real Accounts & Wins ──
+   One landscape hero (Erin's realized P&L) + 3 phone-view screenshots.
+   Files must be set to "Anyone with the link" on Drive. */
+const heroAccount = {
+  id: '189us7YtGk2Vz65NlOUkKnoPme8-pe-fc',
+  name: 'Erin Chawla',
+  role: 'Partner · Coach',
+  caption: 'Realized profit and loss from Erin\'s personal trading account',
+};
+
+const phoneScreenshots = [
   {
     id: '1Tbc4f26qRvGhjUU4pfn51Xh782SMz9AY',
     name: 'Kelly Myers',
     role: 'Student · Robinhood',
-    caption: 'Kelly\'s Robinhood account after joining the program',
+    caption: 'Kelly\'s Robinhood account after joining',
   },
-];
-
-const communityPosts = [
   {
     id: '120XYWJJNE-dllOMQ3gLFc_0dfnTnCdPe',
     name: 'Doug Birnie',
-    source: 'Student Message',
+    role: 'Student · Gains Message',
     caption: 'Doug sharing his gains',
   },
+  {
+    id: '1JDq5SM5darlBATWeelXrqMJy4dRanTqE',
+    name: 'Student Message',
+    role: 'Direct Message',
+    caption: 'Student confirming 75%+ win rate',
+  },
+];
+
+/* ── Skool posts (community section, wider format) ── */
+const skoolPosts = [
   {
     id: '1xLMnLvJirbHJr569Xe3CBA3jmUZNVgq-',
     name: 'Elliot Gumbs',
     source: 'Skool Post',
     caption: 'Elliot posting a trade from his own account',
-  },
-  {
-    id: '1y72LN9dC0GeNo0o38M2Ew4ninD-lxCcg',
-    name: 'Kelly Myers',
-    source: 'Skool Post',
-    caption: 'Kelly sharing account progress with the community',
   },
   {
     id: '1KVy8Lj3VTwNb8-E6OzXniT9O16xcuAcI',
@@ -66,12 +67,6 @@ const communityPosts = [
     name: 'Isaac Rorholm',
     source: 'Skool Post',
     caption: '19-year seasoned options trader',
-  },
-  {
-    id: '1JDq5SM5darlBATWeelXrqMJy4dRanTqE',
-    name: 'Student Message',
-    source: 'Direct Message',
-    caption: 'Student confirming 75%+ win rate',
   },
 ];
 
@@ -480,46 +475,74 @@ export default function Results() {
         </div>
       </section>
 
-      {/* ─── Real Accounts (screenshots — hero tiles) ─── */}
+      {/* ─── Real Accounts & Wins (hero + phone tiles) ─── */}
       <section className="py-24 bg-white border-t border-[#e8e4dc]">
-        <div className="max-w-[1000px] mx-auto px-6 lg:px-8">
+        <div className="max-w-[1200px] mx-auto px-6 lg:px-8">
           <div className="text-center mb-14">
             <p className="text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-3" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-              Real Accounts
+              Real Accounts &amp; Wins
             </p>
             <h2 className="text-3xl md:text-4xl font-extrabold text-[#111] leading-tight" style={{ fontFamily: "'Sen', sans-serif" }}>
-              What a Real Account Looks Like
+              What Actual Results Look Like
             </h2>
             <p className="text-[#555] text-sm sm:text-base leading-relaxed max-w-xl mx-auto mt-5" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-              Most people share individual wins, not full accounts &mdash; account balances are private. When we do get permission, here's what it looks like.
+              Most people share individual wins, not full accounts &mdash; account balances are private. Here's a mix of both, shared with permission.
             </p>
             <div className="w-20 h-[2px] bg-[#c7ab77] mx-auto mt-6" />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10">
-            {realAccounts.map((shot) => (
+          {/* Landscape hero: Erin */}
+          <div className="max-w-[720px] mx-auto mb-10">
+            <div className="bg-[#faf9f6] border border-[#e8e4dc] rounded-lg overflow-hidden hover:shadow-[0_8px_40px_rgba(0,0,0,0.08)] hover:border-[#c7ab77]/40 transition-all duration-300">
+              <div className="p-5 bg-white">
+                <img
+                  src={`https://lh3.googleusercontent.com/d/${heroAccount.id}=s1600`}
+                  alt={`${heroAccount.name} — ${heroAccount.role}`}
+                  className="w-full h-auto rounded"
+                  loading="lazy"
+                />
+              </div>
+              <div className="px-6 py-5 border-t border-[#e8e4dc]">
+                <div className="flex items-center justify-between mb-1.5">
+                  <p className="text-[#111] text-base font-bold" style={{ fontFamily: "'Sen', sans-serif" }}>
+                    {heroAccount.name}
+                  </p>
+                  <p className="text-[#c7ab77] text-[0.7rem] font-bold tracking-[0.15em] uppercase" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    {heroAccount.role}
+                  </p>
+                </div>
+                <p className="text-[#555] text-sm leading-relaxed" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                  {heroAccount.caption}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Phone tiles row */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            {phoneScreenshots.map((shot) => (
               <div
                 key={shot.id}
-                className="bg-[#faf9f6] border border-[#e8e4dc] rounded-lg overflow-hidden hover:shadow-[0_8px_40px_rgba(0,0,0,0.08)] hover:border-[#c7ab77]/40 transition-all duration-300"
+                className="bg-[#faf9f6] border border-[#e8e4dc] rounded-lg overflow-hidden hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] hover:border-[#c7ab77]/40 transition-all duration-300"
               >
-                <div className="p-5 bg-white">
+                <div className="p-4 bg-white flex items-center justify-center">
                   <img
                     src={`https://lh3.googleusercontent.com/d/${shot.id}=s1600`}
                     alt={`${shot.name} — ${shot.role}`}
-                    className="w-full h-auto rounded"
+                    className="max-h-[520px] w-auto h-auto rounded"
                     loading="lazy"
                   />
                 </div>
-                <div className="px-6 py-5 border-t border-[#e8e4dc]">
-                  <div className="flex items-center justify-between mb-1.5">
-                    <p className="text-[#111] text-base font-bold" style={{ fontFamily: "'Sen', sans-serif" }}>
+                <div className="px-5 py-4 border-t border-[#e8e4dc]">
+                  <div className="flex items-center justify-between mb-1">
+                    <p className="text-[#111] text-sm font-bold" style={{ fontFamily: "'Sen', sans-serif" }}>
                       {shot.name}
                     </p>
-                    <p className="text-[#c7ab77] text-[0.7rem] font-bold tracking-[0.15em] uppercase" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    <p className="text-[#c7ab77] text-[0.65rem] font-bold tracking-[0.15em] uppercase" style={{ fontFamily: "'DM Sans', sans-serif" }}>
                       {shot.role}
                     </p>
                   </div>
-                  <p className="text-[#555] text-sm leading-relaxed" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                  <p className="text-[#555] text-xs leading-relaxed" style={{ fontFamily: "'DM Sans', sans-serif" }}>
                     {shot.caption}
                   </p>
                 </div>
@@ -528,29 +551,29 @@ export default function Results() {
           </div>
 
           <p className="text-center text-[#888] text-[11px] leading-relaxed max-w-2xl mx-auto mt-10" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-            Individual accounts belonging to a coach and a student, shared with permission. Personal results are not typical, are not a guarantee of future performance, and do not represent what any student will earn. Trading involves risk of loss.
+            Individual accounts and messages, shared with permission. Personal results are not typical, are not a guarantee of future performance, and do not represent what any student will earn. Trading involves risk of loss.
           </p>
         </div>
       </section>
 
-      {/* ─── From the Community (Skool/DM screenshots) ─── */}
+      {/* ─── Straight from the Community (Skool posts) ─── */}
       <section className="py-24 bg-[#faf9f6]">
-        <div className="max-w-[1320px] mx-auto px-6 lg:px-8">
+        <div className="max-w-[1200px] mx-auto px-6 lg:px-8">
           <div className="text-center mb-14">
             <p className="text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-3" style={{ fontFamily: "'DM Sans', sans-serif" }}>
               Straight From the Community
             </p>
             <h2 className="text-3xl md:text-4xl font-extrabold text-[#111] leading-tight" style={{ fontFamily: "'Sen', sans-serif" }}>
-              Wins, Posts &amp; Conversations
+              Posts From Inside the Program
             </h2>
             <p className="text-[#555] text-sm sm:text-base leading-relaxed max-w-xl mx-auto mt-5" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-              Individual trade wins, Skool posts, direct messages &mdash; the day-to-day of a real community celebrating each other.
+              Real Skool posts &mdash; students and coaches sharing trades, wins, and lessons with each other every day.
             </p>
             <div className="w-20 h-[2px] bg-[#c7ab77] mx-auto mt-6" />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-            {communityPosts.map((post) => (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+            {skoolPosts.map((post) => (
               <div
                 key={post.id}
                 className="bg-white border border-[#e8e4dc] rounded-lg overflow-hidden hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] hover:border-[#c7ab77]/30 transition-all duration-300"
