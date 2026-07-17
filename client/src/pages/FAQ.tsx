@@ -14,18 +14,46 @@ import SEO from '@/components/SEO';
 import Footer from '@/components/Footer';
 
 /* ── FAQ Data ── */
-const faqItems = [
+type Quote = { text: string; name: string; source: string };
+type FaqItem = {
+  question: string;
+  answer: string;
+  quotes?: Quote[];
+};
+
+const faqItems: FaqItem[] = [
   {
     question: 'Am I Capable of Learning This?',
     answer: 'Yes. Trading comes down to two things: pattern recognition and risk management. We\'ve trained over 1,100 students, including engineers, dentists, retirees, and people from every walk of life. You don\'t need to be a genius. You need to be coachable.',
+    quotes: [
+      {
+        text: 'I have been learning a lot, and I have come a long way since I started my classes. Having access to a live person or persons has been incredibly encouraging.',
+        name: 'Bobby Colucci',
+        source: 'Trustpilot',
+      },
+    ],
   },
   {
     question: 'I\'ve tried other trading methods and lost money. Why would this be different?',
     answer: 'Because we don\'t sell shortcuts. Our curriculum was built over a decade by our founder, Vlad Tayman, and is now delivered by Erin and our coaching team. AI bots, signals, and YouTube courses fail because they skip the foundation. We teach you the "why" behind the market, give you a proven system, and coach you 1-on-1 until you get it. We don\'t stop until you do.',
+    quotes: [
+      {
+        text: 'My trading is completely turned around. I\'m more on the 10% side now, not the 90%. I\'ve won an overwhelming number of trades compared to my losers — maybe a few losses compared to nearly a hundred wins. It\'s made a huge difference to me.',
+        name: 'Charles Brey',
+        source: 'Student Testimonial',
+      },
+    ],
   },
   {
     question: 'I\'m worried I\'m not disciplined enough. What if I quit?',
     answer: 'That\'s exactly why accountability is built into this program. Your coach holds you accountable with weekly check-ins, homework reviews, and 1-on-1 sessions. Over 300 students renew with us every year because they know we won\'t let them quit.',
+    quotes: [
+      {
+        text: 'I started trading during the pandemic. Got lucky on NIO, then lost a lot of money — at my worst, down 66% all time. After joining the program and clearing out my bad buys, I started this year with about $25k. I\'m up $16k, a little over 60% YTD. I have no doubt I\'ll make that $30k loss up this year.',
+        name: 'Kelly Myers',
+        source: 'Student Community',
+      },
+    ],
   },
   {
     question: 'Do you have any free courses I can watch?',
@@ -42,10 +70,29 @@ const faqItems = [
   {
     question: 'Is this group coaching or 1-on-1?',
     answer: 'This is genuine 1-on-1 coaching. You get a dedicated coach who works with you individually. We also offer daily group live sessions for real-time market analysis, but your core learning experience is completely personalized.',
+    quotes: [
+      {
+        text: 'The company offers daily live sessions with coaches where stocks are reviewed in real time. Students are also encouraged to schedule one-on-one sessions with coaches for personalized guidance.',
+        name: 'Jonas',
+        source: 'Trustpilot',
+      },
+    ],
   },
   {
     question: 'Why is this better than AI bots, signals, or YouTube education?',
     answer: 'AI bots and signals give you fish — we teach you how to fish. YouTube education is fragmented and lacks accountability. Our program gives you a proven system, a dedicated coach, and a structured path from beginner to confident trader. You build a real skill that lasts a lifetime.',
+    quotes: [
+      {
+        text: 'The Skool platform they use is interactive and really breaks down trading concepts with tutorials and live examples. Vlad leads weekly calls to discuss the market, provide trading insight, and offer live trading opportunities to participate in that he is taking positions with himself in his own portfolio. If you are looking for a group that will not only provide you with a few fish but also teach you how to fish, this is the group!',
+        name: 'Matt Couch',
+        source: 'Student Community',
+      },
+      {
+        text: 'I was calculating my Think or Swim account today. As of today, I\'m up just over 40% in this account. I am amazed at what I\'ve learned and how far I\'ve come from just joining this trading team. I\'m a seasoned options trader — 19 years — and the pieces I was missing from the puzzle were in the training.',
+        name: 'Isaac Rorholm',
+        source: 'Student Community',
+      },
+    ],
   },
   {
     question: 'What\'s your guarantee?',
@@ -58,6 +105,13 @@ const faqItems = [
   {
     question: 'How much does this cost?',
     answer: 'This is a 4 to 5 figure investment. The exact price depends on the program level you choose and your specific situation. We\'ll discuss that on your call. We\'re looking for people who are serious and committed. Please note this program investment is separate from the trading capital you\'ll use in your own brokerage account.',
+    quotes: [
+      {
+        text: 'Trader Foundation has enabled me to feel confident to dive into the deep end with strategies to succeed. The investment has paid off... big time!',
+        name: 'Fred Nicora',
+        source: 'Trustpilot',
+      },
+    ],
   },
   {
     question: 'Do you offer payment plans or funding options?',
@@ -66,6 +120,13 @@ const faqItems = [
   {
     question: 'What if I don\'t like the coaches?',
     answer: 'You keep trading, growing, and learning. Many students renew because they value the coaching and community. Some become self-sufficient and trade on their own. Either way, the door is always open. This is a family, and family is forever.',
+    quotes: [
+      {
+        text: 'I absolutely love this program. The coaches are amazing and they genuinely care and want you to succeed. If you are looking to learn to trade I highly recommend them.',
+        name: 'Bryton Lawrence',
+        source: 'Student Community',
+      },
+    ],
   },
 ];
 
@@ -147,7 +208,7 @@ export default function FAQ() {
                 </button>
                 <div
                   className="overflow-hidden transition-all duration-400 ease-in-out"
-                  style={{ maxHeight: openIndex === index ? '500px' : '0px' }}
+                  style={{ maxHeight: openIndex === index ? '2000px' : '0px' }}
                 >
                   <div className="pb-6">
                     <p
@@ -156,6 +217,22 @@ export default function FAQ() {
                     >
                       {item.answer}
                     </p>
+                    {item.quotes && item.quotes.map((q, qi) => (
+                      <div key={qi} className="mt-5 max-w-[90%] border-l-2 border-[#c7ab77]/50 pl-4 py-1">
+                        <p
+                          className="text-white/85 text-[0.85rem] leading-relaxed italic"
+                          style={{ fontFamily: "'DM Sans', sans-serif" }}
+                        >
+                          &ldquo;{q.text}&rdquo;
+                        </p>
+                        <p
+                          className="mt-2 text-[#c7ab77] text-[0.7rem] font-semibold tracking-[0.15em] uppercase"
+                          style={{ fontFamily: "'DM Sans', sans-serif" }}
+                        >
+                          — {q.name} · {q.source}{q.source === 'Trustpilot' ? ' ★★★★★' : ''}
+                        </p>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
