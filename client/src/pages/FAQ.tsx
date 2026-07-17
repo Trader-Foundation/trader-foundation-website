@@ -42,6 +42,11 @@ const faqItems: FaqItem[] = [
   {
     question: 'I\'m worried I\'m not disciplined enough. What if I quit?',
     answer: 'That\'s exactly why accountability is built into this program. Your coach holds you accountable with weekly check-ins, homework reviews, and 1-on-1 sessions. Over 300 students renew with us every year because they know we won\'t let them quit.',
+    quote: {
+      text: 'I started trading during the pandemic. Got lucky on NIO, then lost a lot of money — at my worst, down 66% all time. After joining the program and clearing out my bad buys, I started this year with about $25k. I\'m up $16k, a little over 60% YTD. I have no doubt I\'ll make that $30k loss up this year.',
+      name: 'Kelly Myers',
+      source: 'Student Community',
+    },
   },
   {
     question: 'Do you have any free courses I can watch?',
@@ -67,6 +72,11 @@ const faqItems: FaqItem[] = [
   {
     question: 'Why is this better than AI bots, signals, or YouTube education?',
     answer: 'AI bots and signals give you fish — we teach you how to fish. YouTube education is fragmented and lacks accountability. Our program gives you a proven system, a dedicated coach, and a structured path from beginner to confident trader. You build a real skill that lasts a lifetime.',
+    quote: {
+      text: 'I was calculating my Think or Swim account today. As of today, I\'m up just over 40% in this account. I am amazed at what I\'ve learned and how far I\'ve come from just joining this trading team. I\'m a seasoned options trader — 19 years — and the pieces I was missing from the puzzle were in the training.',
+      name: 'Isaac Rorholm',
+      source: 'Student Community',
+    },
   },
   {
     question: 'What\'s your guarantee?',
