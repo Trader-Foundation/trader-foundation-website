@@ -17,6 +17,52 @@ import Footer from '@/components/Footer';
 const RESULTS_HERO_BG =
   'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/results-hero-bg-CpFzyjQL6EaMaycvJfWQyx.webp';
 
+/* ── Student account screenshots (Google Drive lh3 proxy) ──
+   TODO: Confirm each file is set to "Anyone with the link" on Drive so
+   the lh3 proxy can serve them. Update captions when broker/name/number
+   details are confirmed. */
+const accountScreenshots = [
+  {
+    id: '189us7YtGk2Vz65NlOUkKnoPme8-pe-fc',
+    name: 'Kelly Myers',
+    broker: 'Robinhood',
+    caption: 'Comeback story: from a 66% drawdown to +60% YTD',
+  },
+  {
+    id: '1y72LN9dC0GeNo0o38M2Ew4ninD-lxCcg',
+    name: 'Student',
+    broker: 'Robinhood',
+    caption: 'Active trading account',
+  },
+  {
+    id: '1VVfuyA2ML0aHETlT1ULQAtFhORiZt9T9',
+    name: 'Student',
+    broker: 'Fidelity',
+    caption: '$56K account balance',
+  },
+];
+
+const communityPosts = [
+  {
+    id: '1KVy8Lj3VTwNb8-E6OzXniT9O16xcuAcI',
+    name: 'Mark Cunningham',
+    source: 'Skool Community',
+    caption: 'Student update from the community',
+  },
+  {
+    id: '18KjlalRZfxEyDpbdLdcN6lya8smzx-Mj',
+    name: 'Isaac Rorholm',
+    source: 'Skool Community',
+    caption: '19-year seasoned options trader',
+  },
+  {
+    id: '1JDq5SM5darlBATWeelXrqMJy4dRanTqE',
+    name: 'Student Message',
+    source: 'Direct Message',
+    caption: 'Student confirming 75%+ win rate',
+  },
+];
+
 /* ── Video data ── */
 const featuredVideo = {
   vimeoId: '1171149705',
@@ -418,6 +464,102 @@ export default function Results() {
               <span className="text-sm font-semibold tracking-wide">Watch more testimonials on our YouTube channel</span>
               <span className="group-hover:translate-x-1 transition-transform duration-300">&rarr;</span>
             </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Real Accounts (screenshots) ─── */}
+      <section className="py-24 bg-white border-t border-[#e8e4dc]">
+        <div className="max-w-[1320px] mx-auto px-6 lg:px-8">
+          <div className="text-center mb-14">
+            <p className="text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-3" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+              Real Accounts
+            </p>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-[#111] leading-tight" style={{ fontFamily: "'Sen', sans-serif" }}>
+              The Numbers, Straight From Their Brokers
+            </h2>
+            <div className="w-20 h-[2px] bg-[#c7ab77] mx-auto mt-6" />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+            {accountScreenshots.map((shot) => (
+              <div
+                key={shot.id}
+                className="bg-[#faf9f6] border border-[#e8e4dc] rounded-lg overflow-hidden hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] hover:border-[#c7ab77]/30 transition-all duration-300"
+              >
+                <div className="p-4 bg-white">
+                  <img
+                    src={`https://lh3.googleusercontent.com/d/${shot.id}=s1600`}
+                    alt={`${shot.name} — ${shot.broker} account`}
+                    className="w-full h-auto rounded"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="px-5 py-4 border-t border-[#e8e4dc]">
+                  <div className="flex items-center justify-between mb-1">
+                    <p className="text-[#111] text-sm font-bold" style={{ fontFamily: "'Sen', sans-serif" }}>
+                      {shot.name}
+                    </p>
+                    <p className="text-[#c7ab77] text-[0.65rem] font-bold tracking-[0.15em] uppercase" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                      {shot.broker}
+                    </p>
+                  </div>
+                  <p className="text-[#555] text-xs leading-relaxed" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    {shot.caption}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <p className="text-center text-[#888] text-[11px] leading-relaxed max-w-2xl mx-auto mt-10" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+            Individual student accounts. Personal results are not typical, are not a guarantee of future performance, and do not represent what any student will earn. Trading involves risk of loss.
+          </p>
+        </div>
+      </section>
+
+      {/* ─── From the Community (Skool/DM screenshots) ─── */}
+      <section className="py-24 bg-[#faf9f6]">
+        <div className="max-w-[1320px] mx-auto px-6 lg:px-8">
+          <div className="text-center mb-14">
+            <p className="text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-3" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+              Straight From the Community
+            </p>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-[#111] leading-tight" style={{ fontFamily: "'Sen', sans-serif" }}>
+              Real Posts, Real Conversations
+            </h2>
+            <div className="w-20 h-[2px] bg-[#c7ab77] mx-auto mt-6" />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+            {communityPosts.map((post) => (
+              <div
+                key={post.id}
+                className="bg-white border border-[#e8e4dc] rounded-lg overflow-hidden hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] hover:border-[#c7ab77]/30 transition-all duration-300"
+              >
+                <div className="p-4">
+                  <img
+                    src={`https://lh3.googleusercontent.com/d/${post.id}=s1600`}
+                    alt={`${post.name} — ${post.source}`}
+                    className="w-full h-auto rounded"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="px-5 py-4 border-t border-[#e8e4dc]">
+                  <div className="flex items-center justify-between mb-1">
+                    <p className="text-[#111] text-sm font-bold" style={{ fontFamily: "'Sen', sans-serif" }}>
+                      {post.name}
+                    </p>
+                    <p className="text-[#c7ab77] text-[0.65rem] font-bold tracking-[0.15em] uppercase" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                      {post.source}
+                    </p>
+                  </div>
+                  <p className="text-[#555] text-xs leading-relaxed" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    {post.caption}
+                  </p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
