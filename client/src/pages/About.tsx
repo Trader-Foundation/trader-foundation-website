@@ -17,10 +17,9 @@ const VLAD_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDB
 const ELLIOT_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/elliot-clean_38e2878f.png';
 /* TODO[v2]: Currently a Google Drive proxy URL — if it stops rendering, re-host. */
 const ERIN_PHOTO = 'https://lh3.googleusercontent.com/d/1P2n8fVs_XSa81WqM8JPGSoJyT_iuNFy8=s2000';
-/* TODO[erin-results]: Replace FILE_ID below with the Google Drive file ID for Erin's
-   Fidelity balance screenshot ($79,162.09 / +122.91% over 3 years, Apr 2023 → Apr 2026).
-   Share the file "Anyone with the link" then swap the ID into the URL. */
-const ERIN_RESULTS_IMG = 'https://lh3.googleusercontent.com/d/FILE_ID_PLACEHOLDER=s2000';
+/* Erin's Fidelity balance screenshot ($79,162.09 / +122.91% over 3 years, Apr 2023 → Apr 2026).
+   Hosted on Google Drive with "Anyone with the link" access. */
+const ERIN_RESULTS_IMG = 'https://lh3.googleusercontent.com/d/1C6DpL71AF46KgQS7tYl5Ezxpz_-WclEn=s2000';
 const LEO_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/leo_professional_b52839af.png';
 const JHALIL_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/jhalil-new_9cefdb48.png';
 const STEVE_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/steve-lapa-new_ac25bb0c.png';
