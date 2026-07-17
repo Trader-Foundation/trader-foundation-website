@@ -282,27 +282,34 @@ export default function FAQ() {
 
             <div className="grid grid-cols-3 gap-3 sm:gap-4 md:gap-6 max-w-[560px] mx-auto">
               {videoTestimonials.map((video) => (
-                <button
-                  key={video.id}
-                  type="button"
-                  onClick={() => setOpenVideoId(video.id)}
-                  aria-label={`Play video testimonial from ${video.name}`}
-                  className="group relative block bg-[#111] border border-[#c7ab77]/20 rounded-lg overflow-hidden hover:border-[#c7ab77]/60 transition-all duration-300"
-                  style={{ aspectRatio: '9 / 16' }}
-                >
-                  <img
-                    src={`https://lh3.googleusercontent.com/d/${video.id}=s800`}
-                    alt={video.name}
-                    className="absolute inset-0 w-full h-full object-cover"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors" />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-14 h-14 rounded-full bg-[#c7ab77]/90 group-hover:bg-[#c7ab77] flex items-center justify-center shadow-2xl transition-all duration-300 group-hover:scale-110">
-                      <Play size={22} className="text-[#111] ml-1" fill="#111" />
+                <div key={video.id} className="flex flex-col">
+                  <button
+                    type="button"
+                    onClick={() => setOpenVideoId(video.id)}
+                    aria-label={`Play video testimonial from ${video.name}`}
+                    className="group relative block bg-[#111] border border-[#c7ab77]/20 rounded-lg overflow-hidden hover:border-[#c7ab77]/60 transition-all duration-300"
+                    style={{ aspectRatio: '9 / 16' }}
+                  >
+                    <img
+                      src={`https://lh3.googleusercontent.com/d/${video.id}=s800`}
+                      alt={video.name}
+                      className="absolute inset-0 w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors" />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="w-14 h-14 rounded-full bg-[#c7ab77]/90 group-hover:bg-[#c7ab77] flex items-center justify-center shadow-2xl transition-all duration-300 group-hover:scale-110">
+                        <Play size={22} className="text-[#111] ml-1" fill="#111" />
+                      </div>
                     </div>
-                  </div>
-                </button>
+                  </button>
+                  <p
+                    className="text-white text-xs sm:text-sm font-bold text-center mt-3"
+                    style={{ fontFamily: "'Sen', sans-serif" }}
+                  >
+                    {video.name}
+                  </p>
+                </div>
               ))}
             </div>
           </div>
