@@ -102,6 +102,11 @@ const faqItems: FaqItem[] = [
   {
     question: 'What if I don\'t like the coaches?',
     answer: 'You keep trading, growing, and learning. Many students renew because they value the coaching and community. Some become self-sufficient and trade on their own. Either way, the door is always open. This is a family, and family is forever.',
+    quote: {
+      text: 'I absolutely love this program. The coaches are amazing and they genuinely care and want you to succeed. If you are looking to learn to trade I highly recommend them.',
+      name: 'Bryton Lawrence',
+      source: 'Student Community',
+    },
   },
 ];
 
