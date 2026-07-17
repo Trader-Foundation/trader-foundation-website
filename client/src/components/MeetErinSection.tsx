@@ -177,7 +177,7 @@ export default function MeetErinSection() {
                 className="text-[#555] text-sm"
                 style={{ fontFamily: "'DM Sans', sans-serif" }}
               >
-                Rated Excellent
+                <strong className="text-[#111]">4.6</strong> out of 5 &middot; Rated Excellent
               </span>
             </div>
           </div>

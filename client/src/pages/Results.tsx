@@ -225,6 +225,12 @@ export default function Results() {
             <div className="flex items-center gap-3">
               <TrustpilotLogoWhite className="h-5" />
               <TrustpilotStars className="h-4" />
+              <span
+                className="text-white/80 text-sm"
+                style={{ fontFamily: "'DM Sans', sans-serif" }}
+              >
+                <strong className="text-white">4.6</strong>/5
+              </span>
             </div>
             <span className="text-white/20">|</span>
             <div className="flex items-center gap-0">
