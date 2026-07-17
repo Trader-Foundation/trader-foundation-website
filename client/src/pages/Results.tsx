@@ -35,10 +35,10 @@ const accountScreenshots = [
     caption: 'Active trading account',
   },
   {
-    id: '1VVfuyA2ML0aHETlT1ULQAtFhORiZt9T9',
-    name: 'Student',
-    broker: 'Fidelity',
-    caption: '$56K account balance',
+    id: '1xLMnLvJirbHJr569Xe3CBA3jmUZNVgq-',
+    name: 'Elliot Gumbs',
+    broker: 'Coach Account',
+    caption: 'Lead Mentor Elliot trades the same system he teaches',
   },
 ];
 
