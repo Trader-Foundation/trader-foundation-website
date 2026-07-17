@@ -538,15 +538,15 @@ export default function Results() {
             <div className="w-20 h-[2px] bg-[#c7ab77] mx-auto mt-6" />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+          <div className="flex flex-wrap justify-center gap-8 lg:gap-10">
             {skoolPosts.map((post) => (
               <div
                 key={post.id}
-                className="bg-white border border-[#e8e4dc] rounded-lg overflow-hidden hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] hover:border-[#c7ab77]/30 transition-all duration-300"
+                className="bg-white border border-[#e8e4dc] rounded-lg overflow-hidden hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] hover:border-[#c7ab77]/30 transition-all duration-300 w-full sm:w-[calc(50%-1.25rem)] max-w-[560px]"
               >
                 <div className="p-4">
                   <img
-                    src={`https://lh3.googleusercontent.com/d/${post.id}=s1600`}
+                    src={`https://lh3.googleusercontent.com/d/${post.id}=s2000`}
                     alt={`${post.name} — ${post.source}`}
                     className="w-full h-auto rounded"
                     loading="lazy"
