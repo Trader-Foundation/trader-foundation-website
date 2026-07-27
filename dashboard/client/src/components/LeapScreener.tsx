@@ -632,7 +632,7 @@ export function LeapScreener({ onDeepDive }: { onDeepDive?: (symbol: string) => 
                 </div>
                 <div className="flex items-center gap-1.5 text-[10px] font-mono text-[#666]">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]" />
-                  Auto-refresh: 30s
+                  Data refresh: ≤15 min
                 </div>
                 {screeningStatus && (
                   <div className="flex items-center gap-1.5 text-[10px] font-mono text-[#666]">

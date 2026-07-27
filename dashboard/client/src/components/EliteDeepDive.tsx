@@ -666,7 +666,7 @@ export function EliteDeepDive({ initialSymbol }: { initialSymbol?: string | null
                   ) : (
                     <Panel title={`${setupStrategy.toUpperCase()} GRADE`}>
                       <p className="text-xs font-mono text-[#555]">
-                        No {setupStrategy} grade available for {symbol} on {setupTimeframe} timeframe. Stock may not be in the screener universe.
+                        No {setupStrategy} grade available for {symbol} on {setupTimeframe} timeframe — market data may be temporarily unavailable for this ticker.
                       </p>
                     </Panel>
                   )}

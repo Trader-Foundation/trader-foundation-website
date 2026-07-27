@@ -355,6 +355,38 @@ function scoreSSLSweep(
 // 1 = Zone tapped/armed but trend filter only partial (stretched bounce)
 // 0 = No bounce setup
 
+// A tap of the zone only counts as a bounce if the candle agrees.
+// A bearish engulfing or a red close near the lows is a REJECTION
+// candle — sellers in control — not a bounce, even if the level
+// technically held on the close.
+export function detectBearishRejection(
+  opens: number[],
+  highs: number[],
+  lows: number[],
+  closes: number[]
+): { rejected: boolean; reason: string } {
+  const n = closes.length;
+  if (n < 2) return { rejected: false, reason: "" };
+  const lastOpen = opens[n - 1];
+  const lastClose = closes[n - 1];
+  const lastHigh = highs[n - 1];
+  const lastLow = lows[n - 1];
+  const prevBodyHigh = Math.max(opens[n - 2], closes[n - 2]);
+  const prevBodyLow = Math.min(opens[n - 2], closes[n - 2]);
+
+  const bearish = lastClose < lastOpen;
+  if (!bearish) return { rejected: false, reason: "" };
+
+  const engulfing = lastOpen >= prevBodyHigh && lastClose <= prevBodyLow;
+  if (engulfing) return { rejected: true, reason: "BEARISH ENGULFING — the candle swallowed the prior body to the downside" };
+
+  const range = lastHigh - lastLow;
+  const closePosition = range > 0 ? (lastClose - lastLow) / range : 0.5;
+  if (closePosition <= 0.35) return { rejected: true, reason: "bearish close in the bottom of the range — sellers rejected the move up" };
+
+  return { rejected: false, reason: "" };
+}
+
 function scoreBounceZone(
   currentPrice: number,
   ohlcv: OHLCVData,
@@ -403,6 +435,18 @@ function scoreBounceZone(
   // Tap-and-hold: this bar (or last bar) dipped into the zone, close held above it
   const tapped = (lastLow <= zone.level * 1.01 || prevLow <= zone.level * 1.01) && lastClose > zone.level;
   const armed = distPct <= 2;
+
+  // The candle must agree — a bearish engulfing / rejection candle at the
+  // zone is NOT a bounce, even if the level technically held on the close.
+  const rejection = detectBearishRejection(ohlcv.opens, ohlcv.highs, ohlcv.lows, ohlcv.closes);
+  if (tapped && rejection.rejected) {
+    return {
+      score: fullTrend ? 1 : 0,
+      details: `ZONE UNDER TEST — Price tapped the ${zone.name} at $${zone.level.toFixed(2)} and the level held on the close, but the candle is a rejection: ${rejection.reason}. Sellers are in control — no bounce confirmation. Wait for a reversal candle.`,
+      nearSupport: zone.level,
+      furtherSupport: nearSwing > 0 && nearSwing !== zone.level ? nearSwing : furtherSupport,
+    };
+  }
 
   if (tapped && fullTrend) {
     return {
@@ -1221,8 +1265,8 @@ async function gradeBounceSetup(
   symbol: string,
   timeframe: Timeframe
 ): Promise<SetupGrade | null> {
-  const stockInfo = INVESTMENT_UNIVERSE.find((s) => s.symbol === symbol);
-  if (!stockInfo) return null;
+  // Grade ANY symbol — fall back to the ticker itself when it's outside the tracked universe
+  const stockInfo = INVESTMENT_UNIVERSE.find((s) => s.symbol === symbol) ?? { symbol, company: symbol, sector: "—" };
 
   const [quote, ohlcv] = await Promise.all([
     fetchStockQuote(symbol),
@@ -1289,8 +1333,8 @@ async function gradeSSLSetup(
   symbol: string,
   timeframe: Timeframe
 ): Promise<SetupGrade | null> {
-  const stockInfo = INVESTMENT_UNIVERSE.find((s) => s.symbol === symbol);
-  if (!stockInfo) return null;
+  // Grade ANY symbol — fall back to the ticker itself when it's outside the tracked universe
+  const stockInfo = INVESTMENT_UNIVERSE.find((s) => s.symbol === symbol) ?? { symbol, company: symbol, sector: "—" };
 
   const [quote, ohlcv] = await Promise.all([
     fetchStockQuote(symbol),
@@ -1363,8 +1407,8 @@ async function gradeBreakoutSetup(
   symbol: string,
   timeframe: Timeframe
 ): Promise<SetupGrade | null> {
-  const stockInfo = INVESTMENT_UNIVERSE.find((s) => s.symbol === symbol);
-  if (!stockInfo) return null;
+  // Grade ANY symbol — fall back to the ticker itself when it's outside the tracked universe
+  const stockInfo = INVESTMENT_UNIVERSE.find((s) => s.symbol === symbol) ?? { symbol, company: symbol, sector: "—" };
 
   const [quote, ohlcv] = await Promise.all([
     fetchStockQuote(symbol),

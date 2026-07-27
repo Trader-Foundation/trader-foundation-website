@@ -35,6 +35,7 @@ import {
   BOUNCE_MA_CONFIG,
   calculateJobsReportInfo,
   classifyMarketTrend,
+  detectBearishRejection,
   type Timeframe as SetupTimeframe,
 } from "./strategyEngine";
 import { detectInstitutionalFlow, scanInstitutionalFlow } from "./institutionalFlow";
@@ -140,8 +141,12 @@ function buildWatchItem(strategy: Strategy, symbol: string, quote: any, data: an
     const zone = candidates.length > 0 ? Math.max(...candidates) : 0;
     level = Math.round(zone * 100) / 100;
     distToLevelPct = zone > 0 ? ((quote.currentPrice - zone) / zone) * 100 : 999;
-    if (zone > 0 && lastLow <= zone * 1.01 && quote.currentPrice > zone) status = "Bouncing";
-    else if (distToLevelPct < 2) status = "Approaching";
+    // The candle must agree — a bearish engulfing / rejection candle at the
+    // zone is only a test of the level, not a bounce
+    const rejection = detectBearishRejection(data.opens || [], data.highs, data.lows, data.closes);
+    if (zone > 0 && lastLow <= zone * 1.01 && quote.currentPrice > zone) {
+      status = rejection.rejected ? "Approaching" : "Bouncing";
+    } else if (distToLevelPct < 2) status = "Approaching";
     chartLevels = candidates.sort((a, b) => a - b).slice(-3).map(l => Math.round(l * 100) / 100);
   }
 
@@ -203,8 +208,8 @@ async function prefetchAll() {
         })
       );
       const rows = results.filter((r): r is PromiseFulfilledResult<any> => r.status === "fulfilled" && r.value !== null).map(r => r.value);
-      // Use timeframe-appropriate TTLs: monthly=24hr, weekly=6hr, daily=30min
-      const tfTTL = tf === "Monthly" ? CACHE_TTL_MONTHLY : tf === "Weekly" ? CACHE_TTL_SLOW : CACHE_TTL_MEDIUM;
+      // Short TTL — the LIVE bar (and therefore statuses) moves intraday on every timeframe
+      const tfTTL = CACHE_TTL_FAST;
       for (const strategy of STRATEGIES) {
         const watchlist = sortWatchlist(rows.map(r => r[strategy]));
         setCache(`strategyWatchlist-${strategy}-${tf}`, watchlist, tfTTL);
@@ -377,10 +382,9 @@ export const appRouter = router({
             .map(r => r.value)
         );
 
-        // Use timeframe-appropriate TTLs
+        // Short TTL — the LIVE bar (and therefore statuses) moves intraday on every timeframe
         if (!input.symbols) {
-          const tfTTL = input.timeframe === "Monthly" ? CACHE_TTL_MONTHLY : input.timeframe === "Weekly" ? CACHE_TTL_SLOW : CACHE_TTL_MEDIUM;
-          setCache(cacheKey, watchlist, tfTTL);
+          setCache(cacheKey, watchlist, CACHE_TTL_FAST);
         }
         return watchlist;
       }),
@@ -778,6 +782,7 @@ Your capabilities:
    - Volume ("The True Ammunition of the Stock"): 3 = volume climax, 2 = elevated (1.5x+), 1 = normal; rising volume across bars strengthens the setup
    - Reversal Candle scoring: long lower wick rejecting the zone + bullish close in the top half of the range + hammer/doji/engulfing pattern (3 = all three, 2 = two, 1 = one)
    - Confluence: Full Stochastics oversold (under 20) and pointing up ready to rise; MACD lines crossing or close to crossing, pointed in the right direction, histogram rising
+   - The candle must AGREE: a tap of the zone with a bearish engulfing or a red close near the lows is a REJECTION — the zone is only under test, NOT a bounce. Wait for the reversal candle.
    - The key difference vs SSL: in a bounce the level HOLDS — price does not lose support on a closing basis
 
    SSL (Sell-Side Liquidity) — price sweeps BELOW a key low to grab liquidity (stop losses get triggered, weak hands sell), then reclaims the level:

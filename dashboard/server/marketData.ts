@@ -64,7 +64,7 @@ export interface InvestmentRadarItem {
   symbol: string;
   company: string;
   sector: string;
-  category: "Mag 7" | "Index ETF";
+  category: "Mag 7" | "Index ETF" | "Growth";
   quote: StockQuote;
   technicals: TechnicalLevels;
   dcaZones: DCAZone[];
@@ -160,7 +160,7 @@ export interface PortfolioPlan {
 
 // --- Stock Universe ---
 
-export const INVESTMENT_UNIVERSE: { symbol: string; company: string; sector: string; category: "Mag 7" | "Index ETF" }[] = [
+export const INVESTMENT_UNIVERSE: { symbol: string; company: string; sector: string; category: "Mag 7" | "Index ETF" | "Growth" }[] = [
   { symbol: "AAPL", company: "Apple Inc.", sector: "Technology", category: "Mag 7" },
   { symbol: "MSFT", company: "Microsoft Corp.", sector: "Technology", category: "Mag 7" },
   { symbol: "GOOGL", company: "Alphabet Inc.", sector: "Technology", category: "Mag 7" },
@@ -168,6 +168,7 @@ export const INVESTMENT_UNIVERSE: { symbol: string; company: string; sector: str
   { symbol: "META", company: "Meta Platforms Inc.", sector: "Technology", category: "Mag 7" },
   { symbol: "NVDA", company: "NVIDIA Corp.", sector: "Technology", category: "Mag 7" },
   { symbol: "TSLA", company: "Tesla Inc.", sector: "Consumer Cyclical", category: "Mag 7" },
+  { symbol: "UBER", company: "Uber Technologies Inc.", sector: "Industrials", category: "Growth" },
   { symbol: "SPY", company: "SPDR S&P 500 ETF", sector: "Index", category: "Index ETF" },
   { symbol: "QQQ", company: "Invesco QQQ Trust", sector: "Index", category: "Index ETF" },
   { symbol: "IWM", company: "iShares Russell 2000 ETF", sector: "Index", category: "Index ETF" },
@@ -176,7 +177,7 @@ export const INVESTMENT_UNIVERSE: { symbol: string; company: string; sector: str
 // Historical average PE ratios (approximate 10-year averages)
 const HISTORICAL_AVG_PE: Record<string, number> = {
   AAPL: 28, MSFT: 32, GOOGL: 27, AMZN: 60, META: 25,
-  NVDA: 55, TSLA: 80, SPY: 22, QQQ: 28, IWM: 20,
+  NVDA: 55, TSLA: 80, UBER: 35, SPY: 22, QQQ: 28, IWM: 20,
 };
 
 // Sector ETF mapping for benchmark comparisons
@@ -188,6 +189,7 @@ export const SECTOR_ETF_MAP: Record<string, { etf: string; sectorName: string }>
   META: { etf: "XLC", sectorName: "Communication Services" },
   NVDA: { etf: "XLK", sectorName: "Technology" },
   TSLA: { etf: "XLY", sectorName: "Consumer Discretionary" },
+  UBER: { etf: "XLI", sectorName: "Industrials" },
   SPY: { etf: "SPY", sectorName: "S&P 500" },
   QQQ: { etf: "QQQ", sectorName: "Nasdaq 100" },
   IWM: { etf: "IWM", sectorName: "Russell 2000" },
@@ -241,11 +243,11 @@ const QUOTE_CACHE_TTL = 5 * 60 * 1000; // 5 min — quotes don't need second-by-
 // Candle data caches — dramatically reduces API calls
 type CandleData = { opens: number[]; closes: number[]; highs: number[]; lows: number[]; volumes: number[]; timestamps: number[] };
 const monthlyCache = new Map<string, { data: CandleData; timestamp: number }>();
-const MONTHLY_CACHE_TTL = 24 * 60 * 60 * 1000; // 24 hours — monthly candles only change once a month
+const MONTHLY_CACHE_TTL = 15 * 60 * 1000; // 15 min — closed bars rarely change, but the LIVE month bar moves intraday
 const weeklyCache = new Map<string, { data: CandleData; timestamp: number }>();
-const WEEKLY_CACHE_TTL = 6 * 60 * 60 * 1000; // 6 hours — weekly candles only close on Friday
+const WEEKLY_CACHE_TTL = 15 * 60 * 1000; // 15 min — the live week bar moves intraday
 const dailyCache = new Map<string, { data: CandleData; timestamp: number }>();
-const DAILY_CACHE_TTL = 30 * 60 * 1000; // 30 min — daily matters during market hours
+const DAILY_CACHE_TTL = 15 * 60 * 1000; // 15 min — daily matters during market hours
 
 export async function fetchStockQuote(symbol: string): Promise<StockQuote | null> {
   const cached = quoteCache.get(symbol);
