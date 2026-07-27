@@ -1,5 +1,14 @@
 import { describe, expect, it } from "vitest";
-import { calculateAlertSchedule, type Grade, type SetupGrade } from "./strategyEngine";
+import {
+  calculateAlertSchedule,
+  calculateFullStochastics,
+  calculateJobsReportInfo,
+  calculateMACD,
+  classifyMarketTrend,
+  smaAt,
+  type Grade,
+  type SetupGrade,
+} from "./strategyEngine";
 
 // ============================================================
 // STRATEGY ENGINE — Unit Tests
@@ -82,6 +91,62 @@ describe("Strategy Engine", () => {
         expect(precision).toBe("WIDE_NET");
         expect(isActive).toBe(true);
       }
+    });
+  });
+
+  // --------------------------------------------------------
+  // Bounce Plan indicator toolkit (pure math)
+  // --------------------------------------------------------
+  describe("Indicator toolkit", () => {
+    it("smaAt computes a simple moving average of the last N values", () => {
+      expect(smaAt([1, 2, 3, 4, 5], 5)).toBe(3);
+      expect(smaAt([1, 2, 3, 4, 5], 2)).toBe(4.5);
+      expect(smaAt([1, 2], 5)).toBeNull();
+    });
+
+    it("calculateMACD returns aligned macd/signal/histogram", () => {
+      // Rising series → MACD should be positive (fast EMA above slow EMA)
+      const rising = Array.from({ length: 60 }, (_, i) => 100 + i);
+      const m = calculateMACD(rising);
+      expect(m).not.toBeNull();
+      expect(m!.macd).toBeGreaterThan(0);
+      expect(m!.histogram).toBeCloseTo(m!.macd - m!.signal, 8);
+
+      // Not enough data → null
+      expect(calculateMACD([1, 2, 3])).toBeNull();
+    });
+
+    it("calculateFullStochastics stays within 0-100 and reads oversold/overbought", () => {
+      // Strong downtrend → %K near 0 (oversold)
+      const n = 40;
+      const down = Array.from({ length: n }, (_, i) => 100 - i);
+      const stochDown = calculateFullStochastics(down.map(v => v + 1), down.map(v => v - 1), down);
+      expect(stochDown).not.toBeNull();
+      expect(stochDown!.k).toBeGreaterThanOrEqual(0);
+      expect(stochDown!.k).toBeLessThan(20);
+
+      // Strong uptrend → %K near 100 (overbought)
+      const up = Array.from({ length: n }, (_, i) => 100 + i);
+      const stochUp = calculateFullStochastics(up.map(v => v + 1), up.map(v => v - 1), up);
+      expect(stochUp).not.toBeNull();
+      expect(stochUp!.k).toBeGreaterThan(80);
+      expect(stochUp!.k).toBeLessThanOrEqual(100);
+    });
+
+    it("classifyMarketTrend labels rising-above-MA as bullish and falling-below as bearish", () => {
+      const bull = Array.from({ length: 60 }, (_, i) => 100 + i);
+      expect(classifyMarketTrend(bull).trend).toBe("BULLISH");
+      const bear = Array.from({ length: 60 }, (_, i) => 200 - i);
+      expect(classifyMarketTrend(bear).trend).toBe("BEARISH");
+    });
+
+    it("calculateJobsReportInfo returns a valid upcoming first-Friday date", () => {
+      const info = calculateJobsReportInfo();
+      expect(typeof info.isJobsReportDay).toBe("boolean");
+      const next = new Date(`${info.nextJobsReportDate}T12:00:00`);
+      expect(next.getTime()).not.toBeNaN();
+      expect(next.getDay()).toBe(5); // Friday
+      expect(next.getDate()).toBeLessThanOrEqual(7); // first Friday of a month
     });
   });
 

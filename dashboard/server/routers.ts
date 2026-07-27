@@ -27,7 +27,16 @@ import { z } from "zod";
 // import { getRecentAlerts, detectVolumeAnomalies, runAlertScan, startAlertScanner } from "./alertService";
 import { createLinkToken, exchangePublicToken, getInvestmentHoldings, isPlaidConfigured } from "./plaidService";
 import { getStockDeepDive, getStockDeepDiveFast } from "./deepDiveData";
-import { getGradedSetups, getSectorRotation, gradeSetup, type Timeframe as SetupTimeframe } from "./strategyEngine";
+import {
+  getGradedSetups,
+  getSectorRotation,
+  gradeSetup,
+  smaAt,
+  BOUNCE_MA_CONFIG,
+  calculateJobsReportInfo,
+  classifyMarketTrend,
+  type Timeframe as SetupTimeframe,
+} from "./strategyEngine";
 import { detectInstitutionalFlow, scanInstitutionalFlow } from "./institutionalFlow";
 
 // Alert scanner and timed alerts DISABLED — no notifications sent;
@@ -101,22 +110,30 @@ function buildWatchItem(strategy: Strategy, symbol: string, quote: any, data: an
       status = distToLevelPct < 2 ? "Approaching" : "Watching";
     }
     chartLevels = resistanceLevels.filter(l => l >= quote.currentPrice * 0.9 && l <= quote.currentPrice * 1.15).slice(0, 3);
-  } else {
+  } else if (strategy === "SSL") {
     const supportLevels = findSupportLevels(data.lows);
     // Allow a level slightly above price so an in-progress sweep still maps to its level
     const nearest = supportLevels.filter(l => l <= quote.currentPrice * 1.02).pop() || 0;
     level = nearest;
     distToLevelPct = nearest > 0 ? ((quote.currentPrice - nearest) / nearest) * 100 : 999;
-
-    if (strategy === "SSL") {
-      if (nearest > 0 && quote.currentPrice < nearest) status = "SSL Breached";
-      else if (distToLevelPct < 2) status = "Approaching";
-    } else {
-      // Bounce — the level must HOLD: a tap of the zone with price still above it
-      if (nearest > 0 && lastLow <= nearest * 1.01 && quote.currentPrice > nearest) status = "Bouncing";
-      else if (distToLevelPct < 2) status = "Approaching";
-    }
+    if (nearest > 0 && quote.currentPrice < nearest) status = "SSL Breached";
+    else if (distToLevelPct < 2) status = "Approaching";
     chartLevels = supportLevels.filter(l => l <= quote.currentPrice * 1.02).slice(-3);
+  } else {
+    // Bounce (The Bounce Profit Plan) — the zone is the 13/20 MA (per-timeframe
+    // equivalents) or the nearest swing support, and the level must HOLD.
+    const cfg = BOUNCE_MA_CONFIG[tf];
+    const maFast = smaAt(data.closes, cfg.bounce[0]);
+    const maSlow = smaAt(data.closes, cfg.bounce[1]);
+    const supportLevels = findSupportLevels(data.lows);
+    const nearSwing = supportLevels.filter(l => l <= quote.currentPrice * 1.01).pop() || 0;
+    const candidates = [maFast, maSlow, nearSwing].filter((l): l is number => l != null && l > 0 && l <= quote.currentPrice * 1.01);
+    const zone = candidates.length > 0 ? Math.max(...candidates) : 0;
+    level = Math.round(zone * 100) / 100;
+    distToLevelPct = zone > 0 ? ((quote.currentPrice - zone) / zone) * 100 : 999;
+    if (zone > 0 && lastLow <= zone * 1.01 && quote.currentPrice > zone) status = "Bouncing";
+    else if (distToLevelPct < 2) status = "Approaching";
+    chartLevels = candidates.sort((a, b) => a - b).slice(-3).map(l => Math.round(l * 100) / 100);
   }
 
   return {
@@ -248,7 +265,7 @@ export function buildChatMessages(message: string, history: { role: "user" | "as
     }
   } catch {}
 
-  const systemPrompt = `You are the TF Elite AI Assistant embedded in the TF Elite Terminal Setup Screener. You have LIVE market data below — always reference it confidently as latest closing prices. Be concise, structured, and actionable. Follow TF philosophy: swing trading, DCA at discounts, safe options, patience over FOMO. The terminal tracks three setup strategies, each graded on a 9-point scale: BOUNCE (price taps key support and holds it), SSL (price sweeps below a key low to grab sell-side liquidity, then reclaims it), and BREAKOUT (price breaks above key resistance with volume). For valuations show PE vs Forward PE vs Historical. NOT financial advice.${marketContext}${setupContext}${flowContext}`;
+  const systemPrompt = `You are the TF Elite AI Assistant embedded in the TF Elite Terminal Setup Screener. You have LIVE market data below — always reference it confidently as latest closing prices. Be concise, structured, and actionable. Follow TF philosophy: swing trading, DCA at discounts, safe options, patience over FOMO. The terminal tracks three setup strategies, each graded on a 9-point scale: BOUNCE (The Bounce Profit Plan — an uptrending stock above its 50/200 MA pulling back and bouncing off the 13/20 MA or key support, confirmed by volume, stochastics, and MACD; avoid jobs-report days and trade with SPY's direction), SSL (price sweeps below a key low to grab sell-side liquidity, then reclaims it), and BREAKOUT (price breaks above key resistance with volume). For valuations show PE vs Forward PE vs Historical. NOT financial advice.${marketContext}${setupContext}${flowContext}`;
 
   const msgs: { role: "system" | "user" | "assistant"; content: string }[] = [
     { role: "system", content: systemPrompt },
@@ -397,6 +414,51 @@ export const appRouter = router({
         isDailyScreeningActive: true,
         currentDate: now.toISOString(),
       };
+    }),
+
+    // Market Pulse — the Bounce Plan's fundamental layer: SPY direction,
+    // volatility, and the jobs-report-day warning
+    marketPulse: protectedProcedure.query(async () => {
+      const cached = getCached<any>("marketPulse");
+      if (cached) return cached;
+
+      const jobs = calculateJobsReportInfo();
+      let spy: { trend: string; price: number; sma50: number | null; detail: string } | null = null;
+      let vix: number | null = null;
+
+      try {
+        const [spyDaily, spyQuote] = await Promise.all([fetchDailyData("SPY"), fetchStockQuote("SPY")]);
+        if (spyDaily && spyDaily.closes.length > 0) {
+          const t = classifyMarketTrend(spyDaily.closes);
+          spy = {
+            trend: t.trend,
+            price: spyQuote?.currentPrice ?? spyDaily.closes[spyDaily.closes.length - 1],
+            sma50: t.sma50 != null ? Math.round(t.sma50 * 100) / 100 : null,
+            detail: t.detail,
+          };
+        }
+      } catch {}
+      try {
+        const vixQuote = await fetchStockQuote("VIX");
+        vix = vixQuote?.currentPrice ?? null;
+      } catch {}
+
+      const pulse = {
+        spy,
+        vix,
+        isJobsReportDay: jobs.isJobsReportDay,
+        nextJobsReportDate: jobs.nextJobsReportDate,
+        guidance: jobs.isJobsReportDay
+          ? "JOBS REPORT DAY — The Bounce Plan says avoid opening new trades on unemployment announcement days."
+          : spy?.trend === "BEARISH"
+          ? "SPY is bearish — the plan says trade with the market's direction. Long bounce setups face a headwind."
+          : spy?.trend === "CONSOLIDATING"
+          ? "SPY is consolidating — no decisive market direction. Be selective."
+          : "Market conditions align for long setups. Still check for major economic news before entering.",
+        lastUpdated: new Date().toISOString(),
+      };
+      setCache("marketPulse", pulse, CACHE_TTL_FAST);
+      return pulse;
     }),
 
     // Research tool — search any stock
@@ -700,18 +762,20 @@ Your capabilities:
 
 5. SETUP EXPERT: You deeply understand the THREE TF Elite setup strategies, each graded on the same 9-point scale (Level X/3 + Volume X/3 + Candle X/3; only 7/9+ A-grade setups are worth acting on):
 
-   BOUNCE — price taps a key support zone, HOLDS it, and reverses off the level:
-   - Support Bounce scoring: 3 = tapped support and rebounded 2%+ off it, 2 = tapped and holding above, 1 = in the bounce zone (within 2% of support)
-   - Volume Confirmation scoring: 3 = largest volume in history, 2 = larger than average, 1 = normal volume
-   - Reversal Candle scoring: long lower wick rejecting the level + bullish close in the top half of the range + hammer/doji/engulfing pattern (3 = all three, 2 = two, 1 = one)
-   - Confluence: RSI bullish divergence, FIB key levels
+   BOUNCE — The TF Bounce Profit Plan. An uptrend pullback bounce with a fundamental layer and a technical layer:
+   - Fundamental layer (Market Pulse): DON'T trade on unemployment-announcement days (usually the first Friday of the month) or around major economic news. Check SPY first — trade WITH the market's direction. Favor sectors trending with the market (XLF, XLY, XLE, XME, XLK, XLV, XLB, XLI, XLU). Avoid holding through earnings ("gamble").
+   - Trend filter: the stock must be above its 50 AND 200 day moving averages (rule may be stretched after a very big market downturn). On weekly/monthly charts the terminal uses the standard equivalents (10/40-week, 12/24-month).
+   - Bounce Zone scoring: 3 = uptrend intact + price pulled back, tapped the 13/20 MA or key swing support, and is holding above it; 2 = uptrend intact + price within 2% of the zone (armed); 1 = zone tapped but trend filter only partial (stretched bounce)
+   - Volume ("The True Ammunition of the Stock"): 3 = volume climax, 2 = elevated (1.5x+), 1 = normal; rising volume across bars strengthens the setup
+   - Reversal Candle scoring: long lower wick rejecting the zone + bullish close in the top half of the range + hammer/doji/engulfing pattern (3 = all three, 2 = two, 1 = one)
+   - Confluence: Full Stochastics oversold (under 20) and pointing up ready to rise; MACD lines crossing or close to crossing, pointed in the right direction, histogram rising
    - The key difference vs SSL: in a bounce the level HOLDS — price does not lose support on a closing basis
 
    SSL (Sell-Side Liquidity) — price sweeps BELOW a key low to grab liquidity (stop losses get triggered, weak hands sell), then reclaims the level:
    - Liquidity scoring: 3 = near-term AND further-term SSL swept, 2 = near-term only, 1 = approaching
    - Volume Climax scoring: 3 = largest volume in history, 2 = larger than average, 1 = no notable volume
    - Absorption Candle scoring: 3 = long wick up closing above SSL + near prev close + doji/hammer/spinning top (all three), 2 = two criteria, 1 = one criterion
-   - Confluence: RSI bullish divergence, FIB key levels (61.8%, 78.6%)
+   - Confluence: RSI bullish divergence, FIB key levels (61.8%, 78.6%), plus the Bounce Plan toolkit — Stochastics positioning and MACD cross/direction
 
    BREAKOUT — price breaks ABOVE a key resistance level with conviction:
    - Resistance Break scoring: 3 = double resistance break, 2 = fresh break of near-term resistance (broken resistance becomes support), 1 = approaching resistance

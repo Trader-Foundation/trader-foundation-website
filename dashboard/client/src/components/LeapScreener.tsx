@@ -26,7 +26,7 @@ interface StrategyConfig {
   statuses: string[]; // filter options
   alertHeadline: string;
   alertDetail: (item: any) => string;
-  provisional?: boolean;
+  planTag?: string; // small badge next to the hero title
 }
 
 const STRATEGY_CONFIG: Record<Strategy, StrategyConfig> = {
@@ -34,15 +34,15 @@ const STRATEGY_CONFIG: Record<Strategy, StrategyConfig> = {
     tabLabel: "BOUNCE",
     title: "Bounce Screener",
     description:
-      "Real-time detection of stocks tapping key support zones and holding them. Identifying high-probability reversals where buyers defend the level.",
-    levelLabel: "SUPPORT",
-    chartLevelLabel: "SUP",
+      "The TF Bounce Profit Plan — uptrending stocks (above the 50 & 200 MA) pulling back and bouncing off the 13/20 MA or key support, confirmed by volume, a reversal candle, stochastics, and MACD.",
+    levelLabel: "BOUNCE ZONE",
+    chartLevelLabel: "ZONE",
     activeStatus: "Bouncing",
     activeStatLabel: "BOUNCING",
     statuses: ["all", "Bouncing", "Approaching", "Watching"],
     alertHeadline: "◉ BOUNCE FORMING",
-    alertDetail: (item) => `${item.symbol} — Holding key support at $${item.level.toFixed(2)}`,
-    provisional: true,
+    alertDetail: (item) => `${item.symbol} — Holding the bounce zone at $${item.level.toFixed(2)}`,
+    planTag: "◆ THE BOUNCE PROFIT PLAN",
   },
   SSL: {
     tabLabel: "SSL",
@@ -87,6 +87,44 @@ function StatusBadge({ status }: { status: string }) {
       {status === "Bouncing" && "◉ "}
       {status.toUpperCase()}
     </span>
+  );
+}
+
+// Market Pulse — the Bounce Plan's fundamental layer: SPY direction,
+// volatility, and the jobs-report-day warning
+function MarketPulseStrip() {
+  const { data: pulse } = trpc.market.marketPulse.useQuery(undefined, { refetchInterval: 5 * 60 * 1000 });
+  if (!pulse) return null;
+
+  const trendColor =
+    pulse.spy?.trend === "BULLISH" ? "text-green-400" : pulse.spy?.trend === "BEARISH" ? "text-red-400" : "text-yellow-400";
+  const warn = pulse.isJobsReportDay;
+
+  return (
+    <div className={`flex flex-wrap items-center gap-x-4 gap-y-1 px-3 py-2 rounded-lg border text-[10px] font-mono ${
+      warn ? "bg-red-950/30 border-red-500/30" : "bg-[#050505] border-[#D4AF37]/10"
+    }`}>
+      <span className="text-[#D4AF37] font-semibold tracking-wider">MARKET PULSE</span>
+      {pulse.spy && (
+        <span className="text-[#888]">
+          SPY <span className={`font-bold ${trendColor}`}>{pulse.spy.trend}</span>
+          {" "}${pulse.spy.price?.toFixed(2)}
+          {pulse.spy.sma50 != null && <span className="text-[#555]"> · 50MA ${pulse.spy.sma50.toFixed(2)}</span>}
+        </span>
+      )}
+      {pulse.vix != null && (
+        <span className="text-[#888]">
+          VIX <span className={`font-bold ${pulse.vix >= 25 ? "text-red-400" : pulse.vix >= 18 ? "text-yellow-400" : "text-green-400"}`}>{pulse.vix.toFixed(1)}</span>
+        </span>
+      )}
+      <span className="text-[#666]">
+        {warn ? "⚠ " : "Next jobs report: "}
+        <span className={warn ? "text-red-400 font-bold" : "text-[#888]"}>
+          {warn ? "JOBS REPORT DAY" : pulse.nextJobsReportDate}
+        </span>
+      </span>
+      <span className={`${warn ? "text-red-300" : "text-[#666]"} basis-full sm:basis-auto sm:ml-auto`}>{pulse.guidance}</span>
+    </div>
   );
 }
 
@@ -138,19 +176,19 @@ function WhatToWatch({ item, strategy, timeframe }: { item: any; strategy: Strat
   } else if (strategy === "Bounce") {
     if (item.status === "Bouncing") {
       lines = [
-        { icon: "◉", iconClass: "text-green-400", text: `Support at ${lvl} tapped and holding` },
-        { icon: "◆", iconClass: "text-[#D4AF37]", text: `Wait for reversal candle confirmation on ${tf} close` },
-        { icon: "◆", iconClass: "text-[#D4AF37]", text: "Volume confirmation strengthens the setup" },
+        { icon: "◉", iconClass: "text-green-400", text: `Bounce zone (13/20 MA or support) at ${lvl} tapped and holding` },
+        { icon: "◆", iconClass: "text-[#D4AF37]", text: `Wait for the reversal candle on the ${tf} close` },
+        { icon: "◆", iconClass: "text-[#D4AF37]", text: "Confirm with volume, stochastics turning up, and MACD" },
       ];
     } else if (item.status === "Approaching") {
       lines = [
-        { icon: "●", iconClass: "text-yellow-400", text: `Price within ${item.distToLevelPct.toFixed(1)}% of support at ${lvl}` },
-        { icon: "◆", iconClass: "text-[#D4AF37]", text: "Watch for a tap-and-hold of the level" },
-        { icon: "◆", iconClass: "text-[#D4AF37]", text: `Set alerts at ${lvl}` },
+        { icon: "●", iconClass: "text-yellow-400", text: `Price within ${item.distToLevelPct.toFixed(1)}% of the bounce zone at ${lvl}` },
+        { icon: "◆", iconClass: "text-[#D4AF37]", text: "Watch for a tap-and-hold of the zone" },
+        { icon: "◆", iconClass: "text-[#D4AF37]", text: `Set alerts at ${lvl} — check the stock is above its 50/200 MA` },
       ];
     } else {
       lines = [
-        { icon: "●", iconClass: "text-blue-400", text: `Price ${item.distToLevelPct.toFixed(1)}% above support at ${lvl}` },
+        { icon: "●", iconClass: "text-blue-400", text: `Price ${item.distToLevelPct.toFixed(1)}% above the bounce zone at ${lvl}` },
         { icon: "◆", iconClass: "text-[#D4AF37]", text: "On radar — not yet actionable" },
         { icon: "◆", iconClass: "text-[#D4AF37]", text: `Watch for a pullback toward ${lvl}` },
       ];
@@ -577,9 +615,9 @@ export function LeapScreener({ onDeepDive }: { onDeepDive?: (symbol: string) => 
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#D4AF37] mb-3" style={{ fontFamily: "'Playfair Display', serif" }}>
                   {timeframe} {cfg.title}
                 </h1>
-                {cfg.provisional && (
-                  <span className="mb-3 px-2 py-1 rounded border border-yellow-500/40 bg-yellow-500/10 text-yellow-400 text-[9px] font-mono tracking-wider">
-                    PROVISIONAL CRITERIA — FINAL TF BOUNCE SPEC INCOMING
+                {cfg.planTag && (
+                  <span className="mb-3 px-2 py-1 rounded border border-[#D4AF37]/40 bg-[#D4AF37]/10 text-[#D4AF37] text-[9px] font-mono tracking-wider">
+                    {cfg.planTag}
                   </span>
                 )}
               </div>
@@ -618,6 +656,9 @@ export function LeapScreener({ onDeepDive }: { onDeepDive?: (symbol: string) => 
           </div>
         </div>
       </div>
+
+      {/* Market Pulse — Bounce Plan fundamental layer */}
+      <MarketPulseStrip />
 
       {/* Strategy Tabs */}
       <div className="flex items-center gap-2 p-2 bg-[#080808] rounded-lg border border-[#D4AF37]/10">

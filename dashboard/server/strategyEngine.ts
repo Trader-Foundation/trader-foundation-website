@@ -3,13 +3,14 @@
 // Three strategies, one grading scale. Only 7/9+ setups show on
 // the terminal. No noise. Only A-grade.
 //
-// BOUNCE — price taps a key support zone, holds it, and reverses.
-//   Support Bounce (X/3) + Volume Confirmation (X/3) + Reversal Candle (X/3)
-//   Confluence (bonus flags): RSI bullish divergence, FIB key levels
-//   >>> PROVISIONAL: the TF Bounce setup is a unique methodology and
-//   >>> its official criteria are coming from Vlad. The scoring below
-//   >>> is a placeholder (touch-and-hold logic). Each criterion is an
-//   >>> isolated function — swap them out when the real spec lands.
+// BOUNCE — The TF Bounce Profit Plan. An uptrend pullback bounce:
+// the stock trades above its 50 & 200 MA (trend filter — "may be
+// stretched if the market had a very big downturn"), pulls back to
+// the 13/20 MA or a key swing support, and bounces off it.
+//   Bounce Zone (X/3) + Volume "The True Ammunition" (X/3) + Reversal Candle (X/3)
+//   Confluence (bonus flags): Stochastics oversold turning up, MACD cross/direction
+//   Fundamental layer (Market Pulse, served via routers): trade with
+//   SPY's direction and avoid jobs-report Fridays / major event days.
 //
 // SSL (Sell-Side Liquidity) — price sweeps BELOW a key low to grab
 // liquidity, absorbs the selling, and reclaims the level.
@@ -176,9 +177,108 @@ async function fetchTimeframeOHLCV(
     case "Weekly":
       return fetchOHLCV(symbol, "1wk", "2y");
     case "Daily":
-      return fetchOHLCV(symbol, "1d", "6mo");
+      // 1y of dailies so the 200-day trend MA is computable at the last bar
+      return fetchOHLCV(symbol, "1d", "1y");
   }
 }
+
+// ============================================================
+// INDICATOR TOOLKIT — SMA, EMA, MACD, Full Stochastics
+// (the tools prescribed by The Bounce Profit Plan)
+// ============================================================
+
+export function smaAt(values: number[], period: number): number | null {
+  if (period <= 0 || values.length < period) return null;
+  let sum = 0;
+  for (let i = values.length - period; i < values.length; i++) sum += values[i];
+  return sum / period;
+}
+
+function emaSeries(values: number[], period: number): number[] {
+  if (values.length < period) return [];
+  const k = 2 / (period + 1);
+  const out: number[] = [];
+  let ema = values.slice(0, period).reduce((a, b) => a + b, 0) / period;
+  out.push(ema);
+  for (let i = period; i < values.length; i++) {
+    ema = values[i] * k + ema * (1 - k);
+    out.push(ema);
+  }
+  return out;
+}
+
+export interface MACDReading {
+  macd: number;
+  signal: number;
+  histogram: number;
+  prevHistogram: number;
+}
+
+export function calculateMACD(closes: number[], fast = 12, slow = 26, signalPeriod = 9): MACDReading | null {
+  if (closes.length < slow + signalPeriod + 2) return null;
+  const emaFast = emaSeries(closes, fast);
+  const emaSlow = emaSeries(closes, slow);
+  // Align: emaSlow starts (slow - fast) entries later than emaFast
+  const offset = slow - fast;
+  const macdLine: number[] = [];
+  for (let i = 0; i < emaSlow.length; i++) {
+    macdLine.push(emaFast[i + offset] - emaSlow[i]);
+  }
+  const signalLine = emaSeries(macdLine, signalPeriod);
+  if (signalLine.length < 2) return null;
+  const last = macdLine.length - 1;
+  const prev = last - 1;
+  return {
+    macd: macdLine[last],
+    signal: signalLine[signalLine.length - 1],
+    histogram: macdLine[last] - signalLine[signalLine.length - 1],
+    prevHistogram: macdLine[prev] - signalLine[signalLine.length - 2],
+  };
+}
+
+export interface StochReading {
+  k: number; // slow %K
+  prevK: number;
+  d: number; // %D
+}
+
+export function calculateFullStochastics(
+  highs: number[],
+  lows: number[],
+  closes: number[],
+  kPeriod = 14,
+  kSmooth = 3,
+  dSmooth = 3
+): StochReading | null {
+  if (closes.length < kPeriod + kSmooth + dSmooth) return null;
+  const rawK: number[] = [];
+  for (let i = kPeriod - 1; i < closes.length; i++) {
+    const windowHigh = Math.max(...highs.slice(i - kPeriod + 1, i + 1));
+    const windowLow = Math.min(...lows.slice(i - kPeriod + 1, i + 1));
+    const range = windowHigh - windowLow;
+    rawK.push(range > 0 ? ((closes[i] - windowLow) / range) * 100 : 50);
+  }
+  const slowK: number[] = [];
+  for (let i = kSmooth - 1; i < rawK.length; i++) {
+    slowK.push(rawK.slice(i - kSmooth + 1, i + 1).reduce((a, b) => a + b, 0) / kSmooth);
+  }
+  if (slowK.length < Math.max(2, dSmooth)) return null;
+  const dWindow = slowK.slice(-dSmooth);
+  return {
+    k: slowK[slowK.length - 1],
+    prevK: slowK[slowK.length - 2],
+    d: dWindow.reduce((a, b) => a + b, 0) / dWindow.length,
+  };
+}
+
+// Bounce Plan MA settings per timeframe. Daily is the plan as written
+// (50/200 trend filter, 13/20 bounce MAs); Weekly and Monthly use the
+// standard equivalents (10/40-week ≈ 50/200-day).
+export const BOUNCE_MA_CONFIG: Record<Timeframe, { trend: [number, number]; bounce: [number, number] }> = {
+  Daily: { trend: [50, 200], bounce: [13, 20] },
+  Weekly: { trend: [10, 40], bounce: [13, 20] },
+  Monthly: { trend: [12, 24], bounce: [6, 10] },
+};
 
 // ============================================================
 // SSL — LIQUIDITY SCORING (X/3)
@@ -244,74 +344,166 @@ function scoreSSLSweep(
 }
 
 // ============================================================
-// BOUNCE — SUPPORT BOUNCE SCORING (X/3)  [PROVISIONAL]
+// BOUNCE — BOUNCE ZONE SCORING (X/3)  [The Bounce Profit Plan]
 // ============================================================
-// A bounce is distinct from an SSL sweep: the level HOLDS. Price taps
-// key support and reverses off it without losing the level on a close.
-// 3 = Tapped key support this bar and closed 2%+ above it (strong rejection)
-// 2 = Tapped key support (within 1%) and closed above it
-// 1 = Approaching support (within 2%) — bounce zone armed
+// Trend filter first: the stock should be above its 50 AND 200 MA
+// (per the plan, this rule "may have to be stretched if the market
+// had a very big downturn"). The bounce zone is the 13/20 MA or a
+// key swing support that price pulls back to and HOLDS.
+// 3 = Uptrend intact AND price tapped the bounce zone and is holding above it
+// 2 = Uptrend intact AND price is in the bounce zone (within 2%) — armed
+// 1 = Zone tapped/armed but trend filter only partial (stretched bounce)
 // 0 = No bounce setup
 
-function scoreSupportBounce(
+function scoreBounceZone(
   currentPrice: number,
-  lows: number[],
-  closes: number[]
+  ohlcv: OHLCVData,
+  timeframe: Timeframe
 ): { score: number; details: string; nearSupport: number; furtherSupport: number } {
-  const supportLevels = findSupportLevels(lows);
-  if (supportLevels.length === 0) {
-    return { score: 0, details: "No significant support levels identified", nearSupport: 0, furtherSupport: 0 };
-  }
-
+  const { closes, lows } = ohlcv;
+  const cfg = BOUNCE_MA_CONFIG[timeframe];
   const lastClose = closes[closes.length - 1];
   const lastLow = lows[lows.length - 1];
   const prevLow = lows.length > 1 ? lows[lows.length - 2] : Infinity;
 
-  // Nearest support at or below current price
-  const levelsBelow = supportLevels.filter((l) => l <= currentPrice * 1.01);
-  const nearSupport = levelsBelow.length > 0 ? levelsBelow[levelsBelow.length - 1] : 0;
-  const furtherSupport = levelsBelow.length > 1 ? levelsBelow[levelsBelow.length - 2] : 0;
+  // Trend filter — 50/200 MA equivalents for the timeframe
+  const trendFast = smaAt(closes, cfg.trend[0]);
+  const trendSlow = smaAt(closes, cfg.trend[1]);
+  const aboveFast = trendFast != null && currentPrice > trendFast;
+  const aboveSlow = trendSlow != null ? currentPrice > trendSlow : null; // null = not enough history
+  const fullTrend = aboveFast && aboveSlow !== false;
+  const partialTrend = aboveFast || aboveSlow === true;
+  const trendLabel = `${cfg.trend[0]}/${cfg.trend[1]} MA`;
+  const trendDesc = trendFast != null
+    ? `${aboveFast ? "above" : "below"} the ${cfg.trend[0]} MA ($${trendFast.toFixed(2)})${trendSlow != null ? ` and ${aboveSlow ? "above" : "below"} the ${cfg.trend[1]} MA ($${trendSlow.toFixed(2)})` : ""}`
+    : "insufficient history for the trend MAs";
 
-  if (nearSupport <= 0) {
-    return { score: 0, details: "No mapped support below price", nearSupport: 0, furtherSupport: 0 };
+  // Bounce zone candidates: 13/20 MA (timeframe equivalents) + nearest swing support
+  const bounceFast = smaAt(closes, cfg.bounce[0]);
+  const bounceSlow = smaAt(closes, cfg.bounce[1]);
+  const supports = findSupportLevels(lows);
+  const nearSwing = supports.filter((l) => l <= currentPrice * 1.01).pop() || 0;
+
+  const candidates: { level: number; name: string }[] = [];
+  if (bounceFast != null && bounceFast <= currentPrice * 1.01) candidates.push({ level: Math.round(bounceFast * 100) / 100, name: `${cfg.bounce[0]} MA` });
+  if (bounceSlow != null && bounceSlow <= currentPrice * 1.01) candidates.push({ level: Math.round(bounceSlow * 100) / 100, name: `${cfg.bounce[1]} MA` });
+  if (nearSwing > 0) candidates.push({ level: nearSwing, name: "swing support" });
+
+  const furtherSupport = supports.filter((l) => l < (nearSwing || currentPrice)).pop() || 0;
+
+  if (candidates.length === 0) {
+    return { score: 0, details: `No bounce zone below price (price is under its ${trendLabel === "50/200 MA" ? "bounce MAs" : "key MAs"} and mapped support).`, nearSupport: 0, furtherSupport };
   }
 
-  // Did price tap the level (within 1%) while holding it on a closing basis?
-  const tappedThisBar = lastLow <= nearSupport * 1.01 && lastLow >= nearSupport * 0.99;
-  const tappedRecently = tappedThisBar || (prevLow <= nearSupport * 1.01 && prevLow >= nearSupport * 0.99);
-  const heldOnClose = lastClose > nearSupport;
+  // The zone = the closest candidate below price
+  candidates.sort((a, b) => b.level - a.level);
+  const zone = candidates[0];
+  const distPct = ((currentPrice - zone.level) / zone.level) * 100;
 
-  const reboundPct = nearSupport > 0 ? ((lastClose - nearSupport) / nearSupport) * 100 : 0;
+  // Tap-and-hold: this bar (or last bar) dipped into the zone, close held above it
+  const tapped = (lastLow <= zone.level * 1.01 || prevLow <= zone.level * 1.01) && lastClose > zone.level;
+  const armed = distPct <= 2;
 
-  if (tappedRecently && heldOnClose && reboundPct >= 2) {
+  if (tapped && fullTrend) {
     return {
       score: 3,
-      details: `STRONG BOUNCE — Price tapped key support at $${nearSupport.toFixed(2)}, held it, and rebounded ${reboundPct.toFixed(1)}% off the level. Buyers defended the zone with conviction.`,
-      nearSupport,
-      furtherSupport,
+      details: `BOUNCE CONFIRMED — Uptrend intact (${trendDesc}). Price pulled back, tapped the ${zone.name} at $${zone.level.toFixed(2)}, and is holding above it. Classic Bounce Plan setup.`,
+      nearSupport: zone.level,
+      furtherSupport: nearSwing > 0 && nearSwing !== zone.level ? nearSwing : furtherSupport,
     };
   }
 
-  if (tappedRecently && heldOnClose) {
+  if (armed && fullTrend) {
     return {
       score: 2,
-      details: `BOUNCE FORMING — Price tapped key support at $${nearSupport.toFixed(2)} and is holding above it. Watch for follow-through confirmation.`,
-      nearSupport,
-      furtherSupport,
+      details: `BOUNCE ZONE ARMED — Uptrend intact (${trendDesc}). Price is ${distPct.toFixed(1)}% above the ${zone.name} at $${zone.level.toFixed(2)}. Watching for the tap and hold.`,
+      nearSupport: zone.level,
+      furtherSupport: nearSwing > 0 && nearSwing !== zone.level ? nearSwing : furtherSupport,
     };
   }
 
-  const distPct = ((currentPrice - nearSupport) / nearSupport) * 100;
-  if (distPct <= 2) {
+  if ((tapped || armed) && partialTrend) {
     return {
       score: 1,
-      details: `BOUNCE ZONE ARMED — Price is ${distPct.toFixed(1)}% above key support at $${nearSupport.toFixed(2)}. Watching for the tap and hold.`,
-      nearSupport,
-      furtherSupport,
+      details: `STRETCHED BOUNCE — Price ${tapped ? "tapped" : "is near"} the ${zone.name} at $${zone.level.toFixed(2)} but the trend filter is only partial (${trendDesc}). The plan allows stretching this rule after a big market downturn — treat with extra caution.`,
+      nearSupport: zone.level,
+      furtherSupport: nearSwing > 0 && nearSwing !== zone.level ? nearSwing : furtherSupport,
     };
   }
 
-  return { score: 0, details: `No active bounce setup. Nearest support at $${nearSupport.toFixed(2)} (${distPct.toFixed(1)}% below price).`, nearSupport, furtherSupport };
+  return {
+    score: 0,
+    details: fullTrend
+      ? `No active bounce. Uptrend intact (${trendDesc}) but price is ${distPct.toFixed(1)}% above the ${zone.name} at $${zone.level.toFixed(2)} — no pullback to the zone yet.`
+      : `No bounce setup — trend filter failed (${trendDesc}). The plan wants the stock above its ${trendLabel} first.`,
+    nearSupport: zone.level,
+    furtherSupport,
+  };
+}
+
+// ============================================================
+// BOUNCE PLAN CONFLUENCE — Stochastics & MACD
+// ============================================================
+
+function detectStochasticsSignal(
+  highs: number[],
+  lows: number[],
+  closes: number[]
+): { active: boolean; details: string } {
+  const stoch = calculateFullStochastics(highs, lows, closes);
+  if (!stoch) return { active: false, details: "Insufficient data for Full Stochastics" };
+  const { k, prevK, d } = stoch;
+
+  const inOversold = k <= 20 || prevK <= 20;
+  const pointingUp = k > prevK;
+
+  if (inOversold && pointingUp) {
+    return {
+      active: true,
+      details: `STOCHASTICS OVERSOLD & TURNING UP — %K at ${k.toFixed(1)} (from ${prevK.toFixed(1)}), %D at ${d.toFixed(1)}. Oversold and pointing up, ready to rise — textbook Bounce Plan signal.`,
+    };
+  }
+  if (k >= 80) {
+    return {
+      active: false,
+      details: `STOCHASTICS OVERBOUGHT at ${k.toFixed(1)} — ${pointingUp ? "still pointing up, but extended" : "pointing down, ready to drop"}. Not a bounce entry zone.`,
+    };
+  }
+  return {
+    active: false,
+    details: `Stochastics %K at ${k.toFixed(1)} (${pointingUp ? "rising" : "falling"}), %D at ${d.toFixed(1)} — no oversold turn yet.`,
+  };
+}
+
+function detectMACDSignal(closes: number[]): { active: boolean; details: string } {
+  const m = calculateMACD(closes);
+  if (!m) return { active: false, details: "Insufficient data for MACD" };
+  const { macd, signal, histogram, prevHistogram } = m;
+  const price = closes[closes.length - 1];
+  const nearZero = Math.abs(histogram) <= price * 0.002; // within 0.2% of price = "close to crossing"
+
+  if (prevHistogram <= 0 && histogram > 0) {
+    return {
+      active: true,
+      details: `MACD BULLISH CROSS — MACD line (${macd.toFixed(2)}) just crossed above the signal line (${signal.toFixed(2)}). Histogram flipped positive.`,
+    };
+  }
+  if (histogram > 0 && histogram >= prevHistogram) {
+    return {
+      active: true,
+      details: `MACD POINTED UP — MACD (${macd.toFixed(2)}) above signal (${signal.toFixed(2)}) with a rising histogram. Momentum in the right direction.`,
+    };
+  }
+  if (histogram < 0 && histogram > prevHistogram && nearZero) {
+    return {
+      active: true,
+      details: `MACD CONVERGING FOR A CROSS — lines are close and the histogram is shrinking toward zero. Watch for the bullish cross.`,
+    };
+  }
+  return {
+    active: false,
+    details: `MACD ${histogram >= 0 ? "positive but fading" : "below signal"} (MACD ${macd.toFixed(2)} vs signal ${signal.toFixed(2)}) — no bullish cross setup.`,
+  };
 }
 
 // ============================================================
@@ -405,6 +597,12 @@ function scoreVolume(
   const maxVolume = Math.max(...prevVolumes);
   const volumeRatio = avgVolume > 0 ? lastVolume / avgVolume : 0;
 
+  // "The true ammunition of the stock" — is volume increasing?
+  const n = volumes.length;
+  const risingNote = n >= 3 && volumes[n - 1] > volumes[n - 2] && volumes[n - 2] > volumes[n - 3]
+    ? " Volume rising for 3 straight bars — ammunition building."
+    : "";
+
   // Sort all volumes to find percentile
   const sortedVolumes = [...volumes].sort((a, b) => b - a);
   const rank = sortedVolumes.indexOf(lastVolume) + 1;
@@ -413,7 +611,7 @@ function scoreVolume(
   if (isTopVolume || lastVolume >= maxVolume) {
     return {
       score: 3,
-      details: `VOLUME CLIMAX — ${(volumeRatio).toFixed(1)}x average volume. ${rank === 1 ? "LARGEST VOLUME IN HISTORY" : `Top ${rank} volume ever recorded`}. Massive institutional flow confirmed.`,
+      details: `VOLUME CLIMAX — ${(volumeRatio).toFixed(1)}x average volume. ${rank === 1 ? "LARGEST VOLUME IN HISTORY" : `Top ${rank} volume ever recorded`}. Massive institutional flow confirmed.${risingNote}`,
       lastVolume,
       avgVolume: Math.round(avgVolume),
       maxVolume,
@@ -424,7 +622,7 @@ function scoreVolume(
   if (volumeRatio >= 1.5) {
     return {
       score: 2,
-      details: `ELEVATED VOLUME — ${volumeRatio.toFixed(1)}x average volume. Significant institutional participation above normal levels.`,
+      details: `ELEVATED VOLUME — ${volumeRatio.toFixed(1)}x average volume. Significant institutional participation above normal levels.${risingNote}`,
       lastVolume,
       avgVolume: Math.round(avgVolume),
       maxVolume,
@@ -435,7 +633,7 @@ function scoreVolume(
   if (volumeRatio >= 0.8) {
     return {
       score: 1,
-      details: `NORMAL VOLUME — ${volumeRatio.toFixed(1)}x average. No significant volume spike detected.`,
+      details: `NORMAL VOLUME — ${volumeRatio.toFixed(1)}x average. No significant volume spike detected.${risingNote}`,
       lastVolume,
       avgVolume: Math.round(avgVolume),
       maxVolume,
@@ -936,15 +1134,14 @@ async function gradeBounceSetup(
 
   if (!quote || !ohlcv || ohlcv.closes.length < 10) return null;
 
-  const bounce = scoreSupportBounce(quote.currentPrice, ohlcv.lows, ohlcv.closes);
+  const bounce = scoreBounceZone(quote.currentPrice, ohlcv, timeframe);
   const volume = scoreVolume(ohlcv.volumes);
   const candle = scoreBounceCandle(ohlcv.opens, ohlcv.highs, ohlcv.lows, ohlcv.closes, bounce.nearSupport);
 
   const totalScore = bounce.score + volume.score + candle.score;
 
-  const rsiValues = calculateRSI(ohlcv.closes);
-  const rsiDivergence = detectRSIDivergence(ohlcv.closes, rsiValues);
-  const fibCheck = checkFibLevels(quote.currentPrice, ohlcv.highs, ohlcv.lows);
+  const stochSignal = detectStochasticsSignal(ohlcv.highs, ohlcv.lows, ohlcv.closes);
+  const macdSignal = detectMACDSignal(ohlcv.closes);
 
   return {
     strategy: "Bounce",
@@ -955,8 +1152,8 @@ async function gradeBounceSetup(
     currentPrice: quote.currentPrice,
 
     criteria: [
-      { key: "level", label: "SUPPORT BOUNCE", score: bounce.score, max: 3, details: bounce.details },
-      { key: "volume", label: "VOLUME CONFIRMATION", score: volume.score, max: 3, details: volume.details },
+      { key: "level", label: "BOUNCE ZONE", score: bounce.score, max: 3, details: bounce.details },
+      { key: "volume", label: "VOLUME (THE AMMUNITION)", score: volume.score, max: 3, details: volume.details },
       { key: "candle", label: "REVERSAL CANDLE", score: candle.score, max: 3, details: candle.details },
     ],
 
@@ -964,8 +1161,8 @@ async function gradeBounceSetup(
     grade: toGrade(totalScore),
 
     confluence: [
-      { key: "rsi", label: "RSI BULLISH DIVERGENCE", active: rsiDivergence.hasDivergence, details: rsiDivergence.details },
-      { key: "fib", label: "FIB KEY LEVEL", active: fibCheck.atKeyLevel, details: fibCheck.details },
+      { key: "stoch", label: "STOCHASTICS", active: stochSignal.active, details: stochSignal.details },
+      { key: "macd", label: "MACD", active: macdSignal.active, details: macdSignal.details },
     ],
 
     keyLevel: bounce.nearSupport,
@@ -1014,6 +1211,9 @@ async function gradeSSLSetup(
   const rsiValues = calculateRSI(ohlcv.closes);
   const rsiDivergence = detectRSIDivergence(ohlcv.closes, rsiValues);
   const fibCheck = checkFibLevels(quote.currentPrice, ohlcv.highs, ohlcv.lows);
+  // Bounce Plan toolkit shared with SSL as extra confluence
+  const stochSignal = detectStochasticsSignal(ohlcv.highs, ohlcv.lows, ohlcv.closes);
+  const macdSignal = detectMACDSignal(ohlcv.closes);
 
   return {
     strategy: "SSL",
@@ -1035,6 +1235,8 @@ async function gradeSSLSetup(
     confluence: [
       { key: "rsi", label: "RSI BULLISH DIVERGENCE", active: rsiDivergence.hasDivergence, details: rsiDivergence.details },
       { key: "fib", label: "FIB KEY LEVEL", active: fibCheck.atKeyLevel, details: fibCheck.details },
+      { key: "stoch", label: "STOCHASTICS", active: stochSignal.active, details: stochSignal.details },
+      { key: "macd", label: "MACD", active: macdSignal.active, details: macdSignal.details },
     ],
 
     keyLevel: sweep.nearSupport,
@@ -1282,6 +1484,58 @@ export async function detectSectorRotation(): Promise<SectorRotation[]> {
   });
 
   return rotations;
+}
+
+// ============================================================
+// MARKET PULSE — the Bounce Plan's fundamental layer
+// ============================================================
+// "Don't trade on the unemployment announcement days. This is usually
+// the first Friday of every month." + "Analyze which way the overall
+// market is headed (look at SPY)."
+
+export interface JobsReportInfo {
+  isJobsReportDay: boolean;
+  nextJobsReportDate: string; // YYYY-MM-DD (first Friday of the month)
+}
+
+function firstFridayOfMonth(year: number, month: number): Date {
+  const d = new Date(year, month, 1);
+  while (d.getDay() !== 5) d.setDate(d.getDate() + 1);
+  return d;
+}
+
+export function calculateJobsReportInfo(): JobsReportInfo {
+  const now = new Date();
+  const et = new Date(now.toLocaleString("en-US", { timeZone: "America/New_York" }));
+  const thisMonths = firstFridayOfMonth(et.getFullYear(), et.getMonth());
+  const isSameDay =
+    et.getFullYear() === thisMonths.getFullYear() &&
+    et.getMonth() === thisMonths.getMonth() &&
+    et.getDate() === thisMonths.getDate();
+  const next = et.getDate() <= thisMonths.getDate()
+    ? thisMonths
+    : firstFridayOfMonth(et.getFullYear(), et.getMonth() + 1);
+  const toYMD = (d: Date) =>
+    `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+  return { isJobsReportDay: isSameDay, nextJobsReportDate: toYMD(next) };
+}
+
+export type MarketTrend = "BULLISH" | "BEARISH" | "CONSOLIDATING";
+
+export function classifyMarketTrend(closes: number[]): { trend: MarketTrend; sma50: number | null; detail: string } {
+  const sma50 = smaAt(closes, 50);
+  const price = closes[closes.length - 1];
+  const lookback = Math.min(10, closes.length - 1);
+  const slope = lookback > 0 ? price - closes[closes.length - 1 - lookback] : 0;
+
+  if (sma50 == null) return { trend: "CONSOLIDATING", sma50: null, detail: "Insufficient history to classify the trend" };
+  if (price > sma50 * 1.005 && slope > 0) {
+    return { trend: "BULLISH", sma50, detail: `Above the 50-day MA ($${sma50.toFixed(2)}) and rising over the last ${lookback} sessions` };
+  }
+  if (price < sma50 * 0.995 && slope < 0) {
+    return { trend: "BEARISH", sma50, detail: `Below the 50-day MA ($${sma50.toFixed(2)}) and falling over the last ${lookback} sessions` };
+  }
+  return { trend: "CONSOLIDATING", sma50, detail: `Hovering around the 50-day MA ($${sma50.toFixed(2)}) — no decisive direction` };
 }
 
 // ============================================================

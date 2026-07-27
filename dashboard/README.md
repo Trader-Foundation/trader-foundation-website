@@ -5,9 +5,11 @@ Bounce, SSL sell-side liquidity, and Breakout), Wall Street Exchange grid,
 Investment Radar, Portfolio Simulator, Freedom Calculator, Research Terminal,
 and AI chatbot.
 
-Note: the Bounce strategy currently runs provisional touch-and-hold criteria —
-the official TF bounce spec will replace the scoring functions in
-`server/strategyEngine.ts` when provided.
+The Bounce strategy implements The TF Bounce Profit Plan: trend filter
+(50/200 MA), pullback bounce off the 13/20 MA or key swing support, volume
+confirmation, reversal candle, with Full Stochastics + MACD confluence and a
+Market Pulse strip (SPY direction, VIX, jobs-report-day warning) for the
+plan's fundamental layer. Scoring lives in `server/strategyEngine.ts`.
 
 Originally built on Manus. It now runs **standalone** — no Manus account or
 keys required.
