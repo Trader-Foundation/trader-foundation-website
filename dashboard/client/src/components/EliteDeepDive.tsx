@@ -1,7 +1,8 @@
 // ============================================================
 // ELITE DEEP DIVE — Comprehensive Stock Research Terminal
-// Analyst targets, insider activity, SSL grading, sector rotation,
-// overreaction detection, SEC filings, AI research — all in one view
+// Analyst targets, insider activity, setup grading (Bounce/SSL/
+// Breakout), sector rotation, overreaction detection, SEC filings,
+// AI research — all in one view
 // ============================================================
 import { useState, useMemo, useEffect } from "react";
 import { trpc } from "@/lib/trpc";
@@ -100,13 +101,14 @@ function OverreactionBanner({ alert }: { alert: any }) {
   );
 }
 
-// --- SSL Grade Card ---
-function SSLGradeCard({ grade }: { grade: any }) {
+// --- Setup Grade Card (generic across Bounce / SSL / Breakout) ---
+function SetupGradeCard({ grade }: { grade: any }) {
   if (!grade) return null;
   const gradeColor = grade.grade === "A+" ? "text-[#D4AF37]" : grade.grade === "A" ? "text-[#C4A265]" : "text-[#666]";
   const gradeBg = grade.grade === "A+" ? "bg-[#D4AF37]/15 border-[#D4AF37]/40" : grade.grade === "A" ? "bg-[#C4A265]/10 border-[#C4A265]/30" : "bg-[#111] border-[#222]";
+  const activeFlags = (grade.confluence || []).filter((f: any) => f.active);
   return (
-    <Panel title={`SSL GRADE — ${grade.timeframe.toUpperCase()}`} icon="◆">
+    <Panel title={`${(grade.strategy || "SETUP").toUpperCase()} GRADE — ${grade.timeframe.toUpperCase()}`} icon="◆">
       <div className="space-y-4">
         {/* Grade Badge */}
         <div className="flex items-center justify-between">
@@ -116,55 +118,41 @@ function SSLGradeCard({ grade }: { grade: any }) {
           </div>
           <div className="text-right">
             <div className="text-xs font-mono text-[#888]">${grade.currentPrice?.toFixed(2)}</div>
-            <div className="text-[10px] font-mono text-[#555]">SSL: ${grade.nearTermSSL?.toFixed(2)}</div>
+            <div className="text-[10px] font-mono text-[#555]">{grade.keyLevelLabel}: ${grade.keyLevel?.toFixed(2)}</div>
           </div>
         </div>
         {/* Score Breakdown */}
         <div className="space-y-3">
-          <ScoreBar score={grade.liquidityScore} max={3} label="LIQUIDITY (SSL SWEEP)" />
-          <ScoreBar score={grade.volumeClimaxScore} max={3} label="VOLUME CLIMAX" />
-          <ScoreBar score={grade.absorptionScore} max={3} label="ABSORPTION CANDLE" />
+          {(grade.criteria || []).map((c: any) => (
+            <ScoreBar key={c.key} score={c.score} max={c.max} label={c.label} />
+          ))}
         </div>
         {/* Details */}
         <div className="space-y-2">
-          <div className="p-2.5 bg-[#111] rounded border border-[#1a1a1a]">
-            <div className="text-[9px] font-mono text-[#D4AF37] mb-1">LIQUIDITY</div>
-            <p className="text-[10px] font-mono text-[#aaa] leading-relaxed">{grade.liquidityDetails}</p>
-          </div>
-          <div className="p-2.5 bg-[#111] rounded border border-[#1a1a1a]">
-            <div className="text-[9px] font-mono text-[#D4AF37] mb-1">VOLUME</div>
-            <p className="text-[10px] font-mono text-[#aaa] leading-relaxed">{grade.volumeClimaxDetails}</p>
-          </div>
-          <div className="p-2.5 bg-[#111] rounded border border-[#1a1a1a]">
-            <div className="text-[9px] font-mono text-[#D4AF37] mb-1">ABSORPTION</div>
-            <p className="text-[10px] font-mono text-[#aaa] leading-relaxed">{grade.absorptionDetails}</p>
-          </div>
+          {(grade.criteria || []).map((c: any) => (
+            <div key={c.key} className="p-2.5 bg-[#111] rounded border border-[#1a1a1a]">
+              <div className="text-[9px] font-mono text-[#D4AF37] mb-1">{c.label}</div>
+              <p className="text-[10px] font-mono text-[#aaa] leading-relaxed">{c.details}</p>
+            </div>
+          ))}
         </div>
         {/* Additional Confluence */}
-        <div className="flex items-center gap-3">
-          {grade.rsiBullishDivergence && (
-            <span className="px-2 py-1 bg-green-500/10 border border-green-500/30 rounded text-[10px] font-mono text-green-400">
-              ✦ RSI DIVERGENCE
+        <div className="flex items-center gap-3 flex-wrap">
+          {activeFlags.map((f: any) => (
+            <span key={f.key} className={`px-2 py-1 rounded text-[10px] font-mono border ${f.key === "fib" ? "bg-purple-500/10 border-purple-500/30 text-purple-400" : "bg-green-500/10 border-green-500/30 text-green-400"}`}>
+              ✦ {f.label}
             </span>
-          )}
-          {grade.fibKeyLevel && (
-            <span className="px-2 py-1 bg-purple-500/10 border border-purple-500/30 rounded text-[10px] font-mono text-purple-400">
-              ✦ FIB KEY LEVEL
-            </span>
-          )}
-          {!grade.rsiBullishDivergence && !grade.fibKeyLevel && (
+          ))}
+          {activeFlags.length === 0 && (
             <span className="text-[10px] font-mono text-[#555]">No additional confluence flags</span>
           )}
         </div>
-        {/* RSI & FIB Details */}
-        {(grade.rsiBullishDivergence || grade.fibKeyLevel) && (
+        {/* Confluence Details */}
+        {activeFlags.length > 0 && (
           <div className="space-y-1.5">
-            {grade.rsiBullishDivergence && (
-              <p className="text-[10px] font-mono text-green-400/80">{grade.rsiDetails}</p>
-            )}
-            {grade.fibKeyLevel && (
-              <p className="text-[10px] font-mono text-purple-400/80">{grade.fibDetails}</p>
-            )}
+            {activeFlags.map((f: any) => (
+              <p key={f.key} className={`text-[10px] font-mono ${f.key === "fib" ? "text-purple-400/80" : "text-green-400/80"}`}>{f.details}</p>
+            ))}
           </div>
         )}
       </div>
@@ -234,13 +222,15 @@ function LoadingPulse() {
 // ============================================================
 // MAIN COMPONENT
 // ============================================================
-type DeepDiveTab = "overview" | "ssl" | "sectors" | "insiders" | "research";
+type DeepDiveTab = "overview" | "setups" | "sectors" | "insiders" | "research";
+type SetupStrategy = "Bounce" | "SSL" | "Breakout";
 
 export function EliteDeepDive({ initialSymbol }: { initialSymbol?: string | null } = {}) {
   const [symbol, setSymbol] = useState(initialSymbol || "");
   const [searchInput, setSearchInput] = useState(initialSymbol || "");
   const [activeSubTab, setActiveSubTab] = useState<DeepDiveTab>("overview");
-  const [sslTimeframe, setSSLTimeframe] = useState<"Daily" | "Weekly" | "Monthly">("Weekly");
+  const [setupStrategy, setSetupStrategy] = useState<SetupStrategy>("Bounce");
+  const [setupTimeframe, setSetupTimeframe] = useState<"Daily" | "Weekly" | "Monthly">("Weekly");
 
   // Update symbol when navigating from another tab
   useEffect(() => {
@@ -266,15 +256,15 @@ export function EliteDeepDive({ initialSymbol }: { initialSymbol?: string | null
   const deepDive = fullData || fastData;
   const deepDiveLoading = fastLoading;
 
-  // SSL grade for this stock
-  const { data: sslGrade, isLoading: sslLoading } = trpc.market.sslGradeSingle.useQuery(
-    { symbol, timeframe: sslTimeframe },
+  // Setup grade for this stock (selected strategy)
+  const { data: setupGrade, isLoading: setupLoading } = trpc.market.gradeSingle.useQuery(
+    { strategy: setupStrategy, symbol, timeframe: setupTimeframe },
     { enabled: !!symbol, staleTime: 3 * 60 * 1000 }
   );
 
-  // All graded setups for the selected timeframe
-  const { data: allGradedSetups } = trpc.market.sslGrading.useQuery(
-    { timeframe: sslTimeframe },
+  // All graded setups for the selected strategy + timeframe
+  const { data: allGradedSetups } = trpc.market.setupGrading.useQuery(
+    { strategy: setupStrategy, timeframe: setupTimeframe },
     { staleTime: 3 * 60 * 1000 }
   );
 
@@ -288,7 +278,7 @@ export function EliteDeepDive({ initialSymbol }: { initialSymbol?: string | null
 
   const subTabs = [
     { id: "overview" as const, label: "OVERVIEW" },
-    { id: "ssl" as const, label: "SSL GRADE" },
+    { id: "setups" as const, label: "SETUP GRADES" },
     { id: "sectors" as const, label: "SECTOR ROTATION" },
     { id: "insiders" as const, label: "INSIDERS & FILINGS" },
     { id: "research" as const, label: "AI RESEARCH" },
@@ -322,14 +312,28 @@ export function EliteDeepDive({ initialSymbol }: { initialSymbol?: string | null
 
       {/* Graded Setups Quick View */}
       {allGradedSetups && allGradedSetups.length > 0 && !symbol && (
-        <Panel title={`A-GRADE SETUPS — ${sslTimeframe.toUpperCase()} (7/9+)`} icon="◆">
-          <div className="flex items-center gap-2 mb-4">
+        <Panel title={`A-GRADE ${setupStrategy.toUpperCase()} SETUPS — ${setupTimeframe.toUpperCase()} (7/9+)`} icon="◆">
+          <div className="flex items-center gap-2 mb-4 flex-wrap">
+            {(["Bounce", "SSL", "Breakout"] as const).map((st) => (
+              <button
+                key={st}
+                onClick={() => setSetupStrategy(st)}
+                className={`px-3 py-1.5 rounded text-[10px] font-mono font-semibold transition-all ${
+                  setupStrategy === st
+                    ? "bg-[#D4AF37]/20 border border-[#D4AF37]/50 text-[#D4AF37]"
+                    : "bg-[#111] border border-[#222] text-[#666] hover:text-[#999]"
+                }`}
+              >
+                {st.toUpperCase()}
+              </button>
+            ))}
+            <div className="h-4 w-px bg-[#222] mx-1" />
             {(["Daily", "Weekly", "Monthly"] as const).map((tf) => (
               <button
                 key={tf}
-                onClick={() => setSSLTimeframe(tf)}
+                onClick={() => setSetupTimeframe(tf)}
                 className={`px-3 py-1.5 rounded text-[10px] font-mono transition-all ${
-                  sslTimeframe === tf
+                  setupTimeframe === tf
                     ? "bg-[#D4AF37]/20 border border-[#D4AF37]/50 text-[#D4AF37]"
                     : "bg-[#111] border border-[#222] text-[#666] hover:text-[#999]"
                 }`}
@@ -360,19 +364,20 @@ export function EliteDeepDive({ initialSymbol }: { initialSymbol?: string | null
                     <div className="text-[10px] font-mono text-[#888]">{s.totalScore}/9</div>
                   </div>
                 </div>
-                <div className="flex items-center gap-4 mt-2">
-                  <span className="text-[10px] font-mono text-[#888]">LIQ: {s.liquidityScore}/3</span>
-                  <span className="text-[10px] font-mono text-[#888]">VOL: {s.volumeClimaxScore}/3</span>
-                  <span className="text-[10px] font-mono text-[#888]">ABS: {s.absorptionScore}/3</span>
-                  {s.rsiBullishDivergence && <span className="text-[9px] font-mono text-green-400">✦ RSI DIV</span>}
-                  {s.fibKeyLevel && <span className="text-[9px] font-mono text-purple-400">✦ FIB</span>}
+                <div className="flex items-center gap-4 mt-2 flex-wrap">
+                  {(s.criteria || []).map((c: any) => (
+                    <span key={c.key} className="text-[10px] font-mono text-[#888]">{c.label.split(" ")[0]}: {c.score}/3</span>
+                  ))}
+                  {(s.confluence || []).filter((f: any) => f.active).map((f: any) => (
+                    <span key={f.key} className={`text-[9px] font-mono ${f.key === "fib" ? "text-purple-400" : "text-green-400"}`}>✦ {f.label}</span>
+                  ))}
                 </div>
               </button>
             ))}
           </div>
           {allGradedSetups.length === 0 && (
             <p className="text-xs font-mono text-[#555] text-center py-4">
-              No setups grading 7/9 or higher on {sslTimeframe} timeframe. Only A-grade shows here.
+              No {setupStrategy} setups grading 7/9 or higher on {setupTimeframe} timeframe. Only A-grade shows here.
             </p>
           )}
         </Panel>
@@ -384,7 +389,7 @@ export function EliteDeepDive({ initialSymbol }: { initialSymbol?: string | null
           <div className="text-6xl mb-4 opacity-20">◆</div>
           <h2 className="text-xl font-mono text-[#D4AF37] mb-2">ELITE DEEP DIVE</h2>
           <p className="text-sm font-mono text-[#666] max-w-md mx-auto">
-            Enter any ticker symbol above to access comprehensive research — analyst targets, insider activity, SSL grading, sector rotation, overreaction detection, and AI-powered analysis.
+            Enter any ticker symbol above to access comprehensive research — analyst targets, insider activity, Bounce/SSL/Breakout setup grading, sector rotation, overreaction detection, and AI-powered analysis.
           </p>
         </div>
       )}
@@ -622,16 +627,30 @@ export function EliteDeepDive({ initialSymbol }: { initialSymbol?: string | null
                 </div>
               )}
 
-              {/* SSL GRADE TAB */}
-              {activeSubTab === "ssl" && (
+              {/* SETUP GRADES TAB */}
+              {activeSubTab === "setups" && (
                 <div className="space-y-4">
-                  <div className="flex items-center gap-2 mb-2">
+                  <div className="flex items-center gap-2 mb-2 flex-wrap">
+                    {(["Bounce", "SSL", "Breakout"] as const).map((st) => (
+                      <button
+                        key={st}
+                        onClick={() => setSetupStrategy(st)}
+                        className={`px-3 py-1.5 rounded text-[10px] font-mono font-semibold transition-all ${
+                          setupStrategy === st
+                            ? "bg-[#D4AF37]/20 border border-[#D4AF37]/50 text-[#D4AF37]"
+                            : "bg-[#111] border border-[#222] text-[#666] hover:text-[#999]"
+                        }`}
+                      >
+                        {st.toUpperCase()}
+                      </button>
+                    ))}
+                    <div className="h-4 w-px bg-[#222] mx-1" />
                     {(["Daily", "Weekly", "Monthly"] as const).map((tf) => (
                       <button
                         key={tf}
-                        onClick={() => setSSLTimeframe(tf)}
+                        onClick={() => setSetupTimeframe(tf)}
                         className={`px-3 py-1.5 rounded text-[10px] font-mono transition-all ${
-                          sslTimeframe === tf
+                          setupTimeframe === tf
                             ? "bg-[#D4AF37]/20 border border-[#D4AF37]/50 text-[#D4AF37]"
                             : "bg-[#111] border border-[#222] text-[#666] hover:text-[#999]"
                         }`}
@@ -640,14 +659,14 @@ export function EliteDeepDive({ initialSymbol }: { initialSymbol?: string | null
                       </button>
                     ))}
                   </div>
-                  {sslLoading ? (
-                    <Panel title="SSL GRADE"><LoadingPulse /></Panel>
-                  ) : sslGrade ? (
-                    <SSLGradeCard grade={sslGrade} />
+                  {setupLoading ? (
+                    <Panel title={`${setupStrategy.toUpperCase()} GRADE`}><LoadingPulse /></Panel>
+                  ) : setupGrade ? (
+                    <SetupGradeCard grade={setupGrade} />
                   ) : (
-                    <Panel title="SSL GRADE">
+                    <Panel title={`${setupStrategy.toUpperCase()} GRADE`}>
                       <p className="text-xs font-mono text-[#555]">
-                        No SSL grade available for {symbol} on {sslTimeframe} timeframe. Stock may not be in the screener universe.
+                        No {setupStrategy} grade available for {symbol} on {setupTimeframe} timeframe. Stock may not be in the screener universe.
                       </p>
                     </Panel>
                   )}

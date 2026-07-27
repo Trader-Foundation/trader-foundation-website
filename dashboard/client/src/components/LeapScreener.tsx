@@ -1,28 +1,90 @@
 // ============================================================
-// SSL SCREENER — Real-time SSL Sweep Detection
+// SETUP SCREENER — Real-time detection across the three TF
+// Elite strategies: BOUNCE, SSL (sell-side liquidity), BREAKOUT
 // Multi-timeframe tabs (Daily/Weekly/Monthly)
 // Past Winners archive, TradingView charts, auto-refresh
 // ============================================================
 
 import { useState, useMemo } from "react";
 import { trpc } from "@/lib/trpc";
-import { getGradeColor, getGradeBg, getAlertColor } from "@/lib/data";
+import { getAlertColor } from "@/lib/data";
 import { motion, AnimatePresence } from "framer-motion";
 import { TradingViewChart } from "./TradingViewChart";
 import { MiniCandleChart } from "./MiniCandleChart";
 
 type Timeframe = "Daily" | "Weekly" | "Monthly";
+type Strategy = "Bounce" | "SSL" | "Breakout";
+
+interface StrategyConfig {
+  tabLabel: string;
+  title: string;
+  description: string;
+  levelLabel: string; // table column / detail panel label
+  chartLevelLabel: string; // short label drawn on the candle chart
+  activeStatus: string; // the "it's happening" status
+  activeStatLabel: string; // hero stat label
+  statuses: string[]; // filter options
+  alertHeadline: string;
+  alertDetail: (item: any) => string;
+  provisional?: boolean;
+}
+
+const STRATEGY_CONFIG: Record<Strategy, StrategyConfig> = {
+  Bounce: {
+    tabLabel: "BOUNCE",
+    title: "Bounce Screener",
+    description:
+      "Real-time detection of stocks tapping key support zones and holding them. Identifying high-probability reversals where buyers defend the level.",
+    levelLabel: "SUPPORT",
+    chartLevelLabel: "SUP",
+    activeStatus: "Bouncing",
+    activeStatLabel: "BOUNCING",
+    statuses: ["all", "Bouncing", "Approaching", "Watching"],
+    alertHeadline: "◉ BOUNCE FORMING",
+    alertDetail: (item) => `${item.symbol} — Holding key support at $${item.level.toFixed(2)}`,
+    provisional: true,
+  },
+  SSL: {
+    tabLabel: "SSL",
+    title: "SSL Screener",
+    description:
+      "Real-time sell-side liquidity sweep detection. Identifying setups where price sweeps below a key low to grab liquidity while smart money is loading.",
+    levelLabel: "SSL LEVEL",
+    chartLevelLabel: "SSL",
+    activeStatus: "SSL Breached",
+    activeStatLabel: "BREACHED",
+    statuses: ["all", "SSL Breached", "Approaching", "Watching"],
+    alertHeadline: "⚡ SSL LEVEL BREACHED",
+    alertDetail: (item) => `${item.symbol} — Sell-side liquidity swept at $${item.level.toFixed(2)}`,
+  },
+  Breakout: {
+    tabLabel: "BREAKOUT",
+    title: "Breakout Screener",
+    description:
+      "Real-time detection of stocks breaking through key resistance with volume behind the move. Broken resistance becomes support.",
+    levelLabel: "RESISTANCE",
+    chartLevelLabel: "RES",
+    activeStatus: "Breakout",
+    activeStatLabel: "BREAKOUTS",
+    statuses: ["all", "Breakout", "Approaching", "Watching"],
+    alertHeadline: "▲ BREAKOUT",
+    alertDetail: (item) => `${item.symbol} — Cleared resistance at $${item.level.toFixed(2)}`,
+  },
+};
 
 function StatusBadge({ status }: { status: string }) {
   const colors: Record<string, string> = {
     "SSL Breached": "text-red-400 bg-red-500/15 border-red-500/30",
+    "Bouncing": "text-green-400 bg-green-500/15 border-green-500/30",
+    "Breakout": "text-[#D4AF37] bg-[#D4AF37]/15 border-[#D4AF37]/40",
     "Approaching": "text-yellow-400 bg-yellow-500/15 border-yellow-500/30",
-    "Confirmed": "text-green-400 bg-green-500/15 border-green-500/30",
     "Watching": "text-blue-400 bg-blue-500/15 border-blue-500/30",
   };
   return (
     <span className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] font-mono font-semibold border ${colors[status] || "text-[#666] bg-[#111] border-[#222]"}`}>
       {status === "SSL Breached" && "⚡ "}
+      {status === "Breakout" && "▲ "}
+      {status === "Bouncing" && "◉ "}
       {status.toUpperCase()}
     </span>
   );
@@ -46,9 +108,93 @@ function VolumeBar({ ratio }: { ratio: number }) {
   );
 }
 
-function SSLDetailPanel({ item, timeframe, onDeepDive }: { item: any; timeframe: Timeframe; onDeepDive?: (symbol: string) => void }) {
+function WhatToWatch({ item, strategy, timeframe }: { item: any; strategy: Strategy; timeframe: Timeframe }) {
+  const cfg = STRATEGY_CONFIG[strategy];
+  const lvl = `$${item.level.toFixed(2)}`;
+  const tf = timeframe.toLowerCase();
+
+  let lines: { icon: string; iconClass: string; text: string }[] = [];
+
+  if (strategy === "SSL") {
+    if (item.status === "SSL Breached") {
+      lines = [
+        { icon: "⚡", iconClass: "text-red-400", text: `SSL level at ${lvl} has been swept` },
+        { icon: "◆", iconClass: "text-[#D4AF37]", text: `Wait for absorption candle on ${tf} close` },
+        { icon: "◆", iconClass: "text-[#D4AF37]", text: "Check for volume climax confirmation" },
+      ];
+    } else if (item.status === "Approaching") {
+      lines = [
+        { icon: "●", iconClass: "text-yellow-400", text: `Price within ${item.distToLevelPct.toFixed(1)}% of SSL level` },
+        { icon: "◆", iconClass: "text-[#D4AF37]", text: "Monitor for sell-side liquidity sweep" },
+        { icon: "◆", iconClass: "text-[#D4AF37]", text: `Set alerts at ${lvl}` },
+      ];
+    } else {
+      lines = [
+        { icon: "●", iconClass: "text-blue-400", text: `Price ${item.distToLevelPct.toFixed(1)}% above SSL level` },
+        { icon: "◆", iconClass: "text-[#D4AF37]", text: "On radar — not yet actionable" },
+        { icon: "◆", iconClass: "text-[#D4AF37]", text: `Watch for breakdown toward ${lvl}` },
+      ];
+    }
+  } else if (strategy === "Bounce") {
+    if (item.status === "Bouncing") {
+      lines = [
+        { icon: "◉", iconClass: "text-green-400", text: `Support at ${lvl} tapped and holding` },
+        { icon: "◆", iconClass: "text-[#D4AF37]", text: `Wait for reversal candle confirmation on ${tf} close` },
+        { icon: "◆", iconClass: "text-[#D4AF37]", text: "Volume confirmation strengthens the setup" },
+      ];
+    } else if (item.status === "Approaching") {
+      lines = [
+        { icon: "●", iconClass: "text-yellow-400", text: `Price within ${item.distToLevelPct.toFixed(1)}% of support at ${lvl}` },
+        { icon: "◆", iconClass: "text-[#D4AF37]", text: "Watch for a tap-and-hold of the level" },
+        { icon: "◆", iconClass: "text-[#D4AF37]", text: `Set alerts at ${lvl}` },
+      ];
+    } else {
+      lines = [
+        { icon: "●", iconClass: "text-blue-400", text: `Price ${item.distToLevelPct.toFixed(1)}% above support at ${lvl}` },
+        { icon: "◆", iconClass: "text-[#D4AF37]", text: "On radar — not yet actionable" },
+        { icon: "◆", iconClass: "text-[#D4AF37]", text: `Watch for a pullback toward ${lvl}` },
+      ];
+    }
+  } else {
+    if (item.status === "Breakout") {
+      lines = [
+        { icon: "▲", iconClass: "text-[#D4AF37]", text: `Resistance at ${lvl} has been broken` },
+        { icon: "◆", iconClass: "text-[#D4AF37]", text: `Watch for the ${tf} close holding above the level` },
+        { icon: "◆", iconClass: "text-[#D4AF37]", text: "Broken resistance should now act as support — watch the retest" },
+      ];
+    } else if (item.status === "Approaching") {
+      lines = [
+        { icon: "●", iconClass: "text-yellow-400", text: `Price within ${item.distToLevelPct.toFixed(1)}% below resistance at ${lvl}` },
+        { icon: "◆", iconClass: "text-[#D4AF37]", text: "Watch for a high-volume break" },
+        { icon: "◆", iconClass: "text-[#D4AF37]", text: `Set alerts at ${lvl}` },
+      ];
+    } else {
+      lines = [
+        { icon: "●", iconClass: "text-blue-400", text: `Resistance overhead at ${lvl} (${item.distToLevelPct.toFixed(1)}% above)` },
+        { icon: "◆", iconClass: "text-[#D4AF37]", text: "On radar — not yet actionable" },
+        { icon: "◆", iconClass: "text-[#D4AF37]", text: `Needs momentum toward ${lvl}` },
+      ];
+    }
+  }
+
+  return (
+    <div className="bg-[#0A0A0A] p-4 rounded-lg border border-[#D4AF37]/10">
+      <span className="text-[10px] font-mono text-[#666] block mb-2">WHAT TO WATCH — {cfg.tabLabel}</span>
+      <ul className="space-y-2 text-xs font-mono text-[#999]">
+        {lines.map((l, i) => (
+          <li key={i} className="flex items-start gap-2">
+            <span className={`${l.iconClass} mt-0.5`}>{l.icon}</span> {l.text}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function SetupDetailPanel({ item, strategy, timeframe, onDeepDive }: { item: any; strategy: Strategy; timeframe: Timeframe; onDeepDive?: (symbol: string) => void }) {
   const [showChart, setShowChart] = useState(false);
   const interval = timeframe === "Monthly" ? "M" : timeframe === "Weekly" ? "W" : "D";
+  const cfg = STRATEGY_CONFIG[strategy];
 
   return (
     <motion.div
@@ -60,11 +206,11 @@ function SSLDetailPanel({ item, timeframe, onDeepDive }: { item: any; timeframe:
     >
       <div className="px-4 sm:px-6 py-6 bg-[#060606] border-t border-[#D4AF37]/15">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Column 1: Price & SSL Data */}
+          {/* Column 1: Price & Level Data */}
           <div className="space-y-4">
             <h4 className="text-[11px] font-mono tracking-wider text-[#D4AF37] font-semibold flex items-center gap-2">
               <span className="w-1 h-4 bg-[#D4AF37] rounded" />
-              PRICE & SSL DATA
+              PRICE & LEVEL DATA
             </h4>
             <div className="bg-[#0A0A0A] p-4 rounded-lg border border-[#D4AF37]/10 space-y-3">
               <div className="grid grid-cols-2 gap-4">
@@ -73,15 +219,15 @@ function SSLDetailPanel({ item, timeframe, onDeepDive }: { item: any; timeframe:
                   <p className="text-xl font-mono font-bold text-[#E8E0D0]">${item.currentPrice.toFixed(2)}</p>
                 </div>
                 <div>
-                  <span className="text-[9px] font-mono text-[#555]">SSL LEVEL</span>
-                  <p className="text-xl font-mono font-bold text-[#D4AF37]">${item.sslLevel.toFixed(2)}</p>
+                  <span className="text-[9px] font-mono text-[#555]">{cfg.levelLabel}</span>
+                  <p className="text-xl font-mono font-bold text-[#D4AF37]">${item.level.toFixed(2)}</p>
                 </div>
               </div>
               <div className="border-t border-[#1A1A1A] pt-3 grid grid-cols-2 gap-4">
                 <div>
-                  <span className="text-[9px] font-mono text-[#555]">DISTANCE TO SSL</span>
-                  <p className={`text-lg font-mono font-bold ${item.distToSSLPct < 2 ? "text-red-400" : item.distToSSLPct < 5 ? "text-yellow-400" : "text-green-400"}`}>
-                    {item.distToSSLPct.toFixed(1)}%
+                  <span className="text-[9px] font-mono text-[#555]">DISTANCE TO {cfg.levelLabel}</span>
+                  <p className={`text-lg font-mono font-bold ${item.distToLevelPct < 2 ? "text-red-400" : item.distToLevelPct < 5 ? "text-yellow-400" : "text-green-400"}`}>
+                    {item.distToLevelPct.toFixed(1)}%
                   </p>
                 </div>
                 <div>
@@ -126,6 +272,8 @@ function SSLDetailPanel({ item, timeframe, onDeepDive }: { item: any; timeframe:
             <div className={`p-3 rounded-lg border flex items-center justify-between ${getAlertColor(item.status)}`}>
               <span className="text-[11px] font-mono font-bold">
                 {item.status === "SSL Breached" && "⚡ "}
+                {item.status === "Breakout" && "▲ "}
+                {item.status === "Bouncing" && "◉ "}
                 STATUS: {item.status.toUpperCase()}
               </span>
               <span className="text-[9px] font-mono opacity-70">
@@ -152,32 +300,7 @@ function SSLDetailPanel({ item, timeframe, onDeepDive }: { item: any; timeframe:
             </div>
 
             {/* What to Watch */}
-            <div className="bg-[#0A0A0A] p-4 rounded-lg border border-[#D4AF37]/10">
-              <span className="text-[10px] font-mono text-[#666] block mb-2">WHAT TO WATCH</span>
-              <ul className="space-y-2 text-xs font-mono text-[#999]">
-                {item.status === "SSL Breached" && (
-                  <>
-                    <li className="flex items-start gap-2"><span className="text-red-400 mt-0.5">⚡</span> SSL level at ${item.sslLevel.toFixed(2)} has been swept</li>
-                    <li className="flex items-start gap-2"><span className="text-[#D4AF37] mt-0.5">◆</span> Wait for absorption candle on {timeframe.toLowerCase()} close</li>
-                    <li className="flex items-start gap-2"><span className="text-[#D4AF37] mt-0.5">◆</span> Check for volume climax confirmation</li>
-                  </>
-                )}
-                {item.status === "Approaching" && (
-                  <>
-                    <li className="flex items-start gap-2"><span className="text-yellow-400 mt-0.5">●</span> Price within {item.distToSSLPct.toFixed(1)}% of SSL level</li>
-                    <li className="flex items-start gap-2"><span className="text-[#D4AF37] mt-0.5">◆</span> Monitor for sell-side liquidity sweep</li>
-                    <li className="flex items-start gap-2"><span className="text-[#D4AF37] mt-0.5">◆</span> Set alerts at ${item.sslLevel.toFixed(2)}</li>
-                  </>
-                )}
-                {item.status === "Watching" && (
-                  <>
-                    <li className="flex items-start gap-2"><span className="text-blue-400 mt-0.5">●</span> Price {item.distToSSLPct.toFixed(1)}% above SSL level</li>
-                    <li className="flex items-start gap-2"><span className="text-[#D4AF37] mt-0.5">◆</span> On radar — not yet actionable</li>
-                    <li className="flex items-start gap-2"><span className="text-[#D4AF37] mt-0.5">◆</span> Watch for breakdown toward ${item.sslLevel.toFixed(2)}</li>
-                  </>
-                )}
-              </ul>
-            </div>
+            <WhatToWatch item={item} strategy={strategy} timeframe={timeframe} />
 
             {/* Risk Note */}
             <div className="bg-red-950/30 p-4 rounded-lg border border-red-500/20">
@@ -190,7 +313,7 @@ function SSLDetailPanel({ item, timeframe, onDeepDive }: { item: any; timeframe:
                 RISK NOTE
               </span>
               <p className="text-[12px] font-mono text-red-300/80 mt-2 leading-relaxed">
-                {timeframe} SSL analysis only. Always confirm with absorption candle and volume. This is NOT financial advice — for educational purposes only.
+                {timeframe} {cfg.tabLabel.toLowerCase()} analysis only. Always confirm with the candle close and volume before acting. This is NOT financial advice — for educational purposes only.
               </p>
             </div>
           </div>
@@ -211,7 +334,8 @@ function SSLDetailPanel({ item, timeframe, onDeepDive }: { item: any; timeframe:
                 </div>
                 <MiniCandleChart
                   candles={item.candles}
-                  sslLevels={item.sslLevels || []}
+                  levels={item.levels || []}
+                  levelLabel={cfg.chartLevelLabel}
                   width={600}
                   height={320}
                   showVolume={true}
@@ -340,14 +464,17 @@ function PastWinnersSection() {
 }
 
 export function LeapScreener({ onDeepDive }: { onDeepDive?: (symbol: string) => void } = {}) {
+  const [strategy, setStrategy] = useState<Strategy>("Bounce");
   const [timeframe, setTimeframe] = useState<Timeframe>("Monthly");
   const [expandedSymbol, setExpandedSymbol] = useState<string | null>(null);
   const [filterStatus, setFilterStatus] = useState<string>("all");
   const [sortBy, setSortBy] = useState<string>("distance");
 
-  // Real-time SSL watchlist from tRPC
-  const { data: watchlist, isLoading, isError } = trpc.market.sslWatchlist.useQuery(
-    { timeframe },
+  const cfg = STRATEGY_CONFIG[strategy];
+
+  // Real-time strategy watchlist from tRPC
+  const { data: watchlist, isLoading, isError } = trpc.market.strategyWatchlist.useQuery(
+    { strategy, timeframe },
     { refetchInterval: 30000 } // Auto-refresh every 30s
   );
 
@@ -384,7 +511,7 @@ export function LeapScreener({ onDeepDive }: { onDeepDive?: (symbol: string) => 
     }
 
     items.sort((a, b) => {
-      if (sortBy === "distance") return a.distToSSLPct - b.distToSSLPct;
+      if (sortBy === "distance") return a.distToLevelPct - b.distToLevelPct;
       if (sortBy === "ticker") return a.symbol.localeCompare(b.symbol);
       if (sortBy === "volume") return b.volumeRatio - a.volumeRatio;
       return 0;
@@ -393,30 +520,41 @@ export function LeapScreener({ onDeepDive }: { onDeepDive?: (symbol: string) => 
     return items;
   }, [watchlist, filterStatus, sortBy]);
 
-  const breachedCount = watchlist?.filter(i => i.status === "SSL Breached").length || 0;
-  const approachingCount = watchlist?.filter(i => i.status === "Approaching").length || 0;
+  const activeItems = watchlist?.filter(i => i.status === cfg.activeStatus) || [];
+
+  const switchStrategy = (s: Strategy) => {
+    setStrategy(s);
+    setExpandedSymbol(null);
+    setFilterStatus("all");
+  };
 
   return (
     <div className="max-w-[1800px] mx-auto px-4 sm:px-6 py-6 space-y-5">
-      {/* Active SSL Breach Alerts */}
-      {watchlist && watchlist.filter(i => i.status === "SSL Breached").length > 0 && (
+      {/* Active Setup Alerts */}
+      {activeItems.length > 0 && (
         <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="space-y-2">
-          {watchlist.filter(i => i.status === "SSL Breached").map(alert => (
+          {activeItems.map(alert => (
             <div
               key={alert.symbol}
-              className="p-3 bg-red-950/30 rounded-lg border border-red-500/30 flex items-center gap-3 cursor-pointer hover:bg-red-950/40 transition-all"
+              className={`p-3 rounded-lg border flex items-center gap-3 cursor-pointer transition-all ${
+                strategy === "SSL"
+                  ? "bg-red-950/30 border-red-500/30 hover:bg-red-950/40"
+                  : strategy === "Bounce"
+                  ? "bg-green-950/30 border-green-500/30 hover:bg-green-950/40"
+                  : "bg-[#D4AF37]/10 border-[#D4AF37]/30 hover:bg-[#D4AF37]/15"
+              }`}
               onClick={() => setExpandedSymbol(expandedSymbol === alert.symbol ? null : alert.symbol)}
             >
               <motion.div
-                className="w-2.5 h-2.5 rounded-full bg-red-500"
+                className={`w-2.5 h-2.5 rounded-full ${strategy === "SSL" ? "bg-red-500" : strategy === "Bounce" ? "bg-green-500" : "bg-[#D4AF37]"}`}
                 animate={{ opacity: [1, 0.3, 1], scale: [1, 1.3, 1] }}
                 transition={{ duration: 1, repeat: Infinity }}
               />
-              <span className="text-sm font-mono font-bold text-red-400">⚡ SSL LEVEL BREACHED</span>
-              <span className="text-sm font-mono text-[#CCC]">
-                {alert.symbol} — Sell-side liquidity swept at ${alert.sslLevel.toFixed(2)}
+              <span className={`text-sm font-mono font-bold ${strategy === "SSL" ? "text-red-400" : strategy === "Bounce" ? "text-green-400" : "text-[#D4AF37]"}`}>
+                {cfg.alertHeadline}
               </span>
-              <span className="ml-auto text-[10px] font-mono text-red-400/60 hidden sm:inline">CLICK TO VIEW</span>
+              <span className="text-sm font-mono text-[#CCC]">{cfg.alertDetail(alert)}</span>
+              <span className="ml-auto text-[10px] font-mono opacity-60 hidden sm:inline text-[#999]">CLICK TO VIEW</span>
             </div>
           ))}
         </motion.div>
@@ -435,12 +573,18 @@ export function LeapScreener({ onDeepDive }: { onDeepDive?: (symbol: string) => 
         <div className="relative px-6 sm:px-8 py-8 sm:py-10">
           <div className="flex flex-col sm:flex-row items-start justify-between gap-4">
             <div>
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#D4AF37] mb-3" style={{ fontFamily: "'Playfair Display', serif" }}>
-                {timeframe} SSL Screener
-              </h1>
+              <div className="flex items-center gap-3 flex-wrap">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#D4AF37] mb-3" style={{ fontFamily: "'Playfair Display', serif" }}>
+                  {timeframe} {cfg.title}
+                </h1>
+                {cfg.provisional && (
+                  <span className="mb-3 px-2 py-1 rounded border border-yellow-500/40 bg-yellow-500/10 text-yellow-400 text-[9px] font-mono tracking-wider">
+                    PROVISIONAL CRITERIA — FINAL TF BOUNCE SPEC INCOMING
+                  </span>
+                )}
+              </div>
               <p className="text-sm font-mono text-[#999] max-w-xl leading-relaxed">
-                Real-time sell-side liquidity sweep detection on the {timeframe.toLowerCase()} timeframe.
-                Identifying high-probability setups where smart money is loading.
+                {cfg.description}
               </p>
               <div className="flex items-center gap-4 mt-4">
                 <div className="flex items-center gap-1.5 text-[10px] font-mono text-[#666]">
@@ -465,16 +609,37 @@ export function LeapScreener({ onDeepDive }: { onDeepDive?: (symbol: string) => 
                 <p className="text-3xl font-mono font-bold text-[#D4AF37]">{watchlist?.length || 0}</p>
               </div>
               <div className="text-center sm:text-right">
-                <span className="text-[10px] font-mono text-[#666]">BREACHED</span>
-                <p className="text-3xl font-mono font-bold text-red-400">{breachedCount}</p>
+                <span className="text-[10px] font-mono text-[#666]">{cfg.activeStatLabel}</span>
+                <p className={`text-3xl font-mono font-bold ${strategy === "SSL" ? "text-red-400" : strategy === "Bounce" ? "text-green-400" : "text-[#D4AF37]"}`}>
+                  {activeItems.length}
+                </p>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Timeframe Tabs */}
+      {/* Strategy Tabs */}
       <div className="flex items-center gap-2 p-2 bg-[#080808] rounded-lg border border-[#D4AF37]/10">
+        <span className="text-[10px] font-mono text-[#666] tracking-wider font-semibold px-2">STRATEGY</span>
+        <div className="h-4 w-px bg-[#222]" />
+        {(Object.keys(STRATEGY_CONFIG) as Strategy[]).map(s => (
+          <button
+            key={s}
+            onClick={() => switchStrategy(s)}
+            className={`px-4 py-1.5 rounded text-xs font-mono font-semibold border transition-all ${
+              strategy === s
+                ? "bg-[#D4AF37]/15 border-[#D4AF37]/40 text-[#D4AF37]"
+                : "bg-[#0A0A0A] border-[#222] text-[#555] hover:border-[#444] hover:text-[#888]"
+            }`}
+          >
+            {STRATEGY_CONFIG[s].tabLabel}
+          </button>
+        ))}
+      </div>
+
+      {/* Timeframe Tabs + Status Filter */}
+      <div className="flex items-center gap-2 p-2 bg-[#080808] rounded-lg border border-[#D4AF37]/10 flex-wrap">
         <span className="text-[10px] font-mono text-[#666] tracking-wider font-semibold px-2">TIMEFRAME</span>
         <div className="h-4 w-px bg-[#222]" />
         {(["Daily", "Weekly", "Monthly"] as Timeframe[]).map(tf => (
@@ -490,9 +655,9 @@ export function LeapScreener({ onDeepDive }: { onDeepDive?: (symbol: string) => 
             {tf.toUpperCase()}
           </button>
         ))}
-        <div className="ml-auto flex items-center gap-2">
+        <div className="ml-auto flex items-center gap-2 flex-wrap">
           <span className="text-[10px] font-mono text-[#555]">STATUS:</span>
-          {["all", "SSL Breached", "Approaching", "Watching"].map(s => (
+          {cfg.statuses.map(s => (
             <button
               key={s}
               onClick={() => setFilterStatus(s)}
@@ -517,7 +682,7 @@ export function LeapScreener({ onDeepDive }: { onDeepDive?: (symbol: string) => 
               animate={{ rotate: 360 }}
               transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
             />
-            <p className="text-sm font-mono text-[#666]">Scanning {timeframe.toLowerCase()} SSL levels...</p>
+            <p className="text-sm font-mono text-[#666]">Scanning {timeframe.toLowerCase()} {cfg.tabLabel.toLowerCase()} setups...</p>
           </div>
         </div>
       )}
@@ -525,7 +690,7 @@ export function LeapScreener({ onDeepDive }: { onDeepDive?: (symbol: string) => 
       {/* Error State */}
       {isError && (
         <div className="p-6 bg-red-950/20 rounded-lg border border-red-500/20 text-center">
-          <p className="text-sm font-mono text-red-400">Failed to load SSL data. Retrying...</p>
+          <p className="text-sm font-mono text-red-400">Failed to load screener data. Retrying...</p>
         </div>
       )}
 
@@ -554,9 +719,9 @@ export function LeapScreener({ onDeepDive }: { onDeepDive?: (symbol: string) => 
       {!isLoading && !isError && filtered.length === 0 && (
         <div className="p-12 bg-[#050505] rounded-lg border border-[#D4AF37]/10 text-center space-y-3">
           <div className="text-4xl">◆</div>
-          <p className="text-sm font-mono text-[#888]">No active setups on the {timeframe.toLowerCase()} timeframe</p>
+          <p className="text-sm font-mono text-[#888]">No active {cfg.tabLabel.toLowerCase()} setups on the {timeframe.toLowerCase()} timeframe</p>
           <p className="text-[10px] font-mono text-[#555]">
-            SSL levels are being monitored. Setups will appear when price approaches key levels.
+            Key levels are being monitored. Setups will appear when price approaches {strategy === "Breakout" ? "resistance" : "support"}.
           </p>
         </div>
       )}
@@ -569,7 +734,7 @@ export function LeapScreener({ onDeepDive }: { onDeepDive?: (symbol: string) => 
             <span>TICKER</span>
             <span>COMPANY</span>
             <span className="text-right">PRICE</span>
-            <span className="text-right">SSL LEVEL</span>
+            <span className="text-right">{cfg.levelLabel}</span>
             <span className="text-center">DIST %</span>
             <span className="text-center">VOL RATIO</span>
             <span className="text-center">STATUS</span>
@@ -585,7 +750,7 @@ export function LeapScreener({ onDeepDive }: { onDeepDive?: (symbol: string) => 
                 className="hidden lg:grid grid-cols-[80px_1fr_100px_100px_80px_100px_120px_80px_50px] gap-0 px-4 py-3 border-b border-[#D4AF37]/5 items-center cursor-pointer hover:bg-[#D4AF37]/[0.03] transition-all"
                 onClick={() => setExpandedSymbol(expandedSymbol === item.symbol ? null : item.symbol)}
               >
-                <span className={`text-sm font-mono font-bold ${item.status === "SSL Breached" ? "text-red-400" : "text-[#D4AF37]"}`}>
+                <span className={`text-sm font-mono font-bold ${item.status === cfg.activeStatus ? (strategy === "SSL" ? "text-red-400" : strategy === "Bounce" ? "text-green-400" : "text-[#D4AF37]") : "text-[#D4AF37]"}`}>
                   {item.symbol}
                 </span>
                 <div className="flex items-center gap-2">
@@ -604,9 +769,9 @@ export function LeapScreener({ onDeepDive }: { onDeepDive?: (symbol: string) => 
                   )}
                 </div>
                 <span className="text-sm font-mono text-[#E8E0D0] text-right">${item.currentPrice.toFixed(2)}</span>
-                <span className="text-sm font-mono text-[#D4AF37] text-right">${item.sslLevel.toFixed(2)}</span>
-                <span className={`text-sm font-mono text-center font-bold ${item.distToSSLPct < 2 ? "text-red-400" : item.distToSSLPct < 5 ? "text-yellow-400" : "text-[#888]"}`}>
-                  {item.distToSSLPct.toFixed(1)}%
+                <span className="text-sm font-mono text-[#D4AF37] text-right">${item.level.toFixed(2)}</span>
+                <span className={`text-sm font-mono text-center font-bold ${item.distToLevelPct < 2 ? "text-red-400" : item.distToLevelPct < 5 ? "text-yellow-400" : "text-[#888]"}`}>
+                  {item.distToLevelPct.toFixed(1)}%
                 </span>
                 <div className="flex justify-center">
                   <VolumeBar ratio={item.volumeRatio} />
@@ -632,7 +797,7 @@ export function LeapScreener({ onDeepDive }: { onDeepDive?: (symbol: string) => 
               >
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-3">
-                    <span className={`text-sm font-mono font-bold ${item.status === "SSL Breached" ? "text-red-400" : "text-[#D4AF37]"}`}>
+                    <span className={`text-sm font-mono font-bold ${item.status === cfg.activeStatus ? (strategy === "SSL" ? "text-red-400" : strategy === "Bounce" ? "text-green-400" : "text-[#D4AF37]") : "text-[#D4AF37]"}`}>
                       {item.symbol}
                     </span>
                     <StatusBadge status={item.status} />
@@ -640,8 +805,8 @@ export function LeapScreener({ onDeepDive }: { onDeepDive?: (symbol: string) => 
                   <span className="text-sm font-mono text-[#E8E0D0]">${item.currentPrice.toFixed(2)}</span>
                 </div>
                 <div className="flex items-center gap-4 text-[10px] font-mono text-[#666]">
-                  <span>SSL: ${item.sslLevel.toFixed(2)}</span>
-                  <span>Dist: {item.distToSSLPct.toFixed(1)}%</span>
+                  <span>{cfg.levelLabel}: ${item.level.toFixed(2)}</span>
+                  <span>Dist: {item.distToLevelPct.toFixed(1)}%</span>
                   <span>Vol: {item.volumeRatio.toFixed(1)}x</span>
                 </div>
               </div>
@@ -649,7 +814,7 @@ export function LeapScreener({ onDeepDive }: { onDeepDive?: (symbol: string) => 
               {/* Expanded Detail */}
               <AnimatePresence>
                 {expandedSymbol === item.symbol && (
-                  <SSLDetailPanel item={item} timeframe={timeframe} onDeepDive={onDeepDive} />
+                  <SetupDetailPanel item={item} strategy={strategy} timeframe={timeframe} onDeepDive={onDeepDive} />
                 )}
               </AnimatePresence>
             </div>

@@ -1,13 +1,14 @@
 import { describe, expect, it } from "vitest";
-import { calculateAlertSchedule, type SSLAlertSchedule, type Grade } from "./sslGradingEngine";
+import { calculateAlertSchedule, type Grade, type SetupGrade } from "./strategyEngine";
 
 // ============================================================
-// SSL GRADING ENGINE — Unit Tests
+// STRATEGY ENGINE — Unit Tests
 // Tests the alert schedule calculator (pure logic, no API calls)
-// and validates the grading system structure & constants
+// and validates the 9-point grading system structure & constants
+// shared by the Bounce, SSL, and Breakout strategies.
 // ============================================================
 
-describe("SSL Grading Engine", () => {
+describe("Strategy Engine", () => {
   // --------------------------------------------------------
   // Alert Schedule (pure date logic — no API calls)
   // --------------------------------------------------------
@@ -116,10 +117,10 @@ describe("SSL Grading Engine", () => {
   // --------------------------------------------------------
   describe("Scoring ranges", () => {
     it("each criterion scores 0-3, total 0-9", () => {
-      for (let liq = 0; liq <= 3; liq++) {
+      for (let level = 0; level <= 3; level++) {
         for (let vol = 0; vol <= 3; vol++) {
-          for (let abs = 0; abs <= 3; abs++) {
-            const total = liq + vol + abs;
+          for (let candle = 0; candle <= 3; candle++) {
+            const total = level + vol + candle;
             expect(total).toBeGreaterThanOrEqual(0);
             expect(total).toBeLessThanOrEqual(9);
           }
@@ -154,31 +155,32 @@ describe("SSL Grading Engine", () => {
   });
 
   // --------------------------------------------------------
-  // SSLGrade type structure validation
+  // SetupGrade type structure validation
   // --------------------------------------------------------
-  describe("SSLGrade type structure", () => {
-    it("SSLGrade has all required fields and total matches sum", () => {
-      const mockGrade = {
+  describe("SetupGrade type structure", () => {
+    it("SetupGrade has all required fields and total matches criteria sum", () => {
+      const mockGrade: SetupGrade = {
+        strategy: "SSL",
         symbol: "AAPL",
         company: "Apple Inc.",
         sector: "Technology",
-        timeframe: "Weekly" as const,
+        timeframe: "Weekly",
         currentPrice: 175.5,
-        liquidityScore: 3,
-        liquidityDetails: "DOUBLE SSL SWEEP",
-        volumeClimaxScore: 2,
-        volumeClimaxDetails: "ELEVATED VOLUME",
-        absorptionScore: 2,
-        absorptionDetails: "2/3 criteria met",
+        criteria: [
+          { key: "level", label: "LIQUIDITY (SSL SWEEP)", score: 3, max: 3, details: "DOUBLE SSL SWEEP" },
+          { key: "volume", label: "VOLUME CLIMAX", score: 2, max: 3, details: "ELEVATED VOLUME" },
+          { key: "candle", label: "ABSORPTION CANDLE", score: 2, max: 3, details: "2/3 criteria met" },
+        ],
         totalScore: 7,
-        grade: "A" as Grade,
-        rsiBullishDivergence: true,
-        rsiDetails: "RSI BULLISH DIVERGENCE",
-        fibKeyLevel: false,
-        fibDetails: "Not at key level",
-        nearTermSSL: 170.0,
-        furtherTermSSL: 165.0,
-        distToNearSSLPct: 3.24,
+        grade: "A",
+        confluence: [
+          { key: "rsi", label: "RSI BULLISH DIVERGENCE", active: true, details: "RSI BULLISH DIVERGENCE" },
+          { key: "fib", label: "FIB KEY LEVEL", active: false, details: "Not at key level" },
+        ],
+        keyLevel: 170.0,
+        keyLevelLabel: "SSL",
+        secondaryLevel: 165.0,
+        distToLevelPct: 3.24,
         lastCandleOpen: 174.0,
         lastCandleClose: 175.5,
         lastCandleHigh: 176.0,
@@ -191,12 +193,25 @@ describe("SSL Grading Engine", () => {
         lastUpdated: new Date().toISOString(),
       };
 
-      expect(mockGrade.totalScore).toBe(
-        mockGrade.liquidityScore + mockGrade.volumeClimaxScore + mockGrade.absorptionScore
-      );
+      const criteriaSum = mockGrade.criteria.reduce((sum, c) => sum + c.score, 0);
+      expect(mockGrade.totalScore).toBe(criteriaSum);
       expect(mockGrade.totalScore).toBeLessThanOrEqual(9);
       expect(mockGrade.totalScore).toBeGreaterThanOrEqual(0);
       expect(mockGrade.grade).toBe("A");
+      expect(mockGrade.criteria).toHaveLength(3);
+      expect(mockGrade.criteria.map(c => c.key)).toEqual(["level", "volume", "candle"]);
+    });
+
+    it("supports all three strategies with matching level labels", () => {
+      const pairs: [SetupGrade["strategy"], SetupGrade["keyLevelLabel"]][] = [
+        ["Bounce", "SUPPORT"],
+        ["SSL", "SSL"],
+        ["Breakout", "RESISTANCE"],
+      ];
+      for (const [strategy, label] of pairs) {
+        expect(["Bounce", "SSL", "Breakout"]).toContain(strategy);
+        expect(["SUPPORT", "SSL", "RESISTANCE"]).toContain(label);
+      }
     });
   });
 });

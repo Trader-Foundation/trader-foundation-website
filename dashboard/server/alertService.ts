@@ -5,7 +5,7 @@
 // ============================================================
 
 // import { notifyOwner } from "./_core/notification"; // Notifications disabled
-import { fetchStockQuote, INVESTMENT_UNIVERSE, findSSLLevels, fetchMonthlyData, fetchWeeklyData } from "./marketData";
+import { fetchStockQuote, INVESTMENT_UNIVERSE, findSupportLevels, fetchMonthlyData, fetchWeeklyData } from "./marketData";
 
 // Track which alerts have been sent to avoid duplicates
 const sentAlerts = new Map<string, number>(); // key -> timestamp
@@ -123,7 +123,7 @@ export async function checkSSLBreachAlerts(): Promise<AlertEvent[]> {
 
       if (!quote || !monthly) continue;
 
-      const sslLevels = findSSLLevels(monthly.lows);
+      const sslLevels = findSupportLevels(monthly.lows);
       const nearestSSL = sslLevels.filter(l => l < quote.currentPrice * 1.02).pop();
 
       if (!nearestSSL) continue;

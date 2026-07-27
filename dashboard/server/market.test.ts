@@ -4,7 +4,8 @@ import {
   calculateTechnicalLevels,
   calculateValuation,
   buildPortfolioPlan,
-  findSSLLevels,
+  findSupportLevels,
+  findResistanceLevels,
   PAST_WINNERS,
   INVESTMENT_UNIVERSE,
   SECTOR_ETF_MAP,
@@ -130,14 +131,14 @@ describe("buildPortfolioPlan", () => {
   });
 });
 
-describe("findSSLLevels", () => {
+describe("findSupportLevels", () => {
   it("finds true swing lows confirmed on both sides", () => {
     // Pattern: 100, 95, 98, 92, 96, 90, 93, 88, 91, 85, 87, 83, 86, 89
     // True swing lows (lower than 3 bars on each side): 92, 90, 88, 85
     const lows = [100, 95, 98, 92, 96, 90, 93, 88, 91, 85, 87, 83, 86, 89];
-    const levels = findSSLLevels(lows);
+    const levels = findSupportLevels(lows);
     expect(Array.isArray(levels)).toBe(true);
-    // SSL levels should be sorted ascending
+    // Support levels should be sorted ascending
     for (let i = 1; i < levels.length; i++) {
       expect(levels[i]).toBeGreaterThanOrEqual(levels[i - 1]);
     }
@@ -147,7 +148,27 @@ describe("findSSLLevels", () => {
   });
 
   it("returns empty array for insufficient data", () => {
-    const levels = findSSLLevels([100]);
+    const levels = findSupportLevels([100]);
+    expect(levels).toEqual([]);
+  });
+});
+
+describe("findResistanceLevels", () => {
+  it("finds true swing highs confirmed on both sides", () => {
+    // Mirror of the support test: swing highs must be higher than 3 bars each side
+    const highs = [100, 105, 102, 108, 104, 110, 107, 112, 109, 115, 113, 117, 114, 111];
+    const levels = findResistanceLevels(highs);
+    expect(Array.isArray(levels)).toBe(true);
+    // Resistance levels should be sorted ascending
+    for (let i = 1; i < levels.length; i++) {
+      expect(levels[i]).toBeGreaterThanOrEqual(levels[i - 1]);
+    }
+    // 117 at index 11 doesn't have enough right-side bars to confirm
+    expect(levels).not.toContain(117);
+  });
+
+  it("returns empty array for insufficient data", () => {
+    const levels = findResistanceLevels([100]);
     expect(levels).toEqual([]);
   });
 });

@@ -12,20 +12,22 @@ import {
   fetchWeeklyData,
   fetchDailyData,
   calculateTechnicalLevels,
-  findSSLLevels,
+  findSupportLevels,
+  findResistanceLevels,
   calculateCorrectionAlert,
   calculateProjections,
   buildPortfolioPlan,
   calculateValuation,
   SECTOR_ETF_MAP,
   calculateSectorBenchmark,
+  type Strategy,
 } from "./marketData";
 import { z } from "zod";
 // Alert service disabled — no notifications
 // import { getRecentAlerts, detectVolumeAnomalies, runAlertScan, startAlertScanner } from "./alertService";
 import { createLinkToken, exchangePublicToken, getInvestmentHoldings, isPlaidConfigured } from "./plaidService";
 import { getStockDeepDive, getStockDeepDiveFast } from "./deepDiveData";
-import { getGradedSetups, getSectorRotation, gradeSSLSetup, type Timeframe as SSLTimeframe } from "./sslGradingEngine";
+import { getGradedSetups, getSectorRotation, gradeSetup, type Timeframe as SetupTimeframe } from "./strategyEngine";
 import { detectInstitutionalFlow, scanInstitutionalFlow } from "./institutionalFlow";
 
 // Alert scanner and timed alerts DISABLED — no notifications sent;
@@ -53,6 +55,99 @@ function setCache(key: string, data: any, ttl: number = CACHE_TTL_MEDIUM): void 
 // AGGRESSIVE PREFETCH — warm ALL endpoints on boot so first load is instant
 const ALL_SYMBOLS = INVESTMENT_UNIVERSE.map(s => s.symbol);
 
+// The three TF Elite setup strategies
+const STRATEGIES = ["Bounce", "SSL", "Breakout"] as const;
+type WatchTimeframe = "Daily" | "Weekly" | "Monthly";
+
+// Active-status-first sort order per strategy
+const STATUS_ORDER: Record<string, number> = {
+  "Bouncing": 0,
+  "SSL Breached": 0,
+  "Breakout": 0,
+  "Approaching": 1,
+  "Watching": 2,
+};
+
+// Build one watchlist row for a symbol under a given strategy.
+// Bounce/SSL key off support levels (swing lows); Breakout keys off resistance (swing highs).
+function buildWatchItem(strategy: Strategy, symbol: string, quote: any, data: any, tf: WatchTimeframe): any {
+  const stockInfo = INVESTMENT_UNIVERSE.find(s => s.symbol === symbol);
+  const volumeRatio = quote.avgVolume > 0 ? quote.volume / quote.avgVolume : 1;
+  const chartLen = tf === "Monthly" ? 60 : tf === "Weekly" ? 52 : 65;
+  const startIdx = Math.max(0, data.closes.length - chartLen);
+  const candles: { t: number; o: number; h: number; l: number; c: number; v: number }[] = [];
+  for (let i = startIdx; i < data.closes.length; i++) {
+    candles.push({ t: data.timestamps?.[i] || 0, o: data.opens?.[i] || data.closes[i], h: data.highs[i], l: data.lows[i], c: data.closes[i], v: data.volumes?.[i] || 0 });
+  }
+
+  const lastLow = data.lows[data.lows.length - 1];
+  let level = 0;
+  let distToLevelPct = 999;
+  let status: "Watching" | "Approaching" | "Bouncing" | "SSL Breached" | "Breakout" = "Watching";
+  let chartLevels: number[] = [];
+
+  if (strategy === "Breakout") {
+    const resistanceLevels = findResistanceLevels(data.highs);
+    // Freshly broken = resistance now sitting within 5% below price
+    const broken = resistanceLevels.filter(l => l < quote.currentPrice && l >= quote.currentPrice * 0.95);
+    const above = resistanceLevels.filter(l => l >= quote.currentPrice);
+    if (broken.length > 0) {
+      level = broken[broken.length - 1];
+      distToLevelPct = ((quote.currentPrice - level) / level) * 100;
+      status = "Breakout";
+    } else if (above.length > 0) {
+      level = above[0];
+      distToLevelPct = ((level - quote.currentPrice) / quote.currentPrice) * 100;
+      status = distToLevelPct < 2 ? "Approaching" : "Watching";
+    }
+    chartLevels = resistanceLevels.filter(l => l >= quote.currentPrice * 0.9 && l <= quote.currentPrice * 1.15).slice(0, 3);
+  } else {
+    const supportLevels = findSupportLevels(data.lows);
+    // Allow a level slightly above price so an in-progress sweep still maps to its level
+    const nearest = supportLevels.filter(l => l <= quote.currentPrice * 1.02).pop() || 0;
+    level = nearest;
+    distToLevelPct = nearest > 0 ? ((quote.currentPrice - nearest) / nearest) * 100 : 999;
+
+    if (strategy === "SSL") {
+      if (nearest > 0 && quote.currentPrice < nearest) status = "SSL Breached";
+      else if (distToLevelPct < 2) status = "Approaching";
+    } else {
+      // Bounce — the level must HOLD: a tap of the zone with price still above it
+      if (nearest > 0 && lastLow <= nearest * 1.01 && quote.currentPrice > nearest) status = "Bouncing";
+      else if (distToLevelPct < 2) status = "Approaching";
+    }
+    chartLevels = supportLevels.filter(l => l <= quote.currentPrice * 1.02).slice(-3);
+  }
+
+  return {
+    symbol,
+    company: stockInfo?.company || symbol,
+    sector: stockInfo?.sector || "Unknown",
+    currentPrice: quote.currentPrice,
+    strategy,
+    level,
+    distToLevelPct: Math.round(Math.abs(distToLevelPct) * 10) / 10,
+    status,
+    timeframe: tf,
+    volume: quote.volume,
+    avgVolume: quote.avgVolume,
+    volumeRatio: Math.round(volumeRatio * 100) / 100,
+    candles,
+    levels: chartLevels,
+    lastUpdated: new Date().toISOString(),
+  };
+}
+
+function sortWatchlist(watchlist: any[]): any[] {
+  watchlist.sort((a: any, b: any) => {
+    const aO = STATUS_ORDER[a.status] ?? 3;
+    const bO = STATUS_ORDER[b.status] ?? 3;
+    if (aO !== bO) return aO - bO;
+    return a.distToLevelPct - b.distToLevelPct;
+  });
+  return watchlist;
+}
+
 async function prefetchAll() {
   console.log("[Prefetch] Warming ALL caches for instant first load...");
   const t0 = Date.now();
@@ -66,12 +161,11 @@ async function prefetchAll() {
     setCache("investmentRadar", radarData, CACHE_TTL_AI);
     console.log(`[Prefetch] Radar warmed (${Date.now() - t0}ms)`);
 
-    // 3. Warm SSL watchlists for all timeframes in parallel
+    // 3. Warm strategy watchlists (all 3 strategies share one data fetch per symbol/timeframe)
     const timeframes = ["Daily", "Weekly", "Monthly"] as const;
     await Promise.allSettled(timeframes.map(async (tf) => {
-      const symbols = ALL_SYMBOLS;
       const results = await Promise.allSettled(
-        symbols.map(async (symbol) => {
+        ALL_SYMBOLS.map(async (symbol) => {
           const quote = await fetchStockQuote(symbol);
           if (!quote) return null;
           let data;
@@ -79,33 +173,18 @@ async function prefetchAll() {
           else if (tf === "Weekly") data = await fetchWeeklyData(symbol);
           else data = await fetchDailyData(symbol);
           if (!data) return null;
-          const sslLevels = findSSLLevels(data.lows);
-          const nearestSSL = sslLevels.filter(l => l < quote.currentPrice).pop() || 0;
-          const distToSSL = nearestSSL > 0 ? ((quote.currentPrice - nearestSSL) / nearestSSL) * 100 : 999;
-          let status: "Watching" | "Approaching" | "SSL Breached" | "Confirmed" = "Watching";
-          if (quote.currentPrice < nearestSSL) status = "SSL Breached";
-          else if (distToSSL < 2) status = "Approaching";
-          const stockInfo = INVESTMENT_UNIVERSE.find(s => s.symbol === symbol);
-          const volumeRatio = quote.avgVolume > 0 ? quote.volume / quote.avgVolume : 1;
-          const chartLen = tf === "Monthly" ? 60 : tf === "Weekly" ? 52 : 65;
-          const startIdx = Math.max(0, data.closes.length - chartLen);
-          const candles: any[] = [];
-          for (let i = startIdx; i < data.closes.length; i++) {
-            candles.push({ t: data.timestamps?.[i] || 0, o: data.opens?.[i] || data.closes[i], h: data.highs[i], l: data.lows[i], c: data.closes[i], v: data.volumes?.[i] || 0 });
-          }
-          return { symbol, company: stockInfo?.company || symbol, sector: stockInfo?.sector || "Unknown", currentPrice: quote.currentPrice, sslLevel: nearestSSL, distToSSLPct: Math.round(distToSSL * 10) / 10, status, timeframe: tf, volume: quote.volume, avgVolume: quote.avgVolume, volumeRatio: Math.round(volumeRatio * 100) / 100, candles, sslLevels: sslLevels.filter(l => l <= quote.currentPrice * 1.02).slice(-3), lastUpdated: new Date().toISOString() };
+          return Object.fromEntries(STRATEGIES.map(strategy => [strategy, buildWatchItem(strategy, symbol, quote, data, tf)]));
         })
       );
-      const watchlist = results.filter((r): r is PromiseFulfilledResult<any> => r.status === "fulfilled" && r.value !== null).map(r => r.value);
-      watchlist.sort((a: any, b: any) => {
-        const order: Record<string, number> = { "SSL Breached": 0, "Approaching": 1, "Confirmed": 2, "Watching": 3 };
-        return (order[a.status] ?? 4) - (order[b.status] ?? 4) || a.distToSSLPct - b.distToSSLPct;
-      });
+      const rows = results.filter((r): r is PromiseFulfilledResult<any> => r.status === "fulfilled" && r.value !== null).map(r => r.value);
       // Use timeframe-appropriate TTLs: monthly=24hr, weekly=6hr, daily=30min
       const tfTTL = tf === "Monthly" ? CACHE_TTL_MONTHLY : tf === "Weekly" ? CACHE_TTL_SLOW : CACHE_TTL_MEDIUM;
-      setCache(`sslWatchlist-${tf}`, watchlist, tfTTL);
+      for (const strategy of STRATEGIES) {
+        const watchlist = sortWatchlist(rows.map(r => r[strategy]));
+        setCache(`strategyWatchlist-${strategy}-${tf}`, watchlist, tfTTL);
+      }
     }));
-    console.log(`[Prefetch] SSL watchlists warmed (${Date.now() - t0}ms)`);
+    console.log(`[Prefetch] Strategy watchlists warmed (${Date.now() - t0}ms)`);
 
     // 4. Warm correction alerts
     const indexResults = await Promise.allSettled(
@@ -131,7 +210,7 @@ setInterval(prefetchAll, 30 * 60 * 1000);
 // Exported for streaming endpoint in index.ts
 export function buildChatMessages(message: string, history: { role: "user" | "assistant"; content: string }[]): { role: "system" | "user" | "assistant"; content: string }[] {
   let marketContext = "";
-  let sslContext = "";
+  let setupContext = "";
   let flowContext = "";
   try {
     const radarData = getCached<Awaited<ReturnType<typeof getInvestmentRadarData>>>("investmentRadar");
@@ -147,13 +226,15 @@ export function buildChatMessages(message: string, history: { role: "user" | "as
     }
   } catch {}
   try {
-    for (const tf of ["weekly", "monthly", "daily"] as const) {
-      const sslData = getCached<any[]>(`sslGrading-${tf}-false`);
-      if (sslData && sslData.length > 0) {
-        const sslSummaries = sslData.map((s: any) =>
-          `${s.symbol}: Grade ${s.grade} (${s.totalScore}/9)`
-        ).join(", ");
-        sslContext += ` | SSL ${tf}: ${sslSummaries}`;
+    for (const strategy of ["Bounce", "SSL", "Breakout"] as const) {
+      for (const tf of ["Daily", "Weekly", "Monthly"] as const) {
+        const setupData = getCached<any[]>(`setupGrading-${strategy}-${tf}-false`);
+        if (setupData && setupData.length > 0) {
+          const summaries = setupData.map((s: any) =>
+            `${s.symbol}: Grade ${s.grade} (${s.totalScore}/9)`
+          ).join(", ");
+          setupContext += ` | ${strategy} ${tf}: ${summaries}`;
+        }
       }
     }
   } catch {}
@@ -167,7 +248,7 @@ export function buildChatMessages(message: string, history: { role: "user" | "as
     }
   } catch {}
 
-  const systemPrompt = `You are the TF Elite AI Assistant embedded in the SSL Screener terminal. You have LIVE market data below — always reference it confidently as latest closing prices. Be concise, structured, and actionable. Follow TF philosophy: swing trading, DCA at discounts, safe options, patience over FOMO. For SSL setups explain the 9-point grading. For valuations show PE vs Forward PE vs Historical. NOT financial advice.${marketContext}${sslContext}${flowContext}`;
+  const systemPrompt = `You are the TF Elite AI Assistant embedded in the TF Elite Terminal Setup Screener. You have LIVE market data below — always reference it confidently as latest closing prices. Be concise, structured, and actionable. Follow TF philosophy: swing trading, DCA at discounts, safe options, patience over FOMO. The terminal tracks three setup strategies, each graded on a 9-point scale: BOUNCE (price taps key support and holds it), SSL (price sweeps below a key low to grab sell-side liquidity, then reclaims it), and BREAKOUT (price breaks above key resistance with volume). For valuations show PE vs Forward PE vs Historical. NOT financial advice.${marketContext}${setupContext}${flowContext}`;
 
   const msgs: { role: "system" | "user" | "assistant"; content: string }[] = [
     { role: "system", content: systemPrompt },
@@ -227,16 +308,19 @@ export const appRouter = router({
         .map(r => r.value);      setCache("correctionAlerts", alerts, CACHE_TTL_AI);    return alerts;
     }),
 
-    // Get SSL watchlist for a given timeframe
-    sslWatchlist: protectedProcedure
+    // Get the setup watchlist for a given strategy + timeframe
+    strategyWatchlist: protectedProcedure
       .input(z.object({
+        strategy: z.enum(["Bounce", "SSL", "Breakout"]),
         timeframe: z.enum(["Daily", "Weekly", "Monthly"]),
         symbols: z.array(z.string()).optional(),
       }))
       .query(async ({ input }) => {
-        const cacheKey = `sslWatchlist-${input.timeframe}`;
-        const cached = getCached<any[]>(cacheKey);
-        if (cached) return cached;
+        const cacheKey = `strategyWatchlist-${input.strategy}-${input.timeframe}`;
+        if (!input.symbols) {
+          const cached = getCached<any[]>(cacheKey);
+          if (cached) return cached;
+        }
 
         const symbols = input.symbols || INVESTMENT_UNIVERSE.map(s => s.symbol);
 
@@ -257,67 +341,21 @@ export const appRouter = router({
 
             if (!data) return null;
 
-            const sslLevels = findSSLLevels(data.lows);
-            const nearestSSL = sslLevels.filter(l => l < quote.currentPrice).pop() || 0;
-            const distToSSL = nearestSSL > 0 ? ((quote.currentPrice - nearestSSL) / nearestSSL) * 100 : 999;
-
-            let status: "Watching" | "Approaching" | "SSL Breached" | "Confirmed" = "Watching";
-            if (quote.currentPrice < nearestSSL) status = "SSL Breached";
-            else if (distToSSL < 2) status = "Approaching";
-            else if (distToSSL < 5) status = "Watching";
-
-            const stockInfo = INVESTMENT_UNIVERSE.find(s => s.symbol === symbol);
-            const volumeRatio = quote.avgVolume > 0 ? quote.volume / quote.avgVolume : 1;
-
-            // Build mini candle chart data — last N bars based on timeframe
-            const chartLen = input.timeframe === "Monthly" ? 60 : input.timeframe === "Weekly" ? 52 : 65;
-            const startIdx = Math.max(0, data.closes.length - chartLen);
-            const candles: { t: number; o: number; h: number; l: number; c: number; v: number }[] = [];
-            for (let i = startIdx; i < data.closes.length; i++) {
-              candles.push({
-                t: data.timestamps?.[i] || 0,
-                o: data.opens?.[i] || data.closes[i],
-                h: data.highs[i],
-                l: data.lows[i],
-                c: data.closes[i],
-                v: data.volumes?.[i] || 0,
-              });
-            }
-
-            return {
-              symbol,
-              company: stockInfo?.company || symbol,
-              sector: stockInfo?.sector || "Unknown",
-              currentPrice: quote.currentPrice,
-              sslLevel: nearestSSL,
-              distToSSLPct: Math.round(distToSSL * 10) / 10,
-              status,
-              timeframe: input.timeframe,
-              volume: quote.volume,
-              avgVolume: quote.avgVolume,
-              volumeRatio: Math.round(volumeRatio * 100) / 100,
-              candles,
-              sslLevels: sslLevels.filter(l => l <= quote.currentPrice * 1.02).slice(-3),
-              lastUpdated: new Date().toISOString(),
-            };
+            return buildWatchItem(input.strategy, symbol, quote, data, input.timeframe);
           })
         );
 
-        const watchlist = results
-          .filter((r): r is PromiseFulfilledResult<any> => r.status === "fulfilled" && r.value !== null)
-          .map(r => r.value);
-
-        watchlist.sort((a: any, b: any) => {
-          const order: Record<string, number> = { "SSL Breached": 0, "Approaching": 1, "Confirmed": 2, "Watching": 3 };
-          const aO = order[a.status] ?? 4;
-          const bO = order[b.status] ?? 4;
-          if (aO !== bO) return aO - bO;
-          return a.distToSSLPct - b.distToSSLPct;
-        });
+        const watchlist = sortWatchlist(
+          results
+            .filter((r): r is PromiseFulfilledResult<any> => r.status === "fulfilled" && r.value !== null)
+            .map(r => r.value)
+        );
 
         // Use timeframe-appropriate TTLs
-        const tfTTL = input.timeframe === "Monthly" ? CACHE_TTL_MONTHLY : input.timeframe === "Weekly" ? CACHE_TTL_SLOW : CACHE_TTL_MEDIUM;
-        setCache(cacheKey, watchlist, tfTTL);
+        if (!input.symbols) {
+          const tfTTL = input.timeframe === "Monthly" ? CACHE_TTL_MONTHLY : input.timeframe === "Weekly" ? CACHE_TTL_SLOW : CACHE_TTL_MEDIUM;
+          setCache(cacheKey, watchlist, tfTTL);
+        }
         return watchlist;
       }),
 
@@ -594,7 +632,7 @@ export const appRouter = router({
 
         // Build rich market context from cached data
         let marketContext = "";
-        let sslContext = "";
+        let setupContext = "";
         let flowContext = "";
         try {
           const radarData = getCached<Awaited<ReturnType<typeof getInvestmentRadarData>>>("investmentRadar");
@@ -621,15 +659,19 @@ export const appRouter = router({
           }
         } catch {}
 
-        // Add SSL grading data if available
+        // Add setup grading data if available (all three strategies)
         try {
-          for (const tf of ["weekly", "monthly", "daily"] as const) {
-            const sslData = getCached<any[]>(`sslGrading-${tf}-false`);
-            if (sslData && sslData.length > 0) {
-              const sslSummaries = sslData.map((s: any) => 
-                `${s.symbol}: Grade ${s.grade} (${s.totalScore}/9) | Liquidity: ${s.liquidityScore}/3 | Volume: ${s.volumeScore}/3 | Absorption: ${s.absorptionScore}/3 | Confluence: ${(s.confluence || []).join(", ") || "none"}`
-              ).join("\n");
-              sslContext += `\n\n=== SSL SETUPS (${tf.toUpperCase()}) — 7/9+ Only ===\n${sslSummaries}`;
+          for (const strategy of ["Bounce", "SSL", "Breakout"] as const) {
+            for (const tf of ["Daily", "Weekly", "Monthly"] as const) {
+              const setupData = getCached<any[]>(`setupGrading-${strategy}-${tf}-false`);
+              if (setupData && setupData.length > 0) {
+                const summaries = setupData.map((s: any) => {
+                  const criteria = (s.criteria || []).map((c: any) => `${c.label}: ${c.score}/3`).join(" | ");
+                  const flags = (s.confluence || []).filter((f: any) => f.active).map((f: any) => f.label).join(", ") || "none";
+                  return `${s.symbol}: Grade ${s.grade} (${s.totalScore}/9) | ${criteria} | Confluence: ${flags}`;
+                }).join("\n");
+                setupContext += `\n\n=== ${strategy.toUpperCase()} SETUPS (${tf.toUpperCase()}) — 7/9+ Only ===\n${summaries}`;
+              }
             }
           }
         } catch {}
@@ -648,7 +690,7 @@ export const appRouter = router({
         const systemPrompt = `You are the Trader Foundation AI Assistant — a world-class financial education and trading analysis chatbot embedded in the TF Elite Terminal (exclusive to skool.com/tfelite members). You are as knowledgeable and articulate as the best AI assistants available. Your job is to make every TF Elite member COMPLETELY PREPARED before they make any trading decision.
 
 Your capabilities:
-1. EDUCATIONAL EXPERT: Explain any trading/investing concept with crystal clarity — PE ratio, forward PE, PEG ratio, SSL (sell-side liquidity), Bollinger Bands, DCA, LEAPs, options Greeks, market cap, revenue growth, free cash flow, earnings per share, etc. Give clear definitions with real-world examples.
+1. EDUCATIONAL EXPERT: Explain any trading/investing concept with crystal clarity — PE ratio, forward PE, PEG ratio, support/resistance, SSL (sell-side liquidity), bounces, breakouts, Bollinger Bands, DCA, LEAPs, options Greeks, market cap, revenue growth, free cash flow, earnings per share, etc. Give clear definitions with real-world examples.
 
 2. STOCK ANALYST: When asked about specific stocks, use the LIVE market data below to provide detailed, data-driven analysis. Quote exact numbers. Show current PE vs forward PE vs historical average. Explain what the valuation means in context.
 
@@ -656,19 +698,32 @@ Your capabilities:
 
 4. CONVICTION BUILDER: When a stock is at a deep discount, explain WHY it's potentially a great opportunity — revenue still growing, earnings estimates strong, PE compressed below historical average. Help members see through the fear. Reference past TF winners like CAG (+12%), SPOT (+14.8%), PG (+5.4%), NFLX (+150%) as examples of what happens when you buy quality at discounts while Wall Street panics.
 
-5. SSL SETUP EXPERT: You deeply understand the TF SSL (Sell-Side Liquidity) methodology:
-   - SSL is when price sweeps below a key low to grab liquidity (stop losses get triggered, weak hands sell)
-   - The 9-point grading system: Liquidity (X/3) + Volume Climax (X/3) + Absorption Candle (X/3)
+5. SETUP EXPERT: You deeply understand the THREE TF Elite setup strategies, each graded on the same 9-point scale (Level X/3 + Volume X/3 + Candle X/3; only 7/9+ A-grade setups are worth acting on):
+
+   BOUNCE — price taps a key support zone, HOLDS it, and reverses off the level:
+   - Support Bounce scoring: 3 = tapped support and rebounded 2%+ off it, 2 = tapped and holding above, 1 = in the bounce zone (within 2% of support)
+   - Volume Confirmation scoring: 3 = largest volume in history, 2 = larger than average, 1 = normal volume
+   - Reversal Candle scoring: long lower wick rejecting the level + bullish close in the top half of the range + hammer/doji/engulfing pattern (3 = all three, 2 = two, 1 = one)
+   - Confluence: RSI bullish divergence, FIB key levels
+   - The key difference vs SSL: in a bounce the level HOLDS — price does not lose support on a closing basis
+
+   SSL (Sell-Side Liquidity) — price sweeps BELOW a key low to grab liquidity (stop losses get triggered, weak hands sell), then reclaims the level:
    - Liquidity scoring: 3 = near-term AND further-term SSL swept, 2 = near-term only, 1 = approaching
    - Volume Climax scoring: 3 = largest volume in history, 2 = larger than average, 1 = no notable volume
    - Absorption Candle scoring: 3 = long wick up closing above SSL + near prev close + doji/hammer/spinning top (all three), 2 = two criteria, 1 = one criterion
-   - Only 7/9+ (A grade) setups are worth acting on
-   - Additional confluence: RSI bullish divergence, FIB key levels (61.8%, 78.6%)
-   - Timeframes: Daily (alert 2pm ET), Weekly (Thu 3pm watchlist, Fri 3pm execution), Monthly (5 days before close)
+   - Confluence: RSI bullish divergence, FIB key levels (61.8%, 78.6%)
+
+   BREAKOUT — price breaks ABOVE a key resistance level with conviction:
+   - Resistance Break scoring: 3 = double resistance break, 2 = fresh break of near-term resistance (broken resistance becomes support), 1 = approaching resistance
+   - Volume Expansion scoring: same volume scale — a breakout without volume is suspect
+   - Breakout Candle scoring: close above resistance + strong bullish body closing near the highs + marubozu/engulfing/gap-up/new-high pattern (3 = all three, 2 = two, 1 = one)
+   - Confluence: RSI momentum (55-80 = fuel without exhaustion), period-high zone (blue-sky territory)
+
+   Timeframes for all strategies: Daily (alert 2pm ET), Weekly (Thu 3pm watchlist, Fri 3pm execution), Monthly (5 days before close)
 
 6. RISK/REWARD ANALYST: For any trade setup, calculate and explain:
-   - Entry zone (where SSL was swept)
-   - Stop loss level (below the SSL sweep low)
+   - Entry zone (Bounce: at the held support; SSL: where the sweep reclaimed the level; Breakout: on the break or the retest of broken resistance)
+   - Stop loss level (Bounce: below the support zone; SSL: below the sweep low; Breakout: below the broken resistance)
    - Target levels (previous highs, resistance levels, analyst targets)
    - Risk/reward ratio (minimum 2:1 for TF setups)
    - Position sizing guidance based on account size and risk tolerance
@@ -703,14 +758,14 @@ Response quality rules:
 - For valuation questions, always show: Current PE → Forward PE → Historical Avg PE → What this means
 - When a stock is deeply discounted, highlight the disconnect between business fundamentals (revenue, earnings, FCF) and stock price
 - For any trade idea, ALWAYS include risk/reward analysis with entry, stop, target, and R:R ratio
-- When SSL setups are active, reference the grading data and explain what makes it a quality setup
+- When Bounce, SSL, or Breakout setups are active, reference the grading data and explain what makes each a quality setup
 - When institutional flow is detected, explain what it means and why smart money is moving
 - You HAVE live market data injected below — always reference it confidently as "latest closing prices" rather than saying you don't have data
 - If a stock is NOT in the injected data, say you don't have data for that specific ticker and suggest the member check the Research Terminal
 - Never give specific buy/sell recommendations — educate and inform with data so the member can make their own informed decision
 - Keep responses focused and actionable — the member should walk away FULLY PREPARED
 - Use professional but approachable tone — like a smart friend who happens to be a world-class financial analyst
-- This is NOT financial advice — it's educational content for TF Elite members${marketContext}${sslContext}${flowContext}`;
+- This is NOT financial advice — it's educational content for TF Elite members${marketContext}${setupContext}${flowContext}`;
 
         const messages: { role: "system" | "user" | "assistant"; content: string }[] = [
           { role: "system", content: systemPrompt },
@@ -1294,29 +1349,31 @@ Response quality rules:
           lastUpdated: new Date().toISOString(),
         };
       }),
-    // SSL Grading Engine — 9-point scoring system
-    sslGrading: protectedProcedure
+    // Strategy Grading Engine — 9-point scoring system (Bounce / SSL / Breakout)
+    setupGrading: protectedProcedure
       .input(z.object({
+        strategy: z.enum(["Bounce", "SSL", "Breakout"]),
         timeframe: z.enum(["Daily", "Weekly", "Monthly"]),
         includeAll: z.boolean().optional(),
       }))
       .query(async ({ input }) => {
-        const cacheKey = `sslGrading-${input.timeframe}-${input.includeAll}`;
+        const cacheKey = `setupGrading-${input.strategy}-${input.timeframe}-${input.includeAll || false}`;
         const cached = getCached<any[]>(cacheKey);
         if (cached) return cached;
-         const results = await getGradedSetups(input.timeframe as SSLTimeframe, input.includeAll || false);
+        const results = await getGradedSetups(input.strategy, input.timeframe as SetupTimeframe, input.includeAll || false);
         setCache(cacheKey, results, CACHE_TTL_AI);
         return results;
       }),
 
-    // SSL Grade single stock
-    sslGradeSingle: protectedProcedure
+    // Grade a single stock under one strategy
+    gradeSingle: protectedProcedure
       .input(z.object({
+        strategy: z.enum(["Bounce", "SSL", "Breakout"]),
         symbol: z.string().min(1).max(10),
         timeframe: z.enum(["Daily", "Weekly", "Monthly"]),
       }))
       .query(async ({ input }) => {
-        return await gradeSSLSetup(input.symbol.toUpperCase(), input.timeframe as SSLTimeframe);
+        return await gradeSetup(input.strategy, input.symbol.toUpperCase(), input.timeframe as SetupTimeframe);
       }),
     // Sector Rotation Detection
     sectorRotation: protectedProcedure.query(async () => {

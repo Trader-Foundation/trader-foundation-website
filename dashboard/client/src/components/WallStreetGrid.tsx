@@ -16,8 +16,8 @@ interface TickerTile {
   down: boolean;
   sector: string;
   volumeRatio?: number;
-  sslStatus?: string;
-  distToSSL?: number;
+  setupStatus?: string;
+  distToLevel?: number;
 }
 
 function formatVolume(vol: number): string {
@@ -51,7 +51,7 @@ function TickerCard({ tile, size, onClick }: { tile: TickerTile; size: "lg" | "m
   const textColor = isFlat ? "text-[#888]" : isUp ? "text-green-400" : "text-red-400";
 
   const hasVolumeAnomaly = tile.volumeRatio && tile.volumeRatio >= 2.0;
-  const hasSSLAlert = tile.sslStatus === "SSL Breached" || tile.sslStatus === "Approaching";
+  const hasSetupAlert = tile.setupStatus === "SSL Breached" || tile.setupStatus === "Approaching";
 
   if (size === "lg") {
     return (
@@ -73,8 +73,8 @@ function TickerCard({ tile, size, onClick }: { tile: TickerTile; size: "lg" | "m
             <span className="text-[7px] font-bold text-black">!</span>
           </motion.div>
         )}
-        {/* SSL alert badge */}
-        {hasSSLAlert && (
+        {/* Setup alert badge (SSL strategy) */}
+        {hasSetupAlert && (
           <motion.div
             className="absolute -top-1 -left-1 w-4 h-4 bg-red-500 rounded-full flex items-center justify-center"
             animate={{ opacity: [1, 0.5, 1] }}
@@ -124,7 +124,7 @@ function TickerCard({ tile, size, onClick }: { tile: TickerTile; size: "lg" | "m
             transition={{ duration: 1.5, repeat: Infinity }}
           />
         )}
-        {hasSSLAlert && (
+        {hasSetupAlert && (
           <motion.div
             className="absolute -top-1 -left-1 w-3 h-3 bg-red-500 rounded-full"
             animate={{ opacity: [1, 0.4, 1] }}
@@ -179,9 +179,9 @@ export function WallStreetGrid({ onDeepDive }: { onDeepDive?: (symbol: string) =
     { refetchInterval: 15000 }
   );
 
-  // Get SSL watchlist for status overlay
-  const { data: sslData } = trpc.market.sslWatchlist.useQuery(
-    { timeframe: "Monthly" },
+  // Get the SSL strategy watchlist for the status overlay
+  const { data: setupData } = trpc.market.strategyWatchlist.useQuery(
+    { strategy: "SSL", timeframe: "Monthly" },
     { refetchInterval: 30000 }
   );
 
@@ -191,7 +191,7 @@ export function WallStreetGrid({ onDeepDive }: { onDeepDive?: (symbol: string) =
   const tiles = useMemo<TickerTile[]>(() => {
     if (!quotes) return [];
     return quotes.map((q: any) => {
-      const ssl = sslData?.find((s: any) => s.symbol === q.symbol);
+      const setup = setupData?.find((s: any) => s.symbol === q.symbol);
       return {
         symbol: q.symbol,
         company: q.company || q.symbol,
@@ -199,12 +199,12 @@ export function WallStreetGrid({ onDeepDive }: { onDeepDive?: (symbol: string) =
         change: q.change,
         down: q.down,
         sector: q.sector || "Unknown",
-        volumeRatio: ssl?.volumeRatio,
-        sslStatus: ssl?.status,
-        distToSSL: ssl?.distToSSLPct,
+        volumeRatio: setup?.volumeRatio,
+        setupStatus: setup?.status,
+        distToLevel: setup?.distToLevelPct,
       };
     });
-  }, [quotes, sslData]);
+  }, [quotes, setupData]);
 
   // Group by sector for sector view
   const sectorGroups = useMemo(() => {
@@ -343,7 +343,7 @@ export function WallStreetGrid({ onDeepDive }: { onDeepDive?: (symbol: string) =
         <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-green-500/60" /> UP</span>
         <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-red-500/60" /> DOWN</span>
         <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-[#D4AF37]" /> VOLUME ANOMALY (2x+ avg)</span>
-        <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-red-500" /> SSL ALERT</span>
+        <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-red-500" /> SSL SWEEP ALERT</span>
         <span className="ml-auto text-[#444]">Auto-refresh: 15s</span>
       </div>
     </div>

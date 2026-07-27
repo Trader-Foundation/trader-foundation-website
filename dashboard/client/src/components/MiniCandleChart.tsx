@@ -11,7 +11,8 @@ interface Candle {
 
 interface MiniCandleChartProps {
   candles: Candle[];
-  sslLevels?: number[];
+  levels?: number[];
+  levelLabel?: string;
   dcaZones?: { price: number; label: string }[];
   ma20?: number;
   width?: number;
@@ -27,7 +28,8 @@ interface MiniCandleChartProps {
 
 function CandleChartSVG({
   candles,
-  sslLevels = [],
+  levels = [],
+  levelLabel = "LVL",
   dcaZones = [],
   ma20,
   width = 320,
@@ -38,7 +40,8 @@ function CandleChartSVG({
   showCrosshair = false,
 }: {
   candles: Candle[];
-  sslLevels?: number[];
+  levels?: number[];
+  levelLabel?: string;
   dcaZones?: { price: number; label: string }[];
   ma20?: number;
   width?: number;
@@ -85,7 +88,7 @@ function CandleChartSVG({
       return { x, bodyTop, bodyHeight, wickTop, wickBottom, candleWidth, wickWidth, isGreen, volumeHeight: volumeToHeight(candle.v), candle };
     });
 
-    const sslLines = sslLevels
+    const levelLines = levels
       .filter(level => level >= priceMin && level <= priceMax)
       .map(level => ({ y: priceToY(level), price: level }));
 
@@ -106,8 +109,8 @@ function CandleChartSVG({
       }
     }
 
-    return { padding, candleElements, sslLines, dcaLines, ma20Line, volumeBaseY, priceMin, priceMax, gridLines, candleSpacing };
-  }, [candles, sslLevels, dcaZones, ma20, width, height, showVolume, showCrosshair]);
+    return { padding, candleElements, levelLines, dcaLines, ma20Line, volumeBaseY, priceMin, priceMax, gridLines, candleSpacing };
+  }, [candles, levels, dcaZones, ma20, width, height, showVolume, showCrosshair]);
 
   if (!chartData) {
     return (
@@ -136,11 +139,11 @@ function CandleChartSVG({
         </g>
       ))}
 
-      {/* SSL levels */}
-      {chartData.sslLines.map((ssl, i) => (
-        <g key={`ssl-${i}`}>
-          <line x1={chartData.padding.left} y1={ssl.y} x2={width - chartData.padding.right} y2={ssl.y} stroke="#D4AF37" strokeWidth={showCrosshair ? 1 : 0.5} strokeDasharray="3,3" opacity={0.6} />
-          <text x={width - chartData.padding.right + 2} y={ssl.y + 3} fill="#D4AF37" fontSize={showCrosshair ? 9 : 7} fontFamily="monospace" textAnchor={showCrosshair ? "start" : "end"} opacity={0.7}>SSL ${ssl.price.toFixed(0)}</text>
+      {/* Key levels (support / SSL / resistance) */}
+      {chartData.levelLines.map((lvl, i) => (
+        <g key={`lvl-${i}`}>
+          <line x1={chartData.padding.left} y1={lvl.y} x2={width - chartData.padding.right} y2={lvl.y} stroke="#D4AF37" strokeWidth={showCrosshair ? 1 : 0.5} strokeDasharray="3,3" opacity={0.6} />
+          <text x={width - chartData.padding.right + 2} y={lvl.y + 3} fill="#D4AF37" fontSize={showCrosshair ? 9 : 7} fontFamily="monospace" textAnchor={showCrosshair ? "start" : "end"} opacity={0.7}>{levelLabel} ${lvl.price.toFixed(0)}</text>
         </g>
       ))}
 
@@ -205,7 +208,8 @@ function CandleChartSVG({
 
 export function MiniCandleChart({
   candles,
-  sslLevels = [],
+  levels = [],
+  levelLabel = "LVL",
   dcaZones = [],
   ma20,
   width = 320,
@@ -226,7 +230,8 @@ export function MiniCandleChart({
       <div className={`relative group ${className}`} style={{ width, height }}>
         <CandleChartSVG
           candles={candles}
-          sslLevels={sslLevels}
+          levels={levels}
+          levelLabel={levelLabel}
           dcaZones={dcaZones}
           ma20={ma20}
           width={width}
@@ -265,10 +270,10 @@ export function MiniCandleChart({
               <div className="flex items-center gap-3">
                 {/* Legend */}
                 <div className="flex items-center gap-3">
-                  {sslLevels.length > 0 && (
+                  {levels.length > 0 && (
                     <div className="flex items-center gap-1">
                       <div className="w-4 h-[1px]" style={{ borderBottom: "1px dashed #D4AF37", opacity: 0.6 }} />
-                      <span className="text-[9px] font-mono text-[#D4AF37]/60">SSL</span>
+                      <span className="text-[9px] font-mono text-[#D4AF37]/60">{levelLabel}</span>
                     </div>
                   )}
                   {dcaZones.length > 0 && (
@@ -296,7 +301,8 @@ export function MiniCandleChart({
             <div className="p-2">
               <CandleChartSVG
                 candles={candles}
-                sslLevels={sslLevels}
+                levels={levels}
+          levelLabel={levelLabel}
                 dcaZones={dcaZones}
                 ma20={ma20}
                 width={1180}
@@ -318,7 +324,8 @@ interface ExpandedCandleChartProps extends MiniCandleChartProps {
   currentPrice?: number;
 }
 
-export function ExpandedCandleChart({ symbol, timeframe, currentPrice, candles, sslLevels = [], dcaZones = [], ma20, width = 600, height = 300, className = "" }: ExpandedCandleChartProps) {
+export function ExpandedCandleChart({ symbol, timeframe, currentPrice, candles, levels = [],
+  levelLabel = "LVL", dcaZones = [], ma20, width = 600, height = 300, className = "" }: ExpandedCandleChartProps) {
   const timeframeLabel = timeframe === "Monthly" ? "5Y MONTHLY" : timeframe === "Weekly" ? "1Y WEEKLY" : "6M DAILY";
   return (
     <div className={`bg-[#0a0a0a] border border-[#D4AF37]/10 rounded ${className}`}>
@@ -330,13 +337,13 @@ export function ExpandedCandleChart({ symbol, timeframe, currentPrice, candles, 
         {currentPrice && <span className="text-[10px] font-mono text-[#E8E0D0]">${currentPrice.toFixed(2)}</span>}
       </div>
       <div className="p-1">
-        <MiniCandleChart candles={candles} sslLevels={sslLevels} dcaZones={dcaZones} ma20={ma20} width={width - 8} height={height - 40} showVolume={true} expandable={true} symbol={symbol} timeframe={timeframe} currentPrice={currentPrice} />
+        <MiniCandleChart candles={candles} levels={levels} levelLabel={levelLabel} dcaZones={dcaZones} ma20={ma20} width={width - 8} height={height - 40} showVolume={true} expandable={true} symbol={symbol} timeframe={timeframe} currentPrice={currentPrice} />
       </div>
       <div className="flex items-center gap-3 px-3 py-1 border-t border-[#D4AF37]/5">
-        {sslLevels.length > 0 && (
+        {levels.length > 0 && (
           <div className="flex items-center gap-1">
             <div className="w-3 h-[1px]" style={{ borderBottom: "1px dashed #D4AF37", opacity: 0.6 }} />
-            <span className="text-[8px] font-mono text-[#D4AF37]/60">SSL</span>
+            <span className="text-[8px] font-mono text-[#D4AF37]/60">{levelLabel}</span>
           </div>
         )}
         {dcaZones.length > 0 && (

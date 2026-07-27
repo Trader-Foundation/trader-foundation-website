@@ -91,14 +91,17 @@ export interface ValuationData {
   valuationVerdict: string;
 }
 
-export interface SSLWatchItem {
+export type Strategy = "Bounce" | "SSL" | "Breakout";
+
+export interface StrategyWatchItem {
   symbol: string;
   company: string;
   sector: string;
   currentPrice: number;
-  sslLevel: number;
-  distToSSLPct: number;
-  status: "Watching" | "Approaching" | "SSL Breached" | "Confirmed";
+  strategy: Strategy;
+  level: number; // key support (Bounce/SSL) or resistance (Breakout)
+  distToLevelPct: number;
+  status: "Watching" | "Approaching" | "Bouncing" | "SSL Breached" | "Breakout";
   timeframe: "Daily" | "Weekly" | "Monthly";
   volume: number;
   avgVolume: number;
@@ -207,19 +210,19 @@ export const PAST_WINNERS: PastWinner[] = [
     symbol: "CAG", company: "ConAgra Brands", setupDate: "March 2026",
     grade: "A+", totalScore: 8, entryPrice: 15.72, exitPrice: 17.60,
     returnPct: 12.0, timeframe: "Monthly", holdingPeriod: "1 week",
-    keyTakeaway: "Classic SSL sweep below multi-year low at $16. Institutional volume spike with 65% buy pressure. Hammer candle closed above sweep level. Ripped 12% in one week."
+    keyTakeaway: "Classic bounce setup — swept the multi-year low at $16 and reclaimed it. Institutional volume spike with 65% buy pressure. Hammer candle closed above the sweep level. Ripped 12% in one week."
   },
   {
     symbol: "SPOT", company: "Spotify Technology", setupDate: "February 2026",
     grade: "A+", totalScore: 9, entryPrice: 540.00, exitPrice: 620.00,
     returnPct: 14.8, timeframe: "Monthly", holdingPeriod: "3 weeks",
-    keyTakeaway: "A+ setup with dark pool prints confirming institutional accumulation. SSL sweep below previous month low with massive volume climax. Perfect hammer absorption candle."
+    keyTakeaway: "A+ bounce setup with dark pool prints confirming institutional accumulation. Swept below the previous month low with massive volume climax. Perfect hammer absorption candle."
   },
   {
     symbol: "PG", company: "Procter & Gamble", setupDate: "January 2026",
     grade: "A", totalScore: 7, entryPrice: 149.90, exitPrice: 158.04,
     returnPct: 5.4, timeframe: "Monthly", holdingPeriod: "2 weeks",
-    keyTakeaway: "Swept previous month low with largest buying volume in months. Long wick up closing above SSL near previous month close. Bullish hammer spinning top. Also a breakout trade — risk was breakout failure."
+    keyTakeaway: "Swept previous month low with largest buying volume in months. Long wick up reclaiming support near previous month close. Bullish hammer spinning top. Doubled as a breakout trade — risk was breakout failure."
   },
   {
     symbol: "NFLX", company: "Netflix Inc.", setupDate: "2022 Recovery",
@@ -1031,10 +1034,10 @@ export function buildPortfolioPlan(
   };
 }
 
-// --- SSL Level Detection ---
+// --- Key Level Detection (support & resistance) ---
 
-export function findSSLLevels(lows: number[], period: number = 3): number[] {
-  // Find significant swing lows that represent sell-side liquidity pools
+export function findSupportLevels(lows: number[], period: number = 3): number[] {
+  // Find significant swing lows that act as key support (sell-side liquidity pools)
   // A true swing low must be lower than bars on BOTH left AND right sides
   const rawLevels: { price: number; index: number }[] = [];
   for (let i = period; i < lows.length - period; i++) {
@@ -1061,6 +1064,39 @@ export function findSSLLevels(lows: number[], period: number = 3): number[] {
     used.add(level.index);
     const lowest = cluster.reduce((a, b) => (a.price < b.price ? a : b));
     clustered.push(lowest.price);
+  }
+  // Return unique levels sorted ascending
+  return Array.from(new Set(clustered)).sort((a, b) => a - b);
+}
+
+export function findResistanceLevels(highs: number[], period: number = 3): number[] {
+  // Find significant swing highs that act as key resistance (buy-side liquidity pools)
+  // A true swing high must be higher than bars on BOTH left AND right sides
+  const rawLevels: { price: number; index: number }[] = [];
+  for (let i = period; i < highs.length - period; i++) {
+    const leftHighs = highs.slice(i - period, i);
+    const rightHighs = highs.slice(i + 1, i + 1 + period);
+    const isSwingHigh = leftHighs.every(h => highs[i] >= h) && rightHighs.every(h => highs[i] >= h);
+    if (isSwingHigh) {
+      rawLevels.push({ price: Math.round(highs[i] * 100) / 100, index: i });
+    }
+  }
+  // Cluster nearby levels (within 2%) and keep the highest in each cluster
+  const clustered: number[] = [];
+  const used = new Set<number>();
+  for (const level of rawLevels) {
+    if (used.has(level.index)) continue;
+    const cluster = [level];
+    for (const other of rawLevels) {
+      if (other.index === level.index || used.has(other.index)) continue;
+      if (Math.abs(other.price - level.price) / level.price < 0.02) {
+        cluster.push(other);
+        used.add(other.index);
+      }
+    }
+    used.add(level.index);
+    const highest = cluster.reduce((a, b) => (a.price > b.price ? a : b));
+    clustered.push(highest.price);
   }
   // Return unique levels sorted ascending
   return Array.from(new Set(clustered)).sort((a, b) => a - b);

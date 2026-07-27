@@ -33,7 +33,7 @@ type TabId = "screener" | "exchange" | "deepdive" | "radar" | "portfolio" | "fre
 const tabs: { id: TabId; label: string; shortLabel: string; icon: React.ReactNode }[] = [
   {
     id: "screener",
-    label: "SSL SCREENER",
+    label: "SETUP SCREENER",
     shortLabel: "SCREENER",
     icon: (
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -171,8 +171,8 @@ export default function Home() {
             </p>
             <p className="text-[#666] font-mono text-xs leading-relaxed">
               This terminal is restricted to verified members of the Trader Foundation Elite community.
-              Sign in with your account to access the SSL Screener, Deep Dive Research, Investment Radar,
-              Freedom Calculator, and all premium tools.
+              Sign in with your account to access the Setup Screener (Bounce, SSL & Breakout), Deep Dive Research,
+              Investment Radar, Freedom Calculator, and all premium tools.
             </p>
           </div>
 

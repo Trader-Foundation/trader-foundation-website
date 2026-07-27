@@ -14,7 +14,7 @@ type ChatMessage = {
 
 const SUGGESTED_PROMPTS = [
   "What is a PE ratio?",
-  "Explain SSL sweep",
+  "Explain the 3 TF setups",
   "Compare NVDA vs MSFT",
   "What are LEAPs?",
   "What is DCA strategy?",
@@ -263,7 +263,7 @@ export function TerminalChatbot() {
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Ask about PE, SSL, compare stocks..."
+                placeholder="Ask about bounces, SSL, breakouts, PE..."
                 disabled={isStreaming}
                 className="flex-1 bg-[#111] border border-[#222] rounded px-3 py-2 text-xs font-mono text-[#E8E0D0] placeholder-[#444] focus:outline-none focus:border-[#D4AF37]/40 disabled:opacity-50"
               />

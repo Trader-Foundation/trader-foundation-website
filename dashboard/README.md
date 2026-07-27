@@ -1,8 +1,13 @@
 # TF Elite Terminal (monthly-leap-screener)
 
-The Trader Foundation members dashboard: SSL screener, Wall Street Exchange
-grid, Investment Radar, Portfolio Simulator, Freedom Calculator, Research
-Terminal, and AI chatbot.
+The Trader Foundation members dashboard: Setup Screener (three strategies —
+Bounce, SSL sell-side liquidity, and Breakout), Wall Street Exchange grid,
+Investment Radar, Portfolio Simulator, Freedom Calculator, Research Terminal,
+and AI chatbot.
+
+Note: the Bounce strategy currently runs provisional touch-and-hold criteria —
+the official TF bounce spec will replace the scoring functions in
+`server/strategyEngine.ts` when provided.
 
 Originally built on Manus. It now runs **standalone** — no Manus account or
 keys required.
