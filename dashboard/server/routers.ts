@@ -1,4 +1,5 @@
 import { COOKIE_NAME } from "@shared/const";
+import { dataHealth } from "./_core/dataApi";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
@@ -459,6 +460,7 @@ export const appRouter = router({
       const pulse = {
         spy,
         vix,
+        data: dataHealth(),
         isJobsReportDay: jobs.isJobsReportDay,
         nextJobsReportDate: jobs.nextJobsReportDate,
         guidance: jobs.isJobsReportDay

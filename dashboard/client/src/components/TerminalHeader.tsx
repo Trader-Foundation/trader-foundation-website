@@ -7,6 +7,26 @@
 import { trpc } from "@/lib/trpc";
 import { motion } from "framer-motion";
 
+// Honest data-source indicator: green = live Yahoo, yellow = live Stooq
+// (EOD/delayed), red = synthetic demo data
+function DataModeBadge() {
+  const { data: pulse } = trpc.market.marketPulse.useQuery(undefined, { refetchInterval: 5 * 60 * 1000 });
+  const d = pulse?.data;
+  const color = d ? (d.isLive ? (d.source === "stooq" ? "bg-yellow-400" : "bg-green-500") : "bg-red-500") : "bg-[#444]";
+  const label = d ? (d.isLive ? (d.source === "stooq" ? "LIVE·EOD" : "LIVE") : "DEMO") : "…";
+  const textColor = d && !d.isLive ? "text-red-400 font-bold" : "text-[#666]";
+  return (
+    <div className="flex items-center gap-1.5" title={d?.label || "Connecting to market data..."}>
+      <motion.div
+        className={`w-1.5 h-1.5 rounded-full ${color}`}
+        animate={{ opacity: [1, 0.5, 1] }}
+        transition={{ duration: 2, repeat: Infinity }}
+      />
+      <span className={`text-[9px] sm:text-[10px] font-mono ${textColor}`}>{label}</span>
+    </div>
+  );
+}
+
 export function TerminalHeader() {
   const { data: status } = trpc.market.screeningStatus.useQuery(undefined, {
     refetchInterval: 60_000, // refresh every minute
@@ -99,14 +119,7 @@ export function TerminalHeader() {
             </span>
           </div>
           <div className="h-6 sm:h-8 w-px bg-[#D4AF37]/15" />
-          <div className="flex items-center gap-1.5">
-            <motion.div
-              className="w-1.5 h-1.5 rounded-full bg-green-500"
-              animate={{ opacity: [1, 0.5, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
-            <span className="text-[9px] sm:text-[10px] font-mono text-[#666]">LIVE</span>
-          </div>
+          <DataModeBadge />
         </div>
       </div>
     </header>

@@ -100,12 +100,24 @@ function MarketPulseStrip() {
   const trendColor =
     pulse.spy?.trend === "BULLISH" ? "text-green-400" : pulse.spy?.trend === "BEARISH" ? "text-red-400" : "text-yellow-400";
   const warn = pulse.isJobsReportDay;
+  const demo = pulse.data && !pulse.data.isLive;
 
   return (
     <div className={`flex flex-wrap items-center gap-x-4 gap-y-1 px-3 py-2 rounded-lg border text-[10px] font-mono ${
-      warn ? "bg-red-950/30 border-red-500/30" : "bg-[#050505] border-[#D4AF37]/10"
+      warn || demo ? "bg-red-950/30 border-red-500/30" : "bg-[#050505] border-[#D4AF37]/10"
     }`}>
       <span className="text-[#D4AF37] font-semibold tracking-wider">MARKET PULSE</span>
+      {pulse.data && (
+        <span className={`px-1.5 py-0.5 rounded border font-bold ${
+          demo
+            ? "text-red-400 border-red-500/40 bg-red-500/10"
+            : pulse.data.source === "stooq"
+            ? "text-yellow-400 border-yellow-500/40 bg-yellow-500/10"
+            : "text-green-400 border-green-500/40 bg-green-500/10"
+        }`}>
+          {demo ? "⚠ DEMO DATA — live feed unreachable, prices are synthetic" : pulse.data.label}
+        </span>
+      )}
       {pulse.spy && (
         <span className="text-[#888]">
           SPY <span className={`font-bold ${trendColor}`}>{pulse.spy.trend}</span>
@@ -511,6 +523,10 @@ export function LeapScreener({ onDeepDive }: { onDeepDive?: (symbol: string) => 
 
   const cfg = STRATEGY_CONFIG[strategy];
 
+  // Data-mode badge (deduped with MarketPulseStrip's query by React Query)
+  const { data: pulseForBadge } = trpc.market.marketPulse.useQuery(undefined, { refetchInterval: 5 * 60 * 1000 });
+  const dataBadge = pulseForBadge?.data;
+
   // Real-time strategy watchlist from tRPC
   const { data: watchlist, isLoading, isError } = trpc.market.strategyWatchlist.useQuery(
     { strategy, timeframe },
@@ -627,8 +643,10 @@ export function LeapScreener({ onDeepDive }: { onDeepDive?: (symbol: string) => 
               </p>
               <div className="flex items-center gap-4 mt-4">
                 <div className="flex items-center gap-1.5 text-[10px] font-mono text-[#666]">
-                  <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-                  LIVE DATA
+                  <span className={`w-1.5 h-1.5 rounded-full animate-pulse ${
+                    dataBadge ? (dataBadge.isLive ? (dataBadge.source === "stooq" ? "bg-yellow-400" : "bg-green-400") : "bg-red-500") : "bg-[#444]"
+                  }`} />
+                  {dataBadge ? dataBadge.label : "CONNECTING..."}
                 </div>
                 <div className="flex items-center gap-1.5 text-[10px] font-mono text-[#666]">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]" />

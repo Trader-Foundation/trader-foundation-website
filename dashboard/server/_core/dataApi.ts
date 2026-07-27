@@ -1,15 +1,18 @@
 /**
- * Market data access layer with three interchangeable sources:
+ * Market data access layer with interchangeable sources:
  *
  *  1. "manus"  — the original Manus Forge proxy (requires BUILT_IN_FORGE_API_URL
  *                + BUILT_IN_FORGE_API_KEY, only available when hosted on Manus)
  *  2. "direct" — Yahoo Finance's public API, called directly. Free, no key.
+ *                When Yahoo is unreachable (it blocks many datacenter IPs),
+ *                chart data falls back to Stooq's free CSV feed (end-of-day /
+ *                delayed, but REAL market data) before resorting to demo.
  *  3. "demo"   — deterministic synthetic market data so the terminal is fully
  *                testable offline (no network, no keys).
  *
  * Selection via DATA_MODE env var: "auto" (default) | "manus" | "direct" | "demo".
- * In auto mode: Manus creds present → manus; otherwise direct, falling back to
- * demo automatically if Yahoo is unreachable.
+ * In auto mode: Manus creds present → manus; otherwise direct (Yahoo → Stooq),
+ * falling back to demo automatically if neither live source is reachable.
  *
  * All sources return the same response shapes the rest of the server expects
  * (Yahoo's raw JSON: chart.result[0], finance.result, quoteSummary.result[0]).
@@ -28,9 +31,32 @@ type DataMode = "auto" | "manus" | "direct" | "demo";
 const FETCH_TIMEOUT_MS = 15_000;
 const DIRECT_RETRY_INTERVAL_MS = 5 * 60 * 1000;
 
-// When direct Yahoo access fails at the network level we stop hammering it and
-// serve demo data, re-probing every DIRECT_RETRY_INTERVAL_MS.
+// When a live source fails at the network level we stop hammering it and move
+// down the chain, re-probing every DIRECT_RETRY_INTERVAL_MS.
 let directDownSince = 0;
+let stooqDownSince = 0;
+
+// What the last successful call was actually served from — powers the UI badge.
+let lastServed: "manus" | "yahoo" | "stooq" | "demo" = "yahoo";
+
+export interface DataHealth {
+  source: "manus" | "yahoo" | "stooq" | "demo";
+  label: string;
+  isLive: boolean;
+}
+
+export function dataHealth(): DataHealth {
+  switch (lastServed) {
+    case "manus":
+      return { source: "manus", label: "LIVE DATA", isLive: true };
+    case "yahoo":
+      return { source: "yahoo", label: "LIVE DATA", isLive: true };
+    case "stooq":
+      return { source: "stooq", label: "LIVE DATA (EOD/DELAYED)", isLive: true };
+    default:
+      return { source: "demo", label: "DEMO DATA", isLive: false };
+  }
+}
 
 function resolveMode(): DataMode {
   const raw = (process.env.DATA_MODE ?? "auto").toLowerCase();
@@ -42,7 +68,10 @@ export function activeDataSource(): "manus" | "direct" | "demo" {
   const mode = resolveMode();
   if (mode !== "auto") return mode;
   if (ENV.forgeApiUrl && ENV.forgeApiKey) return "manus";
-  if (directDownSince && Date.now() - directDownSince < DIRECT_RETRY_INTERVAL_MS) {
+  if (
+    directDownSince && Date.now() - directDownSince < DIRECT_RETRY_INTERVAL_MS &&
+    stooqDownSince && Date.now() - stooqDownSince < DIRECT_RETRY_INTERVAL_MS
+  ) {
     return "demo";
   }
   return "direct";
@@ -52,26 +81,65 @@ export async function callDataApi(
   apiId: string,
   options: DataApiCallOptions = {}
 ): Promise<unknown> {
-  const source = activeDataSource();
+  const mode = resolveMode();
 
-  if (source === "manus") return callManusProxy(apiId, options);
-  if (source === "demo") return callDemo(apiId, options);
-
-  try {
-    const result = await callYahooDirect(apiId, options);
-    directDownSince = 0;
+  if (mode === "manus" || (mode === "auto" && ENV.forgeApiUrl && ENV.forgeApiKey)) {
+    const result = await callManusProxy(apiId, options);
+    lastServed = "manus";
     return result;
-  } catch (err) {
-    if (resolveMode() === "direct") throw err; // explicit direct mode: surface the error
-    if (!directDownSince) {
-      console.warn(
-        `[DataApi] Direct Yahoo Finance unreachable (${String(err).slice(0, 200)}). ` +
-          "Serving deterministic demo data; will re-probe in 5 minutes."
-      );
-    }
-    directDownSince = Date.now();
+  }
+  if (mode === "demo") {
+    lastServed = "demo";
     return callDemo(apiId, options);
   }
+
+  // direct / auto — 1) Yahoo
+  const yahooHealthy = !directDownSince || Date.now() - directDownSince >= DIRECT_RETRY_INTERVAL_MS;
+  if (yahooHealthy) {
+    try {
+      const result = await callYahooDirect(apiId, options);
+      if (directDownSince) console.log("[DataApi] Yahoo Finance is reachable again — back to live Yahoo data.");
+      directDownSince = 0;
+      lastServed = "yahoo";
+      return result;
+    } catch (err) {
+      if (mode === "direct") throw err; // explicit direct mode: surface the error
+      if (!directDownSince) {
+        console.warn(
+          `[DataApi] Direct Yahoo Finance unreachable (${String(err).slice(0, 200)}). ` +
+            "Trying Stooq for live chart data; will re-probe Yahoo in 5 minutes."
+        );
+      }
+      directDownSince = Date.now();
+    }
+  }
+
+  // 2) Stooq — real (EOD/delayed) market data, chart endpoint only
+  if (apiId === "YahooFinance/get_stock_chart") {
+    const stooqHealthy = !stooqDownSince || Date.now() - stooqDownSince >= DIRECT_RETRY_INTERVAL_MS;
+    if (stooqHealthy) {
+      try {
+        const result = await callStooqChart(options);
+        if (stooqDownSince || lastServed === "demo") console.log("[DataApi] Serving live chart data via Stooq (EOD/delayed).");
+        stooqDownSince = 0;
+        lastServed = "stooq";
+        return result;
+      } catch (err) {
+        if (!stooqDownSince) {
+          console.warn(
+            `[DataApi] Stooq unreachable too (${String(err).slice(0, 200)}). ` +
+              "Serving deterministic demo data; will re-probe in 5 minutes."
+          );
+        }
+        stooqDownSince = Date.now();
+      }
+    }
+  }
+
+  // 3) Demo — only chart calls drive the badge; auxiliary endpoints (insights,
+  // holders) have no Stooq equivalent and quietly use demo without flipping it
+  if (apiId === "YahooFinance/get_stock_chart") lastServed = "demo";
+  return callDemo(apiId, options);
 }
 
 // ---------------------------------------------------------------------------
@@ -213,6 +281,144 @@ async function callYahooDirect(
     default:
       throw new Error(`Unsupported data API for direct mode: ${apiId}`);
   }
+}
+
+// ---------------------------------------------------------------------------
+// Source 2b: Stooq free CSV feed (EOD/delayed but REAL market data)
+// ---------------------------------------------------------------------------
+// Yahoo blocks many datacenter IPs (e.g. Vercel), Stooq generally doesn't.
+// Serves only the chart endpoint; responses are shaped like Yahoo's chart JSON
+// so nothing downstream changes.
+
+function stooqSymbol(symbol: string): string {
+  const s = symbol.toUpperCase();
+  if (s === "VIX" || s === "^VIX") return "^vix";
+  if (s.startsWith("^")) return s.toLowerCase();
+  return `${s.toLowerCase()}.us`;
+}
+
+function stooqInterval(interval: string): "d" | "w" | "m" {
+  if (interval === "1d") return "d";
+  if (interval === "1wk") return "w";
+  if (interval === "1mo") return "m";
+  throw new Error(`Stooq does not support interval ${interval}`);
+}
+
+function barsForRange(range: string, interval: string): number {
+  const years = rangeToYears(range);
+  if (interval === "1d") return Math.max(6, Math.round(years * 252));
+  if (interval === "1wk") return Math.max(6, Math.round(years * 52));
+  return Math.max(6, Math.round(years * 12));
+}
+
+function ymd(d: Date): string {
+  return `${d.getUTCFullYear()}${String(d.getUTCMonth() + 1).padStart(2, "0")}${String(d.getUTCDate()).padStart(2, "0")}`;
+}
+
+async function callStooqChart(options: DataApiCallOptions): Promise<unknown> {
+  const q = options.query ?? {};
+  const symbol = String(q.symbol ?? "").toUpperCase();
+  if (!symbol) throw new Error("Missing symbol for Stooq chart");
+  const interval = String(q.interval ?? "1d");
+  const range = String(q.range ?? "1mo");
+  const i = stooqInterval(interval);
+
+  // Always pull at least 1 year of dailies so quote meta (52-week high/low,
+  // average volume) is real even for short chart ranges.
+  const years = Math.max(rangeToYears(range), interval === "1d" ? 1 : 0);
+  const start = new Date(Date.now() - years * 366 * 24 * 60 * 60 * 1000);
+  const url = `https://stooq.com/q/d/l/?s=${encodeURIComponent(stooqSymbol(symbol))}&d1=${ymd(start)}&d2=${ymd(new Date())}&i=${i}`;
+
+  const resp = await fetch(url, {
+    headers: { "user-agent": YAHOO_UA, accept: "text/csv,*/*" },
+    signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
+  });
+  if (!resp.ok) throw new Error(`Stooq request failed (${resp.status}) for ${symbol}`);
+  const csv = (await resp.text()).trim();
+  if (!csv.toLowerCase().startsWith("date,")) {
+    throw new Error(`Stooq returned no data for ${symbol} (${csv.slice(0, 60)})`);
+  }
+
+  const timestamps: number[] = [];
+  const opens: number[] = [];
+  const highs: number[] = [];
+  const lows: number[] = [];
+  const closes: number[] = [];
+  const volumes: number[] = [];
+
+  for (const line of csv.split("\n").slice(1)) {
+    const [date, o, h, l, c, v] = line.trim().split(",");
+    const open = parseFloat(o);
+    const high = parseFloat(h);
+    const low = parseFloat(l);
+    const close = parseFloat(c);
+    if (!date || !isFinite(open) || !isFinite(high) || !isFinite(low) || !isFinite(close)) continue;
+    const ts = Math.floor(Date.parse(`${date}T16:00:00-05:00`) / 1000);
+    if (!isFinite(ts)) continue;
+    timestamps.push(ts);
+    opens.push(open);
+    highs.push(high);
+    lows.push(low);
+    closes.push(close);
+    volumes.push(isFinite(parseFloat(v)) ? parseFloat(v) : 0);
+  }
+
+  if (closes.length === 0) throw new Error(`Stooq returned an empty series for ${symbol}`);
+
+  // Meta from the FULL fetched series (real 52w range / volumes)...
+  const lastIdx = closes.length - 1;
+  const prevClose = lastIdx > 0 ? closes[lastIdx - 1] : closes[lastIdx];
+  const volWindow = volumes.slice(-11, -1);
+  const avgVol = volWindow.length > 0 ? Math.round(volWindow.reduce((a, b) => a + b, 0) / volWindow.length) : volumes[lastIdx];
+  const yearHighs = interval === "1d" ? highs.slice(-252) : highs;
+  const yearLows = interval === "1d" ? lows.slice(-252) : lows;
+
+  const meta = {
+    currency: "USD",
+    symbol,
+    exchangeName: "STOOQ",
+    instrumentType: "EQUITY",
+    regularMarketPrice: closes[lastIdx],
+    chartPreviousClose: prevClose,
+    previousClose: prevClose,
+    regularMarketDayHigh: highs[lastIdx],
+    regularMarketDayLow: lows[lastIdx],
+    regularMarketVolume: volumes[lastIdx],
+    averageDailyVolume10Day: avgVol,
+    fiftyTwoWeekHigh: Math.max(...yearHighs),
+    fiftyTwoWeekLow: Math.min(...yearLows),
+    regularMarketTime: timestamps[lastIdx],
+    dataGranularity: interval,
+    range,
+  };
+
+  // ...but return only the bars the caller asked for
+  const keep = Math.min(barsForRange(range, interval), closes.length);
+  const s = closes.length - keep;
+
+  return {
+    chart: {
+      result: [
+        {
+          meta,
+          timestamp: timestamps.slice(s),
+          indicators: {
+            quote: [
+              {
+                open: opens.slice(s),
+                high: highs.slice(s),
+                low: lows.slice(s),
+                close: closes.slice(s),
+                volume: volumes.slice(s),
+              },
+            ],
+            adjclose: [{ adjclose: closes.slice(s) }],
+          },
+        },
+      ],
+      error: null,
+    },
+  };
 }
 
 // ---------------------------------------------------------------------------
