@@ -9,7 +9,10 @@ The Bounce strategy implements The TF Bounce Profit Plan: trend filter
 (50/200 MA), pullback bounce off the 13/20 MA or key swing support, volume
 confirmation, reversal candle, with Full Stochastics + MACD confluence and a
 Market Pulse strip (SPY direction, VIX, jobs-report-day warning) for the
-plan's fundamental layer. Scoring lives in `server/strategyEngine.ts`.
+plan's fundamental layer. The Breakout strategy implements the TF Breakout
+Strategy: new-52-week-high breakouts on relative volume over 1 (1M+ average
+volume liquidity screen), Marubozu breakout candles, and flag/pennant
+continuation-pattern confluence. Scoring lives in `server/strategyEngine.ts`.
 
 Originally built on Manus. It now runs **standalone** — no Manus account or
 keys required.

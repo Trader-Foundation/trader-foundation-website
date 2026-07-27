@@ -507,29 +507,34 @@ function detectMACDSignal(closes: number[]): { active: boolean; details: string 
 }
 
 // ============================================================
-// BREAKOUT — RESISTANCE BREAK SCORING (X/3)
+// BREAKOUT — BREAKOUT LEVEL SCORING (X/3)  [TF Breakout Strategy]
 // ============================================================
-// 3 = Two resistance levels freshly broken (double break)
-// 2 = Near-term resistance freshly broken
-// 1 = Approaching resistance (within 2% below) but not broken
+// The plan: "ride the wave of a stock that breaks out and starts to
+// hit NEW HIGHS" — the 52-week-high screen is the heart of the setup.
+// 3 = Fresh resistance break AND printing new period highs (blue sky),
+//     or a double resistance break
+// 2 = Near-term resistance freshly broken (still below the period high)
+// 1 = Approaching resistance or the period high (within 2%)
 // 0 = No breakout setup
 //
 // "Freshly broken" = close is above the level AND (the break happened
 // on this bar, or the level sits within 5% below the current close —
 // i.e. the move just cleared it, not ancient history).
 
-function scoreResistanceBreak(
+function scoreBreakoutLevel(
   currentPrice: number,
   highs: number[],
   closes: number[]
 ): { score: number; details: string; nearResistance: number; furtherResistance: number } {
   const resistanceLevels = findResistanceLevels(highs);
-  if (resistanceLevels.length === 0) {
-    return { score: 0, details: "No significant resistance levels identified", nearResistance: 0, furtherResistance: 0 };
-  }
-
   const lastClose = closes[closes.length - 1];
   const prevClose = closes.length > 1 ? closes[closes.length - 2] : Infinity;
+
+  // New period high = at/above the highest high in the dataset
+  // (1y of dailies ≈ the plan's 52-week-high screen)
+  const priorHighs = highs.slice(0, -1);
+  const periodHigh = priorHighs.length > 0 ? Math.max(...priorHighs) : 0;
+  const atNewHigh = periodHigh > 0 && lastClose >= periodHigh * 0.999;
 
   const freshlyBroken = resistanceLevels
     .filter((l) => lastClose > l && (prevClose <= l * 1.005 || l >= lastClose * 0.95))
@@ -537,6 +542,16 @@ function scoreResistanceBreak(
 
   const levelsAbove = resistanceLevels.filter((l) => l >= lastClose).sort((a, b) => a - b);
   const nearestAbove = levelsAbove.length > 0 ? levelsAbove[0] : 0;
+
+  if (atNewHigh && (freshlyBroken.length >= 1 || periodHigh > 0)) {
+    const brokeLevel = freshlyBroken.length > 0 ? freshlyBroken[0] : Math.round(periodHigh * 100) / 100;
+    return {
+      score: 3,
+      details: `NEW-HIGH BREAKOUT — Price cleared resistance at $${brokeLevel.toFixed(2)} and is printing fresh period highs (prior high $${periodHigh.toFixed(2)}). Blue-sky territory with no overhead supply — ride the wave.`,
+      nearResistance: brokeLevel,
+      furtherResistance: freshlyBroken.length > 1 ? freshlyBroken[1] : 0,
+    };
+  }
 
   if (freshlyBroken.length >= 2) {
     return {
@@ -548,20 +563,25 @@ function scoreResistanceBreak(
   }
 
   if (freshlyBroken.length === 1) {
+    const toHighPct = periodHigh > 0 ? ((periodHigh - lastClose) / lastClose) * 100 : 999;
     return {
       score: 2,
-      details: `RESISTANCE BREAK — Price broke above key resistance ($${freshlyBroken[0].toFixed(2)}) and is holding above it. Broken resistance now acts as support.`,
+      details: `RESISTANCE BREAK — Price broke above key resistance ($${freshlyBroken[0].toFixed(2)}) and is holding above it. Broken resistance now acts as support.${periodHigh > 0 && toHighPct <= 10 ? ` The period high ($${periodHigh.toFixed(2)}) is ${toHighPct.toFixed(1)}% away — the new-high trigger.` : ""}`,
       nearResistance: freshlyBroken[0],
       furtherResistance: nearestAbove,
     };
   }
 
-  const distPct = nearestAbove > 0 ? ((nearestAbove - lastClose) / lastClose) * 100 : 999;
-  if (distPct <= 2) {
+  const distToRes = nearestAbove > 0 ? ((nearestAbove - lastClose) / lastClose) * 100 : 999;
+  const distToHigh = periodHigh > 0 ? ((periodHigh - lastClose) / lastClose) * 100 : 999;
+  const nearestTrigger = Math.min(distToRes, distToHigh);
+  if (nearestTrigger <= 2 && nearestTrigger >= 0) {
+    const triggerLevel = distToHigh <= distToRes ? periodHigh : nearestAbove;
+    const triggerName = distToHigh <= distToRes ? "the period high" : "key resistance";
     return {
       score: 1,
-      details: `APPROACHING RESISTANCE — Price is ${distPct.toFixed(1)}% below key resistance at $${nearestAbove.toFixed(2)}. Watch for a high-volume break.`,
-      nearResistance: nearestAbove,
+      details: `APPROACHING BREAKOUT — Price is ${nearestTrigger.toFixed(1)}% below ${triggerName} at $${triggerLevel.toFixed(2)}. Watch for a high-volume Marubozu break.`,
+      nearResistance: Math.round(triggerLevel * 100) / 100,
       furtherResistance: 0,
     };
   }
@@ -569,11 +589,110 @@ function scoreResistanceBreak(
   return {
     score: 0,
     details: nearestAbove > 0
-      ? `No active breakout setup. Nearest resistance at $${nearestAbove.toFixed(2)} (${distPct.toFixed(1)}% above).`
-      : "Price is in blue-sky territory with no mapped resistance overhead — no fresh break to grade.",
-    nearResistance: nearestAbove,
+      ? `No active breakout setup. Nearest resistance at $${nearestAbove.toFixed(2)} (${distToRes.toFixed(1)}% above), period high at $${periodHigh.toFixed(2)}.`
+      : `No fresh breakout to grade. Period high at $${periodHigh.toFixed(2)} (${distToHigh.toFixed(1)}% above).`,
+    nearResistance: nearestAbove || Math.round(periodHigh * 100) / 100,
     furtherResistance: 0,
   };
+}
+
+// ============================================================
+// BREAKOUT — VOLUME SCORING (X/3)  [TF Breakout Strategy]
+// ============================================================
+// The plan's screen: average volume over 1M (liquidity — "legitimate
+// stocks that won't be affected by minor news") and RELATIVE VOLUME
+// OVER 1 (above the 3-month average "which will help the stock
+// movement"). Below-average volume fails the screen outright.
+
+function scoreBreakoutVolume(
+  volumes: number[],
+  quoteAvgVolume: number
+): { score: number; details: string; lastVolume: number; avgVolume: number; maxVolume: number; volumeRatio: number } {
+  if (volumes.length < 5) {
+    return { score: 0, details: "Insufficient volume data", lastVolume: 0, avgVolume: 0, maxVolume: 0, volumeRatio: 0 };
+  }
+
+  const lastVolume = volumes[volumes.length - 1];
+  const prevVolumes = volumes.slice(0, -1);
+  const avgVolume = prevVolumes.reduce((a, b) => a + b, 0) / prevVolumes.length;
+  const maxVolume = Math.max(...prevVolumes);
+  const volumeRatio = avgVolume > 0 ? lastVolume / avgVolume : 0;
+
+  const liquidityNote = quoteAvgVolume > 0 && quoteAvgVolume < 1_000_000
+    ? " ⚠ Average daily volume is under the plan's 1M liquidity screen — thin stock, treat with caution."
+    : "";
+
+  const sortedVolumes = [...volumes].sort((a, b) => b - a);
+  const rank = sortedVolumes.indexOf(lastVolume) + 1;
+
+  const base = {
+    lastVolume,
+    avgVolume: Math.round(avgVolume),
+    maxVolume,
+    volumeRatio: Math.round(volumeRatio * 100) / 100,
+  };
+
+  if (rank <= 3 || lastVolume >= maxVolume) {
+    return { score: 3, details: `VOLUME SURGE — ${volumeRatio.toFixed(1)}x average volume. ${rank === 1 ? "LARGEST VOLUME IN HISTORY" : `Top ${rank} volume ever recorded`}. Maximum fuel behind the breakout.${liquidityNote}`, ...base };
+  }
+  if (volumeRatio >= 1.5) {
+    return { score: 2, details: `STRONG RELATIVE VOLUME — ${volumeRatio.toFixed(1)}x the average. Well above the plan's over-1 relative-volume screen — real participation behind the move.${liquidityNote}`, ...base };
+  }
+  if (volumeRatio > 1.0) {
+    return { score: 1, details: `RELATIVE VOLUME OVER 1 — ${volumeRatio.toFixed(1)}x the average. Passes the plan's screen, but a convincing breakout wants more fuel.${liquidityNote}`, ...base };
+  }
+  return { score: 0, details: `RELATIVE VOLUME BELOW 1 — ${volumeRatio.toFixed(1)}x the average. The plan requires volume above the 3-month average; a breakout without volume is suspect.${liquidityNote}`, ...base };
+}
+
+// ============================================================
+// BREAKOUT — CONTINUATION PATTERN (flag / pennant) CONFLUENCE
+// ============================================================
+// Plan: "Breaking out of a continuation pattern such as a flag or a
+// pennant." Heuristic: a sharp pole, a short contracting consolidation
+// drifting sideways/slightly down, then a close above the flag's high.
+
+function detectContinuationPattern(
+  highs: number[],
+  lows: number[],
+  closes: number[]
+): { active: boolean; details: string } {
+  const n = closes.length;
+  if (n < 16) return { active: false, details: "Insufficient data for pattern analysis" };
+
+  const FLAG_LEN = 5;
+  const POLE_LEN = 9;
+  const lastClose = closes[n - 1];
+
+  // Pole: the advance leading into the consolidation
+  const poleStart = closes[n - 1 - FLAG_LEN - POLE_LEN];
+  const poleEnd = closes[n - 1 - FLAG_LEN];
+  const polePct = poleStart > 0 ? ((poleEnd - poleStart) / poleStart) * 100 : 0;
+
+  // Flag: the bars between the pole and the current bar
+  const flagHighs = highs.slice(n - 1 - FLAG_LEN, n - 1);
+  const flagLows = lows.slice(n - 1 - FLAG_LEN, n - 1);
+  const flagCloses = closes.slice(n - 1 - FLAG_LEN, n - 1);
+  const flagHigh = Math.max(...flagHighs);
+  const flagRangePct = flagHigh > 0 ? ((flagHigh - Math.min(...flagLows)) / flagHigh) * 100 : 999;
+  const flagDriftPct = flagCloses[0] > 0 ? ((flagCloses[flagCloses.length - 1] - flagCloses[0]) / flagCloses[0]) * 100 : 0;
+
+  const hasPole = polePct >= 5;
+  const tightFlag = flagRangePct <= Math.max(6, polePct * 0.6) && flagDriftPct <= 2;
+  const breaking = lastClose > flagHigh;
+
+  if (hasPole && tightFlag && breaking) {
+    return {
+      active: true,
+      details: `FLAG/PENNANT BREAKOUT — ${polePct.toFixed(1)}% pole, then a tight ${FLAG_LEN}-bar consolidation (${flagRangePct.toFixed(1)}% range), now closing above the flag high ($${flagHigh.toFixed(2)}). Classic continuation pattern resolving upward.`,
+    };
+  }
+  if (hasPole && tightFlag) {
+    return {
+      active: false,
+      details: `Flag forming — ${polePct.toFixed(1)}% pole with a tight consolidation under $${flagHigh.toFixed(2)}. Not yet breaking the flag high.`,
+    };
+  }
+  return { active: false, details: "No flag/pennant continuation pattern detected." };
 }
 
 // ============================================================
@@ -842,11 +961,13 @@ function scoreBounceCandle(
 }
 
 // ============================================================
-// BREAKOUT — BREAKOUT CANDLE SCORING (X/3)
+// BREAKOUT — MARUBOZU CANDLE SCORING (X/3)  [TF Breakout Strategy]
 // ============================================================
+// The plan: "Focusing on Marubozu (full-bodied) candles is extremely
+// important — a strong signal toward the desired direction."
 // Checks the last candle for:
 //   1. Close above the key resistance level (breakout bar confirmed)
-//   2. Conviction body — strong bullish body closing near the highs
+//   2. Conviction body — strong full body closing near the highs
 //   3. Candle pattern: marubozu, bullish engulfing, gap-up, or new period high
 //
 // 3 = All three criteria met / 2 = Two / 1 = One / 0 = None
@@ -1089,30 +1210,6 @@ function checkFibLevels(
 }
 
 // ============================================================
-// PERIOD-HIGH ZONE (breakout confluence)
-// ============================================================
-
-function checkHighZone(
-  currentPrice: number,
-  highs: number[]
-): { inZone: boolean; details: string } {
-  if (highs.length < 5) {
-    return { inZone: false, details: "Insufficient data for high-zone analysis" };
-  }
-  const periodHigh = Math.max(...highs);
-  if (periodHigh <= 0) return { inZone: false, details: "No valid period high" };
-
-  const distPct = ((periodHigh - currentPrice) / periodHigh) * 100;
-  if (distPct <= 3) {
-    return {
-      inZone: true,
-      details: `HIGH ZONE — Price is within ${distPct.toFixed(1)}% of the period high ($${periodHigh.toFixed(2)}). Minimal overhead supply — blue-sky territory on a confirmed break.`,
-    };
-  }
-  return { inZone: false, details: `Price is ${distPct.toFixed(1)}% below the period high ($${periodHigh.toFixed(2)}).` };
-}
-
-// ============================================================
 // MAIN GRADING FUNCTIONS
 // ============================================================
 
@@ -1276,15 +1373,15 @@ async function gradeBreakoutSetup(
 
   if (!quote || !ohlcv || ohlcv.closes.length < 10) return null;
 
-  const breakScore = scoreResistanceBreak(quote.currentPrice, ohlcv.highs, ohlcv.closes);
-  const volume = scoreVolume(ohlcv.volumes);
+  const breakScore = scoreBreakoutLevel(quote.currentPrice, ohlcv.highs, ohlcv.closes);
+  const volume = scoreBreakoutVolume(ohlcv.volumes, quote.avgVolume || 0);
   const candle = scoreBreakoutCandle(ohlcv.opens, ohlcv.highs, ohlcv.lows, ohlcv.closes, breakScore.nearResistance);
 
   const totalScore = breakScore.score + volume.score + candle.score;
 
+  const pattern = detectContinuationPattern(ohlcv.highs, ohlcv.lows, ohlcv.closes);
   const rsiValues = calculateRSI(ohlcv.closes);
   const rsiMomentum = detectRSIMomentum(rsiValues);
-  const highZone = checkHighZone(quote.currentPrice, ohlcv.highs);
 
   return {
     strategy: "Breakout",
@@ -1295,17 +1392,17 @@ async function gradeBreakoutSetup(
     currentPrice: quote.currentPrice,
 
     criteria: [
-      { key: "level", label: "RESISTANCE BREAK", score: breakScore.score, max: 3, details: breakScore.details },
-      { key: "volume", label: "VOLUME EXPANSION", score: volume.score, max: 3, details: volume.details },
-      { key: "candle", label: "BREAKOUT CANDLE", score: candle.score, max: 3, details: candle.details },
+      { key: "level", label: "BREAKOUT (NEW HIGHS)", score: breakScore.score, max: 3, details: breakScore.details },
+      { key: "volume", label: "RELATIVE VOLUME", score: volume.score, max: 3, details: volume.details },
+      { key: "candle", label: "MARUBOZU CANDLE", score: candle.score, max: 3, details: candle.details },
     ],
 
     totalScore,
     grade: toGrade(totalScore),
 
     confluence: [
+      { key: "pattern", label: "FLAG/PENNANT", active: pattern.active, details: pattern.details },
       { key: "rsi", label: "RSI MOMENTUM", active: rsiMomentum.hasMomentum, details: rsiMomentum.details },
-      { key: "highzone", label: "HIGH ZONE", active: highZone.inZone, details: highZone.details },
     ],
 
     keyLevel: breakScore.nearResistance,

@@ -61,7 +61,7 @@ const STRATEGY_CONFIG: Record<Strategy, StrategyConfig> = {
     tabLabel: "BREAKOUT",
     title: "Breakout Screener",
     description:
-      "Real-time detection of stocks breaking through key resistance with volume behind the move. Broken resistance becomes support.",
+      "The TF Breakout Strategy — ride the wave of stocks breaking to new highs on above-average relative volume, with full-bodied Marubozu candles, ideally out of a flag or pennant.",
     levelLabel: "RESISTANCE",
     chartLevelLabel: "RES",
     activeStatus: "Breakout",
@@ -69,6 +69,7 @@ const STRATEGY_CONFIG: Record<Strategy, StrategyConfig> = {
     statuses: ["all", "Breakout", "Approaching", "Watching"],
     alertHeadline: "▲ BREAKOUT",
     alertDetail: (item) => `${item.symbol} — Cleared resistance at $${item.level.toFixed(2)}`,
+    planTag: "◆ TF BREAKOUT STRATEGY",
   },
 };
 
@@ -196,14 +197,14 @@ function WhatToWatch({ item, strategy, timeframe }: { item: any; strategy: Strat
   } else {
     if (item.status === "Breakout") {
       lines = [
-        { icon: "▲", iconClass: "text-[#D4AF37]", text: `Resistance at ${lvl} has been broken` },
-        { icon: "◆", iconClass: "text-[#D4AF37]", text: `Watch for the ${tf} close holding above the level` },
+        { icon: "▲", iconClass: "text-[#D4AF37]", text: `Resistance at ${lvl} has been broken — riding toward new highs` },
+        { icon: "◆", iconClass: "text-[#D4AF37]", text: `Confirm the ${tf} close: full-bodied Marubozu candle + relative volume over 1` },
         { icon: "◆", iconClass: "text-[#D4AF37]", text: "Broken resistance should now act as support — watch the retest" },
       ];
     } else if (item.status === "Approaching") {
       lines = [
         { icon: "●", iconClass: "text-yellow-400", text: `Price within ${item.distToLevelPct.toFixed(1)}% below resistance at ${lvl}` },
-        { icon: "◆", iconClass: "text-[#D4AF37]", text: "Watch for a high-volume break" },
+        { icon: "◆", iconClass: "text-[#D4AF37]", text: "Watch for a high-volume Marubozu break — flag/pennant patterns are ideal" },
         { icon: "◆", iconClass: "text-[#D4AF37]", text: `Set alerts at ${lvl}` },
       ];
     } else {

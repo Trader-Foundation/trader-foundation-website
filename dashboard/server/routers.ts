@@ -97,10 +97,19 @@ function buildWatchItem(strategy: Strategy, symbol: string, quote: any, data: an
 
   if (strategy === "Breakout") {
     const resistanceLevels = findResistanceLevels(data.highs);
+    // New period high (the plan's 52-week-high screen): last close at/above the prior highest high
+    const priorHighs = data.highs.slice(0, -1);
+    const periodHigh = priorHighs.length > 0 ? Math.max(...priorHighs) : 0;
+    const lastClose = data.closes[data.closes.length - 1];
+    const atNewHigh = periodHigh > 0 && lastClose >= periodHigh * 0.999;
     // Freshly broken = resistance now sitting within 5% below price
     const broken = resistanceLevels.filter(l => l < quote.currentPrice && l >= quote.currentPrice * 0.95);
     const above = resistanceLevels.filter(l => l >= quote.currentPrice);
-    if (broken.length > 0) {
+    if (atNewHigh) {
+      level = Math.round(periodHigh * 100) / 100;
+      distToLevelPct = ((quote.currentPrice - periodHigh) / periodHigh) * 100;
+      status = "Breakout";
+    } else if (broken.length > 0) {
       level = broken[broken.length - 1];
       distToLevelPct = ((quote.currentPrice - level) / level) * 100;
       status = "Breakout";
@@ -265,7 +274,7 @@ export function buildChatMessages(message: string, history: { role: "user" | "as
     }
   } catch {}
 
-  const systemPrompt = `You are the TF Elite AI Assistant embedded in the TF Elite Terminal Setup Screener. You have LIVE market data below — always reference it confidently as latest closing prices. Be concise, structured, and actionable. Follow TF philosophy: swing trading, DCA at discounts, safe options, patience over FOMO. The terminal tracks three setup strategies, each graded on a 9-point scale: BOUNCE (The Bounce Profit Plan — an uptrending stock above its 50/200 MA pulling back and bouncing off the 13/20 MA or key support, confirmed by volume, stochastics, and MACD; avoid jobs-report days and trade with SPY's direction), SSL (price sweeps below a key low to grab sell-side liquidity, then reclaims it), and BREAKOUT (price breaks above key resistance with volume). For valuations show PE vs Forward PE vs Historical. NOT financial advice.${marketContext}${setupContext}${flowContext}`;
+  const systemPrompt = `You are the TF Elite AI Assistant embedded in the TF Elite Terminal Setup Screener. You have LIVE market data below — always reference it confidently as latest closing prices. Be concise, structured, and actionable. Follow TF philosophy: swing trading, DCA at discounts, safe options, patience over FOMO. The terminal tracks three setup strategies, each graded on a 9-point scale: BOUNCE (The Bounce Profit Plan — an uptrending stock above its 50/200 MA pulling back and bouncing off the 13/20 MA or key support, confirmed by volume, stochastics, and MACD; avoid jobs-report days and trade with SPY's direction), SSL (price sweeps below a key low to grab sell-side liquidity, then reclaims it), and BREAKOUT (TF Breakout Strategy: stocks breaking to new 52-week highs on above-average relative volume with full-bodied Marubozu candles, ideally out of a flag/pennant continuation pattern). For valuations show PE vs Forward PE vs Historical. NOT financial advice.${marketContext}${setupContext}${flowContext}`;
 
   const msgs: { role: "system" | "user" | "assistant"; content: string }[] = [
     { role: "system", content: systemPrompt },
@@ -777,11 +786,12 @@ Your capabilities:
    - Absorption Candle scoring: 3 = long wick up closing above SSL + near prev close + doji/hammer/spinning top (all three), 2 = two criteria, 1 = one criterion
    - Confluence: RSI bullish divergence, FIB key levels (61.8%, 78.6%), plus the Bounce Plan toolkit — Stochastics positioning and MACD cross/direction
 
-   BREAKOUT — price breaks ABOVE a key resistance level with conviction:
-   - Resistance Break scoring: 3 = double resistance break, 2 = fresh break of near-term resistance (broken resistance becomes support), 1 = approaching resistance
-   - Volume Expansion scoring: same volume scale — a breakout without volume is suspect
-   - Breakout Candle scoring: close above resistance + strong bullish body closing near the highs + marubozu/engulfing/gap-up/new-high pattern (3 = all three, 2 = two, 1 = one)
-   - Confluence: RSI momentum (55-80 = fuel without exhaustion), period-high zone (blue-sky territory)
+   BREAKOUT — The TF Breakout Strategy: "ride the wave of a stock that breaks out and starts to hit NEW HIGHS":
+   - Screen: stocks at/near new 52-week highs, average volume over 1M (legitimate, liquid stocks that won't be affected by minor news), RELATIVE VOLUME over 1 (above the 3-month average)
+   - Breakout Level scoring: 3 = fresh resistance break printing new period highs (blue sky) or a double resistance break, 2 = fresh break of near-term resistance (broken resistance becomes support), 1 = approaching resistance or the period high
+   - Relative Volume scoring: 3 = volume surge (top-3 / record), 2 = 1.5x+ average, 1 = over 1x (passes the screen), 0 = below average (fails the plan's screen — a breakout without volume is suspect)
+   - Marubozu Candle scoring: Marubozu (full-bodied) candles are extremely important — close above resistance + strong full body closing near the highs + marubozu/engulfing/gap-up/new-high pattern (3 = all three, 2 = two, 1 = one)
+   - Confluence: breaking out of a continuation pattern (flag or pennant), RSI momentum (55-80 = fuel without exhaustion)
 
    Timeframes for all strategies: Daily (alert 2pm ET), Weekly (Thu 3pm watchlist, Fri 3pm execution), Monthly (5 days before close)
 
