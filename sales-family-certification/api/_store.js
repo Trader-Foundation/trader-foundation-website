@@ -203,10 +203,6 @@ async function deleteUser(email) {
   if (mine.length) await blobDelete(mine.map((b) => b.url));
 }
 
-/* Forgiving on entry, exact on match. The field is a password box, so a rep or
-   trainer cannot see what they typed, and phone keyboards routinely add a
-   trailing space or lowercase the whole thing. None of that should read as a
-   wrong code. */
 /* Fire-and-forget result notification. Reuses the project's existing Resend
    credentials. Never allowed to fail or slow a submission: a rep's result is
    already saved by the time this runs, and a bounced email must not look to
@@ -247,6 +243,10 @@ async function notifyResult({ name, email, examName, score, total, passed, mins,
   }
 }
 
+/* Forgiving on entry, exact on match. The field is a password box, so a rep or
+   trainer cannot see what they typed, and phone keyboards routinely add a
+   trailing space or lowercase the whole thing. None of that should read as a
+   wrong code. */
 function isAdminCode(code) {
   const entered = String(code || "").trim().toUpperCase();
   return Object.keys(ADMIN_CODES).some((k) => k.toUpperCase() === entered);
