@@ -786,7 +786,7 @@ function renderPeople(){
     var at = attemptsFor(u, ADMIN_EXAM);
     var best = at.length ? Math.max.apply(null, at.map(function(a){ return a.score; })) + " / " + examTotal(ADMIN_EXAM) : "";
     var certified = at.some(function(a){ return a.finalPass; });
-    var status = certified ? '<span class="ok">CERTIFIED</span>' : at.length ? '<span class="flag">NOT YET</span>' : "";
+    var status = certified ? '<span class="ok">Certified</span>' : at.length ? '<span class="flag">Not yet</span>' : "";
     var flags = [];
     /* Compare the number itself: a run fast enough to round to 0.0 minutes is
        the most suspicious kind there is, and a truthiness check would let it
@@ -794,7 +794,7 @@ function renderPeople(){
     if (at.some(function(a){ return typeof a.mins === "number" && a.mins < FAST_MINUTES; })) flags.push('<span class="flag">fast</span>');
     if ((u.logins || []).length > at.length + 2) flags.push('<span class="flag">logins &gt; attempts</span>');
     h += '<tr><td style="cursor:pointer;text-decoration:underline" onclick="document.getElementById(&#39;det'+ui+'&#39;).classList.toggle(&#39;hidden&#39;)">' +
-      esc(u.name || "") + (u.tester ? ' <span class="flag">TESTER</span>' : "") + '</td><td>' + esc(u.email) + '</td><td>' +
+      esc(u.name || "") + (u.tester ? ' <span class="flag">Tester</span>' : "") + '</td><td>' + esc(u.email) + '</td><td>' +
       (u.logins || []).length + '</td><td>' + (u.logins && u.logins.length ? fmtDate(u.logins[u.logins.length-1]) : "") + '</td><td>' +
       at.length + '</td><td>' + best + '</td><td>' + status + '</td><td>' + flags.join(" ") + '</td><td>' +
       '<button class="ghost" style="margin:0;padding:5px 9px;font-size:12px" onclick="adminAction(&#39;'+esc(u.email)+'&#39;,&#39;reset&#39;)">Reset</button> ' +
@@ -815,7 +815,7 @@ function attemptDetail(u, at){
     var outOf = a.total || examTotal(ADMIN_EXAM);
     h += '<div class="wbox"><b>Attempt ' + (ai+1) + '</b> &middot; ' + fmtDate(a.ts) + ' &middot; ' +
       a.score + '/' + outOf + ' &middot; ' + a.mins + 'm &middot; ' +
-      (a.finalPass ? '<span class="ok">CERTIFIED</span>' : '<span class="flag">NOT YET</span>');
+      (a.finalPass ? '<span class="ok">Certified</span>' : '<span class="flag">Not yet</span>');
     /* Section breakdown, so a miss is traceable to product knowledge or to the
        call itself rather than just a total. */
     var secs = a.sectionScores || {};

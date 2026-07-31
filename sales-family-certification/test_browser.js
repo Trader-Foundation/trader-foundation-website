@@ -172,7 +172,7 @@ async function takeExam(page, { correct, exam }) {
   check(/27 \/ 27/.test(roster0), "MODE B: roster shows the score");
   check((await page.locator("#in-import").count()) === 0, "MODE B: dashboard has no import box");
 
-  check(/CERTIFIED/.test(roster0), "MODE B: roster shows CERTIFIED with no grading step");
+  check(/Certified/.test(roster0), "MODE B: roster shows Certified with no grading step");
   await page.click("#admin-table td:has-text('Erin Tester')");
   await page.waitForTimeout(200);
   const detail = await page.innerHTML("#admin-table");
@@ -230,7 +230,7 @@ async function takeExam(page, { correct, exam }) {
   await page.waitForTimeout(250);
   const bRoster = await page.innerHTML("#admin-table");
   check(/Kyle Tester/.test(bRoster), "MODE B: rep saved automatically and appears on the EC roster");
-  check(/NOT YET/.test(bRoster), "MODE B: failing attempt shows NOT YET");
+  check(/Not yet/.test(bRoster), "MODE B: failing attempt shows Not yet");
   check(/fast/.test(bRoster), "MODE B: fast-completion flag raised on a scripted run");
 
   check(errors.length === 0, "no uncaught JavaScript errors in either mode" + (errors.length ? ": " + errors.join(" | ") : ""));
