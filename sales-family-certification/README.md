@@ -47,28 +47,21 @@ Two is the strategy call. To move a question between tests, edit that list.
   with at least 2 misses). A tab at the top switches between the two
   certifications.
 
-## The two storage modes
+## Results storage (required)
 
-The exam runs identically whether or not a results database is connected.
-Nothing needs editing to switch; the page detects which mode it is in.
+Every result saves straight to the project's Vercel Blob store and appears in
+the trainer dashboard on its own. There is no per-rep workaround: the
+dashboard exists so an admin can review everyone in one place.
 
-**Result-code mode** (no setup at all, active now). Reps take the exam and
-get a result code at the end. They send it to the trainer, who pastes codes
-into the dashboard and gets the same roster, the same Pass/Revise grading,
-and the same question analysis. Codes carry the score, per-question results,
-and the written answers. They are checksummed and terminated with `.TFEND`,
-so a code survives being pasted inside a text message or wrapped across
-lines, and a truncated or mangled one is rejected instead of silently
-decoding to garbage. Imported records live in the trainer's own browser.
+The Blob store must be connected for the exam to run. In Vercel, open this
+project, Storage tab, connect a Blob store to the project for all
+environments, then redeploy. Until that is done, sign-in refuses with a plain
+message telling the rep to speak to their trainer, and the dashboard names
+the exact fix.
 
-**Automatic mode.** Connect a Blob store in the Vercel project (Storage tab,
-connect to the project for all environments) and redeploy. Results then save
-on their own and appear for any trainer who opens the dashboard. Anything
-previously imported by hand stays and merges in; server records win on
-conflict.
-
-`/api/health` reports which mode is live and does a real write/read
-round-trip when storage is connected. Check it first when anything looks off.
+Records live one JSON file per person under `cert/u_<email>.json`.
+`/api/health` reports whether storage is connected and does a live write/read
+round-trip.
 
 ## How it deploys
 
@@ -90,14 +83,15 @@ codes.
 
 ## Tests
 
-    node test_bank.js      # bank structure, answer-length balance, retake rotation
+    node test_bank.js      # bank structure, the two-exam split, retake rotation
     node test_api.js       # full API lifecycle against a mock Blob server
-    node test_offline.js   # result codes, import/merge, local grading
-    node test_browser.js   # real Chromium run of both modes, end to end
+    node test_browser.js   # real Chromium run, end to end
 
-`test_browser.js` needs `playwright-core` and drives the actual page: takes
-the setter test end to end in result-code mode (27 questions, grade to
-CERTIFIED, question analysis), then the EC test in database mode (34
-questions), and verifies an EC attempt leaves the setter test untouched.
+`test_browser.js` needs `playwright-core` and drives the actual page: first
+with storage off, checking the exam refuses cleanly and offers no workaround,
+then with storage on, taking the setter test (27 questions), watching the
+result appear in the dashboard with no pasting, grading it to CERTIFIED,
+checking the question analysis, then taking the EC test (34 questions) and
+confirming it leaves the setter test untouched.
 
 Run it with `NODE_PATH` pointing at wherever `playwright-core` is installed.

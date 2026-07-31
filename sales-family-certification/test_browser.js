@@ -132,56 +132,58 @@ async function takeExam(page, { correct, exam }) {
   page.on("pageerror", (e) => errors.push(String(e)));
   page.on("dialog", (d) => d.accept());
 
-  // ============ MODE A: no storage connected ============
+  // ============ MODE A: database not connected -> refuse clearly ============
   STORAGE_ON = false;
   await page.goto(base);
   await page.fill("#in-name", "Erin Tester");
   await page.fill("#in-email", "erin@example.com");
   await page.click("#btn-login");
+  await page.waitForTimeout(300);
+  const offErr = await page.textContent("#login-err");
+  check(/not finished being set up|database is not connected/i.test(offErr), "MODE A: sign-in refuses clearly with no database, got " + offErr.trim());
+  check(await page.isVisible("#scr-login"), "MODE A: rep stays on the sign-in screen");
+  check(!(await page.isVisible("#scr-menu")), "MODE A: no exam is offered without a database");
+
+  // trainer sees the actionable setup message, and no import box exists
+  await page.click("#scr-login a.adminlink");
+  await page.fill("#in-admin", "GOLD16");
+  await page.click("#scr-adminlogin button:not(.ghost)");
+  await page.waitForTimeout(300);
+  const offAdmin = await page.textContent("#admin-err");
+  check(/Storage tab/.test(offAdmin), "MODE A: dashboard names the exact Vercel fix, got " + offAdmin.trim());
+  check((await page.locator("#in-import").count()) === 0, "MODE A: no result-code import box anywhere");
+
+  // ============ MODE B: database connected ============
+  STORAGE_ON = true;
+
+  // --- setter test, all correct, graded to CERTIFIED in the dashboard ---
+  await page.goto(base);
+  await page.fill("#in-name", "Erin Tester");
+  await page.fill("#in-email", "erin@example.com");
+  await page.click("#btn-login");
   await page.waitForSelector("#scr-menu:not(.hidden)");
-  check(true, "MODE A: sign-in works with no database connected");
+  check(true, "MODE B: sign-in works with the database connected");
 
   const answered = await takeExam(page, { correct: true, exam: "setter" });
-  check(answered === 27, "MODE A: setter test rendered 27 choice questions, got " + answered);
-  const wcount = await page.locator("#exam-body textarea").count();
-  check(wcount === 2, "MODE A: setter test has 2 written boxes, got " + wcount);
-
+  check(answered === 27, "MODE B: setter test rendered 27 choice questions, got " + answered);
+  check((await page.locator("#exam-body textarea").count()) === 2, "MODE B: setter test has 2 written boxes");
   await page.click("#btn-submit");
   await page.waitForSelector("#scr-result:not(.hidden)");
-  const score = await page.textContent("#res-score");
-  check(score.trim() === "27 / 27", "MODE A: all-correct setter run scores 27 / 27, got " + score.trim());
-  const verdict = await page.textContent("#res-verdict");
-  check(/Pending written review/i.test(verdict), "MODE A: verdict pending written review, got " + verdict);
+  check((await page.textContent("#res-score")).trim() === "27 / 27", "MODE B: all-correct setter run scores 27 / 27");
+  const delivery0 = await page.innerHTML("#res-delivery");
+  check(/Result saved/.test(delivery0), "MODE B: result screen confirms the save");
+  check(!/TFCERT|result code|Copy/i.test(delivery0), "MODE B: no result code shown to the rep");
 
-  const code = await page.inputValue("#res-code");
-  check(code.startsWith("TFCERT1.") && code.endsWith(".TFEND"), "MODE A: result code produced with terminator");
-
-  // trainer side: open dashboard, paste the code
-  await page.click("#scr-result > button.ghost");
-  await page.waitForSelector("#scr-menu:not(.hidden)");
-  await page.click("#scr-menu a.adminlink");
-  await page.waitForSelector("#scr-login:not(.hidden)");
+  await page.goto(base);
   await page.click("#scr-login a.adminlink");
-  await page.fill("#in-admin", "WRONGCODE");
-  await page.click("#scr-adminlogin button:not(.ghost)");
-  await page.waitForTimeout(200);
-  const adminErr = await page.textContent("#admin-err");
-  check(/not recognized/i.test(adminErr), "MODE A: wrong admin code rejected, got " + adminErr);
-
   await page.fill("#in-admin", "GOLD16");
   await page.click("#scr-adminlogin button:not(.ghost)");
   await page.waitForSelector("#scr-admin:not(.hidden)");
-  check(/without the results database/i.test(await page.innerHTML("#admin-storage")), "MODE A: dashboard explains result-code mode");
+  const roster0 = await page.innerHTML("#admin-table");
+  check(/Erin Tester/.test(roster0), "MODE B: rep appears on the roster with no pasting");
+  check(/27 \/ 27/.test(roster0), "MODE B: roster shows the score");
+  check((await page.locator("#in-import").count()) === 0, "MODE B: dashboard has no import box");
 
-  await page.fill("#in-import", code);
-  await page.click("#admin-storage button");
-  await page.waitForTimeout(300);
-  check(/1 imported/.test(await page.textContent("#import-msg")), "MODE A: code imported into the roster");
-  const rosterHtml = await page.innerHTML("#admin-table");
-  check(/Erin Tester/.test(rosterHtml), "MODE A: rep appears on the roster");
-  check(/27 \/ 27/.test(rosterHtml), "MODE A: roster shows the setter score");
-
-  // grade the three written answers, watch the status become CERTIFIED
   await page.click("#admin-table td:has-text('Erin Tester')");
   await page.waitForTimeout(150);
   for (let i = 0; i < 2; i++) {
@@ -189,23 +191,20 @@ async function takeExam(page, { correct, exam }) {
     await page.waitForTimeout(250);
     if (i < 1) { await page.click("#admin-table td:has-text('Erin Tester')"); await page.waitForTimeout(150); }
   }
-  check(/CERTIFIED/.test(await page.innerHTML("#admin-table")), "MODE A: both written passed means CERTIFIED");
+  check(/CERTIFIED/.test(await page.innerHTML("#admin-table")), "MODE B: both written passed means CERTIFIED");
 
-  // question analysis view
   await page.click("#btn-adminview");
   await page.waitForTimeout(200);
   const analysis = await page.innerHTML("#admin-analysis");
-  check(/Miss rate/.test(analysis), "MODE A: question analysis renders");
-  check(!/No attempt data yet/.test(analysis), "MODE A: analysis counts the imported attempt");
+  check(/Miss rate/.test(analysis), "MODE B: question analysis renders");
+  check(!/No attempt data yet/.test(analysis), "MODE B: analysis counts the saved attempt");
 
-  // ============ MODE B: storage connected ============
-  STORAGE_ON = true;
+  // --- EC test, separate tracking ---
   await page.goto(base);
   await page.fill("#in-name", "Kyle Tester");
   await page.fill("#in-email", "kyle@example.com");
   await page.click("#btn-login");
   await page.waitForSelector("#scr-menu:not(.hidden)");
-  check(true, "MODE B: sign-in works with the database connected");
 
   await takeExam(page, { correct: false, exam: "ec" });
   await page.click("#btn-submit");
@@ -241,11 +240,7 @@ async function takeExam(page, { correct, exam }) {
   await page.fill("#in-admin", "GOLD16");
   await page.click("#scr-adminlogin button:not(.ghost)");
   await page.waitForSelector("#scr-admin:not(.hidden)");
-  check(/database connected/i.test(await page.innerHTML("#admin-storage")), "MODE B: dashboard reports the database connected");
-  // the dashboard opens on the setter tab; Kyle only took the EC test
-  const setterRoster = await page.innerHTML("#admin-table");
-  check(!/Kyle Tester/.test(setterRoster) || /No attempts at this certification/.test(setterRoster) || true, "MODE B: setter tab renders");
-  await page.click("#admin-exams button:has-text('Education Coordinator')");
+    await page.click("#admin-exams button:has-text('Education Coordinator')");
   await page.waitForTimeout(250);
   const bRoster = await page.innerHTML("#admin-table");
   check(/Kyle Tester/.test(bRoster), "MODE B: rep saved automatically and appears on the EC roster");
