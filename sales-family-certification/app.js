@@ -391,9 +391,66 @@ var WRITTEN = [
 {part:2,stem:"Earlier in the call the prospect said he wants to stop working weekends so he can be around for his daughter, and that if nothing changes he will be in the same place next year. He now says: \"I am just really busy right now, it is my busy season, I cannot focus on this.\" Write your response using what he already gave you."}
 ];
 
+/* ------------------------------ the two certifications ------------------------------
+
+   Two separate exams, not one combined test. Product knowledge is the half both
+   roles genuinely need: tiers, the guarantee, the 401k rollover, platforms,
+   crypto, who the company is, the burned-before proof. Neither role can work
+   without it. What differs is the call each one runs, so each exam pairs the
+   shared product half with its own call.
+
+   Every Part One question carries a track: "product" is shared by both exams,
+   "setting" belongs to the setter. Every Part Two question is "strategy" and
+   belongs to the Education Coordinator. */
+
+var PRODUCT_IDX = [0,1,2,3,4,5,6,8,14,15,16,17,18,20,24,25];
+
+function trackOf(bi){
+  if (BANK[bi].part === 2) return "strategy";
+  return PRODUCT_IDX.indexOf(bi) >= 0 ? "product" : "setting";
+}
+
+var EXAMS = {
+  setter: {
+    key: "setter",
+    name: "Setter Certification",
+    blurb: "The offer and the setting call. What we sell, and how you set the appointment.",
+    tracks: ["product", "setting"],
+    written: [0, 1],
+    sections: [
+      {track:"product", eyebrow:"Section One", title:"The Offer and the Product"},
+      {track:"setting", eyebrow:"Section Two", title:"The Setting Call"}
+    ]
+  },
+  ec: {
+    key: "ec",
+    name: "Education Coordinator Certification",
+    blurb: "The offer and the strategy call. The same product knowledge, plus running the call itself.",
+    tracks: ["product", "strategy"],
+    written: [2],
+    sections: [
+      {track:"product", eyebrow:"Section One", title:"The Offer and the Product"},
+      {track:"strategy", eyebrow:"Section Two", title:"The Strategy Call"}
+    ]
+  }
+};
+
+function examItems(examKey){
+  var ex = EXAMS[examKey], out = [];
+  BANK.forEach(function(q, bi){
+    if (ex.tracks.indexOf(trackOf(bi)) >= 0) out.push(bi);
+  });
+  return out;
+}
+
+function examTotal(examKey){ return examItems(examKey).length; }
+function examPassMark(examKey){ return Math.ceil(PASS_PCT * examTotal(examKey)); }
+function examName(examKey){ return EXAMS[examKey] ? EXAMS[examKey].name : examKey; }
+
 /* ------------------------------ app state ------------------------------ */
 
 var CURRENT = null, ATTEMPT = null, ADMIN_CODE_ENTERED = "", ADMIN_USERS = null, ADMIN_VIEW = "people";
+var ADMIN_EXAM = "setter"; // which certification the dashboard is showing
 
 /* OFFLINE mode. The exam runs identically whether or not the results database
    is connected. When the server reports no storage, attempts are tracked on the
@@ -507,9 +564,9 @@ async function doLogin(){
       OFFLINE = true;
       info = localLogin(name, email);
     }
-    CURRENT = {name:name, email:info.email, info:info};
+    CURRENT = {name:name, email:info.email, info:info, exam:null};
     $("menu-user").textContent = name + " (" + info.email + ")";
-    renderMenuStatus();
+    renderExamPicker();
     show("scr-menu");
   } catch(e){
     $("login-err").textContent = e.message;
@@ -526,16 +583,24 @@ function localLogin(name, email){
   user.logins = (user.logins || []).concat(Date.now()).slice(-50);
   all[key] = user;
   lsSet(LS_LOCAL, all);
-  var attempts = user.attempts || [];
-  return {
-    email: key,
-    attemptCount: attempts.length,
-    bestScore: attempts.length ? Math.max.apply(null, attempts.map(function(a){ return a.score || 0; })) : null,
-    total: 45,
-    passed: false,
-    tester: false,
-    lastServed: attempts.length ? attempts[attempts.length-1].served || null : null
-  };
+  return {email:key, tester:!!user.tester, exams:examSummaries(user.attempts || [])};
+}
+
+/* Per-exam standing. Attempts are counted, capped, and passed separately for
+   each certification, so a setter using up attempts never locks the other one. */
+function examSummaries(attempts){
+  var out = {};
+  Object.keys(EXAMS).forEach(function(k){
+    var mine = (attempts || []).filter(function(a){ return (a.exam || "setter") === k; });
+    out[k] = {
+      attemptCount: mine.length,
+      bestScore: mine.length ? Math.max.apply(null, mine.map(function(a){ return a.score || 0; })) : null,
+      total: examTotal(k),
+      passed: mine.some(function(a){ return a.finalPass; }),
+      lastServed: mine.length ? mine[mine.length-1].served || null : null
+    };
+  });
+  return out;
 }
 
 function logout(){
@@ -545,58 +610,81 @@ function logout(){
   show("scr-login");
 }
 
-function renderMenuStatus(){
-  var info = CURRENT.info;
-  $("btn-start").disabled = false;
-  if (info.tester){
-    $("menu-status").textContent = "Tester account: attempts do not count against the limit and are labeled TESTER in the dashboard.";
-    return;
-  }
-  var t = info.attemptCount === 0
-    ? "You have not attempted the certification yet. "
-    : "Attempts used: " + info.attemptCount + " of " + MAX_ATTEMPTS + "." +
-      (info.bestScore !== null && info.bestScore !== undefined ? " Best score: " + info.bestScore + " of " + info.total + "." : "") + " ";
-  if (info.passed){
-    t += "You have already passed. Additional attempts are for practice.";
-  } else if (info.attemptCount >= MAX_ATTEMPTS){
-    t += "No attempts remaining. Speak with your trainer to unlock another attempt.";
-    $("btn-start").disabled = true;
-  } else {
-    t += "Attempts remaining: " + (MAX_ATTEMPTS - info.attemptCount) + ".";
-  }
-  $("menu-status").textContent = t;
+function renderExamPicker(){
+  var info = CURRENT.info, html = "";
+  Object.keys(EXAMS).forEach(function(k){
+    var ex = EXAMS[k], st = (info.exams && info.exams[k]) || {attemptCount:0, bestScore:null, total:examTotal(k), passed:false};
+    var total = examTotal(k), pass = examPassMark(k);
+    var wcount = ex.written.length;
+    html += '<div class="pick"><h3>' + esc(ex.name) + '</h3>' +
+      '<p class="small">' + esc(ex.blurb) + '</p>' +
+      '<p class="small">' + total + ' choice questions plus ' + wcount + ' short written scenario' + (wcount > 1 ? 's' : '') +
+      '. Passing: ' + pass + ' of ' + total + ' plus every written response approved.</p>';
+
+    var status, locked = false;
+    if (info.tester){
+      status = "Tester account: attempts do not count against the limit and are labeled TESTER in the dashboard.";
+    } else if (st.passed){
+      status = "You have passed this one. Additional attempts are for practice.";
+    } else if (st.attemptCount === 0){
+      status = "Not attempted yet. Attempts: 3.";
+    } else if (st.attemptCount >= MAX_ATTEMPTS){
+      status = "Attempts used: " + st.attemptCount + " of " + MAX_ATTEMPTS +
+        (st.bestScore !== null ? ". Best score: " + st.bestScore + " of " + st.total : "") +
+        ". No attempts remaining, speak with your trainer.";
+      locked = true;
+    } else {
+      status = "Attempts used: " + st.attemptCount + " of " + MAX_ATTEMPTS +
+        (st.bestScore !== null ? ". Best score: " + st.bestScore + " of " + st.total : "") +
+        ". Attempts remaining: " + (MAX_ATTEMPTS - st.attemptCount) + ".";
+    }
+    html += '<p class="small" id="status-' + k + '">' + esc(status) + '</p>' +
+      '<button id="btn-start-' + k + '" onclick="startPicked(&#39;' + k + '&#39;)"' + (locked ? ' disabled' : '') + '>' +
+      (st.attemptCount > 0 ? 'Retake' : 'Start') + ' the ' + esc(ex.name.replace(" Certification", "")) + ' test</button></div>';
+  });
+  $("exam-picker").innerHTML = html;
+}
+
+function startPicked(examKey){
+  CURRENT.exam = examKey;
+  var st = (CURRENT.info.exams && CURRENT.info.exams[examKey]) || {};
+  CURRENT.info.lastServed = st.lastServed || null;
+  startExam();
 }
 
 /* ------------------------------ the exam ------------------------------ */
 
 /* Builds one attempt. lastServed maps bank index -> variant served last time;
    retakes deliberately serve the other phrasing and flip true/false variants. */
-function buildAttempt(lastServed){
-  var prev = lastServed || {}, served = {}, items = [];
-  BANK.forEach(function(q, bi){
-    var v;
+function buildAttempt(examKey, lastServed){
+  var ex = EXAMS[examKey], prev = lastServed || {}, served = {}, items = [];
+  examItems(examKey).forEach(function(bi){
+    var q = BANK[bi], v, track = trackOf(bi);
     if (q.type === "mc"){
       v = Math.floor(Math.random() * q.stems.length);
       if (prev["q"+bi] !== undefined && q.stems.length > 1) v = (prev["q"+bi] + 1) % q.stems.length;
       served["q"+bi] = v;
-      items.push({part:q.part, type:"mc", bi:bi, stem:q.stems[v], opts:shuffle(q.opts.map(function(o){ return {t:o.t, c:!!o.c}; }))});
+      items.push({track:track, type:"mc", bi:bi, stem:q.stems[v], opts:shuffle(q.opts.map(function(o){ return {t:o.t, c:!!o.c}; }))});
     } else {
       v = Math.floor(Math.random() * q.vars.length);
       if (prev["q"+bi] !== undefined && q.vars.length > 1) v = (prev["q"+bi] + 1) % q.vars.length;
       served["q"+bi] = v;
-      items.push({part:q.part, type:"tf", bi:bi, stem:q.vars[v].s, ans:q.vars[v].a});
+      items.push({track:track, type:"tf", bi:bi, stem:q.vars[v].s, ans:q.vars[v].a});
     }
   });
-  return {
-    items: shuffle(items.filter(function(i){ return i.part === 1; })).concat(shuffle(items.filter(function(i){ return i.part === 2; }))),
-    served: served
-  };
+  /* Shuffle within each section so question order moves between attempts, but
+     keep the sections themselves in order so the exam still reads as a whole. */
+  var ordered = [];
+  ex.sections.forEach(function(sec){
+    ordered = ordered.concat(shuffle(items.filter(function(i){ return i.track === sec.track; })));
+  });
+  return {items: ordered, served: served};
 }
 
 function startExam(){
-  var built = buildAttempt(CURRENT.info.lastServed);
-  ATTEMPT = {items:built.items, served:built.served, startTs:Date.now()};
-  $("exam-user").textContent = CURRENT.name;
+  var built = buildAttempt(CURRENT.exam, CURRENT.info.lastServed);
+  ATTEMPT = {exam:CURRENT.exam, items:built.items, served:built.served, startTs:Date.now()};
+  $("exam-user").textContent = CURRENT.name + " · " + examName(CURRENT.exam);
   renderExam();
   show("scr-exam");
   if (ATTEMPT.timerId) clearInterval(ATTEMPT.timerId);
@@ -628,13 +716,17 @@ function renderExam(){
       '<textarea id="w'+wi+'" rows="5" placeholder="One to three sentences, the way you would say it on a live call."></textarea>' +
       '<p class="small">Short written response, one to three sentences is plenty. Your trainer reviews these.</p></div>';
   };
-  html += '<p class="secnum">Part One</p><h2 class="section">The Offer and the Setting Call</h2>';
-  ATTEMPT.items.filter(function(i){ return i.part === 1; }).forEach(function(i){ html += choiceBox(i); });
-  WRITTEN.forEach(function(w, wi){ if (w.part === 1) html += writtenBox(w, wi); });
-  html += '<div class="note"><b>Part Two: The Strategy Call.</b> Everyone is tested on this so the whole team works from the same canon. These are the Education Coordinator&#39;s moves. You do not run discovery, present the pitch, name a price, or handle a close on a setting call.</div>';
-  html += '<p class="secnum">Part Two</p><h2 class="section">The Strategy Call</h2>';
-  ATTEMPT.items.filter(function(i){ return i.part === 2; }).forEach(function(i){ html += choiceBox(i); });
-  WRITTEN.forEach(function(w, wi){ if (w.part === 2) html += writtenBox(w, wi); });
+  var ex = EXAMS[ATTEMPT.exam];
+  ex.sections.forEach(function(sec){
+    html += '<p class="secnum">' + esc(sec.eyebrow) + '</p><h2 class="section">' + esc(sec.title) + '</h2>';
+    ATTEMPT.items.filter(function(i){ return i.track === sec.track; }).forEach(function(i){ html += choiceBox(i); });
+    /* Written scenarios sit at the end of the section they belong to. */
+    ex.written.forEach(function(wi){
+      var w = WRITTEN[wi];
+      var wTrack = w.part === 2 ? "strategy" : "setting";
+      if (wTrack === sec.track) html += writtenBox(w, wi);
+    });
+  });
   body.innerHTML = html;
 }
 
@@ -646,10 +738,13 @@ async function submitExam(){
     if (item.given === null) unanswered.push(item.disp);
   });
   unanswered.sort(function(a,b){ return a-b; });
+  var ex = EXAMS[ATTEMPT.exam];
   var answers = [], emptyW = [];
-  WRITTEN.forEach(function(w, wi){
+  /* Only this exam's written scenarios are on the page; the others do not exist
+     here and must not block submission. */
+  ex.written.forEach(function(wi){
     var v = $("w"+wi) ? $("w"+wi).value.trim() : "";
-    answers.push(v);
+    answers.push({wi:wi, text:v});
     if (v.length === 0) emptyW.push(ATTEMPT.wdisp[wi]);
   });
   if (unanswered.length || emptyW.length){
@@ -664,20 +759,24 @@ async function submitExam(){
   $("btn-submit").disabled = true;
   $("unanswered").textContent = "Saving your result...";
 
-  var score = 0, part1 = 0, part2 = 0, perQ = [];
+  var score = 0, sectionScores = {}, perQ = [];
   ATTEMPT.items.forEach(function(item){
     var ok = item.type === "mc"
       ? item.opts[parseInt(item.given,10)].c === true
       : (item.given === "true") === item.ans;
-    if (ok){ score++; if (item.part === 1) part1++; else part2++; }
+    if (ok){
+      score++;
+      sectionScores[item.track] = (sectionScores[item.track] || 0) + 1;
+    }
     perQ.push({bi:item.bi, ok:ok});
   });
   var mins = Math.round((Date.now() - ATTEMPT.startTs) / 60000 * 10) / 10;
   var autoPass = score >= Math.ceil(PASS_PCT * total);
   var payload = {
-    score:score, total:total, part1:part1, part2:part2, mins:mins, autoPass:autoPass,
+    exam:ATTEMPT.exam,
+    score:score, total:total, sectionScores:sectionScores, mins:mins, autoPass:autoPass,
     served:ATTEMPT.served, perQ:perQ,
-    written: WRITTEN.map(function(w, wi){ return {stem:w.stem.slice(0,120), answer:answers[wi]}; })
+    written: answers.map(function(a){ return {stem:WRITTEN[a.wi].stem.slice(0,120), answer:a.text}; })
   };
   var savedToServer = false;
   if (!OFFLINE){
@@ -699,12 +798,19 @@ async function submitExam(){
   $("res-score").textContent = score + " / " + total;
   $("res-verdict").textContent = autoPass ? "Pending written review" : "Not yet";
   $("res-verdict").className = "verdict " + (autoPass ? "pend" : "fail");
-  $("res-detail").textContent = "Part One: " + part1 + ". Part Two: " + part2 + ". Time: " + mins +
+  var secText = ex.sections.map(function(sec){
+    var got = sectionScores[sec.track] || 0;
+    var outOf = ATTEMPT.items.filter(function(i){ return i.track === sec.track; }).length;
+    return sec.title + ": " + got + " of " + outOf;
+  }).join(". ");
+  $("res-detail").textContent = ex.name + ". " + secText + ". Time: " + mins +
     " minutes. Passing standard: " + Math.ceil(PASS_PCT * total) + " of " + total +
     " choice questions plus all written responses approved by your trainer.";
   renderResultDelivery(savedToServer, payload);
-  CURRENT.info.attemptCount++;
-  CURRENT.info.lastServed = ATTEMPT.served;
+  var st = CURRENT.info.exams[ATTEMPT.exam];
+  st.attemptCount++;
+  st.lastServed = ATTEMPT.served;
+  if (st.bestScore === null || score > st.bestScore) st.bestScore = score;
   show("scr-result");
 }
 
@@ -712,6 +818,7 @@ function localSaveAttempt(payload){
   var all = lsGet(LS_LOCAL) || {};
   var user = all[CURRENT.email] || {name:CURRENT.name, email:CURRENT.email, tester:false, logins:[], attempts:[]};
   var attempt = JSON.parse(JSON.stringify(payload));
+  attempt.exam = payload.exam;
   attempt.ts = Date.now();
   attempt.finalPass = false;
   attempt.pendingReview = !!payload.autoPass;
@@ -763,7 +870,7 @@ function copyResultCode(){
 }
 
 function backToMenu(){
-  renderMenuStatus();
+  renderExamPicker();
   show("scr-menu");
 }
 
@@ -918,7 +1025,31 @@ function toggleAdminView(){
   renderAdminView();
 }
 
+/* Attempts for one certification. Records written before the split carry no
+   exam tag; they were the combined test, whose Part One is the setter exam. */
+function attemptsFor(u, examKey){
+  return (u.attempts || []).filter(function(a){ return (a.exam || "setter") === examKey; });
+}
+
+function renderExamTabs(){
+  var h = '<p class="small" style="margin-bottom:6px">Showing:</p>';
+  Object.keys(EXAMS).forEach(function(k){
+    var n = (ADMIN_USERS || []).reduce(function(sum, u){ return sum + attemptsFor(u, k).length; }, 0);
+    var on = k === ADMIN_EXAM;
+    h += '<button class="ghost" style="margin:0 8px 0 0;' + (on ? 'background:var(--gold);color:#fff;border-color:var(--gold-dark)' : '') +
+      '" onclick="setAdminExam(&#39;' + k + '&#39;)">' + esc(EXAMS[k].name) + ' (' + n + ')</button>';
+  });
+  $("admin-exams").innerHTML = h;
+}
+
+function setAdminExam(k){
+  ADMIN_EXAM = k;
+  renderExamTabs();
+  renderAdminView();
+}
+
 function renderAdminView(){
+  renderExamTabs();
   if (ADMIN_VIEW === "people"){
     $("admin-analysis").classList.add("hidden");
     $("admin-table").classList.remove("hidden");
@@ -939,10 +1070,12 @@ function renderPeople(){
   users.sort(function(a,b){
     return ((b.logins[b.logins.length-1]) || 0) - ((a.logins[a.logins.length-1]) || 0);
   });
-  var h = "<table><tr><th>Name</th><th>Email</th><th>Logins</th><th>Last login</th><th>Attempts</th><th>Best</th><th>Status</th><th>Flags</th><th>Admin</th></tr>";
+  var h = '<p class="small">' + esc(EXAMS[ADMIN_EXAM].name) + ': ' + examPassMark(ADMIN_EXAM) + ' of ' + examTotal(ADMIN_EXAM) +
+    ' to pass, plus every written response approved.</p>' +
+    "<table><tr><th>Name</th><th>Email</th><th>Logins</th><th>Last login</th><th>Attempts</th><th>Best</th><th>Status</th><th>Flags</th><th>Admin</th></tr>";
   users.forEach(function(u, ui){
-    var at = u.attempts || [];
-    var best = at.length ? Math.max.apply(null, at.map(function(a){ return a.score; })) + " / " + BANK.length : "";
+    var at = attemptsFor(u, ADMIN_EXAM);
+    var best = at.length ? Math.max.apply(null, at.map(function(a){ return a.score; })) + " / " + examTotal(ADMIN_EXAM) : "";
     var certified = at.some(function(a){ return a.finalPass; });
     var pending = at.some(function(a){ return a.pendingReview; });
     var status = certified ? '<span class="ok">CERTIFIED</span>' : pending ? '<span class="pend">REVIEW WRITTEN</span>' : at.length ? '<span class="flag">NOT YET</span>' : "";
@@ -960,18 +1093,18 @@ function renderPeople(){
       '<button class="ghost" style="margin:0;padding:5px 9px;font-size:12px" onclick="adminAction(&#39;'+esc(u.email)+'&#39;,&#39;tester&#39;,'+(!u.tester)+')">'+(u.tester ? "Untester" : "Tester")+'</button> ' +
       '<button class="ghost" style="margin:0;padding:5px 9px;font-size:12px" onclick="adminAction(&#39;'+esc(u.email)+'&#39;,&#39;delete&#39;)">Delete</button>' +
       '</td></tr>';
-    h += '<tr class="hidden" id="det'+ui+'"><td colspan="9">' + attemptDetail(u) + '</td></tr>';
+    h += '<tr class="hidden" id="det'+ui+'"><td colspan="9">' + attemptDetail(u, at) + '</td></tr>';
   });
   h += "</table>";
   box.innerHTML = h;
 }
 
-function attemptDetail(u){
-  var at = u.attempts || [];
-  if (!at.length) return '<p class="small">No attempts.</p>';
+function attemptDetail(u, at){
+  at = at || [];
+  if (!at.length) return '<p class="small">No attempts at this certification.</p>';
   var h = "";
   at.forEach(function(a, ai){
-    h += '<div class="wbox"><b>Attempt ' + (ai+1) + '</b> &middot; ' + fmtDate(a.ts) + ' &middot; ' + a.score + '/' + BANK.length +
+    h += '<div class="wbox"><b>Attempt ' + (ai+1) + '</b> &middot; ' + fmtDate(a.ts) + ' &middot; ' + a.score + '/' + (a.total || examTotal(ADMIN_EXAM)) +
       ' choice (' + (a.autoPass ? '<span class="ok">met standard</span>' : '<span class="flag">below standard</span>') + ') &middot; ' +
       a.mins + 'm &middot; overall: ' +
       (a.finalPass ? '<span class="ok">CERTIFIED</span>' : a.pendingReview ? '<span class="pend">awaiting written review</span>' : '<span class="flag">NOT YET</span>');
@@ -999,7 +1132,7 @@ function renderAnalysis(){
   var stats = {};
   users.forEach(function(u){
     if (u.tester) return;
-    (u.attempts || []).forEach(function(a){
+    attemptsFor(u, ADMIN_EXAM).forEach(function(a){
       (a.perQ || []).forEach(function(p){
         if (typeof p.bi !== "number") return;
         if (!stats[p.bi]) stats[p.bi] = {asked:0, missed:0};
@@ -1008,11 +1141,13 @@ function renderAnalysis(){
       });
     });
   });
-  var rows = BANK.map(function(q, bi){
+  var trackLabel = {product:"Product", setting:"Setting call", strategy:"Strategy call"};
+  var rows = examItems(ADMIN_EXAM).map(function(bi){
+    var q = BANK[bi];
     var s = stats[bi] || {asked:0, missed:0};
     var pct = s.asked ? Math.round(100 * s.missed / s.asked) : 0;
     var label = q.type === "mc" ? q.stems[0] : q.vars[0].s;
-    return {bi:bi, part:q.part, label:label, asked:s.asked, missed:s.missed, pct:pct,
+    return {bi:bi, part:trackLabel[trackOf(bi)], label:label, asked:s.asked, missed:s.missed, pct:pct,
             hot:s.asked > 0 && pct >= 40 && s.missed >= 2};
   });
   rows.sort(function(a,b){
@@ -1022,10 +1157,11 @@ function renderAnalysis(){
     return a.bi - b.bi;
   });
   var anyData = rows.some(function(r){ return r.asked > 0; });
-  var h = '<p class="small">All 45 questions ranked by miss rate across every real attempt. Tester accounts are excluded. ' +
+  var h = '<p class="small">All ' + rows.length + ' questions on the ' + esc(EXAMS[ADMIN_EXAM].name) +
+    ' ranked by miss rate across every real attempt at it. Tester accounts are excluded. ' +
     '<span class="flag">Red rows</span> are missed by 40 percent or more of attempts, with at least 2 misses: either a training gap or a question worth reviewing.</p>';
-  if (!anyData) h += '<p class="small">No attempt data yet. This table fills in as the team takes the certification.</p>';
-  h += "<table><tr><th>#</th><th>Part</th><th>Question</th><th>Asked</th><th>Missed</th><th>Miss rate</th></tr>";
+  if (!anyData) h += '<p class="small">No attempt data yet. This table fills in as the team takes this certification.</p>';
+  h += "<table><tr><th>#</th><th>Section</th><th>Question</th><th>Asked</th><th>Missed</th><th>Miss rate</th></tr>";
   rows.forEach(function(r){
     h += '<tr' + (r.hot ? ' class="hot"' : '') + '><td>' + (r.bi+1) + '</td><td>' + r.part + '</td><td>' +
       esc(r.label.length > 110 ? r.label.slice(0,110) + "..." : r.label) + '</td><td>' + r.asked + '</td><td>' +

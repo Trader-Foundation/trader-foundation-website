@@ -16,15 +16,10 @@ module.exports = async (req, res) => {
     user.logins = (user.logins || []).concat(Date.now()).slice(-50);
     await store.writeUser(user);
 
-    const attempts = user.attempts || [];
     res.status(200).json({
       email,
-      attemptCount: attempts.length,
-      bestScore: attempts.length ? Math.max(...attempts.map((a) => a.score || 0)) : null,
-      total: 45,
-      passed: attempts.some((a) => a.finalPass),
       tester: !!user.tester,
-      lastServed: attempts.length ? attempts[attempts.length - 1].served || null : null,
+      exams: store.examSummaries(user.attempts || []),
     });
   } catch (e) {
     res.status(500).json({ error: e.message || "Server error." });

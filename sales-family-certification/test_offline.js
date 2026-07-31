@@ -44,7 +44,7 @@ const check = (cond, msg) => { console.log((cond ? "ok   " : "FAIL ") + msg); if
 const rec = {
   name: "Erin Tester", email: "erin@example.com", n: 1,
   attempt: {
-    ts: 1785500000000, score: 41, total: 45, part1: 25, part2: 16, mins: 27.4, autoPass: true,
+    exam: "setter", ts: 1785500000000, score: 24, total: 27, sectionScores: { product: 15, setting: 9 }, mins: 27.4, autoPass: true,
     perQ: Array.from({ length: 45 }, (_, i) => ({ bi: i, ok: i % 11 !== 0 })),
     written: [
       { stem: "price push", answer: "Fair question, it is an investment, and Steve builds the plan around your situation." },
@@ -76,18 +76,21 @@ check(caught.length > 0, "mid-code corruption rejected: " + caught);
 
 // --- offline sign-in and attempt tracking ---
 let info = sandbox.localLogin("Erin Tester", "Erin@Example.com ");
-check(info.email === "erin@example.com" && info.attemptCount === 0, "offline login normalizes and starts clean");
+check(info.email === "erin@example.com" && info.exams.setter.attemptCount === 0, "offline login normalizes and starts clean");
+check(info.exams.setter.total === 27 && info.exams.ec.total === 34, "offline login reports both certifications");
 info = sandbox.localLogin("Erin Tester", "erin@example.com");
-check(info.attemptCount === 0, "second sign-in still zero attempts");
+check(info.exams.setter.attemptCount === 0, "second sign-in still zero attempts");
 
 sandbox.CURRENT = { name: "Erin Tester", email: "erin@example.com", info };
 const payload = {
-  score: 41, total: 45, part1: 25, part2: 16, mins: 27.4, autoPass: true,
+  exam: "setter",
+  score: 24, total: 27, sectionScores: { product: 15, setting: 9 }, mins: 27.4, autoPass: true,
   served: { q0: 0 }, perQ: rec.attempt.perQ, written: rec.attempt.written,
 };
 sandbox.localSaveAttempt(payload);
 info = sandbox.localLogin("Erin Tester", "erin@example.com");
-check(info.attemptCount === 1 && info.bestScore === 41, "offline attempt recorded with best score");
+check(info.exams.setter.attemptCount === 1 && info.exams.setter.bestScore === 24, "offline setter attempt recorded with best score");
+check(info.exams.ec.attemptCount === 0, "offline EC untouched by a setter attempt");
 
 // result screen renders a copyable code when there is no database
 sandbox.renderResultDelivery(false, payload);

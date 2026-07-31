@@ -9,20 +9,43 @@ nothing away, the updated sign-in copy, and the single shared admin code.
 Live: https://dashboard-traderfoundations-projects.vercel.app
 Admin: "Trainer and admin access" at the bottom of the sign-in card, code `GOLD16`.
 
-## What it is
+## Two separate certifications
 
-- 45 auto-graded questions (27 on the offer and setting call, 18 on the
-  strategy call) plus 3 written scenarios reviewed by a trainer.
-- Passing: 36 of 45 choice questions AND all 3 written answers approved.
+Product knowledge is the half both roles need: tiers, the guarantee, the 401k
+rollover, platforms, crypto, who the company is, the burned-before proof.
+Neither role can work without it. What differs is the call each one runs, so
+each test pairs the shared product half with its own call.
+
+| | Setter | Education Coordinator |
+| --- | --- | --- |
+| Product and the offer | 16 questions (shared) | 16 questions (shared) |
+| Its own call | 11 (the setting call) | 18 (the strategy call) |
+| Total choice questions | 27 | 34 |
+| Written scenarios | 2 | 1 |
+| Passing | 22 of 27 | 28 of 34 |
+
+Every one of the 45 bank questions and all 3 written scenarios are used. A rep
+picks their test after signing in. Attempts, caps, best scores, pass status,
+and the question analysis are all tracked separately per certification, so
+using up setter attempts never locks someone out of the EC test.
+
+Tracks are assigned in `app.js`: `PRODUCT_IDX` lists the shared product
+questions, everything else in Part One is the setting call, and all of Part
+Two is the strategy call. To move a question between tests, edit that list.
+
+## Also
+
+- Passing needs the choice-question mark AND every written answer approved.
 - Retakes serve alternate variants of every question (rephrased stems,
   shuffled answers, flipped true/false), so memorizing an attempt backfires.
-- 3-attempt cap. Tester accounts bypass it.
+- 3-attempt cap per certification. Tester accounts bypass it.
 - Trainer dashboard: roster with logins, attempts, best scores, status
   (CERTIFIED / REVIEW WRITTEN / NOT YET), anti-cheat flags (under 12 minutes
   = fast; more logins than attempts), Pass/Revise grading for written
   answers, per-person Reset / Tester / Delete, and a question-analysis view
-  ranking all 45 questions by miss rate (red at 40 percent or more missed
-  with at least 2 misses).
+  ranking that test's questions by miss rate (red at 40 percent or more missed
+  with at least 2 misses). A tab at the top switches between the two
+  certifications.
 
 ## The two storage modes
 
@@ -72,6 +95,9 @@ codes.
     node test_offline.js   # result codes, import/merge, local grading
     node test_browser.js   # real Chromium run of both modes, end to end
 
-`test_browser.js` needs `playwright-core` and drives the actual page: signs
-in, answers all 45 questions, submits, grades to CERTIFIED, checks the
-question analysis, and verifies a retake serves different variants.
+`test_browser.js` needs `playwright-core` and drives the actual page: takes
+the setter test end to end in result-code mode (27 questions, grade to
+CERTIFIED, question analysis), then the EC test in database mode (34
+questions), and verifies an EC attempt leaves the setter test untouched.
+
+Run it with `NODE_PATH` pointing at wherever `playwright-core` is installed.

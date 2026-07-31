@@ -7,6 +7,38 @@ const BLOB_API = process.env.BLOB_API_URL || "https://blob.vercel-storage.com";
 const PREFIX = "cert/";
 const ADMIN_CODES = { GOLD16: "Vlad" };
 
+/* Two separate certifications, each with its own attempts, cap, and pass mark.
+   Totals mirror the client's exam config and are only used for reporting. */
+const EXAM_KEYS = ["setter", "ec"];
+const EXAM_TOTALS = { setter: 27, ec: 34 };
+const DEFAULT_EXAM = "setter";
+
+function examKey(v) {
+  const k = String(v || "").trim();
+  return EXAM_KEYS.includes(k) ? k : DEFAULT_EXAM;
+}
+
+/* Attempts recorded before the exams were split carry no tag. Those were the
+   combined test, whose Part One is what the setter exam became. */
+function attemptsForExam(attempts, key) {
+  return (attempts || []).filter((a) => examKey(a.exam) === key);
+}
+
+function examSummaries(attempts) {
+  const out = {};
+  for (const k of EXAM_KEYS) {
+    const mine = attemptsForExam(attempts, k);
+    out[k] = {
+      attemptCount: mine.length,
+      bestScore: mine.length ? Math.max(...mine.map((a) => a.score || 0)) : null,
+      total: EXAM_TOTALS[k],
+      passed: mine.some((a) => a.finalPass),
+      lastServed: mine.length ? mine[mine.length - 1].served || null : null,
+    };
+  }
+  return out;
+}
+
 function findToken() {
   for (const k of Object.keys(process.env)) {
     if (k.includes("BLOB_READ_WRITE_TOKEN") && process.env[k]) return { name: k, value: process.env[k] };
@@ -124,6 +156,11 @@ function recomputeAttempt(a) {
 }
 
 module.exports = {
+  EXAM_KEYS,
+  EXAM_TOTALS,
+  examKey,
+  attemptsForExam,
+  examSummaries,
   findToken,
   blobPut,
   blobList,

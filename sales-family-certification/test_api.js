@@ -79,7 +79,10 @@ function call(handler, { method = "GET", body = null, query = {} } = {}) {
   // fresh login
   r = await call(login, { method: "POST", body: { name: "Test Rep", email: "Rep.One@Example.com " } });
   check(r.status === 200 && r.body.email === "rep.one@example.com", "login normalizes email");
-  check(r.body.attemptCount === 0 && r.body.bestScore === null && r.body.total === 45 && !r.body.passed && !r.body.tester && r.body.lastServed === null, "fresh login shape");
+  check(!!r.body.exams && !!r.body.exams.setter && !!r.body.exams.ec, "login returns both certifications");
+  check(r.body.exams.setter.total === 27 && r.body.exams.ec.total === 34, "per-exam totals: 27 setter, 34 EC");
+  check(r.body.exams.setter.attemptCount === 0 && r.body.exams.ec.attemptCount === 0, "fresh login has zero attempts on both");
+  check(r.body.exams.setter.bestScore === null && !r.body.exams.setter.passed && !r.body.tester, "fresh login shape");
 
   // second login increments logins
   r = await call(login, { method: "POST", body: { name: "Test Rep", email: "rep.one@example.com" } });
@@ -89,7 +92,8 @@ function call(handler, { method = "GET", body = null, query = {} } = {}) {
   const served = {}; for (let i = 0; i < 45; i++) served["q" + i] = i % 2;
   const perQ = []; for (let i = 0; i < 45; i++) perQ.push({ bi: i, ok: i !== 3 && i !== 7 });
   const attempt = {
-    score: 43, total: 45, part1: 26, part2: 17, mins: 21.5, autoPass: true, served, perQ,
+    exam: "setter",
+    score: 24, total: 27, sectionScores: { product: 15, setting: 9 }, mins: 21.5, autoPass: true, served, perQ,
     written: [
       { stem: "price push", answer: "Totally fair question, it is an investment, and Steve builds the plan where pricing fits you." },
       { stem: "specialist frame", answer: "You are going to like Steve, his specialty is traders who went aggressive without structure." },
@@ -99,10 +103,11 @@ function call(handler, { method = "GET", body = null, query = {} } = {}) {
   r = await call(submit, { method: "POST", body: { email: "rep.one@example.com", attempt } });
   check(r.status === 200 && r.body.ok, "submit saved");
 
-  // login now reflects the attempt
+  // login now reflects the attempt, on the setter exam only
   r = await call(login, { method: "POST", body: { name: "Test Rep", email: "rep.one@example.com" } });
-  check(r.body.attemptCount === 1 && r.body.bestScore === 43 && !r.body.passed, "login reflects attempt");
-  check(JSON.stringify(r.body.lastServed) === JSON.stringify(served), "lastServed round-trips");
+  check(r.body.exams.setter.attemptCount === 1 && r.body.exams.setter.bestScore === 24, "setter attempt recorded");
+  check(r.body.exams.ec.attemptCount === 0 && r.body.exams.ec.bestScore === null, "EC untouched by a setter attempt");
+  check(JSON.stringify(r.body.exams.setter.lastServed) === JSON.stringify(served), "lastServed round-trips per exam");
 
   // admin: wrong code rejected, right code lists user
   r = await call(admin, { query: { code: "WRONG" } });
@@ -125,14 +130,32 @@ function call(handler, { method = "GET", body = null, query = {} } = {}) {
   r = await call(admin, { query: { code: "GOLD16" } });
   check(r.body.users[0].attempts[0].finalPass === true, "all written passed means CERTIFIED");
 
-  // attempt cap: 3 attempts lock a non-passed account
+  // attempt cap is per certification
   await call(action, { method: "POST", body: { code: "GOLD16", email: "rep.one@example.com", type: "reset" } });
   for (let i = 0; i < 3; i++) {
-    r = await call(submit, { method: "POST", body: { email: "rep.one@example.com", attempt: { ...attempt, autoPass: false, score: 20 } } });
-    check(r.status === 200, "failed attempt " + (i + 1) + " saved");
+    r = await call(submit, { method: "POST", body: { email: "rep.one@example.com", attempt: { ...attempt, autoPass: false, score: 10 } } });
+    check(r.status === 200, "failed setter attempt " + (i + 1) + " saved");
   }
   r = await call(submit, { method: "POST", body: { email: "rep.one@example.com", attempt } });
-  check(r.status === 403, "fourth attempt blocked by cap");
+  check(r.status === 403, "fourth setter attempt blocked by cap");
+
+  // ...and burning the setter cap must not lock the EC test
+  const ecAttempt = { ...attempt, exam: "ec", score: 30, total: 34, sectionScores: { product: 14, strategy: 16 },
+    written: [{ stem: "busy season", answer: "Is it really the time, or the pattern you told me about?" }] };
+  r = await call(submit, { method: "POST", body: { email: "rep.one@example.com", attempt: ecAttempt } });
+  check(r.status === 200, "EC attempt still allowed after the setter cap is used up");
+  r = await call(login, { method: "POST", body: { name: "Test Rep", email: "rep.one@example.com" } });
+  check(r.body.exams.setter.attemptCount === 3 && r.body.exams.ec.attemptCount === 1, "attempt counts tracked separately per exam");
+
+  // an untagged legacy record counts as a setter attempt
+  await call(action, { method: "POST", body: { code: "GOLD16", email: "rep.one@example.com", type: "reset" } });
+  await call(submit, { method: "POST", body: { email: "rep.one@example.com", attempt: { ...attempt, exam: undefined } } });
+  r = await call(login, { method: "POST", body: { name: "Test Rep", email: "rep.one@example.com" } });
+  check(r.body.exams.setter.attemptCount === 1 && r.body.exams.ec.attemptCount === 0, "untagged legacy attempt counts as setter");
+  await call(action, { method: "POST", body: { code: "GOLD16", email: "rep.one@example.com", type: "reset" } });
+  for (let i = 0; i < 3; i++) {
+    await call(submit, { method: "POST", body: { email: "rep.one@example.com", attempt: { ...attempt, autoPass: false, score: 10 } } });
+  }
 
   // tester bypasses the cap
   await call(action, { method: "POST", body: { code: "GOLD16", email: "rep.one@example.com", type: "tester", on: true } });

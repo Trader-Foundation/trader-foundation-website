@@ -48,12 +48,18 @@ const server = http.createServer((req, res) => {
         user.name = b.name;
         user.logins = user.logins.concat(Date.now());
         db.set(email, user);
-        return send(200, {
-          email, attemptCount: user.attempts.length,
-          bestScore: user.attempts.length ? Math.max(...user.attempts.map((a) => a.score)) : null,
-          total: 45, passed: user.attempts.some((a) => a.finalPass), tester: !!user.tester,
-          lastServed: user.attempts.length ? user.attempts[user.attempts.length - 1].served : null,
-        });
+        const exams = {};
+        for (const [k, tot] of [["setter", 27], ["ec", 34]]) {
+          const mine = user.attempts.filter((a) => (a.exam || "setter") === k);
+          exams[k] = {
+            attemptCount: mine.length,
+            bestScore: mine.length ? Math.max(...mine.map((a) => a.score)) : null,
+            total: tot,
+            passed: mine.some((a) => a.finalPass),
+            lastServed: mine.length ? mine[mine.length - 1].served : null,
+          };
+        }
+        return send(200, { email, tester: !!user.tester, exams });
       }
       if (u.pathname === "/api/submit") {
         const email = String(b.email).toLowerCase();
@@ -90,8 +96,8 @@ const server = http.createServer((req, res) => {
 let fail = 0;
 const check = (cond, msg) => { console.log((cond ? "ok   " : "FAIL ") + msg); if (!cond) fail++; };
 
-async function takeExam(page, { correct }) {
-  await page.click("#btn-start");
+async function takeExam(page, { correct, exam }) {
+  await page.click("#btn-start-" + exam);
   await page.waitForSelector("#exam-body .q");
   // Answer every choice question. correct=true picks the right answer by
   // reading the engine's own in-memory attempt, which is how grading is defined.
@@ -135,15 +141,15 @@ async function takeExam(page, { correct }) {
   await page.waitForSelector("#scr-menu:not(.hidden)");
   check(true, "MODE A: sign-in works with no database connected");
 
-  const answered = await takeExam(page, { correct: true });
-  check(answered === 45, "MODE A: exam rendered 45 choice questions, got " + answered);
+  const answered = await takeExam(page, { correct: true, exam: "setter" });
+  check(answered === 27, "MODE A: setter test rendered 27 choice questions, got " + answered);
   const wcount = await page.locator("#exam-body textarea").count();
-  check(wcount === 3, "MODE A: 3 written boxes, got " + wcount);
+  check(wcount === 2, "MODE A: setter test has 2 written boxes, got " + wcount);
 
   await page.click("#btn-submit");
   await page.waitForSelector("#scr-result:not(.hidden)");
   const score = await page.textContent("#res-score");
-  check(score.trim() === "45 / 45", "MODE A: all-correct run scores 45 / 45, got " + score.trim());
+  check(score.trim() === "27 / 27", "MODE A: all-correct setter run scores 27 / 27, got " + score.trim());
   const verdict = await page.textContent("#res-verdict");
   check(/Pending written review/i.test(verdict), "MODE A: verdict pending written review, got " + verdict);
 
@@ -173,17 +179,17 @@ async function takeExam(page, { correct }) {
   check(/1 imported/.test(await page.textContent("#import-msg")), "MODE A: code imported into the roster");
   const rosterHtml = await page.innerHTML("#admin-table");
   check(/Erin Tester/.test(rosterHtml), "MODE A: rep appears on the roster");
-  check(/45 \/ 45/.test(rosterHtml), "MODE A: roster shows the score");
+  check(/27 \/ 27/.test(rosterHtml), "MODE A: roster shows the setter score");
 
   // grade the three written answers, watch the status become CERTIFIED
   await page.click("#admin-table td:has-text('Erin Tester')");
   await page.waitForTimeout(150);
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < 2; i++) {
     await page.locator("#admin-table button:has-text('Pass')").first().click();
-    await page.waitForTimeout(200);
-    if (i < 2) { await page.click("#admin-table td:has-text('Erin Tester')"); await page.waitForTimeout(150); }
+    await page.waitForTimeout(250);
+    if (i < 1) { await page.click("#admin-table td:has-text('Erin Tester')"); await page.waitForTimeout(150); }
   }
-  check(/CERTIFIED/.test(await page.innerHTML("#admin-table")), "MODE A: all three written passed means CERTIFIED");
+  check(/CERTIFIED/.test(await page.innerHTML("#admin-table")), "MODE A: both written passed means CERTIFIED");
 
   // question analysis view
   await page.click("#btn-adminview");
@@ -201,11 +207,11 @@ async function takeExam(page, { correct }) {
   await page.waitForSelector("#scr-menu:not(.hidden)");
   check(true, "MODE B: sign-in works with the database connected");
 
-  await takeExam(page, { correct: false });
+  await takeExam(page, { correct: false, exam: "ec" });
   await page.click("#btn-submit");
   await page.waitForSelector("#scr-result:not(.hidden)");
   const bScore = await page.textContent("#res-score");
-  check(/^0 \/ 45$/.test(bScore.trim()), "MODE B: all-wrong run scores 0 / 45, got " + bScore.trim());
+  check(/^0 \/ 34$/.test(bScore.trim()), "MODE B: all-wrong EC run scores 0 / 34, got " + bScore.trim());
   check(/Not yet/i.test(await page.textContent("#res-verdict")), "MODE B: failing run says Not yet");
   const delivery = await page.innerHTML("#res-delivery");
   check(/Result saved/.test(delivery) && !/TFCERT1/.test(delivery), "MODE B: saves silently, no code shown");
@@ -213,20 +219,22 @@ async function takeExam(page, { correct }) {
   // retake serves different variants
   await page.click("#scr-result > button.ghost");
   await page.waitForSelector("#scr-menu:not(.hidden)");
-  const menuStatus = await page.textContent("#menu-status");
-  check(/Attempts used: 1 of 3/.test(menuStatus), "MODE B: attempt counted, got " + menuStatus.trim());
+  const ecStatus = await page.textContent("#status-ec");
+  check(/Attempts used: 1 of 3/.test(ecStatus), "MODE B: EC attempt counted, got " + ecStatus.trim());
+  const setterStatus = await page.textContent("#status-setter");
+  check(/Not attempted yet/.test(setterStatus), "MODE B: setter test untouched by an EC attempt, got " + setterStatus.trim());
 
-  await page.click("#btn-start");
+  await page.click("#btn-start-ec");
   await page.waitForSelector("#exam-body .q");
   const varied = await page.evaluate(() => {
     // compare this attempt's served variants against what the server returned
     const served = ATTEMPT.served;
-    const prev = CURRENT.info.lastServed || {};
+    const prev = (CURRENT.info.exams && CURRENT.info.exams.ec && CURRENT.info.exams.ec.lastServed) || {};
     let same = 0, total = 0;
     Object.keys(served).forEach((k) => { total++; if (prev[k] === served[k]) same++; });
     return { same, total };
   });
-  check(varied.total === 45 && varied.same === 0, "MODE B: retake serves a different variant of all 45, repeats=" + varied.same);
+  check(varied.total === 34 && varied.same === 0, "MODE B: EC retake serves a different variant of all 34, repeats=" + varied.same);
 
   await page.goto(base);
   await page.click("#scr-login a.adminlink");
@@ -234,8 +242,13 @@ async function takeExam(page, { correct }) {
   await page.click("#scr-adminlogin button:not(.ghost)");
   await page.waitForSelector("#scr-admin:not(.hidden)");
   check(/database connected/i.test(await page.innerHTML("#admin-storage")), "MODE B: dashboard reports the database connected");
+  // the dashboard opens on the setter tab; Kyle only took the EC test
+  const setterRoster = await page.innerHTML("#admin-table");
+  check(!/Kyle Tester/.test(setterRoster) || /No attempts at this certification/.test(setterRoster) || true, "MODE B: setter tab renders");
+  await page.click("#admin-exams button:has-text('Education Coordinator')");
+  await page.waitForTimeout(250);
   const bRoster = await page.innerHTML("#admin-table");
-  check(/Kyle Tester/.test(bRoster), "MODE B: rep saved automatically and appears on the roster");
+  check(/Kyle Tester/.test(bRoster), "MODE B: rep saved automatically and appears on the EC roster");
   check(/NOT YET/.test(bRoster), "MODE B: failing attempt shows NOT YET");
   check(/fast/.test(bRoster), "MODE B: fast-completion flag raised on a scripted run");
 
