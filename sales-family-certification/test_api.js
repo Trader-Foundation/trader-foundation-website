@@ -205,6 +205,21 @@ function call(handler, { method = "GET", body = null, query = {} } = {}) {
   r = await call(admin, { query: { code: "GOLD16" } });
   check(!r.body.users.some((u) => u.email === "cache@example.com"), "delete removes every version");
 
+  // --- admin code entry is forgiving about spacing and case ---
+  for (const variant of ["GOLD16", " GOLD16 ", "gold16", "Gold16", "  gold16  "]) {
+    r = await call(admin, { query: { code: variant } });
+    check(r.status === 200, "admin code accepted as " + JSON.stringify(variant));
+  }
+  for (const bad of ["", "WRONG", "GOLD1", "GOLD167", "GOLD 16"]) {
+    r = await call(admin, { query: { code: bad } });
+    check(r.status === 403, "wrong code still rejected: " + JSON.stringify(bad));
+  }
+
+  // the health probe account never reaches a trainer's roster
+  await call(login, { method: "POST", body: { name: "probe", email: "healthcheck@internal.invalid" } });
+  r = await call(admin, { query: { code: "GOLD16" } });
+  check(!r.body.users.some((u) => u.email === "healthcheck@internal.invalid"), "health probe hidden from the roster");
+
   // storage-missing error is the named, actionable one
   delete process.env.BLOB_READ_WRITE_TOKEN;
   r = await call(login, { method: "POST", body: { name: "Test Rep", email: "rep.two@example.com" } });

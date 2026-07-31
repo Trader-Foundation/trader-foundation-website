@@ -6,6 +6,7 @@
 const BLOB_API = process.env.BLOB_API_URL || "https://blob.vercel-storage.com";
 const PREFIX = "cert/";
 const ADMIN_CODES = { GOLD16: "Vlad" };
+const PROBE_EMAIL = "healthcheck@internal.invalid";
 
 /* Two separate certifications, each with its own attempts, cap, and pass mark.
    Totals mirror the client's exam config and are only used for reporting. */
@@ -186,7 +187,10 @@ async function listUsers() {
   const users = await Promise.all(
     Object.values(newest).map((b) => blobReadJson(b.url).catch(() => null))
   );
-  return users.filter(Boolean);
+  /* The health check writes a throwaway account to prove reads are fresh. It
+     cleans up after itself, but it must never show up on a trainer's roster
+     even for the moment it exists. */
+  return users.filter(Boolean).filter((u) => u.email !== PROBE_EMAIL);
 }
 
 async function deleteUser(email) {
@@ -194,8 +198,13 @@ async function deleteUser(email) {
   if (mine.length) await blobDelete(mine.map((b) => b.url));
 }
 
+/* Forgiving on entry, exact on match. The field is a password box, so a rep or
+   trainer cannot see what they typed, and phone keyboards routinely add a
+   trailing space or lowercase the whole thing. None of that should read as a
+   wrong code. */
 function isAdminCode(code) {
-  return Object.prototype.hasOwnProperty.call(ADMIN_CODES, String(code || ""));
+  const entered = String(code || "").trim().toUpperCase();
+  return Object.keys(ADMIN_CODES).some((k) => k.toUpperCase() === entered);
 }
 
 function recomputeAttempt(a) {
@@ -208,6 +217,7 @@ function recomputeAttempt(a) {
 }
 
 module.exports = {
+  PROBE_EMAIL,
   EXAM_KEYS,
   EXAM_TOTALS,
   examKey,
