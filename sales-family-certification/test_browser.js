@@ -221,12 +221,21 @@ async function takeExam(page, { correct, exam }) {
   });
   check(varied.total === 34 && varied.same === 0, "MODE B: EC retake serves a different variant of all 34, repeats=" + varied.same);
 
+  // The EC attempt above was deliberately left unfinished, so reloading resumes
+  // it rather than showing sign-in. That is the point of the fix; the way out
+  // is the same "Start over" link a person would use.
   await page.goto(base);
+  await page.waitForTimeout(400);
+  check(await page.isVisible("#scr-exam"), "MODE B: an unfinished attempt resumes after a reload");
+  check(/saved and restored/i.test(await page.textContent("#unanswered")), "MODE B: the resume says so plainly");
+  await page.click("#scr-exam a.adminlink");
+  await page.waitForSelector("#scr-login:not(.hidden)");
+
   await page.click("#scr-login a.adminlink");
   await page.fill("#in-admin", "GOLD16");
   await page.click("#scr-adminlogin button:not(.ghost)");
   await page.waitForSelector("#scr-admin:not(.hidden)");
-    await page.click("#admin-exams button:has-text('Education Coordinator')");
+  await page.click("#admin-exams button:has-text('Education Coordinator')");
   await page.waitForTimeout(250);
   const bRoster = await page.innerHTML("#admin-table");
   check(/Kyle Tester/.test(bRoster), "MODE B: rep saved automatically and appears on the EC roster");

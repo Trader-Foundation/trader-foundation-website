@@ -445,6 +445,72 @@ function examName(examKey){ return EXAMS[examKey] ? EXAMS[examKey].name : examKe
 var CURRENT = null, ATTEMPT = null, ADMIN_CODE_ENTERED = "", ADMIN_USERS = null, ADMIN_VIEW = "people";
 var ADMIN_EXAM = "setter"; // which certification the dashboard is showing
 
+/* Safari on a phone discards background tabs and reloads them when you come
+   back. The rendered page returns with answers still visible, but the state
+   behind it is gone, so an in-progress exam used to die on Submit with nothing
+   shown. The attempt and every answer are mirrored here so a reload resumes
+   exactly where the rep left off. Cleared on submit and on sign out. */
+var SESSION_KEY = "tfcert_inprogress_v1";
+
+function saveSession(){
+  if (!CURRENT || !ATTEMPT) return;
+  try {
+    var answers = {};
+    ATTEMPT.items.forEach(function(item){
+      var sel = document.querySelector('input[name="q'+item.disp+'"]:checked');
+      if (sel) answers[item.disp] = sel.value;
+    });
+    sessionStorage.setItem(SESSION_KEY, JSON.stringify({
+      user: {name:CURRENT.name, email:CURRENT.email, info:CURRENT.info, exam:CURRENT.exam},
+      attempt: {exam:ATTEMPT.exam, items:ATTEMPT.items, served:ATTEMPT.served, startTs:ATTEMPT.startTs},
+      answers: answers
+    }));
+  } catch(e){ /* private browsing or a full quota: the exam still works, it just cannot resume */ }
+}
+
+function clearSession(){
+  try { sessionStorage.removeItem(SESSION_KEY); } catch(e){}
+}
+
+/* Escape hatch: without this, anyone with an abandoned attempt is stuck being
+   resumed into it and can never reach the sign-in card or the dashboard. */
+function discardSession(){
+  clearSession();
+  if (ATTEMPT && ATTEMPT.timerId) clearInterval(ATTEMPT.timerId);
+  ATTEMPT = null;
+  CURRENT = null;
+  $("in-name").value = "";
+  $("in-email").value = "";
+  $("unanswered").textContent = "";
+  show("scr-login");
+}
+
+function restoreSession(){
+  var raw;
+  try { raw = sessionStorage.getItem(SESSION_KEY); } catch(e){ return false; }
+  if (!raw) return false;
+  var s;
+  try { s = JSON.parse(raw); } catch(e){ clearSession(); return false; }
+  if (!s || !s.attempt || !s.attempt.items || !s.user) { clearSession(); return false; }
+  /* A sitting is one sitting. Anything older than a few hours is stale and
+     should not silently resurrect on top of somebody else's sign-in. */
+  if (!s.attempt.startTs || Date.now() - s.attempt.startTs > 4 * 60 * 60 * 1000) { clearSession(); return false; }
+  CURRENT = {name:s.user.name, email:s.user.email, info:s.user.info, exam:s.user.exam};
+  ATTEMPT = {exam:s.attempt.exam, items:s.attempt.items, served:s.attempt.served, startTs:s.attempt.startTs};
+  $("menu-user").textContent = CURRENT.name + " (" + CURRENT.email + ")";
+  $("exam-user").textContent = CURRENT.name + " \u00b7 " + examName(ATTEMPT.exam);
+  renderExam();
+  Object.keys(s.answers || {}).forEach(function(disp){
+    var el = document.querySelector('input[name="q'+disp+'"][value="'+s.answers[disp]+'"]');
+    if (el) el.checked = true;
+  });
+  startTimer();
+  show("scr-exam");
+  $("unanswered").innerHTML = 'Your place was saved and restored. Carry on where you left off. ' +
+    '<a class="adminlink" onclick="discardSession()">Not you? Start over</a>';
+  return true;
+}
+
 /* Every result saves straight to the results database and shows up in the
    trainer dashboard on its own. That is the whole point of the dashboard, so
    there is no per-rep workaround to carry results by hand. */
@@ -510,6 +576,7 @@ async function doLogin(){
 }
 
 function logout(){
+  clearSession();
   CURRENT = null;
   $("in-name").value = "";
   $("in-email").value = "";
@@ -591,6 +658,11 @@ function startExam(){
   $("exam-user").textContent = CURRENT.name + " · " + examName(CURRENT.exam);
   renderExam();
   show("scr-exam");
+  startTimer();
+  saveSession();
+}
+
+function startTimer(){
   if (ATTEMPT.timerId) clearInterval(ATTEMPT.timerId);
   ATTEMPT.timerId = setInterval(function(){
     var s = Math.floor((Date.now() - ATTEMPT.startTs) / 1000);
@@ -619,9 +691,26 @@ function renderExam(){
     ATTEMPT.items.filter(function(i){ return i.track === sec.track; }).forEach(function(i){ html += choiceBox(i); });
   });
   body.innerHTML = html;
+  body.onchange = saveSession;
 }
 
 async function submitExam(){
+  /* Never fail silently. Anything unexpected in here used to leave the rep
+     tapping a dead button with no explanation. */
+  try {
+    await runSubmit();
+  } catch(e){
+    $("unanswered").textContent = "Something went wrong submitting: " + (e && e.message ? e.message : e) +
+      ". Your answers are still on screen, press Submit to try again.";
+    $("btn-submit").disabled = false;
+  }
+}
+
+async function runSubmit(){
+  if (!ATTEMPT || !ATTEMPT.items || !CURRENT){
+    $("unanswered").textContent = "This page lost its place, most often because the browser reloaded the tab. Sign in again and your attempt will pick up where it left off.";
+    return;
+  }
   var total = ATTEMPT.items.length, unanswered = [];
   ATTEMPT.items.forEach(function(item){
     var sel = document.querySelector('input[name="q'+item.disp+'"]:checked');
@@ -681,6 +770,7 @@ async function submitExam(){
   }).join(". ");
   $("res-detail").textContent = ex.name + ". " + secText + ". Time: " + mins +
     " minutes. Passing standard: " + Math.ceil(PASS_PCT * total) + " of " + total + ".";
+  clearSession();
   $("res-delivery").innerHTML = '<p class="small">Result saved. Your trainer can see it now.</p>';
   if (autoPass && CURRENT.info.exams[ATTEMPT.exam]) CURRENT.info.exams[ATTEMPT.exam].passed = true;
   var st = CURRENT.info.exams[ATTEMPT.exam];
@@ -884,4 +974,11 @@ async function adminAction(email, type, on){
   } catch(e){
     alert(e.message);
   }
+}
+
+/* Resume an interrupted attempt as soon as the page comes back. */
+if (typeof window !== "undefined" && window.addEventListener){
+  window.addEventListener("DOMContentLoaded", function(){
+    try { restoreSession(); } catch(e){ clearSession(); }
+  });
 }
