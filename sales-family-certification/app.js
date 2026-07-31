@@ -404,6 +404,7 @@ var CURRENT = null, ATTEMPT = null, ADMIN_CODE_ENTERED = "", ADMIN_USERS = null,
 var OFFLINE = false;
 var LS_LOCAL = "tfcert_local_v1";   // rep side: own attempt history
 var LS_IMPORT = "tfcert_import_v1"; // trainer side: codes pasted into dashboard
+var IMPORT_MSG = "";                // survives the panel rebuild after an import
 
 function $(id){ return document.getElementById(id); }
 
@@ -843,7 +844,7 @@ function renderStorageBanner(serverOk){
     '<label for="in-import">Paste result codes from reps</label>' +
     '<textarea id="in-import" rows="3" placeholder="Paste one or more result codes here, then press Import."></textarea>' +
     '<button class="ghost" onclick="importCodes()">Import</button>' +
-    '<p class="small" id="import-msg"></p>';
+    '<p class="small" id="import-msg">' + esc(IMPORT_MSG) + '</p>';
 }
 
 function importCodes(){
@@ -875,8 +876,10 @@ function importCodes(){
   var summary = added + " imported";
   if (dupes) summary += ", " + dupes + " already on the roster";
   if (bad) summary += ", " + bad + " could not be read (" + msgs.join(" ") + ")";
+  /* Stash the message before refreshing: loadAdmin rebuilds this whole panel,
+     so anything written straight to the old element would vanish unseen. */
+  IMPORT_MSG = summary + ".";
   loadAdmin();
-  $("import-msg").textContent = summary + ".";
 }
 
 /* Grading a written answer works with or without the database: imported
@@ -944,7 +947,10 @@ function renderPeople(){
     var pending = at.some(function(a){ return a.pendingReview; });
     var status = certified ? '<span class="ok">CERTIFIED</span>' : pending ? '<span class="pend">REVIEW WRITTEN</span>' : at.length ? '<span class="flag">NOT YET</span>' : "";
     var flags = [];
-    if (at.some(function(a){ return a.mins && a.mins < FAST_MINUTES; })) flags.push('<span class="flag">fast</span>');
+    /* Compare the number itself: a run fast enough to round to 0.0 minutes is
+       the most suspicious kind there is, and a truthiness check would let it
+       slip through unflagged. */
+    if (at.some(function(a){ return typeof a.mins === "number" && a.mins < FAST_MINUTES; })) flags.push('<span class="flag">fast</span>');
     if ((u.logins || []).length > at.length + 2) flags.push('<span class="flag">logins &gt; attempts</span>');
     h += '<tr><td style="cursor:pointer;text-decoration:underline" onclick="document.getElementById(&#39;det'+ui+'&#39;).classList.toggle(&#39;hidden&#39;)">' +
       esc(u.name || "") + (u.tester ? ' <span class="flag">TESTER</span>' : "") + '</td><td>' + esc(u.email) + '</td><td>' +
