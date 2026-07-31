@@ -114,35 +114,84 @@ function emailKey(email) {
   return String(email || "").trim().toLowerCase();
 }
 
-function userPathname(email) {
-  return `${PREFIX}u_${emailKey(email).replace(/[^a-z0-9]/g, "_")}.json`;
+/* Blob serves every public URL through a CDN, and the shortest cache lifetime
+   it honours is far longer than the gap between a rep submitting and a trainer
+   refreshing. Writing each version to a NEW path sidesteps that completely: a
+   URL that has never been requested cannot be served from cache.
+
+   This matters for correctness, not just freshness. Records are read, modified,
+   and written back, so a stale read silently drops whatever landed in between.
+   That is exactly how a submitted attempt was lost during verification.
+
+   Layout: cert/u_<key>__<ts>_<rand>.json, newest wins, older ones deleted after
+   each successful write. */
+
+function userKey(email) {
+  return emailKey(email).replace(/[^a-z0-9]/g, "_");
 }
 
-async function findUserBlob(email) {
-  const pathname = userPathname(email);
-  const blobs = await blobList(pathname);
-  return blobs.find((b) => b.pathname === pathname) || null;
+function userPrefix(email) {
+  return `${PREFIX}u_${userKey(email)}`;
+}
+
+/* Pulls the account key back out of a stored path, so users whose key is a
+   prefix of another's are never confused for each other. */
+function keyFromPathname(pathname) {
+  const rest = String(pathname).slice(PREFIX.length + 2); // strip "cert/u_"
+  const cut = rest.indexOf("__");
+  return cut >= 0 ? rest.slice(0, cut) : rest.replace(/\.json$/, "");
+}
+
+function versionFromPathname(pathname) {
+  const m = String(pathname).match(/__(\d+)_/);
+  return m ? Number(m[1]) : 0; // legacy single-file records sort oldest
+}
+
+function newestByKey(blobs) {
+  const best = {};
+  for (const b of blobs) {
+    const k = keyFromPathname(b.pathname);
+    if (!best[k] || versionFromPathname(b.pathname) > versionFromPathname(best[k].pathname)) best[k] = b;
+  }
+  return best;
+}
+
+async function userBlobs(email) {
+  const key = userKey(email);
+  const blobs = await blobList(userPrefix(email));
+  return blobs.filter((b) => keyFromPathname(b.pathname) === key);
 }
 
 async function readUser(email) {
-  const blob = await findUserBlob(email);
-  if (!blob) return null;
-  return blobReadJson(blob.url);
+  const mine = await userBlobs(email);
+  if (!mine.length) return null;
+  const newest = Object.values(newestByKey(mine))[0];
+  return newest ? blobReadJson(newest.url) : null;
 }
 
 async function writeUser(user) {
-  return blobPut(userPathname(user.email), user);
+  const mine = await userBlobs(user.email);
+  const pathname = `${userPrefix(user.email)}__${Date.now()}_${Math.random().toString(36).slice(2, 8)}.json`;
+  const result = await blobPut(pathname, user);
+  /* Only prune once the new version is safely stored. Best effort: a failed
+     cleanup leaves a harmless older copy that the next read ignores. */
+  const stale = mine.map((b) => b.url);
+  if (stale.length) await blobDelete(stale).catch(() => {});
+  return result;
 }
 
 async function listUsers() {
   const blobs = await blobList(`${PREFIX}u_`);
-  const users = await Promise.all(blobs.map((b) => blobReadJson(b.url).catch(() => null)));
+  const newest = newestByKey(blobs);
+  const users = await Promise.all(
+    Object.values(newest).map((b) => blobReadJson(b.url).catch(() => null))
+  );
   return users.filter(Boolean);
 }
 
 async function deleteUser(email) {
-  const blob = await findUserBlob(email);
-  if (blob) await blobDelete(blob.url);
+  const mine = await userBlobs(email);
+  if (mine.length) await blobDelete(mine.map((b) => b.url));
 }
 
 function isAdminCode(code) {
@@ -169,7 +218,9 @@ module.exports = {
   blobList,
   blobReadJson,
   emailKey,
-  userPathname,
+  userPrefix,
+  keyFromPathname,
+  versionFromPathname,
   readUser,
   writeUser,
   listUsers,

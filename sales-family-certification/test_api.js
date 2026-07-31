@@ -3,6 +3,7 @@
 const http = require("http");
 
 const store = new Map(); // pathname -> body
+const cdn = new Map();   // pathname -> first body ever served, mimicking a CDN
 
 const mock = http.createServer((req, res) => {
   let body = "";
@@ -16,7 +17,10 @@ const mock = http.createServer((req, res) => {
       res.end(JSON.stringify({ url: `http://127.0.0.1:${PORT}/${pathname}`, pathname }));
     } else if (req.method === "POST" && u.pathname === "/delete") {
       const { urls } = JSON.parse(body);
-      urls.forEach((url) => store.delete(decodeURIComponent(new URL(url).pathname.slice(1))));
+      urls.forEach((url) => {
+        const p = decodeURIComponent(new URL(url).pathname.slice(1));
+        store.delete(p); cdn.delete(p);
+      });
       res.writeHead(200, { "content-type": "application/json" });
       res.end("{}");
     } else if (req.method === "GET" && u.pathname === "/") {
@@ -171,6 +175,35 @@ function call(handler, { method = "GET", body = null, query = {} } = {}) {
   await call(action, { method: "POST", body: { code: "GOLD16", email: "rep.one@example.com", type: "delete" } });
   r = await call(admin, { query: { code: "GOLD16" } });
   check(r.body.users.length === 0, "delete removes user");
+
+  // --- regression: a caching store must not lose writes ---
+  // Every read below goes through the CDN mock above, so this only passes if
+  // each write lands on a URL that has never been served before.
+  await call(login, { method: "POST", body: { name: "Cache Victim", email: "cache@example.com" } });
+  r = await call(submit, { method: "POST", body: { email: "cache@example.com", attempt } });
+  check(r.status === 200, "cache test: attempt submitted");
+  r = await call(login, { method: "POST", body: { name: "Cache Victim", email: "cache@example.com" } });
+  check(r.body.exams.setter.attemptCount === 1, "attempt survives a re-read through a caching store, got " + r.body.exams.setter.attemptCount);
+  r = await call(login, { method: "POST", body: { name: "Cache Victim", email: "cache@example.com" } });
+  check(r.body.exams.setter.attemptCount === 1, "attempt survives a second sign-in, got " + r.body.exams.setter.attemptCount);
+  r = await call(admin, { query: { code: "GOLD16" } });
+  const victim = r.body.users.find((u) => u.email === "cache@example.com");
+  check(!!victim && victim.attempts.length === 1, "dashboard sees the attempt through the cache");
+  check(victim.logins.length === 3, "every sign-in was recorded, got " + (victim ? victim.logins.length : 0));
+
+  // a second attempt must not clobber the first
+  r = await call(submit, { method: "POST", body: { email: "cache@example.com", attempt: { ...attempt, score: 26 } } });
+  r = await call(login, { method: "POST", body: { name: "Cache Victim", email: "cache@example.com" } });
+  check(r.body.exams.setter.attemptCount === 2, "second attempt appends rather than replacing, got " + r.body.exams.setter.attemptCount);
+  check(r.body.exams.setter.bestScore === 26, "best score updates across attempts, got " + r.body.exams.setter.bestScore);
+
+  // old versions are pruned so the store does not grow without bound
+  const leftover = [...store.keys()].filter((k) => k.includes("u_cache_example_com"));
+  check(leftover.length === 1, "only the newest version of a record is kept, got " + leftover.length);
+
+  await call(action, { method: "POST", body: { code: "GOLD16", email: "cache@example.com", type: "delete" } });
+  r = await call(admin, { query: { code: "GOLD16" } });
+  check(!r.body.users.some((u) => u.email === "cache@example.com"), "delete removes every version");
 
   // storage-missing error is the named, actionable one
   delete process.env.BLOB_READ_WRITE_TOKEN;
