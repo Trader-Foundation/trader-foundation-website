@@ -395,7 +395,66 @@ var WRITTEN = [
 
 var CURRENT = null, ATTEMPT = null, ADMIN_CODE_ENTERED = "", ADMIN_USERS = null, ADMIN_VIEW = "people";
 
+/* OFFLINE mode. The exam runs identically whether or not the results database
+   is connected. When the server reports no storage, attempts are tracked on the
+   rep's own device and the result screen hands them a result code to send to
+   their trainer, who pastes it into the dashboard. The moment a Blob store is
+   connected in Vercel, everything switches to automatic with no code change and
+   no redeploy of this file. */
+var OFFLINE = false;
+var LS_LOCAL = "tfcert_local_v1";   // rep side: own attempt history
+var LS_IMPORT = "tfcert_import_v1"; // trainer side: codes pasted into dashboard
+
 function $(id){ return document.getElementById(id); }
+
+function lsGet(key){
+  try { return JSON.parse(localStorage.getItem(key) || "null"); } catch(e){ return null; }
+}
+function lsSet(key, val){
+  try { localStorage.setItem(key, JSON.stringify(val)); return true; } catch(e){ return false; }
+}
+
+function isNoStorage(msg){
+  return /storage is not connected|Storage tab/i.test(String(msg || ""));
+}
+
+/* Result codes: base64 of the attempt record, wrapped in a banner so a rep can
+   paste it out of a text message without losing it. A short checksum catches
+   a code that got truncated in transit. */
+function b64encode(str){
+  return btoa(unescape(encodeURIComponent(str))).replace(/=+$/, "");
+}
+function b64decode(str){
+  var s = str.replace(/\s+/g, "");
+  while (s.length % 4) s += "=";
+  return decodeURIComponent(escape(atob(s)));
+}
+function checksum(str){
+  var h = 0;
+  for (var i = 0; i < str.length; i++){ h = (h * 31 + str.charCodeAt(i)) >>> 0; }
+  return h.toString(36).toUpperCase().slice(0, 6);
+}
+function makeCode(rec){
+  var json = JSON.stringify(rec);
+  var body = b64encode(json);
+  /* Explicit terminator so the code has unambiguous bounds: a rep can paste it
+     inside a text message with words around it, or with line wraps through it,
+     and it still reads back exactly. Base64 never contains a dot, so .TFEND
+     cannot appear inside the body. */
+  return "TFCERT1." + checksum(json) + "." + body + ".TFEND";
+}
+function parseCode(raw){
+  var s = String(raw || "").trim();
+  var m = s.match(/TFCERT1\.([A-Z0-9]{1,8})\.([A-Za-z0-9+/=\s]*?)\.TFEND/);
+  if (!m) throw new Error("That does not look like a complete result code.");
+  var json;
+  try { json = b64decode(m[2]); } catch(e){ throw new Error("Code is damaged and could not be read."); }
+  if (checksum(json) !== m[1]) throw new Error("Code is incomplete. Ask them to send the whole thing.");
+  var rec;
+  try { rec = JSON.parse(json); } catch(e){ throw new Error("Code is damaged and could not be read."); }
+  if (!rec || !rec.email || !rec.attempt) throw new Error("Code is missing its result data.");
+  return rec;
+}
 
 function show(id){
   ["scr-login","scr-menu","scr-exam","scr-result","scr-adminlogin","scr-admin"].forEach(function(s){ $(s).classList.add("hidden"); });
@@ -438,7 +497,15 @@ async function doLogin(){
   $("login-err").textContent = "";
   $("btn-login").disabled = true;
   try {
-    var info = await api("/api/login", {name:name, email:email});
+    var info;
+    try {
+      info = await api("/api/login", {name:name, email:email});
+      OFFLINE = false;
+    } catch(err){
+      if (!isNoStorage(err.message)) throw err;
+      OFFLINE = true;
+      info = localLogin(name, email);
+    }
     CURRENT = {name:name, email:info.email, info:info};
     $("menu-user").textContent = name + " (" + info.email + ")";
     renderMenuStatus();
@@ -447,6 +514,27 @@ async function doLogin(){
     $("login-err").textContent = e.message;
   }
   $("btn-login").disabled = false;
+}
+
+/* Offline sign-in: same shape the server returns, backed by this device. */
+function localLogin(name, email){
+  var key = String(email).trim().toLowerCase();
+  var all = lsGet(LS_LOCAL) || {};
+  var user = all[key] || {name:name, email:key, tester:false, logins:[], attempts:[]};
+  user.name = name;
+  user.logins = (user.logins || []).concat(Date.now()).slice(-50);
+  all[key] = user;
+  lsSet(LS_LOCAL, all);
+  var attempts = user.attempts || [];
+  return {
+    email: key,
+    attemptCount: attempts.length,
+    bestScore: attempts.length ? Math.max.apply(null, attempts.map(function(a){ return a.score || 0; })) : null,
+    total: 45,
+    passed: false,
+    tester: false,
+    lastServed: attempts.length ? attempts[attempts.length-1].served || null : null
+  };
 }
 
 function logout(){
@@ -590,22 +678,87 @@ async function submitExam(){
     served:ATTEMPT.served, perQ:perQ,
     written: WRITTEN.map(function(w, wi){ return {stem:w.stem.slice(0,120), answer:answers[wi]}; })
   };
-  try {
-    await api("/api/submit", {email:CURRENT.email, attempt:payload});
-    $("unanswered").textContent = "";
-    $("res-score").textContent = score + " / " + total;
-    $("res-verdict").textContent = autoPass ? "Pending written review" : "Not yet";
-    $("res-verdict").className = "verdict " + (autoPass ? "pend" : "fail");
-    $("res-detail").textContent = "Part One: " + part1 + ". Part Two: " + part2 + ". Time: " + mins +
-      " minutes. Passing standard: " + Math.ceil(PASS_PCT * total) + " of " + total +
-      " choice questions plus all written responses approved by your trainer.";
-    CURRENT.info.attemptCount++;
-    CURRENT.info.lastServed = ATTEMPT.served;
-    show("scr-result");
-  } catch(e){
-    $("unanswered").textContent = "Save failed: " + e.message + " Press Submit to retry, your answers are still here.";
-    $("btn-submit").disabled = false;
+  var savedToServer = false;
+  if (!OFFLINE){
+    try {
+      await api("/api/submit", {email:CURRENT.email, attempt:payload});
+      savedToServer = true;
+    } catch(e){
+      if (!isNoStorage(e.message)){
+        $("unanswered").textContent = "Save failed: " + e.message + " Press Submit to retry, your answers are still here.";
+        $("btn-submit").disabled = false;
+        return;
+      }
+      OFFLINE = true;
+    }
   }
+  if (!savedToServer) localSaveAttempt(payload);
+
+  $("unanswered").textContent = "";
+  $("res-score").textContent = score + " / " + total;
+  $("res-verdict").textContent = autoPass ? "Pending written review" : "Not yet";
+  $("res-verdict").className = "verdict " + (autoPass ? "pend" : "fail");
+  $("res-detail").textContent = "Part One: " + part1 + ". Part Two: " + part2 + ". Time: " + mins +
+    " minutes. Passing standard: " + Math.ceil(PASS_PCT * total) + " of " + total +
+    " choice questions plus all written responses approved by your trainer.";
+  renderResultDelivery(savedToServer, payload);
+  CURRENT.info.attemptCount++;
+  CURRENT.info.lastServed = ATTEMPT.served;
+  show("scr-result");
+}
+
+function localSaveAttempt(payload){
+  var all = lsGet(LS_LOCAL) || {};
+  var user = all[CURRENT.email] || {name:CURRENT.name, email:CURRENT.email, tester:false, logins:[], attempts:[]};
+  var attempt = JSON.parse(JSON.stringify(payload));
+  attempt.ts = Date.now();
+  attempt.finalPass = false;
+  attempt.pendingReview = !!payload.autoPass;
+  attempt.written = (attempt.written || []).map(function(w){ return {stem:w.stem, answer:w.answer, verdict:null}; });
+  user.attempts = (user.attempts || []).concat(attempt).slice(-10);
+  all[CURRENT.email] = user;
+  lsSet(LS_LOCAL, all);
+}
+
+/* Result screen tail: silent when results saved automatically, or a copyable
+   result code when the database is not connected yet. */
+function renderResultDelivery(savedToServer, payload){
+  var box = $("res-delivery");
+  if (savedToServer){
+    box.innerHTML = '<p class="small">Result saved. Your written answers have been sent to your trainer for review.</p>';
+    return;
+  }
+  var all = lsGet(LS_LOCAL) || {};
+  var user = all[CURRENT.email] || {attempts:[]};
+  var rec = {
+    name: CURRENT.name,
+    email: CURRENT.email,
+    n: (user.attempts || []).length,
+    attempt: {
+      ts: Date.now(), score: payload.score, total: payload.total, part1: payload.part1,
+      part2: payload.part2, mins: payload.mins, autoPass: payload.autoPass,
+      perQ: payload.perQ, written: payload.written
+    }
+  };
+  var code = makeCode(rec);
+  box.innerHTML =
+    '<div class="note" style="text-align:left"><b>Send this result code to your trainer.</b> ' +
+    'Copy it and text or email it over. Your score and your written answers travel inside it.</div>' +
+    '<textarea id="res-code" rows="4" readonly onclick="this.select()">' + esc(code) + '</textarea>' +
+    '<button class="ghost" onclick="copyResultCode()">Copy result code</button>' +
+    '<p class="small" id="res-copied"></p>';
+}
+
+function copyResultCode(){
+  var ta = $("res-code");
+  ta.select();
+  var done = false;
+  try { done = document.execCommand("copy"); } catch(e){ done = false; }
+  if (!done && navigator.clipboard){
+    navigator.clipboard.writeText(ta.value).then(function(){ $("res-copied").textContent = "Copied. Send it to your trainer."; });
+    return;
+  }
+  $("res-copied").textContent = done ? "Copied. Send it to your trainer." : "Select the text above and copy it.";
 }
 
 function backToMenu(){
@@ -620,24 +773,140 @@ async function adminLogin(){
   $("admin-err").textContent = "";
   try {
     await api("/api/admin?code=" + encodeURIComponent(ADMIN_CODE_ENTERED));
-    $("in-admin").value = "";
-    loadAdmin();
-    show("scr-admin");
+    OFFLINE = false;
   } catch(e){
-    $("admin-err").textContent = e.message;
+    if (!isNoStorage(e.message)){ $("admin-err").textContent = e.message; return; }
+    /* Storage not connected. The code itself is still checked server-side, and
+       a wrong code returns 403 before ever reaching the storage layer, so
+       reaching this branch means the code was accepted. */
+    OFFLINE = true;
   }
+  $("in-admin").value = "";
+  loadAdmin();
+  show("scr-admin");
 }
 
 async function loadAdmin(){
   var box = $("admin-table");
   box.innerHTML = '<p class="small">Loading...</p>';
+  var server = [];
+  var serverOk = false;
   try {
-    ADMIN_USERS = (await api("/api/admin?code=" + encodeURIComponent(ADMIN_CODE_ENTERED))).users;
+    server = (await api("/api/admin?code=" + encodeURIComponent(ADMIN_CODE_ENTERED))).users || [];
+    serverOk = true;
+    OFFLINE = false;
   } catch(e){
-    box.innerHTML = '<p class="small">' + esc(e.message) + '</p>';
+    if (!isNoStorage(e.message)){
+      box.innerHTML = '<p class="small">' + esc(e.message) + '</p>';
+      return;
+    }
+    OFFLINE = true;
+  }
+  ADMIN_USERS = mergeImported(server);
+  renderStorageBanner(serverOk);
+  renderAdminView();
+}
+
+/* Merges automatically saved records with any result codes pasted into this
+   device. Server records win on conflict, since they are the live copy. */
+function mergeImported(server){
+  var byEmail = {};
+  (server || []).forEach(function(u){ byEmail[u.email] = u; });
+  var imported = lsGet(LS_IMPORT) || {};
+  Object.keys(imported).forEach(function(email){
+    var imp = imported[email];
+    if (!byEmail[email]){
+      byEmail[email] = {name:imp.name, email:email, tester:false, logins:imp.logins || [], attempts:[], imported:true};
+    }
+    var target = byEmail[email];
+    (imp.attempts || []).forEach(function(a){
+      if (!(target.attempts || []).some(function(x){ return x.ts === a.ts; })) {
+        target.attempts = (target.attempts || []).concat(a);
+      }
+    });
+    target.attempts.sort(function(x, y){ return x.ts - y.ts; });
+  });
+  return Object.keys(byEmail).map(function(k){ return byEmail[k]; });
+}
+
+function renderStorageBanner(serverOk){
+  var el = $("admin-storage");
+  if (serverOk){
+    el.innerHTML = '<div class="note"><b>Results database connected.</b> Every rep\'s result lands here automatically.</div>';
     return;
   }
-  renderAdminView();
+  el.innerHTML =
+    '<div class="note"><b>Running without the results database.</b> The exam works and grades normally. ' +
+    'Reps get a result code at the end and send it to you; paste codes below and the roster builds itself. ' +
+    'To switch this to fully automatic, open this project in Vercel, Storage tab, connect a Blob store to the project, ' +
+    'then redeploy. Nothing else changes and nothing already pasted is lost.</div>' +
+    '<label for="in-import">Paste result codes from reps</label>' +
+    '<textarea id="in-import" rows="3" placeholder="Paste one or more result codes here, then press Import."></textarea>' +
+    '<button class="ghost" onclick="importCodes()">Import</button>' +
+    '<p class="small" id="import-msg"></p>';
+}
+
+function importCodes(){
+  var raw = $("in-import").value || "";
+  var chunks = raw.split(/TFCERT1\./).filter(function(s){ return s.trim().length; }).map(function(s){ return "TFCERT1." + s; });
+  if (!chunks.length){ $("import-msg").textContent = "Nothing to import. Paste a result code first."; return; }
+  var added = 0, dupes = 0, bad = 0, msgs = [];
+  var imported = lsGet(LS_IMPORT) || {};
+  chunks.forEach(function(chunk){
+    var rec;
+    try { rec = parseCode(chunk); } catch(e){ bad++; if (msgs.indexOf(e.message) < 0) msgs.push(e.message); return; }
+    var email = String(rec.email).toLowerCase();
+    var u = imported[email] || {name:rec.name, email:email, logins:[], attempts:[]};
+    u.name = rec.name || u.name;
+    if ((u.attempts || []).some(function(a){ return a.ts === rec.attempt.ts; })){ dupes++; return; }
+    var a = rec.attempt;
+    a.finalPass = false;
+    a.pendingReview = !!a.autoPass;
+    a.written = (a.written || []).map(function(w){ return {stem:w.stem, answer:w.answer, verdict:null}; });
+    u.attempts = (u.attempts || []).concat(a);
+    imported[email] = u;
+    added++;
+  });
+  if (!lsSet(LS_IMPORT, imported)){
+    $("import-msg").textContent = "This browser is blocking storage, so imported codes cannot be kept. Try a normal browser window.";
+    return;
+  }
+  $("in-import").value = "";
+  var summary = added + " imported";
+  if (dupes) summary += ", " + dupes + " already on the roster";
+  if (bad) summary += ", " + bad + " could not be read (" + msgs.join(" ") + ")";
+  loadAdmin();
+  $("import-msg").textContent = summary + ".";
+}
+
+/* Grading a written answer works with or without the database: imported
+   records are graded on this device and kept alongside. */
+function localVerdict(email, attemptTs, wIdx, v){
+  var imported = lsGet(LS_IMPORT) || {};
+  var u = imported[email];
+  if (!u) return false;
+  var a = (u.attempts || []).find(function(x){ return x.ts === Number(attemptTs); });
+  if (!a) return false;
+  var w = (a.written || [])[Number(wIdx)];
+  if (!w) return false;
+  w.verdict = v;
+  var allPass = (a.written || []).length > 0 && a.written.every(function(x){ return x.verdict === "pass"; });
+  var anyRevise = (a.written || []).some(function(x){ return x.verdict === "revise"; });
+  a.finalPass = !!a.autoPass && allPass;
+  a.pendingReview = !!a.autoPass && !a.finalPass && !anyRevise;
+  lsSet(LS_IMPORT, imported);
+  return true;
+}
+
+function localAdminAction(email, type, on){
+  var imported = lsGet(LS_IMPORT) || {};
+  if (type === "delete"){ delete imported[email]; }
+  else if (!imported[email]) { return false; }
+  else if (type === "reset"){ imported[email].attempts = []; }
+  else if (type === "tester"){ imported[email].tester = !!on; }
+  else return false;
+  lsSet(LS_IMPORT, imported);
+  return true;
 }
 
 function toggleAdminView(){
@@ -761,6 +1030,7 @@ function renderAnalysis(){
 }
 
 async function verdict(email, attemptTs, wIdx, v){
+  if (localVerdict(email, attemptTs, wIdx, v)){ loadAdmin(); return; }
   try {
     await api("/api/admin-action", {code:ADMIN_CODE_ENTERED, email:email, type:"verdict", attemptTs:attemptTs, wIdx:wIdx, verdict:v});
     loadAdmin();
@@ -772,10 +1042,12 @@ async function verdict(email, attemptTs, wIdx, v){
 async function adminAction(email, type, on){
   if (type === "reset" && !confirm("Clear all attempts for " + email + "? Logins stay logged.")) return;
   if (type === "delete" && !confirm("Remove " + email + " and their whole history from the dashboard? This cannot be undone.")) return;
+  var handledLocally = localAdminAction(email, type, on);
   try {
     await api("/api/admin-action", {code:ADMIN_CODE_ENTERED, email:email, type:type, on:on});
     loadAdmin();
   } catch(e){
+    if (handledLocally || isNoStorage(e.message)){ loadAdmin(); return; }
     alert(e.message);
   }
 }
