@@ -64,7 +64,10 @@ async function blobPut(pathname, obj) {
       "x-api-version": "7",
       "x-content-type": "application/json",
       "x-add-random-suffix": "0",
-      "x-cache-control-max-age": "60",
+      /* Never cache a result record. These are overwritten in place, so any
+         cache window at all means a trainer can refresh right after a rep
+         submits and still be shown the previous version of that record. */
+      "x-cache-control-max-age": "0",
       "x-allow-overwrite": "1",
     },
     body: JSON.stringify(obj),
