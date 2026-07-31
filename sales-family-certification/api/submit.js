@@ -33,13 +33,6 @@ module.exports = async (req, res) => {
       perQ: Array.isArray(a.perQ)
         ? a.perQ.slice(0, 60).map((p) => ({ bi: Number(p.bi), ok: !!p.ok }))
         : [],
-      written: Array.isArray(a.written)
-        ? a.written.slice(0, 5).map((w) => ({
-            stem: String(w.stem || "").slice(0, 200),
-            answer: String(w.answer || "").slice(0, 4000),
-            verdict: null,
-          }))
-        : [],
     });
 
     /* Trim per certification so a burst of attempts at one never evicts the
@@ -48,7 +41,27 @@ module.exports = async (req, res) => {
       .flatMap((k) => store.attemptsForExam(user.attempts.concat(attempt), k).slice(-10))
       .sort((x, y) => x.ts - y.ts);
     await store.writeUser(user);
-    res.status(200).json({ ok: true });
+
+    /* Tell the trainers someone finished. Saving the result already succeeded,
+       so a notification problem must never surface to the rep as a failure. */
+    const flags = [];
+    if (attempt.mins < 12) flags.push(`finished in ${attempt.mins} minutes`);
+    if ((user.logins || []).length > store.attemptsForExam(user.attempts, exam).length + 2) {
+      flags.push("more sign-ins than attempts");
+    }
+    if (user.tester) flags.push("tester account");
+    const notified = await store.notifyResult({
+      name: user.name,
+      email,
+      examName: exam === "ec" ? "Education Coordinator Certification" : "Setter Certification",
+      score: attempt.score,
+      total: attempt.total,
+      passed: attempt.finalPass,
+      mins: attempt.mins,
+      flags,
+    });
+
+    res.status(200).json({ ok: true, notified: notified.sent });
   } catch (e) {
     res.status(500).json({ error: e.message || "Server error." });
   }

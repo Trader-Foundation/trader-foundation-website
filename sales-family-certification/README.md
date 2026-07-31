@@ -21,10 +21,11 @@ each test pairs the shared product half with its own call.
 | Product and the offer | 16 questions (shared) | 16 questions (shared) |
 | Its own call | 11 (the setting call) | 18 (the strategy call) |
 | Total choice questions | 27 | 34 |
-| Written scenarios | 2 | 1 |
 | Passing | 22 of 27 | 28 of 34 |
 
-Every one of the 45 bank questions and all 3 written scenarios are used. A rep
+Every question is multiple choice. A result is final the moment it is submitted; there is no grading step.
+
+Every one of the 45 bank questions is used. A rep
 picks their test after signing in. Attempts, caps, best scores, pass status,
 and the question analysis are all tracked separately per certification, so
 using up setter attempts never locks someone out of the EC test.
@@ -35,17 +36,27 @@ Two is the strategy call. To move a question between tests, edit that list.
 
 ## Also
 
-- Passing needs the choice-question mark AND every written answer approved.
 - Retakes serve alternate variants of every question (rephrased stems,
   shuffled answers, flipped true/false), so memorizing an attempt backfires.
 - 3-attempt cap per certification. Tester accounts bypass it.
 - Trainer dashboard: roster with logins, attempts, best scores, status
-  (CERTIFIED / REVIEW WRITTEN / NOT YET), anti-cheat flags (under 12 minutes
-  = fast; more logins than attempts), Pass/Revise grading for written
-  answers, per-person Reset / Tester / Delete, and a question-analysis view
+  (CERTIFIED / NOT YET), anti-cheat flags (under 12 minutes = fast; more
+  logins than attempts),
+  per-person Reset / Tester / Delete, and a question-analysis view
   ranking that test's questions by miss rate (red at 40 percent or more missed
   with at least 2 misses). A tab at the top switches between the two
   certifications.
+
+## Result notifications
+
+When someone submits, a note goes to whoever is listed in the `NOTIFY_EMAILS`
+project environment variable (comma separated), sent through the project's
+existing Resend credentials. It carries the name, which certification, the
+score, pass or fail, time taken, and any anti-cheat flags.
+
+Sending is best effort and deliberately cannot fail a submission: the result
+is already saved by the time the email is attempted, so a mail problem must
+never look to a rep like a failed exam.
 
 ## Results storage (required)
 

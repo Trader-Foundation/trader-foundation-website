@@ -21,14 +21,6 @@ module.exports = async (req, res) => {
       user.attempts = [];
     } else if (b.type === "tester") {
       user.tester = !!b.on;
-    } else if (b.type === "verdict") {
-      const attempt = (user.attempts || []).find((a) => a.ts === Number(b.attemptTs));
-      if (!attempt) return res.status(404).json({ error: "Attempt not found." });
-      const w = (attempt.written || [])[Number(b.wIdx)];
-      if (!w) return res.status(404).json({ error: "Written answer not found." });
-      if (b.verdict !== "pass" && b.verdict !== "revise") return res.status(400).json({ error: "Bad verdict." });
-      w.verdict = b.verdict;
-      store.recomputeAttempt(attempt);
     } else {
       return res.status(400).json({ error: "Unknown action." });
     }

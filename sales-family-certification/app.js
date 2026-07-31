@@ -385,11 +385,6 @@ opts:[
 {s:"Prospects who talk themselves into it buy at a different level than prospects who were talked into it, so a call where they did most of the talking is a call run correctly.",a:true}]}
 ];
 
-var WRITTEN = [
-{part:1,stem:"You are on a setting call. The prospect interrupts: \"Look, before I get on any Zoom, just tell me straight. How much does this cost?\" Write exactly what you would say."},
-{part:1,stem:"A prospect just told you: \"I tried day trading futures for a year, blew up two accounts, and I think my problem is I do not follow my own rules. I still want this to work.\" Write two or three sentences introducing Steve and the upcoming call using the specialist frame, built from what this prospect said. Do not use the phrase people like you."},
-{part:2,stem:"Earlier in the call the prospect said he wants to stop working weekends so he can be around for his daughter, and that if nothing changes he will be in the same place next year. He now says: \"I am just really busy right now, it is my busy season, I cannot focus on this.\" Write your response using what he already gave you."}
-];
 
 /* ------------------------------ the two certifications ------------------------------
 
@@ -416,7 +411,6 @@ var EXAMS = {
     name: "Setter Certification",
     blurb: "The offer and the setting call. What we sell, and how you set the appointment.",
     tracks: ["product", "setting"],
-    written: [0, 1],
     sections: [
       {track:"product", eyebrow:"Section One", title:"The Offer and the Product"},
       {track:"setting", eyebrow:"Section Two", title:"The Setting Call"}
@@ -427,7 +421,6 @@ var EXAMS = {
     name: "Education Coordinator Certification",
     blurb: "The offer and the strategy call. The same product knowledge, plus running the call itself.",
     tracks: ["product", "strategy"],
-    written: [2],
     sections: [
       {track:"product", eyebrow:"Section One", title:"The Offer and the Product"},
       {track:"strategy", eyebrow:"Section Two", title:"The Strategy Call"}
@@ -528,11 +521,9 @@ function renderExamPicker(){
   Object.keys(EXAMS).forEach(function(k){
     var ex = EXAMS[k], st = (info.exams && info.exams[k]) || {attemptCount:0, bestScore:null, total:examTotal(k), passed:false};
     var total = examTotal(k), pass = examPassMark(k);
-    var wcount = ex.written.length;
     html += '<div class="pick"><h3>' + esc(ex.name) + '</h3>' +
       '<p class="small">' + esc(ex.blurb) + '</p>' +
-      '<p class="small">' + total + ' choice questions plus ' + wcount + ' short written scenario' + (wcount > 1 ? 's' : '') +
-      '. Passing: ' + pass + ' of ' + total + ' plus every written response approved.</p>';
+      '<p class="small">' + total + ' questions, graded the moment you submit. Passing: ' + pass + ' of ' + total + '.</p>';
 
     var status, locked = false;
     if (info.tester){
@@ -609,7 +600,6 @@ function startExam(){
 
 function renderExam(){
   var body = $("exam-body"), html = "", n = 0;
-  ATTEMPT.wdisp = [];
   var choiceBox = function(item){
     n++; item.disp = n;
     var h = '<div class="q" id="qbox'+n+'"><p class="stem"><span class="qn">'+n+'.</span> '+esc(item.stem)+'</p>';
@@ -623,22 +613,10 @@ function renderExam(){
     }
     return h + '</div>';
   };
-  var writtenBox = function(w, wi){
-    n++; ATTEMPT.wdisp[wi] = n;
-    return '<div class="q" id="qbox'+n+'"><p class="stem"><span class="qn">'+n+'.</span> '+esc(w.stem)+'</p>' +
-      '<textarea id="w'+wi+'" rows="5" placeholder="One to three sentences, the way you would say it on a live call."></textarea>' +
-      '<p class="small">Short written response, one to three sentences is plenty. Your trainer reviews these.</p></div>';
-  };
   var ex = EXAMS[ATTEMPT.exam];
   ex.sections.forEach(function(sec){
     html += '<p class="secnum">' + esc(sec.eyebrow) + '</p><h2 class="section">' + esc(sec.title) + '</h2>';
     ATTEMPT.items.filter(function(i){ return i.track === sec.track; }).forEach(function(i){ html += choiceBox(i); });
-    /* Written scenarios sit at the end of the section they belong to. */
-    ex.written.forEach(function(wi){
-      var w = WRITTEN[wi];
-      var wTrack = w.part === 2 ? "strategy" : "setting";
-      if (wTrack === sec.track) html += writtenBox(w, wi);
-    });
   });
   body.innerHTML = html;
 }
@@ -652,19 +630,9 @@ async function submitExam(){
   });
   unanswered.sort(function(a,b){ return a-b; });
   var ex = EXAMS[ATTEMPT.exam];
-  var answers = [], emptyW = [];
-  /* Only this exam's written scenarios are on the page; the others do not exist
-     here and must not block submission. */
-  ex.written.forEach(function(wi){
-    var v = $("w"+wi) ? $("w"+wi).value.trim() : "";
-    answers.push({wi:wi, text:v});
-    if (v.length === 0) emptyW.push(ATTEMPT.wdisp[wi]);
-  });
-  if (unanswered.length || emptyW.length){
-    var msg = unanswered.length ? "Unanswered choice question" + (unanswered.length>1?"s":"") + ": " + unanswered.join(", ") + ". " : "";
-    if (emptyW.length) msg += "Written answer" + (emptyW.length>1?"s":"") + " still empty at question" + (emptyW.length>1?"s":"") + " " + emptyW.join(", ") + ". One to three sentences is all it takes.";
-    $("unanswered").textContent = msg;
-    $("qbox" + Math.min.apply(null, unanswered.concat(emptyW))).scrollIntoView({behavior:"smooth"});
+  if (unanswered.length){
+    $("unanswered").textContent = "Unanswered question" + (unanswered.length>1?"s":"") + ": " + unanswered.join(", ") + ".";
+    $("qbox" + Math.min.apply(null, unanswered)).scrollIntoView({behavior:"smooth"});
     return;
   }
   if (!confirm("Submit for grading? You cannot change answers after this.")) return;
@@ -688,8 +656,7 @@ async function submitExam(){
   var payload = {
     exam:ATTEMPT.exam,
     score:score, total:total, sectionScores:sectionScores, mins:mins, autoPass:autoPass,
-    served:ATTEMPT.served, perQ:perQ,
-    written: answers.map(function(a){ return {stem:WRITTEN[a.wi].stem.slice(0,120), answer:a.text}; })
+    served:ATTEMPT.served, perQ:perQ
   };
   try {
     await api("/api/submit", {email:CURRENT.email, attempt:payload});
@@ -705,17 +672,17 @@ async function submitExam(){
 
   $("unanswered").textContent = "";
   $("res-score").textContent = score + " / " + total;
-  $("res-verdict").textContent = autoPass ? "Pending written review" : "Not yet";
-  $("res-verdict").className = "verdict " + (autoPass ? "pend" : "fail");
+  $("res-verdict").textContent = autoPass ? "Certified" : "Not yet";
+  $("res-verdict").className = "verdict " + (autoPass ? "pass" : "fail");
   var secText = ex.sections.map(function(sec){
     var got = sectionScores[sec.track] || 0;
     var outOf = ATTEMPT.items.filter(function(i){ return i.track === sec.track; }).length;
     return sec.title + ": " + got + " of " + outOf;
   }).join(". ");
   $("res-detail").textContent = ex.name + ". " + secText + ". Time: " + mins +
-    " minutes. Passing standard: " + Math.ceil(PASS_PCT * total) + " of " + total +
-    " choice questions plus all written responses approved by your trainer.";
+    " minutes. Passing standard: " + Math.ceil(PASS_PCT * total) + " of " + total + ".";
   $("res-delivery").innerHTML = '<p class="small">Result saved. Your trainer can see it now.</p>';
+  if (autoPass && CURRENT.info.exams[ATTEMPT.exam]) CURRENT.info.exams[ATTEMPT.exam].passed = true;
   var st = CURRENT.info.exams[ATTEMPT.exam];
   st.attemptCount++;
   st.lastServed = ATTEMPT.served;
@@ -813,14 +780,13 @@ function renderPeople(){
     return ((b.logins[b.logins.length-1]) || 0) - ((a.logins[a.logins.length-1]) || 0);
   });
   var h = '<p class="small">' + esc(EXAMS[ADMIN_EXAM].name) + ': ' + examPassMark(ADMIN_EXAM) + ' of ' + examTotal(ADMIN_EXAM) +
-    ' to pass, plus every written response approved.</p>' +
+    ' to pass. Results are graded automatically.</p>' +
     "<table><tr><th>Name</th><th>Email</th><th>Logins</th><th>Last login</th><th>Attempts</th><th>Best</th><th>Status</th><th>Flags</th><th>Admin</th></tr>";
   users.forEach(function(u, ui){
     var at = attemptsFor(u, ADMIN_EXAM);
     var best = at.length ? Math.max.apply(null, at.map(function(a){ return a.score; })) + " / " + examTotal(ADMIN_EXAM) : "";
     var certified = at.some(function(a){ return a.finalPass; });
-    var pending = at.some(function(a){ return a.pendingReview; });
-    var status = certified ? '<span class="ok">CERTIFIED</span>' : pending ? '<span class="pend">REVIEW WRITTEN</span>' : at.length ? '<span class="flag">NOT YET</span>' : "";
+    var status = certified ? '<span class="ok">CERTIFIED</span>' : at.length ? '<span class="flag">NOT YET</span>' : "";
     var flags = [];
     /* Compare the number itself: a run fast enough to round to 0.0 minutes is
        the most suspicious kind there is, and a truthiness check would let it
@@ -846,22 +812,18 @@ function attemptDetail(u, at){
   if (!at.length) return '<p class="small">No attempts at this certification.</p>';
   var h = "";
   at.forEach(function(a, ai){
-    h += '<div class="wbox"><b>Attempt ' + (ai+1) + '</b> &middot; ' + fmtDate(a.ts) + ' &middot; ' + a.score + '/' + (a.total || examTotal(ADMIN_EXAM)) +
-      ' choice (' + (a.autoPass ? '<span class="ok">met standard</span>' : '<span class="flag">below standard</span>') + ') &middot; ' +
-      a.mins + 'm &middot; overall: ' +
-      (a.finalPass ? '<span class="ok">CERTIFIED</span>' : a.pendingReview ? '<span class="pend">awaiting written review</span>' : '<span class="flag">NOT YET</span>');
-    (a.written || []).forEach(function(w, wi){
-      h += '<div style="margin-top:8px"><b>W' + (wi+1) + '.</b> <span class="small">' + esc(w.stem) + '</span><br>' + esc(w.answer || "") + '<br>';
-      if (w.verdict === "pass"){
-        h += '<span class="ok">Passed</span> <button class="ghost" style="margin:4px 0 0;padding:4px 8px;font-size:12px" onclick="verdict(&#39;'+esc(u.email)+'&#39;,'+a.ts+','+wi+',&#39;revise&#39;)">Change to Revise</button>';
-      } else if (w.verdict === "revise"){
-        h += '<span class="flag">Revise</span> <button class="ghost" style="margin:4px 0 0;padding:4px 8px;font-size:12px" onclick="verdict(&#39;'+esc(u.email)+'&#39;,'+a.ts+','+wi+',&#39;pass&#39;)">Change to Pass</button>';
-      } else {
-        h += '<button class="ghost" style="margin:4px 6px 0 0;padding:4px 10px;font-size:12px" onclick="verdict(&#39;'+esc(u.email)+'&#39;,'+a.ts+','+wi+',&#39;pass&#39;)">Pass</button>' +
-             '<button class="ghost" style="margin:4px 0 0;padding:4px 10px;font-size:12px" onclick="verdict(&#39;'+esc(u.email)+'&#39;,'+a.ts+','+wi+',&#39;revise&#39;)">Revise</button>';
-      }
-      h += '</div>';
+    var outOf = a.total || examTotal(ADMIN_EXAM);
+    h += '<div class="wbox"><b>Attempt ' + (ai+1) + '</b> &middot; ' + fmtDate(a.ts) + ' &middot; ' +
+      a.score + '/' + outOf + ' &middot; ' + a.mins + 'm &middot; ' +
+      (a.finalPass ? '<span class="ok">CERTIFIED</span>' : '<span class="flag">NOT YET</span>');
+    /* Section breakdown, so a miss is traceable to product knowledge or to the
+       call itself rather than just a total. */
+    var secs = a.sectionScores || {};
+    var parts = Object.keys(secs).map(function(k){
+      var label = {product:"Product", setting:"Setting call", strategy:"Strategy call"}[k] || k;
+      return label + ": " + secs[k];
     });
+    if (parts.length) h += '<br><span class="small">' + esc(parts.join(" &middot; ").replace(/&middot;/g, "·")) + '</span>';
     h += '</div>';
   });
   return h;
@@ -911,15 +873,6 @@ function renderAnalysis(){
   });
   h += "</table>";
   box.innerHTML = h;
-}
-
-async function verdict(email, attemptTs, wIdx, v){
-  try {
-    await api("/api/admin-action", {code:ADMIN_CODE_ENTERED, email:email, type:"verdict", attemptTs:attemptTs, wIdx:wIdx, verdict:v});
-    loadAdmin();
-  } catch(e){
-    alert(e.message);
-  }
 }
 
 async function adminAction(email, type, on){

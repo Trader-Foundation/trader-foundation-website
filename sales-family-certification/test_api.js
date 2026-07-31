@@ -42,6 +42,7 @@ const mock = http.createServer((req, res) => {
 });
 
 let PORT;
+const sentEmails = [];
 let fail = 0;
 const check = (cond, msg) => { console.log((cond ? "ok   " : "FAIL ") + msg); if (!cond) fail++; };
 
@@ -63,6 +64,20 @@ function call(handler, { method = "GET", body = null, query = {} } = {}) {
   PORT = mock.address().port;
   process.env.BLOB_API_URL = `http://127.0.0.1:${PORT}`;
   process.env.BLOB_READ_WRITE_TOKEN = "test-token";
+  process.env.RESEND_API_KEY = "test-resend-key";
+  process.env.NOTIFY_EMAILS = "kaleb@example.com, vlad@example.com";
+  process.env.EMAIL_FROM_ADDRESS = "certs@traderfoundation.com";
+  process.env.EMAIL_FROM_NAME = "Trader Foundation";
+
+  // Intercept the Resend call so the notification is observable without sending.
+  const realFetch = global.fetch;
+  global.fetch = async (url, opts) => {
+    if (String(url).startsWith("https://api.resend.com/")) {
+      sentEmails.push(JSON.parse(opts.body));
+      return { ok: true, status: 200, json: async () => ({ id: "test" }), text: async () => "" };
+    }
+    return realFetch(url, opts);
+  };
 
   const login = require("/home/user/trader-foundation-website/sales-family-certification/api/login.js");
   const submit = require("/home/user/trader-foundation-website/sales-family-certification/api/submit.js");
@@ -98,11 +113,6 @@ function call(handler, { method = "GET", body = null, query = {} } = {}) {
   const attempt = {
     exam: "setter",
     score: 24, total: 27, sectionScores: { product: 15, setting: 9 }, mins: 21.5, autoPass: true, served, perQ,
-    written: [
-      { stem: "price push", answer: "Totally fair question, it is an investment, and Steve builds the plan where pricing fits you." },
-      { stem: "specialist frame", answer: "You are going to like Steve, his specialty is traders who went aggressive without structure." },
-      { stem: "busy season", answer: "Is it really the time, or the pattern you told me about earlier with your daughter and the weekends?" },
-    ],
   };
   r = await call(submit, { method: "POST", body: { email: "rep.one@example.com", attempt } });
   check(r.status === 200 && r.body.ok, "submit saved");
@@ -119,20 +129,38 @@ function call(handler, { method = "GET", body = null, query = {} } = {}) {
   r = await call(admin, { query: { code: "GOLD16" } });
   check(r.status === 200 && r.body.users.length === 1, "admin lists one user");
   const u = r.body.users[0];
-  check(u.attempts[0].pendingReview === true && u.attempts[0].finalPass === false, "attempt pending written review");
+  check(u.attempts[0].finalPass === true, "a passing score certifies immediately, no grading step");
+  check(u.attempts[0].written === undefined, "no written answers are stored");
   check(u.attempts[0].perQ.length === 45, "perQ stored for question analysis");
-  const ts = u.attempts[0].ts;
 
-  // grade all three written: two pass + one revise -> NOT YET, then flip to pass -> CERTIFIED
-  for (const [i, v] of [[0, "pass"], [1, "pass"], [2, "revise"]]) {
-    r = await call(action, { method: "POST", body: { code: "GOLD16", email: "rep.one@example.com", type: "verdict", attemptTs: ts, wIdx: i, verdict: v } });
-    check(r.status === 200, "verdict " + v + " on W" + (i + 1));
-  }
-  r = await call(admin, { query: { code: "GOLD16" } });
-  check(r.body.users[0].attempts[0].finalPass === false && r.body.users[0].attempts[0].pendingReview === false, "revise means NOT YET");
-  r = await call(action, { method: "POST", body: { code: "GOLD16", email: "rep.one@example.com", type: "verdict", attemptTs: ts, wIdx: 2, verdict: "pass" } });
-  r = await call(admin, { query: { code: "GOLD16" } });
-  check(r.body.users[0].attempts[0].finalPass === true, "all written passed means CERTIFIED");
+  // --- the notification ---
+  check(sentEmails.length === 1, "one notification sent on submit, got " + sentEmails.length);
+  const mail = sentEmails[0];
+  check(JSON.stringify(mail.to) === JSON.stringify(["kaleb@example.com", "vlad@example.com"]), "sent to every address in NOTIFY_EMAILS");
+  check(/Test Rep/.test(mail.subject) && /passed/.test(mail.subject), "subject names the rep and the outcome: " + mail.subject);
+  check(/24 of 27/.test(mail.text), "body carries the score");
+  check(/Setter Certification/.test(mail.text), "body names which certification");
+  check(/rep\.one@example\.com/.test(mail.text), "body carries the rep's email");
+  check(mail.from === "Trader Foundation <certs@traderfoundation.com>", "from address uses the project's sender");
+
+  // a failing run still notifies, and says so
+  await call(submit, { method: "POST", body: { email: "rep.one@example.com", attempt: { ...attempt, score: 9, autoPass: false, mins: 0.4 } } });
+  check(sentEmails.length === 2, "a failing attempt notifies too");
+  check(/did not pass/.test(sentEmails[1].subject), "subject says it did not pass: " + sentEmails[1].subject);
+  check(/finished in 0.4 minutes/.test(sentEmails[1].text), "fast run is called out in the email");
+
+  // a broken notifier must never fail the submission
+  const okFetch = global.fetch;
+  global.fetch = async (url, opts) => {
+    if (String(url).startsWith("https://api.resend.com/")) throw new Error("resend is down");
+    return okFetch(url, opts);
+  };
+  r = await call(submit, { method: "POST", body: { email: "rep.one@example.com", attempt: { ...attempt, score: 25 } } });
+  check(r.status === 200 && r.body.ok, "submission still succeeds when the notifier is down");
+  check(r.body.notified === false, "response reports the notification did not go out");
+  global.fetch = okFetch;
+
+  await call(action, { method: "POST", body: { code: "GOLD16", email: "rep.one@example.com", type: "reset" } });
 
   // attempt cap is per certification
   await call(action, { method: "POST", body: { code: "GOLD16", email: "rep.one@example.com", type: "reset" } });
@@ -144,8 +172,7 @@ function call(handler, { method = "GET", body = null, query = {} } = {}) {
   check(r.status === 403, "fourth setter attempt blocked by cap");
 
   // ...and burning the setter cap must not lock the EC test
-  const ecAttempt = { ...attempt, exam: "ec", score: 30, total: 34, sectionScores: { product: 14, strategy: 16 },
-    written: [{ stem: "busy season", answer: "Is it really the time, or the pattern you told me about?" }] };
+  const ecAttempt = { ...attempt, exam: "ec", score: 30, total: 34, sectionScores: { product: 14, strategy: 16 } };
   r = await call(submit, { method: "POST", body: { email: "rep.one@example.com", attempt: ecAttempt } });
   check(r.status === 200, "EC attempt still allowed after the setter cap is used up");
   r = await call(login, { method: "POST", body: { name: "Test Rep", email: "rep.one@example.com" } });

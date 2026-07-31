@@ -8,6 +8,11 @@ const PREFIX = "cert/";
 const ADMIN_CODES = { GOLD16: "Vlad" };
 const PROBE_EMAIL = "healthcheck@internal.invalid";
 
+/* Who gets told when someone finishes. Comma-separated NOTIFY_EMAILS in the
+   project environment wins, so the list can change without a code edit. */
+const NOTIFY_EMAILS = String(process.env.NOTIFY_EMAILS || "")
+  .split(",").map((s) => s.trim()).filter(Boolean);
+
 /* Two separate certifications, each with its own attempts, cap, and pass mark.
    Totals mirror the client's exam config and are only used for reporting. */
 const EXAM_KEYS = ["setter", "ec"];
@@ -202,22 +207,62 @@ async function deleteUser(email) {
    trainer cannot see what they typed, and phone keyboards routinely add a
    trailing space or lowercase the whole thing. None of that should read as a
    wrong code. */
+/* Fire-and-forget result notification. Reuses the project's existing Resend
+   credentials. Never allowed to fail or slow a submission: a rep's result is
+   already saved by the time this runs, and a bounced email must not look to
+   them like a failed exam. */
+async function notifyResult({ name, email, examName, score, total, passed, mins, flags }) {
+  const key = process.env.RESEND_API_KEY;
+  if (!key || !NOTIFY_EMAILS.length) return { sent: false, reason: !key ? "no RESEND_API_KEY" : "no NOTIFY_EMAILS set" };
+  const from = process.env.EMAIL_FROM_ADDRESS
+    ? `${process.env.EMAIL_FROM_NAME || "Trader Foundation"} <${process.env.EMAIL_FROM_ADDRESS}>`
+    : "Trader Foundation <onboarding@resend.dev>";
+  const verdict = passed ? "PASSED" : "did not pass";
+  const subject = `${name || email} ${passed ? "passed" : "did not pass"} the ${examName} (${score}/${total})`;
+  const lines = [
+    `${name || "(no name given)"} just finished the ${examName}.`,
+    ``,
+    `Score: ${score} of ${total} (${verdict})`,
+    `Time taken: ${mins} minutes`,
+    `Email: ${email}`,
+  ];
+  if (flags && flags.length) lines.push(``, `Worth a look: ${flags.join(", ")}`);
+  lines.push(``, `Full detail is in the trainer dashboard.`);
+  try {
+    const r = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: { authorization: `Bearer ${key}`, "content-type": "application/json" },
+      body: JSON.stringify({
+        from,
+        to: NOTIFY_EMAILS,
+        reply_to: process.env.EMAIL_REPLY_TO || undefined,
+        subject,
+        text: lines.join("\n"),
+      }),
+    });
+    if (!r.ok) return { sent: false, reason: `resend ${r.status}: ${(await r.text()).slice(0, 160)}` };
+    return { sent: true, to: NOTIFY_EMAILS };
+  } catch (e) {
+    return { sent: false, reason: String(e).slice(0, 160) };
+  }
+}
+
 function isAdminCode(code) {
   const entered = String(code || "").trim().toUpperCase();
   return Object.keys(ADMIN_CODES).some((k) => k.toUpperCase() === entered);
 }
 
+/* Every question is multiple choice, so the score is the whole verdict and a
+   result is final the moment it is submitted. */
 function recomputeAttempt(a) {
-  const written = a.written || [];
-  const allPass = written.length > 0 && written.every((w) => w.verdict === "pass");
-  const anyRevise = written.some((w) => w.verdict === "revise");
-  a.finalPass = !!a.autoPass && allPass;
-  a.pendingReview = !!a.autoPass && !a.finalPass && !anyRevise;
+  a.finalPass = !!a.autoPass;
   return a;
 }
 
 module.exports = {
   PROBE_EMAIL,
+  NOTIFY_EMAILS,
+  notifyResult,
   EXAM_KEYS,
   EXAM_TOTALS,
   examKey,

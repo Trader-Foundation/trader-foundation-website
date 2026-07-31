@@ -18,15 +18,14 @@ const sandbox = {
 vm.createContext(sandbox);
 vm.runInContext(src, sandbox);
 
-const { BANK, WRITTEN, buildAttempt, EXAMS, examItems, examTotal, examPassMark, trackOf } = sandbox;
+const { BANK, buildAttempt, EXAMS, examItems, examTotal, examPassMark, trackOf } = sandbox;
 let fail = 0;
 const check = (cond, msg) => { if (!cond) { console.log("FAIL: " + msg); fail++; } };
 
 check(BANK.length === 45, "bank has 45 questions, got " + BANK.length);
 check(BANK.filter(q => q.part === 1).length === 27, "27 in part 1, got " + BANK.filter(q => q.part === 1).length);
 check(BANK.filter(q => q.part === 2).length === 18, "18 in part 2, got " + BANK.filter(q => q.part === 2).length);
-check(WRITTEN.length === 3, "3 written scenarios");
-check(WRITTEN.filter(w => w.part === 1).length === 2 && WRITTEN.filter(w => w.part === 2).length === 1, "written split 2+1");
+check(sandbox.WRITTEN === undefined, "written scenarios are gone; every question is multiple choice");
 
 let mc = 0, tf = 0, distractors = 0;
 BANK.forEach((q, i) => {
@@ -52,7 +51,7 @@ check(distractors === 114, "114 distractors, got " + distractors);
 
 // Style rules: no em dashes anywhere, never the word "free".
 check(!src.includes("—"), "no em dashes in app.js");
-check(!/\bfree\b/i.test(JSON.stringify(BANK) + JSON.stringify(WRITTEN)), "the word free never appears in exam content");
+check(!/\bfree\b/i.test(JSON.stringify(BANK)), "the word free never appears in exam content");
 
 // Length tell: correct answer should not be the longest option on most questions.
 let longestCorrect = 0;
@@ -94,13 +93,20 @@ check(eItems.every((i) => trackOf(i) !== "setting"), "EC test contains no settin
 // Nothing from the bank is orphaned by the split.
 const covered = new Set([...sItems, ...eItems]);
 check(covered.size === 45, "every bank question appears on at least one test, got " + covered.size);
-const wCovered = new Set([...EXAMS.setter.written, ...EXAMS.ec.written]);
-check(wCovered.size === 3, "every written scenario is used, got " + wCovered.size);
-check(EXAMS.setter.written.length === 2, "setter has 2 written");
-check(EXAMS.ec.written.length === 1, "EC has 1 written");
-// The written scenarios land on the role that actually faces them.
-check(EXAMS.setter.written.every((wi) => WRITTEN[wi].part === 1), "setter written are setting-call scenarios");
-check(EXAMS.ec.written.every((wi) => WRITTEN[wi].part === 2), "EC written is a strategy-call scenario");
+check(!EXAMS.setter.written && !EXAMS.ec.written, "neither exam carries written scenarios");
+
+// The three retired written scenarios each survive as a multiple choice question.
+const retired = [
+  { probe: "before I get on any Zoom", track: "setting" },
+  { probe: "blew up two accounts", track: "setting" },
+  { probe: "busy season", track: "strategy" },
+];
+retired.forEach((r) => {
+  const hits = BANK.map((q, bi) => ({ q, bi }))
+    .filter(({ q }) => q.type === "mc" && q.stems.some((st) => st.includes(r.probe)));
+  check(hits.length === 1, "retired scenario \"" + r.probe + "\" is still tested exactly once, got " + hits.length);
+  if (hits.length === 1) check(trackOf(hits[0].bi) === r.track, "\"" + r.probe + "\" sits on the " + r.track + " track");
+});
 
 // --- per-exam attempts and retake rotation ---
 ["setter", "ec"].forEach((k) => {

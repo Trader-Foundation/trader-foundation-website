@@ -16,11 +16,7 @@ let STORAGE_ON = false;
 const db = new Map(); // email -> user record
 
 function recompute(a) {
-  const w = a.written || [];
-  const allPass = w.length > 0 && w.every((x) => x.verdict === "pass");
-  const anyRevise = w.some((x) => x.verdict === "revise");
-  a.finalPass = !!a.autoPass && allPass;
-  a.pendingReview = !!a.autoPass && !a.finalPass && !anyRevise;
+  a.finalPass = !!a.autoPass;
   return a;
 }
 
@@ -64,7 +60,7 @@ const server = http.createServer((req, res) => {
       if (u.pathname === "/api/submit") {
         const email = String(b.email).toLowerCase();
         let user = db.get(email) || { name: "", email, tester: false, logins: [], attempts: [] };
-        const a = recompute(Object.assign({}, b.attempt, { ts: Date.now(), written: (b.attempt.written || []).map((w) => ({ ...w, verdict: null })) }));
+        const a = recompute(Object.assign({}, b.attempt, { ts: Date.now() }));
         user.attempts = user.attempts.concat(a);
         db.set(email, user);
         return send(200, { ok: true });
@@ -73,11 +69,7 @@ const server = http.createServer((req, res) => {
       if (u.pathname === "/api/admin-action") {
         const user = db.get(String(b.email).toLowerCase());
         if (!user) return send(404, { error: "No record for that email." });
-        if (b.type === "verdict") {
-          const a = user.attempts.find((x) => x.ts === Number(b.attemptTs));
-          a.written[Number(b.wIdx)].verdict = b.verdict;
-          recompute(a);
-        } else if (b.type === "reset") user.attempts = [];
+        if (b.type === "reset") user.attempts = [];
         else if (b.type === "tester") user.tester = !!b.on;
         return send(200, { ok: true });
       }
@@ -114,9 +106,6 @@ async function takeExam(page, { correct, exam }) {
       const el = document.querySelector('input[name="q' + item.disp + '"][value="' + val + '"]');
       el.checked = true;
       answered++;
-    });
-    document.querySelectorAll("#exam-body textarea").forEach((t, i) => {
-      t.value = "Written answer number " + (i + 1) + ", the way I would say it on a live call.";
     });
     return answered;
   }, correct);
@@ -166,13 +155,12 @@ async function takeExam(page, { correct, exam }) {
 
   const answered = await takeExam(page, { correct: true, exam: "setter" });
   check(answered === 27, "MODE B: setter test rendered 27 choice questions, got " + answered);
-  check((await page.locator("#exam-body textarea").count()) === 2, "MODE B: setter test has 2 written boxes");
+  check((await page.locator("#exam-body textarea").count()) === 0, "MODE B: no written boxes anywhere");
   await page.click("#btn-submit");
   await page.waitForSelector("#scr-result:not(.hidden)");
   check((await page.textContent("#res-score")).trim() === "27 / 27", "MODE B: all-correct setter run scores 27 / 27");
-  const delivery0 = await page.innerHTML("#res-delivery");
-  check(/Result saved/.test(delivery0), "MODE B: result screen confirms the save");
-  check(!/TFCERT|result code|Copy/i.test(delivery0), "MODE B: no result code shown to the rep");
+  check(/Certified/i.test(await page.textContent("#res-verdict")), "MODE B: a passing run says Certified immediately");
+  check(/Result saved/.test(await page.innerHTML("#res-delivery")), "MODE B: result screen confirms the save");
 
   await page.goto(base);
   await page.click("#scr-login a.adminlink");
@@ -184,14 +172,12 @@ async function takeExam(page, { correct, exam }) {
   check(/27 \/ 27/.test(roster0), "MODE B: roster shows the score");
   check((await page.locator("#in-import").count()) === 0, "MODE B: dashboard has no import box");
 
+  check(/CERTIFIED/.test(roster0), "MODE B: roster shows CERTIFIED with no grading step");
   await page.click("#admin-table td:has-text('Erin Tester')");
-  await page.waitForTimeout(150);
-  for (let i = 0; i < 2; i++) {
-    await page.locator("#admin-table button:has-text('Pass')").first().click();
-    await page.waitForTimeout(250);
-    if (i < 1) { await page.click("#admin-table td:has-text('Erin Tester')"); await page.waitForTimeout(150); }
-  }
-  check(/CERTIFIED/.test(await page.innerHTML("#admin-table")), "MODE B: both written passed means CERTIFIED");
+  await page.waitForTimeout(200);
+  const detail = await page.innerHTML("#admin-table");
+  check(/Product:/.test(detail), "MODE B: attempt detail breaks the score down by section");
+  check(!/Pass<\/button>|Revise/.test(detail), "MODE B: no Pass or Revise buttons remain");
 
   await page.click("#btn-adminview");
   await page.waitForTimeout(200);
