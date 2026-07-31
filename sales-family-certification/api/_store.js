@@ -8,10 +8,13 @@ const PREFIX = "cert/";
 const ADMIN_CODES = { GOLD16: "Vlad" };
 const PROBE_EMAIL = "healthcheck@internal.invalid";
 
-/* Who gets told when someone finishes. Comma-separated NOTIFY_EMAILS in the
-   project environment wins, so the list can change without a code edit. */
-const NOTIFY_EMAILS = String(process.env.NOTIFY_EMAILS || "")
-  .split(",").map((s) => s.trim()).filter(Boolean);
+/* Who gets told when someone finishes. Setting NOTIFY_EMAILS in the project
+   environment (comma separated) overrides this list without a code change, so
+   adding or removing a trainer needs no redeploy. */
+const DEFAULT_NOTIFY = ["kalebsalesfam@gmail.com"];
+const NOTIFY_EMAILS = process.env.NOTIFY_EMAILS
+  ? String(process.env.NOTIFY_EMAILS).split(",").map((s) => s.trim()).filter(Boolean)
+  : DEFAULT_NOTIFY;
 
 /* Two separate certifications, each with its own attempts, cap, and pass mark.
    Totals mirror the client's exam config and are only used for reporting. */

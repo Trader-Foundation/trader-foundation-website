@@ -49,9 +49,10 @@ Two is the strategy call. To move a question between tests, edit that list.
 
 ## Result notifications
 
-When someone submits, a note goes to whoever is listed in the `NOTIFY_EMAILS`
-project environment variable (comma separated), sent through the project's
-existing Resend credentials. It carries the name, which certification, the
+When someone submits, a note goes out through the project's existing Resend
+credentials. It goes to `kalebsalesfam@gmail.com` by default; setting
+`NOTIFY_EMAILS` in the project environment (comma separated) overrides that
+list without a code change, so adding or removing a trainer needs no redeploy. It carries the name, which certification, the
 score, pass or fail, time taken, and any anti-cheat flags.
 
 Sending is best effort and deliberately cannot fail a submission: the result
