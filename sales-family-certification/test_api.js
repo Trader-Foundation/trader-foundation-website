@@ -33,8 +33,14 @@ const mock = http.createServer((req, res) => {
     } else if (req.method === "GET") {
       const pathname = decodeURIComponent(u.pathname.slice(1));
       if (!store.has(pathname)) { res.writeHead(404); res.end("not found"); return; }
+      // Blob serves public URLs through a CDN and clamps how short a max-age it
+      // will honour, so whatever body a URL serves first is what later reads
+      // keep getting back. Versioned write paths are what make that safe: a URL
+      // nothing has ever requested cannot have a cached copy. Modelling this is
+      // the whole point of the mock, so reads come from the CDN, not the store.
+      if (!cdn.has(pathname)) cdn.set(pathname, store.get(pathname));
       res.writeHead(200, { "content-type": "application/json" });
-      res.end(store.get(pathname));
+      res.end(cdn.get(pathname));
     } else {
       res.writeHead(400); res.end("bad");
     }

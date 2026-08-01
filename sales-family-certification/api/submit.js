@@ -61,6 +61,12 @@ module.exports = async (req, res) => {
       flags,
     });
 
+    /* A notification that quietly stops working is the worst failure here: the
+       rep sees success, the trainers hear nothing, and nobody finds out until
+       someone thinks to ask why Kaleb was never told. The reason is already
+       worked out, so put it somewhere it can be read back. */
+    if (!notified.sent) console.error("result notification failed:", notified.reason);
+
     res.status(200).json({ ok: true, notified: notified.sent });
   } catch (e) {
     res.status(500).json({ error: e.message || "Server error." });
