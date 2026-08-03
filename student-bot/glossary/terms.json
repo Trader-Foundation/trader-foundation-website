@@ -1,0 +1,113 @@
+{
+  "_comment": "Controlled vocabulary for Trader Foundation transcript cleanup. Run find-and-replace against every raw transcript before tagging or indexing. Add every new error found. Case-insensitive matching on 'wrong', preserve sentence casing on replace.",
+  "_version": "0.1",
+  "_source_modules": [2, 3, 5],
+
+  "confirmed_corrections": [
+    {
+      "wrong": ["miru bozu", "mirabozu", "mirabozor", "miru bozo"],
+      "right": "Marubozu",
+      "found_in": "Module 3",
+      "note": "Full-bodied candle. Japanese term. Students searching the transcript spelling find nothing."
+    },
+    {
+      "wrong": ["Ontario Midstream Partners", "Ontario Midstream"],
+      "right": "Antero Midstream",
+      "found_in": "Module 2",
+      "note": "Ticker AM. Ontario Midstream Partners does not exist. High risk: a bot would cite a fictional company confidently."
+    },
+    {
+      "wrong": ["noose"],
+      "right": "news",
+      "found_in": "Module 5",
+      "note": "CONTEXT DEPENDENT. Verify each hit manually before replacing. Two occurrences in Module 5, both in the instigating-event passage."
+    }
+  ],
+
+  "unresolved": [
+    {
+      "text": "the bowels bowels",
+      "found_in": "Module 5",
+      "note": "Garbled. Likely 'bounce, bounce' or 'the bulls'. Needs Vlad or audio check."
+    },
+    {
+      "text": "shift board",
+      "found_in": "Module 5",
+      "note": "Company name in the first four-hour chart walkthrough. Does not match a known ticker with confidence. Needs Vlad."
+    }
+  ],
+
+  "protected_vocabulary": {
+    "_comment": "Correct spellings the transcription tool is likely to mangle. Feed as vocabulary hints if re-transcribing. Check every occurrence in existing transcripts.",
+
+    "candlestick_patterns": [
+      "Marubozu",
+      "Harami",
+      "Doji",
+      "long-legged doji",
+      "dragonfly doji",
+      "gravestone doji",
+      "hammer",
+      "inverted hammer",
+      "shooting star",
+      "bullish engulfing",
+      "bearish engulfing",
+      "piercing line",
+      "dark cloud cover"
+    ],
+
+    "concepts": [
+      "support",
+      "resistance",
+      "breakout",
+      "breakdown",
+      "bullish",
+      "bearish",
+      "wick",
+      "shadow",
+      "body",
+      "channel",
+      "trend",
+      "volume",
+      "liquidity"
+    ],
+
+    "trader_foundation_terms": [
+      "Paycheck Collector",
+      "Bounce Profit",
+      "Ready Set Explode",
+      "Stock Predator",
+      "Skool",
+      "Education Coordinator",
+      "Trader Foundation"
+    ],
+
+    "platforms_and_tools": [
+      "FinViz",
+      "StockCharts",
+      "Yahoo Finance",
+      "SPY"
+    ],
+
+    "companies_and_tickers": [
+      "Antero Midstream (AM)",
+      "Alibaba (BABA)",
+      "Johnson & Johnson (JNJ)",
+      "Bank of America (BAC)",
+      "AT&T (T)",
+      "Ventas (VTR)",
+      "Apple (AAPL)",
+      "Tesla (TSLA)"
+    ]
+  },
+
+  "forbidden_output_terms": {
+    "_comment": "Must never appear in bot output. Retired program labels and prohibited copy. Separate from transcription errors.",
+    "retired_labels": ["Elite Four", "Elite 12", "Elite Twelve"],
+    "prohibited_copy": ["free", "closer", "closers", "salesperson", "salespeople"],
+    "replacements": {
+      "free": "pay nothing / yours to keep",
+      "closer": "Education Coordinator"
+    }
+  }
+}
