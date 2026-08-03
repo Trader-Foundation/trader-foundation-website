@@ -76,11 +76,18 @@ Any pricing claim from the Module 2 walkthrough needs verification. The bot does
 
 ## 7. Module inventory
 
-**Status:** OPEN, scoping
+**Status:** PARTIALLY RESOLVED, see `../corpus/sources.md`
 
-How many modules total, and which are CURRENT, SUPERSEDED, or RETIRED. Three modules sampled so far (2, 3, 5).
+**Settled:** v1 covers four products, not one. The numbered Trader Foundation modules, Stock Predator, Bounce Profit, and the Masterclass. Chunks are course scoped as a result, see `../corpus/schema.md`.
 
-Every module needs a recording date and a status before ingestion.
+**Still open:**
+
+- How many numbered modules total, and which are CURRENT, SUPERSEDED, or RETIRED. Three sampled so far (2, 3, 5). Vlad is supplying modules separately.
+- Whether Paycheck Collector and Ready Set Explode are in v1. Both are house IP and both appear in the protected vocabulary, but neither was named in the scope decision.
+- Canonical version per product. Every product has duplicate files in Drive, including three Stock Predator PDFs and three Masterclass decks. Ingesting duplicates puts the same passage in the corpus several times.
+- Recording date per file. Several carry none in the title and their Drive modified dates look unreliable.
+
+Every chunk needs a recording date and a status before ingestion.
 
 ---
 

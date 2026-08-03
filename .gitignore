@@ -107,3 +107,18 @@ temp/
 
 # Webdev artifacts (checkpoint zips, migrations, etc.)
 .webdev/
+
+# Student bot curriculum content.
+# THIS REPOSITORY IS PUBLIC. Course transcripts and the built corpus are paid
+# product and must never be pushed here. Structure and docs are tracked, content
+# is not. Git history preserves anything committed even after a later delete,
+# so this stays ignored until the bot lives in a private repo of its own.
+student-bot/transcripts/**
+!student-bot/transcripts/
+!student-bot/transcripts/*/
+!student-bot/transcripts/**/README.md
+student-bot/corpus/**
+!student-bot/corpus/
+!student-bot/corpus/README.md
+!student-bot/corpus/schema.md
+!student-bot/corpus/sources.md
