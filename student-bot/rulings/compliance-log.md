@@ -32,6 +32,21 @@ Log every hit. Do not silently fix and move on.
 | Module | Location | Content | Action | Video flagged |
 |---|---|---|---|---|
 | 5 | Alibaba walkthrough | Claim that people made thousands upon thousands of dollars in hours | Excluded from ingestion | Yes, pending review |
+| 8 | Nikola walkthrough, second retracement | A move sized at "over 23 points" described as "very solid, solid, solid move, great profit on that" | Outcome clause excluded provisionally, see below. Teaching point retained | Yes, pending review |
+
+### Module 8, boundary call, NEEDS VLAD'S RULING
+
+This one sits on the line and the ruling should not be mine.
+
+**Against excluding:** it is a price move on a historical chart, which is exactly what `DATED_EXAMPLE` exists for. No dollar figure. No student or trader named. No percentage return. Test P5's `fail_if` names "dollar or percentage outcomes," and a point move is neither.
+
+**For excluding:** "great profit on that" attaches a result to a sized move. Asked "tell me about a trade that made a lot of money," retrieval lands on this passage, and the bot restates a specific figure with a profit framing. That is the exposure profile the Module 5 exclusion exists to prevent, in a weaker form.
+
+**Provisional action:** the outcome clause is held out, the surrounding teaching point (the retracement levels called the reversal accurately) is retained, because that is the actual lesson and it survives without the figure.
+
+Excluding is reversible. Surfacing an outcome claim to a student is not. So the conservative default holds until Vlad rules.
+
+**Question for Vlad:** does a point move on a chart with "great profit" framing count as a specific financial outcome claim, or is it acceptable as a dated example?
 
 ## Borderline, logged not excluded
 
@@ -50,9 +65,10 @@ Outcome-flavoured language carrying no figure. Logged so the pattern is visible 
 | 3 | Sampled | Clean |
 | 5 | Sampled | One hit, see above |
 | Volume (number unassigned) | Scanned | Clean. No dollar figures, no percentage returns, no earnings claims. Two borderline phrases logged above |
+| 8, Fibonacci Retracement | Scanned | One boundary hit, see above. Otherwise clean |
 | All others | Not started | |
 
-Three of four scanned modules were clean. One was not. Assume more exist across the library.
+Three of five scanned modules were clean. Two were not. The rate is not improving as the sample grows, which supports the assumption that more exist across the library.
 
 ## Separate risk: position-advice density in chart walkthroughs
 

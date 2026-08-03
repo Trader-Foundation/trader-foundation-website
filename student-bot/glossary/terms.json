@@ -30,6 +30,33 @@
     }
   ],
 
+  "numeric_corrections": {
+    "_comment": "HIGHEST RISK CLASS. The transcription tool mis-hears the numeric values being taught. More dangerous than proper-noun errors: a student who reads 'Mirabozor' can tell something is wrong and search for the right word, but a student who reads a wrong Fibonacci level cannot tell, and the bot would state it confidently as house teaching. Every taught number must be checked against the values established earlier in the same transcript.",
+    "instances": [
+      {
+        "wrong": "the 32. 8",
+        "right": "the 38.2",
+        "found_in": "Module 8, Fibonacci Retracement",
+        "note": "Fibonacci retracement level. The module establishes 38.2, 50, and 61.8 earlier and uses them correctly four times before this. 32.8 is not a Fibonacci level."
+      },
+      {
+        "wrong": "the 60. 8 line",
+        "right": "the 61.8 line",
+        "found_in": "Module 8, Fibonacci Retracement",
+        "note": "Same lesson, second numeric error, in the passage explaining why the instructor would not take the trade. 60.8 is not a Fibonacci level."
+      }
+    ],
+    "formatting_artifacts": {
+      "_comment": "The tool splits decimals across a space or a line break, rendering 38.2 as '38. 2'. Cosmetic, but it breaks any numeric check run against the raw text and must be normalised before the values can be audited.",
+      "pattern": "38. 2, 61. 8",
+      "normalise_to": "38.2, 61.8"
+    },
+    "canonical_values": {
+      "fibonacci_retracement_levels": ["38.2", "50", "61.8"],
+      "note": "The three levels the curriculum teaches as support or resistance. Any other value appearing in a retracement passage is a transcription error, not a variant teaching."
+    }
+  },
+
   "generic_transcription_noise": {
     "_comment": "Not proper nouns. Systematic mis-hearings and stray words the tool inserts. Fix per hit, do not run as blind find-and-replace. Found in the Volume module, expect the same class across the library.",
     "instances": [
@@ -56,6 +83,11 @@
       "text": "And it's stocked to this random volume.",
       "found_in": "Volume (module number unassigned)",
       "note": "Garbled. Likely 'it's stuck in this random volume' or 'the stock's due to this random volume'. Left intact in the clean pass. Needs Vlad or an audio check."
+    },
+    {
+      "text": "the ACC",
+      "found_in": "Module 8, Fibonacci Retracement",
+      "note": "Ticker for the first chart walkthrough. ACC was American Campus Communities, taken private in 2022, so a current lookup returns nothing. Could equally be a mis-hearing. Antero Midstream is the precedent for not guessing at a ticker. Needs Vlad."
     }
   ],
 
@@ -137,7 +169,15 @@
       "Apple (AAPL)",
       "Tesla (TSLA)",
       "Peloton (PTON)",
-      "Amazon (AMZN)"
+      "Amazon (AMZN)",
+      "Nikola (NKLA)"
+    ],
+
+    "indicators_and_tools": [
+      "Fibonacci retracement",
+      "Fibonacci levels",
+      "moving averages",
+      "watch list"
     ]
   },
 

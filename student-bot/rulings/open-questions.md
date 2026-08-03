@@ -80,9 +80,11 @@ Any pricing claim from the Module 2 walkthrough needs verification. The bot does
 
 **Settled:** v1 covers four products, not one. The numbered Trader Foundation modules, Stock Predator, Bounce Profit, and the Masterclass. Chunks are course scoped as a result, see `../corpus/schema.md`.
 
+**Also settled:** the numbered course runs to at least 9 modules. Module 8 is Fibonacci Retracement, self-identified by its closing line "do the homework for this lesson and then move to module 9." That is the first transcript to carry its own number, and it is worth checking every transcript's closing lines for the same, since it is cheaper than asking.
+
 **Still open:**
 
-- How many numbered modules total, and which are CURRENT, SUPERSEDED, or RETIRED. Three sampled so far (2, 3, 5). Vlad is supplying modules separately.
+- How many numbered modules total, and which are CURRENT, SUPERSEDED, or RETIRED. Known so far: 2, 3, 5, 8, and 9 exists. Vlad is supplying modules separately.
 - Whether Paycheck Collector and Ready Set Explode are in v1. Both are house IP and both appear in the protected vocabulary, but neither was named in the scope decision.
 - Canonical version per product. Every product has duplicate files in Drive, including three Stock Predator PDFs and three Masterclass decks. Ingesting duplicates puts the same passage in the corpus several times.
 - Recording date per file. Several carry none in the title and their Drive modified dates look unreliable.
@@ -100,6 +102,42 @@ A compliance pass across the full library, separate from transcription cleanup. 
 Older videos carrying outcome claims may warrant a re-record decision independent of this project.
 
 **Question for Vlad:** who owns the compliance pass across the full library, and does a video carrying a claim get re-recorded or just excluded from ingestion?
+
+---
+
+## 14. Fibonacci: core method or optional supplement?
+
+**Status:** OPEN, changes how the bot weights every Fibonacci answer
+
+Module 8 closes with the instructor saying he does not always use the tool: "I don't a lot of times because I've been doing this for a while. I use moving averages. I use support and resistance. This is just another supplement you could use to see where the retracement would be if you don't have a good eye for where the support and resistance lines are."
+
+Read one way, Fibonacci is a training wheel for students who cannot yet read levels by eye, and the bot should present it as optional scaffolding. Read the other way, it is a full part of the method that the instructor personally happens to use less.
+
+A student asking "should I be using Fibonacci?" gets a materially different answer either way, and the module supports both readings.
+
+**Question for Vlad:** is Fibonacci retracement part of the core method, or scaffolding for students who cannot yet spot support and resistance unaided?
+
+---
+
+## 15. "the ACC" ticker
+
+**Status:** OPEN, transcription
+
+First chart walkthrough in Module 8. ACC was American Campus Communities, taken private in 2022, so a current lookup returns nothing. It could equally be a mis-hearing of something else.
+
+Antero Midstream is the precedent for not guessing: the transcript said "Ontario Midstream Partners," a company that does not exist, and a bot would have cited it confidently.
+
+**Question for Vlad:** which stock is the first chart walkthrough in Module 8?
+
+---
+
+## 16. Moving averages module
+
+**Status:** OPEN, scoping
+
+Module 8 names moving averages as something the instructor uses in preference to Fibonacci, but no module seen so far teaches them. Same situation as falling wedges and double tops in item 13.
+
+**Question for Vlad:** which module covers moving averages?
 
 ---
 
