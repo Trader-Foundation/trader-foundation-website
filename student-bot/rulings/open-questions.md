@@ -103,6 +103,58 @@ Older videos carrying outcome claims may warrant a re-record decision independen
 
 ---
 
+## 10. Volume module: number and course
+
+**Status:** OPEN, BLOCKING. Nothing from this module can be cited until it is answered.
+
+The Volume transcript arrived with no module number and no course. Every chunk requires `course`, `module`, and `timestamp`, and citations are the product. Held in `../transcripts/` as `volume-UNNUMBERED` until assigned.
+
+Content places it near Modules 3 and 5. It assumes candlesticks, support and resistance, and breakouts are already taught, and it closes by telling students to layer volume on top of them.
+
+**Question for Vlad:** which course and which module number is the Volume lesson?
+
+---
+
+## 11. Transcripts arriving without timestamps
+
+**Status:** OPEN, BLOCKING for indexing
+
+The Volume transcript is text only, with no timestamps. `../corpus/schema.md` requires `timestamp` on every chunk and does not index without one, because a chunk that cannot be cited can only produce an uncitable answer.
+
+This is not specific to one module. Any transcript pasted or exported as plain text has the same gap, so it needs solving once rather than per module.
+
+Options: re-export with timestamps from the transcription tool, or run a pass against the source video to recover them. The second is expensive across a six year library.
+
+**Question for Vlad:** can transcripts be re-exported with timestamps, or do we need a different citation granularity such as section headings?
+
+---
+
+## 12. Hammer, possible advancement past the recording
+
+**Status:** OPEN, needs the advancement check
+
+In the Volume module, on a hammer candle: "The candle's okay, it's a hammer candle. Not something I would trade, and I'll show you why. We learned support resistance. We want to see it break this resistance." Entry then waits for the resistance break.
+
+Module 3 teaches the hammer as bullish, colour irrelevant, meaningful at the bottom of a downtrend, with no confirmation condition attached.
+
+These are not necessarily in conflict. The Volume module may be applying confirmation before entry rather than redefining the pattern. But this is the same shape as the inverted hammer case: a recording teaching a flat rule while current teaching carries a condition the recording never states.
+
+**Question for Vlad:** does the hammer carry a confirmation condition in current teaching, the way the inverted hammer does, or is the Volume passage just confirmation before entry applied to a hammer?
+
+---
+
+## 13. Prerequisite modules not yet sampled
+
+**Status:** OPEN, scoping
+
+The Volume module refers back to material taught elsewhere and not present in the four transcripts seen so far: falling wedges, double tops, and double bottoms.
+
+The bot must not answer on these from general knowledge. Until those modules are ingested, questions about them fall to the no-relevant-retrieval path and route to a coach, which is correct but unhelpful if the material exists and simply has not been supplied.
+
+**Question for Vlad:** which module covers falling wedges and double top / double bottom?
+
+---
+
 ## 9. Coach review dashboard
 
 **Status:** OPEN, architectural, raise before building

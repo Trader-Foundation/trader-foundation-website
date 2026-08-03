@@ -21,8 +21,25 @@
       "right": "news",
       "found_in": "Module 5",
       "note": "CONTEXT DEPENDENT. Verify each hit manually before replacing. Two occurrences in Module 5, both in the instigating-event passage."
+    },
+    {
+      "wrong": ["the man versus the supply"],
+      "right": "the demand versus the supply",
+      "found_in": "Volume (module number unassigned)",
+      "note": "CONTEXT DEPENDENT. 'demand' heard as 'the man'. Confirmed by the next sentence, which reads 'That means that demand is higher.' Scoped to this full phrase deliberately: a bare 'the man' to 'the demand' rule would corrupt legitimate uses elsewhere."
     }
   ],
+
+  "generic_transcription_noise": {
+    "_comment": "Not proper nouns. Systematic mis-hearings and stray words the tool inserts. Fix per hit, do not run as blind find-and-replace. Found in the Volume module, expect the same class across the library.",
+    "instances": [
+      { "wrong": "They people need to be there", "right": "The people need to be there" },
+      { "wrong": "That's the demand You For the sales", "right": "That's the demand for the sales", "note": "Spurious capitalised 'You' inserted mid-sentence" },
+      { "wrong": "the candles very down", "right": "the candle's very down" },
+      { "wrong": "the volumes extremely high", "right": "the volume's extremely high" },
+      { "wrong": "a big, Week in sales", "right": "a big week in sales", "note": "Spurious comma plus mid-sentence capitalisation" }
+    ]
+  },
 
   "unresolved": [
     {
@@ -34,6 +51,11 @@
       "text": "shift board",
       "found_in": "Module 5",
       "note": "Company name in the first four-hour chart walkthrough. Does not match a known ticker with confidence. Needs Vlad."
+    },
+    {
+      "text": "And it's stocked to this random volume.",
+      "found_in": "Volume (module number unassigned)",
+      "note": "Garbled. Likely 'it's stuck in this random volume' or 'the stock's due to this random volume'. Left intact in the clean pass. Needs Vlad or an audio check."
     }
   ],
 
@@ -69,7 +91,23 @@
       "channel",
       "trend",
       "volume",
-      "liquidity"
+      "liquidity",
+      "consolidation",
+      "retrace",
+      "momentum play",
+      "swing trader",
+      "above average volume",
+      "falling wedge",
+      "double top",
+      "double bottom"
+    ],
+
+    "volume_patterns": [
+      "flat pattern",
+      "random pattern",
+      "U pattern",
+      "increasing pattern",
+      "decreasing pattern"
     ],
 
     "trader_foundation_terms": [
@@ -97,7 +135,9 @@
       "AT&T (T)",
       "Ventas (VTR)",
       "Apple (AAPL)",
-      "Tesla (TSLA)"
+      "Tesla (TSLA)",
+      "Peloton (PTON)",
+      "Amazon (AMZN)"
     ]
   },
 
