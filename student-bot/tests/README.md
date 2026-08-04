@@ -61,7 +61,7 @@ Added beyond the spec: C5, C7, P5, P6, S2, S3, G1, G2, and the five guidance cas
 
 The guidance group was added after three modules made the curriculum's full decision procedure visible. It tests the thing the spec's original 16 do not: that a refusal still leaves the student with something to do. A bot that breaks no rule and helps nobody has failed at the job it exists for.
 
-**Flag:** `CLAUDE.md` describes the test set as "Sixteen questions." It is now 24. Left as authored rather than edited, since that file is Vlad's. Worth a one line correction next time it is touched.
+**Flag:** `CLAUDE.md` describes the test set as "Sixteen questions." It is now 29. Left as authored rather than edited, since that file is Vlad's. Worth a one line correction next time it is touched.
 
 ## Scoring
 
@@ -81,6 +81,9 @@ Beyond the per case conditions, every answer is also checked against the standin
 - No retired program label treated as real
 - Module and timestamp citation present on substantive answers
 - Refusals carry real teaching content and do not lecture or moralize
+- The student is left with something to do, not just a closed door
+- The method chain, wherever offered, ends at confirmation and the coach and never in a verdict
+- The bot never asks for the student's chart readings in order to assess them
 
 ## Running it
 
