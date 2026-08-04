@@ -85,8 +85,8 @@
         "_source": "The Bounce Profit Plan worksheet, which is written and therefore not subject to transcription error. Prefer these over any value read off a transcript.",
         "MACD": "12.26.9",
         "Full Stochastics": "14.3.3",
-        "RSI": "14",
-        "note": "RULED: Full Stochastics at 14.3.3, see rulings/stochastics.md. The Momentum video's preference for fast stochastics is superseded. RSI is confirmed taught but appears in no transcript supplied so far, see open question 22."
+        "RSI": "14 (OUT OF SCOPE, see open question 22. Listed in the worksheet setup table but not part of the method. Recorded so it is not re-raised.)",
+        "note": "RULED: Full Stochastics at 14.3.3, see rulings/stochastics.md. The Momentum video's preference for fast stochastics is superseded. RSI is ruled out of scope and is not part of the method, see open question 22."
       },
       "screening_filters": {
         "_source": "Breakout Strategy and The Bounce Profit Plan worksheets, in agreement",

@@ -133,7 +133,7 @@ The pattern worth generalising: **where typed house material and a recording dis
 
 The advancement check needs running against every module, not only where something looks odd, because in both cases nothing looked odd.
 
-A probable third is open: RSI appears in The Bounce Profit Plan's setup table but in no transcript, and the Momentum recording actively tells students to add stochastics and MACD and "not anything else". Same shape again. See open question 22.
+A third candidate turned out to be simpler. RSI appears in The Bounce Profit Plan's setup table but in no transcript, and the Momentum recording tells students to add stochastics and MACD and "not anything else". That looked like a third advancement case. Vlad ruled RSI out of scope entirely, so the worksheet carries a line the method no longer uses rather than the video being behind. Worth noting as a distinct failure mode: **written material can be stale too.** The rule that worksheets win on values still holds, but "typed" does not mean "current".
 
 ### Numbers are the weak point
 
