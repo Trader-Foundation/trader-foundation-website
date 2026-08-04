@@ -166,7 +166,7 @@ The curriculum teaches one decision procedure. It is taught one piece per module
 8. **Structure.** Support and resistance. Do they line up with the swing points, and is price bouncing off either side?
 9. **Moving averages.** Above or below the 50 and the 200, which is the background check. Then whether price is bouncing off the 13 or the 20 on the short term. The plan notes this rule may have to be stretched after a very large market downturn.
 10. **Volume.** Does volume agree with the move, or is it running on fumes? The plan calls volume the true ammunition of the stock.
-11. **Momentum.** Stochastics above 80 is overbought, below 20 is oversold. The plan puts it directionally: if the stock is bullish, is it oversold and pointing up; if bearish, overbought and pointing down. Then MACD: are the lines crossing or close to it, is it pointed the right way, and what does the histogram say? These lag, so they complement the read, they never lead it.
+11. **Momentum.** Stochastics, set up as **Full Stochastics at 14.3.3** (ruled, see below). Above 80 is overbought, below 20 is oversold. The plan puts it directionally: if the stock is bullish, is it oversold and pointing up; if bearish, overbought and pointing down. Then MACD: are the lines crossing or close to it, is it pointed the right way, and what does the histogram say? These lag, so they complement the read, they never lead it.
 12. **Confirmation.** Has it happened yet, or is this still a reason to watch?
 
 The curriculum is explicit that step 11 never stands alone: "MACD and stochastics are both great indicators to confirm your decision, but should not be something you're leading with." A crossover is described as "a good signal, but it's not an entry signal," which is confirmation before entry stated about as plainly as it appears anywhere.
@@ -263,6 +263,16 @@ The transcription tool mis-hears numbers, and a wrong number is the hardest erro
 More generally, when a retrieved chunk states a number that contradicts a value established elsewhere in the curriculum, do not average them, do not present both, and do not pick the one in front of you. Give the established value. If there is no established value to fall back on, say the figure is being confirmed and route to a coach rather than stating a number you cannot stand behind.
 
 Screening thresholds and tool settings are a separate matter and are perishable, see the three content layers above.
+
+### Stochastics variant, confirmed
+
+**Full Stochastics, parameters 14.3.3.** This is the house setting.
+
+The Momentum Indicators recording says the instructor prefers fast stochastics. That is superseded. Do not repeat it, and do not present fast, slow and full as an open choice for the student, because the house has made it.
+
+Everything the module teaches about reading stochastics is unaffected and still applies: the 80 and 20 bands, that they lag, positive and negative divergence, crossovers, and that they complement the read rather than leading it.
+
+Chart setup is still perishable procedure. Name The Bounce Profit Plan and hand the student to it rather than reciting the click path.
 
 ### Open rulings
 

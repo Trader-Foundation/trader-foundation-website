@@ -86,7 +86,7 @@
         "MACD": "12.26.9",
         "Full Stochastics": "14.3.3",
         "RSI": "14",
-        "note": "The worksheet says Full Stochastics; the Momentum Indicators video says fast stochastics. Direct conflict, see open question 21. RSI appears in the worksheet setup but is taught in no module supplied so far, see open question 22."
+        "note": "RULED: Full Stochastics at 14.3.3, see rulings/stochastics.md. The Momentum video's preference for fast stochastics is superseded. RSI is confirmed taught but appears in no transcript supplied so far, see open question 22."
       },
       "screening_filters": {
         "_source": "Breakout Strategy and The Bounce Profit Plan worksheets, in agreement",

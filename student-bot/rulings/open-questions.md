@@ -145,33 +145,33 @@ Module 8 names moving averages as something the instructor uses in preference to
 
 ---
 
-## 21. Full stochastics or fast stochastics? Worksheet contradicts the video
+## 21. Full stochastics or fast stochastics?
 
-**Status:** OPEN, DIRECT CONFLICT, affects what students are told to set up
+**Status:** RESOLVED. See `stochastics.md`.
 
-The Bounce Profit Plan says: *"Under indicators make sure to select **Full Stochastics** and press Update"*, with parameters `14.3.3`.
+**Vlad's ruling: Full Stochastics, parameters 14.3.3.** The worksheet wins, the Momentum video's "I usually go for fast stochastics" is superseded, and the bot does not repeat it.
 
-The Momentum Indicators module says: *"There's the full stochastic, slow stochastic or fast... I usually go for **fast stochastics** because most of our plays are somewhat of a fast play."*
+Narrow in scope. Everything the module teaches *about* stochastics (the 80/20 bands, the lagging caveat, divergence, crossovers, complement-never-lead) holds regardless of variant, so the lesson stays intact. Only the setup instruction changes.
 
-These are different indicators producing different lines. A student following the written plan and a student following the video are not looking at the same chart.
-
-This is not the inverted hammer situation, where a recording was simply incomplete. Both sources are explicit and they disagree. The written plan is more likely to be current, but that is an assumption.
-
-**Question for Vlad:** full stochastics or fast stochastics?
+Second confirmed case of a recording being superseded, after the inverted hammer, and the second time typed or current material carried the correction.
 
 ---
 
-## 22. RSI is in the setup but taught nowhere
+## 22. Which module teaches RSI?
 
-**Status:** OPEN, curriculum gap
+**Status:** OPEN, narrowed. Vlad says RSI is taught, "part of indicators".
 
-The Bounce Profit Plan's indicator table tells students to add `RSI | 14 | Above`. No module supplied so far teaches RSI: not Momentum Indicators, which covers stochastics and MACD in depth and never mentions it, and not any other.
+Verified against everything supplied: **RSI appears exactly once, in The Bounce Profit Plan worksheet's setup table. It is in no transcript.**
 
-So a student sets up an indicator the curriculum never explains, and the bot will be asked what it is. Grounding rules mean the correct answer today is "that is not something I can find in the curriculum," which is right but unhelpful when the house worksheet put it on their screen.
+Worth stating precisely, because a naive search says otherwise. A case-insensitive substring search for "rsi" returns four hits in the Momentum Indicators transcript, but all four are inside the word "reversing". Word-boundary matching returns nothing.
 
-Two possibilities: a module teaches RSI and has not been supplied, or RSI is a leftover in the worksheet that should not be there.
+That matters because Momentum Indicators *is* the indicators module, and it covers stochastics 30 times and MACD 18 times without once mentioning RSI.
 
-**Question for Vlad:** is RSI taught in a module, or is it left over in the plan?
+**The Momentum transcript is not truncated.** It opens "Welcome to Momentum Indicators" and closes "See you at the next lesson guys", so it is a complete lesson. RSI is therefore taught in a module that has not been supplied, not in a missing section of this one.
+
+**Question for Vlad:** which module teaches RSI? It is not in the Momentum Indicators lesson.
+
+Until it arrives, a student asking the bot about RSI gets the no-relevant-retrieval answer, which is correct but unhelpful given the house worksheet put RSI on their screen.
 
 ---
 

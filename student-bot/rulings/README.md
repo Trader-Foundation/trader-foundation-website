@@ -9,6 +9,7 @@ Where a recording and a ruling conflict, the ruling wins and the bot follows the
 | File | Contents |
 |---|---|
 | `inverted-hammer.md` | Confirmed. House convention overriding the Module 3 recording. |
+| `stochastics.md` | Confirmed. Full Stochastics at 14.3.3, overriding the Momentum Indicators recording. |
 | `open-questions.md` | Unresolved. The bot must not build answers around these. |
 | `compliance-log.md` | Every compliance hit found during scanning, and what was done about it. |
 

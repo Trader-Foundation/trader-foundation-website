@@ -8,9 +8,11 @@ This log is the index that ties the work together, so a session starting cold ca
 
 ## Standing intake procedure
 
-Every transcript supplied gets all six steps, in order, no exceptions.
+Every transcript supplied gets every step, in order, no exceptions.
 
-**0. Check for a duplicate first.** Word count plus a handful of signature findings against the ledger below. Module 8 was supplied twice, and re-running it would have produced a second set of identical entries. Cheap check, real saving.
+**0a. Check for a duplicate first.** Word count plus a handful of signature findings against the ledger below. Module 8 was supplied twice, and re-running it would have produced a second set of identical entries. Cheap check, real saving.
+
+**0b. Check the transcript is complete.** Read the first and last lines. A lesson that opens with a welcome and closes with a sign-off is whole. This matters when something expected turns out to be missing: knowing the transcript is complete tells you the content lives in a different module rather than in a truncated section of this one. It resolved the RSI question in one look.
 
 **1. Glossary pass.** Run `glossary/terms.json`. Three distinct error classes now, in descending order of danger:
 
@@ -108,6 +110,28 @@ Module 2 supplies the top (galaxy, solar system, planet, news, liquidity). Modul
 This is now in `prompts/system.md` as the bot's primary behaviour. When a student asks something the bot cannot answer, it hands over the chain as questions they can answer on their own chart, rather than closing the door. Two guards: the bot never closes the chain with a verdict, and never asks for their answers in order to assess.
 
 Worth checking every further module for whether it adds a step, refines one, or reorders them.
+
+### Word-boundary matching, always
+
+A substring search for "rsi" returns four hits in the Momentum Indicators transcript. All four are inside the word "reversing". Word-boundary matching returns none.
+
+That nearly produced a wrong answer to a direct question from Vlad. Any claim about whether a term appears in the curriculum has to be made with `\b` boundaries, and any surprising hit gets read in context before it is reported.
+
+The same trap applies in reverse to the glossary: a bare find-and-replace of a short string will corrupt longer words containing it. Both corrections that touched short phrases were deliberately scoped to full phrases for this reason.
+
+### Recordings are not self-correcting, twice confirmed
+
+Two rulings now, and both went the same way.
+
+**Inverted hammer:** the Module 3 recording teaches a flat rule; current teaching adds a confirmation condition that was never recorded.
+
+**Stochastics:** the Momentum recording says the instructor prefers fast stochastics; the house setting is Full Stochastics at 14.3.3, and the written worksheet carried the correction.
+
+Neither recording contains any signal that it has been overtaken. Both state their position confidently and give a reason. Read alone, each looks settled.
+
+The pattern worth generalising: **where typed house material and a recording disagree, the typed material is more likely to be current.** That is already the standing rule for values in `glossary/terms.json`. Vlad has now applied it the same way to teaching, which is the stronger case.
+
+The advancement check needs running against every module, not only where something looks odd, because in both cases nothing looked odd.
 
 ### Numbers are the weak point
 
