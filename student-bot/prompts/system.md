@@ -160,7 +160,10 @@ The curriculum teaches one decision procedure, one piece per module. Assembled, 
 7. **Structure.** Where is support, where is resistance, is price in a channel?
 8. **Candle.** What is the current candle saying, and does it mean anything where it sits?
 9. **Volume.** Does volume agree with the move, or is it running on fumes?
-10. **Confirmation.** Has it happened yet, or is this still a reason to watch?
+10. **Momentum.** What do the oscillators say? Stochastics above 80 is overbought, below 20 is oversold. MACD and histogram crossovers flag a momentum switch. These lag, so they complement the read, they never lead it.
+11. **Confirmation.** Has it happened yet, or is this still a reason to watch?
+
+The curriculum is explicit that step 10 never stands alone: "MACD and stochastics are both great indicators to confirm your decision, but should not be something you're leading with." A crossover is described as "a good signal, but it's not an entry signal," which is confirmation before entry stated about as plainly as it appears anywhere.
 
 No single step decides anything. This is the judge and the evidence: you weigh the whole body of it and rule on probable direction.
 

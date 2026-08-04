@@ -46,6 +46,18 @@
         "note": "Same lesson, second numeric error, in the passage explaining why the instructor would not take the trade. 60.8 is not a Fibonacci level."
       },
       {
+        "wrong": "look at the 250 day moving average. They are way below",
+        "right": "look at the 50 and 200 day moving averages. They are way below",
+        "found_in": "Momentum Indicators (module number unassigned, likely 11)",
+        "note": "250 is not a canonical period. Resolved because 'They are' is plural, and 50 plus 200 is the only plural reading in the canonical set. The passage is the background-check step of the method chain, where 50 and 200 are exactly the pair used."
+      },
+      {
+        "wrong": "So here we have the MACD. You could see the MACD represents 80 and 20 right here.",
+        "right": "So here we have the stochastics. You could see the stochastics represents 80 and 20 right here.",
+        "found_in": "Momentum Indicators (module number unassigned, likely 11)",
+        "note": "Indicator mislabel rather than a bare number error. 80 and 20 with a 50 midline are stochastic bands; the MACD is a centered oscillator around zero. Confirmed by the next sentence, 'On the MACD, you got the two lines as well', where 'as well' marks the switch to a different panel. Left uncorrected, the bot would teach the wrong indicator's bands."
+      },
+      {
         "wrong": "bouncing off both the 20 day moving average and the 30 day moving average",
         "right": "bouncing off both the 20 day moving average and the 13 day moving average",
         "found_in": "Moving Averages (module number unassigned)",
@@ -60,6 +72,7 @@
     "canonical_values": {
       "fibonacci_retracement_levels": ["38.2", "50", "61.8"],
       "moving_averages": ["13", "20", "50", "200"],
+      "stochastic_bands": ["80 overbought", "20 oversold", "50 midline"],
       "note": "The levels and periods the curriculum teaches. Any other value appearing in a retracement or moving-average passage is a transcription error, not a variant teaching. Two short-term averages (13, 20) and two long-term (50, 200)."
     }
   },
@@ -95,6 +108,11 @@
       "text": "the ACC",
       "found_in": "Module 8, Fibonacci Retracement",
       "note": "Ticker for the first chart walkthrough. ACC was American Campus Communities, taken private in 2022, so a current lookup returns nothing. Could equally be a mis-hearing. Antero Midstream is the precedent for not guessing at a ticker. Needs Vlad."
+    },
+    {
+      "text": "MACD parameters, stated as both '12 day / 25 day' and '13 and 28 day moving averages'",
+      "found_in": "Momentum Indicators (module number unassigned, likely 11)",
+      "note": "The module gives two different parameter pairs for the MACD in the same lesson. Standard MACD defaults are 12, 26 and 9, which matches neither exactly. Could be a transcription error in one or both, or a deliberate custom setting. Not guessed. Needs Vlad or a look at the actual chart."
     },
     {
       "text": "I'm thinking once it hits this 30 day moving average",
@@ -150,7 +168,14 @@
       "swing point",
       "all time high",
       "pullback",
-      "correction"
+      "correction",
+      "overbought",
+      "oversold",
+      "divergence",
+      "positive divergence",
+      "negative divergence",
+      "crossover",
+      "lagging indicator"
     ],
 
     "volume_patterns": [
@@ -205,7 +230,16 @@
       "20 day moving average",
       "50 day moving average",
       "200 day moving average",
-      "watch list"
+      "watch list",
+      "stochastics",
+      "fast stochastic",
+      "slow stochastic",
+      "full stochastic",
+      "MACD",
+      "MACD histogram",
+      "oscillator",
+      "banded oscillator",
+      "centered oscillator"
     ]
   },
 

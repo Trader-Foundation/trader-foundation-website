@@ -141,6 +141,29 @@ Module 8 names moving averages as something the instructor uses in preference to
 
 ---
 
+## 20. Momentum Indicators: module number, and the numbering of the whole run
+
+**Status:** OPEN, BLOCKING for citation, but close to resolved
+
+Momentum Indicators refers three times to "the past 10 modules," which places it at **Module 11**. Held as `momentum-indicators-UNNUMBERED` until confirmed.
+
+Putting the cross-references together gives a consistent picture for all three unassigned modules:
+
+| Module | Evidence |
+|---|---|
+| 8 | Fibonacci, self-identified by "then move to module 9" |
+| 9 | Moving Averages? It closes by pointing at the bounce formula "next" |
+| 10 | The bounce formula? |
+| 11 | Momentum Indicators, from "the past 10 modules" |
+
+That fits every cross-reference seen so far, but only Module 8 is stated outright. The rest is inference and should not be encoded.
+
+If this is right, Volume sits somewhere at 6 or below, since it assumes candles, structure, falling wedges and double tops are already taught.
+
+**Question for Vlad:** are Moving Averages, the bounce formula, and Momentum Indicators modules 9, 10 and 11?
+
+---
+
 ## 17. Moving Averages: module number, and where the bounce formula sits
 
 **Status:** OPEN, BLOCKING for citation
