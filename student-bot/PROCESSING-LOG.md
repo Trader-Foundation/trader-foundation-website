@@ -65,6 +65,18 @@ Modules 3, 5, Volume, and Fibonacci each arrive at it separately. This is the be
 
 Every walkthrough module narrates entry and exit against a real chart. Fine in a video, reads as instruction when retrieved as a chunk. `prompts/system.md` carries a rule for this. Expect it in every walkthrough module rather than treating it as a per-module finding.
 
+### The curriculum contains one decision procedure, taught one piece per module
+
+The most useful thing to come out of processing three modules, and something not visible from any single one of them.
+
+Assembled macro to micro: market, sector, stock, news to avoid, liquidity, the 50 and 200 day background check, structure, candle, volume, confirmation.
+
+Module 2 supplies the top (galaxy, solar system, planet, news, liquidity). Module 3 supplies candles and the judge-and-evidence framing that governs how the steps combine. Module 5 supplies structure. Volume supplies the volume check. Moving Averages supplies the background check and, notably, demonstrates the whole chain running at once on the Amazon walkthrough.
+
+This is now in `prompts/system.md` as the bot's primary behaviour. When a student asks something the bot cannot answer, it hands over the chain as questions they can answer on their own chart, rather than closing the door. Two guards: the bot never closes the chain with a verdict, and never asks for their answers in order to assess.
+
+Worth checking every further module for whether it adds a step, refines one, or reorders them.
+
 ### Numbers are the weak point
 
 Two modules produced numeric errors in the values being taught. Canonical values now live in `terms.json` and the system prompt instructs the bot to prefer them over anything retrieved.
