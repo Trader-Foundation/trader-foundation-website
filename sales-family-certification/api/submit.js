@@ -44,9 +44,16 @@ module.exports = async (req, res) => {
 
     /* Tell the trainers someone finished. Saving the result already succeeded,
        so a notification problem must never surface to the rep as a failure. */
+    const attemptNo = store.attemptsForExam(user.attempts, exam).length;
     const flags = [];
     if (attempt.mins < 12) flags.push(`finished in ${attempt.mins} minutes`);
-    if ((user.logins || []).length > store.attemptsForExam(user.attempts, exam).length + 2) {
+    /* The cap exists so that being certified means knowing the material. Someone
+       working through their attempts is the case a trainer most needs to see,
+       and it is invisible unless the email says so. */
+    if (attemptNo >= store.REPEAT_ATTEMPT) {
+      flags.push(`${attemptNo} attempts on this certification`);
+    }
+    if ((user.logins || []).length > attemptNo + 2) {
       flags.push("more sign-ins than attempts");
     }
     if (user.tester) flags.push("tester account");
@@ -59,6 +66,7 @@ module.exports = async (req, res) => {
       passed: attempt.finalPass,
       mins: attempt.mins,
       flags,
+      attemptNo,
     });
 
     /* A notification that quietly stops working is the worst failure here: the

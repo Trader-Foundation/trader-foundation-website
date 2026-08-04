@@ -155,6 +155,12 @@ function call(handler, { method = "GET", body = null, query = {} } = {}) {
   check(/did not pass/.test(sentEmails[1].subject), "subject says it did not pass: " + sentEmails[1].subject);
   check(/finished in 0.4 minutes/.test(sentEmails[1].text), "fast run is called out in the email");
 
+  // early attempts are numbered in the body but must not clutter the subject
+  check(/Attempt: 1st on this certification/.test(mail.text), "first attempt is numbered in the body");
+  check(!/attempt/i.test(mail.subject), "a first attempt stays out of the subject: " + mail.subject);
+  check(/Attempt: 2nd on this certification/.test(sentEmails[1].text), "second attempt is numbered in the body");
+  check(!/attempt/i.test(sentEmails[1].subject), "a second attempt stays out of the subject");
+
   // a broken notifier must never fail the submission
   const okFetch = global.fetch;
   global.fetch = async (url, opts) => {
@@ -170,10 +176,21 @@ function call(handler, { method = "GET", body = null, query = {} } = {}) {
 
   // attempt cap is per certification
   await call(action, { method: "POST", body: { code: "GOLD16", email: "rep.one@example.com", type: "reset" } });
+  const beforeCap = sentEmails.length;
   for (let i = 0; i < 3; i++) {
     r = await call(submit, { method: "POST", body: { email: "rep.one@example.com", attempt: { ...attempt, autoPass: false, score: 10 } } });
     check(r.status === 200, "failed setter attempt " + (i + 1) + " saved");
   }
+
+  /* Reaching the cap is the case a trainer most needs to see, and it is
+     invisible unless the email says so without being opened. */
+  const third = sentEmails[beforeCap + 2];
+  check(/3rd attempt/.test(third.subject), "third attempt is called out in the subject: " + third.subject);
+  check(/3 attempts on this certification/.test(third.text), "third attempt is flagged as worth a look");
+  check(/Attempt: 3rd on this certification/.test(third.text), "third attempt is numbered in the body");
+  const second = sentEmails[beforeCap + 1];
+  check(!/attempt/i.test(second.subject), "the attempt before the cap does not trip the alert: " + second.subject);
+
   r = await call(submit, { method: "POST", body: { email: "rep.one@example.com", attempt } });
   check(r.status === 403, "fourth setter attempt blocked by cap");
 

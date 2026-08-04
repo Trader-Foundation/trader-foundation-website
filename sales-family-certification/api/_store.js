@@ -206,25 +206,44 @@ async function deleteUser(email) {
   if (mine.length) await blobDelete(mine.map((b) => b.url));
 }
 
+/* The attempt number at which a run stops being routine and starts being worth
+   a trainer's attention. The cap is 3, so reaching it means this is their last
+   go, and anything beyond it means the cap was lifted for them somehow. */
+const REPEAT_ATTEMPT = 3;
+
+/* 1st, 2nd, 3rd, 4th. This lands in a subject line, so it has to read like a
+   person wrote it. */
+function ordinal(n) {
+  const tens = n % 100;
+  if (tens >= 11 && tens <= 13) return `${n}th`;
+  return n + ({ 1: "st", 2: "nd", 3: "rd" }[n % 10] || "th");
+}
+
 /* Fire-and-forget result notification. Reuses the project's existing Resend
    credentials. Never allowed to fail or slow a submission: a rep's result is
    already saved by the time this runs, and a bounced email must not look to
    them like a failed exam. */
-async function notifyResult({ name, email, examName, score, total, passed, mins, flags }) {
+async function notifyResult({ name, email, examName, score, total, passed, mins, flags, attemptNo }) {
   const key = process.env.RESEND_API_KEY;
   if (!key || !NOTIFY_EMAILS.length) return { sent: false, reason: !key ? "no RESEND_API_KEY" : "no NOTIFY_EMAILS set" };
   const from = process.env.EMAIL_FROM_ADDRESS
     ? `${process.env.EMAIL_FROM_NAME || "Trader Foundation"} <${process.env.EMAIL_FROM_ADDRESS}>`
     : "Trader Foundation <onboarding@resend.dev>";
   const verdict = passed ? "PASSED" : "did not pass";
-  const subject = `${name || email} ${passed ? "passed" : "did not pass"} the ${examName} (${score}/${total})`;
+  /* Put a repeat attempt in the subject, not just the body. The whole point of
+     the alert is that it is seen without opening anything. */
+  const repeat = typeof attemptNo === "number" && attemptNo >= REPEAT_ATTEMPT;
+  const subject =
+    `${name || email} ${passed ? "passed" : "did not pass"} the ${examName} (${score}/${total})` +
+    (repeat ? `, ${ordinal(attemptNo)} attempt` : "");
   const lines = [
     `${name || "(no name given)"} just finished the ${examName}.`,
     ``,
     `Score: ${score} of ${total} (${verdict})`,
     `Time taken: ${mins} minutes`,
-    `Email: ${email}`,
   ];
+  if (typeof attemptNo === "number") lines.push(`Attempt: ${ordinal(attemptNo)} on this certification`);
+  lines.push(`Email: ${email}`);
   if (flags && flags.length) lines.push(``, `Worth a look: ${flags.join(", ")}`);
   lines.push(``, `Full detail is in the trainer dashboard.`);
   try {
@@ -265,6 +284,7 @@ function recomputeAttempt(a) {
 module.exports = {
   PROBE_EMAIL,
   NOTIFY_EMAILS,
+  REPEAT_ATTEMPT,
   notifyResult,
   EXAM_KEYS,
   EXAM_TOTALS,
