@@ -141,6 +141,44 @@ Module 8 names moving averages as something the instructor uses in preference to
 
 ---
 
+## 17. Moving Averages: module number, and where the bounce formula sits
+
+**Status:** OPEN, BLOCKING for citation
+
+No module number stated. Held as `moving-averages-UNNUMBERED`.
+
+The module closes with "we're going to use this to create our bounce formula next," and refers throughout to "the bounce profit formula." **Bounce Profit is one of the four v1 products.** So either the numbered course teaches the bounce formula as a lesson, or this module is the on-ramp into a separate product, and the two are being cross-sold inside the curriculum.
+
+This matters for the course-scoped chunk schema. If the bounce formula is both a `tf-core` module and a `bounce-profit` product, the same teaching exists in two places under different citations, and retrieval will surface whichever it happens to match.
+
+**Question for Vlad:** which module number is Moving Averages, and is the bounce formula a numbered module, the Bounce Profit product, or both?
+
+---
+
+## 18. Scaling: is "collect 50 percent" taught doctrine?
+
+**Status:** OPEN
+
+The module recommends scaling out: "Maybe you should collect 50 percent of your profit right here." The surrounding dollar example is excluded on compliance grounds, but the scaling rule itself is method, not an outcome claim, and survives the exclusion.
+
+The hedged phrasing ("maybe you should") leaves it unclear whether 50 percent is a taught rule or an illustration. The bot should not state a specific scaling percentage as house teaching unless it is one.
+
+**Question for Vlad:** is scaling out 50 percent at a target a taught rule, or was that an illustration?
+
+---
+
+## 19. Holding period: "two to three days max, usually two"
+
+**Status:** OPEN, needs the advancement check
+
+Stated twice and firmly: "you do this in this strategy two to three days max maybe four but that's really stretching it," and "My recommendation is always get out two to three days max, usually two."
+
+This is the most concrete, most actionable rule found in any module so far, and it is exactly the kind of thing a student will ask the bot to confirm. It is also the kind of rule most likely to have moved since recording, which is what the advancement check exists to catch.
+
+**Question for Vlad:** is the two to three day maximum hold still current teaching for this strategy?
+
+---
+
 ## 10. Volume module: number and course
 
 **Status:** OPEN, BLOCKING. Nothing from this module can be cited until it is answered.

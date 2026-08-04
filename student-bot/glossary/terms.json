@@ -44,6 +44,12 @@
         "right": "the 61.8 line",
         "found_in": "Module 8, Fibonacci Retracement",
         "note": "Same lesson, second numeric error, in the passage explaining why the instructor would not take the trade. 60.8 is not a Fibonacci level."
+      },
+      {
+        "wrong": "bouncing off both the 20 day moving average and the 30 day moving average",
+        "right": "bouncing off both the 20 day moving average and the 13 day moving average",
+        "found_in": "Moving Averages (module number unassigned)",
+        "note": "The module teaches exactly four averages: 13, 20, 50, 200. There is no 30 day. Resolved with confidence because 'both' pairs it with the 20, and 13 is the other short-term average. A second '30 day' occurrence in the Zoom walkthrough has no such pairing and is left unresolved."
       }
     ],
     "formatting_artifacts": {
@@ -53,7 +59,8 @@
     },
     "canonical_values": {
       "fibonacci_retracement_levels": ["38.2", "50", "61.8"],
-      "note": "The three levels the curriculum teaches as support or resistance. Any other value appearing in a retracement passage is a transcription error, not a variant teaching."
+      "moving_averages": ["13", "20", "50", "200"],
+      "note": "The levels and periods the curriculum teaches. Any other value appearing in a retracement or moving-average passage is a transcription error, not a variant teaching. Two short-term averages (13, 20) and two long-term (50, 200)."
     }
   },
 
@@ -88,6 +95,11 @@
       "text": "the ACC",
       "found_in": "Module 8, Fibonacci Retracement",
       "note": "Ticker for the first chart walkthrough. ACC was American Campus Communities, taken private in 2022, so a current lookup returns nothing. Could equally be a mis-hearing. Antero Midstream is the precedent for not guessing at a ticker. Needs Vlad."
+    },
+    {
+      "text": "I'm thinking once it hits this 30 day moving average",
+      "found_in": "Moving Averages (module number unassigned), Zoom walkthrough",
+      "note": "Second '30 day' occurrence. The module teaches only 13, 20, 50, 200. Unlike the first occurrence there is no pairing to resolve it against, so it could be 13 or 20. Left intact in the clean pass. Needs Vlad or an audio check."
     }
   ],
 
@@ -131,7 +143,14 @@
       "above average volume",
       "falling wedge",
       "double top",
-      "double bottom"
+      "double bottom",
+      "stretch stock",
+      "scaling",
+      "entry candle",
+      "swing point",
+      "all time high",
+      "pullback",
+      "correction"
     ],
 
     "volume_patterns": [
@@ -149,7 +168,9 @@
       "Stock Predator",
       "Skool",
       "Education Coordinator",
-      "Trader Foundation"
+      "Trader Foundation",
+      "bounce formula",
+      "bounce profit formula"
     ],
 
     "platforms_and_tools": [
@@ -170,13 +191,20 @@
       "Tesla (TSLA)",
       "Peloton (PTON)",
       "Amazon (AMZN)",
-      "Nikola (NKLA)"
+      "Nikola (NKLA)",
+      "Zoom (ZM)"
     ],
 
     "indicators_and_tools": [
       "Fibonacci retracement",
       "Fibonacci levels",
       "moving averages",
+      "simple moving average",
+      "exponential moving average",
+      "13 day moving average",
+      "20 day moving average",
+      "50 day moving average",
+      "200 day moving average",
       "watch list"
     ]
   },

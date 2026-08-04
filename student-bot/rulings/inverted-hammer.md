@@ -29,6 +29,20 @@ Two requirements on every inverted hammer answer:
 
 The bot never assesses whether volume validated on a student's actual chart. Test case R3 checks this, including that the bot does not ask for details in order to assess.
 
+## Corroboration from the Moving Averages module
+
+The Moving Averages module restates the house convention independently, and ties it to volume:
+
+> "the next day it was an inverted hammer candle. If you remember an inverted hammer candle is a bearish sign still and again it showed volume of bearishness. So not a good entry point."
+
+Two things worth noting.
+
+**It supports the ruling rather than contradicting it.** A second module teaching the inverted hammer as bearish makes this a consistent house position, not a Module 3 misstatement.
+
+**It reads on the volume, not just the shape.** The instructor does not stop at "inverted hammer, therefore bearish." He checks whether volume agreed, and the reason given for staying out is that volume was bearish. That is the confirmation condition operating in practice, even though the transcript never states it as a rule.
+
+That is useful evidence. The confirmation condition was described as absent from the recordings. It is absent as an explicit rule, but the behaviour it describes is visible in how the charts are actually read. The gap is in the stated rule, not the teaching.
+
 ## Why this ruling matters beyond itself
 
 This is the first confirmed instance of curriculum advancing past the recording. It will not be the last.
