@@ -58,11 +58,15 @@ Garbled passage in Module 5. Likely "bounce, bounce" or "the bulls." Needs Vlad 
 
 ## 5. FinViz average volume threshold
 
-**Status:** OPEN, perishable
+**Status:** LIKELY RESOLVED, needs only a date
 
-Module 2 screening uses an average volume over 1 million threshold. Tagged PERISHABLE_PROCEDURE. The bot must not state it as current until confirmed. Test case S3 checks this.
+Two written worksheets, the Breakout Strategy and The Bounce Profit Plan, both specify the same threshold: "Over 1 Million" and "Over 1M". That is two independent written confirmations of the Module 2 video.
 
-**Question for Vlad:** is the average volume screening filter still 1 million?
+The Bounce Profit Plan also gives the reasoning the video did not: "We want to make sure we are dealing with legitimate stocks that won't be affected by minor news. In addition we want them to be liquid." That is the liquidity principle from Module 2 applied as a screening rule, which makes the threshold a consequence of a principle rather than an arbitrary number.
+
+Still perishable in principle, since it is a tool setting. But it is now the best-evidenced setting in the corpus.
+
+**Question for Vlad:** what is the date on these worksheets? If they are current, the bot can state 1 million and test S3 needs rewriting.
 
 ---
 
@@ -80,11 +84,11 @@ Any pricing claim from the Module 2 walkthrough needs verification. The bot does
 
 **Settled:** v1 covers four products, not one. The numbered Trader Foundation modules, Stock Predator, Bounce Profit, and the Masterclass. Chunks are course scoped as a result, see `../corpus/schema.md`.
 
-**Also settled:** the numbered course runs to at least 9 modules. Module 8 is Fibonacci Retracement, self-identified by its closing line "do the homework for this lesson and then move to module 9." That is the first transcript to carry its own number, and it is worth checking every transcript's closing lines for the same, since it is cheaper than asking.
+**Also settled:** the numbered course runs to at least 11 modules. Module 8 is Fibonacci Retracement, self-identified by its closing line "do the homework for this lesson and then move to module 9." That is the first transcript to carry its own number, and it is worth checking every transcript's closing lines for the same, since it is cheaper than asking.
 
 **Still open:**
 
-- How many numbered modules total, and which are CURRENT, SUPERSEDED, or RETIRED. Known so far: 2, 3, 5, 8, and 9 exists. Vlad is supplying modules separately.
+- How many numbered modules total, and which are CURRENT, SUPERSEDED, or RETIRED. Known so far: 2, 3, 5, 8, and at least 11 exist. Vlad is supplying modules separately.
 - Whether Paycheck Collector and Ready Set Explode are in v1. Both are house IP and both appear in the protected vocabulary, but neither was named in the scope decision.
 - Canonical version per product. Every product has duplicate files in Drive, including three Stock Predator PDFs and three Masterclass decks. Ingesting duplicates puts the same passage in the corpus several times.
 - Recording date per file. Several carry none in the title and their Drive modified dates look unreliable.
@@ -141,6 +145,36 @@ Module 8 names moving averages as something the instructor uses in preference to
 
 ---
 
+## 21. Full stochastics or fast stochastics? Worksheet contradicts the video
+
+**Status:** OPEN, DIRECT CONFLICT, affects what students are told to set up
+
+The Bounce Profit Plan says: *"Under indicators make sure to select **Full Stochastics** and press Update"*, with parameters `14.3.3`.
+
+The Momentum Indicators module says: *"There's the full stochastic, slow stochastic or fast... I usually go for **fast stochastics** because most of our plays are somewhat of a fast play."*
+
+These are different indicators producing different lines. A student following the written plan and a student following the video are not looking at the same chart.
+
+This is not the inverted hammer situation, where a recording was simply incomplete. Both sources are explicit and they disagree. The written plan is more likely to be current, but that is an assumption.
+
+**Question for Vlad:** full stochastics or fast stochastics?
+
+---
+
+## 22. RSI is in the setup but taught nowhere
+
+**Status:** OPEN, curriculum gap
+
+The Bounce Profit Plan's indicator table tells students to add `RSI | 14 | Above`. No module supplied so far teaches RSI: not Momentum Indicators, which covers stochastics and MACD in depth and never mentions it, and not any other.
+
+So a student sets up an indicator the curriculum never explains, and the bot will be asked what it is. Grounding rules mean the correct answer today is "that is not something I can find in the curriculum," which is right but unhelpful when the house worksheet put it on their screen.
+
+Two possibilities: a module teaches RSI and has not been supplied, or RSI is a leftover in the worksheet that should not be there.
+
+**Question for Vlad:** is RSI taught in a module, or is it left over in the plan?
+
+---
+
 ## 20. Momentum Indicators: module number, and the numbering of the whole run
 
 **Status:** OPEN, BLOCKING for citation, but close to resolved
@@ -174,7 +208,11 @@ The module closes with "we're going to use this to create our bounce formula nex
 
 This matters for the course-scoped chunk schema. If the bounce formula is both a `tf-core` module and a `bounce-profit` product, the same teaching exists in two places under different citations, and retrieval will surface whichever it happens to match.
 
-**Question for Vlad:** which module number is Moving Averages, and is the bounce formula a numbered module, the Bounce Profit product, or both?
+**Partially resolved.** The Bounce Profit Plan worksheet has been supplied. It is a written checklist branded "TRADER FOUNDATION", not a video lesson, and it is plainly the "bounce formula" Moving Averages points at. So the bounce formula exists at least as a deliverable document.
+
+That does not settle whether a numbered *module* also teaches it, which matters for the numbering run in question 20 and for whether the same teaching gets cited two ways.
+
+**Question for Vlad:** which module number is Moving Averages, and is there a numbered module teaching the bounce formula, or is the written plan the whole of it?
 
 ---
 

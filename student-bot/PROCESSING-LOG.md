@@ -45,6 +45,8 @@ Then: append a row to the ledger, add new questions to `rulings/open-questions.m
 | Fibonacci Retracement | 8 | 1 boundary call | 2 | 1 | No |
 | Moving Averages | **unassigned** | **6 hits, re-record candidate** | 1 fixed, 1 unresolved | 1 | No |
 | Momentum Indicators | **unassigned, likely 11** | Clean | 2 fixed, 1 unresolved | 1 | No |
+| Breakout Strategy *(worksheet)* | n/a, document | Clean | none, written source | 0 | No |
+| The Bounce Profit Plan *(worksheet)* | n/a, document | Clean | none, written source | 0 | No |
 
 Modules 2, 3 and 5 were characterised in the spec before this log existed. Everything from Volume onward was processed here.
 
@@ -55,6 +57,31 @@ Working hypothesis for the unassigned two, not confirmed: Moving Averages closes
 ---
 
 ## Cumulative findings
+
+### Written worksheets are a second material class, and they behave differently
+
+Two worksheets arrived alongside the transcripts: the Breakout Strategy and The Bounce Profit Plan. They are typed, not transcribed, and that changes three things.
+
+**They carry no mis-hearing errors.** Every numeric problem found so far came from speech-to-text. A worksheet has none, which makes it authoritative for numbers and settings. Recorded in `terms.json` under `indicator_parameters` and `screening_filters`, with the standing rule: where a worksheet and a transcript disagree on a *value*, the worksheet wins. Where they disagree on *teaching*, that is a ruling for Vlad, not a correction.
+
+This immediately resolved the MACD parameters. The transcript said 12/25 in one place and 13/28 in another; the worksheet says 12.26.9, the standard default, so the "25" was 26 mis-heard and the "13 and 28" was the instructor reading a blurry on-screen label aloud.
+
+**They can be cited without timestamps.** This matters more than it looks. The single biggest blocker on indexing is that no transcript carries timestamps, and the chunk schema will not index without one. A worksheet has named sections instead, so `The Bounce Profit Plan, "Screen The Stocks"` is a complete and checkable citation. **Written material is not blocked on the timestamp problem and could be indexed first.**
+
+**They are mostly click paths.** Both worksheets are dense `PERISHABLE_PROCEDURE`. The bot does not recite them, it names the document and hands it over, exactly as it does with a video.
+
+### The method chain is confirmed, not inferred
+
+The chain was assembled by reading four transcripts and noticing that no single module contained it. The Bounce Profit Plan contains it, written down, as the house checklist.
+
+Its "Technical Analysis - Using What We learned" section runs: candlestick entry pattern, long term pattern, consolidation, support and resistance, moving averages, volume, stochastics, MACD. Its fundamental section runs: avoid economic events, check market direction via SPY, find the sector trending with the market. That is macro to micro, and it is the same chain.
+
+Two refinements worth taking from the worksheet rather than the videos:
+
+- **Its own ordering** puts the candle before structure, where the inferred chain had structure first. Minor, but the worksheet is the house artifact so its order should win.
+- **The sector step is operationalised.** The worksheet gives a sector ETF table (XLF, XLY, XLE, XME, XLK, XLV, XLB, XLI, XLU, plus SPY and VIX), which turns "which sector is leading" from a concept into something a student can actually check. Added to `terms.json`.
+
+The worksheet also states the posture the bot is built around: "This is where you want to take all the tools we used and start making your own decision on the stock based on what you see." That is the guided-reasoning behaviour, in the curriculum's own words.
 
 ### Compliance rate is worsening, not improving
 
@@ -92,7 +119,7 @@ Three of four modules processed here produced numeric errors in the values being
 
 Nothing is in the corpus. Two blockers, both structural rather than per module.
 
-1. **No transcript carries timestamps.** `corpus/schema.md` requires one per chunk and does not index without it. Affects every plain-text transcript, so it needs solving once. Open question 11.
+1. **No transcript carries timestamps.** `corpus/schema.md` requires one per chunk and does not index without it. Affects every plain-text transcript, so it needs solving once. Open question 11. **Does not affect written worksheets**, which cite by section and could be indexed ahead of the video material.
 2. **Three modules have no number or course.** Volume, Moving Averages, and Momentum Indicators. Citations are the product. Open questions 10, 17 and 20.
 
 ## Transcript store: Google Drive

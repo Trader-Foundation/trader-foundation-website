@@ -40,12 +40,26 @@ A chunk missing `timestamp` does not get indexed. The bot cannot use it without 
 
 Add a slug here before ingesting a new product. Do not invent one at chunk time.
 
+## Written documents
+
+Not everything in the library is a video. Worksheets and plans are typed, carry named sections instead of timestamps, and are authoritative for numbers because they are not subject to transcription error.
+
+For these, `timestamp` is replaced by `section`, and `module` by the document title. Everything else in the schema is unchanged.
+
+- `chunk_id`: `{course}:doc-{slug}:{seq}`, for example `bounce-profit:doc-plan:0004`
+- `section`: the heading the chunk sits under, for example `Screen The Stocks`
+
+`The Bounce Profit Plan, "Screen The Stocks"` is a complete citation. A student can find it in seconds and check it.
+
+**This means written material is not blocked on the timestamp problem.** It can be chunked and indexed before the video material is, which is worth knowing given that no transcript supplied so far carries timestamps.
+
 ## Citation format
 
 The bot names the course whenever it is not `tf-core`, because "Module 3" alone is ambiguous once more than one product is indexed.
 
 - `tf-core`: **Module 3, around 12:40**
-- Anything else: **Stock Predator, Module 4, around 12:40**
+- Another product: **Stock Predator, Module 4, around 12:40**
+- A written document: **The Bounce Profit Plan, "Screen The Stocks"**
 
 ## Module number collision
 
