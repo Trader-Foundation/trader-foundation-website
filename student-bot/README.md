@@ -34,16 +34,18 @@ Each directory carries a README covering what belongs in it and what happens to 
 | Piece | State |
 |---|---|
 | Spec | v0.2, built from Modules 2, 3, 5 |
-| Glossary | v0.1, 3 confirmed corrections, 2 unresolved |
+| Glossary | 4 confirmed corrections, 3 numeric, 5 noise, 5 unresolved |
 | Test set | 24 cases, 5 blockers, no runner |
 | System prompt | v0.1, not yet tested against a corpus |
-| Rulings | 1 confirmed, 9 open |
+| Rulings | 1 confirmed, 19 open |
 | Chunk schema | course scoped, see `corpus/schema.md` |
 | Source manifest | candidates surveyed, see `corpus/sources.md` |
-| Transcripts | none ingested |
-| Corpus | empty |
+| Modules processed | 3 (Volume, Fibonacci, Moving Averages), see `PROCESSING-LOG.md` |
+| Corpus | empty, nothing indexed |
 
-Nothing has been indexed. The pipeline has no input yet. Modules are being supplied separately.
+**`PROCESSING-LOG.md` is the running record.** Every module supplied goes through the full pipeline and appends to it. Read that file to see where the work stands without needing the transcripts, which do not survive between sessions.
+
+Indexing is blocked on two structural items: no transcript carries timestamps, and two modules have no number assigned. Both are in `rulings/open-questions.md`.
 
 ## Courses in v1
 
