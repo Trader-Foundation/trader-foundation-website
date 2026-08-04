@@ -157,21 +157,31 @@ Second confirmed case of a recording being superseded, after the inverted hammer
 
 ---
 
-## 22. Which module teaches RSI?
+## 22. RSI: probable third advancement case
 
-**Status:** OPEN, narrowed. Vlad says RSI is taught, "part of indicators".
+**Status:** OPEN. Vlad indicates Momentum Indicators. The supplied transcript does not contain it, and appears to actively exclude it.
 
-Verified against everything supplied: **RSI appears exactly once, in The Bounce Profit Plan worksheet's setup table. It is in no transcript.**
+**What the transcript shows.** Word-boundary counts across the whole lesson: stochastic 30, MACD 18, histogram 13, **RSI 0**, "relative strength" 0.
 
-Worth stating precisely, because a naive search says otherwise. A case-insensitive substring search for "rsi" returns four hits in the Momentum Indicators transcript, but all four are inside the word "reversing". Word-boundary matching returns nothing.
+Note that a naive substring search for "rsi" returns four hits, all of them inside the word "reversing". Word-boundary matching is required here.
 
-That matters because Momentum Indicators *is* the indicators module, and it covers stochastics 30 times and MACD 18 times without once mentioning RSI.
+**The setup walkthrough does not merely omit RSI, it excludes it:**
 
-**The Momentum transcript is not truncated.** It opens "Welcome to Momentum Indicators" and closes "See you at the next lesson guys", so it is a complete lesson. RSI is therefore taught in a module that has not been supplied, not in a missing section of this one.
+> "we're going to select stochastics first... I'll select the fast stochastics and then I'm going to go down here and select MACD. **You don't want to select MACD histogram or anything else.** You want to make sure it's MACD."
 
-**Question for Vlad:** which module teaches RSI? It is not in the Momentum Indicators lesson.
+Two indicators, with an explicit instruction not to add more. The Bounce Profit Plan's table lists three: RSI 14 above, MACD 12.26.9 below, Full Stochastics 14.3.3 below.
 
-Until it arrives, a student asking the bot about RSI gets the no-relevant-retrieval answer, which is correct but unhelpful given the house worksheet put RSI on their screen.
+**The transcript is not truncated.** It opens "Welcome to Momentum Indicators" and closes "See you at the next lesson guys".
+
+**Most likely reading, and it fits a pattern.** This is the same shape as the two confirmed rulings. In both, a recording stated something confidently, gave a reason, showed no sign of being superseded, and current material carried the correction. The stochastics ruling in this very module is one of them: the video says fast, the house setting is Full.
+
+If RSI was added to the method after this lesson was recorded, everything observed fits: the worksheet has it, the video predates it and tells students to add only what the method used at the time.
+
+That would make RSI a third advancement case rather than a missing module, and it would mean the Momentum recording is now superseded on two separate points.
+
+**Question for Vlad:** was RSI added to the method after the Momentum Indicators video was recorded? If so it needs a ruling like the stochastics one, covering what RSI is for and how it fits the chain, since no supplied material teaches it.
+
+**Alternative worth ruling out first:** a newer cut of the module exists that includes RSI, and the transcript supplied is from the older recording.
 
 ---
 
