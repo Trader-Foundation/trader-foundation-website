@@ -157,17 +157,31 @@ Second confirmed case of a recording being superseded, after the inverted hammer
 
 ---
 
-## 22. RSI
+## 22. RSI, and every other indicator
 
-**Status:** RESOLVED. Vlad's ruling: **out of scope. RSI is not part of the method and the bot does not need it.**
+**Status:** RESOLVED, and generalised. See `indicator-hierarchy.md`.
 
-Closed. No ruling on what RSI is for is needed, because it is not taught and will not be.
+The first answer was "out of scope, ignore it". Vlad replaced it with a better one that covers every indicator rather than just this one:
 
-**Bot behaviour:** a student asking about RSI gets the standard no-relevant-retrieval answer, which is now the correct answer rather than a gap. The bot does not explain RSI from general knowledge, same as any other topic outside the curriculum.
+> There are a million indicators. The most important is always volume, candlestick and context, so trend, higher lows and higher highs. Then use indicators, RSI and stochastics, as supplementary.
 
-**One residual, for whenever the worksheet is next touched.** The Bounce Profit Plan's setup table still lists `RSI | 14 | Above`, so a student following it will put RSI on their chart and may ask about it. Not urgent and not a blocker. Noted here so it is not rediscovered and raised again.
+That is now a confirmed ruling and the standing answer for any indicator question, including tools the curriculum will never cover.
 
-**Why this was worth checking rather than assuming.** The Momentum recording says to select stochastics and MACD and "not anything else", so the video and the worksheet disagreed. That looked like a third advancement case. It was simpler than that: the worksheet carries a line the method no longer uses.
+**It also creates one gap worth tracking separately.** "Context" in the sense of trend structure is new: higher high, higher low, lower high, lower low and context appear **zero times** across every transcript and worksheet supplied. Volume and candlesticks each have a module. Trend structure does not. See question 23.
+
+---
+
+## 23. Trend, and where the bot cites it from
+
+**Status:** CLOSED as a gap. Downgraded to a note.
+
+Vlad clarified that "context" in the indicator hierarchy means the trend of the stock itself, read off the chart.
+
+This was briefly logged as a curriculum gap on the grounds that "higher high" and "higher low" appear zero times in the supplied material. That was wrong. The phrasing is absent, the concept is taught throughout: Module 2 trades with the trend and screens for the name trending hardest, Module 3 teaches every candlestick pattern relative to the prevailing trend, Module 5 covers channels and structure, and Moving Averages gives the mechanical version, above the 50 and 200 is bullish, below both is bearish.
+
+No module is missing. The bot cites whichever module fits the question rather than one canonical trend lesson.
+
+**Method note worth keeping:** absence of a phrase is not absence of a concept. Word-boundary search is the right tool for asking whether a *term* appears, and the wrong basis for concluding something is untaught.
 
 ---
 

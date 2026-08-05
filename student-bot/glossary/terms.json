@@ -85,8 +85,8 @@
         "_source": "The Bounce Profit Plan worksheet, which is written and therefore not subject to transcription error. Prefer these over any value read off a transcript.",
         "MACD": "12.26.9",
         "Full Stochastics": "14.3.3",
-        "RSI": "14 (OUT OF SCOPE, see open question 22. Listed in the worksheet setup table but not part of the method. Recorded so it is not re-raised.)",
-        "note": "RULED: Full Stochastics at 14.3.3, see rulings/stochastics.md. The Momentum video's preference for fast stochastics is superseded. RSI is ruled out of scope and is not part of the method, see open question 22."
+        "RSI": "14 (supplementary. Not taught by any module, but no longer treated as out of scope: see rulings/indicator-hierarchy.md for the standing answer to any indicator question.)",
+        "note": "RULED: Full Stochastics at 14.3.3, see rulings/stochastics.md. The Momentum video's preference for fast stochastics is superseded. RSI and all other indicators are supplementary to volume, candlesticks and context, see rulings/indicator-hierarchy.md."
       },
       "screening_filters": {
         "_source": "Breakout Strategy and The Bounce Profit Plan worksheets, in agreement",
@@ -194,6 +194,11 @@
       "negative divergence",
       "crossover",
       "lagging indicator",
+      "trend structure",
+      "higher high",
+      "higher low",
+      "lower high",
+      "lower low",
       "breakout",
       "breakdown",
       "continuation pattern",
