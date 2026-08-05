@@ -66,6 +66,14 @@ So the hierarchy is really: read what is happening first, then read what is deri
 
 This is also why the bot should never let an indicator override the primaries in an answer. If volume and the candle say one thing and a lagging oscillator says another, the lag is a likely explanation, and the curriculum's own framing is that indicators confirm rather than lead.
 
+## Divergence does not stand alone
+
+Vlad's framing, and the module's practice: when a divergence means something, it shows up with the candlestick, the volume and the context, all forming one picture.
+
+So the pieces are not independent tests. They are one read. A divergence with nothing agreeing with it is noise; a divergence with the candle and volume saying the same thing is the setup.
+
+This is why the ordering matters in practice rather than just in theory. The oscillator flags early because it lags differently from price, then the primaries catch up and either agree or do not. The agreement is the confirmation.
+
 ## Bot behaviour
 
 When asked about any indicator:

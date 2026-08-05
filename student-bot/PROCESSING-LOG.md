@@ -151,6 +151,22 @@ The risk this creates for the bot is specific. Encoding a method chain, canonica
 
 Worth re-checking whenever a new rule or value gets encoded: does this make the method look more mechanical than the curriculum intends?
 
+### The chain is a convergence read, not a checklist
+
+The most important correction to the project's model of the method, from Vlad: when a divergence matters, it appears together with the candlestick, volume and context as one picture.
+
+The chain had been encoded as ordered steps, which is right as a list of what to look at and wrong as a description of how the read works. The steps are not gates. They are pieces that either point the same way or do not.
+
+The module's worked entry is unambiguous about this. A crossover is called "a good signal, but it's not an entry signal". Then candles gap up, bullish volume appears, a third day breaks two moving averages on a strong hammer, and the conclusion is "we have everything pointing in that direction". Confirmation there is not a rule being satisfied, it is pieces accumulating until they agree.
+
+Three consequences now in `prompts/system.md`:
+
+- The chain is never presented as a score. Six of ten steps is not a signal and nothing in the method sums that way.
+- Alignment is what gets taught. The question is not "did I complete the checklist" but "is everything pointing the same way, and if not, what disagrees".
+- Disagreement is information. The curriculum declines trades on a single dissenting piece, most clearly a bullish reversal candle refused because "the volume is still very bearish".
+
+This also completes the lag picture. The indicator flags early, the primaries catch up, and whether they agree is the confirmation. That is why a divergence is a reason to watch rather than a trigger.
+
 ### The indicator hierarchy is ordered by latency
 
 Vlad's rulings across several messages assembled into something the modules never state in one place: volume, candlesticks and context are primary, indicators are supplementary, divergence is the primary use of the oscillators, and all of it is delayed.
