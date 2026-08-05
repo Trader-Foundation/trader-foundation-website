@@ -40,6 +40,41 @@ Log every hit. Do not silently fix and move on.
 | Moving Averages | Multiple-average section | "moving averages can be applied for great short term gains... there's some huge gains" | **Exclude.** Outcome claims | Yes, re-record candidate |
 | Moving Averages | Closing | "step by step of exactly what I do on a weekly basis to make money off moving averages" | **Exclude.** Outcome promise | Yes, re-record candidate |
 
+### Options Intro: the hardest case so far, and it needs a ruling not a red pen
+
+**This module cannot be stripped of figures without destroying the lesson.** That makes it structurally different from every prior hit and the exclusion habit does not transfer.
+
+Moving Averages carried outcome language as garnish: cut the six hits, the teaching survives intact. Here the arithmetic **is** the teaching. Options leverage is a numerical argument. Remove the numbers and there is no module.
+
+So the figures need sorting into two piles rather than one.
+
+**Pile A, mechanics. Keep.** Hypothetical arithmetic explaining how a contract works, attached to an invented house or an example stock, never to a real trader or student:
+
+- The house: 300,000 value, 320,000 sale, 2,000 premium, contract rising to 5,500, 3,500 gain, 18,000 net on the exercise route
+- The Apple illustration: 280 a share, 100 shares, 28,000 outlay, a 10 dollar move, 1,000 profit, 3.57 percent
+- The loss illustration: invest 10,000, decline 25 percent, lose 2,500
+
+Every one is flagged hypothetical in the transcript itself ("assume we have", "let's just say", "just using it as an example"). Several argue *against* stocks rather than promising anything: 3.57 percent is presented as a bad return, and the 2,000 premium loss is presented as the worst case.
+
+**Pile B, outcome and performance claims. Exclude.** These attach results to real people or state efficiency as fact:
+
+| Passage | Why |
+|---|---|
+| "97 percent on average, less money you're using to make the same exact gains" | A precise efficiency statistic stated as fact |
+| "That's the way I've made money for many years" | Trader performance claim |
+| "you were an all star and had a year where you made 120 percent of the profit" | A 120 percent annual return figure, even though the point being made is that it is not enough |
+| "only 10 percent or less truly make it consistently" | Success-rate statistic about traders generally |
+
+**Perishable, separate:** "minor commissions like 65 cents a contract". Third-party pricing, never recited. Also "as of this video, Amazon's over 3,000 per share", which the module helpfully dates itself.
+
+### Why this needs a guard more than an exclusion
+
+Even Pile A is dangerous once retrievable. Asked *"how much can I make with options?"*, retrieval lands on the house walkthrough and the bot restates "your total gain is 18,000". Compliant in the lesson, an outcome claim in the answer.
+
+This is the same shape as the chart-walkthrough problem: material that is fine inside a video and dangerous once a bot can serve it on demand. The mitigation is the same. `prompts/system.md` now carries a rule that worked option arithmetic is mechanism illustration, never an indication of what a student might make, and that the bot explains the mechanism in relative terms rather than restating the figures.
+
+**Question for Vlad:** does Pile A stay? My recommendation is yes with the retrieval guard, because the module is unteachable without it and none of it attaches to a real person. Pile B goes either way.
+
 ### Moving Averages: escalation, recommend re-record review
 
 Six hits in one module, two of them unambiguous breaches of the standing rules: a stated percentage return ("150 to 200 percent gain off your money") and dollar figures attached to performance ("invested a thousand... profited an extra 700").
@@ -95,9 +130,10 @@ Outcome-flavoured language carrying no figure. Logged so the pattern is visible 
 | Volume (number unassigned) | Scanned | Clean. No dollar figures, no percentage returns, no earnings claims. Two borderline phrases logged above |
 | 8, Fibonacci Retracement | Scanned | One boundary hit, see above. Otherwise clean |
 | Moving Averages (number unassigned) | Scanned | **Six hits, two unambiguous.** Plus the insider information line. Re-record candidate |
+| Options Intro (number unassigned) | Scanned | **Four outcome claims excluded.** Illustrative arithmetic retained pending ruling, see above |
 | All others | Not started | |
 
-Three of six scanned modules were clean. Three were not, and the most recent is the worst by a wide margin. The rate is getting worse, not better, as the sample grows.
+Three of seven scanned modules were clean. Four were not. The rate is getting worse, not better, as the sample grows.
 
 That matters for planning. The original assumption was a compliance pass that finds occasional hits. On this evidence it is closer to half the library needing review, and at least some of it needing re-recording rather than editing. Scope and owner for that pass are still unassigned, which is open item 8.
 

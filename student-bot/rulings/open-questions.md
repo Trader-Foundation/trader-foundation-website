@@ -208,6 +208,20 @@ Both terms are now in the protected vocabulary so retrieval matches either. What
 
 ---
 
+## 25. Options Intro: module number, and how many options modules there are
+
+**Status:** OPEN, BLOCKING for citation
+
+No number stated. Held as `options-intro-UNNUMBERED`.
+
+What is known: it comes after Moving Averages, which forward-references it ("we're going to get into options"), and it is followed by at least one more options module, since it closes by promising "the factors of what controls the premiums coming up in the next module".
+
+So options is a run of at least two lessons sitting after the technical analysis block.
+
+**Question for Vlad:** which module number is Options Intro, and how many options modules follow it?
+
+---
+
 ## 20. Momentum Indicators: module number, and the numbering of the whole run
 
 **Status:** OPEN, BLOCKING for citation, but close to resolved

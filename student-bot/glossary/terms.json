@@ -210,7 +210,15 @@
       "relative volume",
       "swing point",
       "52 week high",
-      "52 week low"
+      "52 week low",
+      "option contract",
+      "premium",
+      "exercise",
+      "expire",
+      "leverage",
+      "capital",
+      "FOMO",
+      "penny stock"
     ],
 
     "sector_etfs": [

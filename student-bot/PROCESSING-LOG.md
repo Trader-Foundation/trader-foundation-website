@@ -49,6 +49,7 @@ Then: append a row to the ledger, add new questions to `rulings/open-questions.m
 | Momentum Indicators | **unassigned, likely 11** | Clean | 2 fixed, 1 unresolved | 1 | No |
 | Breakout Strategy *(worksheet)* | n/a, document | Clean | none, written source | 0 | No |
 | The Bounce Profit Plan *(worksheet)* | n/a, document | Clean | none, written source | 0 | No |
+| Options Intro | **unassigned** | **4 excluded, arithmetic pending ruling** | none, formatting only | 0 | No |
 
 Modules 2, 3 and 5 were characterised in the spec before this log existed. Everything from Volume onward was processed here.
 
@@ -150,6 +151,22 @@ The risk this creates for the bot is specific. Encoding a method chain, canonica
 `prompts/system.md` now carries this as a first-class principle rather than a caveat: the chain is a weighing not a formula, conflicting signals are the normal case rather than an error, experience changes how the method is applied, and hedged language is required where the curriculum hedges.
 
 Worth re-checking whenever a new rule or value gets encoded: does this make the method look more mechanical than the curriculum intends?
+
+### Some modules cannot be stripped of figures
+
+Options Intro breaks the exclusion habit that worked on every prior compliance hit.
+
+In Moving Averages the outcome language was garnish. Cut the six hits, the lesson survives whole. In Options Intro the arithmetic **is** the lesson: leverage is a numerical argument, and a module explaining why a 2,000 premium beats a 300,000 purchase has nothing left once the numbers go.
+
+So figures now sort into two piles, not one.
+
+**Mechanics** are hypothetical arithmetic attached to an invented house or an example stock, never to a real person, and usually arguing *against* something rather than promising anything. The 3.57 percent in that module is presented as a bad return.
+
+**Outcome claims** attach results to real people or state efficiency as fact. Four of those were excluded: the 97 percent capital-efficiency statistic, "that's the way I've made money for many years", a 120 percent annual return figure, and "only 10 percent or less truly make it consistently".
+
+**The mechanics still need a retrieval guard even when they stay.** Asked how much you can make with options, retrieval lands on the house walkthrough, which is dense with money words, and the bot restates "your total gain is 18,000". Compliant inside the lesson, an outcome claim in the answer. Same shape as the chart-walkthrough problem, same fix: `system.md` now requires the mechanism to be explained in relative terms rather than by restating the figures.
+
+Worth expecting this pile-splitting on any module that teaches something quantitative.
 
 ### The chain is a convergence read, not a checklist
 
