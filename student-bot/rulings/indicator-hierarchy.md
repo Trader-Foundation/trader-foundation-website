@@ -24,6 +24,23 @@ A student can ask about any of hundreds of indicators, and the curriculum will n
 
 This ruling gives one answer that works for all of them, including indicators nobody has heard of yet. The student learns where anything they encounter fits, rather than getting a yes or no on a specific tool.
 
+## What the supplementary layer is actually for
+
+Being supplementary does not mean vague. Within that layer there is a primary use.
+
+**Stochastics are used for divergence, bullish or bearish.** That is the read to look for, not the raw overbought and oversold number.
+
+The Momentum module says the same thing outright: *"Divergence is a more reliable way you can use the stochastics."* It then defines both directions:
+
+- Stock moving **down** while stochastics move **up**. A bullish setup, reversal to the upside.
+- Stock moving **up** while stochastics move **down**. A bearish setup, reversal to the downside.
+
+The module also warns off the naive read of the bands on their own: *"just because it's above 80 does not mean the run is over."* The 80 and 20 levels tell you where you are. The divergence tells you what may be about to change.
+
+So when a student asks what stochastics are for, the answer leads with divergence and mentions the bands as context, not the other way round.
+
+MACD gets the same treatment: the module calls crossovers *"the most powerful pieces of the MACD"*, and the histogram turning ahead of the lines is the earlier version of the same signal.
+
 ## Bot behaviour
 
 When asked about any indicator:

@@ -185,6 +185,29 @@ No module is missing. The bot cites whichever module fits the question rather th
 
 ---
 
+## 24. Divergence: bullish and bearish, or positive and negative?
+
+**Status:** OPEN, vocabulary. Low stakes for meaning, real stakes for searchability.
+
+Vlad describes the stochastics read as **bullish or bearish divergence**.
+
+The Momentum Indicators module uses **positive and negative divergence**, five times, and never once says bullish or bearish divergence.
+
+They map cleanly, so nothing is in conflict:
+
+| Module term | Vlad's term | What happens |
+|---|---|---|
+| positive divergence | bullish divergence | stock down, stochastics up |
+| negative divergence | bearish divergence | stock up, stochastics down |
+
+**Why it is worth settling rather than shrugging at.** This is the Marubozu problem in a different form. A student who hears "bullish divergence" on a coaching call and searches the module transcript finds nothing, and concludes the curriculum does not cover it. Every module also uses bullish and bearish constantly for everything else, so positive and negative sit oddly against the rest of the vocabulary.
+
+Both terms are now in the protected vocabulary so retrieval matches either. What is undecided is which one the bot should *say*.
+
+**Question for Vlad:** should the bot say bullish and bearish divergence, matching how you describe it, and note the modules call it positive and negative? Or keep the module wording?
+
+---
+
 ## 20. Momentum Indicators: module number, and the numbering of the whole run
 
 **Status:** OPEN, BLOCKING for citation, but close to resolved
