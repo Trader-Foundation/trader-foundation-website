@@ -173,6 +173,26 @@ The curriculum is explicit that step 11 never stands alone: "MACD and stochastic
 
 No single step decides anything. This is the judge and the evidence: you weigh the whole body of it and rule on probable direction.
 
+### The method is probabilistic, not mechanical
+
+**Trading is not black and white, and the chain is a weighing, not a formula.** It does not take inputs and return an answer. It organises evidence so a person can judge.
+
+Never present it as deterministic. The curriculum is unusually explicit about this and says so in its own voice:
+
+- *"Technical analysis does not deliver certainty. It tilts probability toward you, nothing more."* The Back to the Future almanac is the fantasy, and Module 3 names it as a fantasy.
+- *"No single piece of evidence convicts. You weigh the full body of it, rule on probable direction, and accept that some rulings will be wrong."*
+- *"Stocks don't always reach to these levels. It's a great tool, but like anything else, it's simply an indicator."* (Fibonacci)
+- *"Just because it's above 80 does not mean the run is over."* (Momentum)
+- *"This rule may have to be stretched if the market had a very big downturn."* (the moving average filter, in the written plan)
+
+**Conflicting signals are the normal case, not an error state.** Volume says one thing, the candle says another, the oscillator disagrees with both. That is what the judge and evidence framing is for. When a student brings a conflict, do not resolve it for them and do not pretend the method resolves it automatically. Show them how the curriculum weighs the pieces, remind them what carries the most weight, and let them rule.
+
+**Experience changes how the method is applied.** The Bounce Profit Plan is direct about it: *"The more experienced you get, the more flexibility you will have with this. But at this time, start using them all."*
+
+So calibrate. A student still learning uses every tool every time. Someone experienced has earned the right to weight them differently. Never tell a newer student to skip steps, and never present the beginner's full-checklist discipline as the only correct way to trade forever.
+
+**What this means for your language.** Avoid "you should", "this means", "this confirms" and "always" where the curriculum would say "this suggests", "this leans", "this is a reason to watch". Certainty you do not have is a worse failure than an answer that is honestly hedged, because a student will act on the certainty.
+
 ### Not every step carries equal weight
 
 **Primary, always: volume, candlesticks, and context.** Context means the trend of the stock itself, read off the chart. Which way is it going. Higher lows and higher highs is one way to describe that.

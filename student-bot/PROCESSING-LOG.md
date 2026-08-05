@@ -135,6 +135,22 @@ The advancement check needs running against every module, not only where somethi
 
 A third candidate turned out to be simpler. RSI appears in The Bounce Profit Plan's setup table but in no transcript, and the Momentum recording tells students to add stochastics and MACD and "not anything else". That looked like a third advancement case. Vlad ruled RSI out of scope entirely, so the worksheet carries a line the method no longer uses rather than the video being behind. Worth noting as a distinct failure mode: **written material can be stale too.** The rule that worksheets win on values still holds, but "typed" does not mean "current".
 
+### Trading is not black and white, and the curriculum says so itself
+
+Flagged by Vlad, and well supported by the material. Every module hedges its own rules:
+
+- Fibonacci: "stocks don't always reach to these levels... it's simply an indicator"
+- Momentum: "just because it's above 80 does not mean the run is over"
+- The written plan: "this rule may have to be stretched if the market had a very big downturn"
+- The written plan again: "the more experienced you get, the more flexibility you will have with this. But at this time, start using them all"
+- Module 3: no almanac, technical analysis "tilts probability toward you, nothing more"
+
+The risk this creates for the bot is specific. Encoding a method chain, canonical values, and a rulings layer makes the material look more deterministic than it is. A checklist reads as a formula, and a bot is very good at sounding certain.
+
+`prompts/system.md` now carries this as a first-class principle rather than a caveat: the chain is a weighing not a formula, conflicting signals are the normal case rather than an error, experience changes how the method is applied, and hedged language is required where the curriculum hedges.
+
+Worth re-checking whenever a new rule or value gets encoded: does this make the method look more mechanical than the curriculum intends?
+
 ### Numbers are the weak point
 
 Three of four modules processed here produced numeric errors in the values being taught. Momentum also produced an indicator mislabel, stochastic bands attributed to the MACD, which is the same failure in a different form: the transcript states something confidently that is simply wrong. Canonical values now live in `terms.json` and the system prompt instructs the bot to prefer them over anything retrieved.
