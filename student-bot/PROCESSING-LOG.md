@@ -236,6 +236,8 @@ This repository is public so transcripts cannot be committed here, and the conta
 | Module 8, Fibonacci | `module-08-fibonacci-retracement-RAW.txt` | `1zRcbT3hq64fE3Ni38tRcaEGzQMzT1f-2` |
 | Moving Averages | `moving-averages-UNNUMBERED-RAW.txt` | `1_L2e5pKD41z0dM2MQFfZZdiWuExiBJ8t` |
 | Momentum Indicators | `momentum-indicators-UNNUMBERED-RAW.txt` | `1wVcs-O50OlB_0YMSItm3wwoJ-lif1yiZ` |
+| Options Intro | `options-intro-UNNUMBERED-RAW.txt` | `1ZoCdJm0A6v2M13TVoG7bND6_TAxiT55s` |
+| Options Factors | `options-factors-UNNUMBERED-RAW.txt` | `1fjHIeeOPAQfe_UbgEX6L4PrBjxjOF222` |
 | The Bounce Profit Plan *(worksheet)* | `document-bounce-profit-plan-RAW.txt` | `1I-ejvV92yaZdzKpQSv5JeyGclsRIq6sr` |
 | Breakout Strategy *(worksheet)* | `document-breakout-strategy-RAW.txt` | `1INwugRa-afsIWs8l-tP5iAL4oOuofEVO` |
 
