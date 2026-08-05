@@ -151,6 +151,16 @@ The risk this creates for the bot is specific. Encoding a method chain, canonica
 
 Worth re-checking whenever a new rule or value gets encoded: does this make the method look more mechanical than the curriculum intends?
 
+### The indicator hierarchy is ordered by latency
+
+Vlad's rulings across several messages assembled into something the modules never state in one place: volume, candlesticks and context are primary, indicators are supplementary, divergence is the primary use of the oscillators, and all of it is delayed.
+
+Put together, the ranking turns out to be ordered by how live the information is. Volume is real time, and the Volume module opens by saying nothing is as live as it. The candle is the current session. Trend is the accumulated record. Indicators are computed from bars that have already printed, so they lag by construction rather than by flaw.
+
+That makes the hierarchy explainable rather than a list to memorise, and it gives the bot a reason to give when an indicator disagrees with the primaries: the lag is the likely explanation.
+
+It also produces confirmation before entry for the sixth time, now from the indicator side. A divergence is a reason to watch. Entry still waits.
+
 ### Numbers are the weak point
 
 Three of four modules processed here produced numeric errors in the values being taught. Momentum also produced an indicator mislabel, stochastic bands attributed to the MACD, which is the same failure in a different form: the transcript states something confidently that is simply wrong. Canonical values now live in `terms.json` and the system prompt instructs the bot to prefer them over anything retrieved.

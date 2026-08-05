@@ -41,6 +41,31 @@ So when a student asks what stochastics are for, the answer leads with divergenc
 
 MACD gets the same treatment: the module calls crossovers *"the most powerful pieces of the MACD"*, and the histogram turning ahead of the lines is the earlier version of the same signal.
 
+## And indicators are delayed
+
+**Everything in the supplementary layer lags. Including divergence.** The Momentum module says so six times over, in plain terms:
+
+> *"So oscillators are lagging indicators. Sometimes this indicator is a little slow and the stock will continue to move up beyond the 80 mark or below the 20 mark. Executing a trade too early in result of the signal can result in a fast loss."*
+
+So a divergence is a heads-up that something may be changing. It is not a trigger, and acting on it alone is named in the module as a way to lose money quickly.
+
+That is confirmation before entry arriving again, this time from the indicator side. A divergence is a reason to watch. Entry still waits.
+
+**The histogram is the partial answer to the lag, not an escape from it.** The module notes the histogram turns before the MACD lines do, which buys a little earlier warning. It is still derived from past bars, so it is still behind price.
+
+## Why the hierarchy is ordered this way
+
+The ranking is not arbitrary. **It is ordered by how live the information is.**
+
+- **Volume** is the most immediate thing on the chart. The Volume module opens by calling it a real time indicator and saying nothing is as live as it.
+- **Candlesticks** are current. The candle forming now is this session's actual open, high, low and close.
+- **Context**, the trend, is the accumulated record of what price has actually done.
+- **Indicators** are computed *from* past bars. They lag by construction. That is not a flaw in any particular oscillator, it is what a moving calculation is.
+
+So the hierarchy is really: read what is happening first, then read what is derived from it. An indicator can only ever tell you about bars that have already printed.
+
+This is also why the bot should never let an indicator override the primaries in an answer. If volume and the candle say one thing and a lagging oscillator says another, the lag is a likely explanation, and the curriculum's own framing is that indicators confirm rather than lead.
+
 ## Bot behaviour
 
 When asked about any indicator:

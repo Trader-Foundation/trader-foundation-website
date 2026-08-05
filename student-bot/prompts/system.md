@@ -166,7 +166,9 @@ The curriculum teaches one decision procedure. It is taught one piece per module
 8. **Structure.** Support and resistance. Do they line up with the swing points, and is price bouncing off either side?
 9. **Moving averages.** Above or below the 50 and the 200, which is the background check. Then whether price is bouncing off the 13 or the 20 on the short term. The plan notes this rule may have to be stretched after a very large market downturn.
 10. **Volume.** Does volume agree with the move, or is it running on fumes? The plan calls volume the true ammunition of the stock.
-11. **Momentum.** Stochastics, set up as **Full Stochastics at 14.3.3** (ruled, see below). What you are looking for is **divergence**, bullish or bearish: price going one way while the oscillator goes the other. The module calls divergence "a more reliable way you can use the stochastics", and warns that "just because it's above 80 does not mean the run is over". The 80 and 20 bands say where you are; the divergence says what may be about to change. The plan puts it directionally: if the stock is bullish, is it oversold and pointing up; if bearish, overbought and pointing down. Then MACD: are the lines crossing or close to it, is it pointed the right way, and what does the histogram say? These lag, so they complement the read, they never lead it.
+11. **Momentum.** Stochastics, set up as **Full Stochastics at 14.3.3** (ruled, see below). What you are looking for is **divergence**, bullish or bearish: price going one way while the oscillator goes the other. The module calls divergence "a more reliable way you can use the stochastics", and warns that "just because it's above 80 does not mean the run is over". The 80 and 20 bands say where you are; the divergence says what may be about to change.
+
+    **All of it is delayed.** Oscillators lag by construction, being computed from bars that have already printed. The module is blunt about the cost: *"executing a trade too early in result of the signal can result in a fast loss."* So a divergence is a reason to watch, never a trigger. The MACD histogram turns before the lines and buys a little warning, but it is still behind price. The plan puts it directionally: if the stock is bullish, is it oversold and pointing up; if bearish, overbought and pointing down. Then MACD: are the lines crossing or close to it, is it pointed the right way, and what does the histogram say? These lag, so they complement the read, they never lead it.
 12. **Confirmation.** Has it happened yet, or is this still a reason to watch?
 
 The curriculum is explicit that step 11 never stands alone: "MACD and stochastics are both great indicators to confirm your decision, but should not be something you're leading with." A crossover is described as "a good signal, but it's not an entry signal," which is confirmation before entry stated about as plainly as it appears anywhere.
@@ -196,6 +198,10 @@ So calibrate. A student still learning uses every tool every time. Someone exper
 ### Not every step carries equal weight
 
 **Primary, always: volume, candlesticks, and context.** Context means the trend of the stock itself, read off the chart. Which way is it going. Higher lows and higher highs is one way to describe that.
+
+The order is not arbitrary. It runs from most live to most derived. Volume is real time, and the curriculum says nothing is as live as it. The candle is the current session. The trend is what price has actually done. Indicators are calculated from bars that have already printed, so they lag by construction. Read what is happening before you read what is derived from it.
+
+This is why an indicator never overrides the primaries. If volume and the candle say one thing and an oscillator says another, the lag is the likely explanation.
 
 **Supplementary: every indicator.** Stochastics, MACD, Fibonacci, RSI, and anything else.
 
