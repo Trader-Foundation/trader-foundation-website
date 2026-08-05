@@ -14,10 +14,11 @@ Every transcript supplied gets every step, in order, no exceptions.
 
 **0b. Check the transcript is complete.** Read the first and last lines. A lesson that opens with a welcome and closes with a sign-off is whole. This matters when something expected turns out to be missing: knowing the transcript is complete tells you the content lives in a different module rather than in a truncated section of this one. It resolved the RSI question in one look.
 
-**1. Glossary pass.** Run `glossary/terms.json`. Three distinct error classes now, in descending order of danger:
+**1. Glossary pass.** Run `glossary/terms.json`. Four distinct error classes now, in descending order of danger:
 
 - **Numeric.** The tool mis-hears the values being taught. Highest risk, because a wrong number looks authoritative and a student cannot tell. Always audit taught numbers against the canonical values in `terms.json`, and against values the same transcript establishes earlier.
 - **Proper noun.** Tickers, company names, pattern names. Dangerous because the bot would cite a fictional company confidently.
+- **Terms of art replaced by common words.** A domain term rendered as ordinary English, which nothing flags as wrong. Theta transcribed as "data" is the model case. These are found by knowing the field, not by spotting something broken.
 - **Generic noise.** Stray inserted words, mis-heard contractions, decimal splitting. Cosmetic, but decimal splitting defeats numeric auditing, so normalise before checking numbers.
 
 Fix only what is unambiguous. Anything that needs a guess goes to `unresolved`, not into the clean file.
@@ -50,6 +51,7 @@ Then: append a row to the ledger, add new questions to `rulings/open-questions.m
 | Breakout Strategy *(worksheet)* | n/a, document | Clean | none, written source | 0 | No |
 | The Bounce Profit Plan *(worksheet)* | n/a, document | Clean | none, written source | 0 | No |
 | Options Intro | **unassigned** | **4 excluded, arithmetic pending ruling** | none, formatting only | 0 | No |
+| Options Factors | **unassigned** | Clean | 1 term error (theta) | 1 | No |
 
 Modules 2, 3 and 5 were characterised in the spec before this log existed. Everything from Volume onward was processed here.
 
@@ -151,6 +153,20 @@ The risk this creates for the bot is specific. Encoding a method chain, canonica
 `prompts/system.md` now carries this as a first-class principle rather than a caveat: the chain is a weighing not a formula, conflicting signals are the normal case rather than an error, experience changes how the method is applied, and hedged language is required where the curriculum hedges.
 
 Worth re-checking whenever a new rule or value gets encoded: does this make the method look more mechanical than the curriculum intends?
+
+### A fourth error class: the wrong word that is still a real word
+
+Options Factors renders **theta**, the standard name for time decay, as **"data"**.
+
+This is worse than the mangled proper nouns and worse in a different way from the wrong numbers.
+
+- "Mirabozor" looks wrong. A student sees it, knows something is off, and searches for the real word.
+- A wrong Fibonacci level does not look wrong, but at least a student who checks another source finds the discrepancy.
+- **"Data" looks like ordinary English.** Nothing about it signals an error. It reads as a slightly odd but plausible sentence.
+
+And the module tells students to go look it up: *"you can look it up in your brokerage system and it will tell you how much your contract will decline of daily basis."* Under the name "data", that instruction fails outright. Every platform lists theta.
+
+So the glossary now needs a fourth check alongside proper nouns, numbers and generic noise: **terms of art replaced by common words.** These will not surface from spotting something that looks broken, because nothing looks broken. They surface from knowing the domain and noticing that a concept has been given a name the field does not use.
 
 ### Some modules cannot be stripped of figures
 

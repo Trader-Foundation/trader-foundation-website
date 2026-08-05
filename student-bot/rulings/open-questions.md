@@ -208,6 +208,30 @@ Both terms are now in the protected vocabulary so retrieval matches either. What
 
 ---
 
+## 26. The two option strategies, and a tension between them
+
+**Status:** OPEN, needs the advancement check and a clarification
+
+Options Factors states two rules more directly than almost anything else in the curriculum:
+
+> **Strategy number one.** "Always buy two months or longer when purchasing an option."
+>
+> **Strategy number two.** "If the option is approaching the last month or two, try to close it."
+
+These are concrete and actionable, which makes them exactly the sort of thing a student will ask the bot to confirm, and exactly the sort of thing most likely to have moved since recording. Same class as the two to three day hold in Moving Averages, question 19.
+
+**The tension.** Taken literally the two rules collide at the boundary. Buy exactly two months, and you are inside "the last month or two" on day one, so strategy two would have you close immediately.
+
+Three readings, all plausible, and the bot's answer differs under each:
+
+1. Buy longer than two months in practice, three or more, so there is room to close with a month or two left.
+2. Strategy two means the last month, and "or two" is loose speech.
+3. Two months is a hard floor and closing is judged against how the trade is going rather than the calendar.
+
+**Question for Vlad:** if a student buys a two month option, when should they be closing it?
+
+---
+
 ## 25. Options Intro: module number, and how many options modules there are
 
 **Status:** OPEN, BLOCKING for citation
@@ -219,6 +243,8 @@ What is known: it comes after Moving Averages, which forward-references it ("we'
 So options is a run of at least two lessons sitting after the technical analysis block.
 
 **Question for Vlad:** which module number is Options Intro, and how many options modules follow it?
+
+**Update:** the second options module has now been supplied, Options Factors, which covers the six factors that set the premium. It closes by pointing at a third: "the next part where we really start looking at how do you invest with an option", covering investing up, investing down, and the key aspects. So the options run is at least three lessons.
 
 ---
 

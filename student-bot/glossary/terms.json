@@ -25,6 +25,12 @@
       "note": "CONTEXT DEPENDENT. Verify each hit manually before replacing. Two occurrences in Module 5, both in the instigating-event passage."
     },
     {
+      "wrong": ["time decay is also known as data", "known as data"],
+      "right": "time decay is also known as theta",
+      "found_in": "Options Factors (module number unassigned)",
+      "note": "HIGH RISK. Theta is the standard name for time decay and the term a student will meet in any brokerage platform. 'Data' is not a name for anything in options, and unlike a mangled proper noun it is an ordinary English word, so it does not look wrong. The module tells students to look it up in their brokerage system, which fails outright under the wrong name."
+    },
+    {
       "wrong": ["the man versus the supply"],
       "right": "the demand versus the supply",
       "found_in": "Volume (module number unassigned)",
@@ -88,6 +94,17 @@
         "RSI": "14 (supplementary. Not taught by any module, but no longer treated as out of scope: see rulings/indicator-hierarchy.md for the standing answer to any indicator question.)",
         "note": "RULED: Full Stochastics at 14.3.3, see rulings/stochastics.md. The Momentum video's preference for fast stochastics is superseded. RSI and all other indicators are supplementary to volume, candlesticks and context, see rulings/indicator-hierarchy.md."
       },
+      "options_conventions": {
+        "_source": "Options Factors module. Market conventions rather than tool settings, but strike increments are set by the exchanges and can change, so treat as verifiable rather than permanent.",
+        "contract_multiplier": "1 contract = 100 shares",
+        "strike_increments": {
+          "stock 5 to 25": "2.50",
+          "stock 25 and above": "5.00",
+          "stock over 200": "10.00"
+        },
+        "six_premium_factors": ["duration", "expiration", "strike price", "current price", "risk and reward", "volatility"]
+      },
+
       "screening_filters": {
         "_source": "Breakout Strategy and The Bounce Profit Plan worksheets, in agreement",
         "average_volume": "Over 1 Million",
@@ -131,6 +148,11 @@
       "text": "the ACC",
       "found_in": "Module 8, Fibonacci Retracement",
       "note": "Ticker for the first chart walkthrough. ACC was American Campus Communities, taken private in 2022, so a current lookup returns nothing. Could equally be a mis-hearing. Antero Midstream is the precedent for not guessing at a ticker. Needs Vlad."
+    },
+    {
+      "text": "the lower the stock price the more you go into the money",
+      "found_in": "Options Factors (module number unassigned)",
+      "note": "Reads as a slip for 'the lower the STRIKE price', which is what the surrounding passage is about and what the very next sentence says correctly. Left intact because it could equally be a live misspeak rather than a transcription error, and the two have different fixes. Needs Vlad or an audio check."
     },
     {
       "text": "I'm thinking once it hits this 30 day moving average",
@@ -218,7 +240,18 @@
       "leverage",
       "capital",
       "FOMO",
-      "penny stock"
+      "penny stock",
+      "time decay",
+      "theta",
+      "in the money",
+      "out of the money",
+      "strike price",
+      "expiration",
+      "duration",
+      "volatility",
+      "historical volatility",
+      "contract multiplier",
+      "strike increment"
     ],
 
     "sector_etfs": [
@@ -260,7 +293,8 @@
       "FinViz",
       "StockCharts",
       "Yahoo Finance",
-      "SPY"
+      "SPY",
+      "thinkorswim"
     ],
 
     "companies_and_tickers": [
