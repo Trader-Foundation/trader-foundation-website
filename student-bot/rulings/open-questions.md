@@ -208,6 +208,48 @@ Both terms are now in the protected vocabulary so retrieval matches either. What
 
 ---
 
+## 28. Moneyness for puts: the definitions inverted in text
+
+**Status:** OPEN, and the most consequential teaching issue found so far. Flagged, not corrected.
+
+The scenarios module defines in, at and out of the money four times. The two call definitions are
+correct and framed as **strike relative to stock price**:
+
+> "If the stock is at a hundred dollars currently, anything over a hundred dollars is considered out
+> of the money" (a call struck above the stock is OTM, correct)
+>
+> "we have a stock price at 200, anything under 200 is considered in the money because the contract
+> lets you buy the stock for less and resell it at the current price" (correct)
+
+The two put definitions use the **same sentence shape** but only work if read as **the stock moving**:
+
+> "if the stock price is 50, anything under 50 is considered in the money because we are looking for
+> the stock price to go down"
+>
+> "if you look at the stock price at 200, anything over 200 is considered out of the money"
+
+Read as strike, which is how the two call sentences just trained the student to read them, both are
+**backwards**. A put struck under 50 with the stock at 50 is out of the money, not in it.
+
+**The module's own examples are correct.** Stock at 50 with an 80 put is in the money. Stock at 200
+with a 170 put is out of the money. So the worked examples and the chart descriptions disagree with
+each other, and only under the strike reading.
+
+**Why this matters more than the other open items.** In, at and out of the money is foundational.
+A student who inverts it for puts will pick strikes that cannot profit, and will not understand why.
+It is also the kind of error that survives a confident read, because all four sentences are parallel
+and sound equally authoritative.
+
+**Most likely explanation, and it generalises.** There is a chart on screen during all four. The
+visual almost certainly disambiguates, and the ambiguity is created by transcription rather than
+present in the lesson. See the note on visual-dependent teaching in `../PROCESSING-LOG.md`.
+
+**Question for Vlad:** in the put sections, are those lines describing where the strike sits or where
+the stock moves? If it is the strike, the definitions need correcting. If it is the stock, the
+passage needs rewording before ingestion, because in text it reads as the strike.
+
+---
+
 ## 27. Put seller risk zones, and the "2 out of 3" that follows from them
 
 **Status:** OPEN. Flagged, not corrected. This is teaching, not transcription, so it is Vlad's call.
@@ -282,7 +324,7 @@ So options is a run of at least two lessons sitting after the technical analysis
 
 **Question for Vlad:** which module number is Options Intro, and how many options modules follow it?
 
-**Update:** three options modules are now in. Options Intro, then Options Factors on the six premium factors, then Calls and Puts, which is the one Options Factors promised by pointing at "investing going up, investing going down". Calls and Puts closes by pointing at "the next modules" on how calls and puts play in reality, so the options run is at least four lessons. Original note follows: Options Factors closes by pointing at a third: "the next part where we really start looking at how do you invest with an option", covering investing up, investing down, and the key aspects. So the options run is at least three lessons.
+**Update:** four options modules are now in, and the run continues. The fourth covers in, at and out of the money across the three price scenarios, and closes by pointing at a live thinkorswim walkthrough, so there are at least five. Original note follows. Three options modules were in at the time of writing: Options Intro, then Options Factors on the six premium factors, then Calls and Puts, which is the one Options Factors promised by pointing at "investing going up, investing going down". Calls and Puts closes by pointing at "the next modules" on how calls and puts play in reality, so the options run is at least four lessons. Original note follows: Options Factors closes by pointing at a third: "the next part where we really start looking at how do you invest with an option", covering investing up, investing down, and the key aspects. So the options run is at least three lessons.
 
 ---
 

@@ -53,6 +53,7 @@ Then: append a row to the ledger, add new questions to `rulings/open-questions.m
 | Options Intro | **unassigned** | **4 excluded, arithmetic pending ruling** | none, formatting only | 0 | No |
 | Options Factors | **unassigned** | Clean | 1 term error (theta) | 1 | No |
 | Options Calls and Puts | **unassigned** | **2 excluded, incl. a win-rate promise** | 1 term error (calls) | 1 | No |
+| Options: in/at/out of the money | **unassigned** | Clean, 1 borderline | none, see question 28 | 1 | No |
 
 Modules 2, 3 and 5 were characterised in the spec before this log existed. Everything from Volume onward was processed here.
 
@@ -154,6 +155,33 @@ The risk this creates for the bot is specific. Encoding a method chain, canonica
 `prompts/system.md` now carries this as a first-class principle rather than a caveat: the chain is a weighing not a formula, conflicting signals are the normal case rather than an error, experience changes how the method is applied, and hedged language is required where the curriculum hedges.
 
 Worth re-checking whenever a new rule or value gets encoded: does this make the method look more mechanical than the curriculum intends?
+
+### A fifth risk class: teaching that depended on the visual
+
+Not a transcription error. Something the transcript loses because the chart is gone.
+
+The scenarios module defines in, at and out of the money four times. The two call definitions read
+as strike relative to stock and are correct. The two put definitions use the identical sentence
+shape but only make sense as the stock moving. Read as strike, which is how the call sentences train
+you to read them, both puts come out backwards. The module's own worked examples are correct, so the
+examples and the chart descriptions disagree.
+
+Almost certainly there is a chart on screen making it obvious. **The lesson is probably fine. The
+transcript is not.**
+
+That is a different problem from every error class tracked so far, and it has no glossary fix:
+
+- Nothing is misspelled or mis-heard
+- Nothing looks wrong, because all four sentences are parallel and equally confident
+- The words are very likely exactly what was said
+
+**The bot only ever gets the text.** Any passage whose meaning was carried by what was on screen
+arrives ambiguous or inverted, and no amount of transcription accuracy helps. This is a reason to
+expect more of these in every chart walkthrough module, where "anything under this line" and "right
+here" do a lot of work that text cannot carry.
+
+**Detection:** compare a stated rule against the module's own worked examples. Where they disagree,
+the visual was probably doing the disambiguating. That check found this one and it is cheap to run.
 
 ### The fourth error class recurs, and it lands in the mnemonic
 

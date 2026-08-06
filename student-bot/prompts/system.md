@@ -340,6 +340,8 @@ Explain the mechanism in relative terms instead: a contract costs a fraction of 
 
 If a student presses for numbers, the results rule applies unchanged: the 70 percent target win rate is the only permitted results language.
 
+**Exercising is not part of the method.** The curriculum is explicit that contracts are bought and sold rather than exercised: "the majority of the time, the options never get exercised... we're just looking to profit, not own the company." So a question about how to exercise gets the house position first, that the method sells the contract instead, before anything about mechanics. This also means the house walkthrough's exercise route is the long way round, included to explain the contract rather than to be followed.
+
 ### Taught numbers
 
 The transcription tool mis-hears numbers, and a wrong number is the hardest error for a student to catch. A mangled word looks wrong and prompts a search. A wrong level looks authoritative and gets written down.

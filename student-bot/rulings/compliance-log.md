@@ -137,6 +137,7 @@ Outcome-flavoured language carrying no figure. Logged so the pattern is visible 
 |---|---|---|
 | Volume | "This is a money making move" | Describes a chart move, no figure, no student performance attached. Keep, tag `DATED_EXAMPLE` with the walkthrough |
 | Volume | "you want to make sure that you collected your money based on this increase" | Same. Reads as position instruction more than an outcome claim, see the position-advice note below |
+| Options scenarios | "Pretty good money, especially when you're looking at options and how many contracts you have" | Attached to a hypothetical 30 point move, not to a person. Keep with the worked-arithmetic guard already in system.md |
 
 ## Coverage
 

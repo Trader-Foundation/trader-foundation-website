@@ -136,7 +136,8 @@
       { "wrong": "That's the demand You For the sales", "right": "That's the demand for the sales", "note": "Spurious capitalised 'You' inserted mid-sentence" },
       { "wrong": "the candles very down", "right": "the candle's very down" },
       { "wrong": "the volumes extremely high", "right": "the volume's extremely high" },
-      { "wrong": "a big, Week in sales", "right": "a big week in sales", "note": "Spurious comma plus mid-sentence capitalisation" }
+      { "wrong": "a big, Week in sales", "right": "a big week in sales", "note": "Spurious comma plus mid-sentence capitalisation" },
+      { "wrong": "If the contract expires and the stock price is higher than the strike price, you profit. If the contract expires and the stock price is higher than the strike price, you profit.", "right": "If the contract expires and the stock price is higher than the strike price, you profit.", "note": "Whole-sentence duplication. Second instance of this artifact, after the call-option definition repeated twice in the previous module. Harmless to meaning but it would produce two near-identical chunks competing in retrieval." }
     ]
   },
 
