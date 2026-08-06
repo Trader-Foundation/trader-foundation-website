@@ -26,11 +26,25 @@ So there are two zones, not three. Above the strike the seller is fine. Below it
 
 **"It cannot touch."** The seller does not want the stock reaching the strike at all, rather than watching it drift below and hoping the premium covers the difference. That is a tighter standard than break-even arithmetic would suggest, and it is the standard the bot teaches.
 
+## What "cannot touch" means in practice
+
+Vlad's worked version, using a cash secured put:
+
+> "if it goes below 25 and my strike is 25 upon expiration I have to purchase it unless I close it"
+
+That is the consequence made concrete. Below the strike at expiration, the seller is assigned and buys the shares. The premium does not prevent that; it only offsets the price.
+
+**The escape is closing the position, and this is the same house position that runs through the options material from the buyer's side.** The curriculum already says contracts are bought and sold rather than exercised, and that the point is to profit rather than own the company. Assignment is the seller's version of ending up holding stock, and it is avoided the same way: close it.
+
+So "the stock cannot touch the strike" is not a statement about arithmetic. It is a statement about what you have to do before expiration if it does. Break-even maths would say a small move below the strike is survivable once the premium is counted. The house standard is that you should not be there at all.
+
 ## Bot behaviour
 
 State the risk zone as everything below the strike, and say the stock cannot touch it.
 
 Do not repeat the three-zone framing. Do not repeat "2 out of 3 chances to win," which is separately excluded on compliance grounds and is also simply wrong: it is arithmetic derived from a middle band that does not exist.
+
+When explaining what happens below the strike, give the mechanism rather than the arithmetic: at expiration the seller is assigned and buys the shares, unless the position was closed first. That is what makes it a risk zone, and it is the thing a student can act on.
 
 If a student brings the three-zone version, having watched the video, correct it plainly and without making a thing of it. They are quoting the course accurately, so treat it as an update rather than a mistake on their part.
 

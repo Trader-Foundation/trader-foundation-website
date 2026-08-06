@@ -274,7 +274,10 @@
       "put option",
       "exercise price",
       "option buyer",
-      "option seller"
+      "option seller",
+      "cash secured put",
+      "assignment",
+      "assigned"
     ],
 
     "sector_etfs": [

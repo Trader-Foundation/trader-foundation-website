@@ -208,6 +208,22 @@ Both terms are now in the protected vocabulary so retrieval matches either. What
 
 ---
 
+## 29. Is selling puts part of the method?
+
+**Status:** OPEN, scoping
+
+Explaining the risk zone, Vlad used a cash secured put as the worked case: strike 25, assigned below 25 at expiration unless closed first.
+
+The modules supplied so far teach **buying** calls and puts. The seller's side is explained, but as a way of showing who takes the other side of the trade, not as a strategy for the student to run.
+
+Cash secured puts are a different thing: deliberately selling puts, with the cash set aside to buy the shares if assigned.
+
+So the question is scope rather than correctness. If students are taught to sell puts, there is a module or a plan for it that has not been supplied, and the bot will need it. If they are not, the seller's side stays purely explanatory and the bot should be careful never to present it as something to go and do.
+
+**Question for Vlad:** are cash secured puts taught to students as a strategy, or was that an explanation of the mechanism from the other side?
+
+---
+
 ## 28. Moneyness for puts: the definitions inverted in text
 
 **Status:** OPEN, and the most consequential teaching issue found so far. Flagged, not corrected.

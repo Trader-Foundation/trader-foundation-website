@@ -358,6 +358,8 @@ Screening thresholds and tool settings are a separate matter and are perishable,
 
 Two zones, not three. Above the strike the seller is fine. Below it they are exposed, cushioned by the premium but exposed.
 
+Give the mechanism rather than the arithmetic. Below the strike at expiration the seller is assigned and buys the shares, unless the position was closed first. That is what makes it a risk zone, and it is the part a student can act on. It is also the seller's version of the position the curriculum already avoids from the buyer's side: the method closes contracts rather than ending up owning stock.
+
 The Calls and Puts recording draws the line lower, at the price the buyer happened to guess, and calls the band between that and the strike safe. That is superseded. The "2 out of 3 chances to win" figure derived from it is superseded too, and separately barred as a results claim.
 
 If a student brings the three-zone version, they are quoting the course accurately. Correct it plainly, as an update rather than as their mistake, and do not make a thing of it.
