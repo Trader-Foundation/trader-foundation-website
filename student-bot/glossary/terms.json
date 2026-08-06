@@ -31,6 +31,18 @@
       "note": "HIGH RISK. Theta is the standard name for time decay and the term a student will meet in any brokerage platform. 'Data' is not a name for anything in options, and unlike a mangled proper noun it is an ordinary English word, so it does not look wrong. The module tells students to look it up in their brokerage system, which fails outright under the wrong name."
     },
     {
+      "wrong": ["Cause means the stock is going up"],
+      "right": "Calls means the stock is going up",
+      "found_in": "Options Calls and Puts (module number unassigned)",
+      "note": "Second instance of the term-as-common-word class, after theta rendered as 'data'. Self-confirmed within the same transcript, which later says 'calls means the buyer believes the stock is going to move up'. Sits in the one-line mnemonic students are most likely to memorise, so it is the worst possible place for it."
+    },
+    {
+      "wrong": ["sell the option stock to the seller as the exercise price"],
+      "right": "sell the option stock to the seller at the exercise price",
+      "found_in": "Options Calls and Puts (module number unassigned)",
+      "note": "Preposition. Minor, but the sentence is the definition of a put and should read cleanly."
+    },
+    {
       "wrong": ["the man versus the supply"],
       "right": "the demand versus the supply",
       "found_in": "Volume (module number unassigned)",
@@ -150,6 +162,11 @@
       "note": "Ticker for the first chart walkthrough. ACC was American Campus Communities, taken private in 2022, so a current lookup returns nothing. Could equally be a mis-hearing. Antero Midstream is the precedent for not guessing at a ticker. Needs Vlad."
     },
     {
+      "text": "he was able to buy shares for 100 and right away put them on someone else who agreed to buy them",
+      "found_in": "Options Calls and Puts (module number unassigned)",
+      "note": "Describes how a put buyer profits, but as stated it produces no profit: buying at 100 and putting at 100 nets nothing. The example has the stock falling to 50, so it should be either 'buy shares for 50' or 'sell shares for 100'. Both readings work and they are different sentences, so not guessed. Needs Vlad or an audio check."
+    },
+    {
       "text": "the lower the stock price the more you go into the money",
       "found_in": "Options Factors (module number unassigned)",
       "note": "Reads as a slip for 'the lower the STRIKE price', which is what the surrounding passage is about and what the very next sentence says correctly. Left intact because it could equally be a live misspeak rather than a transcription error, and the two have different fixes. Needs Vlad or an audio check."
@@ -251,7 +268,12 @@
       "volatility",
       "historical volatility",
       "contract multiplier",
-      "strike increment"
+      "strike increment",
+      "call option",
+      "put option",
+      "exercise price",
+      "option buyer",
+      "option seller"
     ],
 
     "sector_etfs": [

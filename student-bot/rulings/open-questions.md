@@ -208,6 +208,44 @@ Both terms are now in the protected vocabulary so retrieval matches either. What
 
 ---
 
+## 27. Put seller risk zones, and the "2 out of 3" that follows from them
+
+**Status:** OPEN. Flagged, not corrected. This is teaching, not transcription, so it is Vlad's call.
+
+The Calls and Puts module maps the put seller's outcomes into three zones, with the stock at 100, a
+2 premium, and the buyer expecting a fall to 50:
+
+> "the seller is going to be fine if the stock is above 100, or if it's anywhere above 50 and
+> between 100, now if it goes to below 50, obviously they will lose money. So 2 out of 3 chances to
+> win is actually a pretty big benefit."
+
+**What does not follow.** A put buyer holding the 100 strike exercises anywhere below 100, not only
+below 50. The 50 in the example is where *the buyer guessed* the stock would go, not a threshold in
+the contract. With a 2 premium the seller's break-even is around 98, so the middle zone is not safe:
+the seller is losing across most of it, partly cushioned by the premium.
+
+**Why it matters more than a slip.** Three things ride on it:
+
+1. It understates the seller's risk, and understating risk is the most consequential kind of error a
+   teaching module can make.
+2. The "2 out of 3 chances to win" is derived from the three zones. If the zones are wrong, the odds
+   claim is wrong too. That line is separately excluded on compliance grounds, but exclusion only
+   stops the bot repeating it; it does not fix what students take away from the video.
+3. Students will bring this to the bot as a settled belief, and the bot needs a position.
+
+**Possible readings, and I cannot tell which:**
+
+- Transcription. Something was mis-heard and the spoken version drew the line at the strike.
+- Simplification. A deliberate first pass for beginners, tightened in a later options module that
+  has not been supplied.
+- Framing about the buyer. The zones may describe when the buyer *bothers* to exercise in practice
+  rather than when the seller is mathematically ahead.
+
+**Question for Vlad:** for a put seller, is the risk zone everything below the strike, or does the
+module intend the narrower reading it states? And is "2 out of 3 chances to win" meant as teaching?
+
+---
+
 ## 26. The two option strategies, and a tension between them
 
 **Status:** OPEN, needs the advancement check and a clarification
@@ -244,7 +282,7 @@ So options is a run of at least two lessons sitting after the technical analysis
 
 **Question for Vlad:** which module number is Options Intro, and how many options modules follow it?
 
-**Update:** the second options module has now been supplied, Options Factors, which covers the six factors that set the premium. It closes by pointing at a third: "the next part where we really start looking at how do you invest with an option", covering investing up, investing down, and the key aspects. So the options run is at least three lessons.
+**Update:** three options modules are now in. Options Intro, then Options Factors on the six premium factors, then Calls and Puts, which is the one Options Factors promised by pointing at "investing going up, investing going down". Calls and Puts closes by pointing at "the next modules" on how calls and puts play in reality, so the options run is at least four lessons. Original note follows: Options Factors closes by pointing at a third: "the next part where we really start looking at how do you invest with an option", covering investing up, investing down, and the key aspects. So the options run is at least three lessons.
 
 ---
 

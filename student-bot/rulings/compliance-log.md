@@ -40,6 +40,24 @@ Log every hit. Do not silently fix and move on.
 | Moving Averages | Multiple-average section | "moving averages can be applied for great short term gains... there's some huge gains" | **Exclude.** Outcome claims | Yes, re-record candidate |
 | Moving Averages | Closing | "step by step of exactly what I do on a weekly basis to make money off moving averages" | **Exclude.** Outcome promise | Yes, re-record candidate |
 
+### Options Calls and Puts: a direct win-rate promise
+
+| Passage | Why |
+|---|---|
+| "You will win more times than none because you are more educated than the other person" | **Exclude.** A plain promise that the student will win more often than they lose. This is a win-rate claim made outside the only permitted results language |
+| "So 2 out of 3 chances to win is actually a pretty big benefit" | **Exclude.** A stated probability of winning, and see the accuracy problem below |
+
+The first is the most direct outcome promise found in any module so far. Earlier hits attached
+figures to trades or to the instructor. This one attaches an outcome to **the student**, in the
+second person, as a consequence of taking the course. Module 5's Alibaba claim was about what
+people made; this is about what you will do.
+
+It is also inconsistent with the curriculum's own posture everywhere else: no almanac, technical
+analysis tilts probability and nothing more, and some rulings will be wrong.
+
+Both excluded. The surrounding teaching, that options put you against another participant with an
+opposite belief rather than against a house, survives without either sentence.
+
 ### Options Intro: the hardest case so far, and it needs a ruling not a red pen
 
 **This module cannot be stripped of figures without destroying the lesson.** That makes it structurally different from every prior hit and the exclusion habit does not transfer.
@@ -131,9 +149,11 @@ Outcome-flavoured language carrying no figure. Logged so the pattern is visible 
 | 8, Fibonacci Retracement | Scanned | One boundary hit, see above. Otherwise clean |
 | Moving Averages (number unassigned) | Scanned | **Six hits, two unambiguous.** Plus the insider information line. Re-record candidate |
 | Options Intro (number unassigned) | Scanned | **Four outcome claims excluded.** Illustrative arithmetic retained pending ruling, see above |
+| Options Factors (number unassigned) | Scanned | Clean |
+| Options Calls and Puts (number unassigned) | Scanned | **Two excluded**, including a direct win-rate promise. See above |
 | All others | Not started | |
 
-Three of seven scanned modules were clean. Four were not. The rate is getting worse, not better, as the sample grows.
+Four of nine scanned modules were clean. Five were not. The rate is getting worse, not better, as the sample grows.
 
 That matters for planning. The original assumption was a compliance pass that finds occasional hits. On this evidence it is closer to half the library needing review, and at least some of it needing re-recording rather than editing. Scope and owner for that pass are still unassigned, which is open item 8.
 

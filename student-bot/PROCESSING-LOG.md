@@ -52,6 +52,7 @@ Then: append a row to the ledger, add new questions to `rulings/open-questions.m
 | The Bounce Profit Plan *(worksheet)* | n/a, document | Clean | none, written source | 0 | No |
 | Options Intro | **unassigned** | **4 excluded, arithmetic pending ruling** | none, formatting only | 0 | No |
 | Options Factors | **unassigned** | Clean | 1 term error (theta) | 1 | No |
+| Options Calls and Puts | **unassigned** | **2 excluded, incl. a win-rate promise** | 1 term error (calls) | 1 | No |
 
 Modules 2, 3 and 5 were characterised in the spec before this log existed. Everything from Volume onward was processed here.
 
@@ -153,6 +154,19 @@ The risk this creates for the bot is specific. Encoding a method chain, canonica
 `prompts/system.md` now carries this as a first-class principle rather than a caveat: the chain is a weighing not a formula, conflicting signals are the normal case rather than an error, experience changes how the method is applied, and hedged language is required where the curriculum hedges.
 
 Worth re-checking whenever a new rule or value gets encoded: does this make the method look more mechanical than the curriculum intends?
+
+### The fourth error class recurs, and it lands in the mnemonic
+
+Calls and Puts renders **"Calls means the stock is going up"** as **"Cause means the stock is going up"**.
+
+Second instance of the class, after theta as "data", which confirms it is a pattern rather than a
+one-off. This one is worse placed: it sits in the single-line mnemonic the module offers as the
+thing to remember, immediately after saying "very simple to remember".
+
+It is also self-correcting within the transcript, which later says "calls means the buyer believes
+the stock is going to move up". That is the second time a transcript has contained its own fix
+further down, after the Fibonacci levels. **Worth checking a suspect term against the rest of the
+same transcript before treating it as unresolvable.**
 
 ### A fourth error class: the wrong word that is still a real word
 
