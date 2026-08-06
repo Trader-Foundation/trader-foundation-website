@@ -286,6 +286,16 @@ more likely to be "reword before ingestion" than "the teaching is wrong."
 
 ## 33. Is "max profit is infinite" an outcome claim?
 
+**Status: CLOSED. Ruled by Vlad.** See `max-profit-and-risk.md`.
+
+> "CALLS in this instance. profit is infinite HOWEVER there is risk management that needs to be accounted for more risky to want more"
+
+The fact stays. It never travels alone. The original note follows for the record.
+
+---
+
+### Original note, superseded
+
 **Status:** OPEN, held out of the corpus provisionally. **The one I would most like answered**, because the answer generalises to every module that walks through a broker screen.
 
 The thinkorswim walkthrough reads the platform's own max profit field on a long call:
@@ -361,6 +371,14 @@ and again at the close: "the closer you are to the money the more money you're g
 Three different placements in one module. Not a contradiction in a live lesson where the chain is visible, ambiguous in text.
 
 **Question for Vlad:** on a directional call, does the method buy in the money, at the money, or slightly out of the money, and does that change with the days to expiration?
+
+**UPDATE, mostly answered by the Greeks module and by the chart ruling.** The Greeks module states the preference and, more usefully, gives the reason as a number:
+
+> "have enough days, be closer to the money so you can start making, because what happens is if you start buying things like here, that's 15 cents. Well, yeah, but look, 0.04."
+
+A 15 cent contract with a 0.04 delta barely responds when the stock moves. So "closer to the money" is not a taste, it is a statement about delta, and a student can check it on their own screen rather than taking it on faith.
+
+And Vlad's chart ruling reframes what is left: *"every single decision always comes down to the chart."* So the remaining question is not "which strike" but whether there is a **default to start from** before the chart moves you off it. Narrowed accordingly, and no longer blocking, since the bot can now teach delta as the tool instead of a threshold.
 
 ---
 

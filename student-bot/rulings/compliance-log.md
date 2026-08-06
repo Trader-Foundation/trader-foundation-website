@@ -58,7 +58,69 @@ analysis tilts probability and nothing more, and some rulings will be wrong.
 Both excluded. The surrounding teaching, that options put you against another participant with an
 opposite belief rather than against a house, survives without either sentence.
 
-### thinkorswim walkthrough: "max profit is infinite"
+### Greeks in thinkorswim: the heaviest compliance load in the corpus, and a re-record recommendation
+
+**This module is worse than Moving Averages, and it is worse in a way that exclusion alone will not fix.**
+
+Moving Averages carried six hits threaded through the lesson. This one carries three percentage returns, a compounding account-growth narrative, and a closing pitch, all aimed explicitly at a beginner with a small account. It is also the only module in the corpus that **poses the earnings question in the instructor's own voice and then answers it with figures**:
+
+> "If you, for example, have 500, and that's what you're starting with, because a lot of people ask that question, Well, how do I make money?"
+
+That sentence names the exact question the standing rules exist to govern, tells the student other people ask it, and proceeds to answer it.
+
+**Pile B, outcome and performance claims. Exclude.**
+
+| Passage | Why |
+|---|---|
+| "that's 175 percent winner" | A stated percentage return |
+| "that's a 88 percent move... you're making 87%, 1800 of investing 2060" | A stated percentage return, twice, plus the dollar pair it derives from |
+| "That's 214 percent on the money" | A stated percentage return |
+| "If this moves 8, like we wanted to, that's a thousand dollars. You're making a thousand dollars" | A dollar outcome, stated twice for emphasis |
+| "That's the power of options" | Outcome framing attached to the returns above |
+| "really start making money that you want to make with a small bank account" | An earnings promise, addressed to the smallest-account student |
+| "If you, for example, have 500... Well, how do I make money?" | Poses and answers the earnings question directly |
+| "And that's how you build your account. Cause the next time now you can invest way more because now you have almost 1500 in the bank" | **Compounding account growth.** The most serious single item. It is not one trade's return, it is a trajectory, and it implies repeatability |
+| "So you could spend a lot less money to make huge profits" | Closing outcome promise |
+
+**Pile A, Greek mechanics. Keep, under the existing worked-arithmetic guard.**
+
+The per-Greek arithmetic is the teaching and the module is unteachable without it. Delta 0.45 means 45 cents per share per dollar, so $45 a contract, so $450 on ten. Gamma 0.06 means the next dollar pays 51 cents rather than 45. Theta 0.04 means $40 a day leaving. Vega 0.15 means 15 cents per point of volatility. Every one of those is mechanism, attached to a hypothetical position, and none of it names a person.
+
+**The line between the piles is unusually clean here**, cleaner than in Options Intro. Pile A stops at "here is what this Greek does to your premium." Pile B starts the moment a figure is divided by the cost to produce a percentage, or added to a starting balance to produce an account. **That is the test to apply: the Greek arithmetic stays, the return arithmetic goes.**
+
+**Why I am recommending a re-record rather than only an exclusion.** The exclusions protect the bot. They do nothing about the video, and this is the video a beginner with 500 dollars watches. Moving Averages was flagged as the first unavoidable re-record candidate. This one is a stronger case, because the offending material is not garnish here, it is the module's motivation and its closing argument, and the audience is the least experienced one in the funnel.
+
+The Greeks explanation itself is the best in the corpus and deserves to survive. A re-record that keeps every Greek and drops every percentage would lose nothing pedagogically.
+
+### Greeks module: a mechanical gap, separate from compliance
+
+Not a compliance hit. Logged because it is the third finding from checking a taught rule against the mechanics rather than against the transcript.
+
+**The headline returns are gross of time decay, and the module teaches the decay itself moments later.**
+
+Delta gains are computed as if the move arrives for free: 450 a point, 8 points, 3600. Theta is then introduced at 0.04, correctly worked as $40 a day on the same ten contracts. The two are never netted. The module proposes holding "maybe in a couple of weeks," and fourteen days of that decay is $560, which turns the 3600 into roughly 3040.
+
+So the arithmetic is right in every individual step and the conclusion overstates. Nothing is mis-heard and nothing is mis-said. The pieces simply never meet.
+
+**This is a teaching point, not just a correction.** Delta and theta pull against each other, and the whole reason "have enough days" is a rule is that theta is the thing being managed. A module that shows both and never subtracts one from the other leaves out the tension that makes the advice make sense.
+
+Since the return figures are excluded anyway, the bot is not exposed to the overstatement. It matters for the re-record.
+
+### thinkorswim walkthrough: "max profit is infinite" — RULED, NOT EXCLUDED
+
+**Vlad has ruled. The fact stays.** See `max-profit-and-risk.md`. The provisional hold recorded below is superseded.
+
+> "CALLS in this instance. profit is infinite HOWEVER there is risk management that needs to be accounted for more risky to want more"
+
+The unbounded upside on a long call is taught, never alone. It travels with the risk that buys it, and the operative half is that reaching for more upside means taking more risk.
+
+**Why this is consistent with the standing rules rather than an exception to them.** The non-negotiable bars *specific* financial outcome claims: figures attached to a trader or a student. Unbounded upside on a call carries no figure, names no person, and is true of every call ever written. It is a property of the instrument. The provisional hold treated it as an outcome claim because of how extreme it sounds, which was the wrong test.
+
+**The right test, and it generalises to every broker screen in the library:** not whether the number is accurate, but whether the sentence could stand alone as an answer about what someone might earn. This one cannot, once the risk half is attached to it. That is the shape to apply to the rest.
+
+The record of the original call follows, kept because the reasoning is still the reasoning for anything that does not survive the test.
+
+### Original provisional hold, superseded
 
 The single most exposed sentence found in any module, and it is not a claim the instructor made up.
 
@@ -198,10 +260,11 @@ Outcome-flavoured language carrying no figure. Logged so the pattern is visible 
 | Options Factors (number unassigned) | Scanned | Clean |
 | Options Calls and Puts (number unassigned) | Scanned | **Two excluded**, including a direct win-rate promise. See above |
 | Options: in/at/out of the money (number unassigned) | Scanned | Clean, one borderline kept under the worked-arithmetic guard |
-| Options thinkorswim walkthrough (number unassigned) | Scanned | **One held out provisionally: "max profit is infinite."** Four calculator figures kept under the guard. See above |
+| Options thinkorswim walkthrough (number unassigned) | Scanned | Ruled by Vlad. "Max profit is infinite" stays, paired with the risk. See above |
+| Options Greeks in thinkorswim (number unassigned) | Scanned | **Nine excluded, three of them percentage returns. Strongest re-record candidate in the corpus.** See above |
 | All others | Not started | |
 
-Five of eleven scanned modules were clean. Six were not.
+Five of twelve scanned modules were clean. Seven were not, and the two worst are the two aimed at students with the least experience.
 
 That matters for planning. The original assumption was a compliance pass that finds occasional hits. On this evidence it is closer to half the library needing review, and at least some of it needing re-recording rather than editing. Scope and owner for that pass are still unassigned, which is open item 8.
 

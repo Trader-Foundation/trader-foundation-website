@@ -54,7 +54,8 @@ Then: append a row to the ledger, add new questions to `rulings/open-questions.m
 | Options Factors | **unassigned** | Clean | 1 term error (theta) | 1 | No |
 | Options Calls and Puts | **unassigned** | **2 excluded, incl. a win-rate promise** | 1 term error (calls) | 1 | No |
 | Options: in/at/out of the money | **unassigned** | Clean, 1 borderline | none. 4 generic noise fixes, see question 28 for the real problem | 1 | No |
-| Options thinkorswim walkthrough | **unassigned** | **1 held out: "max profit is infinite"** | 5 decimal artifacts fixed, 2 unresolved | 3 | No |
+| Options thinkorswim walkthrough | **unassigned** | 1 ruled by Vlad, kept with the risk paired | 5 decimal artifacts fixed, 2 unresolved | 2 | No |
+| Options Greeks in thinkorswim | **unassigned** | **9 excluded. Strongest re-record candidate** | 17 artifacts fixed, arithmetic audited clean | 0 | No |
 
 Modules 2, 3 and 5 were characterised in the spec before this log existed. Everything from Volume onward was processed here.
 
@@ -117,6 +118,38 @@ This is now in `prompts/system.md` as the bot's primary behaviour. When a studen
 
 Worth checking every further module for whether it adds a step, refines one, or reorders them.
 
+### The governing principle, and it was never in a transcript
+
+Vlad, unprompted:
+
+> "every single decision always comes down to the chart."
+>
+> "trade the chart not your heart"
+
+This outranks everything else in this log. Full write-up in `rulings/the-chart-decides.md`.
+
+**It reframes every number encoded so far.** Thirty days minimum, two to three days holding, close at 50 percent, Full Stochastics at 14.3.3, the 13 and the 20. None of those are decisions. They are places to start from before reading a chart. The project has been accumulating rule-shaped things because rule-shaped things are what a corpus can hold, and this is the correction to that drift.
+
+**It also turns the bot's biggest limitation into its footing.** "The bot cannot see charts" was written as a compliance restraint. Under this ruling it is a description of the bot's position: if every decision comes down to the chart, and the chart is the one thing the bot will never have, then the bot is not *forbidden* from deciding, it is *incapable* of it. That is a stronger guarantee, because a restriction invites a student to push and a fact does not.
+
+And it says the guided-reasoning behaviour was never a workaround. Handing a student the questions to ask of their own chart is the method being taught correctly, because the decision was always going to be theirs.
+
+**"Not your heart" adds the second half.** The plain statement says where the information is. The phrase says what it competes with: hope, conviction, the number you want to be true. That meets the max profit ruling exactly, since reaching further out of the money for a bigger multiple is the heart talking. Two rulings, same idea from opposite ends.
+
+### Delta turns a caution into something checkable
+
+The best single thing the Greeks module contributes, and it is not the Greeks themselves.
+
+Vlad ruled that unbounded upside on a call is real but that "more risky to want more." That is sound and it is hard to act on, because a student reaching for a cheap far out of the money contract does not feel like they are taking more risk, they feel like they are being efficient.
+
+The Greeks module answers it with a number:
+
+> "have enough days, be closer to the money so you can start making, because what happens is if you start buying things like here, that's 15 cents. Well, yeah, but look, 0.04."
+
+Fifteen cents, delta 0.04. The contract barely moves when the stock does. **The cheap contract is not a bargain, it is a contract that hardly responds**, and delta says so on the student's own screen.
+
+This is the pattern worth looking for generally: a principle Vlad states in judgement terms usually has an instrument in the curriculum that measures it. Finding that instrument is what makes the principle teachable by a bot rather than merely repeatable.
+
 ### The method has an execution step, and it was invisible until now
 
 The chain assembled from the analysis modules ends at confirmation. The thinkorswim walkthrough adds what happens after you decide, and it is not just clicking.
@@ -131,7 +164,19 @@ That is a real filter with a real reason, and it is the kind of thing that decid
 
 The liquidity screen from the FinViz step was taught as a stock-selection criterion. Here it turns out to be doing a second job: liquid underlyings have tight option spreads. Second time a later module has explained why an earlier filter exists, after Momentum sent students back to FinViz screening.
 
-**Worth adding to the chain as a distinct stage.** Analysis says whether to trade. Execution says whether this particular contract is worth trading, and it can veto a good read. The contract choices in the same module, duration and moneyness, belong to the same stage, but both are still open questions 31 and 32 so only the spread check is settled enough to teach.
+**Worth adding to the chain as a distinct stage.** Analysis says whether to trade. Execution says whether this particular contract is worth trading, and it can veto a good read.
+
+**The Greeks module then puts a step in front of it and three behind it.** In front: option volume and open interest, and it is emphatic about the ordering, "First thing you want to do before anything is look at volume." That is the stage 5 liquidity screen applied a second time, to the contract instead of the stock. Behind: delta, gamma and theta, with vega watched rather than led with, which is the same posture the curriculum takes toward momentum indicators.
+
+So the execution stage is now four steps, and it has its own internal order, which is a sign it is a real part of the method rather than a bag of tips.
+
+### Theta is mis-transcribed in two separate recordings
+
+Options Factors rendered theta as "data". The Greeks module renders it as **"The next one is data. Data is your time the case"**, where "time decay" is also mangled, so the term and its definition are lost in the same line.
+
+Two recordings, same error, which makes it systematic. **The tell is that every other Greek transcribes correctly.** Delta, gamma and vega come through clean in both modules. They are not English words and theta is close to one, so the tool reaches for the nearest ordinary word and finds it.
+
+That sharpens the fourth error class into something predictable: **the domain terms at risk are the ones with a common-word neighbour.** Theta to data, calls to cause. Worth scanning for proactively rather than waiting to notice, and worth checking any term that sits one syllable from ordinary English.
 
 ### The visual-dependent class is worst in platform walkthroughs, and it has an antidote
 
@@ -329,6 +374,7 @@ This repository is public so transcripts cannot be committed here, and the conta
 | Options Calls and Puts | `options-calls-puts-UNNUMBERED-RAW.txt` | `1oCPr-FIekNwYhDpepMYWbME--s_64kUk` |
 | Options: in/at/out of the money | `options-money-scenarios-UNNUMBERED-RAW.txt` | `1HIUBIpzJLU6Bu2rnENx34KI8VWwEdmcO` |
 | Options thinkorswim walkthrough | `options-thinkorswim-walkthrough-UNNUMBERED-RAW.txt` | `1QD-x7q7ZEK0XZycqVNlVNgzncFcdV2Et` |
+| Options Greeks in thinkorswim | `options-greeks-thinkorswim-UNNUMBERED-RAW.txt` | `1PrZbsqNkpdxbUFKOJoMXoP2wvt4ybGBl` |
 | The Bounce Profit Plan *(worksheet)* | `document-bounce-profit-plan-RAW.txt` | `1I-ejvV92yaZdzKpQSv5JeyGclsRIq6sr` |
 | Breakout Strategy *(worksheet)* | `document-breakout-strategy-RAW.txt` | `1INwugRa-afsIWs8l-tP5iAL4oOuofEVO` |
 

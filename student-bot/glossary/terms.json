@@ -43,11 +43,12 @@
     {
       "wrong": [
         "time decay is also known as data",
-        "known as data"
+        "known as data",
+        "The next one is data. Data is your time the case"
       ],
       "right": "time decay is also known as theta",
-      "found_in": "Options Factors (module number unassigned)",
-      "note": "HIGH RISK. Theta is the standard name for time decay and the term a student will meet in any brokerage platform. 'Data' is not a name for anything in options, and unlike a mangled proper noun it is an ordinary English word, so it does not look wrong. The module tells students to look it up in their brokerage system, which fails outright under the wrong name."
+      "found_in": "Options Factors, and again in Options Greeks in thinkorswim (module numbers unassigned)",
+      "note": "HIGH RISK. Theta is the standard name for time decay and the term a student will meet in any brokerage platform. 'Data' is not a name for anything in options, and unlike a mangled proper noun it is an ordinary English word, so it does not look wrong. The module tells students to look it up in their brokerage system, which fails outright under the wrong name. SECOND RECORDING, CONFIRMED PATTERN. The Greeks module renders it as 'The next one is data. Data is your time the case', where 'time the case' is itself 'time decay' mangled, so the sentence loses the term AND its definition in one line. Two separate recordings mis-hear theta the same way, so this is systematic rather than incidental. Every Greek but theta transcribes correctly, which is the tell: delta, gamma and vega are not English words and theta is close to one."
     },
     {
       "wrong": [
@@ -185,7 +186,16 @@
         "moving_average_filters": "Price Above/Below SMA50 and SMA200",
         "chart_view": "Basic"
       },
-      "note": "The levels and periods the curriculum teaches. Any other value appearing in a retracement or moving-average passage is a transcription error, not a variant teaching. Two short-term averages (13, 20) and two long-term (50, 200)."
+      "note": "The levels and periods the curriculum teaches. Any other value appearing in a retracement or moving-average passage is a transcription error, not a variant teaching. Two short-term averages (13, 20) and two long-term (50, 200).",
+      "option_greeks": {
+        "_source": "Options Greeks in thinkorswim. The VALUES below are read off one live chain and are examples, not settings. What is canonical is what each Greek measures and the unit it is expressed in.",
+        "delta": "how much the premium moves per 1 dollar move in the stock, per share. 0.45 delta means 45 cents per share, 45 dollars per contract",
+        "gamma": "the acceleration of delta. 0.06 gamma means the next dollar moves delta from 0.45 to 0.51",
+        "theta": "time decay, per day, per share. 0.04 theta means 4 dollars per contract per day leaving the position. Decay accelerates as expiration approaches",
+        "vega": "sensitivity to volatility. 0.15 vega means 15 cents per share per 1 percent change in volatility, in either direction",
+        "instructor_priority": "Delta, gamma and theta are the focus. Vega is watched rather than led with, and flagged as a caution when it is large",
+        "_warning": "The module's return figures are gross of theta. Delta gains and theta decay are both worked correctly and never netted against each other. See rulings/compliance-log.md."
+      }
     }
   },
   "generic_transcription_noise": {
@@ -410,7 +420,8 @@
       "Education Coordinator",
       "Trader Foundation",
       "bounce formula",
-      "bounce profit formula"
+      "bounce profit formula",
+      "Trade the chart, not your heart"
     ],
     "platforms_and_tools": [
       "FinViz",
@@ -456,7 +467,13 @@
       "RSI",
       "Simple Moving Avg",
       "SMA50",
-      "SMA200"
+      "SMA200",
+      "delta",
+      "gamma",
+      "theta",
+      "vega",
+      "open interest",
+      "volume open interest"
     ],
     "options_order_terms": {
       "_comment": "Order mechanics from the thinkorswim walkthrough. The CONCEPTS are EVERGREEN and portable to any broker. The click paths and colour coding around them are PERISHABLE_PROCEDURE. Keep the two apart: a student on a different platform still needs limit versus market.",
@@ -489,6 +506,12 @@
         "GTC",
         "day"
       ]
+    },
+    "house_principles": {
+      "_comment": "Vlad's own phrasings for governing principles. Reproduce them as written. These are not slogans the bot may improvise on, and they are not paraphrasable without losing the point.",
+      "trade the chart not your heart": "Every decision comes down to the chart. Governs two failure modes at once: following a rule instead of reading the chart, and following a feeling instead of reading the chart. See rulings/the-chart-decides.md.",
+      "more risky to want more": "Reaching for more upside means taking more risk. The counterweight that must travel with the unbounded upside on a long call. See rulings/max-profit-and-risk.md.",
+      "trading is not black and white": "The method is a weighing, not a formula. Conflicting signals are the normal case rather than an error."
     }
   },
   "forbidden_output_terms": {
