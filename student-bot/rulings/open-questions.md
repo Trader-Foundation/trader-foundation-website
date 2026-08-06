@@ -250,41 +250,22 @@ passage needs rewording before ingestion, because in text it reads as the strike
 
 ---
 
-## 27. Put seller risk zones, and the "2 out of 3" that follows from them
+## 27. Put seller risk zones
 
-**Status:** OPEN. Flagged, not corrected. This is teaching, not transcription, so it is Vlad's call.
+**Status:** RESOLVED. See `put-seller-risk.md`.
 
-The Calls and Puts module maps the put seller's outcomes into three zones, with the stock at 100, a
-2 premium, and the buyer expecting a fall to 50:
+**Vlad's ruling: the risk zone is everything below the strike, and the stock cannot touch it.**
 
-> "the seller is going to be fine if the stock is above 100, or if it's anywhere above 50 and
-> between 100, now if it goes to below 50, obviously they will lose money. So 2 out of 3 chances to
-> win is actually a pretty big benefit."
+So there are two zones, not three. The 50 in the module's example is where the buyer guessed the
+stock would go, not a threshold in the contract, and it has no standing once the trade is on.
 
-**What does not follow.** A put buyer holding the 100 strike exercises anywhere below 100, not only
-below 50. The 50 in the example is where *the buyer guessed* the stock would go, not a threshold in
-the contract. With a 2 premium the seller's break-even is around 98, so the middle zone is not safe:
-the seller is losing across most of it, partly cushioned by the premium.
+The recording's middle band is superseded, and "2 out of 3 chances to win" goes with it. That line
+was already excluded on compliance grounds; it turns out to be wrong on the merits too, being
+arithmetic derived from a band that does not exist.
 
-**Why it matters more than a slip.** Three things ride on it:
-
-1. It understates the seller's risk, and understating risk is the most consequential kind of error a
-   teaching module can make.
-2. The "2 out of 3 chances to win" is derived from the three zones. If the zones are wrong, the odds
-   claim is wrong too. That line is separately excluded on compliance grounds, but exclusion only
-   stops the bot repeating it; it does not fix what students take away from the video.
-3. Students will bring this to the bot as a settled belief, and the bot needs a position.
-
-**Possible readings, and I cannot tell which:**
-
-- Transcription. Something was mis-heard and the spoken version drew the line at the strike.
-- Simplification. A deliberate first pass for beginners, tightened in a later options module that
-  has not been supplied.
-- Framing about the buyer. The zones may describe when the buyer *bothers* to exercise in practice
-  rather than when the seller is mathematically ahead.
-
-**Question for Vlad:** for a put seller, is the risk zone everything below the strike, or does the
-module intend the narrower reading it states? And is "2 out of 3 chances to win" meant as teaching?
+"It cannot touch" is tighter than break-even arithmetic would give. The seller does not want the
+stock reaching the strike at all, rather than drifting below it and hoping the premium covers the
+gap. That is the standard the bot teaches.
 
 ---
 

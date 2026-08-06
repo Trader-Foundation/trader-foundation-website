@@ -352,6 +352,16 @@ More generally, when a retrieved chunk states a number that contradicts a value 
 
 Screening thresholds and tool settings are a separate matter and are perishable, see the three content layers above.
 
+### Put seller risk, confirmed
+
+**The risk zone for a put seller is everything below the strike, and the stock cannot touch it.**
+
+Two zones, not three. Above the strike the seller is fine. Below it they are exposed, cushioned by the premium but exposed.
+
+The Calls and Puts recording draws the line lower, at the price the buyer happened to guess, and calls the band between that and the strike safe. That is superseded. The "2 out of 3 chances to win" figure derived from it is superseded too, and separately barred as a results claim.
+
+If a student brings the three-zone version, they are quoting the course accurately. Correct it plainly, as an update rather than as their mistake, and do not make a thing of it.
+
 ### Stochastics variant, confirmed
 
 **Full Stochastics, parameters 14.3.3.** This is the house setting.

@@ -124,9 +124,28 @@ That nearly produced a wrong answer to a direct question from Vlad. Any claim ab
 
 The same trap applies in reverse to the glossary: a bare find-and-replace of a short string will corrupt longer words containing it. Both corrections that touched short phrases were deliberately scoped to full phrases for this reason.
 
+### Check taught rules against the mechanics, not just the transcript
+
+Two findings now have come from working a stated rule against what the instrument actually does,
+rather than from any transcription check.
+
+**The put seller zones.** The module called a middle band safe. Nothing was mis-heard, the sentence
+was exactly what was said, and it was internally coherent. It only came apart when the arithmetic
+was worked against the contract instead of against the example's narrative. Vlad has since ruled
+the risk zone is everything below the strike.
+
+**The moneyness definitions.** Four parallel sentences, two correct and two only correct under a
+different reading. Found by comparing the stated rule against the module's own worked examples.
+
+Neither would have surfaced from a glossary pass, a compliance scan, or a currency check. Both
+needed someone to ask whether the rule as stated is true of the thing it describes.
+
+Worth running on any module that teaches a mechanism rather than a concept, which so far means all
+the options material.
+
 ### Recordings are not self-correcting, twice confirmed
 
-Two rulings now, and both went the same way.
+Three rulings now.
 
 **Inverted hammer:** the Module 3 recording teaches a flat rule; current teaching adds a confirmation condition that was never recorded.
 

@@ -45,7 +45,7 @@ Log every hit. Do not silently fix and move on.
 | Passage | Why |
 |---|---|
 | "You will win more times than none because you are more educated than the other person" | **Exclude.** A plain promise that the student will win more often than they lose. This is a win-rate claim made outside the only permitted results language |
-| "So 2 out of 3 chances to win is actually a pretty big benefit" | **Exclude.** A stated probability of winning, and see the accuracy problem below |
+| "So 2 out of 3 chances to win is actually a pretty big benefit" | **Exclude.** A stated probability of winning. Now also superseded on the merits: Vlad has ruled the risk zone is everything below the strike, so the middle band this figure was derived from does not exist. See `put-seller-risk.md` |
 
 The first is the most direct outcome promise found in any module so far. Earlier hits attached
 figures to trades or to the instructor. This one attaches an outcome to **the student**, in the
