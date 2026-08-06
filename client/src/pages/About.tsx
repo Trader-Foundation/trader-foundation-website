@@ -99,6 +99,7 @@ function useFadeIn(threshold = 0.15) {
 /* ── Page ── */
 export default function About() {
   const story = useFadeIn();
+  const erinSpotlight = useFadeIn();
   const philosophy = useFadeIn();
   const team = useFadeIn();
 
@@ -152,6 +153,50 @@ export default function About() {
               </p>
               <p className="text-[#555] text-sm leading-relaxed italic border-l-2 border-[#c7ab77]/40 pl-4">
                 "Everyone deserves to understand how money really works. Not just the theory, but the real skills to grow wealth on your own terms. The best moment is when a student stops relying on someone else and starts making confident financial decisions on their own. That's the transformation we're building here."
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Coach Spotlight: Erin ─── */}
+      <section className="py-20 bg-white border-t border-[#e8e4dc]">
+        <div
+          ref={erinSpotlight.ref}
+          className={`max-w-[900px] mx-auto px-6 lg:px-8 transition-all duration-700 ${
+            erinSpotlight.visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-12 items-center">
+            <div className="md:col-span-2 flex justify-center">
+              <div className="relative w-44 h-44 sm:w-52 sm:h-52">
+                <div className="absolute -inset-2 border border-[#c7ab77]/30 rounded-full" />
+                <img
+                  src={ERIN_PHOTO}
+                  alt="Erin Chawla, Senior Coach at Trader Foundation"
+                  className="w-full h-full object-cover rounded-full shadow-xl"
+                />
+              </div>
+            </div>
+            <div className="md:col-span-3 text-center md:text-left">
+              <p className="text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-3" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                Coach Spotlight
+              </p>
+              <h2 className="text-2xl md:text-3xl font-extrabold text-[#111] leading-tight mb-5" style={{ fontFamily: "'Sen', sans-serif" }}>
+                From Skeptic to Coach
+              </h2>
+              <p className="text-[#444] text-base leading-relaxed mb-4">
+                Erin came to Trader Foundation from corporate finance at{' '}
+                <strong>GE</strong> &mdash; sixty-hour weeks reading P&amp;Ls and analyzing risk for a living. She joined as a student, skeptical the way every serious professional is, kept her full-time job, and studied trading on the side.
+              </p>
+              <p className="text-[#444] text-base leading-relaxed mb-4">
+                By the time her trading portfolio was <strong>5&times;</strong> what she'd started with, she'd made her decision. She believed in what Trader Foundation was building so completely that she walked away from the corporate track for good. Today she's a senior coach who has personally worked with hundreds of students.
+              </p>
+              <p className="text-[#555] text-sm leading-relaxed italic border-l-2 border-[#c7ab77]/40 pl-4">
+                &ldquo;Trading is like dating, you choose the best.&rdquo;
+                <span className="block mt-2 not-italic text-xs uppercase tracking-[0.18em] text-[#c7ab77]">
+                  &mdash; Erin Chawla
+                </span>
               </p>
             </div>
           </div>
