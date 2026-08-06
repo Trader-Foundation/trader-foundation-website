@@ -63,7 +63,7 @@ const coaches = [
     photo: ERIN_PHOTO,
     philosophy: '"Trading is like dating, choose the best and leave the rest."',
     cardQuote: '"Patience isn\'t boring, it\'s profitable. I only need a few great setups a month."',
-    bio: 'My approach is different from most. I only trade off Weekly and Monthly charts. No noise. No chasing. Just patience and precision. What drives me isn\'t just the trades, it\'s the people behind them. I genuinely love helping others build real, lasting wealth through disciplined swing trading. Every free video I create, every question I answer, comes from the same place: I remember what it felt like to figure this out alone, and I don\'t want anyone else to go through that.',
+    bio: 'After years in corporate finance at GE, I made the leap to full-time trading and coaching. My approach is different from most. I only trade off Weekly and Monthly charts. No noise. No chasing. Just patience and precision. What drives me isn\'t just the trades, it\'s the people behind them. I genuinely love helping others build real, lasting wealth through disciplined swing trading. Every free video I create, every question I answer, comes from the same place: I remember what it felt like to figure this out alone, and I don\'t want anyone else to go through that.',
   },
   {
     name: 'Leo Gonzalez',
