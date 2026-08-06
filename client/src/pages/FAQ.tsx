@@ -53,7 +53,7 @@ const faqItems: FaqItem[] = [
   },
   {
     question: 'I\'ve tried other trading methods and lost money. Why would this be different?',
-    answer: 'Because we don\'t sell shortcuts. Our curriculum was built over a decade by our founder, Vlad Tayman, and is now delivered by Erin and our coaching team. AI bots, signals, and YouTube courses fail because they skip the foundation. We teach you the "why" behind the market, give you a proven system, and coach you 1-on-1 until you get it. We don\'t stop until you do.',
+    answer: 'Because we don\'t sell shortcuts. Our curriculum was built over a decade by our founder, Vlad Tayman, and is delivered by Vlad and our full coaching team. AI bots, signals, and YouTube courses fail because they skip the foundation. We teach you the "why" behind the market, give you a proven system, and coach you 1-on-1 until you get it. We don\'t stop until you do.',
     quotes: [
       {
         text: 'My trading is completely turned around. I\'m more on the 10% side now, not the 90%. I\'ve won an overwhelming number of trades compared to my losers — maybe a few losses compared to nearly a hundred wins. It\'s made a huge difference to me.',

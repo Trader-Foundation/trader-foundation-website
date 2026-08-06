@@ -1,14 +1,13 @@
 /*
- * Home Page, Trader Foundation Academy (v2)
+ * Home Page, Trader Foundation Academy
  * Design: "The Academy", Ivy League Digital Campus
- * Sections flow: Nav → Hero → Stats → Who This Is For → CTA → Meet Erin → Method → Book Call → CTA → Guarantee → Podcast → CTA → Footer
- * CTA frequency modeled after GOAT Academy - after every major section
+ * Sections flow: Nav → Hero → Stats → CTA → Meet Vlad → Method → Real Results → Guarantee → Podcast → CTA → Footer
  */
 
 import Navigation from '@/components/Navigation';
 import HeroSection from '@/components/HeroSection';
 import StatsSection from '@/components/StatsSection';
-import MeetErinSection from '@/components/MeetErinSection';
+import MeetVladSection from '@/components/MeetVladSection';
 import BookCallCTA from '@/components/BookCallCTA';
 import PodcastSection from '@/components/PodcastSection';
 import Footer from '@/components/Footer';
@@ -65,7 +64,7 @@ export default function Home() {
         subtext="Book a call with our team to see how a proven swing trading strategy can fit into your schedule."
       />
 
-      <MeetErinSection />
+      <MeetVladSection />
 
       {/* ─── The Method: Paycheck Collector ─── */}
       <section className="py-20 sm:py-24 bg-[#111]">

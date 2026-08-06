@@ -1,7 +1,7 @@
 /*
  * Compound Interest Calculator Page, Trader Foundation Academy
  * Design: "The Academy", Ivy League Digital Campus
- * Features: Interactive calculator with chart, Erin teaching image, educational content
+ * Features: Interactive calculator with chart, Vlad teaching image, educational content
  * Fonts: Sen (headings), DM Sans (body)
  * Palette: #111 (dark), #faf9f6 (ivory), #c7ab77 (gold), #1a1a1a (near-black)
  */
@@ -12,9 +12,8 @@ import Navigation from '@/components/Navigation';
 import SEO from '@/components/SEO';
 import Footer from '@/components/Footer';
 
-/* TODO[v2]: Replace with final Erin teaching/classroom photo. Using existing Erin headshot as placeholder. */
-const ERIN_TEACHING =
-  'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/erin_93b42a5c.jpg';
+const VLAD_TEACHING =
+  'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/vlad-teaching-clean2_08a2b1d6.png';
 const CALCULATOR_HERO_BG =
   'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/calculator-hero-bg-f3Rq9By3EDjXhzwTJdmpaq.webp';
 
@@ -719,7 +718,7 @@ export default function Calculator() {
         </div>
       </section>
 
-      {/* ─── Erin Teaching Section ─── */}
+      {/* ─── Vlad Teaching Section ─── */}
       <section className="py-24 bg-[#faf9f6]">
         <div
           ref={educationSection.ref}
@@ -734,8 +733,8 @@ export default function Calculator() {
             <div className="relative">
               <div className="absolute -inset-4 border border-[#c7ab77]/20 rounded-xl" />
               <img
-                src={ERIN_TEACHING}
-                alt="Erin Chawla teaching compound interest growth in a wealth management classroom"
+                src={VLAD_TEACHING}
+                alt="Vlad Tayman teaching compound interest growth at Trader Foundation Academy"
                 className="w-full rounded-xl shadow-2xl"
               />
               <div className="absolute bottom-4 left-4 right-4 bg-[#111]/90 backdrop-blur-sm rounded-lg p-4 border border-[#c7ab77]/20">
@@ -743,13 +742,13 @@ export default function Calculator() {
                   className="text-[#c7ab77] text-xs font-bold tracking-wide uppercase mb-1"
                   style={{ fontFamily: "'DM Sans', sans-serif" }}
                 >
-                  Erin Chawla
+                  Vlad Tayman
                 </p>
                 <p
                   className="text-white/70 text-xs"
                   style={{ fontFamily: "'DM Sans', sans-serif" }}
                 >
-                  Partner, Trader Foundation
+                  Founder, Trader Foundation
                 </p>
               </div>
             </div>
