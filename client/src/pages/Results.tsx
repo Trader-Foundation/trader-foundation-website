@@ -24,7 +24,7 @@ const accountTiles = [
   {
     id: '189us7YtGk2Vz65NlOUkKnoPme8-pe-fc',
     name: 'Erin Chawla',
-    role: 'Partner · Coach',
+    role: 'Coach',
     caption: 'Realized profit and loss from Erin\'s personal trading account',
   },
   {
