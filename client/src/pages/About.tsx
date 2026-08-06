@@ -150,6 +150,9 @@ export default function About() {
               <p className="text-[#444] text-base leading-relaxed mb-4">
                 But what truly drives Vlad isn't profit, it's people. He gives away more free education than most programs charge for because he genuinely believes everyone deserves access to real financial knowledge. From YouTube content to the Stock Predator E-Book, Vlad's mission has always been the same: help as many people as possible take control of their financial future.
               </p>
+              <p className="text-[#444] text-base leading-relaxed mb-4">
+                That mission runs deeper than one person. The coaches on this team didn't come from a classroom &mdash; <strong>Elliot</strong> from a decade in the options markets, <strong>Erin</strong> from corporate finance at GE, <strong>Leo</strong> from years of watching traders fail before finding a better way. Each of them joined Trader Foundation as a student, chasing the same dream Vlad chased: <strong>freedom to build real wealth on their own terms</strong>. They mastered the system, then came back to teach it. Every coach on this team is living proof that what we teach works.
+              </p>
               <p className="text-[#555] text-sm leading-relaxed italic border-l-2 border-[#c7ab77]/40 pl-4">
                 "Everyone deserves to understand how money really works. Not just the theory, but the real skills to grow wealth on your own terms. The best moment is when a student stops relying on someone else and starts making confident financial decisions on their own. That's the transformation we're building here."
               </p>
