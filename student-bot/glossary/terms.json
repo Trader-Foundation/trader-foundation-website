@@ -1,55 +1,87 @@
 {
   "_comment": "Controlled vocabulary for Trader Foundation transcript cleanup. Run find-and-replace against every raw transcript before tagging or indexing. Add every new error found. Case-insensitive matching on 'wrong', preserve sentence casing on replace.",
   "_version": "0.1",
-  "_source_modules": [2, 3, 5],
-  "_written_sources": ["Breakout Strategy", "The Bounce Profit Plan"],
+  "_source_modules": [
+    2,
+    3,
+    5
+  ],
+  "_written_sources": [
+    "Breakout Strategy",
+    "The Bounce Profit Plan"
+  ],
   "_note_on_written_sources": "Worksheets are typed, not transcribed, so they carry no mis-hearing errors and are authoritative for numbers and settings. Where a worksheet and a transcript disagree on a value, the worksheet wins. Where they disagree on teaching, that is a ruling for Vlad, not a correction.",
-
   "confirmed_corrections": [
     {
-      "wrong": ["miru bozu", "mirabozu", "mirabozor", "miru bozo"],
+      "wrong": [
+        "miru bozu",
+        "mirabozu",
+        "mirabozor",
+        "miru bozo"
+      ],
       "right": "Marubozu",
       "found_in": "Module 3",
       "note": "Full-bodied candle. Japanese term. Students searching the transcript spelling find nothing."
     },
     {
-      "wrong": ["Ontario Midstream Partners", "Ontario Midstream"],
+      "wrong": [
+        "Ontario Midstream Partners",
+        "Ontario Midstream"
+      ],
       "right": "Antero Midstream",
       "found_in": "Module 2",
       "note": "Ticker AM. Ontario Midstream Partners does not exist. High risk: a bot would cite a fictional company confidently."
     },
     {
-      "wrong": ["noose"],
+      "wrong": [
+        "noose"
+      ],
       "right": "news",
       "found_in": "Module 5",
       "note": "CONTEXT DEPENDENT. Verify each hit manually before replacing. Two occurrences in Module 5, both in the instigating-event passage."
     },
     {
-      "wrong": ["time decay is also known as data", "known as data"],
+      "wrong": [
+        "time decay is also known as data",
+        "known as data"
+      ],
       "right": "time decay is also known as theta",
       "found_in": "Options Factors (module number unassigned)",
       "note": "HIGH RISK. Theta is the standard name for time decay and the term a student will meet in any brokerage platform. 'Data' is not a name for anything in options, and unlike a mangled proper noun it is an ordinary English word, so it does not look wrong. The module tells students to look it up in their brokerage system, which fails outright under the wrong name."
     },
     {
-      "wrong": ["Cause means the stock is going up"],
+      "wrong": [
+        "Cause means the stock is going up"
+      ],
       "right": "Calls means the stock is going up",
       "found_in": "Options Calls and Puts (module number unassigned)",
       "note": "Second instance of the term-as-common-word class, after theta rendered as 'data'. Self-confirmed within the same transcript, which later says 'calls means the buyer believes the stock is going to move up'. Sits in the one-line mnemonic students are most likely to memorise, so it is the worst possible place for it."
     },
     {
-      "wrong": ["sell the option stock to the seller as the exercise price"],
+      "wrong": [
+        "exactly how to cause and puts work"
+      ],
+      "right": "exactly how to calls and puts work",
+      "found_in": "Options thinkorswim walkthrough (module number unassigned)",
+      "note": "STANDING PATTERN, NOT A ONE-OFF. Third instance of the term-as-common-word class and the second time 'calls' specifically becomes 'cause'. Two different recordings, so the tool mis-hears this word reliably rather than occasionally. Treat 'cause' as suspect wherever it sits next to 'puts', 'option', or 'strike', and check it every options module. The word 'cause' is also legitimately present in these transcripts as a clipped 'because' ('you don't want to chase cause it's going to be a problem'), so this cannot run as a blind find-and-replace. Match the phrase, not the word."
+    },
+    {
+      "wrong": [
+        "sell the option stock to the seller as the exercise price"
+      ],
       "right": "sell the option stock to the seller at the exercise price",
       "found_in": "Options Calls and Puts (module number unassigned)",
       "note": "Preposition. Minor, but the sentence is the definition of a put and should read cleanly."
     },
     {
-      "wrong": ["the man versus the supply"],
+      "wrong": [
+        "the man versus the supply"
+      ],
       "right": "the demand versus the supply",
       "found_in": "Volume (module number unassigned)",
       "note": "CONTEXT DEPENDENT. 'demand' heard as 'the man'. Confirmed by the next sentence, which reads 'That means that demand is higher.' Scoped to this full phrase deliberately: a bare 'the man' to 'the demand' rule would corrupt legitimate uses elsewhere."
     }
   ],
-
   "numeric_corrections": {
     "_comment": "HIGHEST RISK CLASS. The transcription tool mis-hears the numeric values being taught. More dangerous than proper-noun errors: a student who reads 'Mirabozor' can tell something is wrong and search for the right word, but a student who reads a wrong Fibonacci level cannot tell, and the bot would state it confidently as house teaching. Every taught number must be checked against the values established earlier in the same transcript.",
     "instances": [
@@ -93,12 +125,30 @@
     "formatting_artifacts": {
       "_comment": "The tool splits decimals across a space or a line break, rendering 38.2 as '38. 2'. Cosmetic, but it breaks any numeric check run against the raw text and must be normalised before the values can be audited.",
       "pattern": "38. 2, 61. 8",
-      "normalise_to": "38.2, 61.8"
+      "normalise_to": "38.2, 61.8",
+      "also_seen": {
+        "pattern": "1. 30, 1. 41, five, 10 for 5.10, three 30 for 3.30, 3158 for 31.58",
+        "found_in": "Options thinkorswim walkthrough (module number unassigned)",
+        "note": "The artifact has three shapes, not one. A split decimal ('1. 30'), a decimal spoken as two numbers and comma-separated by the tool ('five, 10'), and a decimal dropped entirely so a price reads as an integer ('3158' for 31.58). The third is the dangerous one: it produces a plausible-looking whole number with no punctuation to signal that anything is missing. Options prices and strikes are the place to expect it, because the module reads them off screen at speed."
+      }
     },
     "canonical_values": {
-      "fibonacci_retracement_levels": ["38.2", "50", "61.8"],
-      "moving_averages": ["13", "20", "50", "200"],
-      "stochastic_bands": ["80 overbought", "20 oversold", "50 midline"],
+      "fibonacci_retracement_levels": [
+        "38.2",
+        "50",
+        "61.8"
+      ],
+      "moving_averages": [
+        "13",
+        "20",
+        "50",
+        "200"
+      ],
+      "stochastic_bands": [
+        "80 overbought",
+        "20 oversold",
+        "50 midline"
+      ],
       "indicator_parameters": {
         "_source": "The Bounce Profit Plan worksheet, which is written and therefore not subject to transcription error. Prefer these over any value read off a transcript.",
         "MACD": "12.26.9",
@@ -114,9 +164,19 @@
           "stock 25 and above": "5.00",
           "stock over 200": "10.00"
         },
-        "six_premium_factors": ["duration", "expiration", "strike price", "current price", "risk and reward", "volatility"]
+        "six_premium_factors": [
+          "duration",
+          "expiration",
+          "strike price",
+          "current price",
+          "risk and reward",
+          "volatility"
+        ],
+        "_added_from": "Options thinkorswim walkthrough. Market conventions, verifiable rather than permanent.",
+        "standard_expiration": "third Friday of the month",
+        "weekly_expirations": "non-standard dates, shorter dated. Colour-coded separately from standard dates in thinkorswim, so the colour is platform UI and perishable, but the standard-versus-weekly distinction itself is not",
+        "minimum_days_to_expiration": "30 days, stated as a minimum with 'the longer the better'. PENDING VLAD, open question 31. Not yet treated as a house rule"
       },
-
       "screening_filters": {
         "_source": "Breakout Strategy and The Bounce Profit Plan worksheets, in agreement",
         "average_volume": "Over 1 Million",
@@ -128,19 +188,48 @@
       "note": "The levels and periods the curriculum teaches. Any other value appearing in a retracement or moving-average passage is a transcription error, not a variant teaching. Two short-term averages (13, 20) and two long-term (50, 200)."
     }
   },
-
   "generic_transcription_noise": {
     "_comment": "Not proper nouns. Systematic mis-hearings and stray words the tool inserts. Fix per hit, do not run as blind find-and-replace. Found in the Volume module, expect the same class across the library.",
     "instances": [
-      { "wrong": "They people need to be there", "right": "The people need to be there" },
-      { "wrong": "That's the demand You For the sales", "right": "That's the demand for the sales", "note": "Spurious capitalised 'You' inserted mid-sentence" },
-      { "wrong": "the candles very down", "right": "the candle's very down" },
-      { "wrong": "the volumes extremely high", "right": "the volume's extremely high" },
-      { "wrong": "a big, Week in sales", "right": "a big week in sales", "note": "Spurious comma plus mid-sentence capitalisation" },
-      { "wrong": "If the contract expires and the stock price is higher than the strike price, you profit. If the contract expires and the stock price is higher than the strike price, you profit.", "right": "If the contract expires and the stock price is higher than the strike price, you profit.", "note": "Whole-sentence duplication. Second instance of this artifact, after the call-option definition repeated twice in the previous module. Harmless to meaning but it would produce two near-identical chunks competing in retrieval." }
+      {
+        "wrong": "They people need to be there",
+        "right": "The people need to be there"
+      },
+      {
+        "wrong": "That's the demand You For the sales",
+        "right": "That's the demand for the sales",
+        "note": "Spurious capitalised 'You' inserted mid-sentence"
+      },
+      {
+        "wrong": "the candles very down",
+        "right": "the candle's very down"
+      },
+      {
+        "wrong": "the volumes extremely high",
+        "right": "the volume's extremely high"
+      },
+      {
+        "wrong": "a big, Week in sales",
+        "right": "a big week in sales",
+        "note": "Spurious comma plus mid-sentence capitalisation"
+      },
+      {
+        "wrong": "If the contract expires and the stock price is higher than the strike price, you profit. If the contract expires and the stock price is higher than the strike price, you profit.",
+        "right": "If the contract expires and the stock price is higher than the strike price, you profit.",
+        "note": "Whole-sentence duplication. Second instance of this artifact, after the call-option definition repeated twice in the previous module. Harmless to meaning but it would produce two near-identical chunks competing in retrieval."
+      },
+      {
+        "wrong": "So I'm pretty confident with this plane",
+        "right": "So I'm pretty confident with this plan",
+        "note": "Homophone. 'Plane' is a real word so nothing flags it, but the sentence is about the trade plan."
+      },
+      {
+        "wrong": "for some reason, buy 200 dates where",
+        "right": "for some reason, buy 200 days where",
+        "note": "Dates for days. The module uses 'dates' correctly elsewhere for expirations, which is what makes this one easy to miss."
+      }
     ]
   },
-
   "unresolved": [
     {
       "text": "the bowels bowels",
@@ -176,12 +265,25 @@
       "text": "I'm thinking once it hits this 30 day moving average",
       "found_in": "Moving Averages (module number unassigned), Zoom walkthrough",
       "note": "Second '30 day' occurrence. The module teaches only 13, 20, 50, 200. Unlike the first occurrence there is no pairing to resolve it against, so it could be 13 or 20. Left intact in the clean pass. Needs Vlad or an audio check."
+    },
+    {
+      "text": "GTC stands for good to close",
+      "found_in": "Options thinkorswim walkthrough (module number unassigned)",
+      "note": "NOT A TRANSCRIPTION ERROR AND THE MOST IMPORTANT ITEM IN THIS MODULE. GTC is Good Till Cancelled, an industry-standard order duration on every broker. 'Good to close' is not what the acronym stands for anywhere. The expansion is wrong but the BEHAVIOUR described immediately after it is correct: 'this is not going to expire. It's actually going to continue staying there until it gets to a dollar or until you cancel the order.' That is Good Till Cancelled exactly. So the student learns the right mechanic under the wrong name. Third instance of a transcript containing its own fix further down. Not fixed in the clean pass because the acronym could equally be a live misspeak rather than a mis-hearing, and the two have different remedies. Open question 30."
+    },
+    {
+      "text": "the most you could make if the stock goes down is 3056",
+      "found_in": "Options thinkorswim walkthrough (module number unassigned)",
+      "note": "Almost certainly $3,056 as displayed by the platform, not 30.56. Consistent with a put max profit of strike times 100 minus premium. Left intact because it is a read-off-screen figure and guessing at it would be inventing a number. Flagged so it is not silently normalised the way the split decimals were."
+    },
+    {
+      "text": "So if it's at 61, 63 cents that we bought it at",
+      "found_in": "Options thinkorswim walkthrough (module number unassigned)",
+      "note": "Reads as a bid of 61 and an ask of 63 rendered as a list, which would fit the passage since the bid ask spread is the module's own theme. Could equally be a self-correction mid-sentence. The worked example that follows uses 61 cents alone, so nothing downstream depends on resolving it."
     }
   ],
-
   "protected_vocabulary": {
     "_comment": "Correct spellings the transcription tool is likely to mangle. Feed as vocabulary hints if re-transcribing. Check every occurrence in existing transcripts.",
-
     "candlestick_patterns": [
       "Marubozu",
       "Harami",
@@ -197,7 +299,6 @@
       "piercing line",
       "dark cloud cover"
     ],
-
     "concepts": [
       "support",
       "resistance",
@@ -279,7 +380,6 @@
       "assignment",
       "assigned"
     ],
-
     "sector_etfs": [
       "XLF (Financial)",
       "XLY (Retail Services)",
@@ -294,7 +394,6 @@
       "SPY (Market)",
       "VIX (Volatility)"
     ],
-
     "volume_patterns": [
       "flat pattern",
       "random pattern",
@@ -302,7 +401,6 @@
       "increasing pattern",
       "decreasing pattern"
     ],
-
     "trader_foundation_terms": [
       "Paycheck Collector",
       "Bounce Profit",
@@ -314,7 +412,6 @@
       "bounce formula",
       "bounce profit formula"
     ],
-
     "platforms_and_tools": [
       "FinViz",
       "StockCharts",
@@ -322,7 +419,6 @@
       "SPY",
       "thinkorswim"
     ],
-
     "companies_and_tickers": [
       "Antero Midstream (AM)",
       "Alibaba (BABA)",
@@ -337,7 +433,6 @@
       "Nikola (NKLA)",
       "Zoom (ZM)"
     ],
-
     "indicators_and_tools": [
       "Fibonacci retracement",
       "Fibonacci levels",
@@ -362,13 +457,54 @@
       "Simple Moving Avg",
       "SMA50",
       "SMA200"
-    ]
+    ],
+    "options_order_terms": {
+      "_comment": "Order mechanics from the thinkorswim walkthrough. The CONCEPTS are EVERGREEN and portable to any broker. The click paths and colour coding around them are PERISHABLE_PROCEDURE. Keep the two apart: a student on a different platform still needs limit versus market.",
+      "evergreen": [
+        "limit order",
+        "market order",
+        "stop order",
+        "bid",
+        "ask",
+        "bid ask spread",
+        "natural price",
+        "mid price",
+        "option chain",
+        "strike price",
+        "premium",
+        "in the money",
+        "at the money",
+        "out of the money",
+        "good till cancelled"
+      ],
+      "platform_specific": [
+        "LMT",
+        "single",
+        "confirm and send",
+        "working",
+        "filled",
+        "POS",
+        "cancel and replace",
+        "create closing order",
+        "GTC",
+        "day"
+      ]
+    }
   },
-
   "forbidden_output_terms": {
     "_comment": "Must never appear in bot output. Retired program labels and prohibited copy. Separate from transcription errors.",
-    "retired_labels": ["Elite Four", "Elite 12", "Elite Twelve"],
-    "prohibited_copy": ["free", "closer", "closers", "salesperson", "salespeople"],
+    "retired_labels": [
+      "Elite Four",
+      "Elite 12",
+      "Elite Twelve"
+    ],
+    "prohibited_copy": [
+      "free",
+      "closer",
+      "closers",
+      "salesperson",
+      "salespeople"
+    ],
     "replacements": {
       "free": "pay nothing / yours to keep",
       "closer": "Education Coordinator"

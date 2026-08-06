@@ -54,6 +54,7 @@ Then: append a row to the ledger, add new questions to `rulings/open-questions.m
 | Options Factors | **unassigned** | Clean | 1 term error (theta) | 1 | No |
 | Options Calls and Puts | **unassigned** | **2 excluded, incl. a win-rate promise** | 1 term error (calls) | 1 | No |
 | Options: in/at/out of the money | **unassigned** | Clean, 1 borderline | none. 4 generic noise fixes, see question 28 for the real problem | 1 | No |
+| Options thinkorswim walkthrough | **unassigned** | **1 held out: "max profit is infinite"** | 5 decimal artifacts fixed, 2 unresolved | 3 | No |
 
 Modules 2, 3 and 5 were characterised in the spec before this log existed. Everything from Volume onward was processed here.
 
@@ -115,6 +116,32 @@ Module 2 supplies the top (galaxy, solar system, planet, news, liquidity). Modul
 This is now in `prompts/system.md` as the bot's primary behaviour. When a student asks something the bot cannot answer, it hands over the chain as questions they can answer on their own chart, rather than closing the door. Two guards: the bot never closes the chain with a verdict, and never asks for their answers in order to assess.
 
 Worth checking every further module for whether it adds a step, refines one, or reorders them.
+
+### The method has an execution step, and it was invisible until now
+
+The chain assembled from the analysis modules ends at confirmation. The thinkorswim walkthrough adds what happens after you decide, and it is not just clicking.
+
+**Check the bid ask spread before you take the trade.**
+
+> "if you buy something at 97 cents, you could only sell it for 92. So you have to make up the 5 cent difference first before even profiting. Now that's not too bad 5 cents, but if you look here all of a sudden this next one is 11 cents."
+
+That is a real filter with a real reason, and it is the kind of thing that decides whether a correct read makes money. It also **closes a loop back to Module 2**, in the module's own words:
+
+> "That is why we're looking for liquid stocks with higher volume because usually they're highly traded and you won't have that big discrepancy."
+
+The liquidity screen from the FinViz step was taught as a stock-selection criterion. Here it turns out to be doing a second job: liquid underlyings have tight option spreads. Second time a later module has explained why an earlier filter exists, after Momentum sent students back to FinViz screening.
+
+**Worth adding to the chain as a distinct stage.** Analysis says whether to trade. Execution says whether this particular contract is worth trading, and it can veto a good read. The contract choices in the same module, duration and moneyness, belong to the same stage, but both are still open questions 31 and 32 so only the spread check is settled enough to teach.
+
+### The visual-dependent class is worst in platform walkthroughs, and it has an antidote
+
+The fifth error class was found in the scenarios module. The thinkorswim walkthrough is far more exposed to it: "if we come around here, put the lines up", "over here", "this piece right here", "click here", "it's in the purple here", "everything in the black".
+
+But this module is also the first to **name what the colours mean**, so purple as in the money and black as out of the money survive the loss of the screen. That is the difference between a passage that degrades and one that dies.
+
+Two consequences worth carrying forward. Any walkthrough passage where the meaning is carried by a deictic alone is unusable as text and should not be chunked. And where a module labels its own visual, that label is worth capturing in `terms.json`, because it is the only bridge from the recording to a student sitting in front of the same screen.
+
+There is also a payoff. The walkthrough's put moneyness explanation, made against a live option chain, comes out correct and in strike terms. That is the strongest available evidence that the scenarios module's inverted put definitions were a transcription loss rather than a teaching error. See open question 28.
 
 ### Word-boundary matching, always
 
@@ -301,6 +328,7 @@ This repository is public so transcripts cannot be committed here, and the conta
 | Options Factors | `options-factors-UNNUMBERED-RAW.txt` | `1fjHIeeOPAQfe_UbgEX6L4PrBjxjOF222` |
 | Options Calls and Puts | `options-calls-puts-UNNUMBERED-RAW.txt` | `1oCPr-FIekNwYhDpepMYWbME--s_64kUk` |
 | Options: in/at/out of the money | `options-money-scenarios-UNNUMBERED-RAW.txt` | `1HIUBIpzJLU6Bu2rnENx34KI8VWwEdmcO` |
+| Options thinkorswim walkthrough | `options-thinkorswim-walkthrough-UNNUMBERED-RAW.txt` | `1QD-x7q7ZEK0XZycqVNlVNgzncFcdV2Et` |
 | The Bounce Profit Plan *(worksheet)* | `document-bounce-profit-plan-RAW.txt` | `1I-ejvV92yaZdzKpQSv5JeyGclsRIq6sr` |
 | Breakout Strategy *(worksheet)* | `document-breakout-strategy-RAW.txt` | `1INwugRa-afsIWs8l-tP5iAL4oOuofEVO` |
 

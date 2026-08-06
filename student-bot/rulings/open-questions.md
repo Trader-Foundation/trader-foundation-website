@@ -264,6 +264,104 @@ present in the lesson. See the note on visual-dependent teaching in `../PROCESSI
 the stock moves? If it is the strike, the definitions need correcting. If it is the stock, the
 passage needs rewording before ingestion, because in text it reads as the strike.
 
+**UPDATE, and this is close to answering itself.** The thinkorswim walkthrough teaches put moneyness
+again, this time with the option chain on screen, and it comes out **correct**:
+
+> "remember put options you want the stock to go down so in this case the purple is in the money
+> because the higher it is the better it is, so for you to buy, if it's lower it's out of the money"
+
+Purple is thinkorswim's in-the-money shading, and it runs up the strike column. Higher strike equals
+in the money for a put. That is the strike reading, stated correctly, in the module that had a live
+chain to point at.
+
+So the two modules agree on the mechanics and disagree only in what the text can carry. That is
+strong support for the reading that **the lesson was always right and the scenarios transcript lost
+the visual**, which is the whole point of the fifth error class.
+
+It does not close the question. The scenarios module's four sentences still need a decision before
+they go in the corpus, because the bot gets text and the text is inverted. But the fix is now much
+more likely to be "reword before ingestion" than "the teaching is wrong."
+
+---
+
+## 33. Is "max profit is infinite" an outcome claim?
+
+**Status:** OPEN, held out of the corpus provisionally. **The one I would most like answered**, because the answer generalises to every module that walks through a broker screen.
+
+The thinkorswim walkthrough reads the platform's own max profit field on a long call:
+
+> "Now it says max profit. Max profit is infinite because it could go up as high as you want it to go up and you could sell it whenever."
+
+It is true. A long call has no upper bound. thinkorswim really does display it. The instructor is reading the screen and explaining it accurately, and there is no figure, no percentage, and no person attached.
+
+**And it is still the most extreme outcome statement the corpus could produce.** Asked "how much can I make with options?", retrieval lands here and the bot says max profit is infinite. Every prior exclusion was loose language sitting next to the teaching. This is accurate, it is a broker's own words, and it is worse than any of them.
+
+The module supplies its own fix seconds later, on the put side: "there is a max profit because the stock could only go down to zero and that's it." Taught as the **asymmetry between calls and puts** it is the same fact, it is the actual lesson, and it cannot be served back as an answer about earnings.
+
+**Provisional action:** the "infinite" sentence is held out. The asymmetry is retained and is what the bot teaches.
+
+**Question for Vlad:** does a true, platform-generated statement count as an outcome claim once a bot can serve it on demand? Every broker walkthrough in the library will have numbers with this shape, so a ruling here is a rule for all of them rather than one sentence.
+
+---
+
+## 30. GTC: "good to close" or Good Till Cancelled?
+
+**Status:** OPEN, flagged not corrected. Low ambiguity on the fact, real ambiguity on the remedy.
+
+The thinkorswim walkthrough says:
+
+> "you're going to change the GTC. GTC stands for good to close."
+
+GTC is **Good Till Cancelled**. That is the standard expansion on every broker, and "good to close" is not a term in use anywhere.
+
+**The mechanic taught is correct.** The very next sentence describes Good Till Cancelled exactly:
+
+> "instead of the end of the day runs out, this is not going to expire. It's actually going to continue staying there until it gets to a dollar or until you cancel the order."
+
+So the student learns the right behaviour under the wrong name. This is the third time a transcript has carried its own correction further down, after the Fibonacci levels and the calls mnemonic.
+
+**Why it is not fixed in the clean pass.** It could be a mis-hearing or a live misspeak, and the two have different remedies. A mis-hearing is a glossary entry. A misspeak is a note on the video, and possibly a re-record line. Guessing picks the wrong one half the time.
+
+**Why it matters more than a naming quibble.** The module tells students to go set this on their own platform, exactly as Options Factors told them to look up theta under the name "data". Under "good to close" a student searching their broker's help finds nothing, and GTC is the setting that keeps a sell order alive past the session, so getting it wrong means an exit order that quietly expires at the close.
+
+**Question for Vlad:** is this a transcription error to fix in the glossary, or is it said that way in the recording?
+
+---
+
+## 31. Is "30 days minimum to expiration" a house rule?
+
+**Status:** OPEN. Recorded in `terms.json` as pending, not as doctrine.
+
+The walkthrough states a duration preference twice and demonstrates the reasoning:
+
+> "I personally would say start the longer the better... let's check out a weekly option of 30 days minimum"
+
+> "if I go, let's just say 16 days instead of 30, it's only worth 87 because you have so much less time and you're taking more risk"
+
+and the counterweight, that going far out costs more: 200 days runs 3.30 for the same contract, against 1.20 at 30 days. The stated goal is "something fairly affordable for you, but you have enough days and it's closer into the money."
+
+**This may resolve an apparent contradiction rather than create one.** Open question 19 records a holding period of "two to three days max, usually two." Buying 30-plus days and exiting in two is not a contradiction, it is buying time you do not intend to use, so that theta is not the thing deciding the trade. If that is the intent it is a genuinely useful piece of the method and worth teaching as a pair rather than as two separate numbers.
+
+**Question for Vlad:** is 30 days a floor students should treat as a rule, and is the reason that it buys room against time decay rather than that the trade is meant to last that long?
+
+---
+
+## 32. On entry, how far into the money?
+
+**Status:** OPEN, and the module gives two answers.
+
+Stated as a rule:
+
+> "I always recommend try to be as close to the money as possible because you have a better chance of it moving up faster and you're making money"
+
+and again at the close: "the closer you are to the money the more money you're going to be making if it does go that way."
+
+**But the contract actually selected is in the money**, at a 1.20 ask with the stock at 31.58, and the closing advice is "closer into the money," not at the money. A second demonstration then places an out of the money contract without comment.
+
+Three different placements in one module. Not a contradiction in a live lesson where the chain is visible, ambiguous in text.
+
+**Question for Vlad:** on a directional call, does the method buy in the money, at the money, or slightly out of the money, and does that change with the days to expiration?
+
 ---
 
 ## 27. Put seller risk zones
@@ -321,7 +419,9 @@ So options is a run of at least two lessons sitting after the technical analysis
 
 **Question for Vlad:** which module number is Options Intro, and how many options modules follow it?
 
-**Update:** four options modules are now in, and the run continues. The fourth covers in, at and out of the money across the three price scenarios, and closes by pointing at a live thinkorswim walkthrough, so there are at least five. Original note follows. Three options modules were in at the time of writing: Options Intro, then Options Factors on the six premium factors, then Calls and Puts, which is the one Options Factors promised by pointing at "investing going up, investing going down". Calls and Puts closes by pointing at "the next modules" on how calls and puts play in reality, so the options run is at least four lessons. Original note follows: Options Factors closes by pointing at a third: "the next part where we really start looking at how do you invest with an option", covering investing up, investing down, and the key aspects. So the options run is at least three lessons.
+**Update:** five options modules are now in, and the run still continues. The fifth is the thinkorswim walkthrough the scenarios module promised, and it closes by pointing at the Greeks, so there are at least six. The Greeks module is the one that will settle the theta naming problem from open question 30's sibling, since Options Factors already taught time decay under the wrong name.
+
+**Earlier update:** four options modules were in. The fourth covers in, at and out of the money across the three price scenarios, and closes by pointing at a live thinkorswim walkthrough, so there are at least five. Original note follows. Three options modules were in at the time of writing: Options Intro, then Options Factors on the six premium factors, then Calls and Puts, which is the one Options Factors promised by pointing at "investing going up, investing going down". Calls and Puts closes by pointing at "the next modules" on how calls and puts play in reality, so the options run is at least four lessons. Original note follows: Options Factors closes by pointing at a third: "the next part where we really start looking at how do you invest with an option", covering investing up, investing down, and the key aspects. So the options run is at least three lessons.
 
 ---
 

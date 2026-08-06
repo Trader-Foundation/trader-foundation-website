@@ -58,6 +58,51 @@ analysis tilts probability and nothing more, and some rulings will be wrong.
 Both excluded. The surrounding teaching, that options put you against another participant with an
 opposite belief rather than against a house, survives without either sentence.
 
+### thinkorswim walkthrough: "max profit is infinite"
+
+The single most exposed sentence found in any module, and it is not a claim the instructor made up.
+
+> "Now it says max profit. Max profit is infinite because it, it could go up as high as you want it to go up and you could sell it whenever."
+
+**It is true, and it is the platform's own label.** thinkorswim displays max profit as infinite on a long call, because a long call has no upper bound. The instructor is reading the screen and explaining it correctly. Nothing here is wrong, exaggerated, or invented.
+
+That is exactly why it is the worst one. Every prior hit could be excluded because it was loose language sitting beside the teaching. This is the teaching, it is accurate, and it is a broker's own words.
+
+**Retrieved as a chunk against "how much can I make with options?" the bot answers "max profit is infinite."** No figure, no student named, so it clears the letter of the standing rules. It is still the most extreme outcome statement the corpus could produce, and unlike the Options Intro arithmetic it has no ceiling to argue about.
+
+The contrast the module itself draws is the fix. Immediately afterwards, on the put side:
+
+> "The only difference now is there is a max profit because the stock could only go down to zero and that's it."
+
+That is the same fact taught as a *structural asymmetry between calls and puts*, which is the actual lesson, rather than as a headline about upside.
+
+**Provisional action:** the "infinite" sentence is held out of the corpus. The call-versus-put asymmetry is retained and is what the bot teaches: a long call has no fixed ceiling because a stock has no fixed ceiling, a long put is capped because a stock stops at zero. Same information, and it cannot be served back as an answer to how much someone might make.
+
+**Question for Vlad, and this is the one I would most like answered:** does a true, platform-generated statement count as an outcome claim once a bot can serve it on demand? The answer generalises well beyond this sentence, because every broker screen a module walks through is full of numbers like it.
+
+### thinkorswim walkthrough: the calculator figures
+
+| Passage | Assessment |
+|---|---|
+| "you will make 58 on this deal" | Hypothetical, two contracts, invented fill prices. Pile A mechanics. Kept under the worked-arithmetic guard |
+| "if let's just say we have 10 contracts now, you're making 290" | Same |
+| "we'll put a dollar here, 390" | Same |
+| "So now, you know, you're going to make 300" | Same, though "you're going to make" is the most certain phrasing of the four. It describes what a limit order would pay if filled, which is conditional in a way the sentence does not say |
+
+All four are outputs of the profit calculator worksheet the module hands out, run on made-up numbers. None attaches to a person. Kept, logged so the pattern is visible.
+
+Also note "you'll know you'll make that amount of money," about setting a sell limit. True of a filled limit order, silent on the *if*. Not excluded, logged.
+
+### thinkorswim walkthrough: a new shape of position-advice density
+
+Every prior walkthrough narrated **when to get in**. This one narrates **how to click buy**, on a live option chain, on a real ticker, at real prices, ending in a working order.
+
+> "we might have a great run to 34" ... "I always recommend try to be as close to the money as possible" ... "let's check out a weekly option of 30 days minimum" ... "if I were you I would watch this video again"
+
+The `DATED_EXAMPLE` tag and the existing walkthrough guard cover the chart reading. The order placement is different in kind and tags `PERISHABLE_PROCEDURE`, which the bot does not recite at all. That is the right outcome for two independent reasons: the click paths rot, and reciting them is the closest the bot could ever come to walking a student into a position.
+
+**BAC at 31.58 with a target of 34 is the most specific live setup in the corpus.** It is a historical chart and tags dated, but it is the case the `DATED_EXAMPLE` rule exists for, so it is worth naming here as the reference instance.
+
 ### Options Intro: the hardest case so far, and it needs a ruling not a red pen
 
 **This module cannot be stripped of figures without destroying the lesson.** That makes it structurally different from every prior hit and the exclusion habit does not transfer.
@@ -152,9 +197,11 @@ Outcome-flavoured language carrying no figure. Logged so the pattern is visible 
 | Options Intro (number unassigned) | Scanned | **Four outcome claims excluded.** Illustrative arithmetic retained pending ruling, see above |
 | Options Factors (number unassigned) | Scanned | Clean |
 | Options Calls and Puts (number unassigned) | Scanned | **Two excluded**, including a direct win-rate promise. See above |
+| Options: in/at/out of the money (number unassigned) | Scanned | Clean, one borderline kept under the worked-arithmetic guard |
+| Options thinkorswim walkthrough (number unassigned) | Scanned | **One held out provisionally: "max profit is infinite."** Four calculator figures kept under the guard. See above |
 | All others | Not started | |
 
-Four of nine scanned modules were clean. Five were not. The rate is getting worse, not better, as the sample grows.
+Five of eleven scanned modules were clean. Six were not.
 
 That matters for planning. The original assumption was a compliance pass that finds occasional hits. On this evidence it is closer to half the library needing review, and at least some of it needing re-recording rather than editing. Scope and owner for that pass are still unassigned, which is open item 8.
 
