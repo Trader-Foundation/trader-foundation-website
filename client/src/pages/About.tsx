@@ -58,7 +58,7 @@ const coaches = [
   },
   {
     name: 'Erin Chawla',
-    title: 'Partner · Senior Coach',
+    title: 'Senior Coach · Head of YouTube Education',
     experience: '11+ Years of Experience',
     photo: ERIN_PHOTO,
     philosophy: '"Trading is like dating, choose the best and leave the rest."',
