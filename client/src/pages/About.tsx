@@ -172,7 +172,7 @@ export default function About() {
             Our coaches aren't hired instructors. They're former students who took the same course you're about to take, mastered the strategies, and came back to help others do the same. They are proof that it works. They've been exactly where you are. They know the challenges, the doubts, and the breakthroughs because they lived them.
           </p>
           <p className="text-[#444] text-base leading-relaxed text-center">
-            We're a boutique academy by design. Small class sizes. Direct access to coaches who genuinely care. A community where your mentors know your name. When you join Trader Foundation, you're not joining a program. You're joining a family.
+            We're a boutique academy by design. Every student gets 1:1 coaching, plus small live sessions where mentors know your name. Direct access to coaches who genuinely care. When you join Trader Foundation, you're not joining a program. You're joining a family.
           </p>
         </div>
       </section>
