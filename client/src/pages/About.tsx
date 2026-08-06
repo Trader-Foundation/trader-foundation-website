@@ -142,7 +142,7 @@ export default function About() {
                 From $150K in Losses to Building a Trading Academy
               </h2>
               <p className="text-[#444] text-base leading-relaxed mb-4">
-                After 20 years as a Director of Training at a Fortune 500 company, Vlad had the six-figure salary and the corner office, but he was burned out, missing his family, and dying inside. Then came the wake-up call: he lost $29,000 in 29 days trading penny stocks.
+                Vlad came to America from Ukraine with nothing but a work ethic. He built his career the hard way, spending 20 years as a Director of Training at a Fortune 500 company. He had the six-figure salary and the corner office, but he was burned out, missing his family, and dying inside. Then came the wake-up call: he lost $29,000 in 29 days trading penny stocks.
               </p>
               <p className="text-[#444] text-base leading-relaxed mb-4">
                 That failure became fuel. Vlad tried every trading method until he discovered the approach that actually works. But here's what makes him different from every other trading educator: he spent two decades teaching Fortune 500 executives. Great traders don't always make great teachers. Vlad mastered both.

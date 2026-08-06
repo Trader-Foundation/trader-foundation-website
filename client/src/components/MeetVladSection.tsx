@@ -86,10 +86,11 @@ export default function MeetVladSection() {
                 style={{ fontFamily: "'DM Sans', sans-serif" }}
               >
                 <p>
-                  I still remember the moment everything clicked. I was sitting at my desk after another
-                  14-hour day, watching my 401(k) statement show the same mediocre returns year after year.
-                  I had done everything "right", the degree, the career, the savings, but I realized{' '}
-                  <strong>nobody had ever taught me how to actually grow my wealth</strong>.
+                  I came to America from Ukraine with nothing but a work ethic. I built my career the hard way,
+                  the degree, the corporate ladder, the six-figure salary. And I still remember the moment
+                  everything clicked. I was sitting at my desk after another 14-hour day, watching my 401(k)
+                  statement show the same mediocre returns year after year. I had done everything "right", but
+                  I realized <strong>nobody had ever taught me how to actually grow my wealth</strong>.
                 </p>
                 <p>
                   That frustration led me down a path most professionals know too well. I tried the stock
