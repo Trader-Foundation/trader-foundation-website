@@ -53,7 +53,7 @@ Then: append a row to the ledger, add new questions to `rulings/open-questions.m
 | Options Intro | **unassigned** | **4 excluded, arithmetic pending ruling** | none, formatting only | 0 | No |
 | Options Factors | **unassigned** | Clean | 1 term error (theta) | 1 | No |
 | Options Calls and Puts | **unassigned** | **2 excluded, incl. a win-rate promise** | 1 term error (calls) | 1 | No |
-| Options: in/at/out of the money | **unassigned** | Clean, 1 borderline | none, see question 28 | 1 | No |
+| Options: in/at/out of the money | **unassigned** | Clean, 1 borderline | none. 4 generic noise fixes, see question 28 for the real problem | 1 | No |
 
 Modules 2, 3 and 5 were characterised in the spec before this log existed. Everything from Volume onward was processed here.
 
@@ -299,12 +299,16 @@ This repository is public so transcripts cannot be committed here, and the conta
 | Momentum Indicators | `momentum-indicators-UNNUMBERED-RAW.txt` | `1wVcs-O50OlB_0YMSItm3wwoJ-lif1yiZ` |
 | Options Intro | `options-intro-UNNUMBERED-RAW.txt` | `1ZoCdJm0A6v2M13TVoG7bND6_TAxiT55s` |
 | Options Factors | `options-factors-UNNUMBERED-RAW.txt` | `1fjHIeeOPAQfe_UbgEX6L4PrBjxjOF222` |
+| Options Calls and Puts | `options-calls-puts-UNNUMBERED-RAW.txt` | `1oCPr-FIekNwYhDpepMYWbME--s_64kUk` |
+| Options: in/at/out of the money | `options-money-scenarios-UNNUMBERED-RAW.txt` | `1HIUBIpzJLU6Bu2rnENx34KI8VWwEdmcO` |
 | The Bounce Profit Plan *(worksheet)* | `document-bounce-profit-plan-RAW.txt` | `1I-ejvV92yaZdzKpQSv5JeyGclsRIq6sr` |
 | Breakout Strategy *(worksheet)* | `document-breakout-strategy-RAW.txt` | `1INwugRa-afsIWs8l-tP5iAL4oOuofEVO` |
 
 **Raw only.** Worksheets need no clean pass at all, since they are typed and carry no transcription errors. For transcripts, clean files are regenerated deterministically from raw plus `glossary/terms.json`, so storing them would create a second thing to keep in sync. Each uploaded file carries a header listing its known errors, module-number evidence, and compliance status, so it is self-describing if opened directly.
 
 **This is now step 6 of the intake procedure.** Upload raw to that folder as part of processing, before committing metadata.
+
+**Status: current.** Every transcript supplied since the store was created is in it. Nothing is sitting on local disk only.
 
 **Volume is the one gap.** It was processed before this store existed and its transcript was lost to a container reset. Its findings are fully recorded, so nothing analytical is missing, but the text cannot be re-derived from. Not worth re-supplying unless something specific needs checking against it.
 
