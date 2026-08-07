@@ -48,9 +48,18 @@ if [ -f app.js ] && [ -f index.html ]; then
 fi
 
 # No local copy, so this is an upload that deliberately left the engine behind.
-# Vercel deployment URLs are immutable, so they keep serving the exact bytes
-# that were verified when they were built.
+#
+# Prefer the repo: it is the source of record, and it is the only source that
+# has the current engine the moment the bank changes. The sha256 below is what
+# makes a mutable branch ref safe, since content that does not match the
+# recorded hash fails the build rather than reaching a rep. The Vercel
+# deployment URLs come after it as a fallback: those are immutable, so they
+# keep serving exactly the bytes verified when they were built, which makes
+# them useful only while the engine is unchanged.
+RAW="https://raw.githubusercontent.com/Trader-Foundation/trader-foundation-website"
 for src in \
+  "$RAW/claude/sales-quiz-issues-efpsb7/sales-family-certification" \
+  "$RAW/main/sales-family-certification" \
   "https://dashboard-ouhwq0xwg-traderfoundations-projects.vercel.app" \
   "https://dashboard-traderfoundations-projects.vercel.app"; do
   echo "fetching the engine from $src"
