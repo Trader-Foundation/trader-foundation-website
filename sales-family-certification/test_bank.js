@@ -22,9 +22,9 @@ const { BANK, buildAttempt, EXAMS, examItems, examTotal, examPassMark, trackOf }
 let fail = 0;
 const check = (cond, msg) => { if (!cond) { console.log("FAIL: " + msg); fail++; } };
 
-check(BANK.length === 45, "bank has 45 questions, got " + BANK.length);
-check(BANK.filter(q => q.part === 1).length === 27, "27 in part 1, got " + BANK.filter(q => q.part === 1).length);
-check(BANK.filter(q => q.part === 2).length === 18, "18 in part 2, got " + BANK.filter(q => q.part === 2).length);
+check(BANK.length === 54, "bank has 54 questions, got " + BANK.length);
+check(BANK.filter(q => q.part === 1).length === 35, "35 in part 1, got " + BANK.filter(q => q.part === 1).length);
+check(BANK.filter(q => q.part === 2).length === 19, "19 in part 2, got " + BANK.filter(q => q.part === 2).length);
 check(sandbox.WRITTEN === undefined, "written scenarios are gone; every question is multiple choice");
 
 let mc = 0, tf = 0, distractors = 0;
@@ -45,9 +45,9 @@ BANK.forEach((q, i) => {
     check(false, "q" + (i+1) + " unknown type " + q.type);
   }
 });
-check(mc === 38, "38 mc questions, got " + mc);
-check(tf === 7, "7 tf questions, got " + tf);
-check(distractors === 114, "114 distractors, got " + distractors);
+check(mc === 46, "46 mc questions, got " + mc);
+check(tf === 8, "8 tf questions, got " + tf);
+check(distractors === 138, "138 distractors, got " + distractors);
 
 // Style rules: no em dashes anywhere, never the word "free".
 check(!src.includes("—"), "no em dashes in app.js");
@@ -66,10 +66,10 @@ check(longestCorrect >= 4 && longestCorrect <= 14, "correct-is-longest sits near
 // --- the two certifications ---
 const tracks = { product: 0, setting: 0, strategy: 0 };
 BANK.forEach((q, i) => tracks[trackOf(i)]++);
-check(tracks.product === 16, "16 shared product questions, got " + tracks.product);
-check(tracks.setting === 11, "11 setting-call questions, got " + tracks.setting);
-check(tracks.strategy === 18, "18 strategy-call questions, got " + tracks.strategy);
-check(tracks.product + tracks.setting + tracks.strategy === 45, "every question has a track");
+check(tracks.product === 19, "19 shared product questions, got " + tracks.product);
+check(tracks.setting === 16, "16 setting-call questions, got " + tracks.setting);
+check(tracks.strategy === 19, "19 strategy-call questions, got " + tracks.strategy);
+check(tracks.product + tracks.setting + tracks.strategy === 54, "every question has a track");
 
 // Part Two is strategy only; product/setting live in Part One.
 BANK.forEach((q, i) => {
@@ -77,22 +77,22 @@ BANK.forEach((q, i) => {
   else check(trackOf(i) !== "strategy", "q" + (i+1) + " in part 1 is not strategy");
 });
 
-check(examTotal("setter") === 27, "setter test is 27 questions, got " + examTotal("setter"));
-check(examTotal("ec") === 34, "EC test is 34 questions, got " + examTotal("ec"));
-check(examPassMark("setter") === 22, "setter passes at 22, got " + examPassMark("setter"));
-check(examPassMark("ec") === 28, "EC passes at 28, got " + examPassMark("ec"));
+check(examTotal("setter") === 35, "setter test is 35 questions, got " + examTotal("setter"));
+check(examTotal("ec") === 38, "EC test is 38 questions, got " + examTotal("ec"));
+check(examPassMark("setter") === 28, "setter passes at 28, got " + examPassMark("setter"));
+check(examPassMark("ec") === 31, "EC passes at 31, got " + examPassMark("ec"));
 
 // Both exams share the product half, and neither leaks the other's call.
 const sItems = examItems("setter"), eItems = examItems("ec");
 const shared = sItems.filter((i) => eItems.includes(i));
-check(shared.length === 16, "both tests share the 16 product questions, got " + shared.length);
+check(shared.length === 19, "both tests share the 19 product questions, got " + shared.length);
 check(shared.every((i) => trackOf(i) === "product"), "everything shared is product knowledge");
 check(sItems.every((i) => trackOf(i) !== "strategy"), "setter test contains no strategy-call questions");
 check(eItems.every((i) => trackOf(i) !== "setting"), "EC test contains no setting-call questions");
 
 // Nothing from the bank is orphaned by the split.
 const covered = new Set([...sItems, ...eItems]);
-check(covered.size === 45, "every bank question appears on at least one test, got " + covered.size);
+check(covered.size === 54, "every bank question appears on at least one test, got " + covered.size);
 check(!EXAMS.setter.written && !EXAMS.ec.written, "neither exam carries written scenarios");
 
 // The three retired written scenarios each survive as a multiple choice question.

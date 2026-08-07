@@ -105,7 +105,7 @@ function call(handler, { method = "GET", body = null, query = {} } = {}) {
   r = await call(login, { method: "POST", body: { name: "Test Rep", email: "Rep.One@Example.com " } });
   check(r.status === 200 && r.body.email === "rep.one@example.com", "login normalizes email");
   check(!!r.body.exams && !!r.body.exams.setter && !!r.body.exams.ec, "login returns both certifications");
-  check(r.body.exams.setter.total === 27 && r.body.exams.ec.total === 34, "per-exam totals: 27 setter, 34 EC");
+  check(r.body.exams.setter.total === 35 && r.body.exams.ec.total === 38, "per-exam totals: 35 setter, 38 EC");
   check(r.body.exams.setter.attemptCount === 0 && r.body.exams.ec.attemptCount === 0, "fresh login has zero attempts on both");
   check(r.body.exams.setter.bestScore === null && !r.body.exams.setter.passed && !r.body.tester, "fresh login shape");
 

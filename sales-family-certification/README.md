@@ -18,14 +18,14 @@ each test pairs the shared product half with its own call.
 
 | | Setter | Education Coordinator |
 | --- | --- | --- |
-| Product and the offer | 16 questions (shared) | 16 questions (shared) |
-| Its own call | 11 (the setting call) | 18 (the strategy call) |
-| Total choice questions | 27 | 34 |
-| Passing | 22 of 27 | 28 of 34 |
+| Product and the offer | 19 questions (shared) | 19 questions (shared) |
+| Its own call | 16 (the setting call) | 19 (the strategy call) |
+| Total choice questions | 35 | 38 |
+| Passing | 28 of 35 | 31 of 38 |
 
 Every question is multiple choice. A result is final the moment it is submitted; there is no grading step.
 
-Every one of the 45 bank questions is used. A rep
+Every one of the 54 bank questions is used. A rep
 picks their test after signing in. Attempts, caps, best scores, pass status,
 and the question analysis are all tracked separately per certification, so
 using up setter attempts never locks someone out of the EC test.
@@ -101,9 +101,9 @@ codes.
 
 `test_browser.js` needs `playwright-core` and drives the actual page: first
 with storage off, checking the exam refuses cleanly and offers no workaround,
-then with storage on, taking the setter test (27 questions), watching the
+then with storage on, taking the setter test (35 questions), watching the
 result appear in the dashboard with no pasting, grading it to CERTIFIED,
-checking the question analysis, then taking the EC test (34 questions) and
+checking the question analysis, then taking the EC test (38 questions) and
 confirming it leaves the setter test untouched.
 
 Run it with `NODE_PATH` pointing at wherever `playwright-core` is installed.

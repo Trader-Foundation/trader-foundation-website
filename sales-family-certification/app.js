@@ -3,11 +3,11 @@
    Served as a PLAIN TEXT static file on purpose. Earlier builds shipped this
    engine as a compressed binary (app.bin) and the upload path corrupted the
    binary every time. Keep this file plain text. */
-var CERT_VERSION = "2026-07-30-repo-r1";
+var CERT_VERSION = "2026-08-04-lesson-r1";
 
 var MAX_ATTEMPTS = 3, PASS_PCT = 0.8, FAST_MINUTES = 12;
 
-/* Question bank. 45 questions: 27 in Part One, 18 in Part Two.
+/* Question bank. 54 questions: 35 in Part One, 19 in Part Two.
    mc questions: two stems (retakes serve the other phrasing), first option is
    correct (c: true), positions shuffle at render time.
    tf questions: two variants with reversed polarity, retakes serve the other.
@@ -237,7 +237,74 @@ opts:[
 {s:"Personality and care transfer through text just as well as they do on a phone call, so a thorough text exchange can replace the confirmation call.",a:false},
 {s:"Texting is not talking: personality and care do not transfer through text, which is why the confirmation call carries the relationship.",a:true}]},
 
-/* 28 */ {part:2,type:"mc",stems:[
+/* 28 */ {part:1,type:"mc",stems:[
+"Describe our ideal person. Which answer names what actually matters most in a prospect?",
+"A trainer asks you to describe the avatar we are looking for. Which answer matches how the company defines it?"],
+opts:[
+{t:"Coachable first, so they are not coming in to run the show themselves. Then genuinely qualified, meaning they have money to trade with. And able to give about three hours a week to show up consistently.",c:true},
+{t:"Anyone at all who says they want to learn trading, because willingness to learn is the only filter that really matters and the money side tends to sort itself out on its own once somebody is excited enough about the opportunity in front of them."},
+{t:"Someone who already trades actively and knows the platforms well, because an experienced trader needs less hand holding from the coaches and will get to a profitable result far faster than a total beginner ever could."},
+{t:"Someone with a completely open schedule and no job to work around, because the program only works for people who can sit at the screen through every session live rather than catching the recordings later in their own time."}]},
+
+/* 29 */ {part:1,type:"mc",stems:[
+"A prospect asks what results you actually promise. What is the trained answer?",
+"\"So what am I actually going to get out of this?\" What does the company promise, and what does it deliberately not promise?"],
+opts:[
+{t:"No profit is promised. Show up consistently and you should be placing a trade on your own inside about a week, and the goal is being self-sufficient by around ninety days, with the coaches still there after that.",c:true},
+{t:"That they will replace their current income within ninety days, because that is the timeline the coaching is built around and it is the outcome the great majority of students reach once they commit to following the strategy properly."},
+{t:"A specific monthly return once they are running the Paycheck Collector, since the strategy is risk averse enough that the figure holds up, and quoting a real number is what makes the value of the program land for a prospect."},
+{t:"That the coaches will place trades in their account for the first ninety days while they learn by watching, and after that they take the wheel themselves with the coaching team continuing to monitor every position they open."}]},
+
+/* 30 */ {part:1,type:"tf",vars:[
+{s:"If a prospect wants proof we are not a scam, pointing them to our Google reviews is fine, because that is one of the places our rating is published.",a:false},
+{s:"Our public rating lives on Trustpilot and the Better Business Bureau, so sending a skeptical prospect off to find Google reviews points them at something that is not there.",a:true}]},
+
+/* 31 */ {part:1,type:"mc",stems:[
+"Early on a setting call the prospect asks, \"How much does this cost?\" What are the two words you answer with, and what comes next?",
+"A prospect leads with the price question before you have learned anything about them. What is the trained response?"],
+opts:[
+{t:"\"It depends.\" Then say it depends on a few things, and ask if they mind you asking a couple of questions so you can work out what it would look like for them. That hands the conversation back to you and earns the right to qualify.",c:true},
+{t:"Give them the range the packages fall into straight away, because being upfront about money builds trust faster than anything else, and a prospect who is going to object to the price will object to it eventually anyway."},
+{t:"Tell them you are not permitted to discuss pricing at all and that only the Education Coordinator can answer that, then move directly to booking the appointment before they get a chance to put the question to you again."},
+{t:"Explain that the packages are tailored to each person because trading is not one size fits all, then carry on to the booking, since the tailoring answer covers the question honestly without you having to get into numbers."}]},
+
+/* 32 */ {part:1,type:"mc",stems:[
+"How do you find out whether a prospect can actually fund an account without interrogating them about their money?",
+"You need to know if a prospect is qualified, but asking what is in their bank account feels wrong. What is the trained approach?"],
+opts:[
+{t:"Do not ask it, speak to it. Say the strategies need leverage, that most of our people are comfortable starting somewhere around five to ten thousand, and that we never want anyone trading out of desperation instead of inspiration. Then let them react.",c:true},
+{t:"Ask them directly how much they have available to trade with right now, because you cannot qualify somebody without the number, and a prospect who is serious about the opportunity is not going to take offence at a straightforward question."},
+{t:"Leave the money out of the setting call entirely and let the Education Coordinator handle all of it, because that conversation belongs on the Zoom where there is enough time and rapport to get into somebody's personal finances properly."},
+{t:"Tell them there is a firm minimum they have to meet before you can book anything and ask them to confirm they can meet it, so that nobody turns up to a call they were never qualified for and wastes everybody's time."}]},
+
+/* 33 */ {part:1,type:"mc",stems:[
+"Beyond booking the call, what are setters actually graded on, and what do good numbers look like?",
+"What is the preparation score, what else is measured alongside it, and what are the targets?"],
+opts:[
+{t:"Whether they show, which should run around eighty percent, and how they show, meaning whether they arrive having watched the videos, which should be ninety to one hundred. The Education Coordinator opens by asking whether they watched.",c:true},
+{t:"The raw number of appointments you put on the calendar each week, since volume is the only part of the outcome a setter genuinely controls, and everything past the booking belongs to whoever ends up running the call."},
+{t:"The share of your booked calls that end in a sale, because that is the number the business actually runs on and it is the fairest way to compare one setter against another over the course of a full month."},
+{t:"The length of your calls and the dials behind each booking, because a longer conversation and a higher dial count are what separate a setter working the list properly from one who is skimming the easy names off it."}]},
+
+/* 34 */ {part:1,type:"mc",stems:[
+"The call is booked and there is a page of videos to send. What is the trained way to get one actually watched?",
+"Why is telling a prospect to \"watch the videos\" the wrong instruction, and what do you do instead?"],
+opts:[
+{t:"Pick the one video that answers the concern they just voiced, walk them to it on the page, and ask them to text you any questions once they have seen it. Naming one leaves nothing to guess at, and the question opens a loop into the call.",c:true},
+{t:"Send the whole library and let them work through as much of it as they have time for, because different people care about different things and handing them the full picture respects that more than choosing for them."},
+{t:"Send the link the moment you hang up and then check later whether they opened it, so you know before the appointment whether they prepared and can decide whether the call is still worth the Education Coordinator's time."},
+{t:"Say nothing about the videos yourself and let the confirmation text and the reminder sequence carry that message, because the automation is already built to do it and repeating it makes your call sound like a list of chores."}]},
+
+/* 35 */ {part:1,type:"mc",stems:[
+"You are calling a revive who has not heard from us in years and does not remember signing up. What makes the opening work?",
+"What is the trained opening on an old lead who has no memory of us, and why does it work?"],
+opts:[
+{t:"Reference when they showed interest. Telling them you are reaching out about the interest they showed back in January turns the question in their head from whether this is a scam into what it was they did in January.",c:true},
+{t:"Lead with the company name and a short summary of what the mentorship offers, so that somebody who has completely forgotten signing up still has enough context to decide on the spot whether they want to keep listening."},
+{t:"Open by apologising for the interruption and asking whether it is a good time to talk, because acknowledging that you have called out of nowhere is what earns you permission to carry on into the rest of the conversation."},
+{t:"Open with something that holds their attention, such as a place in the next intake or a limited offer, because an old lead needs a concrete reason to stay on the line with somebody they do not remember hearing from before."}]},
+
+/* 36 */ {part:2,type:"mc",stems:[
 "You open with, \"This is really just for the two of us to figure out if what we do is even a fit for you.\" Why say it that way, and how long should rapport run before discovery?",
 "What does the fit-focused opening frame accomplish, and what is the trained length for rapport at the top of the call?"],
 opts:[
@@ -246,7 +313,7 @@ opts:[
 {t:"It politely warns them the call will be short and business-only, and rapport should be skipped entirely. High-ticket buyers respect efficiency, and every minute spent on small talk at the top is selling time you never get back."},
 {t:"It is the compliance-required fit disclaimer read at the top of every recorded call, and on a high-ticket offer rapport should run around fifteen minutes, because an ask this size demands a real relationship before any hard question lands. The relationship math is simple: nobody wires five figures to a stranger, so the first quarter of the call is where the money actually gets made, long before discovery starts."}]},
 
-/* 29 */ {part:2,type:"mc",stems:[
+/* 37 */ {part:2,type:"mc",stems:[
 "What does KYOSWAQ stand for, who controls the sale, and whose words count as true?",
 "Break down KYOSWAQ: the acronym, the control principle, and whose statements actually carry weight on the call."],
 opts:[
@@ -255,7 +322,7 @@ opts:[
 {t:"Know Your Objections, Sell With A Quote. Control comes from anticipating every objection before it lands and leading with the price early, because whoever gets the number on the table first is the one framing the entire negotiation."},
 {t:"It is the name of the CRM the team uses for booking and tracking calls, and this question is really checking whether you finished the software training. Control of the sale and whose words count are covered in a different module."}]},
 
-/* 30 */ {part:2,type:"mc",stems:[
+/* 38 */ {part:2,type:"mc",stems:[
 "A prospect says, \"I just do not know how to trade properly and I keep losing money.\" Is that the real problem?",
 "\"My problem is I keep losing money and I do not really know what I am doing.\" Surface problem or real problem?"],
 opts:[
@@ -264,7 +331,7 @@ opts:[
 {t:"Neither, honestly. Lines like that are just how prospects make conversation at the top of a call, so you note the sentiment, keep the tone light, and wait for something concrete about money or family before treating anything as real."},
 {t:"Yes, but only once he has said it twice. A problem stated a single time is a passing complaint, and a problem the prospect repeats is a priority, so you circle back later and see whether he brings it up again on his own."}]},
 
-/* 31 */ {part:2,type:"mc",stems:[
+/* 39 */ {part:2,type:"mc",stems:[
 "Mid-discovery the prospect names the exact problem we solve: \"I need someone to keep me accountable.\" What do you do?",
 "During discovery the prospect hands you the perfect setup line for our coaching. What is the trained move?"],
 opts:[
@@ -273,7 +340,7 @@ opts:[
 {t:"Quote the price on the spot, since a prospect who names the exact problem you solve is clearly already sold, and the fastest path from there is finding out whether the budget is real before either of you invests more time in the call."},
 {t:"Gently change the subject so they forget they said it, and save the accountability card for the close. If they connect our offer to their problem this early, the pitch later has nothing new in it and the ending falls flat."}]},
 
-/* 32 */ {part:2,type:"mc",stems:[
+/* 40 */ {part:2,type:"mc",stems:[
 "The prospect says he has no system and panic sells. What is the trained way to magnify that?",
 "A prospect admits he panic sells with no system. How do you magnify the problem the trained way?"],
 opts:[
@@ -282,7 +349,7 @@ opts:[
 {t:"Do the math for him out loud, estimating how much the panic selling has probably cost him over a year, and let the size of that number do the magnifying. Specific dollar figures land harder than feelings on a logical buyer."},
 {t:"Touch it lightly and move past it quickly so the energy of the call stays positive. Dwelling on failure puts a prospect in a defensive headspace, and people buy from optimism about the future, not from reliving their worst trades."}]},
 
-/* 33 */ {part:2,type:"mc",stems:[
+/* 41 */ {part:2,type:"mc",stems:[
 "The prospect says, \"I want to be home for my kid's games. He is 12, I do not get these years back.\" What do you do with that, and what question comes next?",
 "The prospect gives you an emotional line about missing his son's games. What happens to that line, and what do you ask next?"],
 opts:[
@@ -291,7 +358,7 @@ opts:[
 {t:"That line tells you a spouse is in the picture, so the next question is whether his wife needs to be part of the decision, because there is no point building a close around the kid if the real objection is waiting at home later."},
 {t:"Capture the idea in your notes in cleaner language, something like values family time over income growth, and keep moving. The exact wording fades by the close anyway, and what you need for later is the theme, not the sentence."}]},
 
-/* 34 */ {part:2,type:"mc",stems:[
+/* 42 */ {part:2,type:"mc",stems:[
 "Transitioning to the pitch you say, \"What we do might actually work for you. With your permission, let me walk you through a few things. Is that okay?\" Why \"might,\" and why ask permission?",
 "The transition uses \"might\" instead of \"will\" and asks permission before presenting. What is the strategy behind each?"],
 opts:[
@@ -300,7 +367,7 @@ opts:[
 {t:"Both are really just politeness. They are in the script because calls flow better when reps sound courteous, but neither word carries strategy, and swapping them for your own phrasing changes nothing about how the pitch lands."},
 {t:"\"Might\" keeps you sounding humble instead of salesy, and the permission question is a practical check that they are still engaged and have not tuned out, since long discovery sections lose people and you want proof of attention."}]},
 
-/* 35 */ {part:2,type:"mc",stems:[
+/* 43 */ {part:2,type:"mc",stems:[
 "How should the pitch be structured?",
 "What is the trained structure of the presentation itself?"],
 opts:[
@@ -309,7 +376,7 @@ opts:[
 {t:"Lead with the guarantee to remove the risk, follow immediately with the price while trust is at its peak, and then stop talking entirely. The first person to speak after the number loses, so the pitch is really those two beats and silence."},
 {t:"Open by asking what they would want a program like this to include, then agree and confirm we do each thing they name. Building the pitch out of their wish list means there is nothing left to object to when you reach the close."}]},
 
-/* 36 */ {part:2,type:"mc",stems:[
+/* 44 */ {part:2,type:"mc",stems:[
 "A prospect says he has tried courses before and they never worked. How do you present the one-on-one coaching?",
 "\"I have bought two trading courses. Watched maybe half of the first, never finished the second. I do not want to waste money again.\" Which presentation of our coaching is trained?"],
 opts:[
@@ -318,7 +385,7 @@ opts:[
 {t:"Take the comparison head-on: explain that our course is better produced, more current, and more complete than whatever he bought before, so even the self-study portion alone beats the products that burned him, before you get to coaching."},
 {t:"Steer clear of the topic entirely, since bringing up his past courses invites him to compare us to things that failed him. Present the coaching fresh, on its own merits, and let the contrast happen silently in his head without naming it. The past is a minefield you do not control, and the version of our offer that lives in his imagination, untouched by his history, closes better than any comparison you could win out loud."}]},
 
-/* 37 */ {part:2,type:"mc",stems:[
+/* 45 */ {part:2,type:"mc",stems:[
 "You have three tiers. How many do you present, and when is the price named?",
 "Tier presentation and price timing: what is the trained standard?"],
 opts:[
@@ -327,7 +394,7 @@ opts:[
 {t:"Present exactly two, priced upfront, so the cheaper one anchors the more complete one. A two-way comparison is the classic frame that moves people toward the bigger option without pressure, and leading with numbers builds trust early. Car dealers, insurance brokers, and every subscription page on the internet run the same two-option frame because it works: the small option makes the big option look complete instead of expensive, the buyer feels smart for choosing up, and the question of whether to buy quietly becomes which one to buy, which is the close doing itself."},
 {t:"Present none at all, and let them ask. If discovery ran well, curiosity about packages and price comes from their side, and a pitch that never has to introduce money holds the strongest frame a sales call can have."}]},
 
-/* 38 */ {part:2,type:"mc",stems:[
+/* 46 */ {part:2,type:"mc",stems:[
 "A prospect who said money is not the issue says, \"Let me think about it over the weekend.\" What is the read and the next move?",
 "After the pitch, a qualified prospect who never raised money wants to \"think about it.\" What is the trained read and move?"],
 opts:[
@@ -336,7 +403,7 @@ opts:[
 {t:"Run the pitch again from the top with more energy and better stories, because a prospect who wants to think it over is really telling you the presentation did not land the first time, and the second pass is where these calls get saved."},
 {t:"Bring out a discount that expires when the call ends, since a real deadline with real savings turns thinking about it into a decision today, and a prospect who walks away from a discount was never going to buy at full price anyway."}]},
 
-/* 39 */ {part:2,type:"mc",stems:[
+/* 47 */ {part:2,type:"mc",stems:[
 "Light pressure worked and the objection named itself: \"The money is not the issue, I just always tell myself I will start things later.\" What now?",
 "The smokescreen dropped and the real objection is his habit of putting things off. What is the trained move?"],
 opts:[
@@ -345,7 +412,7 @@ opts:[
 {t:"Tell him directly that he is making excuses, that later is a lie people tell themselves, and that he needs to decide right now on the call. Some prospects only move when someone finally refuses to accept the pattern from them."},
 {t:"Drop the price, because a habit of putting things off usually dissolves the moment the deal gets sweeter, and a one-time number he will not see again gives him a reason to break the pattern today without anyone naming it out loud."}]},
 
-/* 40 */ {part:2,type:"mc",stems:[
+/* 48 */ {part:2,type:"mc",stems:[
 "Three prospects respond differently to light pressure. Which reads match the trained gears?",
 "Drive, Step Back, Disqualify: which answer applies the three gears correctly?"],
 opts:[
@@ -354,7 +421,7 @@ opts:[
 {t:"Step back from everyone who hesitates, without exception, since pressure of any kind damages the brand and generates disputes, and the prospects worth having will drive themselves once the information has had time to settle."},
 {t:"Disqualify anyone who hesitates at all, on the spot. The pipeline is full, hesitation now predicts hesitation as a client, and the cleanest book of business comes from only enrolling people who say yes without a second question."}]},
 
-/* 41 */ {part:2,type:"mc",stems:[
+/* 49 */ {part:2,type:"mc",stems:[
 "A client agrees to split the payment, some today and the rest in 30 days. What matters most in setting up that payment link?",
 "Split payment agreed: part now, part in 30 days. What matters most when you build the payment link?"],
 opts:[
@@ -363,7 +430,7 @@ opts:[
 {t:"Always run financing first before building any split link, since practically everyone gets approved, the company gets its money upfront, and a client on a lender's schedule is a client whose payments are never yours to chase. The finance partners exist precisely so payment mechanics never sit in a rep's hands, where one typo can cost a client thousands."},
 {t:"Charge the full amount today and refund the difference afterward, because collecting everything while the card is out protects the deal, and a refund is a clean, documented way to honor whatever split the two of you agreed to on the call."}]},
 
-/* 42 */ {part:2,type:"mc",stems:[
+/* 50 */ {part:2,type:"mc",stems:[
 "Earlier in the call the prospect said he wants to stop working weekends to be around for his daughter, and that if nothing changes he is in the same place next year. He now says: \"It is my busy season, I cannot focus on this.\" Which response is trained?",
 "The prospect banked strong lines about his daughter and being stuck, and now says busy season means he cannot do this. Pick the trained response."],
 opts:[
@@ -372,17 +439,26 @@ opts:[
 {t:"That honestly sounds like an excuse, and I say it with respect. Busy people make time for the things that matter to them, so if this mattered, the season would not be the deciding factor, and maybe that tells us both something."},
 {t:"I hear you, so let me make it easier: if you can start today I can knock a thousand off, and busy season stops being a money conversation. That way the timing problem and the price problem solve each other on this one call."}]},
 
-/* 43 */ {part:2,type:"tf",vars:[
+/* 51 */ {part:2,type:"tf",vars:[
 {s:"If a client asks about the service charge at checkout, it is fine to tell them it is taxes.",a:false},
 {s:"The service charge at checkout is the card processing fee, and you never describe it as taxes.",a:true}]},
 
-/* 44 */ {part:2,type:"tf",vars:[
+/* 52 */ {part:2,type:"tf",vars:[
 {s:"Your job during discovery is to give the prospect good advice about what they are doing wrong.",a:false},
 {s:"During discovery you never give advice. Your job is to ask the questions that get the prospect to say it themselves.",a:true}]},
 
-/* 45 */ {part:2,type:"tf",vars:[
+/* 53 */ {part:2,type:"tf",vars:[
 {s:"A call where the prospect talked far more than you did, and you barely said a word before they bought, means you ran it wrong.",a:false},
-{s:"Prospects who talk themselves into it buy at a different level than prospects who were talked into it, so a call where they did most of the talking is a call run correctly.",a:true}]}
+{s:"Prospects who talk themselves into it buy at a different level than prospects who were talked into it, so a call where they did most of the talking is a call run correctly.",a:true}]},
+
+/* 54 */ {part:2,type:"mc",stems:[
+"A prospect asks what the personalized plan actually is. What is the trained answer?",
+"What does a personalized plan mean here, and what is it not?"],
+opts:[
+{t:"Matching them to the coach and the schedule that fit their life, with sessions recorded and their coach answering their questions on the live even when they cannot make it. It is not a projection of what their money will do.",c:true},
+{t:"A written projection of what their account should grow to over six months and a year at the level they are funding it, because seeing the numbers laid out is what makes the value of the program concrete for someone on the fence."},
+{t:"A portfolio the coaching team builds and manages on their behalf for the first stretch, so that a complete beginner is never making allocation decisions alone before they have learned enough to be making them well."},
+{t:"A curriculum document listing every lesson in the order they will work through it, so they can see exactly what is coming and how much material they are getting for what they are about to pay for the program."}]}
 ];
 
 
@@ -398,7 +474,7 @@ opts:[
    "setting" belongs to the setter. Every Part Two question is "strategy" and
    belongs to the Education Coordinator. */
 
-var PRODUCT_IDX = [0,1,2,3,4,5,6,8,14,15,16,17,18,20,24,25];
+var PRODUCT_IDX = [0,1,2,3,4,5,6,8,14,15,16,17,18,20,24,25,27,28,29];
 
 function trackOf(bi){
   if (BANK[bi].part === 2) return "strategy";
