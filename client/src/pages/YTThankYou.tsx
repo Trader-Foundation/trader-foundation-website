@@ -3,16 +3,17 @@
  * The original is a GoHighLevel funnel page. Structure, copy, media and layout
  * are reproduced 1:1 from its source; only the builder chrome is dropped.
  *
- * NOTE: the original also loads GTM (GTM-MWWTB5DB), the Meta Pixel
- * (2170715166407053) and the Hyros universal script. Those are intentionally
- * NOT included here — add them deliberately if this page replaces the funnel
- * page for ad traffic.
+ * Tracking matches the funnel (GTM, Meta Pixel, Hyros) and is loaded only by
+ * this page, see lib/funnelTracking. Wistia player events are pushed to the
+ * dataLayer with the page path attached, which is what separates this page's
+ * video engagement from the funnel page sharing the same media IDs.
  *
  * Fonts: Inter (headings + body), Oswald ("Watch This Video")
  */
 
 import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { initFunnelTracking } from '@/lib/funnelTracking';
 
 const CDN = 'https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/vTzJCtKf0RZp1Tf6cIIp/media';
 const MEDIA = 'https://assets.cdn.filesafe.space/vTzJCtKf0RZp1Tf6cIIp/media';
@@ -157,6 +158,11 @@ function Grid({ cols, children }: { cols: 2 | 3 | 4; children: React.ReactNode }
 }
 
 export default function YTThankYou() {
+  /* Queue the Wistia bindings before the player scripts load */
+  useEffect(() => {
+    initFunnelTracking();
+  }, []);
+
   useWistia([WISTIA_INTRO, WISTIA_SCAMS, WISTIA_STRATEGY, WISTIA_COMPOUNDING, WISTIA_CLIENTS]);
 
   useEffect(() => {
