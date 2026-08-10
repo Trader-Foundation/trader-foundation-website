@@ -24,6 +24,7 @@ import BookACall from "./pages/BookACall";
 import FAQ from "./pages/FAQ";
 import WeeklyCheckin from "./pages/WeeklyCheckin";
 import StockRulebook from "./pages/StockRulebook";
+import YTThankYou from "./pages/YTThankYou";
 
 function Router() {
   return (
@@ -45,6 +46,7 @@ function Router() {
       <Route path={"/trading-disclaimer"} component={TradingDisclaimer} />
       <Route path={"/weeklycheckin"} component={WeeklyCheckin} />
       <Route path={"/stock-rulebook"} component={StockRulebook} />
+      <Route path={"/yt-thank-you-page"} component={YTThankYou} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
