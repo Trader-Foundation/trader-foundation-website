@@ -1,6 +1,9 @@
 /**
  * Market data access layer with interchangeable sources:
  *
+ *  0. "alpaca" — Alpaca Market Data v2 (real-time IEX feed on the free plan).
+ *                Used FIRST whenever ALPACA_API_KEY_ID + ALPACA_API_SECRET_KEY
+ *                are set. Stocks/ETFs only — indices (VIX) fall through.
  *  1. "manus"  — the original Manus Forge proxy (requires BUILT_IN_FORGE_API_URL
  *                + BUILT_IN_FORGE_API_KEY, only available when hosted on Manus)
  *  2. "direct" — Yahoo Finance's public API, called directly. Free, no key.
@@ -11,8 +14,9 @@
  *                testable offline (no network, no keys).
  *
  * Selection via DATA_MODE env var: "auto" (default) | "manus" | "direct" | "demo".
- * In auto mode: Manus creds present → manus; otherwise direct (Yahoo → Stooq),
- * falling back to demo automatically if neither live source is reachable.
+ * In auto mode: Alpaca keys present → Alpaca first; Manus creds present → manus;
+ * otherwise direct (Yahoo → Stooq), falling back to demo automatically if no
+ * live source is reachable.
  *
  * All sources return the same response shapes the rest of the server expects
  * (Yahoo's raw JSON: chart.result[0], finance.result, quoteSummary.result[0]).
@@ -33,20 +37,23 @@ const DIRECT_RETRY_INTERVAL_MS = 5 * 60 * 1000;
 
 // When a live source fails at the network level we stop hammering it and move
 // down the chain, re-probing every DIRECT_RETRY_INTERVAL_MS.
+let alpacaDownSince = 0;
 let directDownSince = 0;
 let stooqDownSince = 0;
 
 // What the last successful call was actually served from — powers the UI badge.
-let lastServed: "manus" | "yahoo" | "stooq" | "demo" = "yahoo";
+let lastServed: "alpaca" | "manus" | "yahoo" | "stooq" | "demo" = "yahoo";
 
 export interface DataHealth {
-  source: "manus" | "yahoo" | "stooq" | "demo";
+  source: "alpaca" | "manus" | "yahoo" | "stooq" | "demo";
   label: string;
   isLive: boolean;
 }
 
 export function dataHealth(): DataHealth {
   switch (lastServed) {
+    case "alpaca":
+      return { source: "alpaca", label: "LIVE DATA (ALPACA)", isLive: true };
     case "manus":
       return { source: "manus", label: "LIVE DATA", isLive: true };
     case "yahoo":
@@ -57,6 +64,16 @@ export function dataHealth(): DataHealth {
       return { source: "demo", label: "DEMO DATA", isLive: false };
   }
 }
+
+function alpacaCreds(): { keyId: string; secret: string } | null {
+  const keyId = process.env.ALPACA_API_KEY_ID || process.env.APCA_API_KEY_ID || "";
+  const secret = process.env.ALPACA_API_SECRET_KEY || process.env.APCA_API_SECRET_KEY || "";
+  return keyId && secret ? { keyId, secret } : null;
+}
+
+// Thrown when Alpaca simply doesn't carry a symbol (e.g. VIX) — the call
+// should fall through to the next source WITHOUT marking Alpaca down.
+class AlpacaUnsupportedError extends Error {}
 
 function resolveMode(): DataMode {
   const raw = (process.env.DATA_MODE ?? "auto").toLowerCase();
@@ -91,6 +108,31 @@ export async function callDataApi(
   if (mode === "demo") {
     lastServed = "demo";
     return callDemo(apiId, options);
+  }
+
+  // direct / auto — 0) Alpaca (real-time IEX) whenever keys are configured
+  if (apiId === "YahooFinance/get_stock_chart" && alpacaCreds()) {
+    const alpacaHealthy = !alpacaDownSince || Date.now() - alpacaDownSince >= DIRECT_RETRY_INTERVAL_MS;
+    if (alpacaHealthy) {
+      try {
+        const result = await callAlpacaChart(options);
+        if (alpacaDownSince || lastServed !== "alpaca") console.log("[DataApi] Serving real-time market data via Alpaca (IEX).");
+        alpacaDownSince = 0;
+        lastServed = "alpaca";
+        return result;
+      } catch (err) {
+        if (!(err instanceof AlpacaUnsupportedError)) {
+          if (!alpacaDownSince) {
+            console.warn(
+              `[DataApi] Alpaca unreachable or rejecting requests (${String(err).slice(0, 200)}). ` +
+                "Falling back to Yahoo/Stooq; will re-probe Alpaca in 5 minutes."
+            );
+          }
+          alpacaDownSince = Date.now();
+        }
+        // fall through to Yahoo → Stooq → demo
+      }
+    }
   }
 
   // direct / auto — 1) Yahoo
@@ -137,8 +179,11 @@ export async function callDataApi(
   }
 
   // 3) Demo — only chart calls drive the badge; auxiliary endpoints (insights,
-  // holders) have no Stooq equivalent and quietly use demo without flipping it
-  if (apiId === "YahooFinance/get_stock_chart") lastServed = "demo";
+  // holders) have no Stooq equivalent and quietly use demo without flipping it.
+  // A single unsupported symbol (e.g. VIX on Alpaca) also shouldn't flip the
+  // badge while a live source is healthily serving everything else.
+  const alpacaServing = lastServed === "alpaca" && !alpacaDownSince;
+  if (apiId === "YahooFinance/get_stock_chart" && !alpacaServing) lastServed = "demo";
   return callDemo(apiId, options);
 }
 
@@ -281,6 +326,144 @@ async function callYahooDirect(
     default:
       throw new Error(`Unsupported data API for direct mode: ${apiId}`);
   }
+}
+
+// ---------------------------------------------------------------------------
+// Source 0: Alpaca Market Data v2 (real-time IEX feed on the free plan)
+// ---------------------------------------------------------------------------
+// Stocks and ETFs only — no indices (VIX falls through to Yahoo/Stooq).
+// Responses are reshaped into Yahoo's chart JSON so nothing downstream changes.
+
+function alpacaTimeframe(interval: string): "1Day" | "1Week" | "1Month" {
+  if (interval === "1d") return "1Day";
+  if (interval === "1wk") return "1Week";
+  if (interval === "1mo") return "1Month";
+  throw new AlpacaUnsupportedError(`Alpaca source does not support interval ${interval}`);
+}
+
+async function callAlpacaChart(options: DataApiCallOptions): Promise<unknown> {
+  const creds = alpacaCreds();
+  if (!creds) throw new Error("Alpaca credentials not configured");
+
+  const q = options.query ?? {};
+  const symbol = String(q.symbol ?? "").toUpperCase();
+  if (!symbol) throw new Error("Missing symbol for Alpaca chart");
+  if (symbol.startsWith("^") || symbol === "VIX") {
+    throw new AlpacaUnsupportedError(`Alpaca does not carry index symbol ${symbol}`);
+  }
+  const interval = String(q.interval ?? "1d");
+  const range = String(q.range ?? "1mo");
+  const timeframe = alpacaTimeframe(interval);
+
+  // Always pull at least 1 year of dailies so quote meta (52-week high/low,
+  // average volume) is real even for short chart ranges.
+  const years = Math.max(rangeToYears(range), interval === "1d" ? 1 : 0);
+  const start = new Date(Date.now() - years * 366 * 24 * 60 * 60 * 1000).toISOString();
+
+  const params = new URLSearchParams({
+    timeframe,
+    start,
+    limit: "10000",
+    adjustment: "split",
+    feed: "iex", // the free plan's real-time feed
+    sort: "asc",
+  });
+  const resp = await fetch(
+    `https://data.alpaca.markets/v2/stocks/${encodeURIComponent(symbol)}/bars?${params}`,
+    {
+      headers: {
+        "APCA-API-KEY-ID": creds.keyId,
+        "APCA-API-SECRET-KEY": creds.secret,
+        accept: "application/json",
+      },
+      signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
+    }
+  );
+
+  if (resp.status === 404 || resp.status === 422) {
+    throw new AlpacaUnsupportedError(`Alpaca does not carry ${symbol} (${resp.status})`);
+  }
+  if (!resp.ok) {
+    const detail = await resp.text().catch(() => "");
+    throw new Error(`Alpaca request failed (${resp.status})${detail ? `: ${detail.slice(0, 120)}` : ""}`);
+  }
+
+  const payload = (await resp.json()) as { bars?: { t: string; o: number; h: number; l: number; c: number; v: number }[] };
+  const bars = payload.bars ?? [];
+  if (bars.length === 0) throw new AlpacaUnsupportedError(`Alpaca returned no bars for ${symbol}`);
+
+  const timestamps: number[] = [];
+  const opens: number[] = [];
+  const highs: number[] = [];
+  const lows: number[] = [];
+  const closes: number[] = [];
+  const volumes: number[] = [];
+  for (const b of bars) {
+    const ts = Math.floor(Date.parse(b.t) / 1000);
+    if (!isFinite(ts) || !isFinite(b.c)) continue;
+    timestamps.push(ts);
+    opens.push(b.o);
+    highs.push(b.h);
+    lows.push(b.l);
+    closes.push(b.c);
+    volumes.push(isFinite(b.v) ? b.v : 0);
+  }
+  if (closes.length === 0) throw new Error(`Alpaca returned an empty series for ${symbol}`);
+
+  // Meta from the FULL fetched series (real 52w range / volumes)...
+  const lastIdx = closes.length - 1;
+  const prevClose = lastIdx > 0 ? closes[lastIdx - 1] : closes[lastIdx];
+  const volWindow = volumes.slice(-11, -1);
+  const avgVol = volWindow.length > 0 ? Math.round(volWindow.reduce((a, b) => a + b, 0) / volWindow.length) : volumes[lastIdx];
+  const yearHighs = interval === "1d" ? highs.slice(-252) : highs;
+  const yearLows = interval === "1d" ? lows.slice(-252) : lows;
+
+  const meta = {
+    currency: "USD",
+    symbol,
+    exchangeName: "ALPACA-IEX",
+    instrumentType: "EQUITY",
+    regularMarketPrice: closes[lastIdx],
+    chartPreviousClose: prevClose,
+    previousClose: prevClose,
+    regularMarketDayHigh: highs[lastIdx],
+    regularMarketDayLow: lows[lastIdx],
+    regularMarketVolume: volumes[lastIdx],
+    averageDailyVolume10Day: avgVol,
+    fiftyTwoWeekHigh: Math.max(...yearHighs),
+    fiftyTwoWeekLow: Math.min(...yearLows),
+    regularMarketTime: timestamps[lastIdx],
+    dataGranularity: interval,
+    range,
+  };
+
+  // ...but return only the bars the caller asked for
+  const keep = Math.min(barsForRange(range, interval), closes.length);
+  const s = closes.length - keep;
+
+  return {
+    chart: {
+      result: [
+        {
+          meta,
+          timestamp: timestamps.slice(s),
+          indicators: {
+            quote: [
+              {
+                open: opens.slice(s),
+                high: highs.slice(s),
+                low: lows.slice(s),
+                close: closes.slice(s),
+                volume: volumes.slice(s),
+              },
+            ],
+            adjclose: [{ adjclose: closes.slice(s) }],
+          },
+        },
+      ],
+      error: null,
+    },
+  };
 }
 
 // ---------------------------------------------------------------------------
