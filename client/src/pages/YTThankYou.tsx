@@ -1,374 +1,366 @@
 /*
- * YouTube Funnel Thank You Page, Trader Foundation
- * Mirrors start.traderfoundation.co/yt-thank-you-page — the confirmation page
- * shown after someone books a strategy call from the YouTube funnel (/trade-yt).
- * Unlisted funnel page: minimal header (no nav, to avoid leaking the funnel),
- * noindex/nofollow, disallowed in robots.txt.
- * Fonts: Sen (headings), DM Sans (body)
- * Palette: #111 (dark), #c7ab77 (gold)
+ * YT Thank You Page — faithful port of start.traderfoundation.co/yt-thank-you-page
+ * The original is a GoHighLevel funnel page. Structure, copy, media and layout
+ * are reproduced 1:1 from its source; only the builder chrome is dropped.
+ *
+ * NOTE: the original also loads GTM (GTM-MWWTB5DB), the Meta Pixel
+ * (2170715166407053) and the Hyros universal script. Those are intentionally
+ * NOT included here — add them deliberately if this page replaces the funnel
+ * page for ad traffic.
+ *
+ * Fonts: Inter (headings + body), Oswald ("Watch This Video")
  */
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
-import {
-  ArrowRight,
-  CalendarCheck,
-  CheckCircle2,
-  Clock,
-  Inbox,
-  Mail,
-  MonitorPlay,
-  NotebookPen,
-  Youtube,
-} from 'lucide-react';
-import Footer from '@/components/Footer';
 
-const LOGO_URL =
-  'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/Transparentlogo_ee195afe.png';
-const BOOKING_URL = 'https://start.traderfoundation.co/trade-yt';
-const SUPPORT_EMAIL = 'support@traderfoundation.com';
-const YOUTUBE_URL = 'https://www.youtube.com/@TheTraderFoundation';
-const SKOOL_URL = 'https://www.skool.com/tf-membership/classroom';
+const CDN = 'https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/vTzJCtKf0RZp1Tf6cIIp/media';
+const MEDIA = 'https://assets.cdn.filesafe.space/vTzJCtKf0RZp1Tf6cIIp/media';
 
-const NEXT_STEPS = [
-  {
-    icon: Inbox,
-    step: '01',
-    title: 'Check your inbox',
-    body: `Your confirmation and the meeting link are on their way from ${SUPPORT_EMAIL}. If you do not see it in a few minutes, check spam or promotions and mark it as safe.`,
-  },
-  {
-    icon: CalendarCheck,
-    step: '02',
-    title: 'Add it to your calendar',
-    body: 'Accept the calendar invite so the time is locked in and you get the reminder. If something changes, use the reschedule link in that email rather than no-showing.',
-  },
-  {
-    icon: MonitorPlay,
-    step: '03',
-    title: 'Show up ready',
-    body: 'Join from a computer somewhere quiet where you can talk openly about your finances. Calls run about 30 to 45 minutes and we go through the numbers together.',
-  },
+const img = (id: string) => `${CDN}/${id}`;
+
+const BG_IMAGE = img('695e99c9153bbc8ebafb83cf.png');
+const LOGO = img('698d19647213974f94a3ff69.png');
+const FOOTER_LOGO = img('6841cd8538889687db63b4b2.png');
+const FOOTER_BADGE = img('6a183fd3f58810f313ae785d.svg');
+
+/* Wistia VSLs, in page order */
+const WISTIA_INTRO = 'fpmxol1xnd';
+const WISTIA_SCAMS = 'uydwzz366f';
+const WISTIA_STRATEGY = 'gcnmksvf2n';
+const WISTIA_COMPOUNDING = 'ezs3aymbma';
+const WISTIA_CLIENTS = 'dfmchpoaj7';
+
+/* Self-hosted client testimonials */
+const TESTIMONIALS_4 = [
+  { id: '6a194b5f5be84ad6402e71fb', poster: '6a75f64cdd9e4a3814296fab.png', name: 'Andrew Scott' },
+  { id: '6a19530f5be84ad6402eebda', poster: '6a75f64cdd9e4a3814296fa7.png', name: 'Danny Musaev' },
+  { id: '6a195310d293ded457ba197a', poster: '6a75f64de15da8bdd8f327db.png', name: 'Eugene Bell' },
+  { id: '6a1953108c6ee94929c50b59', poster: '6a75f64c888087201926205c.png', name: 'Kunal Jani' },
 ];
 
-const PREP_ITEMS = [
-  'Know roughly what you have available to trade with, and what you want it to earn.',
-  'Have a number in mind for the monthly income you are working toward.',
-  'Be honest about your experience level, beginners are welcome and it changes what we recommend.',
-  'Bring your questions about the Paycheck Collector strategy, the coaching, and the time it takes.',
+const TESTIMONIALS_3 = [
+  { id: '6a195310d293ded457ba1974', poster: '6a75f64c8880872019262052.png', name: 'Sabat Madina' },
+  { id: '6a19530fd293ded457ba1972', poster: '6a75f64c9994d35aa0cdab34.png', name: 'Sarah Johnson' },
+  { id: '6a19530f337267cd86eac96d', poster: '6a75f64e8880872019262083.png', name: 'Shawna' },
 ];
 
-const RESOURCES = [
-  {
-    icon: Youtube,
-    title: 'Watch on YouTube',
-    body: 'More strategy breakdowns and student interviews on the channel that brought you here.',
-    href: YOUTUBE_URL,
-    external: true,
-  },
-  {
-    icon: NotebookPen,
-    title: 'Join the free Skool community',
-    body: 'Free classroom, market discussion, and a place to ask questions between calls.',
-    href: SKOOL_URL,
-    external: true,
-  },
-  {
-    icon: CheckCircle2,
-    title: 'See real student results',
-    body: 'Verified reviews and account screenshots from people who started exactly where you are.',
-    href: '/results',
-    external: false,
-  },
-  {
-    icon: Clock,
-    title: 'Run the numbers',
-    body: 'Use the compound wealth calculator to see what consistent monthly returns look like over time.',
-    href: '/calculator',
-    external: false,
-  },
-];
+/* Vimeo testimonials, two rows of two */
+const VIMEO_ROW_1 = ['936211466', '936212402'];
+const VIMEO_ROW_2 = ['949813014', '936218776'];
+
+/* Results screenshots */
+const RESULTS_PAIR_1 = ['6a1831275be84ad6401b9b0e.png', '6a18313a054f002268c404c2.png'];
+const RESULTS_PAIR_2 = ['6a1831635be84ad6401b9d18.png', '6a183163054f002268c4065c.png'];
+const RESULTS_WIDE_1 = '6a183163054f002268c40666.png';
+const RESULTS_PAIR_3 = ['6a1831623e043d8258eae342.png', '6a1831608c6ee94929b1ab4e.png'];
+const RESULTS_PAIR_4 = ['6a183162c460f23b3a00a9ef.png', '6a183160054f002268c4064c.png'];
+const RESULTS_WIDE_2 = '6a18316260904d91053b6f55.png';
+const RESULTS_WIDE_3 = '6a183162fedd58e234b60fb9.png';
+const RESULTS_PAIR_5 = ['6a1831603e043d8258eae317.png', '6a1831607b799e677779ee92.png'];
+const RESULTS_WIDE_4 = '6a1831603e043d8258eae316.png';
+const RESULTS_WIDE_5 = '6a183160054f002268c4064d.png';
+
+const WISTIA_PLAYER_SRC = 'https://fast.wistia.com/player.js';
+
+function useWistia(mediaIds: string[]) {
+  useEffect(() => {
+    const sources = [WISTIA_PLAYER_SRC, ...mediaIds.map((id) => `https://fast.wistia.com/embed/${id}.js`)];
+    const added: HTMLScriptElement[] = [];
+
+    sources.forEach((src) => {
+      if (document.querySelector(`script[src="${src}"]`)) return;
+      const script = document.createElement('script');
+      script.src = src;
+      script.async = true;
+      if (src !== WISTIA_PLAYER_SRC) script.type = 'module';
+      document.body.appendChild(script);
+      added.push(script);
+    });
+
+    return () => {
+      added.forEach((script) => script.parentNode?.removeChild(script));
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+}
+
+/* The builder renders headings as gold banners with black text, 32px desktop / 17px mobile */
+function GoldHeading({ children }: { children: React.ReactNode }) {
+  return (
+    <h2
+      className="my-8 bg-[#c7ab77] text-black text-center font-bold leading-[1.3em] text-[17px] sm:text-[32px]"
+      style={{ fontFamily: "'Inter', sans-serif" }}
+    >
+      {children}
+    </h2>
+  );
+}
+
+function WistiaVideo({ mediaId, width = '75%' }: { mediaId: string; width?: string }) {
+  return (
+    <div className="mx-auto w-full py-2.5" style={{ maxWidth: width }}>
+      {/* @ts-expect-error wistia-player is a custom element registered by the embed script */}
+      <wistia-player media-id={mediaId} seo="false" aspect="1.7777777777777777" />
+    </div>
+  );
+}
+
+function HostedVideo({ id, poster, name }: { id: string; poster: string; name: string }) {
+  return (
+    <video
+      className="w-full h-auto"
+      controls
+      playsInline
+      preload="none"
+      poster={img(poster)}
+      aria-label={`${name} testimonial`}
+    >
+      <source src={`${MEDIA}/${id}.mov`} />
+    </video>
+  );
+}
+
+function VimeoVideo({ id }: { id: string }) {
+  return (
+    <div className="relative w-full bg-black" style={{ paddingBottom: '56.25%' }}>
+      <iframe
+        src={`https://player.vimeo.com/video/${id}?app_id=122963&autoplay=0&controls=1`}
+        className="absolute inset-0 w-full h-full border-0"
+        allow="autoplay; fullscreen; picture-in-picture"
+        allowFullScreen
+        title={`Trader Foundation testimonial ${id}`}
+        loading="lazy"
+      />
+    </div>
+  );
+}
+
+function ResultImage({ id, maxWidth }: { id: string; maxWidth: number }) {
+  return (
+    <div className="p-2.5 text-center">
+      <img
+        src={img(id)}
+        alt=""
+        loading="lazy"
+        className="mx-auto max-w-full h-auto"
+        style={{ width: maxWidth }}
+      />
+    </div>
+  );
+}
+
+/* Rows collapse to a single column under 768px, matching the builder's mobile behaviour */
+function Grid({ cols, children }: { cols: 2 | 3 | 4; children: React.ReactNode }) {
+  const md = { 2: 'md:grid-cols-2', 3: 'md:grid-cols-3', 4: 'md:grid-cols-4' }[cols];
+  return <div className={`grid grid-cols-1 ${md} gap-2.5 py-2.5`}>{children}</div>;
+}
 
 export default function YTThankYou() {
-  const [isVisible, setIsVisible] = useState(false);
+  useWistia([WISTIA_INTRO, WISTIA_SCAMS, WISTIA_STRATEGY, WISTIA_COMPOUNDING, WISTIA_CLIENTS]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    const timer = setTimeout(() => setIsVisible(true), 150);
-    return () => clearTimeout(timer);
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#111]">
+    <div className="bg-black">
       <Helmet>
-        <title>You're Booked | Trader Foundation Academy</title>
+        <title>TF | Start Trading with Confidence</title>
         <meta name="robots" content="noindex, nofollow" />
+        <meta property="og:title" content="TF | Start Trading with Confidence" />
+        <meta property="og:type" content="website" />
         <meta
-          name="description"
-          content="Your Trader Foundation strategy call is confirmed. Here is what happens next and how to prepare."
+          property="og:image"
+          content={img('69ac8b9c7bdf384400d373d3.png')}
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@400;500;600;700&display=swap"
+          rel="stylesheet"
         />
       </Helmet>
 
-      {/* Minimal header, logo only */}
-      <header className="pt-10 pb-2 flex justify-center px-6">
-        <a href="/" aria-label="Trader Foundation home">
-          <img src={LOGO_URL} alt="Trader Foundation" className="h-12 md:h-14 w-auto" />
-        </a>
-      </header>
-
-      {/* Hero, confirmation */}
-      <section className="relative overflow-hidden pt-10 pb-16 sm:pt-14 sm:pb-20">
-        <div
-          className="absolute inset-x-0 top-0 h-[420px] pointer-events-none"
-          style={{
-            background:
-              'radial-gradient(ellipse 60% 100% at 50% 0%, rgba(199,171,119,0.16), transparent 70%)',
-          }}
-        />
-
-        <div
-          className={`relative z-10 max-w-[820px] mx-auto px-6 lg:px-8 text-center transition-all duration-1000 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-          }`}
-        >
-          <div className="mx-auto mb-8 flex h-16 w-16 items-center justify-center rounded-full border border-[#c7ab77]/40 bg-[#c7ab77]/10">
-            <CheckCircle2 size={30} className="text-[#c7ab77]" />
+      {/* Main section, fixed cover background */}
+      <section
+        className="min-h-screen bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${BG_IMAGE})`, backgroundAttachment: 'fixed' }}
+      >
+        <div className="mx-auto w-full max-w-[1170px] px-4 sm:px-6">
+          {/* Logo */}
+          <div className="pt-2.5 text-center">
+            <img
+              src={LOGO}
+              alt="Trader Foundation"
+              className="mx-auto h-auto w-10 sm:w-[100px]"
+            />
           </div>
 
-          <p
-            className="text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-5"
-            style={{ fontFamily: "'DM Sans', sans-serif" }}
-          >
-            Your Spot Is Reserved
-          </p>
-
+          {/* Watch This Video */}
           <h1
-            className="text-[2rem] sm:text-[2.6rem] lg:text-[3.1rem] font-extrabold text-white leading-[1.12]"
-            style={{ fontFamily: "'Sen', sans-serif" }}
+            className="text-center font-bold text-white leading-[1.3em] text-[25px] sm:text-[38px] py-4"
+            style={{ fontFamily: "'Oswald', sans-serif" }}
           >
-            Thank You. Your Strategy Call Is{' '}
-            <span className="text-[#c7ab77]">Confirmed</span>.
+            Watch This Video
           </h1>
 
-          <p
-            className="mt-6 text-white/60 text-base sm:text-lg leading-relaxed max-w-xl mx-auto"
-            style={{ fontFamily: "'DM Sans', sans-serif" }}
-          >
-            You have taken the step most people never take. Watch for the confirmation email with
-            your meeting link, then read the three steps below so you get everything possible out of
-            the call.
+          <WistiaVideo mediaId={WISTIA_INTRO} />
+
+          <GoldHeading>There Are A Lot Of Scams Out There, So...</GoldHeading>
+
+          <WistiaVideo mediaId={WISTIA_SCAMS} />
+
+          <GoldHeading>Want To See How I Teach Our Strategy?</GoldHeading>
+
+          <WistiaVideo mediaId={WISTIA_STRATEGY} />
+
+          <GoldHeading>Want To See The Power Of Compounding With Us?</GoldHeading>
+
+          <WistiaVideo mediaId={WISTIA_COMPOUNDING} />
+
+          <GoldHeading>Want To Hear From Our 1200+ Clients?</GoldHeading>
+
+          <WistiaVideo mediaId={WISTIA_CLIENTS} width="100%" />
+
+          {/* Client testimonials */}
+          <Grid cols={4}>
+            {TESTIMONIALS_4.map((video) => (
+              <HostedVideo key={video.id} {...video} />
+            ))}
+          </Grid>
+
+          <Grid cols={3}>
+            {TESTIMONIALS_3.map((video) => (
+              <HostedVideo key={video.id} {...video} />
+            ))}
+          </Grid>
+
+          <Grid cols={2}>
+            {VIMEO_ROW_1.map((id) => (
+              <VimeoVideo key={id} id={id} />
+            ))}
+          </Grid>
+
+          <Grid cols={2}>
+            {VIMEO_ROW_2.map((id) => (
+              <VimeoVideo key={id} id={id} />
+            ))}
+          </Grid>
+
+          <GoldHeading>
+            In No Way Are We
+            <br />
+            Making Claims This Will Be Your Results. But We Guarantee That If You Follow Our
+            Blueprint You Have Better Odds At Succeeding Like The Ones That Committed To Learning
+            The Skill Of Trading
+          </GoldHeading>
+
+          {/* Results screenshots */}
+          <Grid cols={2}>
+            {RESULTS_PAIR_1.map((id) => (
+              <ResultImage key={id} id={id} maxWidth={500} />
+            ))}
+          </Grid>
+
+          <Grid cols={2}>
+            {RESULTS_PAIR_2.map((id) => (
+              <ResultImage key={id} id={id} maxWidth={500} />
+            ))}
+          </Grid>
+
+          <ResultImage id={RESULTS_WIDE_1} maxWidth={900} />
+
+          <Grid cols={2}>
+            <ResultImage id={RESULTS_PAIR_3[0]} maxWidth={500} />
+            <ResultImage id={RESULTS_PAIR_3[1]} maxWidth={300} />
+          </Grid>
+
+          {/* This row is 82% wide in the original */}
+          <div className="mx-auto w-full md:w-[82%]">
+            <Grid cols={2}>
+              {RESULTS_PAIR_4.map((id) => (
+                <ResultImage key={id} id={id} maxWidth={350} />
+              ))}
+            </Grid>
+            <ResultImage id={RESULTS_WIDE_2} maxWidth={900} />
+          </div>
+
+          <ResultImage id={RESULTS_WIDE_3} maxWidth={900} />
+
+          <Grid cols={2}>
+            {RESULTS_PAIR_5.map((id) => (
+              <ResultImage key={id} id={id} maxWidth={350} />
+            ))}
+          </Grid>
+
+          <ResultImage id={RESULTS_WIDE_4} maxWidth={900} />
+          <ResultImage id={RESULTS_WIDE_5} maxWidth={900} />
+        </div>
+      </section>
+
+      {/* Footer, black */}
+      <section className="bg-black py-5">
+        <div
+          className="mx-auto w-full max-w-[1170px] px-4 sm:px-6 text-center text-white"
+          style={{ fontFamily: "'Inter', sans-serif" }}
+        >
+          <div className="mx-auto w-full md:w-[46%]">
+            <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-2.5 py-2.5">
+              <div className="p-2.5">
+                <img
+                  src={FOOTER_LOGO}
+                  alt="Trader Foundation"
+                  loading="lazy"
+                  className="mx-auto h-auto w-[150px] max-w-full"
+                />
+              </div>
+              <div className="p-2.5">
+                <img
+                  src={FOOTER_BADGE}
+                  alt=""
+                  loading="lazy"
+                  className="mx-auto h-auto w-[150px] max-w-full"
+                />
+              </div>
+            </div>
+          </div>
+
+          <h2 className="mb-4 text-[16px] font-normal leading-[1.3em]">
+            © {new Date().getFullYear()} Trader Foundation | All Rights Reserved
+          </h2>
+
+          <p className="mb-4 text-[14px] font-medium leading-[1.3em]">
+            The results shown on this page are real students and our own trades, shared with
+            permission. They are not a promise of what you'll earn. What we've seen consistently:
+            students who show up, follow the process, and trade the plan tend to see steady progress
+            over months not overnight. Students who don't, don't. Trading involves real risk,
+            including loss of capital.
           </p>
 
-          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-            <a
-              href={`mailto:${SUPPORT_EMAIL}`}
-              className="group inline-flex items-center gap-2 px-8 py-3.5 bg-[#c7ab77] text-[#111] text-[0.85rem] font-bold tracking-wide rounded-sm transition-all duration-300 hover:bg-[#b89a66] hover:shadow-[0_8px_30px_rgba(199,171,119,0.3)]"
-              style={{ fontFamily: "'DM Sans', sans-serif" }}
-            >
-              <Mail size={16} />
-              Email Our Team
-            </a>
-            <a
-              href={YOUTUBE_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex items-center gap-2 px-8 py-3.5 border border-white/15 text-white/80 text-[0.85rem] font-bold tracking-wide rounded-sm transition-all duration-300 hover:border-[#c7ab77]/50 hover:text-white"
-              style={{ fontFamily: "'DM Sans', sans-serif" }}
-            >
-              <Youtube size={16} className="text-[#c7ab77]" />
-              Watch While You Wait
-            </a>
+          <p className="mb-4 text-[14px] font-medium leading-[1.3em]">
+            NOT FACEBOOK™: This site is not a part of the Facebook™ website or Facebook Inc.
+            Additionally, This site is NOT endorsed by Facebook™ in any way. FACEBOOK™ is a
+            trademark of FACEBOOK™, Inc. Hi! We use cookies, including third-party cookies, on this
+            website to help operate our site and for analytics and advertising purposes. For more on
+            how we use cookies and your cookie choices, go here for our cookie policy
+          </p>
+
+          <div className="text-[14px] leading-[1.3em]">
+            <h2 className="font-normal">DISCLAIMER:</h2>
+            <p>
+              The trading results stated and shown are based on my personal experience and the
+              experiences of my clients. Results will vary depending on individual starting points,
+              financial goals, trading frequency, risk tolerance, and adherence to the program. The
+              testimonials featured represent clients who have successfully implemented the
+              strategies taught in the Trader Foundation program. Program lengths and results depend
+              on individual participation, market conditions, and effort. Trading carries risk, and
+              it is possible to lose money. The contents of our website and program are for
+              informational and educational purposes only and should not be construed as financial
+              advice, nor do they guarantee specific outcomes. Consult with a licensed financial
+              advisor before making any investment decisions.
+            </p>
           </div>
         </div>
       </section>
-
-      {/* What happens next */}
-      <section className="pb-20 sm:pb-24">
-        <div className="max-w-[1100px] mx-auto px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <p
-              className="text-[0.72rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-4"
-              style={{ fontFamily: "'DM Sans', sans-serif" }}
-            >
-              What Happens Next
-            </p>
-            <h2
-              className="text-[1.6rem] sm:text-[2.1rem] font-extrabold text-white leading-tight"
-              style={{ fontFamily: "'Sen', sans-serif" }}
-            >
-              Three Things To Do Right Now
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {NEXT_STEPS.map(({ icon: Icon, step, title, body }) => (
-              <div
-                key={step}
-                className="relative rounded-sm border border-white/10 bg-white/[0.03] p-7 transition-colors duration-300 hover:border-[#c7ab77]/40"
-              >
-                <span
-                  className="absolute right-6 top-6 text-[2rem] font-extrabold text-white/5"
-                  style={{ fontFamily: "'Sen', sans-serif" }}
-                >
-                  {step}
-                </span>
-                <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-sm border border-[#c7ab77]/30 bg-[#c7ab77]/10">
-                  <Icon size={19} className="text-[#c7ab77]" />
-                </div>
-                <h3
-                  className="text-white text-[1.05rem] font-bold mb-3"
-                  style={{ fontFamily: "'Sen', sans-serif" }}
-                >
-                  {title}
-                </h3>
-                <p
-                  className="text-white/50 text-sm leading-relaxed"
-                  style={{ fontFamily: "'DM Sans', sans-serif" }}
-                >
-                  {body}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Prep checklist */}
-      <section className="py-20 sm:py-24 border-y border-white/5 bg-white/[0.02]">
-        <div className="max-w-[900px] mx-auto px-6 lg:px-8">
-          <div className="text-center mb-10">
-            <p
-              className="text-[0.72rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-4"
-              style={{ fontFamily: "'DM Sans', sans-serif" }}
-            >
-              Come Prepared
-            </p>
-            <h2
-              className="text-[1.6rem] sm:text-[2.1rem] font-extrabold text-white leading-tight"
-              style={{ fontFamily: "'Sen', sans-serif" }}
-            >
-              How To Get The Most Out Of Your Call
-            </h2>
-            <p
-              className="mt-5 text-white/50 text-base leading-relaxed max-w-xl mx-auto"
-              style={{ fontFamily: "'DM Sans', sans-serif" }}
-            >
-              This is not a sales pitch. It is a straight conversation about where you are and
-              whether our coaching is the right fit. A little prep makes it far more useful.
-            </p>
-          </div>
-
-          <ul className="space-y-4 max-w-2xl mx-auto">
-            {PREP_ITEMS.map((item) => (
-              <li key={item} className="flex gap-4">
-                <CheckCircle2 size={20} className="mt-0.5 shrink-0 text-[#c7ab77]" />
-                <span
-                  className="text-white/70 text-[0.95rem] leading-relaxed"
-                  style={{ fontFamily: "'DM Sans', sans-serif" }}
-                >
-                  {item}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* While you wait */}
-      <section className="py-20 sm:py-24">
-        <div className="max-w-[1100px] mx-auto px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <p
-              className="text-[0.72rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-4"
-              style={{ fontFamily: "'DM Sans', sans-serif" }}
-            >
-              While You Wait
-            </p>
-            <h2
-              className="text-[1.6rem] sm:text-[2.1rem] font-extrabold text-white leading-tight"
-              style={{ fontFamily: "'Sen', sans-serif" }}
-            >
-              Get A Head Start
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-            {RESOURCES.map(({ icon: Icon, title, body, href, external }) => (
-              <a
-                key={title}
-                href={href}
-                {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                className="group flex gap-5 rounded-sm border border-white/10 bg-white/[0.03] p-6 transition-all duration-300 hover:border-[#c7ab77]/40 hover:bg-white/[0.05]"
-              >
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-sm border border-[#c7ab77]/30 bg-[#c7ab77]/10">
-                  <Icon size={19} className="text-[#c7ab77]" />
-                </div>
-                <div>
-                  <h3
-                    className="flex items-center gap-2 text-white text-[1rem] font-bold mb-2"
-                    style={{ fontFamily: "'Sen', sans-serif" }}
-                  >
-                    {title}
-                    <ArrowRight
-                      size={14}
-                      className="text-[#c7ab77] transition-transform duration-300 group-hover:translate-x-1"
-                    />
-                  </h3>
-                  <p
-                    className="text-white/50 text-sm leading-relaxed"
-                    style={{ fontFamily: "'DM Sans', sans-serif" }}
-                  >
-                    {body}
-                  </p>
-                </div>
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Fallback, in case they landed here without booking */}
-      <section className="pb-24">
-        <div className="max-w-[820px] mx-auto px-6 lg:px-8">
-          <div className="rounded-sm border border-[#c7ab77]/20 bg-[#c7ab77]/[0.04] px-8 py-10 text-center">
-            <h2
-              className="text-white text-[1.25rem] sm:text-[1.5rem] font-extrabold leading-tight"
-              style={{ fontFamily: "'Sen', sans-serif" }}
-            >
-              Did not get a confirmation email?
-            </h2>
-            <p
-              className="mt-4 text-white/55 text-[0.95rem] leading-relaxed max-w-xl mx-auto"
-              style={{ fontFamily: "'DM Sans', sans-serif" }}
-            >
-              If your booking did not go through, grab a time below. If it did and the email is
-              missing, write to us at{' '}
-              <a
-                href={`mailto:${SUPPORT_EMAIL}`}
-                className="text-[#c7ab77] hover:underline"
-              >
-                {SUPPORT_EMAIL}
-              </a>{' '}
-              and we will sort it out.
-            </p>
-            <a
-              href={BOOKING_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group mt-8 inline-flex items-center gap-3 px-9 py-3.5 bg-[#c7ab77] text-[#111] text-[0.85rem] font-bold tracking-wide rounded-sm transition-all duration-300 hover:bg-[#b89a66] hover:shadow-[0_8px_30px_rgba(199,171,119,0.3)]"
-              style={{ fontFamily: "'DM Sans', sans-serif" }}
-            >
-              Book Your Call
-              <ArrowRight
-                size={16}
-                className="transition-transform duration-300 group-hover:translate-x-1"
-              />
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <Footer />
     </div>
   );
 }
