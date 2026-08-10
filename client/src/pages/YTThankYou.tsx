@@ -64,6 +64,16 @@ const RESULTS_WIDE_5 = '6a183160054f002268c4064d.png';
 
 const WISTIA_PLAYER_SRC = 'https://fast.wistia.com/player.js';
 
+/*
+ * 16px gutters, widened to clear the notch when a phone is held in landscape.
+ * Without the env() floor the first column slides under the Dynamic Island on
+ * every Pro since the 14.
+ */
+const SAFE_GUTTER: React.CSSProperties = {
+  paddingLeft: 'max(1rem, env(safe-area-inset-left))',
+  paddingRight: 'max(1rem, env(safe-area-inset-right))',
+};
+
 function useWistia(mediaIds: string[]) {
   useEffect(() => {
     const sources = [WISTIA_PLAYER_SRC, ...mediaIds.map((id) => `https://fast.wistia.com/embed/${id}.js`)];
@@ -90,7 +100,7 @@ function useWistia(mediaIds: string[]) {
 function GoldHeading({ children }: { children: React.ReactNode }) {
   return (
     <h2
-      className="my-8 bg-[#c7ab77] text-black text-center font-bold leading-[1.3em] text-[17px] sm:text-[32px]"
+      className="my-5 sm:my-8 px-3 py-1 sm:py-0 bg-[#c7ab77] text-black text-center font-bold leading-[1.3em] text-[17px] sm:text-[32px]"
       style={{ fontFamily: "'Inter', sans-serif" }}
     >
       {children}
@@ -98,9 +108,14 @@ function GoldHeading({ children }: { children: React.ReactNode }) {
   );
 }
 
-function WistiaVideo({ mediaId, width = '75%' }: { mediaId: string; width?: string }) {
+/*
+ * The funnel insets its VSLs to 75%. That reads as a narrow strip with dead
+ * black margins on a phone, so the inset is desktop-only and mobile runs the
+ * full column width, flush with the gold heading bars above and below it.
+ */
+function WistiaVideo({ mediaId, full = false }: { mediaId: string; full?: boolean }) {
   return (
-    <div className="mx-auto w-full py-2.5" style={{ maxWidth: width }}>
+    <div className={`mx-auto w-full py-1.5 sm:py-2.5 ${full ? '' : 'sm:max-w-[75%]'}`}>
       {/* @ts-expect-error wistia-player is a custom element registered by the embed script */}
       <wistia-player media-id={mediaId} seo="false" aspect="1.7777777777777777" />
     </div>
@@ -139,7 +154,7 @@ function VimeoVideo({ id }: { id: string }) {
 
 function ResultImage({ id, maxWidth }: { id: string; maxWidth: number }) {
   return (
-    <div className="p-2.5 text-center">
+    <div className="py-1.5 sm:p-2.5 text-center">
       <img
         src={img(id)}
         alt=""
@@ -151,10 +166,19 @@ function ResultImage({ id, maxWidth }: { id: string; maxWidth: number }) {
   );
 }
 
-/* Rows collapse to a single column under 768px, matching the builder's mobile behaviour */
+/*
+ * Stacking four videos one-per-screen on a phone turns the testimonial block
+ * into a very long scroll, so anything wider than two goes 2-up at 640px and
+ * only reaches its full column count at 1024px, where the tiles are wide
+ * enough to be worth watching.
+ */
 function Grid({ cols, children }: { cols: 2 | 3 | 4; children: React.ReactNode }) {
-  const md = { 2: 'md:grid-cols-2', 3: 'md:grid-cols-3', 4: 'md:grid-cols-4' }[cols];
-  return <div className={`grid grid-cols-1 ${md} gap-2.5 py-2.5`}>{children}</div>;
+  const responsive = {
+    2: 'md:grid-cols-2',
+    3: 'sm:grid-cols-2 lg:grid-cols-3',
+    4: 'sm:grid-cols-2 lg:grid-cols-4',
+  }[cols];
+  return <div className={`grid grid-cols-1 ${responsive} gap-2 sm:gap-2.5 py-1.5 sm:py-2.5`}>{children}</div>;
 }
 
 export default function YTThankYou() {
@@ -191,7 +215,7 @@ export default function YTThankYou() {
         className="min-h-screen bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${BG_IMAGE})`, backgroundAttachment: 'fixed' }}
       >
-        <div className="mx-auto w-full max-w-[1170px] px-4 sm:px-6">
+        <div className="mx-auto w-full max-w-[1170px]" style={SAFE_GUTTER}>
           {/* Logo */}
           <div className="pt-2.5 text-center">
             <img
@@ -225,7 +249,7 @@ export default function YTThankYou() {
 
           <GoldHeading>Want To Hear From Our 1200+ Clients?</GoldHeading>
 
-          <WistiaVideo mediaId={WISTIA_CLIENTS} width="100%" />
+          <WistiaVideo mediaId={WISTIA_CLIENTS} full />
 
           {/* Client testimonials */}
           <Grid cols={4}>
@@ -306,8 +330,8 @@ export default function YTThankYou() {
       {/* Footer, black */}
       <section className="bg-black py-5">
         <div
-          className="mx-auto w-full max-w-[1170px] px-4 sm:px-6 text-center text-white"
-          style={{ fontFamily: "'Inter', sans-serif" }}
+          className="mx-auto w-full max-w-[1170px] text-center text-white"
+          style={{ fontFamily: "'Inter', sans-serif", ...SAFE_GUTTER }}
         >
           <div className="mx-auto w-full md:w-[46%]">
             <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-2.5 py-2.5">
