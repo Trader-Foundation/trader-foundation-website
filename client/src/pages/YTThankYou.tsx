@@ -1,8 +1,7 @@
 /*
  * YouTube Funnel Thank You Page, Trader Foundation
  * Mirrors start.traderfoundation.co/yt-thank-you-page — the confirmation page
- * shown after someone submits the lead form from the YouTube funnel (/trade-yt).
- * Nothing is booked at this point: the team reaches out to qualify and schedule.
+ * shown after someone books a strategy call from the YouTube funnel (/trade-yt).
  * Unlisted funnel page: minimal header (no nav, to avoid leaking the funnel),
  * noindex/nofollow, disallowed in robots.txt.
  * Fonts: Sen (headings), DM Sans (body)
@@ -13,13 +12,13 @@ import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import {
   ArrowRight,
+  CalendarCheck,
   CheckCircle2,
   Clock,
   Inbox,
   Mail,
+  MonitorPlay,
   NotebookPen,
-  PhoneCall,
-  UserCheck,
   Youtube,
 } from 'lucide-react';
 import Footer from '@/components/Footer';
@@ -33,22 +32,22 @@ const SKOOL_URL = 'https://www.skool.com/tf-membership/classroom';
 
 const NEXT_STEPS = [
   {
-    icon: PhoneCall,
-    step: '01',
-    title: 'Watch for our call',
-    body: 'A member of our team will reach out to go over your answers and find a time that works. It may come from a number you do not recognize, so please pick up or call back.',
-  },
-  {
     icon: Inbox,
-    step: '02',
+    step: '01',
     title: 'Check your inbox',
-    body: `Your confirmation is on its way from ${SUPPORT_EMAIL}. If you do not see it in a few minutes, check spam or promotions and mark it as safe so nothing gets missed.`,
+    body: `Your confirmation and the meeting link are on their way from ${SUPPORT_EMAIL}. If you do not see it in a few minutes, check spam or promotions and mark it as safe.`,
   },
   {
-    icon: UserCheck,
+    icon: CalendarCheck,
+    step: '02',
+    title: 'Add it to your calendar',
+    body: 'Accept the calendar invite so the time is locked in and you get the reminder. If something changes, use the reschedule link in that email rather than no-showing.',
+  },
+  {
+    icon: MonitorPlay,
     step: '03',
-    title: 'Be ready to talk',
-    body: 'Have a few quiet minutes and somewhere you can speak openly about your finances. The first conversation is short, and the full strategy call runs about 30 to 45 minutes.',
+    title: 'Show up ready',
+    body: 'Join from a computer somewhere quiet where you can talk openly about your finances. Calls run about 30 to 45 minutes and we go through the numbers together.',
   },
 ];
 
@@ -102,11 +101,11 @@ export default function YTThankYou() {
   return (
     <div className="min-h-screen bg-[#111]">
       <Helmet>
-        <title>Thank You | Trader Foundation Academy</title>
+        <title>You're Booked | Trader Foundation Academy</title>
         <meta name="robots" content="noindex, nofollow" />
         <meta
           name="description"
-          content="We received your information. Here is what happens next and how to prepare for your call with the Trader Foundation team."
+          content="Your Trader Foundation strategy call is confirmed. Here is what happens next and how to prepare."
         />
       </Helmet>
 
@@ -140,24 +139,24 @@ export default function YTThankYou() {
             className="text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-5"
             style={{ fontFamily: "'DM Sans', sans-serif" }}
           >
-            Submission Received
+            Your Spot Is Reserved
           </p>
 
           <h1
             className="text-[2rem] sm:text-[2.6rem] lg:text-[3.1rem] font-extrabold text-white leading-[1.12]"
             style={{ fontFamily: "'Sen', sans-serif" }}
           >
-            Thank You. We Have Your{' '}
-            <span className="text-[#c7ab77]">Information</span>.
+            Thank You. Your Strategy Call Is{' '}
+            <span className="text-[#c7ab77]">Confirmed</span>.
           </h1>
 
           <p
             className="mt-6 text-white/60 text-base sm:text-lg leading-relaxed max-w-xl mx-auto"
             style={{ fontFamily: "'DM Sans', sans-serif" }}
           >
-            You have taken the step most people never take. A member of our team will be in touch
-            shortly to go over your answers and get your strategy call scheduled. Here is what to
-            expect in the meantime.
+            You have taken the step most people never take. Watch for the confirmation email with
+            your meeting link, then read the three steps below so you get everything possible out of
+            the call.
           </p>
 
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
@@ -336,21 +335,21 @@ export default function YTThankYou() {
               className="text-white text-[1.25rem] sm:text-[1.5rem] font-extrabold leading-tight"
               style={{ fontFamily: "'Sen', sans-serif" }}
             >
-              Not sure your form went through?
+              Did not get a confirmation email?
             </h2>
             <p
               className="mt-4 text-white/55 text-[0.95rem] leading-relaxed max-w-xl mx-auto"
               style={{ fontFamily: "'DM Sans', sans-serif" }}
             >
-              If you are not certain your details reached us, fill the form out again below, it is
-              quicker than waiting. You can also write to us at{' '}
+              If your booking did not go through, grab a time below. If it did and the email is
+              missing, write to us at{' '}
               <a
                 href={`mailto:${SUPPORT_EMAIL}`}
                 className="text-[#c7ab77] hover:underline"
               >
                 {SUPPORT_EMAIL}
               </a>{' '}
-              and we will confirm we have you.
+              and we will sort it out.
             </p>
             <a
               href={BOOKING_URL}
@@ -359,7 +358,7 @@ export default function YTThankYou() {
               className="group mt-8 inline-flex items-center gap-3 px-9 py-3.5 bg-[#c7ab77] text-[#111] text-[0.85rem] font-bold tracking-wide rounded-sm transition-all duration-300 hover:bg-[#b89a66] hover:shadow-[0_8px_30px_rgba(199,171,119,0.3)]"
               style={{ fontFamily: "'DM Sans', sans-serif" }}
             >
-              Resubmit The Form
+              Book Your Call
               <ArrowRight
                 size={16}
                 className="transition-transform duration-300 group-hover:translate-x-1"
