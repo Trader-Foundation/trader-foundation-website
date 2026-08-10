@@ -24,7 +24,7 @@ const accountTiles = [
   {
     id: '189us7YtGk2Vz65NlOUkKnoPme8-pe-fc',
     name: 'Erin Chawla',
-    role: 'Partner · Coach',
+    role: 'Coach',
     caption: 'Realized profit and loss from Erin\'s personal trading account',
   },
   {
@@ -318,11 +318,9 @@ export default function Results() {
             className="text-white/55 text-sm sm:text-base leading-relaxed"
             style={{ fontFamily: "'DM Sans', sans-serif" }}
           >
-            Trader Foundation has been changing lives for over six years. Many of our
-            earlier students worked closely with our founder,{' '}
-            <strong className="text-white/80">Vlad Tayman</strong> &mdash; today{' '}
-            <strong className="text-white/80">Erin Chawla</strong> is joined by coaches
-            Elliot and Leo, carrying that same system forward.
+            Trader Foundation has been changing lives for over six years, led by our founder{' '}
+            <strong className="text-white/80">Vlad Tayman</strong>, alongside coaches{' '}
+            <strong className="text-white/80">Elliot, Erin, and Leo</strong> &mdash; every one of them a working trader teaching the same system every day.
           </p>
         </div>
       </section>
