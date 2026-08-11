@@ -624,9 +624,12 @@ This repository is public so transcripts cannot be committed here, and the conta
 | Paycheck Collector, how you lose *(coaching)* | `paycheck-collector-losses-COACHING-RAW.txt` | `1gtmqsBpLC1p_w3f7r_HAjbQcD0iInrFs` |
 | Paycheck Collector part one *(coaching)* | `paycheck-collector-part1-COACHING-RAW.txt` | `1bMm5yGleI1w8wyZ0h4sUTybgWsxeK4x5` |
 | thinkorswim setup | `thinkorswim-setup-UNNUMBERED-RAW.txt` | `1s4MWv8sgd0rNNWtlQy3_rG8kq-flCspx` |
+| Live session 2026-08-06 *(coach)* | `live-session-2026-08-06-COACH-weekly-review-TIMESTAMPED.txt` | `1h6ByYMFC97B9ygg0zCBLcBVPFodbAnEP` |
 | Bull call / bear put *(coaching)* | `coaching-call-bull-call-bear-put-COACHING-RAW.txt` | `1o8dMyHcgLSMSXoNBkRjh4qcPht1Sk_O_` |
 | The Bounce Profit Plan *(worksheet)* | `document-bounce-profit-plan-RAW.txt` | `1I-ejvV92yaZdzKpQSv5JeyGclsRIq6sr` |
 | Breakout Strategy *(worksheet)* | `document-breakout-strategy-RAW.txt` | `1INwugRa-afsIWs8l-tP5iAL4oOuofEVO` |
+
+**Raw only, with one deliberate exception.** The live session is stored as the timestamp-anchored CLEAN file rather than the raw SRT, because the anchors are the point and chunk-level citation does not need per-cue precision. The original SRT is with Vlad if cue-level timing is ever needed.
 
 **Raw only.** Worksheets need no clean pass at all, since they are typed and carry no transcription errors. For transcripts, clean files are regenerated deterministically from raw plus `glossary/terms.json`, so storing them would create a second thing to keep in sync. Each uploaded file carries a header listing its known errors, module-number evidence, and compliance status, so it is self-describing if opened directly.
 
