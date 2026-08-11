@@ -58,6 +58,94 @@ analysis tilts probability and nothing more, and some rulings will be wrong.
 Both excluded. The surrounding teaching, that options put you against another participant with an
 opposite belief rather than against a house, survives without either sentence.
 
+### Paycheck Collector part two, how you lose: much cleaner, three hits
+
+The continuation covering loss mechanics. **Notably cleaner than the part one intro**, and the reason is structural: this half is about what goes wrong, so there is nothing to oversell.
+
+| Passage | Action |
+|---|---|
+| "You'll be right 90 percent of the time for that max loss" (weekly options) | **Exclude.** Third stated win rate in this strategy's material |
+| "So the chances are pretty high, right?" | Borderline, logged. No figure, and it refers to a specific spread's distance from price rather than to the strategy. Keep |
+| "you owe us 800,000 in Netflix" and "this is going to be worth a hundred grand" | Keep. These are **assignment cost illustrations**, and they are the opposite of outcome claims: they exist to frighten a student away from a mistake. Under the worked-arithmetic guard |
+
+**The arithmetic reconciles**: a 27 credit against a 473 max loss sums to 500, which is a 5 point spread on one contract. Consistent with the narrow-spread rule taught in part one.
+
+**Worth recording as a pattern.** Part one sells the strategy and carries the largest exclusion set in the project. Part two explains how it fails and carries three hits, one of them real. **Compliance risk concentrates in the parts of a lesson that motivate, not the parts that teach.** That is the same finding as the produced-wrapper note above, from a different angle, and it should shape where the library pass spends its time.
+
+### THE PAYCHECK COLLECTOR CLASS: the largest compliance load in the project, and it is a distributed class
+
+**Ingested at Vlad's direction.** He has ruled that coaching material is in scope: *"i need you to put this in though"*, *"everything im feeding you is needed."* That is his call and the scope boundary moves. The standing rules do not, so this gets the same compliance treatment as every module, and the named student is redacted in the clean file.
+
+**Read this first: it is not a private call.** It opens with a produced introduction that ends *"I would recommend really pay attention to this class... See you in the class."* It refers to itself as *"a class like this, a paid class"*. So the material below is not loose talk between two people. **It is content students are shown**, which means the exposure is live in the product right now, independently of anything the bot does.
+
+That is why this entry is longer than the others.
+
+#### The framing claim, stated in the introduction
+
+> "you'll be able to collect a premium on a weekly basis **knowing exactly how much money is going to come in, usually an average about 10 percent of your account, 10 percent a week or a month**"
+
+> "if you want to make 10 grand a month, you gotta understand you gotta have 10 percent of this, it'll be what a hundred grand"
+
+> "**That's a very safe strategy**"
+
+**This is the most consequential compliance item found anywhere in the project.** It is not a figure inside a worked example. It is the strategy's stated design, delivered in a scripted intro, and it does three prohibited things at once: it states a recurring rate of return, it says the amount is knowable in advance, and it calls the strategy safe.
+
+"Knowing exactly how much money is going to come in" is also not true of a credit spread. The credit is known. The outcome is not. That distinction is the entire risk of the position and the sentence removes it.
+
+**Excluded in full. Flagged as a re-record line rather than an edit**, because it is the opening frame of the class rather than an aside inside it.
+
+#### The compounding projection
+
+> "let's just say you invest 2,500 this week, you collect 250 next week... in a month from now you're going to have 11 grand... now you're taking 275 per week... as long as you're consistent and do that math consistently, and I did, **you're going to make retirement money**"
+
+A month by month wealth trajectory built on the 10 percent rate holding every week, ending in the word retirement. **Excluded in full.** This is the same shape as the Greeks module's account-growth line and considerably longer and more specific.
+
+#### Stated win probabilities
+
+| Passage | Why |
+|---|---|
+| "I noticed you have a 90 percent chance of winning" (weekly spreads) | Stated win rate |
+| "that's going to give you the 90 over 90 percent chance of win" | Stated win rate |
+| "it basically kind of tells you that you have a 7 percent chance that this is going to happen" | Delta read as probability. This one is a standard trader approximation and roughly defensible, but it is stated as fact and it feeds the 90 percent claims above |
+| "do you see how the chances are in your favor?" | Reinforces the above |
+
+The delta approximation is worth separating from the rest. It is a real convention and the reasoning is sound. What is not sound is converting it into "90 percent chance of winning" and presenting that as a property of the strategy. **The two 90 percent claims are excluded. The delta convention is kept as mechanism**, taught as roughly how likely the option is to finish in the money rather than as a win rate.
+
+#### Third party income and account figures
+
+| Passage | Action |
+|---|---|
+| "he's making like four grand, I think he told me a week" | **Exclude.** A named individual's weekly income |
+| "he's working with like 130,000, 150,000" | **Exclude.** Account size |
+| "I started with five grand... right now I'm at around eight" | **Exclude.** Instructor performance |
+| "a couple of people got a hundred grand, 200 grand, and then they lost it all" | **Exclude.** Figures attached to students, even though the point being made is cautionary |
+| "I've made five G's in a day" (student) | **Exclude and redact.** Student performance |
+| "I'm only working with 10 G's right now" (student) | **Redact.** Student account size |
+| "in this particular account of mine, I just collected 460" | **Exclude.** Instructor result on a live position |
+
+All the student figures are redacted in the clean file as well as excluded, because redaction protects the person and exclusion protects the bot, and those are different jobs.
+
+#### "Guaranteed" again, and a retired-term flag
+
+> "even though it's **guaranteed** to get filled at 15 cents"
+
+Second appearance of the word, after the credit spreads forward reference. Here it is about a fill rather than a return, which is milder, and it is still the word. **Excluded.**
+
+> "one of our **elite** members"
+
+**Flagged for Vlad, not auto-excluded.** Non-negotiable 8 retires Elite Four and Elite 12. "Elite members" is not either of those, and it may be a current and perfectly fine descriptor of a membership tier. It may also be a survival of the retired naming. **I do not know which, and guessing wrong in either direction is bad**, so it is open question 39 rather than a silent edit.
+
+#### What survives, and it is substantial
+
+The teaching underneath is genuinely strong and most of it is compliant:
+
+- The strategy mechanics: sell a credit spread around 0.07 delta, 30 to 37 days out, close early rather than holding to expiration.
+- **The risk lecture, which is the best passage in the source.** Keep the spread narrow, never end up inside it, and what assignment actually costs. *"The spread is the biggest risk you have. You never want to end up in that spread. I don't care if you're going to make way less money."* That is a risk-first passage and it is the counterweight the introduction lacks.
+- The discipline argument: refusing a 30 percent credit on purpose because the probability behind it is worse. *"Don't fall in love with the 30 percent, fall in love with longevity."*
+- The evidence standard, which is the chart ruling in live form: *"what's your evidence... if you're not doing it, then you're gambling."*
+
+**The gap between the introduction and the body is the finding.** The intro sells a rate of return. The body spends most of its length arguing against reaching for return and in favour of never being near the strike. The body is the teaching. The intro is the problem.
+
 ### From an OUT OF SCOPE source: "guaranteed premiums"
 
 **Not corpus content.** Found in a live coaching call, which is out of scope for v1 and is not being ingested. Logged here anyway, because the standing rules are about what gets said to students and this was said to a student.

@@ -1,4 +1,30 @@
-# Out of scope: live coaching call recordings
+# Coaching call recordings
+
+**SUPERSEDED BY VLAD. Coaching material is now IN SCOPE and gets the full pipeline.**
+
+> "i need you to put this in though"
+>
+> "everything im feeding you is needed"
+
+His call, and the scope boundary moves. Anything still sitting in this folder is
+awaiting processing, not excluded.
+
+**Two things did not move, because they are standing rules rather than scope:**
+
+1. **Compliance exclusions apply exactly as they do to every module.** Ingesting a
+   source has never meant ingesting all of it. The Paycheck Collector class carries
+   the largest exclusion set in the project. See `../../rulings/compliance-log.md`.
+2. **Named students and their personal financial details are redacted in the clean
+   file.** Raw stays verbatim, as it does everywhere. Redaction is what makes
+   ingesting this material possible at all: exclusion protects the bot, redaction
+   protects the person, and they are different jobs.
+
+The original note follows, because the risks it describes are real and now have to
+be managed inside the pipeline rather than avoided by keeping the material out.
+
+---
+
+## Original note, superseded
 
 **Nothing in this folder goes into the corpus. Nothing in this folder gets the normal pipeline.**
 

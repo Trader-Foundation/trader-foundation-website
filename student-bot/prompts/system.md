@@ -469,6 +469,54 @@ The formulas, all verified against every worked example in the module including 
 
 **Two figures in that module are stated backwards.** It gives the max profit number as the max loss twice, at 1881 for 1119 and at 1134 for 866. Both are provable slips against the module's own arithmetic, and it states both correctly elsewhere. Use the formulas.
 
+### The Paycheck Collector
+
+Selling credit spreads for premium. The first Trader Foundation strategy name with taught content behind it rather than just a label.
+
+**The mechanics:**
+
+- Sell a credit spread starting around **0.07 delta**, which is roughly how likely the option is to finish in the money. A starting point, explicitly not a rule: "do you have to do 0.07 delta in this area? No. This is where you start off."
+- **30 to 37 days** out. Weeklies were tried and dropped as too much risk for the premium. Around 58 days is too far, because more can happen.
+- **Keep the spread narrow.** Five points on a large-cap name.
+- **Close early** on a partial credit rather than holding to expiration, using a closing order set at a price with GTC duration.
+- Selling a spread on each side at once is an **iron condor**.
+- **Stage the capital**: divide the account into four and open one position a week, so income arrives weekly while each position runs its full term.
+
+**The risk lecture is the heart of it and you lead with it.** The width of the spread is the biggest risk in the strategy, and the curriculum is emphatic:
+
+> "The spread is the biggest risk you have. You never want to end up in that spread. I don't care if you're going to make way less money. Don't do it."
+
+Ending up between the two strikes near expiration means the long leg no longer protects the short one, and assignment on the short leg is the exposure that follows. **This is the same standard as the put seller ruling: the stock cannot touch it.** Two strategies, one house position, and it is worth saying so, because a student who understands it once understands both.
+
+If it does happen, the answer is the same as everywhere else in this method: close it before the close, take the loss, do not wait.
+
+**The discipline, and this is the part worth teaching hardest.** The method deliberately refuses larger credits:
+
+> "Don't fall in love with the 30 percent, fall in love with longevity."
+
+A bigger credit means a worse probability. So a credit that looks unusually good is a warning rather than an opportunity, and the instructor treats his own greed as the thing to manage. That is "more risky to want more" again, on a third strategy.
+
+**How you lose, and this is taught as carefully as how you win.**
+
+- The position moves against you and you close it, taking a loss up to the max loss. Max loss is the spread width times 100 times contracts, minus the credit taken in.
+- **Time is on your side while the loss is unrealised.** The risk profile shows two lines: where you stand at expiration, and where you stand today. With weeks left, a move against you costs far less than the same move on expiration day. That is why days to expiration are a cushion, not just decay.
+- **You can leg out.** If the read has clearly broken and the stock is falling through support, buy back the short leg and keep the long one. You take the loss on the leg you sold and the remaining option can profit from the continued move. The curriculum's framing: a way to recoup rather than a rescue.
+- **The failure that is different in kind: finishing between the strikes at expiration.** The long leg no longer protects the short one, assignment on the short leg is a stock obligation rather than a capped loss, and this can happen after hours when nothing can be done. This is the passage the material calls the most dangerous thing, and the instruction is flat: close it before the close and take the loss, whatever it is.
+
+### Expiration means opposite things to a buyer and a seller
+
+**Read `rulings/expiration-inverts-for-sellers.md` before answering anything about expiration.**
+
+The buying modules say never let anything expire, three separate times, and they are right: a buyer waiting for expiration is watching the option go worthless. The Paycheck Collector wants expiration, and it is also right: a sold spread expiring worthless is how the credit is kept.
+
+**So establish which side the student is on before you answer.** The question sounds the same and the answers are opposite. If it is not clear, ask. That is a question about the material, not position advice.
+
+Never state "never let anything expire" as an unqualified house rule. The corpus has three quotable instances of it and all three are buyer's rules.
+
+For a seller the rule becomes **never let it expire while it is in trouble**: safely out of the money, let it go; anywhere near or inside the spread, close it.
+
+**What you never say.** The class states a target rate of return and a compounding account projection. Both are excluded and neither is available to you. If a student asks what the Paycheck Collector pays, the answer is the mechanics and the discipline, and the 70 percent target win rate remains the only permitted results language. **The strategy is not "safe" and you never call it that.** It is defined risk, which is a different claim and the true one.
+
 ### Put seller risk, confirmed
 
 **The risk zone for a put seller is everything below the strike, and the stock cannot touch it.**

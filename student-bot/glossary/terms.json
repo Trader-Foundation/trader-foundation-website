@@ -211,6 +211,17 @@
         "breakeven_bull_call": "lower bought strike plus net debit",
         "width_tradeoff": "a wider spread raises the max profit and requires a larger move to reach it",
         "_warning": "The module twice states the max PROFIT figure as the max loss (1881 for 1119, and 1134 for 866). Both are provably slips against its own arithmetic and it states both correctly elsewhere. Use the formulas, not those two sentences."
+      },
+      "paycheck_collector": {
+        "_source": "The Paycheck Collector class, taught to a student on a call and distributed as a class. FIRST DEFINITION of a Trader Foundation strategy name that was previously protected vocabulary with no content behind it.",
+        "what_it_is": "selling credit spreads for premium, held to expire worthless or closed early",
+        "delta_start": "0.07, described as roughly the chance the option finishes in the money. A STARTING POINT, explicitly not a rule: 'do you have to do 0.07 delta in this area? No. This is where you start off'",
+        "days_to_expiration": "30 to 37. Weeklies were used previously and abandoned as too much risk for the premium. 58 days is called too far out",
+        "spread_width": "NARROW. 5 points on a large-cap name. Wide spreads are the stated biggest risk in the strategy",
+        "capital_staging": "divide the account into four and open one position a week, so income arrives weekly while each position runs its full term",
+        "exit": "close early on a partial credit rather than holding to expiration. A closing order at a set price with GTC duration",
+        "both_sides": "selling a spread on each side at once is named as an iron condor",
+        "_warning_on_returns": "The class states a target of about 10 percent of the account per period and the instructor's own discipline band as 10 to 12 percent, refusing higher credits on purpose. THE RETURN FIGURES ARE EXCLUDED FROM THE CORPUS as outcome claims. The DISCIPLINE is the teachable part: a larger credit means a worse probability, so a credit that looks too good is a warning rather than an opportunity."
       }
     }
   },
@@ -491,7 +502,8 @@
       "open interest",
       "volume open interest",
       "risk profile chart",
-      "paper trading"
+      "paper trading",
+      "Bollinger Bands"
     ],
     "options_order_terms": {
       "_comment": "Order mechanics from the thinkorswim walkthrough. The CONCEPTS are EVERGREEN and portable to any broker. The click paths and colour coding around them are PERISHABLE_PROCEDURE. Keep the two apart: a student on a different platform still needs limit versus market.",
@@ -539,11 +551,13 @@
         "bear put spread",
         "bear call spread",
         "bull put spread",
-        "directional trade"
+        "directional trade",
+        "credit spread",
+        "iron condor",
+        "legging out"
       ],
       "named_only": [
         "butterfly",
-        "iron condor",
         "diagonal",
         "calendar spread"
       ],
@@ -553,8 +567,10 @@
         "cash secured put"
       ],
       "_note_on_credit_spreads": "The bear call and bull put are named as two of the four verticals but never demonstrated. Only the bull call and bear put, both debit spreads, are taught. Same 'named but not taught' shape as covered calls, not confirmed with Vlad. The bot names them and does not teach them.",
-      "_note_on_cash_secured_puts": "Used by Vlad to explain assignment in the put seller ruling. Whether they are taught as a strategy is open question 29. Listed as not taught pending that, on the same reasoning as covered calls, and this should be confirmed rather than assumed."
-    }
+      "_note_on_cash_secured_puts": "Used by Vlad to explain assignment in the put seller ruling. Whether they are taught as a strategy is open question 29. Listed as not taught pending that, on the same reasoning as covered calls, and this should be confirmed rather than assumed.",
+      "_note_on_legging_out": "Buying back the short leg to convert a spread into a plain directional option. Taught in coaching material and in no recorded module. Now in scope. Open question 38 asks whether it belongs in the spreads module."
+    },
+    "_note_on_bollinger_bands": "USED IN COACHING, TAUGHT IN NO RECORDED MODULE. Used two ways: to judge whether a target is a realistic distance away, and in a weekly variant where the sold strike goes one step outside the band. A curriculum gap rather than a transcription issue. Open question 40."
   },
   "forbidden_output_terms": {
     "_comment": "Must never appear in bot output. Retired program labels and prohibited copy. Separate from transcription errors.",

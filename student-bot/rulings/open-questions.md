@@ -600,6 +600,48 @@ The more likely reading, and it fits the chart ruling: **neither is a threshold.
 
 ---
 
+## 39. "One of our elite members": is that a current term or a retired one?
+
+**Status:** OPEN, flagged rather than edited. **Needs an answer before anything ships.**
+
+The Paycheck Collector class opens:
+
+> "today we're going to talk to [STUDENT], **one of our elite members**"
+
+Non-negotiable 8 retires **Elite Four** and **Elite 12** and says they must never surface. "Elite members" is neither of those. It could be a perfectly current description of a membership tier, or it could be what is left of the retired naming after the numbers were dropped.
+
+**I have not edited it, because guessing wrong is bad in both directions.** Strip a live product name and the bot cannot talk about a tier students are in. Keep a retired one and it surfaces exactly what the rule exists to prevent.
+
+**Question for Vlad:** is "elite member" current language, or does it need retiring along with Elite Four and Elite 12?
+
+---
+
+## 40. Bollinger Bands are used and never taught
+
+**Status:** OPEN. Same shape as legging out, and more load-bearing.
+
+Bollinger Bands appear twice in the Paycheck Collector class, doing real work:
+
+> "I'm going to go into a Bollinger bands and I'm going to look at seven months... I want to see the long term situation"
+
+and as the actual rule for the weekly variant:
+
+> "you take the Bollinger band and if it should be expiring, you should buy something one outside the Bollinger band"
+
+They also appear as a go or no-go filter: when the bands are wide, the premium at a safe distance is not worth taking, so the trade is skipped.
+
+**No recorded module teaches them.** They are not in Momentum Indicators, which teaches stochastics and MACD, and the Momentum module explicitly tells students to add those two and "not anything else."
+
+**So there is a straight conflict**, and it is not a transcription problem. A recorded module says use these two indicators and nothing else. The coaching material uses a third and treats it as a criterion.
+
+The likely explanation is that Bollinger Bands belong to the options strategies rather than to the technical analysis chain, which would make it an addition rather than a contradiction. That is a guess and it should not be encoded.
+
+**Bot behaviour meanwhile:** the bot can describe how the bands are used in the Paycheck Collector, since that is now in scope, but it does not present them as part of the indicator set from Momentum Indicators, and it does not teach the indicator itself from general knowledge.
+
+**Question for Vlad:** are Bollinger Bands part of what you teach, and does "add stochastics and MACD and not anything else" still hold for the technical analysis chain?
+
+---
+
 ## 37. The credit spreads module, and how it will be framed
 
 **Status:** OPEN, pre-emptive. Flagged before the module arrives, not after.

@@ -125,9 +125,22 @@ Do not ship on a failing refusal case.
 
 ## Scope boundaries
 
-**In scope for v1:** structured course modules only. Deliberate, reviewed teaching.
+**In scope for v1:** structured course modules, **and coaching material.** Vlad ruled on the latter: *"i need you to put this in though"*, *"everything im feeding you is needed."*
 
-**Out of scope for v1:** live coaching call recordings. They contain student names, specific positions, and coaches speaking loosely in a context that does not survive extraction. Revisit only after v1 is stable and only with a redaction standard in place.
+The original boundary held coaching recordings out of v1 pending a redaction standard. The standard now exists and is below, so the boundary has moved rather than been dropped.
+
+**Redaction standard for coaching material.** Raw stays verbatim as everywhere else. The clean file gets:
+
+- **Names replaced** with `[STUDENT]`, `[COACH]`, `[STAFF]`. **The instructor is not redacted.** Vlad is the author of the material and the name is already throughout the rulings and the corpus; redacting him would break every citation and protects nobody. The rule is for students, other coaches, staff, and third parties discussed in their absence.
+- **A student's account size, open positions, running profit and loss, and trading history replaced** with a marked redaction. These are also compliance exclusions, but redaction and exclusion do different jobs: exclusion protects the bot, redaction protects the person, and a source needs both.
+- **Personal details removed**: locations, family, occupation, anything that identifies someone alongside their finances.
+- **Third party figures removed**, including people discussed but not present.
+
+Every redaction leaves a visible marker. Silent removal would make the clean file untrustworthy as a record.
+
+**What redaction does not do.** It is not a substitute for the compliance scan. Coaching material carries more outcome language than recorded modules, not less, because nobody scripted it. The Paycheck Collector class carries the largest exclusion set in the project. Run the scan harder here, not softer.
+
+**Coaches speaking loosely is a real cost and it is now a processing problem rather than a reason to exclude.** A live correction thirty seconds later does not travel with the sentence that needed correcting. Where a passage is self-corrected, take the corrected version and exclude the first pass rather than trying to repair it.
 
 **Logging is required, not optional.** Student conversations must be reviewable by coaches. This is what makes the bot an intake layer that strengthens the coaching relationship rather than a parallel channel that quietly erodes it. If the architecture cannot support coach visibility, raise it before building.
 

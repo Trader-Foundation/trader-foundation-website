@@ -63,6 +63,9 @@ Then: append a row to the ledger, add new questions to `rulings/open-questions.m
 | Options thinkorswim walkthrough | **unassigned** | 1 ruled by Vlad, kept with the risk paired | 5 decimal artifacts fixed, 2 unresolved | 2 | No |
 | Options Greeks in thinkorswim | **unassigned** | **9 excluded. Strongest re-record candidate** | 17 artifacts fixed, arithmetic audited clean | 0 | No |
 | Options Vertical Spreads | **unassigned** | **3 excluded, 2 of them the counting-scenarios pattern** | none. Every figure reconciles exactly | 3 | No |
+| Bull call / bear put *(coaching call)* | n/a, coaching | Awaiting processing under the new scope ruling | not yet run | 0 | No |
+| The Paycheck Collector *(class)* | n/a, coaching | **LARGEST EXCLUSION SET IN THE PROJECT. Re-record line in the intro** | glossary pass run, 12 redactions | 2 | No |
+| Paycheck Collector, how you lose | n/a, coaching | 1 excluded, 2 borderline. Much cleaner | 16 fixed, arithmetic reconciles | 1 | No |
 
 Modules 2, 3 and 5 were characterised in the spec before this log existed. Everything from Volume onward was processed here.
 
@@ -125,9 +128,83 @@ This is now in `prompts/system.md` as the bot's primary behaviour. When a studen
 
 Worth checking every further module for whether it adds a step, refines one, or reorders them.
 
-### A live coaching call arrived, and it is out of scope. Not ingested.
+### Compliance risk concentrates in the motivating half of a lesson
 
-**A recording of a one-to-one coaching session was supplied. It has not been processed and nothing from it is in the corpus.** It is stored in `transcripts/out-of-scope-coaching-calls/` so it never has to be supplied again, with a README explaining why it stays there.
+Two halves of the same class, processed back to back, and the difference is stark.
+
+**Part one sells the strategy.** It carries the largest exclusion set in the project: a stated rate of return, a compounding projection ending in the word retirement, two 90 percent win rates, and the strategy called "very safe".
+
+**Part two explains how you lose.** Three hits, one of them real, and its two biggest dollar figures are *assignment cost illustrations* whose whole purpose is to frighten a student away from a mistake.
+
+Same speaker, same session, same strategy. The difference is what the passage is for.
+
+**This is the second time the same shape has appeared.** Part one's worst material is in its produced introduction rather than its unscripted body. Here the worst material is in the half that motivates rather than the half that instructs.
+
+**So the library pass should be targeted rather than uniform.** Intros, closings, forward references to the next lesson, and any passage answering "why should I learn this" are where the exposure lives. The passage explaining a mechanism is usually fine. That is a much cheaper pass than reading every module end to end with equal attention, and on this evidence it would catch most of it.
+
+### Students hit a wall in the same place, twice, with two different people
+
+Both coaching sessions received are about spreads, and in both the student stalls on the same conceptual ground.
+
+**First call:** "I need to understand better the formula for doing the math and where to find those numbers", after the max profit and max loss walkthrough.
+
+**Second call:** an extended struggle with what it means to *sell* a put. "Why is it so hard? Why is it so hard for my brain?" The student writes it down twice, gets it backwards in their own notes, and works through it out loud for several minutes.
+
+And Vlad's answer is the useful part:
+
+> "it took me about seven months to really comprehend this idea. Cause I felt the same way. You're not used to selling."
+
+**So this is a known hard edge, not two students being slow.** The recorded modules teach buying throughout and every intuition a student builds is a buyer's intuition. Selling inverts the direction of every one of them, and nothing in the material marks the switch.
+
+**Two things follow.** It is a strong candidate for a dedicated piece of teaching, since Vlad has already diagnosed it precisely. And for the bot it means questions in this area deserve extra care: a student asking about a sold put is very likely to have the direction backwards, so lead with which side of the trade they are on rather than assuming the question means what it says.
+
+### Coaching material is in scope now, and it changes the job
+
+Vlad has ruled: *"i need you to put this in though"*, *"everything im feeding you is needed."* The `CLAUDE.md` scope boundary is updated and a redaction standard is written into it, which is what the spec required before this could happen.
+
+**What moved:** coaching recordings are first-class sources and get the full pipeline.
+
+**What did not move, and this matters:** the compliance scan runs harder here, not softer. Ingesting a source has never meant ingesting all of it, and coaching material carries *more* outcome language than recorded modules because nobody scripted it. The Paycheck Collector class produced the largest exclusion set in the project.
+
+**The new step is redaction, and it is not the same thing as exclusion.** Exclusion protects the bot from restating something. Redaction protects a real person whose account size, open position and running profit and loss are in the recording. A source with a named student in it needs both, and only one of them was in the pipeline before. Every redaction leaves a visible marker, because silent removal would make the clean file useless as a record.
+
+### The Paycheck Collector class: the intro and the body argue against each other
+
+**This is the single most important compliance finding in the project, and the reason is that it is not a private call.** It opens with a produced introduction and calls itself "a class like this, a paid class". The material is shown to students, so the exposure is live in the product regardless of what the bot ever does.
+
+**The introduction sells a rate of return.** Ten percent of the account per week or month, "knowing exactly how much money is going to come in", and the strategy called "very safe". Then a month by month compounding projection that ends in the word retirement. All excluded, and flagged as a re-record line rather than an edit, because it is the opening frame rather than an aside.
+
+**The body argues the opposite for most of its length.** Keep the spread narrow. Never end up inside it. Refuse a 30 percent credit on purpose because the probability behind it is worse. "Don't fall in love with the 30 percent, fall in love with longevity." Take the smaller, likelier outcome. That is a risk-first lesson and it is good teaching.
+
+**So the fix is not to soften the lesson. It is to make the intro match the body.** Everything the intro promises, the body spends forty minutes qualifying. Cutting the rate of return would cost the class nothing it actually teaches.
+
+Worth generalising: **where a piece of content has a produced wrapper and an unscripted body, scan the wrapper first.** The wrapper is where the selling happens, it is written rather than spoken, and it is the part that gets reused.
+
+### A strategy name finally has content behind it
+
+`Paycheck Collector` has been protected vocabulary since the first day of this project with nothing behind it. It is selling credit spreads: 0.07 delta as a starting point, 30 to 37 days out, narrow spreads, closed early, capital split four ways so one position opens each week.
+
+Two things worth noting beyond the mechanics.
+
+**It closes the loop on the put seller ruling.** "You never want to end up in that spread" is the same standard as "the stock cannot touch the strike", applied to a different structure. One house position, two strategies, and saying so is worth more than teaching them separately.
+
+**It is the third appearance of "more risky to want more."** Vlad's ruling, delta making it checkable in the Greeks module, and now an entire strategy built around deliberately refusing the better-paying trade. That is no longer a caution, it is the spine of the method.
+
+### Two things are used in coaching and taught in no module
+
+**Bollinger Bands**, which do real work in the Paycheck Collector: judging whether a target is a realistic distance away, and setting the sold strike one step outside the band on the weekly variant. They also act as a go or no-go filter.
+
+This is a straight conflict rather than a gap. Momentum Indicators teaches stochastics and MACD and tells students to add those two and "not anything else." Open question 40.
+
+**Legging out**, now confirmed as taught: Vlad asks the student "are you familiar with the term legging out?" and the student says yes, so it is established vocabulary between them. Still in no module. Open question 38.
+
+Both are the same shape as covered calls and the opposite answer. Covered calls were referenced and not taught. These are taught and not recorded.
+
+### The first coaching call, and the original out-of-scope call. SUPERSEDED
+
+The scope ruling above overtakes this note. Kept because the risks it describes are real and are now managed inside the pipeline rather than avoided. The bull call and bear put call is queued for processing under the new standard.
+
+**A recording of a one-to-one coaching session was supplied. It was not processed at the time and nothing from it entered the corpus.** It is stored in `transcripts/out-of-scope-coaching-calls/` so it never has to be supplied again, with a README explaining why it stays there.
 
 `CLAUDE.md` is explicit that live coaching recordings are out of scope for v1, pending a redaction standard. This is the first one received, and it makes the case for that boundary better than the spec does. All three named risks are present in one recording:
 
