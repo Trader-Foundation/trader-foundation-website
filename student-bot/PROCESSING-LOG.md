@@ -544,6 +544,9 @@ This repository is public so transcripts cannot be committed here, and the conta
 | Options thinkorswim walkthrough | `options-thinkorswim-walkthrough-UNNUMBERED-RAW.txt` | `1QD-x7q7ZEK0XZycqVNlVNgzncFcdV2Et` |
 | Options Greeks in thinkorswim | `options-greeks-thinkorswim-UNNUMBERED-RAW.txt` | `1PrZbsqNkpdxbUFKOJoMXoP2wvt4ybGBl` |
 | Options Vertical Spreads | `options-vertical-spreads-UNNUMBERED-RAW.txt` | `1WqiLrsnf2feKzkneP2xG0oNoS6oJl6mD` |
+| Paycheck Collector, how you lose *(coaching)* | `paycheck-collector-losses-COACHING-RAW.txt` | `1gtmqsBpLC1p_w3f7r_HAjbQcD0iInrFs` |
+| Paycheck Collector part one *(coaching)* | **PENDING UPLOAD** | on local disk only |
+| Bull call / bear put *(coaching)* | **PENDING UPLOAD** | on local disk only |
 | The Bounce Profit Plan *(worksheet)* | `document-bounce-profit-plan-RAW.txt` | `1I-ejvV92yaZdzKpQSv5JeyGclsRIq6sr` |
 | Breakout Strategy *(worksheet)* | `document-breakout-strategy-RAW.txt` | `1INwugRa-afsIWs8l-tP5iAL4oOuofEVO` |
 
@@ -551,7 +554,7 @@ This repository is public so transcripts cannot be committed here, and the conta
 
 **This is now step 6 of the intake procedure.** Upload raw to that folder as part of processing, before committing metadata.
 
-**Status: current.** Every transcript supplied since the store was created is in it. Nothing is sitting on local disk only.
+**Status: two outstanding.** The Paycheck Collector part one and the bull call coaching call are on local disk only and would be lost to a container reset. Everything else is stored.
 
 **Volume is the one gap.** It was processed before this store existed and its transcript was lost to a container reset. Its findings are fully recorded, so nothing analytical is missing, but the text cannot be re-derived from. Not worth re-supplying unless something specific needs checking against it.
 
