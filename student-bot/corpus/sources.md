@@ -6,11 +6,25 @@ The Drive that holds the curriculum also holds live coaching calls, marketing co
 
 Nothing below has been ingested. This is a survey of candidates from two Drive searches, not a complete inventory. Modules are being supplied separately.
 
+**The allowlist principle has not changed and is the reason this file exists.** That Drive still mixes house curriculum with marketing copy, third party courses, and operational files. A folder sweep would pull in material that must not reach a student. Every file enters by name.
+
 ---
 
 ## Scope decision
 
-Confirmed in session: v1 covers the Trader Foundation numbered modules, Stock Predator, Bounce Profit, and the Masterclass.
+**UPDATED. The original decision has been superseded twice and this file was reflecting the old one.**
+
+v1 covers:
+
+1. The Trader Foundation **numbered modules**
+2. **Stock Predator**, **Bounce Profit**, and the **Masterclass**
+3. **The options track.** Seven modules processed and not in the original decision because they had not surfaced yet: Options Intro, Options Factors, Calls and Puts, in/at/out of the money scenarios, the thinkorswim walkthrough, the Greeks, and Vertical Spreads.
+4. **Platform setup.** The thinkorswim setup module, which teaches the house chart configuration.
+5. **Coaching material.** Ruled in by Vlad: *"i need you to put this in though"*, *"everything im feeding you is needed."* See the Excluded section below, which used to hold it.
+
+**What this file got wrong, and it is worth naming.** It was written from two Drive searches at the start of the project and then not revisited while twenty sources went through the pipeline. As the ingestion allowlist that is a correctness problem rather than an untidiness problem: anyone working from it would have excluded coaching material and would not have known the options track existed at all.
+
+**Standing rule from that:** whenever a scope decision changes, this file changes in the same commit. It is the only file whose staleness silently changes what gets ingested.
 
 ---
 
@@ -63,6 +77,8 @@ Three .pptx versions from April 2026, two workbook copies. Needs a canonical pic
 Trader Foundation products that were not named in the scope decision but are house IP and appear in the protected vocabulary. Held out until confirmed.
 
 - **Paycheck Collector.** `Paycheck Collector Strategy Breakdown` (doc), `The Paycheck Collector Ebook.pdf`, `Paycheck Collector Execution.mp4`, `What is the Paycheck Collector.mp4`, plus two folders.
+
+  **Partly overtaken.** The strategy has now been taught to the bot through the coaching class, which is where its definition came from: selling credit spreads at around 0.07 delta, 30 to 37 days out, narrow spreads, closed early, capital split four ways. So it is no longer *pending* in the sense of unknown. What is still pending is whether these specific FILES get ingested, and the ebook and breakdown doc are worth checking against the class, since written house material has beaten recordings on values every time so far.
 - **Ready Set Explode.** `ready set explode.mp4`.
 
 ---
@@ -84,9 +100,20 @@ Sales copy is written to persuade. The system prompt requires teaching first, ne
 - `How Professionals Make Their First Million.mp4`
 - `Testimonials - Vimeo Transcripts`
 
-### Live coaching calls
+### ~~Live coaching calls~~ MOVED TO IN SCOPE
 
-Out of scope for v1 per `CLAUDE.md`. Student names, live positions, and coaches speaking loosely in a context that does not survive extraction. Revisit only after v1 is stable and only with a redaction standard.
+**No longer excluded.** Vlad ruled coaching material in scope, and the redaction standard the original exclusion was waiting for now exists in `CLAUDE.md`.
+
+Three pieces have been processed: a bull call and bear put call, and the Paycheck Collector class in two parts.
+
+**The risks the exclusion named are real and are now managed inside the pipeline rather than avoided.** Student names, live positions, and coaches speaking loosely are all present, and every one of them showed up in the material processed so far. Two passes handle it:
+
+- **Redaction** protects the person: names, account sizes, open positions, running profit and loss, personal details, third party figures. Raw stays verbatim, every redaction leaves a visible marker.
+- **Exclusion** protects the bot, and runs *harder* here than on scripted modules because nothing in a call was written in advance. The Paycheck Collector class carries the largest exclusion set in the project.
+
+**Where a passage is self-corrected, take the corrected version and exclude the first pass** rather than trying to repair it. A live correction thirty seconds later does not travel with the sentence that needed it.
+
+**Note on the file below with a personal name in its title.** These were surveyed by filename only and never opened. Any that are ingested need the redaction pass applied to the transcript, and the filename itself should not carry into a citation.
 
 - `Kim - January 5, 2024.mp4` and `Kim - January 5, 2024 (Paycheck Collector Strategy).mp4`
 - `1-29 Live.mp4`
@@ -111,6 +138,6 @@ Not Trader Foundation IP. These sit in the same Drive and use module numbers tha
 
 ## Open questions this raises
 
-1. Most source material is video. Transcription is an ongoing step, not a one time cleanup, which makes `terms.json` a vocabulary hint file fed to the transcription tool as well as a find and replace list.
+1. Most source material is video. Transcription is an ongoing step, not a one time cleanup, which makes `terms.json` a vocabulary hint file fed to the transcription tool as well as a find and replace list. **Twenty sources in, this is the highest-leverage unbuilt thing in the project.** The glossary now holds the systematic errors, theta becoming "data", calls becoming "cause", tickers spelled out as words, decimals dropped from prices. Feeding it forward would prevent errors rather than catch them.
 2. Duplicate files across every product. Canonical versions need picking before ingestion, or the corpus carries duplicate chunks and retrieval returns the same passage several times.
 3. Several files carry no recording date in their title and modified dates look unreliable. Every chunk needs `recording_date` and `status`, so this has to be resolved per file.
