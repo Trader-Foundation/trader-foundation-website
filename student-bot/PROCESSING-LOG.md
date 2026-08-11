@@ -63,7 +63,7 @@ Then: append a row to the ledger, add new questions to `rulings/open-questions.m
 | Options thinkorswim walkthrough | **unassigned** | 1 ruled by Vlad, kept with the risk paired | 5 decimal artifacts fixed, 2 unresolved | 2 | No |
 | Options Greeks in thinkorswim | **unassigned** | **9 excluded. Strongest re-record candidate** | 17 artifacts fixed, arithmetic audited clean | 0 | No |
 | Options Vertical Spreads | **unassigned** | **3 excluded, 2 of them the counting-scenarios pattern** | none. Every figure reconciles exactly | 3 | No |
-| Bull call / bear put *(coaching call)* | n/a, coaching | Awaiting processing under the new scope ruling | not yet run | 0 | No |
+| Bull call / bear put *(coaching)* | n/a, coaching | 2 excluded, 2 borderline | 2 proper nouns, 15 artifacts, 5 redactions | 1 | No |
 | The Paycheck Collector *(class)* | n/a, coaching | **LARGEST EXCLUSION SET IN THE PROJECT. Re-record line in the intro** | glossary pass run, 12 redactions | 2 | No |
 | Paycheck Collector, how you lose | n/a, coaching | 1 excluded, 2 borderline. Much cleaner | 16 fixed, arithmetic reconciles | 1 | No |
 

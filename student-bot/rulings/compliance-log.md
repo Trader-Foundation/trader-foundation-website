@@ -58,6 +58,21 @@ analysis tilts probability and nothing more, and some rulings will be wrong.
 Both excluded. The surrounding teaching, that options put you against another participant with an
 opposite belief rather than against a house, survives without either sentence.
 
+### Bull call and bear put coaching call: two excluded, and it retires an assumption
+
+Processed under the scope ruling. Two live trades were placed and closed on screen, so the redaction pass mattered more here than the exclusion pass.
+
+| Passage | Action |
+|---|---|
+| "Guaranteed premiums" | **Exclude.** First appearance of the word in the project, already logged above and now formally excluded with its source processed |
+| "max profit is $1205 here and my max loss is $800. **Pretty good odds.** I like that" | **Exclude.** Fourth instance of the counting-scenarios pattern, and the second time a payoff ratio is called odds |
+| "These are very good probability trade" | Borderline, logged. No figure, and it refers to one contract's distance from price. Keep |
+| "this is a good strategy, especially for beginners, just to kind of be safe" | Borderline, logged. "Safe" language, but attached to *defined risk* rather than to an outcome, which is the true version of the claim. Keep, and the bot says defined risk rather than safe |
+
+**Five live profit and loss readings redacted**, plus the student's own chart idea. Those are privacy items rather than compliance items and they would not have been caught by the exclusion pass.
+
+**A useful non-finding.** The worked calculator arithmetic here is clean: three contracts at a dollar, sold at 1.35, giving 405 and a 105 profit. All correct, all hypothetical, all kept. Consistent with the pattern that the instructional half of a session is rarely the problem.
+
 ### Paycheck Collector part two, how you lose: much cleaner, three hits
 
 The continuation covering loss mechanics. **Notably cleaner than the part one intro**, and the reason is structural: this half is about what goes wrong, so there is nothing to oversell.
@@ -426,6 +441,7 @@ Outcome-flavoured language carrying no figure. Logged so the pattern is visible 
 | Options thinkorswim walkthrough (number unassigned) | Scanned | Ruled by Vlad. "Max profit is infinite" stays, paired with the risk. See above |
 | Options Greeks in thinkorswim (number unassigned) | Scanned | **Nine excluded, three of them percentage returns. Strongest re-record candidate in the corpus.** See above |
 | Options Vertical Spreads (number unassigned) | Scanned | Three excluded, two of them the counting-scenarios pattern. Otherwise the cleanest options module on returns |
+| Bull call / bear put *(coaching)* | Scanned | Two excluded, two borderline. Five live P and L readings redacted |
 | All others | Not started | |
 
 Five of thirteen scanned modules were clean. Eight were not.

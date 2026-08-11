@@ -81,6 +81,25 @@
       "right": "the demand versus the supply",
       "found_in": "Volume (module number unassigned)",
       "note": "CONTEXT DEPENDENT. 'demand' heard as 'the man'. Confirmed by the next sentence, which reads 'That means that demand is higher.' Scoped to this full phrase deliberately: a bare 'the man' to 'the demand' rule would corrupt legitimate uses elsewhere."
+    },
+    {
+      "wrong": [
+        "a stock like DKNG,  uh, draft gains",
+        "draft gains",
+        "draft kings"
+      ],
+      "right": "DraftKings",
+      "found_in": "Coaching call, bull call and bear put spreads",
+      "note": "PROPER NOUN, and the first one found in coaching material. The ticker DKNG is transcribed correctly right beside it, which is what makes the company name recoverable with certainty. Worth noting the shape: where a transcript gives BOTH a ticker and a spoken company name, the ticker is the reliable one and can resolve the name. That is a cheap check and it works in reverse to the usual worry, since tickers are short and letter-by-letter rather than phonetic."
+    },
+    {
+      "wrong": [
+        "Z and G a",
+        "Z and G"
+      ],
+      "right": "ZNGA",
+      "found_in": "Coaching call, bull call and bear put spreads",
+      "note": "Ticker spelled aloud letter by letter and rendered as words. Same class as the DraftKings error and resolved the same way: the student names the company (Zynga) in the same exchange. Expect this shape wherever a ticker is read out rather than typed."
     }
   ],
   "numeric_corrections": {
