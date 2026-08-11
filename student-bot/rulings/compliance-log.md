@@ -58,6 +58,25 @@ analysis tilts probability and nothing more, and some rulings will be wrong.
 Both excluded. The surrounding teaching, that options put you against another participant with an
 opposite belief rather than against a house, survives without either sentence.
 
+### From an OUT OF SCOPE source: "guaranteed premiums"
+
+**Not corpus content.** Found in a live coaching call, which is out of scope for v1 and is not being ingested. Logged here anyway, because the standing rules are about what gets said to students and this was said to a student.
+
+Closing sentence of the call, introducing the next lesson:
+
+> "the credit spreads where you're actually collecting. **Guaranteed premiums** and that's what we're going to get into next."
+
+**"Guaranteed" is the most prohibited word in this vocabulary**, and this is the first time it appears anywhere across fourteen sources. Every prior hit was a figure, a percentage, or an implication. This is the plain word.
+
+**It is also false on the mechanics.** A credit spread collects a premium up front, and that premium is not profit. The position can and does lose more than the credit taken in. What is guaranteed is that the money arrives at the open, not that it is kept. That distinction is the entire risk of the strategy, and "guaranteed premiums" erases it.
+
+**Live speech, not a script.** In a conversation it plainly means "the premium is collected up front rather than hoped for," which is true and is a real contrast with debit spreads. That reading does not survive being written down, and it certainly would not survive a bot repeating it.
+
+**Two actions.**
+
+1. **The bot never uses the word in connection with premiums or any outcome**, regardless of source. Already covered by the standing rules, restated here because the phrase is memorable and could be picked up from a student quoting it back.
+2. **Scan the credit spreads module carefully when it arrives.** This is a forward reference to a lesson not yet supplied, and the framing this call sets up is the framing that lesson is likely to open with. Open question 37.
+
 ### A PATTERN ACROSS MODULES: probability derived by counting scenarios
 
 **This is the most important thing in this log, and it is not a single hit. It is a habit of reasoning that has now produced a stated win probability three times, in three different modules.**

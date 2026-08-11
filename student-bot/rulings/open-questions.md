@@ -588,6 +588,62 @@ Open question 18 records "collect 50 percent" from an earlier module. This says 
 
 **Question for Vlad:** is 20 percent for spreads and 50 percent for directional trades, or is one of them the current number and the other superseded?
 
+**UPDATE, and it undercuts my own guess.** I reasoned that 20 percent was the spread number because a spread's profit is capped and the last part arrives slowly. A coaching call then gives **50 percent for a spread**, in the same breath as the same reasoning:
+
+> "the goal is, listen, if you could make 50 percent of that, we'll get out of it and do another one. You don't need to reach the max. You're here to profit."
+
+So both numbers now attach to spreads, and my strategy-based explanation does not hold. Recording this because the tidy theory was mine, not the curriculum's, and it would have been encoded as fact.
+
+The more likely reading, and it fits the chart ruling: **neither is a threshold.** Both sit beside "if it's a good enough profit for you," "it depends against how much money you're investing," and "you're here to profit." The teaching is take profit rather than chase the maximum, and the percentage is an illustration of that.
+
+**Revised question for Vlad:** is there a house exit number at all, or is the rule simply to take a good profit rather than wait for the cap?
+
+---
+
+## 37. The credit spreads module, and how it will be framed
+
+**Status:** OPEN, pre-emptive. Flagged before the module arrives, not after.
+
+Two forward references now point at a credit spreads lesson that has not been supplied.
+
+The Vertical Spreads module names the bear call and bull put as two of the four verticals and never demonstrates them. Both are credit spreads. A coaching call then closes by pointing straight at the lesson:
+
+> "the real strategy comes from when you're starting to collect premiums and that's what we're going to do next is go over the vertical credit spread"
+
+And frames it as:
+
+> "the credit spreads where you're actually collecting. **Guaranteed premiums**"
+
+**That framing is the concern.** "Guaranteed" is the most prohibited word in this vocabulary and it is the first appearance of the plain word across fourteen sources. It is also wrong on the mechanics: the premium arrives at the open, it is not kept regardless, and the position can lose more than the credit taken in. That distinction is the whole risk of the strategy.
+
+In a live conversation it plainly means "collected up front rather than hoped for," which is true and is the real contrast with a debit spread. Written down, or repeated by a bot, it becomes a promise.
+
+**Why flag it now.** The framing a coach uses when introducing a lesson is usually the framing the lesson opens with. If the recorded module carries the same word, that is a re-record line rather than an exclusion, because it sits at the top of the lesson rather than inside an example.
+
+**Question for Vlad:** when the credit spreads module comes through, is the collected premium described as guaranteed anywhere in it, and is that a word you want changed at the source?
+
+---
+
+## 38. Legging out, taught in a call and nowhere in the course
+
+**Status:** OPEN, and it is the same shape as covered calls but with the opposite likely answer.
+
+A coaching call teaches a technique with a name, in response to a student's question:
+
+> "can you sell that one and then hold on to the call? So, yes, absolutely... **It's called legging out.**"
+
+Buying back the short leg to convert a spread into a plain long call, when the move is stronger than expected. The call covers when to do it, and the risk plainly: the premium is gone and the protection with it, so a reversal now costs the full position.
+
+**No recorded module teaches this.** It is not in the Vertical Spreads module, which is where it belongs.
+
+This differs from covered calls in a way that matters. Covered calls were referenced as taught and are not taught, and Vlad's answer was that they are not part of the method. Legging out is **not referenced by any module at all**, so no student is sent looking for it, and it is plainly something the method does, since it came up as a live answer to a live question.
+
+So the question is not "is this taught" but "should it be."
+
+**Bot behaviour meanwhile:** legging out is not in the course material, so the bot does not teach it. If a student raises it, name that it is not covered in the modules and route to a coach, with no promise about what the coach covers. Same shape as covered calls.
+
+**Question for Vlad:** is legging out part of what you teach, and should it be in the spreads module?
+
 ---
 
 ## 19. Holding period: "two to three days max, usually two"

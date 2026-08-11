@@ -125,6 +125,38 @@ This is now in `prompts/system.md` as the bot's primary behaviour. When a studen
 
 Worth checking every further module for whether it adds a step, refines one, or reorders them.
 
+### A live coaching call arrived, and it is out of scope. Not ingested.
+
+**A recording of a one-to-one coaching session was supplied. It has not been processed and nothing from it is in the corpus.** It is stored in `transcripts/out-of-scope-coaching-calls/` so it never has to be supplied again, with a README explaining why it stays there.
+
+`CLAUDE.md` is explicit that live coaching recordings are out of scope for v1, pending a redaction standard. This is the first one received, and it makes the case for that boundary better than the spec does. All three named risks are present in one recording:
+
+- **Live positions.** Two real trades placed and closed on screen, with strikes, fills, and running profit and loss.
+- **The student's own material.** They bring a chart they have been working on and it gets analysed. No name is spoken, but the idea is theirs.
+- **Loose speech, extensively.** The downside of a long call stated as "unlimited" twice before being half-corrected. Max profit and max loss swapped repeatedly, with the instructor saying out loud that he thinks he mixed them up. The contract count drifting between five, ten and twenty. A closed trade whose result he cannot determine, later found to have still been open.
+
+**None of that is a criticism.** A live call is a conversation, and correcting yourself in front of a student is how teaching works. It is simply not extractable: every one of those sentences would retrieve as a fact, stripped of the correction that followed it thirty seconds later.
+
+**What is worth keeping is what the call says about the recorded course**, which is a different thing from the call's contents. Those findings are below and in `rulings/`. Observations about the material are not the material.
+
+### The max profit and max loss confusion is a teaching weak point, not a transcription slip
+
+Three sources now, and the evidence has changed character.
+
+| Source | What happened |
+|---|---|
+| Vertical Spreads module | Max profit figure given as the max loss, twice |
+| The coaching call | Same swap several times, and the instructor says "I think I messed up... I thought I maybe mixed up the numbers" |
+| The coaching call | The student says "I need to understand better the formula for doing the math and where to find those numbers" |
+
+The first instance looked like a slip in a recording. The second shows the same confusion arising live, unprompted, and being noticed by the person making it. The third is a student reporting directly that the lesson did not land.
+
+**That is three independent kinds of evidence pointing at one thing**, and it moves this from "fix two sentences" to "the way this is taught does not stick." Worth Vlad's attention as a teaching question rather than a transcript question.
+
+**The bot side is already handled.** It uses the formulas, which are verified, rather than any restated figure.
+
+**One encouraging detail.** Asked for the math, the instructor routes the student straight back to the recorded module: *"You want to go back to the original lesson... I explain exactly why each number is where, how we get the max profit, how we get the max loss, the break even."* That is precisely the behaviour the bot is designed to have, performed by a coach, which is a useful confirmation that the design matches how the teaching already works.
+
 ### A sixth thing that can be wrong: a reference to teaching that does not exist
 
 The Vertical Spreads module says **"we already did with covered calls, didn't we?"** Vlad's answer: *"nothing actually teaches covered calls,"* and *"i doubt we discuss it."*
