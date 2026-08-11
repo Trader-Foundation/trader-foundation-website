@@ -31,6 +31,12 @@ Fix only what is unambiguous. Anything that needs a guess goes to `unresolved`, 
 
 **5. Chunk and index.** Blocked. See "What is blocking indexing" below.
 
+**5b. Dangling reference check.** Search the transcript for backward references: "we learned", "we already", "we talked about", "we covered", "as we discussed", "previous or last module", "from our previous video", and any explicit module number. Confirm each one lands on teaching that actually exists.
+
+This found that covered calls are referenced as taught and are not taught at all, which no other pass would have caught. It is the one gap class where the bot's default answer, "I cannot find that," is actively harmful, because it sends a student searching for something that was never recorded. Cheap, mechanical, worth running every time.
+
+Two outcomes to tell apart: a reference to **nothing**, which needs a bot rule and a video flag, and a reference to the **wrong place**, which is usually numbering evidence rather than a problem.
+
 **6. Store the raw transcript in Drive.** See "Transcript store" below. Never ask for a transcript twice.
 
 Then: append a row to the ledger, add new questions to `rulings/open-questions.md` phrased as direct questions, and commit metadata only.
@@ -118,6 +124,26 @@ Module 2 supplies the top (galaxy, solar system, planet, news, liquidity). Modul
 This is now in `prompts/system.md` as the bot's primary behaviour. When a student asks something the bot cannot answer, it hands over the chain as questions they can answer on their own chart, rather than closing the door. Two guards: the bot never closes the chain with a verdict, and never asks for their answers in order to assess.
 
 Worth checking every further module for whether it adds a step, refines one, or reorders them.
+
+### A sixth thing that can be wrong: a reference to teaching that does not exist
+
+The Vertical Spreads module says **"we already did with covered calls, didn't we?"** Vlad's answer: *"nothing actually teaches covered calls,"* and *"i doubt we discuss it."*
+
+So the course points a student at a lesson that is not there, and the phrasing makes it worse. "We already did" and "didn't we" both assume the student had it, so anyone who does not remember covered calls concludes they missed a module or that their access is broken.
+
+**This is a distinct class from everything tracked so far.** Nothing is mis-heard, nothing is non-compliant, nothing is out of date, and no visual is missing. The sentence is intact and the teaching around it is fine. What is wrong is that it refers outside itself to something that does not exist.
+
+**It is also the class the bot handles worst by default.** Every other gap produces "I cannot find that," which is honest and safe. Here that answer is actively harmful: it tells a student to keep looking for something that was never recorded. The right answer is "that is not part of the course," which the bot can only give if it knows, which means gaps like this have to be found deliberately.
+
+**So I scanned every clean transcript for backward references** and checked each one resolves. Patterns searched: "we learned", "we already", "we talked about", "we covered", "as we discussed", "in the previous or last module", "from our previous video", and any explicit module number.
+
+**Result: covered calls is the only dangling one.** Every other reference lands on real taught content. Fibonacci pointing back at consolidation, Momentum pointing back at candles and at support and resistance, Moving Averages pointing back at simple moving averages, the Greeks module pointing back at the thinkorswim walkthrough for how to reach the trade screen. All good.
+
+**One near miss worth separating out.** Vertical Spreads says "we learned that in module two" about not waiting for expiration. The *content* exists, in the in/at/out of the money scenarios module, so this is not a dangling reference. It is a **mis-numbered** one, and it is the evidence behind open question 35 that the options track may be numbered separately.
+
+So there are two failure modes here, and only the first is dangerous: a reference to nothing, and a reference to the wrong place. One instance of each in thirteen sources.
+
+**Worth re-running as a standing check** whenever a batch of new modules arrives. It is cheap, it is mechanical, and it found something no other pass would have.
 
 ### The curriculum derives probability by counting scenarios, and it has done it three times
 

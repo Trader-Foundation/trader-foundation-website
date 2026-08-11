@@ -539,8 +539,7 @@
         "bear put spread",
         "bear call spread",
         "bull put spread",
-        "directional trade",
-        "covered call"
+        "directional trade"
       ],
       "named_only": [
         "butterfly",
@@ -548,7 +547,13 @@
         "diagonal",
         "calendar spread"
       ],
-      "_note_on_covered_calls": "Referenced in Vertical Spreads as already taught ('we already did with covered calls, didn't we?') but no covered calls transcript has been supplied. There is a missing module. See open question 34."
+      "_note_on_covered_calls": "RULED BY VLAD: not taught. 'nothing actually teaches covered calls', 'i doubt we discuss it'. The Vertical Spreads module refers to them as already covered, which is a dangling reference to a lesson that does not exist. The bot says they are not part of the course, does not explain them, and does not promise a coach will cover them. See rulings/open-questions.md item 34.",
+      "not_taught": [
+        "covered call",
+        "cash secured put"
+      ],
+      "_note_on_credit_spreads": "The bear call and bull put are named as two of the four verticals but never demonstrated. Only the bull call and bear put, both debit spreads, are taught. Same 'named but not taught' shape as covered calls, not confirmed with Vlad. The bot names them and does not teach them.",
+      "_note_on_cash_secured_puts": "Used by Vlad to explain assignment in the put seller ruling. Whether they are taught as a strategy is open question 29. Listed as not taught pending that, on the same reasoning as covered calls, and this should be confirmed rather than assumed."
     }
   },
   "forbidden_output_terms": {

@@ -284,9 +284,45 @@ more likely to be "reword before ingestion" than "the teaching is wrong."
 
 ---
 
-## 34. There is a covered calls module and I have never seen it
+## 34. Covered calls: referenced by the course, not taught by it
 
-**Status:** OPEN. A gap in the material, not a question about it.
+**Status: CLOSED. Answered by Vlad.**
+
+> "nothing actually teaches covered calls"
+>
+> "it isnt taught unless we discuss it via lessons"
+>
+> "i doubt we discuss it"
+
+**There is no missing transcript. Covered calls are simply not part of what Trader Foundation teaches.** They might come up in a live session, and Vlad doubts they do.
+
+So the Vertical Spreads module contains a **dangling reference**: it tells students "we already did with covered calls, didn't we?" about something the course never did. A student who hears that will go looking through the modules for a lesson that is not there, and will conclude they missed something or that their access is incomplete.
+
+### Bot behaviour
+
+Covered calls are **not part of what Trader Foundation teaches**. Say that plainly. Do not explain the strategy from general knowledge, do not send a student looking for a module, and **do not imply a coach has a covered calls lesson waiting for them** either. Vlad doubts it comes up in live sessions, so promising one would be a second wrong steer on top of the first.
+
+If they ask *because the spreads module told them they had already learned it*, answer that directly rather than leaving them puzzled. They have not missed anything and their access is not incomplete. That is a small thing that saves real confusion, and it is exactly the kind of question the bot exists to absorb at eleven at night.
+
+Routing to a coach is still right for anything they want to do about it. Just route without a promise about what the coach will cover.
+
+### Flagged for the video
+
+One sentence, and it sends students hunting. Worth cutting or rewording on any pass over that module, independently of the compliance items.
+
+### What it also tells us about the method
+
+The recorded course teaches **buying** directional calls and puts, and **debit** vertical spreads. Every strategy that involves selling for income sits outside it. That is consistent with the house position stated three times over: the method does not own stock and does not exercise.
+
+**Note, not a ruling:** the spreads module names four verticals, but only demonstrates the bull call and the bear put, which are both debit spreads. The bear call and bull put are credit spreads and are named only. So the same "named but not taught" pattern may apply to them. Left as an observation because Vlad has not been asked, and the bot should not teach them either way.
+
+**This also bears on question 29**, which asks whether cash secured puts are taught or were an explaining device. Same shape, same likely answer, but it is not settled and should not be assumed.
+
+---
+
+## 34a. Original note, superseded
+
+**Status:** was OPEN. A gap in the material, not a question about it.
 
 The Vertical Spreads module refers back to covered calls as something already taught:
 
