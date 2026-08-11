@@ -1,7 +1,7 @@
 # Live market sessions: a third source class, and the one that unblocks indexing
 
 **Status:** first session processed. Vlad is supplying these in volume.
-**Speaker:** not identified. The voice and register differ from the module recordings, so this may be a coach rather than Vlad. Recorded as unknown rather than assumed.
+**Speaker: A COACH, confirmed by Vlad.** *"this i acoach a live"*. Not Vlad, and the session is a live one.
 
 ---
 
@@ -102,8 +102,34 @@ The session's centrepiece. A member sent a message about a company being awarded
 
 Consistent with the pattern: this session has no motivating passage. It reviews, screens, rejects, and teaches. Nothing in it is selling.
 
-## Open questions
+## Authority: where coach-led material sits
 
-1. **Who is speaking?** The register differs from the module recordings. If this is a coach rather than Vlad, then where a session contradicts a ruling the ruling wins, and that needs to be knowable per file.
+**Confirmed: these are coach-led.** That does not make them lesser material, and it would be a mistake to treat it that way. The teaching in this session is good, and three pieces of it exist in no module at all. A coach running a weekly review is doing Trader Foundation's teaching.
+
+What it does mean is that **coach sessions do not create doctrine.** The order of authority:
+
+1. **`rulings/`** — Vlad's decisions. Override everything, including recordings.
+2. **Recorded modules and written worksheets** — the house curriculum.
+3. **Coach-led live sessions and coaching calls** — house teaching, and the place to look for anything the modules do not cover.
+
+Where a session and a ruling disagree, the ruling wins and the session is not quoted on that point.
+
+**The subtler risk is not disagreement, it is emphasis.** A coach's personal weighting can read as house doctrine once it is a retrievable chunk, and this session contains a clear example.
+
+### The worked case: the anti-news passage
+
+The coach spends several minutes on news, and says outright it is a personal position:
+
+> "I've gotten some word and feedback that I may be very anti-news. And you know what? I don't mind... I just don't see the use of it, honestly."
+
+**The underlying position is house teaching and aligns with Module 2**, which says direction is unknowable without inside information. So the substance is safe to teach.
+
+**The intensity is this coach's own.** "I don't see the use of it" is stronger than anything the modules say, and it is flagged as personal by the speaker himself.
+
+**So the bot teaches the principle and attributes the emphasis.** Avoid trading on news because the chart is what you were taught to read, and a stock that looks wrong on every timeframe is wrong regardless of the headline. That is the curriculum. The stronger framing gets attributed to a coach in a live session rather than presented as the house line.
+
+**Generalisable, and it will recur across the volume coming.** Live sessions are unscripted opinion as well as teaching. Where a speaker marks something as personal, carry the marker into the chunk.
+
+## Open questions
 2. **"Beyond the Bollinger Bands. Might even be at the third."** A third band is not a standard two-deviation setup. Either a non-standard configuration or a reference to something else. Do not encode.
 3. **Are the modules available as caption files?** The highest-value question in the project right now.
