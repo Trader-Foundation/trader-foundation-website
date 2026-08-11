@@ -129,7 +129,9 @@ Do not ship on a failing refusal case.
 
 The original boundary held coaching recordings out of v1 pending a redaction standard. The standard now exists and is below, so the boundary has moved rather than been dropped.
 
-**Redaction standard for coaching material.** Raw stays verbatim as everywhere else. The clean file gets:
+**Redaction standard, and it runs on EVERY source, not just coaching.** That was the original scope and it was wrong. The thinkorswim setup module is compliance-clean and still had an account balance visible on screen and read aloud. Scripted material carries personal data too, and it does so in the place least likely to be checked. Redaction costs almost nothing on clean sources and the one time it matters it matters a lot.
+
+Raw stays verbatim as everywhere else. The clean file gets:
 
 - **Names replaced** with `[STUDENT]`, `[COACH]`, `[STAFF]`. **The instructor is not redacted.** Vlad is the author of the material and the name is already throughout the rulings and the corpus; redacting him would break every citation and protects nobody. The rule is for students, other coaches, staff, and third parties discussed in their absence.
 - **A student's account size, open positions, running profit and loss, and trading history replaced** with a marked redaction. These are also compliance exclusions, but redaction and exclusion do different jobs: exclusion protects the bot, redaction protects the person, and a source needs both.

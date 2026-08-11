@@ -241,6 +241,16 @@
         "exit": "close early on a partial credit rather than holding to expiration. A closing order at a set price with GTC duration",
         "both_sides": "selling a spread on each side at once is named as an iron condor",
         "_warning_on_returns": "The class states a target of about 10 percent of the account per period and the instructor's own discipline band as 10 to 12 percent, refusing higher credits on purpose. THE RETURN FIGURES ARE EXCLUDED FROM THE CORPUS as outcome claims. The DISCIPLINE is the teachable part: a larger credit means a worse probability, so a credit that looks too good is a warning rather than an opportunity."
+      },
+      "chart_setup": {
+        "_source": "thinkorswim setup module. THE HOUSE CHART CONFIGURATION, stated as a complete list for the first time.",
+        "_why_this_matters": "Every prior module used these values one or two at a time. This one sets all of them up in order and says 'we use four simple moving averages', which independently confirms the canonical set rather than inferring it.",
+        "moving_averages": "SIMPLE, four of them: 13, 20, 50, 200. 13 and 20 are named the short term pair, 50 and 200 the long term pair, which matches the background-check step of the method chain",
+        "ma_colors": "13 green, 20 purple, 50 unnamed colour, 200 red. PERISHABLE, a display preference, not part of the method",
+        "volume": "volume study with green and red colouring, and a separate colour on the crossover",
+        "momentum": "stochastics and MACD",
+        "bollinger_bands": "added for spreads. See open question 40",
+        "_display_vs_method": "Colours, line widths, timeframes and workspace layout are display preferences. The LIST of what to put on the chart is the method. Keep those apart."
       }
     }
   },

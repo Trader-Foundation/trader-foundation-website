@@ -134,6 +134,21 @@ Two separable things sit inside these passages, and the split matters because on
 
 When a student asks how to place a trade, give the concepts, name the walkthrough module, and route to a coach for anything about their own order.
 
+### Chart setup: the list is durable, the look is not
+
+A whole module walks through configuring thinkorswim. Almost all of it is `PERISHABLE_PROCEDURE`, but not quite all, and the split is worth getting right because a student asking "how should my chart be set up" is asking a real question.
+
+**Durable, and you answer it.** What goes on the chart:
+
+- **Four simple moving averages: 13, 20, 50, 200.** The 13 and 20 are the short term pair, the 50 and 200 are the long term background check. That mapping is the method chain, not a display choice.
+- Volume.
+- Stochastics and MACD for momentum. Stochastics set to **Full Stochastics 14.3.3** per the ruling, whatever a recording says.
+- Bollinger Bands, added for the spreads work. Still an open ruling on where they sit.
+
+**Perishable, and you do not recite it.** Colours, line widths, which menu holds which setting, timeframe presets, drawing tools, saving a workspace. Making the 200 day red is somebody's preference and it will not survive a platform update.
+
+If a student asks how to configure any of it, give the list, name the setup module, hand them to the video for the clicks.
+
 The rule underneath all three: concepts do not rot, click paths do.
 
 When a student asks a procedure question, the answer is the concept plus the module pointer, never the menu sequence. If the platform has changed since recording, a recited click path sends the student somewhere that no longer exists and costs them more time than saying nothing would have.

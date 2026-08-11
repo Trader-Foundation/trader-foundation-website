@@ -66,6 +66,7 @@ Then: append a row to the ledger, add new questions to `rulings/open-questions.m
 | Bull call / bear put *(coaching)* | n/a, coaching | 2 excluded, 2 borderline | 2 proper nouns, 15 artifacts, 5 redactions | 1 | No |
 | The Paycheck Collector *(class)* | n/a, coaching | **LARGEST EXCLUSION SET IN THE PROJECT. Re-record line in the intro** | glossary pass run, 12 redactions | 2 | No |
 | Paycheck Collector, how you lose | n/a, coaching | 1 excluded, 2 borderline. Much cleaner | 16 fixed, arithmetic reconciles | 1 | No |
+| thinkorswim setup | **unassigned** | **Clean.** 2 privacy redactions | 9 fixed, 1 unresolved | 1 | No |
 
 Modules 2, 3 and 5 were characterised in the spec before this log existed. Everything from Volume onward was processed here.
 

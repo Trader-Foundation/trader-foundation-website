@@ -145,6 +145,20 @@ Module 8 names moving averages as something the instructor uses in preference to
 
 ---
 
+## 21a. Stochastics: the recordings say fast a second time
+
+**Not a new question. Evidence for the existing ruling**, recorded here so the ruling's basis is visible.
+
+The thinkorswim setup module says:
+
+> "I usually like to use the stochastics fast"
+
+That is the **second recording** to say fast, after Momentum Indicators. Vlad has already ruled the house setting is **Full Stochastics at 14.3.3**, confirmed against the written worksheet.
+
+**Why it is worth logging rather than just fixing.** The stochastics ruling rests on the principle that where typed house material and a recording disagree, the typed material is more likely to be current. A single recording saying "fast" is consistent with a slip. Two independent recordings saying it means the videos consistently teach the superseded setting, which is a re-record consideration rather than a transcription one.
+
+**Bot behaviour is unchanged:** Full Stochastics 14.3.3, per the ruling. The clean file leaves "fast" intact because it is what was said, and the ruling overrides it at answer time.
+
 ## 21. Full stochastics or fast stochastics?
 
 **Status:** RESOLVED. See `stochastics.md`.
@@ -639,6 +653,18 @@ The likely explanation is that Bollinger Bands belong to the options strategies 
 **Bot behaviour meanwhile:** the bot can describe how the bands are used in the Paycheck Collector, since that is now in scope, but it does not present them as part of the indicator set from Momentum Indicators, and it does not teach the indicator itself from general knowledge.
 
 **Question for Vlad:** are Bollinger Bands part of what you teach, and does "add stochastics and MACD and not anything else" still hold for the technical analysis chain?
+
+**UPDATE, and it mostly dissolves the conflict.** The thinkorswim setup module **teaches how to add and configure Bollinger Bands**, so they are not coaching-only after all:
+
+> "when we're doing more spreads and stuff like that, one of the things I like to look at is Bollinger Bands as well"
+
+and it goes on to set the band widths so the outer bands read clearly while the midline is de-emphasised.
+
+**The likely resolution: no contradiction exists.** Momentum Indicators says add stochastics and MACD and "not anything else", and that instruction is about the **momentum panel**. Bollinger Bands are a price overlay, not a momentum oscillator, so they were never in the set that sentence was ruling on. The setup module reinforces this by adding the bands in a separate step, after the momentum studies, and by tying them to spreads rather than to the technical analysis chain.
+
+**Recorded as a hypothesis, not encoded.** It fits every instance seen, but it is my reading rather than Vlad's statement, and the whole point of this file is not to encode readings.
+
+**Narrowed question for Vlad:** are Bollinger Bands part of the options and spreads work rather than the technical analysis chain, which would mean "not anything else" was only ever about momentum indicators?
 
 ---
 

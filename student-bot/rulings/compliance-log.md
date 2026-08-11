@@ -58,6 +58,21 @@ analysis tilts probability and nothing more, and some rulings will be wrong.
 Both excluded. The surrounding teaching, that options put you against another participant with an
 opposite belief rather than against a house, survives without either sentence.
 
+### thinkorswim setup module: clean, and the reason is structural
+
+**No outcome claims, no percentage returns, no win rates, no earnings language.** The cleanest source processed since the worksheets.
+
+**And that is not luck.** This module has no motivating passage. It never argues that you should trade, only how to configure a platform, so there is nothing to oversell. It is the strongest confirmation yet of the pattern that compliance risk lives in the parts of a lesson that motivate rather than the parts that instruct.
+
+Two items, neither an outcome claim:
+
+| Passage | Action |
+|---|---|
+| "this person has a balance of 1,550" | **Redact.** A real account balance visible on screen. Privacy rather than compliance, and it would not have been caught by an outcome-claim scan |
+| A live order placed and filled in the closing seconds, and a chart note reading "looking very bullish off the bounce" | **Redact the fill. Tag the note `DATED_EXAMPLE`.** The note is a drawing demonstration on a historical chart, not a call |
+
+The account balance is the second privacy item found in a source that is compliance-clean, after the coaching call. **Worth stating plainly: the redaction pass has to run on module material too, not just coaching.** The assumption that only coaching carries personal data was wrong.
+
 ### Bull call and bear put coaching call: two excluded, and it retires an assumption
 
 Processed under the scope ruling. Two live trades were placed and closed on screen, so the redaction pass mattered more here than the exclusion pass.
@@ -442,6 +457,7 @@ Outcome-flavoured language carrying no figure. Logged so the pattern is visible 
 | Options Greeks in thinkorswim (number unassigned) | Scanned | **Nine excluded, three of them percentage returns. Strongest re-record candidate in the corpus.** See above |
 | Options Vertical Spreads (number unassigned) | Scanned | Three excluded, two of them the counting-scenarios pattern. Otherwise the cleanest options module on returns |
 | Bull call / bear put *(coaching)* | Scanned | Two excluded, two borderline. Five live P and L readings redacted |
+| thinkorswim setup (number unassigned) | Scanned | **Clean.** Two privacy redactions, no compliance hits |
 | All others | Not started | |
 
 Five of thirteen scanned modules were clean. Eight were not.
