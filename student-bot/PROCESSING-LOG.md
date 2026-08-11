@@ -547,6 +547,7 @@ This repository is public so transcripts cannot be committed here, and the conta
 | Options Vertical Spreads | `options-vertical-spreads-UNNUMBERED-RAW.txt` | `1WqiLrsnf2feKzkneP2xG0oNoS6oJl6mD` |
 | Paycheck Collector, how you lose *(coaching)* | `paycheck-collector-losses-COACHING-RAW.txt` | `1gtmqsBpLC1p_w3f7r_HAjbQcD0iInrFs` |
 | Paycheck Collector part one *(coaching)* | `paycheck-collector-part1-COACHING-RAW.txt` | `1bMm5yGleI1w8wyZ0h4sUTybgWsxeK4x5` |
+| thinkorswim setup | `thinkorswim-setup-UNNUMBERED-RAW.txt` | `1s4MWv8sgd0rNNWtlQy3_rG8kq-flCspx` |
 | Bull call / bear put *(coaching)* | `coaching-call-bull-call-bear-put-COACHING-RAW.txt` | `1o8dMyHcgLSMSXoNBkRjh4qcPht1Sk_O_` |
 | The Bounce Profit Plan *(worksheet)* | `document-bounce-profit-plan-RAW.txt` | `1I-ejvV92yaZdzKpQSv5JeyGclsRIq6sr` |
 | Breakout Strategy *(worksheet)* | `document-breakout-strategy-RAW.txt` | `1INwugRa-afsIWs8l-tP5iAL4oOuofEVO` |
