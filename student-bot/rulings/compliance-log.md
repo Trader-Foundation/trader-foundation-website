@@ -58,6 +58,62 @@ analysis tilts probability and nothing more, and some rulings will be wrong.
 Both excluded. The surrounding teaching, that options put you against another participant with an
 opposite belief rather than against a house, survives without either sentence.
 
+### A PATTERN ACROSS MODULES: probability derived by counting scenarios
+
+**This is the most important thing in this log, and it is not a single hit. It is a habit of reasoning that has now produced a stated win probability three times, in three different modules.**
+
+| Module | Passage | What it counts |
+|---|---|---|
+| Calls and Puts | "So 2 out of 3 chances to win is actually a pretty big benefit" | Three zones on a payoff diagram, treated as three equally likely outcomes |
+| Vertical Spreads | "if it moves up, we profit. If it doesn't move, we lose. And if it moves down, we lose again... we have a one out of three chance of winning" | Three price directions, treated as three equally likely outcomes |
+| Vertical Spreads | "my max profit is 1881 and my max loss is 1119. So if you think about it, those are pretty good odds" | A payoff ratio, described as odds |
+
+**All three are the same error.** Counting the outcomes a position can have tells you nothing about how likely each one is. A stock is not equally likely to rise, fall, or sit still. A zone on a diagram is not a probability. And a favourable payoff ratio is not favourable odds, it is a favourable *price* for whatever the odds turn out to be, which is close to the opposite point.
+
+**It matters twice over.**
+
+As compliance: two of the three are stated win rates, which the standing rules permit only as the 70 percent target. The Calls and Puts instance is already excluded. The "one out of three" and "pretty good odds" lines are the same class.
+
+As teaching: it contradicts the curriculum's own posture everywhere else. Module 3 says there is no almanac and that technical analysis "tilts probability toward you, nothing more." The spreads module itself says "we can predict the patterns and not simply gamble." A method built on tilting probability cannot also derive probability by counting boxes, and a student who learns the counting habit will misprice every position they ever look at.
+
+**The spreads instance is the mildest in intent and the most instructive.** It is used to argue the odds are *against* the student, as motivation for why the method exists. The framing is honest. The arithmetic behind it is still not a probability, and it trains the exact reflex that produced "2 out of 3 chances to win" in an earlier module.
+
+**Action:** the two spreads passages are excluded, consistent with the Calls and Puts precedent. The teaching point each was serving survives without them. "The chances are not in our favour without a method" needs no fraction. "This is a good risk to reward ratio" is what the 1881 against 1119 actually says, and it is both true and useful.
+
+**Recommendation for the library pass:** this is a phrasing habit rather than six bad sentences, so search for it directly. Any place a module counts scenarios and then states a chance of winning is a hit, and there are likely more in modules not yet scanned.
+
+### Vertical Spreads: max profit stated as max loss, twice
+
+Not a compliance hit. Logged here because it is the fourth finding from checking a taught claim against the mechanics, and because it is provable rather than suspected.
+
+**Every number in this module reconciles exactly.** Net debit times 100 times contracts gives max loss; width minus debit, times 100 times contracts, gives max profit. All six worked positions check out, including all four live Roku readings. The formulas are right and the platform readings are right.
+
+Which is what makes the two slips unambiguous:
+
+| Said | Correct | Established where |
+|---|---|---|
+| "it will always be 1881 is the most you could lose" | Max loss is **1119**. 1881 is the max profit | Stated correctly by the instructor about ninety seconds earlier |
+| "if your stocks moving down you're losing 1134" | Max loss is **866**. 1134 is the max profit | Stated correctly two sentences earlier |
+
+Both times the max profit figure is given as the loss. Same direction both times.
+
+**The error is in the safe direction, which is why it is easy to miss.** It overstates the downside rather than understating it, so nobody trading on it gets hurt by the number itself. But max loss and max profit are the whole point of a spread, they are the reason the strategy is being taught as the safer one, and a student who takes the sentence at face value has the two most important numbers of the position swapped.
+
+**Bot behaviour: use the correct figures.** They are provable from the module's own arithmetic and the module states them correctly elsewhere, so this needs no ruling. Fifth instance of a transcript containing its own correction.
+
+**Flagged for the video** as a caption or annotation fix rather than a re-record. Two sentences, and both have a correct version already on screen.
+
+### Vertical Spreads: the rest of the scan
+
+| Passage | Action |
+|---|---|
+| "these are going to be pretty decent odds for you to make it" | **Exclude.** Win-likelihood claim attached to completing the course, same shape as the excluded "you will win more times than none" |
+| "this raises our chances substantially" (technical analysis) | Borderline, logged. No figure, and the surrounding teaching hedges properly. Keep |
+| "If you could make $813, that's pretty good" | Hypothetical on an invented position. Keep under the worked-arithmetic guard |
+| "manage your risks substantially with a small bank account" | Borderline, logged. This is about risk reduction rather than earnings, which is the opposite emphasis from the Greeks module's use of the same phrase. Keep |
+
+Notably **cleaner than the Greeks module on returns.** The figures here are almost all risk figures, and the module's argument is that spreads lose less, not that they make more. That is the compliant version of the same lesson, and it is worth noting as evidence that this material can be taught within the rules.
+
 ### Greeks in thinkorswim: the heaviest compliance load in the corpus, and a re-record recommendation
 
 **This module is worse than Moving Averages, and it is worse in a way that exclusion alone will not fix.**
@@ -262,9 +318,12 @@ Outcome-flavoured language carrying no figure. Logged so the pattern is visible 
 | Options: in/at/out of the money (number unassigned) | Scanned | Clean, one borderline kept under the worked-arithmetic guard |
 | Options thinkorswim walkthrough (number unassigned) | Scanned | Ruled by Vlad. "Max profit is infinite" stays, paired with the risk. See above |
 | Options Greeks in thinkorswim (number unassigned) | Scanned | **Nine excluded, three of them percentage returns. Strongest re-record candidate in the corpus.** See above |
+| Options Vertical Spreads (number unassigned) | Scanned | Three excluded, two of them the counting-scenarios pattern. Otherwise the cleanest options module on returns |
 | All others | Not started | |
 
-Five of twelve scanned modules were clean. Seven were not, and the two worst are the two aimed at students with the least experience.
+Five of thirteen scanned modules were clean. Eight were not.
+
+**The counting-scenarios pattern changes how the remaining pass should be run.** It is a habit rather than a set of sentences, it has appeared in two modules already, and it produces stated win probabilities that read as reassurance. Search for it specifically rather than waiting to notice it.
 
 That matters for planning. The original assumption was a compliance pass that finds occasional hits. On this evidence it is closer to half the library needing review, and at least some of it needing re-recording rather than editing. Scope and owner for that pass are still unassigned, which is open item 8.
 

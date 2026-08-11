@@ -56,6 +56,7 @@ Then: append a row to the ledger, add new questions to `rulings/open-questions.m
 | Options: in/at/out of the money | **unassigned** | Clean, 1 borderline | none. 4 generic noise fixes, see question 28 for the real problem | 1 | No |
 | Options thinkorswim walkthrough | **unassigned** | 1 ruled by Vlad, kept with the risk paired | 5 decimal artifacts fixed, 2 unresolved | 2 | No |
 | Options Greeks in thinkorswim | **unassigned** | **9 excluded. Strongest re-record candidate** | 17 artifacts fixed, arithmetic audited clean | 0 | No |
+| Options Vertical Spreads | **unassigned** | **3 excluded, 2 of them the counting-scenarios pattern** | none. Every figure reconciles exactly | 3 | No |
 
 Modules 2, 3 and 5 were characterised in the spec before this log existed. Everything from Volume onward was processed here.
 
@@ -117,6 +118,38 @@ Module 2 supplies the top (galaxy, solar system, planet, news, liquidity). Modul
 This is now in `prompts/system.md` as the bot's primary behaviour. When a student asks something the bot cannot answer, it hands over the chain as questions they can answer on their own chart, rather than closing the door. Two guards: the bot never closes the chain with a verdict, and never asks for their answers in order to assess.
 
 Worth checking every further module for whether it adds a step, refines one, or reorders them.
+
+### The curriculum derives probability by counting scenarios, and it has done it three times
+
+**The most significant cross-module finding since the method chain, and the first one that is a reasoning habit rather than a fact.**
+
+Three instances, two modules:
+
+- Calls and Puts: three zones on a payoff diagram, therefore "2 out of 3 chances to win"
+- Vertical Spreads: three price directions, therefore "a one out of three chance of winning"
+- Vertical Spreads: a payoff ratio of 1881 against 1119, therefore "pretty good odds"
+
+Counting outcomes is not a probability. A stock is not equally likely to rise, fall, and stay put. A zone on a diagram has no likelihood attached. And a good risk to reward ratio is not good odds, it is a good price for whatever the odds are, which is nearly the opposite claim.
+
+**Why it took three instances to see.** Each one reads as a throwaway framing line in its own module. The first was caught as a compliance hit and excluded, and it looked like a one-off phrasing problem. Only with the third does it become clear that the counting is the *method* by which these numbers are being produced, which means more of them exist in modules not yet scanned.
+
+**It contradicts the curriculum's own best statement of itself.** Module 3: no almanac, technical analysis "tilts probability toward you, nothing more." A method built on tilting probability cannot also derive probability by counting boxes.
+
+**Two consequences.** `prompts/system.md` now carries an explicit rule against reproducing the habit, with the compliant replacement for each shape. And the library pass should search for it directly rather than waiting to notice it, because it is a phrasing reflex and reflexes recur.
+
+**Generalisable beyond this project:** a corpus can carry a wrong *way of reasoning* as well as wrong facts, and the wrong reasoning is harder to find because each instance looks locally reasonable. Three sightings of the same shape is what made it visible. Worth watching for other shapes that recur.
+
+### Arithmetic that fully reconciles is a finding in itself
+
+The Vertical Spreads module states four formulas and works six positions, four of them read live off a platform. **Every single figure reconciles exactly**: net debit times 100 times contracts for max loss, width minus debit for max profit, lower strike plus debit for breakeven.
+
+That is worth recording for two reasons.
+
+**It makes the two slips provable rather than suspected.** The module twice gives the max profit figure as the max loss. Because everything else checks out, those two sentences can be called errors with confidence instead of being logged as ambiguous. Compare the GTC case, where nothing could be proved and the item stayed open.
+
+**It is evidence about the material's quality that the compliance log alone would not show.** The same module that carries the counting-scenarios problem is also the most numerically careful one processed so far. Those are independent axes, and conflating them would misjudge the library. A module can be arithmetically rigorous and rhetorically loose at the same time, and this one is.
+
+**Method note:** auditing every number rather than spot-checking took a few minutes and converted a "looks inconsistent" into a "is provably wrong, here is the correct value." Worth doing on any module that teaches a formula.
 
 ### The governing principle, and it was never in a transcript
 
@@ -375,6 +408,7 @@ This repository is public so transcripts cannot be committed here, and the conta
 | Options: in/at/out of the money | `options-money-scenarios-UNNUMBERED-RAW.txt` | `1HIUBIpzJLU6Bu2rnENx34KI8VWwEdmcO` |
 | Options thinkorswim walkthrough | `options-thinkorswim-walkthrough-UNNUMBERED-RAW.txt` | `1QD-x7q7ZEK0XZycqVNlVNgzncFcdV2Et` |
 | Options Greeks in thinkorswim | `options-greeks-thinkorswim-UNNUMBERED-RAW.txt` | `1PrZbsqNkpdxbUFKOJoMXoP2wvt4ybGBl` |
+| Options Vertical Spreads | `options-vertical-spreads-UNNUMBERED-RAW.txt` | `1WqiLrsnf2feKzkneP2xG0oNoS6oJl6mD` |
 | The Bounce Profit Plan *(worksheet)* | `document-bounce-profit-plan-RAW.txt` | `1I-ejvV92yaZdzKpQSv5JeyGclsRIq6sr` |
 | Breakout Strategy *(worksheet)* | `document-breakout-strategy-RAW.txt` | `1INwugRa-afsIWs8l-tP5iAL4oOuofEVO` |
 

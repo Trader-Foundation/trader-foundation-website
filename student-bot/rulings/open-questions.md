@@ -284,6 +284,44 @@ more likely to be "reword before ingestion" than "the teaching is wrong."
 
 ---
 
+## 34. There is a covered calls module and I have never seen it
+
+**Status:** OPEN. A gap in the material, not a question about it.
+
+The Vertical Spreads module refers back to covered calls as something already taught:
+
+> "Can we increase the odds even more? **We already did with covered calls, didn't we?** You could go up, you could go down, you know, you could do different things with covered calls, but even they have drawbacks."
+
+"We already did" and "didn't we" both assume the student has had the lesson. No covered calls transcript has been supplied, and nothing in the twelve sources processed so far teaches it.
+
+**Why this matters beyond one missing file.** Covered calls are the first strategy in the options run where the student *sells* rather than buys, and they involve owning the underlying stock. That sits awkwardly next to the house position that the method never owns shares and never exercises, which is stated three separate times across the options modules. Either covered calls are an exception to that posture, or they are taught and then set aside. The bot cannot tell which from the material it has.
+
+It also means the options run is at least seven modules, not six.
+
+**Question for Vlad:** can you send the covered calls transcript, and is it taught as something students actually use or as background before spreads?
+
+---
+
+## 35. "We learned that in module two" points at the wrong module
+
+**Status:** OPEN, and it may unlock the whole numbering problem.
+
+The Vertical Spreads module says:
+
+> "You don't want to wait for expiration. We never want to wait for expiration. **We learned that in module two.** There's no reason for that."
+
+Module 2 in the numbering used so far is Fundamental Analysis and Stock Screening, which contains nothing about expiration. Not waiting for expiration is an options idea, and it is stated in the in/at/out of the money scenarios module, which is the **second options module** in the sequence supplied.
+
+**So the most likely reading is that the options track has its own numbering**, and "module two" means the second options lesson rather than the second lesson of the course.
+
+If that is right, it resolves a large part of open questions 10, 17, 20 and 25 at once. It would mean the course is not one run of numbered modules but several tracks each numbered from one, which is why so many of these recordings never state a number that fits the sequence.
+
+It also explains why Momentum Indicators refers to "the past 10 modules" while the options material numbers nothing: different tracks, different counters.
+
+**Question for Vlad:** is the options material numbered separately from the technical analysis modules, so that "module two" here means the second options lesson?
+
+---
+
 ## 33. Is "max profit is infinite" an outcome claim?
 
 **Status: CLOSED. Ruled by Vlad.** See `max-profit-and-risk.md`.
@@ -493,6 +531,26 @@ The module recommends scaling out: "Maybe you should collect 50 percent of your 
 The hedged phrasing ("maybe you should") leaves it unclear whether 50 percent is a taught rule or an illustration. The bot should not state a specific scaling percentage as house teaching unless it is one.
 
 **Question for Vlad:** is scaling out 50 percent at a target a taught rule, or was that an illustration?
+
+---
+
+## 36. Twenty percent, and how it sits with the fifty percent scaling rule
+
+**Status:** OPEN. Two different exit numbers now, from two different modules.
+
+The Vertical Spreads module gives a profit target, twice, and the second time as personal practice:
+
+> "once it gets even to 414, if it's a good enough profit for you, even if it's 20%, you could get out of it and play another one. That way you collect profits or you could scale and take some profits in."
+
+> "For me, if I could get to 20%. I'm good. I'll probably be out. And it depends against how much money you're investing. So always collect profits if you can."
+
+Open question 18 records "collect 50 percent" from an earlier module. This says 20.
+
+**They may not conflict.** The 20 percent is stated about a *spread*, where the profit is capped and the last part of it arrives slowly, so leaving early costs less than it would on a directional trade. The 50 percent may be about directional positions where the upside is not capped. If so, the exit target is a function of the strategy rather than a single house number, which would be worth teaching explicitly.
+
+**And the chart ruling applies.** Neither is likely to be a threshold. "It depends against how much money you're investing" and "if it's a good enough profit for you" are both in the same breath as the 20, so the number is a reference point rather than a rule.
+
+**Question for Vlad:** is 20 percent for spreads and 50 percent for directional trades, or is one of them the current number and the other superseded?
 
 ---
 

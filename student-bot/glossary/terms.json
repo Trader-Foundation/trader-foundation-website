@@ -195,6 +195,22 @@
         "vega": "sensitivity to volatility. 0.15 vega means 15 cents per share per 1 percent change in volatility, in either direction",
         "instructor_priority": "Delta, gamma and theta are the focus. Vega is watched rather than led with, and flagged as a caution when it is large",
         "_warning": "The module's return figures are gross of theta. Delta gains and theta decay are both worked correctly and never netted against each other. See rulings/compliance-log.md."
+      },
+      "vertical_spreads": {
+        "_source": "Options Vertical Spreads. FORMULAS, not settings. Every worked example in that module reconciles against these exactly, including all four live platform readings, so they are verified rather than merely transcribed.",
+        "definition": "two options, same expiration date, different strike prices. One bought, one sold. The shared expiration is what makes it vertical",
+        "the_four": [
+          "bull call spread",
+          "bear put spread",
+          "bear call spread",
+          "bull put spread"
+        ],
+        "net_debit": "premium paid minus premium collected",
+        "max_loss": "net debit x 100 x contracts",
+        "max_profit": "(width of the strikes minus net debit) x 100 x contracts",
+        "breakeven_bull_call": "lower bought strike plus net debit",
+        "width_tradeoff": "a wider spread raises the max profit and requires a larger move to reach it",
+        "_warning": "The module twice states the max PROFIT figure as the max loss (1881 for 1119, and 1134 for 866). Both are provably slips against its own arithmetic and it states both correctly elsewhere. Use the formulas, not those two sentences."
       }
     }
   },
@@ -473,7 +489,9 @@
       "theta",
       "vega",
       "open interest",
-      "volume open interest"
+      "volume open interest",
+      "risk profile chart",
+      "paper trading"
     ],
     "options_order_terms": {
       "_comment": "Order mechanics from the thinkorswim walkthrough. The CONCEPTS are EVERGREEN and portable to any broker. The click paths and colour coding around them are PERISHABLE_PROCEDURE. Keep the two apart: a student on a different platform still needs limit versus market.",
@@ -512,6 +530,25 @@
       "trade the chart not your heart": "Every decision comes down to the chart. Governs two failure modes at once: following a rule instead of reading the chart, and following a feeling instead of reading the chart. See rulings/the-chart-decides.md.",
       "more risky to want more": "Reaching for more upside means taking more risk. The counterweight that must travel with the unbounded upside on a long call. See rulings/max-profit-and-risk.md.",
       "trading is not black and white": "The method is a weighing, not a formula. Conflicting signals are the normal case rather than an error."
+    },
+    "options_strategies": {
+      "_comment": "Strategy names. The four verticals are taught in detail. The others are named once in passing as things that exist, so the bot names them and does not explain them.",
+      "taught": [
+        "vertical spread",
+        "bull call spread",
+        "bear put spread",
+        "bear call spread",
+        "bull put spread",
+        "directional trade",
+        "covered call"
+      ],
+      "named_only": [
+        "butterfly",
+        "iron condor",
+        "diagonal",
+        "calendar spread"
+      ],
+      "_note_on_covered_calls": "Referenced in Vertical Spreads as already taught ('we already did with covered calls, didn't we?') but no covered calls transcript has been supplied. There is a missing module. See open question 34."
     }
   },
   "forbidden_output_terms": {
