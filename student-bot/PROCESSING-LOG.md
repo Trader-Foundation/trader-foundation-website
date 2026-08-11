@@ -69,6 +69,7 @@ Then: append a row to the ledger, add new questions to `rulings/open-questions.m
 | The Paycheck Collector *(class)* | n/a, coaching | **LARGEST EXCLUSION SET IN THE PROJECT. Re-record line in the intro** | glossary pass run, 12 redactions | 2 | No |
 | Paycheck Collector, how you lose | n/a, coaching | 1 excluded, 2 borderline. Much cleaner | 16 fixed, arithmetic reconciles | 1 | No |
 | thinkorswim setup | **unassigned** | **Clean.** 2 privacy redactions | 9 fixed, 1 unresolved | 1 | No |
+| Live session 2026-08-06 *(SRT)* | n/a, live session | **Clean** | 1 redaction. **368 timestamps** | 3 | **Unblocked** |
 
 Modules 2, 3 and 5 were characterised in the spec before this log existed. Everything from Volume onward was processed here.
 
@@ -160,6 +161,24 @@ And Vlad's answer is the useful part:
 **So this is a known hard edge, not two students being slow.** The recorded modules teach buying throughout and every intuition a student builds is a buyer's intuition. Selling inverts the direction of every one of them, and nothing in the material marks the switch.
 
 **Two things follow.** It is a strong candidate for a dedicated piece of teaching, since Vlad has already diagnosed it precisely. And for the bot it means questions in this area deserve extra care: a student asking about a sold put is very likely to have the direction backwards, so lead with which side of the trade they are on rather than assuming the question means what it says.
+
+### A third source class, and it carries timestamps
+
+Live market sessions: a recurring review that grades past calls, reads the market top down, and screens live. Not a module, not a one-to-one call.
+
+**The first one arrived as an SRT and solved the biggest structural blocker on this project.** Twenty sources are processed and nothing is indexed, and the reason is that the chunk schema requires a timestamp and no plain-text transcript has one. This file has 368.
+
+**The point is the route, not the file.** The modules exist as videos. The transcripts came through as plain text, but captions would carry positions. Asking whether the modules can be exported the same way is now worth more than any remaining processing work.
+
+**What this class uniquely provides, beyond timestamps:**
+
+- **Setups graded after the fact.** No module shows a call that failed. This session shows two that reached the same target, one continuing and one rejecting, and draws the lesson from the pair.
+- **Rejections.** Five screener pages, most candidates dismissed out loud with a reason. The rejections teach more than the acceptances and nothing else in the corpus contains them.
+- **Teaching that exists nowhere else.** A named disqualifier for the bounce setup ("the hiccup", a dip too shallow to count as a fall), the instruction to make rules conditional rather than "sometimes", and the cleanest answer in the corpus to "should I have held longer".
+
+Full write-up in `rulings/live-sessions.md`.
+
+**One caution.** The speaker is not identified and the register differs from the module recordings, so this may be a coach rather than Vlad. Where a session and a ruling disagree, the ruling wins, which means speaker identity has to be knowable per file. Raised as an open question rather than assumed.
 
 ### Coverage is lopsided, and coaching material will not fix it
 
@@ -567,7 +586,11 @@ Three of four modules processed here produced numeric errors in the values being
 
 Nothing is in the corpus. Two blockers, both structural rather than per module.
 
-1. **No transcript carries timestamps.** `corpus/schema.md` requires one per chunk and does not index without it. Affects every plain-text transcript, so it needs solving once. Open question 11. **Does not affect written worksheets**, which cite by section and could be indexed ahead of the video material.
+1. ~~**No transcript carries timestamps.**~~ **SOLVED FOR CAPTION FILES.** A live session arrived as an SRT with **368 timestamped cues across 22 minutes**. Every sentence has a position, so a chunk can cite `live session, 2026-08-06, 00:02:14` and send a student to that moment.
+
+   **The route matters more than the file.** The classroom modules exist as videos, and the transcripts supplied were plain text. The same videos would produce captions through whatever route produced this one. **If the modules can be re-exported as SRT or VTT, this blocker disappears for the whole corpus.** That is now the highest-value question in the project.
+
+   Still open for the twenty plain-text sources already processed, which would need re-supplying as captions to be indexable. Their findings do not need redoing either way. **Written worksheets remain unaffected**, since they cite by section.
 2. **Three modules have no number or course.** Volume, Moving Averages, and Momentum Indicators. Citations are the product. Open questions 10, 17 and 20.
 
 ## Transcript store: Google Drive
