@@ -161,6 +161,49 @@ And Vlad's answer is the useful part:
 
 **Two things follow.** It is a strong candidate for a dedicated piece of teaching, since Vlad has already diagnosed it precisely. And for the bot it means questions in this area deserve extra care: a student asking about a sold put is very likely to have the direction backwards, so lead with which side of the trade they are on rather than assuming the question means what it says.
 
+### Coverage is lopsided, and coaching material will not fix it
+
+Recorded at the point Vlad said the classroom material was complete and that a large coaching library was coming.
+
+**Text actually held: 16 transcripts.** The ledger shows more because Modules 2, 3 and 5 were characterised in the spec rather than transcribed, and the Volume transcript was lost to a container reset with only its findings surviving.
+
+**Exactly one numbered module exists as text: Module 8, Fibonacci.** Everything else is unnumbered or spec-described.
+
+So the corpus is deep on options and thin on technical analysis. **A beginner would hit the thin part first**, since candlesticks, support and resistance and screening are the opening lessons and none of them exist as text.
+
+**Coaching sessions deepen the imbalance rather than correcting it.** They assume the modules and refer back to them. The clearest evidence is in the material itself: asked how the spread maths works, the coach says *"you want to go back to the original lesson."* A bot built mostly from coaching would keep making that same handoff to lessons it cannot cite.
+
+**Known gaps, with the evidence for each:**
+
+| Gap | Evidence |
+|---|---|
+| Modules 2, 3, 5 | The spec describes them in detail, so transcripts existed. Never supplied here |
+| Credit spreads module | Forward-referenced twice, "that's what we're going to get into next". Never arrived. May not exist, with the Paycheck Collector class covering it instead |
+| Volume | Lost to a container reset. Findings preserved, text gone. Only worth re-supplying if something needs checking against it |
+| Stock Predator | Named in the original scope decision, and coaching points students at it: "watch my predator course" |
+| Modules 1, 4, 6, 7, 9, 10 | Only if they are separate lessons rather than mapping onto the unnumbered files held |
+
+**The numbering question is now worth more than it was.** If the options track is numbered separately, several unnumbered files may turn out to be the missing numbered modules, which would close part of this without anyone finding a file.
+
+### What coaching material is uniquely good for
+
+Worth stating before the volume arrives, so processing optimises for the right thing.
+
+Coaching is **weaker** than modules as a source of teaching: it is unscripted, it repeats itself, and it carries more compliance load and all the personal data. Processing it purely for content would be poor value at scale.
+
+**Its unique value is showing where students get stuck.** Two sessions have produced two walls, both on selling rather than buying:
+
+- One student could not place where the max profit and max loss figures come from.
+- Another could not hold onto what selling a put means, wrote it down twice, and got it backwards in his own notes.
+
+And Vlad's own diagnosis, which is the useful part: *"it took me about seven months to really comprehend this idea. You're not used to selling."*
+
+Every recorded module teaches **buying**. Every intuition a student builds is a buyer's intuition, and selling inverts all of them with nothing marking the switch.
+
+**At volume this stops being anecdote.** A count of where students stall, across a large library, is evidence about which lessons are not landing, and that is worth more to the curriculum than another paraphrase of a strategy already recorded three times.
+
+`COACHING-INTAKE.md` makes that the primary output of the triage, rather than a side note.
+
 ### Coaching material is in scope now, and it changes the job
 
 Vlad has ruled: *"i need you to put this in though"*, *"everything im feeding you is needed."* The `CLAUDE.md` scope boundary is updated and a redaction standard is written into it, which is what the spec required before this could happen.
