@@ -14,6 +14,8 @@ Every transcript supplied gets every step, in order, no exceptions.
 
 **0b. Check the transcript is complete.** Read the first and last lines. A lesson that opens with a welcome and closes with a sign-off is whole. This matters when something expected turns out to be missing: knowing the transcript is complete tells you the content lives in a different module rather than in a truncated section of this one. It resolved the RSI question in one look.
 
+**0c. Before transcription, if you control it: feed `glossary/transcription-hints.md` to the tool.** Prevention beats cleanup. The errors this project keeps fixing are the same words failing the same way, and the hint list is ordered by observed damage so a tool with a term cap still gets the ones that matter.
+
 **1. Glossary pass.** Run `glossary/terms.json`. Four distinct error classes now, in descending order of danger:
 
 - **Numeric.** The tool mis-hears the values being taught. Highest risk, because a wrong number looks authoritative and a student cannot tell. Always audit taught numbers against the canonical values in `terms.json`, and against values the same transcript establishes earlier.
