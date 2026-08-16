@@ -19,13 +19,13 @@ each test pairs the shared product half with its own call.
 | | Setter | Education Coordinator |
 | --- | --- | --- |
 | Product and the offer | 23 questions (shared) | 23 questions (shared) |
-| Its own call | 19 (the setting call) | 22 (the strategy call) |
-| Total choice questions | 42 | 45 |
-| Passing | 34 of 42 | 36 of 45 |
+| Its own call | 17 (the setting call) | 22 (the strategy call) |
+| Total choice questions | 40 | 45 |
+| Passing | 32 of 40 | 36 of 45 |
 
 Every question is multiple choice. A result is final the moment it is submitted; there is no grading step.
 
-Every one of the 64 bank questions is used. A rep
+Questions are retired rather than deleted (`RETIRED` in `app.js`): they stay in the bank so old results still decode, but are never served or counted again. A rep
 picks their test after signing in. Attempts, caps, best scores, pass status,
 and the question analysis are all tracked separately per certification, so
 using up setter attempts never locks someone out of the EC test.
@@ -39,6 +39,16 @@ Two is the strategy call. To move a question between tests, edit that list.
 - Retakes serve alternate variants of every question (rephrased stems,
   shuffled answers, flipped true/false), so memorizing an attempt backfires.
 - 3-attempt cap per certification. Tester accounts bypass it.
+- Both tests end with a short unscored "Working style" section: five DISC
+  style forced-choice questions with no right answers. The trainer read turns
+  the picks into a plain-words profile (Driver, Connector, Steady, Precise)
+  with a coaching note. Never counted toward the pass mark.
+- "Team breakdown" in the dashboard puts every person on one page: both
+  certifications, best scores, the generated trainer read, and the working
+  style profile.
+- `api/maintenance.js` is the one admin action allowed over GET, flipping a
+  tester flag, because it is idempotent and destroys nothing. Reset and
+  delete stay POST-only.
 - Every attempt records which answer the rep chose on every question. Clicking
   a name opens each attempt's misses: the question as served, what they chose,
   the trained answer, a coaching note (`COACH` in `app.js`), and a personality

@@ -41,6 +41,10 @@ module.exports = async (req, res) => {
             ...(typeof p.pick === "number" ? { pick: p.pick } : {}),
           }))
         : [],
+      /* Working style picks: unscored, trainer-read only. */
+      ...(Array.isArray(a.disc)
+        ? { disc: a.disc.slice(0, 10).map((p) => ({ di: Number(p.di), pick: Number(p.pick) })) }
+        : {}),
     });
 
     /* Trim per certification so a burst of attempts at one never evicts the

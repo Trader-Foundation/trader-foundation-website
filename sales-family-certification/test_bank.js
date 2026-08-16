@@ -18,7 +18,7 @@ const sandbox = {
 vm.createContext(sandbox);
 vm.runInContext(src, sandbox);
 
-const { BANK, buildAttempt, EXAMS, examItems, examTotal, examPassMark, trackOf, COACH, TRAITS, decodeBi } = sandbox;
+const { BANK, buildAttempt, EXAMS, examItems, examTotal, examPassMark, trackOf, COACH, TRAITS, decodeBi, DISC, RETIRED } = sandbox;
 let fail = 0;
 const check = (cond, msg) => { if (!cond) { console.log("FAIL: " + msg); fail++; } };
 
@@ -77,9 +77,9 @@ BANK.forEach((q, i) => {
   else check(trackOf(i) !== "strategy", "q" + (i+1) + " in part 1 is not strategy");
 });
 
-check(examTotal("setter") === 42, "setter test is 42 questions, got " + examTotal("setter"));
+check(examTotal("setter") === 40, "setter test is 40 questions (2 retired), got " + examTotal("setter"));
 check(examTotal("ec") === 45, "EC test is 45 questions, got " + examTotal("ec"));
-check(examPassMark("setter") === 34, "setter passes at 34, got " + examPassMark("setter"));
+check(examPassMark("setter") === 32, "setter passes at 32, got " + examPassMark("setter"));
 check(examPassMark("ec") === 36, "EC passes at 36, got " + examPassMark("ec"));
 
 // Both exams share the product half, and neither leaks the other's call.
@@ -92,7 +92,9 @@ check(eItems.every((i) => trackOf(i) !== "setting"), "EC test contains no settin
 
 // Nothing from the bank is orphaned by the split.
 const covered = new Set([...sItems, ...eItems]);
-check(covered.size === 64, "every bank question appears on at least one test, got " + covered.size);
+check(covered.size === 64 - RETIRED.length, "every non-retired question appears on a test, got " + covered.size);
+check(RETIRED.every((bi) => !covered.has(bi)), "retired questions are never served");
+check(RETIRED.every((bi) => bi >= 0 && bi < BANK.length), "retired list points at real questions");
 check(!EXAMS.setter.written && !EXAMS.ec.written, "neither exam carries written scenarios");
 
 // The three retired written scenarios each survive as a multiple choice question.
@@ -125,12 +127,26 @@ check(decodeBi({total: 35}, 27) === 27 && decodeBi({total: 38}, 53) === 53, "54-
   check(mcItem.opts.find(o => o.c).oi === 0, "the correct option's bank position is always 0");
 }
 
+// --- the working style section ---
+check(DISC.length === 5, "5 working style questions, got " + DISC.length);
+DISC.forEach((d, i) => {
+  check(d.opts.length === 4, "disc q" + (i+1) + " has 4 options");
+  const letters = d.opts.map(o => o.s).sort().join("");
+  check(letters === "CDIS", "disc q" + (i+1) + " covers D, I, S, C exactly once, got " + letters);
+});
+check(!/\bfree\b/i.test(JSON.stringify(DISC)) && !JSON.stringify(DISC).includes("\u2014"), "style section follows the style rules");
+
 // --- per-exam attempts and retake rotation ---
 ["setter", "ec"].forEach((k) => {
-  const first = buildAttempt(k, null);
-  check(first.items.length === examTotal(k), k + ": attempt has " + examTotal(k) + " items, got " + first.items.length);
-  check(first.items.every((i) => EXAMS[k].tracks.includes(i.track)), k + ": every item belongs to this exam");
-  check(first.items.every((i) => typeof i.bi === "number"), k + ": every item carries a bank index");
+  const built = buildAttempt(k, null);
+  const styleItems = built.items.filter((i) => i.track === "style");
+  const first = { items: built.items.filter((i) => i.track !== "style"), served: built.served };
+  check(styleItems.length === DISC.length, k + ": the working style section rides along, got " + styleItems.length);
+  check(styleItems.every((i) => i.type === "disc" && typeof i.di === "number" && i.opts.length === 4), k + ": style items are well formed");
+  check(built.items.slice(-DISC.length).every((i) => i.track === "style"), k + ": style section comes last");
+  check(first.items.length === examTotal(k), k + ": attempt has " + examTotal(k) + " scored items, got " + first.items.length);
+  check(first.items.every((i) => EXAMS[k].tracks.includes(i.track)), k + ": every scored item belongs to this exam");
+  check(first.items.every((i) => typeof i.bi === "number"), k + ": every scored item carries a bank index");
 
   // sections stay in order, questions shuffle within them
   const order = first.items.map((i) => i.track);

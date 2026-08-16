@@ -3,7 +3,7 @@
    Served as a PLAIN TEXT static file on purpose. Earlier builds shipped this
    engine as a compressed binary (app.bin) and the upload path corrupted the
    binary every time. Keep this file plain text. */
-var CERT_VERSION = "2026-08-07-coach-r1";
+var CERT_VERSION = "2026-08-16-disc-r1";
 
 var MAX_ATTEMPTS = 3, PASS_PCT = 0.8, FAST_MINUTES = 12;
 
@@ -555,6 +555,48 @@ opts:[
 ];
 
 
+/* ------------------------------ working style ------------------------------
+
+   Five short forced-choice questions in the DISC style, served as a final
+   "no right answers" section. They are never scored and never count toward
+   the pass mark: their only job is telling a trainer how this person
+   operates, so coaching lands the way this rep actually works. Each option
+   maps to one style: D drives, I connects, S steadies, C perfects. */
+var DISC = [
+{q:"Your week just got blown up by a last minute schedule change. What is your honest first reaction?",opts:[
+{t:"Take charge of the mess, make the new plan fast, and get moving again",s:"D"},
+{t:"Get the people involved on the phone and talk it through, the plan will follow",s:"I"},
+{t:"Stay calm, protect the commitments already made, and adjust one step at a time",s:"S"},
+{t:"Sit down and rework the details properly before touching anything",s:"C"}]},
+{q:"Which compliment would honestly mean the most to you?",opts:[
+{t:"You get results, full stop",s:"D"},
+{t:"Talking to you is the best part of people's day",s:"I"},
+{t:"You are the one everyone can count on",s:"S"},
+{t:"Your work is airtight, nothing slips past you",s:"C"}]},
+{q:"On a team push, you naturally end up being the one who...",opts:[
+{t:"makes the calls nobody else wants to make",s:"D"},
+{t:"keeps everyone talking, laughing, and moving",s:"I"},
+{t:"quietly carries the load and keeps things steady",s:"S"},
+{t:"catches the details everyone else missed",s:"C"}]},
+{q:"A good prospect goes quiet for a week. Your instinct is to...",opts:[
+{t:"call them directly and ask for a decision either way",s:"D"},
+{t:"send something warm and personal to restart the conversation",s:"I"},
+{t:"give them a little room, then check in gently, people have lives",s:"S"},
+{t:"reread the whole thread first to work out what changed",s:"C"}]},
+{q:"What would drain you most in this job?",opts:[
+{t:"People who cannot make a decision",s:"D"},
+{t:"A script so tight there is no room to be yourself",s:"I"},
+{t:"Days full of conflict and confrontation",s:"S"},
+{t:"Being told to wing it without the full picture",s:"C"}]}
+];
+
+var DISC_META = {
+D:{name:"Driver", read:"Direct and results-first. Give them the goal and room to run. They push through resistance well but can bulldoze a hesitant prospect, so coach pace, not effort."},
+I:{name:"Connector", read:"People-first and persuasive. Rapport comes easily and calls feel natural, but they can drift off script and promise in the moment, so coach structure and follow-through."},
+S:{name:"Steady", read:"Calm, consistent, dependable. Prospects trust them quickly, but they can shy away from the hard ask, so coach directness: the money question and the close."},
+C:{name:"Precise", read:"Careful and thorough. They know the material and respect process, but can over-explain and stall waiting for certainty, so coach speed and asking before everything is perfect."}
+};
+
 /* ------------------------------ the two certifications ------------------------------
 
    Two separate exams, not one combined test. Product knowledge is the half both
@@ -597,9 +639,19 @@ var EXAMS = {
   }
 };
 
+/* Questions pulled from service without deleting them. Stored results
+   reference questions by index, so a question is never removed from BANK:
+   retiring it here stops it being served or counted while every old record
+   still decodes. Retired Aug 16 on the miss data: the pre-call video
+   commitment question (9), missed by six of the first eight certified reps,
+   and the preparation score question (32), missed by every rep who saw it,
+   which grades trainer-side metrics a rep does not need to recite. */
+var RETIRED = [9, 32];
+
 function examItems(examKey){
   var ex = EXAMS[examKey], out = [];
   BANK.forEach(function(q, bi){
+    if (RETIRED.indexOf(bi) >= 0) return;
     if (ex.tracks.indexOf(trackOf(bi)) >= 0) out.push(bi);
   });
   return out;
@@ -820,6 +872,10 @@ function buildAttempt(examKey, lastServed){
   ex.sections.forEach(function(sec){
     ordered = ordered.concat(shuffle(items.filter(function(i){ return i.track === sec.track; })));
   });
+  /* The working style section rides along at the end, unscored. */
+  ordered = ordered.concat(shuffle(DISC.map(function(d, di){
+    return {track:"style", type:"disc", di:di, stem:d.q, opts:shuffle(d.opts.map(function(o, oi){ return {t:o.t, oi:oi}; }))};
+  })));
   return {items: ordered, served: served};
 }
 
@@ -846,13 +902,13 @@ function renderExam(){
   var choiceBox = function(item){
     n++; item.disp = n;
     var h = '<div class="q" id="qbox'+n+'"><p class="stem"><span class="qn">'+n+'.</span> '+esc(item.stem)+'</p>';
-    if (item.type === "mc"){
+    if (item.type === "tf"){
+      h += '<label class="opt"><input type="radio" name="q'+n+'" value="true"><span>True</span></label>' +
+           '<label class="opt"><input type="radio" name="q'+n+'" value="false"><span>False</span></label>';
+    } else {
       item.opts.forEach(function(o, oi){
         h += '<label class="opt"><input type="radio" name="q'+n+'" value="'+oi+'"><span>'+esc(o.t)+'</span></label>';
       });
-    } else {
-      h += '<label class="opt"><input type="radio" name="q'+n+'" value="true"><span>True</span></label>' +
-           '<label class="opt"><input type="radio" name="q'+n+'" value="false"><span>False</span></label>';
     }
     return h + '</div>';
   };
@@ -861,6 +917,12 @@ function renderExam(){
     html += '<p class="secnum">' + esc(sec.eyebrow) + '</p><h2 class="section">' + esc(sec.title) + '</h2>';
     ATTEMPT.items.filter(function(i){ return i.track === sec.track; }).forEach(function(i){ html += choiceBox(i); });
   });
+  var styleItems = ATTEMPT.items.filter(function(i){ return i.track === "style"; });
+  if (styleItems.length){
+    html += '<p class="secnum">Last part</p><h2 class="section">Working style</h2>' +
+      '<p class="small">No right or wrong answers here, and this part is not scored. Pick whichever sounds most like you, so your trainers can coach you the way you actually work.</p>';
+    styleItems.forEach(function(i){ html += choiceBox(i); });
+  }
   body.innerHTML = html;
   body.onchange = saveSession;
 }
@@ -900,9 +962,16 @@ async function runSubmit(){
   $("btn-submit").disabled = true;
   $("unanswered").textContent = "Saving your result...";
 
-  var score = 0, sectionScores = {}, perQ = [];
+  var score = 0, sectionScores = {}, perQ = [], discPicks = [];
+  total = ATTEMPT.items.filter(function(i){ return i.type !== "disc"; }).length;
   ATTEMPT.items.forEach(function(item){
     var ok, pick;
+    if (item.type === "disc"){
+      /* Unscored on purpose: this section exists for the trainer read, not
+         the pass mark. */
+      discPicks.push({di:item.di, pick:item.opts[parseInt(item.given,10)].oi});
+      return;
+    }
     if (item.type === "mc"){
       var chosen = item.opts[parseInt(item.given,10)];
       ok = chosen.c === true;
@@ -929,7 +998,7 @@ async function runSubmit(){
        forever, which is what lets the dashboard reconstruct old attempts. */
     bn:BANK.length,
     score:score, total:total, sectionScores:sectionScores, mins:mins, autoPass:autoPass,
-    served:ATTEMPT.served, perQ:perQ
+    served:ATTEMPT.served, perQ:perQ, disc:discPicks
   };
   try {
     await api("/api/submit", {email:CURRENT.email, attempt:payload});
@@ -1002,11 +1071,13 @@ async function loadAdmin(){
   renderAdminView();
 }
 
-function toggleAdminView(){
-  ADMIN_VIEW = ADMIN_VIEW === "people" ? "questions" : "people";
-  $("btn-adminview").textContent = ADMIN_VIEW === "people" ? "Question analysis" : "Back to people";
+function setAdminView(v){
+  ADMIN_VIEW = ADMIN_VIEW === v ? "people" : v;
+  $("btn-adminview").textContent = ADMIN_VIEW === "questions" ? "Back to people" : "Question analysis";
+  $("btn-breakdown").textContent = ADMIN_VIEW === "breakdown" ? "Back to people" : "Team breakdown";
   renderAdminView();
 }
+function toggleAdminView(){ setAdminView("questions"); }
 
 /* Attempts for one certification. Records written before the split carry no
    exam tag; they were the combined test, whose Part One is the setter exam. */
@@ -1033,15 +1104,13 @@ function setAdminExam(k){
 
 function renderAdminView(){
   renderExamTabs();
-  if (ADMIN_VIEW === "people"){
-    $("admin-analysis").classList.add("hidden");
-    $("admin-table").classList.remove("hidden");
-    renderPeople();
-  } else {
-    $("admin-table").classList.add("hidden");
-    $("admin-analysis").classList.remove("hidden");
-    renderAnalysis();
-  }
+  var views = {people:"admin-table", questions:"admin-analysis", breakdown:"admin-breakdown"};
+  Object.keys(views).forEach(function(k){
+    $(views[k]).classList[(ADMIN_VIEW === k) ? "remove" : "add"]("hidden");
+  });
+  if (ADMIN_VIEW === "people") renderPeople();
+  else if (ADMIN_VIEW === "questions") renderAnalysis();
+  else renderBreakdown();
 }
 
 function renderPeople(){
@@ -1160,6 +1229,26 @@ function correctTextOf(q, v){
 /* The trainer-facing read on one person: are they solid, where are they weak,
    and what their wrong choices say about them. Deliberately plain sentences,
    because Kaleb reads this between calls. */
+/* The DISC read: counts every working-style pick across a person's attempts
+   and names the dominant style in plain words. Null until they have sat an
+   exam new enough to carry the section. */
+function discProfile(at){
+  var counts = {D:0, I:0, S:0, C:0}, any = false;
+  (at || []).forEach(function(a){
+    (a.disc || []).forEach(function(pk){
+      var d = DISC[pk.di];
+      var o = d && d.opts[pk.pick];
+      if (o && counts[o.s] !== undefined){ counts[o.s]++; any = true; }
+    });
+  });
+  if (!any) return null;
+  var order = Object.keys(counts).sort(function(a,b){ return counts[b] - counts[a]; });
+  var primary = order[0], secondary = counts[order[1]] > 0 ? order[1] : null;
+  return {counts:counts, primary:primary, secondary:secondary,
+    label: DISC_META[primary].name + (secondary ? " with a " + DISC_META[secondary].name.toLowerCase() + " streak" : ""),
+    read: DISC_META[primary].read};
+}
+
 function personAssessment(u, at){
   if (!at.length) return "";
   var best = at.reduce(function(m, a){ return a.score > m.score ? a : m; }, at[0]);
@@ -1216,6 +1305,10 @@ function personAssessment(u, at){
     lines.push("Pattern in the wrong answers they chose: " + sigKeys.map(function(k){ return k + (sig[k] > 1 ? " (" + sig[k] + "×)" : ""); }).join(", ") + ". Probe this in the interview, it predicts call behavior.");
   } else if (anyPicks){
     lines.push("No concerning pattern in which wrong answers they chose: their misses read as knowledge gaps, not character ones.");
+  }
+  var dp = discProfile(at);
+  if (dp){
+    lines.push("Working style: " + dp.label + " (D " + dp.counts.D + ", I " + dp.counts.I + ", S " + dp.counts.S + ", C " + dp.counts.C + "). " + dp.read);
   }
   return '<div class="wbox" style="border-left:4px solid var(--gold)"><b>Trainer read</b><br>' +
     lines.map(esc).join("<br>") + '</div>';
@@ -1313,6 +1406,44 @@ function renderAnalysis(){
   h += "</table>";
   box.innerHTML = h;
 }
+
+/* The whole team on one page: status on both certifications, the trainer
+   read, and the working style, per person, without clicking through rows. */
+function renderBreakdown(){
+  var box = $("admin-breakdown"), users = (ADMIN_USERS || []).slice();
+  if (!users.length){ box.innerHTML = '<p class="small">No one has signed in yet.</p>'; return; }
+  var certCount = function(u){
+    return EXAM_KEYS_UI.filter(function(k){ return attemptsFor(u, k).some(function(a){ return a.finalPass; }); }).length;
+  };
+  users.sort(function(a, b){
+    var d = certCount(b) - certCount(a);
+    if (d) return d;
+    return ((b.logins||[]).slice(-1)[0] || 0) - ((a.logins||[]).slice(-1)[0] || 0);
+  });
+  var h = '<p class="small">Everyone in one place: both certifications, the trainer read, and the working style once they have taken the current exam. Click their row on the roster for the question by question detail.</p>';
+  users.forEach(function(u){
+    h += '<div class="wbox"><b>' + esc(u.name || u.email) + '</b>' + (u.tester ? ' <span class="flag">Tester</span>' : '') +
+      ' <span class="small">' + esc(u.email) + ' \u00b7 ' + (u.logins||[]).length + ' sign-in' + ((u.logins||[]).length===1?'':'s') + '</span>';
+    var any = false;
+    EXAM_KEYS_UI.forEach(function(k){
+      var at = attemptsFor(u, k);
+      if (!at.length) return;
+      any = true;
+      var best = at.reduce(function(m,a){ return a.score > m.score ? a : m; }, at[0]);
+      var certified = at.some(function(a){ return a.finalPass; });
+      h += '<br><b>' + esc(examName(k)) + ':</b> ' +
+        (certified ? '<span class="ok">Certified</span>' : '<span class="flag">Not yet</span>') +
+        ' \u00b7 best ' + best.score + '/' + (best.total || examTotal(k)) + ' \u00b7 ' + best.mins + 'm \u00b7 ' +
+        at.length + ' attempt' + (at.length===1?'':'s');
+      h += personAssessment(u, at);
+    });
+    if (!any) h += '<br><span class="small">Signed in, has not taken a test yet.</span>';
+    h += '</div>';
+  });
+  box.innerHTML = h;
+}
+
+var EXAM_KEYS_UI = ["setter", "ec"];
 
 async function adminAction(email, type, on){
   if (type === "reset" && !confirm("Clear all attempts for " + email + "? Logins stay logged.")) return;

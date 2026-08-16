@@ -19,7 +19,7 @@ const NOTIFY_EMAILS = process.env.NOTIFY_EMAILS
 /* Two separate certifications, each with its own attempts, cap, and pass mark.
    Totals mirror the client's exam config and are only used for reporting. */
 const EXAM_KEYS = ["setter", "ec"];
-const EXAM_TOTALS = { setter: 42, ec: 45 };
+const EXAM_TOTALS = { setter: 40, ec: 45 };
 const DEFAULT_EXAM = "setter";
 
 function examKey(v) {
