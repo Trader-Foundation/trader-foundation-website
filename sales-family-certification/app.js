@@ -1140,10 +1140,13 @@ var TRAITS = {
    question up by eight. Attempts record bn (the bank size that graded them)
    since then, and the bank is append-only since then, so:
    - an attempt with bn: any bi below it is already correct, forever
-   - an attempt without bn predates the shift: original 45-bank indexing */
+   - no bn: the attempt's own total dates it, since no two generations share
+     one. 27 or 34 is the original 45-bank, whose Part Two sat 8 lower. 35 or
+     38 is the 54-bank, whose indexing already matches today's. */
 function decodeBi(a, bi){
   if (a && a.bn) return bi < a.bn ? bi : null;
-  var d = bi < 27 ? bi : bi + 8;
+  var legacy45 = a && (a.total === 27 || a.total === 34);
+  var d = legacy45 && bi >= 27 ? bi + 8 : bi;
   return d < BANK.length ? d : null;
 }
 

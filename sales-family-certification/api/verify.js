@@ -14,7 +14,7 @@ const crypto = require("crypto");
 /* sha256 of the committed files. Update these in the same commit that changes
    index.html or app.js, or this endpoint will report a false alarm. */
 const EXPECTED = {
-  "/app.js": "2124a6aecc042cee4823167d73252a01d2ec58b85e8993fad015f2a31896ffda",
+  "/app.js": "1b4088617aa50d0933b5e858440d6aa571647acef9e4c2aeaf9d7e140370e5a0",
   "/index.html": "52962cd059bdfc9cbff28c90ae74fc59292885b3d5009e57ff1e4176eb643614",
 };
 

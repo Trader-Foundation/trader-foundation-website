@@ -14,7 +14,7 @@ set -euo pipefail
 # Either way the sha256 must match or the build fails loudly instead of going
 # live. Update these sums in the same commit that changes app.js or index.html.
 
-APP_SHA="2124a6aecc042cee4823167d73252a01d2ec58b85e8993fad015f2a31896ffda"
+APP_SHA="1b4088617aa50d0933b5e858440d6aa571647acef9e4c2aeaf9d7e140370e5a0"
 IDX_SHA="52962cd059bdfc9cbff28c90ae74fc59292885b3d5009e57ff1e4176eb643614"
 
 verify() {

@@ -115,7 +115,8 @@ check(Object.keys(TRAITS).every(k => {
   return bi >= 0 && bi < BANK.length && pick >= 0 && pick <= 3 && BANK[bi].type === "mc" && !BANK[bi].opts[pick].c;
 }), "every TRAITS tag points at a real wrong answer");
 check(decodeBi({bn: 64}, 63) === 63 && decodeBi({bn: 64}, 64) === null, "bn-tagged attempts decode straight through");
-check(decodeBi({}, 26) === 26 && decodeBi({}, 27) === 35, "legacy 45-bank attempts decode with the +8 shift");
+check(decodeBi({total: 34}, 26) === 26 && decodeBi({total: 34}, 27) === 35, "45-bank attempts decode with the +8 shift");
+check(decodeBi({total: 35}, 27) === 27 && decodeBi({total: 38}, 53) === 53, "54-bank attempts decode straight through");
 {
   const built = buildAttempt("setter");
   const mcItem = built.items.find(i => i.type === "mc");
