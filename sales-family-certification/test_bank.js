@@ -18,7 +18,7 @@ const sandbox = {
 vm.createContext(sandbox);
 vm.runInContext(src, sandbox);
 
-const { BANK, buildAttempt, EXAMS, examItems, examTotal, examPassMark, trackOf, COACH, TRAITS, decodeBi, DISC, RETIRED } = sandbox;
+const { BANK, buildAttempt, EXAMS, examItems, examTotal, examPassMark, trackOf, COACH, TRAITS, decodeBi, DISC, RETIRED, ROLES, fmtSpan } = sandbox;
 let fail = 0;
 const check = (cond, msg) => { if (!cond) { console.log("FAIL: " + msg); fail++; } };
 
@@ -136,6 +136,15 @@ DISC.forEach((d, i) => {
   check(letters === "CDIS", "disc q" + (i+1) + " covers D, I, S, C exactly once, got " + letters);
 });
 check(!/\bfree\b/i.test(JSON.stringify(DISC)) && !JSON.stringify(DISC).includes("\u2014"), "style section follows the style rules");
+
+// --- the team roster ---
+check(Object.keys(ROLES).sort().join(",") === "ec,quit,setter,terminated", "the four statuses exist");
+check(!/closer/i.test(JSON.stringify(ROLES)), "the role is Education Coordinator, never closer");
+check(ROLES.setter.active && ROLES.ec.active && !ROLES.terminated.active && !ROLES.quit.active, "active flags separate the team from leavers");
+const DAY = 86400000;
+check(fmtSpan(DAY) === "1 day" && fmtSpan(5 * DAY) === "5 days", "short tenures read in days");
+check(fmtSpan(30 * DAY) === "4 weeks" && fmtSpan(90 * DAY) === "3 months", "longer tenures read in weeks and months");
+check(fmtSpan(400 * DAY) === "1 year 1 month", "year spans stay grammatical");
 
 // --- per-exam attempts and retake rotation ---
 ["setter", "ec"].forEach((k) => {

@@ -3,7 +3,7 @@
    Served as a PLAIN TEXT static file on purpose. Earlier builds shipped this
    engine as a compressed binary (app.bin) and the upload path corrupted the
    binary every time. Keep this file plain text. */
-var CERT_VERSION = "2026-08-16-guarantee-r1";
+var CERT_VERSION = "2026-08-16-roster-r1";
 
 var MAX_ATTEMPTS = 3, PASS_PCT = 0.8, FAST_MINUTES = 12;
 
@@ -1124,6 +1124,7 @@ function setAdminView(v){
   ADMIN_VIEW = ADMIN_VIEW === v ? "people" : v;
   $("btn-adminview").textContent = ADMIN_VIEW === "questions" ? "Back to people" : "Question analysis";
   $("btn-breakdown").textContent = ADMIN_VIEW === "breakdown" ? "Back to people" : "Team breakdown";
+  $("btn-roster").textContent = ADMIN_VIEW === "roster" ? "Back to people" : "Team roster";
   renderAdminView();
 }
 function toggleAdminView(){ setAdminView("questions"); }
@@ -1153,12 +1154,13 @@ function setAdminExam(k){
 
 function renderAdminView(){
   renderExamTabs();
-  var views = {people:"admin-table", questions:"admin-analysis", breakdown:"admin-breakdown"};
+  var views = {people:"admin-table", questions:"admin-analysis", breakdown:"admin-breakdown", roster:"admin-roster"};
   Object.keys(views).forEach(function(k){
     $(views[k]).classList[(ADMIN_VIEW === k) ? "remove" : "add"]("hidden");
   });
   if (ADMIN_VIEW === "people") renderPeople();
   else if (ADMIN_VIEW === "questions") renderAnalysis();
+  else if (ADMIN_VIEW === "roster") renderRoster();
   else renderBreakdown();
 }
 
@@ -1499,6 +1501,113 @@ function renderBreakdown(){
 }
 
 var EXAM_KEYS_UI = ["setter", "ec"];
+
+/* ------------------------------ team roster ------------------------------
+
+   Who is on the team right now, in which position, and for how long. Status
+   history lives on the person's record as roles: [{role, ts}], newest last,
+   so tenure comes from stored timestamps instead of anyone's memory. Setting
+   the same status twice is a no-op on the server, so a stray click can never
+   restart someone's clock. */
+
+var ROLES = {
+  setter: {name:"Setter", active:true},
+  ec: {name:"Education Coordinator", active:true},
+  terminated: {name:"Terminated", active:false},
+  quit: {name:"Quit", active:false}
+};
+
+function roleHistory(u){ return Array.isArray(u.roles) ? u.roles : []; }
+function currentRole(u){ var h = roleHistory(u); return h.length ? h[h.length - 1] : null; }
+
+function fmtSpan(ms){
+  var d = Math.max(1, Math.round(ms / 86400000));
+  if (d < 14) return d + (d === 1 ? " day" : " days");
+  if (d < 61) return Math.round(d / 7) + " weeks";
+  var m = Math.round(d / 30.4);
+  if (m < 12) return m + " months";
+  var y = Math.floor(m / 12), rm = m % 12;
+  return y + (y === 1 ? " year" : " years") + (rm ? " " + rm + (rm === 1 ? " month" : " months") : "");
+}
+
+function certList(u){
+  var names = EXAM_KEYS_UI.filter(function(k){
+    return attemptsFor(u, k).some(function(a){ return a.finalPass; });
+  }).map(function(k){ return examName(k); });
+  return names.length ? '<span class="ok">' + esc(names.join(", ")) + '</span>' : '<span class="small">None yet</span>';
+}
+
+function roleButtons(u){
+  var cur = currentRole(u);
+  return Object.keys(ROLES).map(function(r){
+    var on = cur && cur.role === r;
+    return '<button class="ghost" style="margin:2px 4px 2px 0;padding:5px 9px;font-size:12px' +
+      (on ? ';background:var(--gold);color:#fff;border-color:var(--gold-dark)' : '') + '"' +
+      (on ? ' disabled' : '') + ' onclick="adminSetRole(&#39;' + esc(u.email) + '&#39;,&#39;' + r + '&#39;)">' +
+      esc(ROLES[r].name) + '</button>';
+  }).join("");
+}
+
+function rosterRow(u){
+  var cur = currentRole(u), h = roleHistory(u);
+  var pos = cur
+    ? (ROLES[cur.role].active ? esc(ROLES[cur.role].name) : '<span class="flag">' + esc(ROLES[cur.role].name) + '</span>')
+    : '<span class="pend">Not set</span>';
+  var since = cur ? fmtDate(cur.ts) : "";
+  var span = "";
+  if (cur && ROLES[cur.role].active) span = fmtSpan(Date.now() - cur.ts);
+  else if (cur){
+    /* Someone who left: show which position they held last and for how long. */
+    for (var i = h.length - 2; i >= 0; i--){
+      if (ROLES[h[i].role] && ROLES[h[i].role].active){
+        span = esc(ROLES[h[i].role].name) + " for " + fmtSpan(cur.ts - h[i].ts);
+        break;
+      }
+    }
+  }
+  var hist = "";
+  if (h.length > 1){
+    hist = '<br><span class="small">' + h.map(function(e){
+      return esc(ROLES[e.role] ? ROLES[e.role].name : e.role) + " " + fmtDate(e.ts);
+    }).join(", then ") + '</span>';
+  }
+  return '<tr><td>' + esc(u.name || u.email) + (u.tester ? ' <span class="flag">Tester</span>' : '') +
+    '<br><span class="small">' + esc(u.email) + '</span></td><td>' + pos + hist + '</td><td>' + since + '</td><td>' +
+    span + '</td><td>' + certList(u) + '</td><td>' + roleButtons(u) + '</td></tr>';
+}
+
+function renderRoster(){
+  var box = $("admin-roster"), users = (ADMIN_USERS || []).slice();
+  if (!users.length){ box.innerHTML = '<p class="small">No one has signed in yet.</p>'; return; }
+  var rank = {setter: 0, ec: 1};
+  var active = users.filter(function(u){ var c = currentRole(u); return !c || ROLES[c.role].active; });
+  var gone = users.filter(function(u){ var c = currentRole(u); return c && !ROLES[c.role].active; });
+  active.sort(function(a, b){
+    var ca = currentRole(a), cb = currentRole(b);
+    var ra = ca ? rank[ca.role] : 2, rb = cb ? rank[cb.role] : 2;
+    if (ra !== rb) return ra - rb;
+    return (ca ? ca.ts : Infinity) - (cb ? cb.ts : Infinity);
+  });
+  var head = "<table><tr><th>Name</th><th>Position</th><th>Since</th><th>Time in position</th><th>Certifications</th><th>Change status</th></tr>";
+  var h = '<p class="small">The team as it stands. Time in position runs from the moment a status was set, and setting the same status again never restarts it.</p>';
+  h += head + active.map(rosterRow).join("") + "</table>";
+  if (gone.length){
+    h += '<p class="small" style="margin-top:14px"><b>No longer on the team</b></p>';
+    h += head + gone.map(rosterRow).join("") + "</table>";
+  }
+  box.innerHTML = h;
+}
+
+async function adminSetRole(email, role){
+  if (!ROLES[role]) return;
+  if (!ROLES[role].active && !confirm("Mark " + email + " as " + ROLES[role].name + "?")) return;
+  try {
+    await api("/api/admin-action", {code:ADMIN_CODE_ENTERED, email:email, type:"role", role:role});
+    loadAdmin();
+  } catch(e){
+    alert(e.message);
+  }
+}
 
 async function adminAction(email, type, on){
   if (type === "reset" && !confirm("Clear all attempts for " + email + "? Logins stay logged.")) return;

@@ -21,6 +21,19 @@ module.exports = async (req, res) => {
       user.attempts = [];
     } else if (b.type === "tester") {
       user.tester = !!b.on;
+    } else if (b.type === "role") {
+      /* Position history, newest last: [{role, ts}]. The whole array is kept
+         so the roster can show how long someone held each position, not just
+         what they are now. Re-sending the current status is a no-op, so a
+         double click can never restart anyone's tenure clock. */
+      if (!["setter", "ec", "terminated", "quit"].includes(b.role)) {
+        return res.status(400).json({ error: "Unknown role." });
+      }
+      user.roles = Array.isArray(user.roles) ? user.roles : [];
+      const cur = user.roles[user.roles.length - 1];
+      if (!cur || cur.role !== b.role) {
+        user.roles.push({ role: b.role, ts: Date.now() });
+      }
     } else {
       return res.status(400).json({ error: "Unknown action." });
     }

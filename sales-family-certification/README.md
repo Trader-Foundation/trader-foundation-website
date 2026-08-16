@@ -46,9 +46,15 @@ Two is the strategy call. To move a question between tests, edit that list.
 - "Team breakdown" in the dashboard puts every person on one page: both
   certifications, best scores, the generated trainer read, and the working
   style profile.
-- `api/maintenance.js` is the one admin action allowed over GET, flipping a
-  tester flag, because it is idempotent and destroys nothing. Reset and
-  delete stay POST-only.
+- "Team roster" in the dashboard tracks each person's position: Setter,
+  Education Coordinator, Terminated, or Quit. Status history is stored on the
+  record as `roles: [{role, ts}]`, newest last, so the view shows how long
+  each person has held their position from real timestamps. Setting the same
+  status twice is a no-op, so tenure clocks never restart by accident, and
+  people who left keep their history and can be brought back.
+- `api/maintenance.js` carries the admin actions allowed over GET: flipping a
+  tester flag, and a delete guarded by a confirm parameter that must repeat
+  the exact email. Reset and role changes stay POST-only.
 - Every attempt records which answer the rep chose on every question. Clicking
   a name opens each attempt's misses: the question as served, what they chose,
   the trained answer, a coaching note (`COACH` in `app.js`), and a personality

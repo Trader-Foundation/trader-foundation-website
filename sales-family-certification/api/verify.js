@@ -14,8 +14,8 @@ const crypto = require("crypto");
 /* sha256 of the committed files. Update these in the same commit that changes
    index.html or app.js, or this endpoint will report a false alarm. */
 const EXPECTED = {
-  "/app.js": "47fa9e2959cd9f20a50eb8cb3a0b314ebfbe955ee744c1b71846180de76d9808",
-  "/index.html": "19c7ddfdc12773dc33e4c3bc4a30d2dfb86c44afca3111717e22e19943e35959",
+  "/app.js": "3b42e99ddf139f546ea17d80ec50511c41b99c51185cc8bfd89cfb504e26ecce",
+  "/index.html": "3e1d2e418b12ffa127eaaea525809cdb428c21e3bb15695d225edfc22aefe870",
 };
 
 /* Preview deployments get Vercel's feedback toolbar appended to every HTML

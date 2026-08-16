@@ -242,6 +242,32 @@ function call(handler, { method = "GET", body = null, query = {} } = {}) {
   r = await call(maintenance, { query: { code: "GOLD16", email: "doomed@example.com", delete: "1", confirm: "doomed@example.com" } });
   check(r.status === 404, "re-running a delete is a harmless 404");
 
+  // --- the roster: position changes with tenure history ---
+  r = await call(action, { method: "POST", body: { code: "WRONG", email: "rep.one@example.com", type: "role", role: "setter" } });
+  check(r.status === 403, "role change rejects a wrong code");
+  r = await call(action, { method: "POST", body: { code: "GOLD16", email: "rep.one@example.com", type: "role", role: "manager" } });
+  check(r.status === 400, "unknown role rejected");
+  r = await call(action, { method: "POST", body: { code: "GOLD16", email: "rep.one@example.com", type: "role", role: "setter" } });
+  check(r.status === 200, "role set over the admin action");
+  r = await call(admin, { query: { code: "GOLD16" } });
+  let rosterU = r.body.users.find((x) => x.email === "rep.one@example.com");
+  check(rosterU.roles.length === 1 && rosterU.roles[0].role === "setter" && typeof rosterU.roles[0].ts === "number",
+    "status history records the role and when it was set");
+  const roleTs = rosterU.roles[0].ts;
+  await call(action, { method: "POST", body: { code: "GOLD16", email: "rep.one@example.com", type: "role", role: "setter" } });
+  r = await call(admin, { query: { code: "GOLD16" } });
+  rosterU = r.body.users.find((x) => x.email === "rep.one@example.com");
+  check(rosterU.roles.length === 1 && rosterU.roles[0].ts === roleTs, "setting the same status again does not restart the clock");
+  await call(action, { method: "POST", body: { code: "GOLD16", email: "rep.one@example.com", type: "role", role: "ec" } });
+  await call(action, { method: "POST", body: { code: "GOLD16", email: "rep.one@example.com", type: "role", role: "terminated" } });
+  r = await call(admin, { query: { code: "GOLD16" } });
+  rosterU = r.body.users.find((x) => x.email === "rep.one@example.com");
+  check(rosterU.roles.map((x) => x.role).join(",") === "setter,ec,terminated", "history keeps every change in order");
+  await call(action, { method: "POST", body: { code: "GOLD16", email: "rep.one@example.com", type: "role", role: "setter" } });
+  r = await call(admin, { query: { code: "GOLD16" } });
+  rosterU = r.body.users.find((x) => x.email === "rep.one@example.com");
+  check(rosterU.roles.length === 4 && rosterU.roles[3].role === "setter", "a leaver can be brought back and the history shows it");
+
   // tester bypasses the cap
   await call(action, { method: "POST", body: { code: "GOLD16", email: "rep.one@example.com", type: "tester", on: true } });
   r = await call(submit, { method: "POST", body: { email: "rep.one@example.com", attempt } });
