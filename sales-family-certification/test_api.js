@@ -225,6 +225,23 @@ function call(handler, { method = "GET", body = null, query = {} } = {}) {
   r = await call(maintenance, { query: { code: "GOLD16", email: "rep.one@example.com", tester: "0" } });
   check(r.status === 200 && r.body.tester === false, "maintenance can unmark a tester over GET");
 
+  // the GET delete needs the code, delete=1, and confirm repeating the email
+  r = await call(maintenance, { query: { code: "WRONG", email: "doomed@example.com", delete: "1", confirm: "doomed@example.com" } });
+  check(r.status === 403, "maintenance delete rejects a wrong code");
+  await call(login, { method: "POST", body: { name: "Doomed Account", email: "doomed@example.com" } });
+  r = await call(maintenance, { query: { code: "GOLD16", email: "doomed@example.com", delete: "1" } });
+  check(r.status === 400, "maintenance delete without confirm is refused");
+  r = await call(maintenance, { query: { code: "GOLD16", email: "doomed@example.com", delete: "1", confirm: "other@example.com" } });
+  check(r.status === 400, "maintenance delete with a mismatched confirm is refused");
+  r = await call(admin, { query: { code: "GOLD16" } });
+  check(r.body.users.some((u) => u.email === "doomed@example.com"), "refused deletes removed nothing");
+  r = await call(maintenance, { query: { code: "GOLD16", email: "doomed@example.com", delete: "1", confirm: "doomed@example.com" } });
+  check(r.status === 200 && r.body.deleted === true, "maintenance delete works with code plus confirm");
+  r = await call(admin, { query: { code: "GOLD16" } });
+  check(!r.body.users.some((u) => u.email === "doomed@example.com"), "deleted account is gone from the roster");
+  r = await call(maintenance, { query: { code: "GOLD16", email: "doomed@example.com", delete: "1", confirm: "doomed@example.com" } });
+  check(r.status === 404, "re-running a delete is a harmless 404");
+
   // tester bypasses the cap
   await call(action, { method: "POST", body: { code: "GOLD16", email: "rep.one@example.com", type: "tester", on: true } });
   r = await call(submit, { method: "POST", body: { email: "rep.one@example.com", attempt } });
