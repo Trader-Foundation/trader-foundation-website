@@ -3,7 +3,7 @@
    Served as a PLAIN TEXT static file on purpose. Earlier builds shipped this
    engine as a compressed binary (app.bin) and the upload path corrupted the
    binary every time. Keep this file plain text. */
-var CERT_VERSION = "2026-08-16-disc-r1";
+var CERT_VERSION = "2026-08-16-guarantee-r1";
 
 var MAX_ATTEMPTS = 3, PASS_PCT = 0.8, FAST_MINUTES = 12;
 
@@ -551,7 +551,56 @@ opts:[
 {t:"As what the strategy has done in training, never as a promise for their account. Anchor to the real promise: a trade placed on their own inside a week, self-sufficiency around ninety days, the guarantee if they do the work without profit.",c:true},
 {t:"Confirm it plainly, ten to thirty percent a month is what the strategy pays, because hedging on your own numbers at the close reads as doubt, and doubt at the close is the single most expensive thing a salesperson can put in a prospect's head."},
 {t:"Refuse to discuss performance numbers at any point, because any figure spoken aloud on a recorded call is a liability, and a rep who never says a number is a rep who can never be quoted, which protects the company completely."},
-{t:"Tell them that results are entirely up to them and so any numbers are effectively meaningless, which has the considerable advantage of being technically true while also putting the responsibility exactly where it belongs before they have even started, on the student themselves rather than on the program or the coaches."}]}
+{t:"Tell them that results are entirely up to them and so any numbers are effectively meaningless, which has the considerable advantage of being technically true while also putting the responsibility exactly where it belongs before they have even started, on the student themselves rather than on the program or the coaches."}]},
+
+/* The Conditional Money-Back Guarantee document, added Aug 16. Reps quote
+   this guarantee on every call, so both roles are tested on its exact
+   eligibility criteria, not just its framing. */
+
+/* 65 */ {part:1,type:"mc",stems:[
+"A prospect asks, \"What would stop me from getting the refund?\" What is the honest standard?",
+"How strict is the Conditional Money-Back Guarantee, and how do you say that on a call?"],
+opts:[
+{t:"It is conditional on meeting every requirement in full, without exception: all three courses finished completely, homework in on time each week, weekly coaching sessions, weekly assessments passed, the paper trades, and trade reviews. Missing any one forfeits it, and you say exactly that.",c:true},
+{t:"The conditions are a formality the company rarely enforces, so the practical answer is that anyone who makes an honest effort qualifies, and the safest thing a rep can do on the call is reassure the prospect that nobody who genuinely put in the work has ever been turned away from a refund they asked for."},
+{t:"Completion is judged on the whole picture rather than any single item, so a prospect who does most of the program and shows real commitment stays eligible even if a week of homework or a handful of the paper trades slip through the cracks along the way."},
+{t:"The requirements are a private matter between the student and their coach, so the right move on a sales call is to keep the guarantee general and let the coaching team walk them through the fine print once they have already enrolled and can read it calmly."}]},
+
+/* 66 */ {part:1,type:"mc",stems:[
+"Which courses must be finished for the guarantee, and to what standard?",
+"The guarantee's first condition is course completion. Which courses, and what counts as complete?"],
+opts:[
+{t:"Every module of all three courses, each at one hundred percent completion: Trading Analysis, Options Unleashed, and the Weekly Paycheck Collector. Partial progress in any of them does not count.",c:true},
+{t:"Trading Analysis and Options Unleashed at full completion, with the Weekly Paycheck Collector treated as optional enrichment, since the guarantee is really built around the two core courses that carry the weekly homework requirement rather than the income strategy layered on top of them."},
+{t:"Any one of the three main courses at full completion, chosen to match the strategy the student actually intends to trade, because requiring all three would punish a student for specializing early in the strategy best suited to their account size and schedule."},
+{t:"All three courses at eighty percent or better, since the last stretch of every course is bonus material and the company measures completion the way schools measure passing, on substantial completion of the core rather than on watching every last minute of video."}]},
+
+/* 67 */ {part:1,type:"mc",stems:[
+"What does the guarantee's weekly engagement condition actually require?",
+"A prospect asks how much showing up the guarantee demands. What are the engagement terms?"],
+opts:[
+{t:"Both, every week: at least one individual coaching session, and participation in one group coaching session, where the group session can also be satisfied by watching the replay and messaging your coach on Skool after completing it.",c:true},
+{t:"One coaching session a week of either kind, individual or group, whichever fits the student's schedule that week, because the point of the condition is regular contact with the coaching team rather than any particular format of session on any particular day."},
+{t:"Individual sessions are the requirement and group sessions are encouraged extras, since one on one time is where a coach can actually verify the student is doing the work the guarantee depends on, while sitting quietly in a group call proves nothing about any single student."},
+{t:"Live attendance only, at both kinds of session, because replays are exactly the loophole the old version of the guarantee was abused through, and the current terms closed it by requiring every session to be attended in real time with the camera on."}]},
+
+/* 68 */ {part:1,type:"mc",stems:[
+"What does the guarantee require on paper trading, exactly?",
+"The paper trading condition has specific numbers. What are they, and what counts as a valid trade?"],
+opts:[
+{t:"At least fifty paper trades in the provided trading log for each strategy separately, Bounce Profit, Debit Spreads, and Paycheck Collector, every trade following the exact rules provided and fully executed, both the open and the close, per the program's instructions.",c:true},
+{t:"Fifty paper trades total across the strategies combined, logged wherever the student finds convenient, because the condition is really about building the habit of recording trades honestly rather than about hitting a separate quota inside each of the three strategies."},
+{t:"Fifty paper trades of which a majority finish profitable, since a guarantee about making money would mean very little if a student could qualify for it while losing on the very practice trades that are meant to prove the method works in their own hands before real money goes in."},
+{t:"A dozen live trades in a funded account for each strategy, because paper results are exactly the kind of evidence a refund dispute cannot be settled on, and only real fills with real money prove the student actually executed the method the way it was taught."}]},
+
+/* 69 */ {part:1,type:"mc",stems:[
+"Beyond finishing the courses and the paper trades, what weekly work does the guarantee require?",
+"What are the homework, assessment, and trade review conditions on the guarantee?"],
+opts:[
+{t:"Homework for Trading Analysis and Options Unleashed submitted every week, on time, without exception. Every weekly assessment taken and passed as scheduled. And trades reviewed with the coach during the coaching session.",c:true},
+{t:"Homework can be handed in whenever the student finishes it as long as everything is complete by the end of the program, since adults learning around jobs and families cannot reasonably be held to a school style weekly deadline on material they have already paid for."},
+{t:"Assessments must be attempted but not necessarily passed, because the guarantee is meant to measure effort rather than aptitude, and a student failing a weekly quiz while doing everything else on the list says the teaching needs work rather than the student."},
+{t:"Trade reviews happen automatically as long as the trading log is kept current, because a coach can read a complete log without a meeting, and the review condition exists to catch empty logs rather than to put one more weekly call on anyone's calendar."}]}
 ];
 
 
@@ -609,7 +658,7 @@ C:{name:"Precise", read:"Careful and thorough. They know the material and respec
    "setting" belongs to the setter. Every Part Two question is "strategy" and
    belongs to the Education Coordinator. */
 
-var PRODUCT_IDX = [0,1,2,3,4,5,6,8,14,15,16,17,18,20,24,25,27,28,29,54,55,56,57];
+var PRODUCT_IDX = [0,1,2,3,4,5,6,8,14,15,16,17,18,20,24,25,27,28,29,54,55,56,57,64,65,66,67,68];
 
 function trackOf(bi){
   if (BANK[bi].part === 2) return "strategy";
@@ -1183,7 +1232,12 @@ var COACH = {
   60:"Never book an unqualified call to protect a number. A wasted Education Coordinator hour costs more than a missing booking. The open community, which costs nothing, is the graceful give.",
   61:"The fifteen a month cap is real scarcity, said as fact. Inventing a lower number is lying to a prospect, and it is a habit that ends careers.",
   62:"The blow up story: twenty nine thousand in twenty nine days at age twenty nine, then twenty thousand more on options. It normalizes their losses and lands the point that the system, not the person, was the problem.",
-  63:"Strategy numbers are training results, never promises. Pair any figure with the real promise: a trade in a week, self-sufficient around ninety days, the guarantee if the work is done."
+  63:"Strategy numbers are training results, never promises. Pair any figure with the real promise: a trade in a week, self-sufficient around ninety days, the guarantee if the work is done.",
+  64:"The guarantee is every condition, in full, without exception. Drill the list until it comes out in one breath: three courses done, homework on time, weekly coaching, weekly assessments passed, the paper trades, trade reviews. Strict, said straight, builds trust.",
+  65:"Three courses, all modules, one hundred percent: Trading Analysis, Options Unleashed, Weekly Paycheck Collector. Partial credit does not exist on this condition.",
+  66:"Weekly engagement is both, not either: an individual session every week, plus the group session, live or by replay with a Skool message to the coach after finishing it. Have them recite it back.",
+  67:"Fifty paper trades per strategy, not fifty total: Bounce Profit, Debit Spreads, Paycheck Collector, each trade by the exact rules and fully executed, open and close, in the provided log.",
+  68:"The weekly rhythm: homework for the two courses on time every week, assessments taken and passed, trades reviewed with the coach. The guarantee is proof of work, and this is the proof."
 };
 
 /* What choosing a specific wrong option says about the person, keyed
@@ -1200,7 +1254,8 @@ var TRAITS = {
   "59:1":"reactive under pressure", "59:2":"gives up early", "59:3":"overpromises",
   "60:1":"chases numbers over quality", "60:3":"ethics risk",
   "61:1":"invents urgency", "61:2":"avoids the ask", "61:3":"overpromises",
-  "63:1":"overpromises", "63:2":"dodges hard questions"
+  "63:1":"overpromises", "63:2":"dodges hard questions",
+  "64:1":"overpromises", "64:3":"dodges hard questions"
 };
 
 /* Stored results reference questions by bank index, and the bank has been

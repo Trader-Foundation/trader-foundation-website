@@ -11,17 +11,17 @@ Admin: "Trainer and admin access" at the bottom of the sign-in card, code `GOLD1
 
 ## Two separate certifications
 
-Product knowledge is the half both roles need: tiers, the guarantee, the 401k
-rollover, platforms, crypto, who the company is, the burned-before proof.
-Neither role can work without it. What differs is the call each one runs, so
+Product knowledge is the half both roles need: tiers, the guarantee and its
+exact eligibility criteria, the 401k rollover, platforms, crypto, who the
+company is, the burned-before proof. Neither role can work without it. What differs is the call each one runs, so
 each test pairs the shared product half with its own call.
 
 | | Setter | Education Coordinator |
 | --- | --- | --- |
-| Product and the offer | 23 questions (shared) | 23 questions (shared) |
+| Product and the offer | 28 questions (shared) | 28 questions (shared) |
 | Its own call | 17 (the setting call) | 22 (the strategy call) |
-| Total choice questions | 40 | 45 |
-| Passing | 32 of 40 | 36 of 45 |
+| Total choice questions | 45 | 50 |
+| Passing | 36 of 45 | 40 of 50 |
 
 Every question is multiple choice. A result is final the moment it is submitted; there is no grading step.
 
@@ -117,9 +117,9 @@ codes.
 
 `test_browser.js` needs `playwright-core` and drives the actual page: first
 with storage off, checking the exam refuses cleanly and offers no workaround,
-then with storage on, taking the setter test (42 questions), watching the
-result appear in the dashboard with no pasting, grading it to CERTIFIED,
-checking the question analysis, then taking the EC test (45 questions) and
-confirming it leaves the setter test untouched.
+then with storage on, taking the setter test, watching the result appear in
+the dashboard with no pasting, grading it to CERTIFIED, checking the question
+analysis, then taking the EC test and confirming it leaves the setter test
+untouched.
 
 Run it with `NODE_PATH` pointing at wherever `playwright-core` is installed.
