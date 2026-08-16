@@ -13,7 +13,7 @@ const store = require("./_store.js");
 module.exports = async (req, res) => {
   res.setHeader("cache-control", "no-store");
   const out = {
-    version: "2026-08-04-lesson-r1",
+    version: "2026-08-07-coach-r1",
     env: process.env.VERCEL_ENV || "unknown",
     exams: store.EXAM_TOTALS,
     tokenFound: null,

@@ -3,11 +3,15 @@
    Served as a PLAIN TEXT static file on purpose. Earlier builds shipped this
    engine as a compressed binary (app.bin) and the upload path corrupted the
    binary every time. Keep this file plain text. */
-var CERT_VERSION = "2026-08-04-lesson-r1";
+var CERT_VERSION = "2026-08-07-coach-r1";
 
 var MAX_ATTEMPTS = 3, PASS_PCT = 0.8, FAST_MINUTES = 12;
 
-/* Question bank. 54 questions: 35 in Part One, 19 in Part Two.
+/* Question bank. 64 questions: 42 in Part One, 22 in Part Two. Later additions
+   are APPENDED at the end rather than inserted, whatever their part, so that a
+   question's index never shifts again: stored results reference questions by
+   index, and the one insert that did shift them (the Aug 4 lesson) is undone
+   for old records by decodeBi below.
    mc questions: two stems (retakes serve the other phrasing), first option is
    correct (c: true), positions shuffle at render time.
    tf questions: two variants with reversed polarity, retakes serve the other.
@@ -458,7 +462,96 @@ opts:[
 {t:"Matching them to the coach and the schedule that fit their life, with sessions recorded and their coach answering their questions on the live even when they cannot make it. It is not a projection of what their money will do.",c:true},
 {t:"A written projection of what their account should grow to over six months and a year at the level they are funding it, because seeing the numbers laid out is what makes the value of the program concrete for someone on the fence."},
 {t:"A portfolio the coaching team builds and manages on their behalf for the first stretch, so that a complete beginner is never making allocation decisions alone before they have learned enough to be making them well."},
-{t:"A curriculum document listing every lesson in the order they will work through it, so they can see exactly what is coming and how much material they are getting for what they are about to pay for the program."}]}
+{t:"A curriculum document listing every lesson in the order they will work through it, so they can see exactly what is coming and how much material they are getting for what they are about to pay for the program."}]},
+/* 55 */ {part:1,type:"mc",stems:[
+"A prospect asks about the money back guarantee. What are the actual terms?",
+"\"So if this does not work, do I get my money back?\" What is the honest, accurate answer?"],
+opts:[
+{t:"If you follow the training, do the work, and still do not profit, you get your money back. Doing the work is provable: coaching attendance and a trading log. That is exactly what our one refund refusal was missing, the client completed the course, took the coaching, then would not share his log.",c:true},
+{t:"Thirty days, no questions asked, full refund for any reason at all and with no paperwork, because standing behind the program that unconditionally is the strongest trust signal a company can possibly send a nervous buyer, and in practice it costs almost nothing to offer since so few people who actually start the coaching ever go on to use it."},
+{t:"There is no guarantee and it is better not to bring the subject up, because the moment a rep starts talking about refunds the prospect starts planning their exit instead of their success, and the whole tone of the call turns defensive."},
+{t:"If their trades lose money in the first ninety days, the company reimburses the losses out of the guarantee fund, which is why the coaches keep such a close eye on every position a new student opens during that window."}]},
+
+/* 56 */ {part:1,type:"mc",stems:[
+"A skeptical prospect wants hard proof the company is legitimate, beyond star ratings. What do you point to?",
+"\"Reviews can be faked. What real evidence is there that you are not a scam?\" What is the trained answer?"],
+opts:[
+{t:"The receipts nobody can fake: four payment disputes across 959 transactions since 2021, two won, one an honest double charge we refunded and own, one we take on the chin. Plus Better Business Bureau accreditation with an A plus, a public Trustpilot page we cannot delete, and an open community where they can talk to real students directly.",c:true},
+{t:"Screenshots of student profit and loss statements, because unlike marketing words those are actual account numbers from actual trades placed by actual people, and once a skeptic has seen real money made in real accounts the whole legitimacy question answers itself on the spot, which is why results screenshots have always been the strongest proof any trading educator can put in front of a doubter."},
+{t:"Explain that dispute records and payment histories are private banking information no company can share, so at the end of the day the star ratings really are the only evidence available and they will have to weigh those for themselves."},
+{t:"Our Google reviews, since Google is the platform people trust most and the rating there is strong enough that a skeptic who looks it up will come back reassured without you having to argue the point at all."}]},
+
+/* 57 */ {part:1,type:"mc",stems:[
+"Why do we refuse to show profit and loss screenshots as proof, even real ones?",
+"A rep wants to close a skeptic by showing a student's trading results. Why is that against the rules here?"],
+opts:[
+{t:"Because P and L screenshots are the number one way people get scammed, they are usually fake, and presenting results as proof is a claim that can cross a legal line. We show the service instead, and a skeptic can go talk to real students in the open community themselves.",c:true},
+{t:"Because our student results are honestly not strong enough yet to persuade anybody, so until the numbers improve it is safer for everyone if reps keep the conversation away from performance entirely and sell the coaching relationship instead."},
+{t:"Because only Steve is authorized to show results material, so the right move is to promise the prospect that all the performance data they want will be waiting for them on the strategy call once they have booked it."},
+{t:"Because there is simply no need for that kind of proof when the strategy already wins 93 percent of the time, so instead of digging up screenshots the rep should walk the prospect slowly through the win ratio and the monthly percentages until the skepticism has nowhere left to hide and the numbers have done the closing on their own."}]},
+
+/* 58 */ {part:1,type:"mc",stems:[
+"What are the four Ms, and why is the first one first?",
+"The program is built on the four M process. Which answer names all four and gets the order right?"],
+opts:[
+{t:"Mindset, Manageable technical training, Mentorship, Mastermind community. Mindset comes first because the psychology has to land before any strategy will: teach a complicated strategy to an unprepared brain and the person concludes it does not work.",c:true},
+{t:"Money, Markets, Mentorship, Mastery. Money comes first because nothing else in the program can even begin until the account is funded, which is why the qualifying conversation always starts with what the prospect has to invest."},
+{t:"Mindset, Momentum, Marketing, Mastermind. Momentum sits at the center because the data shows students who take their first trade inside seventy two hours are the ones who stay, so everything is built to get money moving fast."},
+{t:"Manageable technical training, Mindset, Mentorship, Mastermind community. The technicals come first because until someone can actually read a chart there is nothing for the psychology to even act on, which is exactly why the charting course has always been the piece that opens the program."}]},
+
+/* 59 */ {part:1,type:"mc",stems:[
+"A prospect asks you something you genuinely do not know. What do you do?",
+"Mid-call, a question comes up that you honestly cannot answer. What is the right move?"],
+opts:[
+{t:"Say so plainly: great question, I want to get it right, so let me find out and text you today. Then actually do it. Guessing trades the whole relationship for one smooth moment, and the follow-up text is another touch before the call anyway.",c:true},
+{t:"Give the most confident answer you can piece together on the spot, because hesitation reads as weakness everywhere in sales, and a prospect who hears a single um will quietly discount everything else you said on the call, however right or wrong your educated guess later turns out to be."},
+{t:"Tell them every question of that kind is handled by Steve and move on, since the setter's job description does not include knowing details, and questions on the setting call are mostly a sign the prospect is stalling anyway."},
+{t:"Steer the conversation straight back to the calendar, because time spent on questions you cannot answer is time the booking is leaking away, and once the appointment is set the question will take care of itself on the Zoom."}]},
+
+/* 60 */ {part:1,type:"mc",stems:[
+"A prospect is short with you, a bit hostile, interrupting. What is the trained posture?",
+"The person on the line is rude and combative from the first minute. How do you handle it?"],
+opts:[
+{t:"Stay warm and stay curious, because hostility is usually armor from being burned before, and calm questions find out what is under it. And if they stay abusive, end it kindly and move on: we are picky on purpose, and no booking is worth training someone to treat the team badly.",c:true},
+{t:"Match their energy and push back a little rather than absorbing it, because respect in sales is taken rather than given, and a prospect who successfully bullies you inside the first minute of a call has already privately decided that you have nothing they need before you get to say another word about the program."},
+{t:"End the call at the first sign of resistance and mark the lead dead, because the pipeline always has friendlier people in it and time spent softening a hostile prospect is time a cooperative one spent talking to a competitor."},
+{t:"Defuse it by giving something away, a discount or an extra, because nothing settles an aggravated prospect faster than feeling they have already won something, and a small concession up front is cheap against a closed deal later."}]},
+
+/* 61 */ {part:1,type:"mc",stems:[
+"It is the end of the week, you are behind on bookings, and a keen prospect who is clearly not qualified wants to book. What do you do?",
+"Your numbers are down and the only interested person on the line today has no money to trade with. What is the right call?"],
+opts:[
+{t:"Do not book it. A call that wastes an Education Coordinator's hour and ends in a rejection costs more than a missing number, and quality over quantity is the whole account. Point them to the open community and the no-cost course, and spend the hour on revives instead.",c:true},
+{t:"Book it anyway, because your job is measured in appointments set and the qualifying question belongs to the person running the strategy call, who is better placed than you to judge who can and cannot be worked with."},
+{t:"Book it but quietly give the Education Coordinator a heads up that this one is probably dead on arrival, so the number counts for the week while the team at least knows not to prepare too hard for the call itself."},
+{t:"Suggest they look into borrowing options or a credit line in the days before the call, because plenty of perfectly successful students started out with money that was not technically theirs to begin with, and at the end of the day it is not a setter's place to decide how much risk another consenting adult chooses to take."}]},
+
+/* 62 */ {part:2,type:"mc",stems:[
+"The program takes 15 people a month. How do you use that honestly on a strategy call?",
+"How does the monthly intake cap get used in the close, and what is off limits about it?"],
+opts:[
+{t:"Say it as fact, not pressure: one-on-one coaching does not scale, so intake is capped at 15 a month, which is why we recommend starting before the month's spots go instead of waiting for a better time. Never invent a lower number to force the close.",c:true},
+{t:"Tell them there are two spots left whatever the real number is, because scarcity only works when it feels immediate, and nobody on the other end of the phone has any way of checking how many spots a private program actually has open."},
+{t:"Leave the cap out of the conversation entirely, because talking about limited spots makes even an honest program sound like a late night infomercial, and a genuinely serious buyer makes the decision on the merits of the coaching itself rather than on whatever calendar pressure happens to be sitting around it."},
+{t:"Offer to hold a spot outside the cap if they pay today, because flexibility on the limit shows goodwill to a serious buyer and the cap is really there for the hesitant people rather than for the ones ready to move."}]},
+
+/* 63 */ {part:2,type:"mc",stems:[
+"Why does the founder's blow up story belong on a strategy call, and what are its facts?",
+"What is the story of how the founder started trading, and what work does it do in the conversation?"],
+opts:[
+{t:"He lost 29 thousand dollars in 29 days at age 29 on penny stocks, then 20 thousand more in two months on options in 2013. It is the same struggle the prospect is living, and it lands the point: it was never that he was not smart enough, it was the system.",c:true},
+{t:"He was profitable almost from his very first month in the market, which is the whole reason he is qualified to be teaching anyone at all, and the story matters on calls because prospects only really want to learn from someone whose account has gone in one direction since the day he started trading."},
+{t:"He lost money for years and the lesson of the story is that trading is mostly luck and timing, so the honest pitch is that we cannot promise the market will cooperate, but we can promise the prospect will have company while they find out."},
+{t:"The story is that he built the strategy at a bank desk before leaving to teach it, and it works on calls because institutional credentials close the trust gap faster than any personal struggle story ever could with a skeptical buyer."}]},
+
+/* 64 */ {part:2,type:"mc",stems:[
+"The prospect asks, \"So I will really make 10 to 30 percent a month?\" How do you handle the strategy's numbers?",
+"How are the Paycheck Collector figures, the 93 percent win ratio and 10 to 30 percent a month, allowed to be used in a close?"],
+opts:[
+{t:"As what the strategy has done in training, never as a promise for their account. Anchor to the real promise: a trade placed on their own inside a week, self-sufficiency around ninety days, the guarantee if they do the work without profit.",c:true},
+{t:"Confirm it plainly, ten to thirty percent a month is what the strategy pays, because hedging on your own numbers at the close reads as doubt, and doubt at the close is the single most expensive thing a salesperson can put in a prospect's head."},
+{t:"Refuse to discuss performance numbers at any point, because any figure spoken aloud on a recorded call is a liability, and a rep who never says a number is a rep who can never be quoted, which protects the company completely."},
+{t:"Tell them that results are entirely up to them and so any numbers are effectively meaningless, which has the considerable advantage of being technically true while also putting the responsibility exactly where it belongs before they have even started, on the student themselves rather than on the program or the coaches."}]}
 ];
 
 
@@ -474,7 +567,7 @@ opts:[
    "setting" belongs to the setter. Every Part Two question is "strategy" and
    belongs to the Education Coordinator. */
 
-var PRODUCT_IDX = [0,1,2,3,4,5,6,8,14,15,16,17,18,20,24,25,27,28,29];
+var PRODUCT_IDX = [0,1,2,3,4,5,6,8,14,15,16,17,18,20,24,25,27,28,29,54,55,56,57];
 
 function trackOf(bi){
   if (BANK[bi].part === 2) return "strategy";
@@ -711,7 +804,9 @@ function buildAttempt(examKey, lastServed){
       v = Math.floor(Math.random() * q.stems.length);
       if (prev["q"+bi] !== undefined && q.stems.length > 1) v = (prev["q"+bi] + 1) % q.stems.length;
       served["q"+bi] = v;
-      items.push({track:track, type:"mc", bi:bi, stem:q.stems[v], opts:shuffle(q.opts.map(function(o){ return {t:o.t, c:!!o.c}; }))});
+      /* oi remembers each option's position in the bank, so the record of what
+         a rep picked survives the shuffle and a trainer can read it back. */
+      items.push({track:track, type:"mc", bi:bi, stem:q.stems[v], opts:shuffle(q.opts.map(function(o, oi){ return {t:o.t, c:!!o.c, oi:oi}; }))});
     } else {
       v = Math.floor(Math.random() * q.vars.length);
       if (prev["q"+bi] !== undefined && q.vars.length > 1) v = (prev["q"+bi] + 1) % q.vars.length;
@@ -807,19 +902,32 @@ async function runSubmit(){
 
   var score = 0, sectionScores = {}, perQ = [];
   ATTEMPT.items.forEach(function(item){
-    var ok = item.type === "mc"
-      ? item.opts[parseInt(item.given,10)].c === true
-      : (item.given === "true") === item.ans;
+    var ok, pick;
+    if (item.type === "mc"){
+      var chosen = item.opts[parseInt(item.given,10)];
+      ok = chosen.c === true;
+      pick = chosen.oi;
+    } else {
+      ok = (item.given === "true") === item.ans;
+      pick = item.given === "true" ? 1 : 0;
+    }
     if (ok){
       score++;
       sectionScores[item.track] = (sectionScores[item.track] || 0) + 1;
     }
-    perQ.push({bi:item.bi, ok:ok});
+    /* pick is the bank position of the option they chose (mc), or 1/0 for a
+       True/False answer, so the dashboard can show a trainer not just that a
+       question was missed but which wrong idea the rep actually holds. */
+    perQ.push({bi:item.bi, ok:ok, pick:pick});
   });
   var mins = Math.round((Date.now() - ATTEMPT.startTs) / 60000 * 10) / 10;
   var autoPass = score >= Math.ceil(PASS_PCT * total);
   var payload = {
     exam:ATTEMPT.exam,
+    /* bn records which bank generation graded this attempt. Questions are only
+       ever appended, so any bi below a recorded bn refers to the same question
+       forever, which is what lets the dashboard reconstruct old attempts. */
+    bn:BANK.length,
     score:score, total:total, sectionScores:sectionScores, mins:mins, autoPass:autoPass,
     served:ATTEMPT.served, perQ:perQ
   };
@@ -973,23 +1081,180 @@ function renderPeople(){
   box.innerHTML = h;
 }
 
+/* ------------------------------ coaching layer ------------------------------
+
+   Everything below exists so a trainer clicking a name sees not just that a
+   question was missed, but which wrong idea the rep actually holds, what to
+   say to fix it, and what the pattern of their wrong choices says about how
+   they will behave on a live call. */
+
+/* What to tell a rep who missed this question, keyed by bank index. Anything
+   without an entry falls back to walking them through the trained answer. */
+var COACH = {
+  0:"Re-teach the two strategies as one arc: swing trading builds the account, the Paycheck Collector sells options to collect premium upfront. Have them say it back in thirty seconds.",
+  1:"The platform answer is ThinkOrSwim first, for back-testing and paper trading, then coaching walks them to whatever broker they prefer. Never dodge a platform question.",
+  5:"The fifteen thousand is a filter for serious people, not an entry requirement. Role-play qualifying by speaking to capital instead of asking for it.",
+  9:"The video ask has to end in a commitment: pin down exactly when they will watch, then ask for a two sentence text afterwards. Role-play that close until it is automatic.",
+  10:"Brand new is not an obstacle, it is the fit: Steve specializes in people who have never traded. Practice welcoming the beginner instead of hesitating on them.",
+  14:"Lead the guarantee with the catch, told straight: do the work, keep the trading log, then it pays. Serious people trust conditions, tourists want no questions asked.",
+  18:"A crypto asker stays: the foundation transfers and options is just our vehicle. Practice bridging from what they asked for to what actually gets them there.",
+  37:"Losing money is the surface complaint. Coach two more questions before any pitch: what is the money for, who is it for, what changes when it works.",
+  38:"When a prospect names the exact problem we solve, do not pitch early. Finish discovery first, so the close lands on full information instead of one lucky line.",
+  40:"An emotional line like the kids' games is close material: write it down word for word and spend it back at the close in their own words.",
+  41:"\"Might\" beats \"will\" in the transition: might keeps them leaning in and asking, will hands them certainty too early. Drill the permission-based pitch opening.",
+  44:"Present one tier, chosen from their own words, never the menu. Three options makes people afraid of picking wrong, and afraid people stall.",
+  48:"Split payments live or die on setup: right initial amount, right recurring amount, right period, and the subscription must end after the agreed cycles.",
+  52:"A call where the prospect did most of the talking is a call run right. People who talk themselves into it buy at a different level than people who were talked into it.",
+  54:"Guarantee terms exactly: follow the training, prove the work with coaching attendance and a trading log, no profit means money back. Never unconditional, never dodged.",
+  55:"Legitimacy is receipts, not adjectives: four disputes in 959 transactions since 2021, BBB A plus, a public Trustpilot page, and an open community full of real students.",
+  56:"P and L screenshots are how people get scammed, and presenting results as proof can cross a legal line. We show the service and let skeptics meet real students.",
+  57:"The four Ms in order: Mindset, Manageable technicals, Mentorship, Mastermind. Mindset first, because a strategy taught to an unprepared brain reads as \"it does not work\".",
+  58:"Not knowing is fine, hiding it is not: say so, find out, text them the same day. The follow-up text is one more touch before the call anyway.",
+  59:"Hostility is usually armor from being burned. Stay warm, get curious about what is under it, and if it stays abusive end it kindly. We are picky on purpose.",
+  60:"Never book an unqualified call to protect a number. A wasted Education Coordinator hour costs more than a missing booking. The open community, which costs nothing, is the graceful give.",
+  61:"The fifteen a month cap is real scarcity, said as fact. Inventing a lower number is lying to a prospect, and it is a habit that ends careers.",
+  62:"The blow up story: twenty nine thousand in twenty nine days at age twenty nine, then twenty thousand more on options. It normalizes their losses and lands the point that the system, not the person, was the problem.",
+  63:"Strategy numbers are training results, never promises. Pair any figure with the real promise: a trade in a week, self-sufficient around ninety days, the guarantee if the work is done."
+};
+
+/* What choosing a specific wrong option says about the person, keyed
+   "bankIndex:optionIndex". Only distractors that are genuinely diagnostic are
+   tagged: a factual mix-up says nothing about character, but choosing to
+   invent scarcity or dodge a hard question does. */
+var TRAITS = {
+  "1:3":"dodges hard questions",
+  "9:2":"pressures instead of guides", "9:3":"avoids the ask",
+  "54:1":"overpromises", "54:2":"dodges hard questions", "54:3":"overpromises",
+  "55:1":"compliance risk", "55:3":"sloppy on details",
+  "56:2":"dodges hard questions", "56:3":"overpromises",
+  "58:1":"wings it instead of checking", "58:2":"dodges hard questions", "58:3":"chases the booking",
+  "59:1":"reactive under pressure", "59:2":"gives up early", "59:3":"overpromises",
+  "60:1":"chases numbers over quality", "60:3":"ethics risk",
+  "61:1":"invents urgency", "61:2":"avoids the ask", "61:3":"overpromises",
+  "63:1":"overpromises", "63:2":"dodges hard questions"
+};
+
+/* Stored results reference questions by bank index, and the bank has been
+   edited once in a way that shifted indices: the Aug 4 lesson inserted eight
+   Part One questions ahead of Part Two, moving every original Part Two
+   question up by eight. Attempts record bn (the bank size that graded them)
+   since then, and the bank is append-only since then, so:
+   - an attempt with bn: any bi below it is already correct, forever
+   - an attempt without bn predates the shift: original 45-bank indexing */
+function decodeBi(a, bi){
+  if (a && a.bn) return bi < a.bn ? bi : null;
+  var d = bi < 27 ? bi : bi + 8;
+  return d < BANK.length ? d : null;
+}
+
+function correctTextOf(q, v){
+  if (q.type === "mc"){
+    for (var i = 0; i < q.opts.length; i++) if (q.opts[i].c) return q.opts[i].t;
+  }
+  return q.vars[v] && q.vars[v].a ? "True" : "False";
+}
+
+/* The trainer-facing read on one person: are they solid, where are they weak,
+   and what their wrong choices say about them. Deliberately plain sentences,
+   because Kaleb reads this between calls. */
+function personAssessment(u, at){
+  if (!at.length) return "";
+  var best = at.reduce(function(m, a){ return a.score > m.score ? a : m; }, at[0]);
+  var certified = at.some(function(a){ return a.finalPass; });
+  var passMark = Math.ceil(PASS_PCT * (best.total || examTotal(ADMIN_EXAM)));
+  var margin = best.score - passMark;
+  var lines = [];
+
+  if (certified){
+    lines.push(margin >= 3
+      ? "Certified with room to spare: best score clears the pass mark by " + margin + "."
+      : "Certified, but at the line: best score clears the pass mark by " + (margin < 1 ? "nothing" : margin) + ". Verify the misses below in person before treating this as solid.");
+  } else {
+    var left = Math.max(0, MAX_ATTEMPTS - at.length);
+    lines.push("Not certified. " + (left ? left + " attempt" + (left>1?"s":"") + " remaining." : "No attempts remaining without a trainer reset."));
+  }
+  if (typeof best.mins === "number" && best.mins < FAST_MINUTES){
+    lines.push("Their best run took " + best.mins + " minutes, which is fast enough to question how carefully they read.");
+  }
+
+  /* Weakest area, computed from the misses themselves so it works on every
+     generation of the bank. */
+  var tr = {};
+  (best.perQ || []).forEach(function(p){
+    var d = decodeBi(best, p.bi);
+    if (d === null) return;
+    var t = trackOf(d);
+    tr[t] = tr[t] || {asked:0, missed:0};
+    tr[t].asked++;
+    if (!p.ok) tr[t].missed++;
+  });
+  var label = {product:"product knowledge", setting:"the setting call", strategy:"the strategy call"};
+  var worst = null;
+  Object.keys(tr).forEach(function(k){
+    if (tr[k].missed && (!worst || tr[k].missed / tr[k].asked > tr[worst].missed / tr[worst].asked)) worst = k;
+  });
+  if (worst) lines.push("Weakest area on their best attempt: " + label[worst] + ", " + tr[worst].missed + " of " + tr[worst].asked + " missed.");
+
+  /* Personality signals, from which wrong answers they chose across every
+     attempt. Only attempts new enough to have recorded the choice count. */
+  var sig = {}, anyPicks = false;
+  at.forEach(function(a){
+    (a.perQ || []).forEach(function(p){
+      if (p.ok || typeof p.pick !== "number") return;
+      anyPicks = true;
+      var d = decodeBi(a, p.bi);
+      if (d === null) return;
+      var t = TRAITS[d + ":" + p.pick];
+      if (t) sig[t] = (sig[t] || 0) + 1;
+    });
+  });
+  var sigKeys = Object.keys(sig).sort(function(a,b){ return sig[b] - sig[a]; });
+  if (sigKeys.length){
+    lines.push("Pattern in the wrong answers they chose: " + sigKeys.map(function(k){ return k + (sig[k] > 1 ? " (" + sig[k] + "×)" : ""); }).join(", ") + ". Probe this in the interview, it predicts call behavior.");
+  } else if (anyPicks){
+    lines.push("No concerning pattern in which wrong answers they chose: their misses read as knowledge gaps, not character ones.");
+  }
+  return '<div class="wbox" style="border-left:4px solid var(--gold)"><b>Trainer read</b><br>' +
+    lines.map(esc).join("<br>") + '</div>';
+}
+
 function attemptDetail(u, at){
   at = at || [];
   if (!at.length) return '<p class="small">No attempts at this certification.</p>';
-  var h = "";
+  var h = personAssessment(u, at);
   at.forEach(function(a, ai){
     var outOf = a.total || examTotal(ADMIN_EXAM);
     h += '<div class="wbox"><b>Attempt ' + (ai+1) + '</b> &middot; ' + fmtDate(a.ts) + ' &middot; ' +
       a.score + '/' + outOf + ' &middot; ' + a.mins + 'm &middot; ' +
       (a.finalPass ? '<span class="ok">Certified</span>' : '<span class="flag">Not yet</span>');
-    /* Section breakdown, so a miss is traceable to product knowledge or to the
-       call itself rather than just a total. */
     var secs = a.sectionScores || {};
     var parts = Object.keys(secs).map(function(k){
       var label = {product:"Product", setting:"Setting call", strategy:"Strategy call"}[k] || k;
       return label + ": " + secs[k];
     });
-    if (parts.length) h += '<br><span class="small">' + esc(parts.join(" &middot; ").replace(/&middot;/g, "·")) + '</span>';
+    if (parts.length) h += '<br><span class="small">' + esc(parts.join(" · ")) + '</span>';
+
+    /* Every miss, with what they chose, the trained answer, and what to say. */
+    (a.perQ || []).forEach(function(p){
+      if (p.ok) return;
+      var d = decodeBi(a, p.bi);
+      if (d === null) return;
+      var q = BANK[d];
+      var v = a.served && typeof a.served["q" + p.bi] === "number" ? a.served["q" + p.bi] : 0;
+      var stem = q.type === "mc" ? q.stems[Math.min(v, q.stems.length - 1)] : q.vars[Math.min(v, q.vars.length - 1)].s;
+      var picked = null;
+      if (typeof p.pick === "number"){
+        picked = q.type === "mc" ? (q.opts[p.pick] ? q.opts[p.pick].t : null) : (p.pick === 1 ? "True" : "False");
+      }
+      var trait = typeof p.pick === "number" ? TRAITS[d + ":" + p.pick] : null;
+      h += '<div style="margin:8px 0 0;padding:8px 10px;border-left:3px solid var(--fail);background:#fff">' +
+        '<b>Missed:</b> ' + esc(stem) + '<br>' +
+        '<span class="flag">They chose:</span> ' + (picked ? esc(picked) : '<i>answer choice was not recorded on this attempt</i>') +
+        (trait ? ' <span class="flag">[signal: ' + esc(trait) + ']</span>' : '') + '<br>' +
+        '<span class="ok">Trained answer:</span> ' + esc(correctTextOf(q, Math.min(v, (q.vars||[]).length ? q.vars.length-1 : 0))) + '<br>' +
+        '<b>Coach:</b> ' + esc(COACH[d] || "Walk them back through the trained answer above until they can say it in their own words.") +
+        '</div>';
+    });
     h += '</div>';
   });
   return h;
@@ -1005,9 +1270,14 @@ function renderAnalysis(){
     attemptsFor(u, ADMIN_EXAM).forEach(function(a){
       (a.perQ || []).forEach(function(p){
         if (typeof p.bi !== "number") return;
-        if (!stats[p.bi]) stats[p.bi] = {asked:0, missed:0};
-        stats[p.bi].asked++;
-        if (!p.ok) stats[p.bi].missed++;
+        /* Decode through the bank generation the attempt was graded on, so an
+           old record counts against the question it actually asked rather
+           than whatever now sits at that index. */
+        var d = decodeBi(a, p.bi);
+        if (d === null) return;
+        if (!stats[d]) stats[d] = {asked:0, missed:0};
+        stats[d].asked++;
+        if (!p.ok) stats[d].missed++;
       });
     });
   });

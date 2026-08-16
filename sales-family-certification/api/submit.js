@@ -24,6 +24,10 @@ module.exports = async (req, res) => {
     const attempt = store.recomputeAttempt({
       exam,
       ts: Date.now(),
+      /* bn is which bank generation graded this, pick is which answer the rep
+         chose. Both exist so the dashboard can show a trainer the wrong idea a
+         rep actually holds, not just that a question was missed. */
+      bn: Number(a.bn) || undefined,
       score: Number(a.score) || 0,
       total: Number(a.total) || store.EXAM_TOTALS[exam],
       sectionScores: a.sectionScores && typeof a.sectionScores === "object" ? a.sectionScores : {},
@@ -31,7 +35,11 @@ module.exports = async (req, res) => {
       autoPass: !!a.autoPass,
       served: a.served && typeof a.served === "object" ? a.served : {},
       perQ: Array.isArray(a.perQ)
-        ? a.perQ.slice(0, 60).map((p) => ({ bi: Number(p.bi), ok: !!p.ok }))
+        ? a.perQ.slice(0, 80).map((p) => ({
+            bi: Number(p.bi),
+            ok: !!p.ok,
+            ...(typeof p.pick === "number" ? { pick: p.pick } : {}),
+          }))
         : [],
     });
 

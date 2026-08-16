@@ -18,13 +18,13 @@ const sandbox = {
 vm.createContext(sandbox);
 vm.runInContext(src, sandbox);
 
-const { BANK, buildAttempt, EXAMS, examItems, examTotal, examPassMark, trackOf } = sandbox;
+const { BANK, buildAttempt, EXAMS, examItems, examTotal, examPassMark, trackOf, COACH, TRAITS, decodeBi } = sandbox;
 let fail = 0;
 const check = (cond, msg) => { if (!cond) { console.log("FAIL: " + msg); fail++; } };
 
-check(BANK.length === 54, "bank has 54 questions, got " + BANK.length);
-check(BANK.filter(q => q.part === 1).length === 35, "35 in part 1, got " + BANK.filter(q => q.part === 1).length);
-check(BANK.filter(q => q.part === 2).length === 19, "19 in part 2, got " + BANK.filter(q => q.part === 2).length);
+check(BANK.length === 64, "bank has 64 questions, got " + BANK.length);
+check(BANK.filter(q => q.part === 1).length === 42, "42 in part 1, got " + BANK.filter(q => q.part === 1).length);
+check(BANK.filter(q => q.part === 2).length === 22, "22 in part 2, got " + BANK.filter(q => q.part === 2).length);
 check(sandbox.WRITTEN === undefined, "written scenarios are gone; every question is multiple choice");
 
 let mc = 0, tf = 0, distractors = 0;
@@ -45,9 +45,9 @@ BANK.forEach((q, i) => {
     check(false, "q" + (i+1) + " unknown type " + q.type);
   }
 });
-check(mc === 46, "46 mc questions, got " + mc);
+check(mc === 56, "56 mc questions, got " + mc);
 check(tf === 8, "8 tf questions, got " + tf);
-check(distractors === 138, "138 distractors, got " + distractors);
+check(distractors === 168, "168 distractors, got " + distractors);
 
 // Style rules: no em dashes anywhere, never the word "free".
 check(!src.includes("—"), "no em dashes in app.js");
@@ -61,15 +61,15 @@ BANK.forEach(q => {
   if (lens[0] === Math.max(...lens)) longestCorrect++;
 });
 console.log("questions where correct is longest: " + longestCorrect + " of " + mc);
-check(longestCorrect >= 4 && longestCorrect <= 14, "correct-is-longest sits near chance, got " + longestCorrect);
+check(longestCorrect >= 4 && longestCorrect <= 18, "correct-is-longest sits near chance, got " + longestCorrect);
 
 // --- the two certifications ---
 const tracks = { product: 0, setting: 0, strategy: 0 };
 BANK.forEach((q, i) => tracks[trackOf(i)]++);
-check(tracks.product === 19, "19 shared product questions, got " + tracks.product);
-check(tracks.setting === 16, "16 setting-call questions, got " + tracks.setting);
-check(tracks.strategy === 19, "19 strategy-call questions, got " + tracks.strategy);
-check(tracks.product + tracks.setting + tracks.strategy === 54, "every question has a track");
+check(tracks.product === 23, "23 shared product questions, got " + tracks.product);
+check(tracks.setting === 19, "19 setting-call questions, got " + tracks.setting);
+check(tracks.strategy === 22, "22 strategy-call questions, got " + tracks.strategy);
+check(tracks.product + tracks.setting + tracks.strategy === 64, "every question has a track");
 
 // Part Two is strategy only; product/setting live in Part One.
 BANK.forEach((q, i) => {
@@ -77,22 +77,22 @@ BANK.forEach((q, i) => {
   else check(trackOf(i) !== "strategy", "q" + (i+1) + " in part 1 is not strategy");
 });
 
-check(examTotal("setter") === 35, "setter test is 35 questions, got " + examTotal("setter"));
-check(examTotal("ec") === 38, "EC test is 38 questions, got " + examTotal("ec"));
-check(examPassMark("setter") === 28, "setter passes at 28, got " + examPassMark("setter"));
-check(examPassMark("ec") === 31, "EC passes at 31, got " + examPassMark("ec"));
+check(examTotal("setter") === 42, "setter test is 42 questions, got " + examTotal("setter"));
+check(examTotal("ec") === 45, "EC test is 45 questions, got " + examTotal("ec"));
+check(examPassMark("setter") === 34, "setter passes at 34, got " + examPassMark("setter"));
+check(examPassMark("ec") === 36, "EC passes at 36, got " + examPassMark("ec"));
 
 // Both exams share the product half, and neither leaks the other's call.
 const sItems = examItems("setter"), eItems = examItems("ec");
 const shared = sItems.filter((i) => eItems.includes(i));
-check(shared.length === 19, "both tests share the 19 product questions, got " + shared.length);
+check(shared.length === 23, "both tests share the 23 product questions, got " + shared.length);
 check(shared.every((i) => trackOf(i) === "product"), "everything shared is product knowledge");
 check(sItems.every((i) => trackOf(i) !== "strategy"), "setter test contains no strategy-call questions");
 check(eItems.every((i) => trackOf(i) !== "setting"), "EC test contains no setting-call questions");
 
 // Nothing from the bank is orphaned by the split.
 const covered = new Set([...sItems, ...eItems]);
-check(covered.size === 54, "every bank question appears on at least one test, got " + covered.size);
+check(covered.size === 64, "every bank question appears on at least one test, got " + covered.size);
 check(!EXAMS.setter.written && !EXAMS.ec.written, "neither exam carries written scenarios");
 
 // The three retired written scenarios each survive as a multiple choice question.
@@ -107,6 +107,22 @@ retired.forEach((r) => {
   check(hits.length === 1, "retired scenario \"" + r.probe + "\" is still tested exactly once, got " + hits.length);
   if (hits.length === 1) check(trackOf(hits[0].bi) === r.track, "\"" + r.probe + "\" sits on the " + r.track + " track");
 });
+
+// --- the coaching layer ---
+check(Object.keys(COACH).every(k => Number(k) >= 0 && Number(k) < BANK.length), "every COACH note points at a real question");
+check(Object.keys(TRAITS).every(k => {
+  const [bi, pick] = k.split(":").map(Number);
+  return bi >= 0 && bi < BANK.length && pick >= 0 && pick <= 3 && BANK[bi].type === "mc" && !BANK[bi].opts[pick].c;
+}), "every TRAITS tag points at a real wrong answer");
+check(decodeBi({bn: 64}, 63) === 63 && decodeBi({bn: 64}, 64) === null, "bn-tagged attempts decode straight through");
+check(decodeBi({}, 26) === 26 && decodeBi({}, 27) === 35, "legacy 45-bank attempts decode with the +8 shift");
+{
+  const built = buildAttempt("setter");
+  const mcItem = built.items.find(i => i.type === "mc");
+  check(mcItem.opts.every(o => typeof o.oi === "number") &&
+    [...new Set(mcItem.opts.map(o => o.oi))].length === 4, "shuffled options keep their bank position for pick tracking");
+  check(mcItem.opts.find(o => o.c).oi === 0, "the correct option's bank position is always 0");
+}
 
 // --- per-exam attempts and retake rotation ---
 ["setter", "ec"].forEach((k) => {

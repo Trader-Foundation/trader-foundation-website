@@ -18,14 +18,14 @@ each test pairs the shared product half with its own call.
 
 | | Setter | Education Coordinator |
 | --- | --- | --- |
-| Product and the offer | 19 questions (shared) | 19 questions (shared) |
-| Its own call | 16 (the setting call) | 19 (the strategy call) |
-| Total choice questions | 35 | 38 |
-| Passing | 28 of 35 | 31 of 38 |
+| Product and the offer | 23 questions (shared) | 23 questions (shared) |
+| Its own call | 19 (the setting call) | 22 (the strategy call) |
+| Total choice questions | 42 | 45 |
+| Passing | 34 of 42 | 36 of 45 |
 
 Every question is multiple choice. A result is final the moment it is submitted; there is no grading step.
 
-Every one of the 54 bank questions is used. A rep
+Every one of the 64 bank questions is used. A rep
 picks their test after signing in. Attempts, caps, best scores, pass status,
 and the question analysis are all tracked separately per certification, so
 using up setter attempts never locks someone out of the EC test.
@@ -39,6 +39,12 @@ Two is the strategy call. To move a question between tests, edit that list.
 - Retakes serve alternate variants of every question (rephrased stems,
   shuffled answers, flipped true/false), so memorizing an attempt backfires.
 - 3-attempt cap per certification. Tester accounts bypass it.
+- Every attempt records which answer the rep chose on every question. Clicking
+  a name opens each attempt's misses: the question as served, what they chose,
+  the trained answer, a coaching note (`COACH` in `app.js`), and a personality
+  signal when the wrong answer they picked is diagnostic (`TRAITS`). Above the
+  attempts sits a generated trainer read: certification verdict, margin,
+  weakest area, and any pattern in their wrong choices.
 - Trainer dashboard: roster with logins, attempts, best scores, status
   (CERTIFIED / NOT YET), anti-cheat flags (under 12 minutes = fast; more
   logins than attempts),
@@ -101,9 +107,9 @@ codes.
 
 `test_browser.js` needs `playwright-core` and drives the actual page: first
 with storage off, checking the exam refuses cleanly and offers no workaround,
-then with storage on, taking the setter test (35 questions), watching the
+then with storage on, taking the setter test (42 questions), watching the
 result appear in the dashboard with no pasting, grading it to CERTIFIED,
-checking the question analysis, then taking the EC test (38 questions) and
+checking the question analysis, then taking the EC test (45 questions) and
 confirming it leaves the setter test untouched.
 
 Run it with `NODE_PATH` pointing at wherever `playwright-core` is installed.
