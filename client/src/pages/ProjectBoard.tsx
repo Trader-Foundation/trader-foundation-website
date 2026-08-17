@@ -1,27 +1,45 @@
 /*
- * Project Board - simple Trello-style kanban for Vlad & Erin.
+ * Project Board - Trello-style kanban for the Trader Foundation team.
  * Unlisted: not linked from site nav, disallowed in robots.txt, noindex/nofollow.
- * Data lives in this browser's localStorage - there is no backend for it.
+ * Data lives in this browser's localStorage - there is no backend for it, and
+ * the sign-in gate is a lightweight shared passcode, not real account security.
  */
 
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import CardDetailDialog, {
+  MemberAvatar,
+} from '@/components/board/CardDetailDialog';
 import {
-  Dialog,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog';
+  type BoardCard,
+  type BoardColumn,
+  type MemberId,
+  BOARD_PASSCODE_SHA256,
+  MEMBER_IDS,
+  MEMBERS,
+  SESSION_KEY,
+  STORAGE_KEY,
+  dueStatus,
+  formatDue,
+  loadBoard,
+  loadSessionUser,
+  newCard,
+  normalizeBoard,
+  sha256Hex,
+} from '@/components/board/boardModel';
+import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import {
-  AlignLeft,
+  Calendar,
+  CheckSquare,
   Download,
-  GripVertical,
+  FileText,
+  LogOut,
+  MessageSquare,
+  Paperclip,
   Plus,
   Trash2,
   Upload,
+  Video,
   X,
 } from 'lucide-react';
 import { nanoid } from 'nanoid';
@@ -32,90 +50,19 @@ import { toast } from 'sonner';
 const LOGO_URL =
   'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/Transparentlogo_ee195afe.png';
 
-const STORAGE_KEY = 'tf-project-board-v1';
-
-type Assignee = 'vlad' | 'erin' | 'both';
-
-interface BoardCard {
-  id: string;
-  title: string;
-  notes: string;
-  assignee: Assignee | null;
-  createdAt: number;
-}
-
-interface BoardColumn {
-  id: string;
-  title: string;
-  cards: BoardCard[];
-}
-
-const ASSIGNEE_META: Record<Assignee, { label: string; className: string }> = {
-  vlad: {
-    label: 'Vlad',
-    className: 'bg-amber-500/15 text-amber-300 border-amber-500/40',
-  },
-  erin: {
-    label: 'Erin',
-    className: 'bg-sky-500/15 text-sky-300 border-sky-500/40',
-  },
-  both: {
-    label: 'Vlad + Erin',
-    className: 'bg-violet-500/15 text-violet-300 border-violet-500/40',
-  },
-};
-
-function defaultColumns(): BoardColumn[] {
-  return [
-    { id: nanoid(8), title: 'To Do', cards: [] },
-    { id: nanoid(8), title: 'In Progress', cards: [] },
-    { id: nanoid(8), title: 'Done', cards: [] },
-  ];
-}
-
-function isBoardData(value: unknown): value is BoardColumn[] {
-  return (
-    Array.isArray(value) &&
-    value.every(
-      (col) =>
-        col &&
-        typeof col.id === 'string' &&
-        typeof col.title === 'string' &&
-        Array.isArray(col.cards) &&
-        col.cards.every(
-          (card: unknown) =>
-            card &&
-            typeof (card as BoardCard).id === 'string' &&
-            typeof (card as BoardCard).title === 'string',
-        ),
-    )
-  );
-}
-
-function loadBoard(): BoardColumn[] {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return defaultColumns();
-    const parsed = JSON.parse(raw);
-    if (isBoardData(parsed)) return parsed;
-  } catch {
-    /* fall through to defaults */
-  }
-  return defaultColumns();
-}
-
 interface DropTarget {
   columnId: string;
   index: number;
 }
 
 export default function ProjectBoard() {
+  const [user, setUser] = useState<MemberId | null>(loadSessionUser);
   const [columns, setColumns] = useState<BoardColumn[]>(loadBoard);
   const [dragCardId, setDragCardId] = useState<string | null>(null);
   const [dropTarget, setDropTarget] = useState<DropTarget | null>(null);
-  const [editingCard, setEditingCard] = useState<{
+  const [editing, setEditing] = useState<{
     columnId: string;
-    card: BoardCard;
+    cardId: string;
   } | null>(null);
   const [addingToColumn, setAddingToColumn] = useState<string | null>(null);
   const [renamingColumn, setRenamingColumn] = useState<string | null>(null);
@@ -136,8 +83,8 @@ export default function ProjectBoard() {
     const onStorage = (e: StorageEvent) => {
       if (e.key !== STORAGE_KEY || !e.newValue) return;
       try {
-        const parsed = JSON.parse(e.newValue);
-        if (isBoardData(parsed)) setColumns(parsed);
+        const board = normalizeBoard(JSON.parse(e.newValue));
+        if (board) setColumns(board);
       } catch {
         /* ignore bad payloads from other tabs */
       }
@@ -146,25 +93,22 @@ export default function ProjectBoard() {
     return () => window.removeEventListener('storage', onStorage);
   }, []);
 
+  const signOut = () => {
+    try {
+      localStorage.removeItem(SESSION_KEY);
+    } catch {
+      /* ignore */
+    }
+    setUser(null);
+  };
+
   const addCard = (columnId: string, title: string) => {
     const trimmed = title.trim();
     if (!trimmed) return;
     setColumns((cols) =>
       cols.map((col) =>
         col.id === columnId
-          ? {
-              ...col,
-              cards: [
-                ...col.cards,
-                {
-                  id: nanoid(8),
-                  title: trimmed,
-                  notes: '',
-                  assignee: null,
-                  createdAt: Date.now(),
-                },
-              ],
-            }
+          ? { ...col, cards: [...col.cards, newCard(trimmed)] }
           : col,
       ),
     );
@@ -209,7 +153,7 @@ export default function ProjectBoard() {
             ? col.cards.filter((k) => k.id !== cardId)
             : [...col.cards];
         if (col.id === toColumnId) cards.splice(insertAt, 0, card);
-        return cards === col.cards ? col : { ...col, cards };
+        return { ...col, cards };
       });
     });
   };
@@ -217,14 +161,19 @@ export default function ProjectBoard() {
   const addColumn = (title: string) => {
     const trimmed = title.trim();
     if (!trimmed) return;
-    setColumns((cols) => [...cols, { id: nanoid(8), title: trimmed, cards: [] }]);
+    setColumns((cols) => [
+      ...cols,
+      { id: nanoid(8), title: trimmed, cards: [] },
+    ]);
   };
 
   const renameColumn = (columnId: string, title: string) => {
     const trimmed = title.trim();
     if (!trimmed) return;
     setColumns((cols) =>
-      cols.map((col) => (col.id === columnId ? { ...col, title: trimmed } : col)),
+      cols.map((col) =>
+        col.id === columnId ? { ...col, title: trimmed } : col,
+      ),
     );
   };
 
@@ -258,9 +207,9 @@ export default function ProjectBoard() {
     const reader = new FileReader();
     reader.onload = () => {
       try {
-        const parsed = JSON.parse(String(reader.result));
-        if (!isBoardData(parsed)) throw new Error('bad shape');
-        setColumns(parsed);
+        const board = normalizeBoard(JSON.parse(String(reader.result)));
+        if (!board) throw new Error('bad shape');
+        setColumns(board);
         toast.success('Board imported');
       } catch {
         toast.error("That file doesn't look like a board export");
@@ -276,6 +225,17 @@ export default function ProjectBoard() {
     setDragCardId(null);
     setDropTarget(null);
   };
+
+  if (!user) {
+    return <LoginScreen onLogin={setUser} />;
+  }
+
+  const editingColumn = editing
+    ? columns.find((c) => c.id === editing.columnId)
+    : undefined;
+  const editingCard = editingColumn?.cards.find(
+    (c) => c.id === editing?.cardId,
+  );
 
   return (
     <div
@@ -297,7 +257,7 @@ export default function ProjectBoard() {
             Project Board
           </h1>
           <p className="text-xs text-white/50 mt-0.5">
-            Vlad &amp; Erin · saved in this browser
+            Vlad, Erin &amp; Ariana · saved in this browser
           </p>
         </div>
         <div className="ml-auto flex items-center gap-2">
@@ -330,6 +290,19 @@ export default function ProjectBoard() {
               e.target.value = '';
             }}
           />
+          <div className="ml-1 flex items-center gap-2 border-l border-white/10 pl-3">
+            <MemberAvatar memberId={user} />
+            <span className="hidden sm:inline text-sm text-white/80">
+              {MEMBERS[user].name}
+            </span>
+            <button
+              className="p-1.5 rounded text-white/40 hover:text-white hover:bg-white/10"
+              onClick={signOut}
+              title="Sign out"
+            >
+              <LogOut className="h-4 w-4" />
+            </button>
+          </div>
         </div>
       </header>
 
@@ -352,7 +325,9 @@ export default function ProjectBoard() {
               onStartAdd={() => setAddingToColumn(column.id)}
               onAddCard={(title) => addCard(column.id, title)}
               onStopAdd={() => setAddingToColumn(null)}
-              onCardClick={(card) => setEditingCard({ columnId: column.id, card })}
+              onCardClick={(card) =>
+                setEditing({ columnId: column.id, cardId: card.id })
+              }
               onDragStartCard={(cardId) => setDragCardId(cardId)}
               onDragEndCard={() => {
                 setDragCardId(null);
@@ -390,29 +365,123 @@ export default function ProjectBoard() {
         </div>
       </main>
 
-      {editingCard && (
-        <CardDialog
+      {editing && editingCard && (
+        <CardDetailDialog
           columns={columns}
-          columnId={editingCard.columnId}
-          card={editingCard.card}
-          onClose={() => setEditingCard(null)}
-          onSave={(card) => {
-            updateCard(editingCard.columnId, card);
-            setEditingCard(null);
-          }}
+          columnId={editing.columnId}
+          card={editingCard}
+          currentUser={user}
+          onChange={(card) => updateCard(editing.columnId, card)}
           onMove={(toColumnId) => {
             const target = columns.find((c) => c.id === toColumnId);
             if (target) {
-              moveCard(editingCard.card.id, toColumnId, target.cards.length);
+              moveCard(editingCard.id, toColumnId, target.cards.length);
+              setEditing({ columnId: toColumnId, cardId: editingCard.id });
             }
-            setEditingCard(null);
           }}
           onDelete={() => {
-            deleteCard(editingCard.columnId, editingCard.card.id);
-            setEditingCard(null);
+            deleteCard(editing.columnId, editingCard.id);
+            setEditing(null);
           }}
+          onClose={() => setEditing(null)}
         />
       )}
+    </div>
+  );
+}
+
+function LoginScreen({ onLogin }: { onLogin: (user: MemberId) => void }) {
+  const [selected, setSelected] = useState<MemberId | null>(null);
+  const [passcode, setPasscode] = useState('');
+  const [checking, setChecking] = useState(false);
+
+  const submit = async () => {
+    if (!selected || !passcode || checking) return;
+    setChecking(true);
+    try {
+      const hash = await sha256Hex(passcode);
+      if (hash === BOARD_PASSCODE_SHA256) {
+        try {
+          localStorage.setItem(SESSION_KEY, selected);
+        } catch {
+          /* ignore */
+        }
+        onLogin(selected);
+      } else {
+        toast.error('Wrong passcode');
+      }
+    } finally {
+      setChecking(false);
+    }
+  };
+
+  return (
+    <div
+      className="min-h-screen flex flex-col items-center justify-center bg-[#111] text-white px-4"
+      style={{ fontFamily: "'DM Sans', sans-serif" }}
+    >
+      <Helmet>
+        <title>Project Board | Trader Foundation</title>
+        <meta name="robots" content="noindex, nofollow" />
+      </Helmet>
+
+      <img src={LOGO_URL} alt="Trader Foundation" className="h-12 w-auto mb-6" />
+      <h1
+        className="text-2xl font-extrabold tracking-tight"
+        style={{ fontFamily: "'Sen', sans-serif" }}
+      >
+        Project Board
+      </h1>
+      <p className="mt-1 text-sm text-white/50">Who's working?</p>
+
+      <div className="mt-6 w-full max-w-sm space-y-2">
+        {MEMBER_IDS.map((id) => {
+          const member = MEMBERS[id];
+          const active = selected === id;
+          return (
+            <button
+              key={id}
+              onClick={() => setSelected(id)}
+              className={`w-full flex items-center gap-3 rounded-lg border px-4 py-3 text-left transition-colors ${
+                active
+                  ? 'border-[oklch(0.75_0.06_80)] bg-white/[0.07]'
+                  : 'border-white/15 hover:border-white/35 hover:bg-white/5'
+              }`}
+            >
+              <MemberAvatar memberId={id} />
+              <span className="min-w-0">
+                <span className="block text-sm font-semibold">
+                  {member.name}
+                </span>
+                <span className="block text-xs text-white/45 truncate">
+                  {member.email}
+                </span>
+              </span>
+            </button>
+          );
+        })}
+
+        <div className="pt-2">
+          <Input
+            type="password"
+            value={passcode}
+            onChange={(e) => setPasscode(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && submit()}
+            placeholder="Team passcode"
+            className="bg-black/30 border-white/20 text-white placeholder:text-white/30"
+          />
+          <Button
+            className="mt-2 w-full bg-[oklch(0.75_0.06_80)] text-black hover:bg-[oklch(0.85_0.04_80)] disabled:opacity-40"
+            disabled={!selected || !passcode || checking}
+            onClick={submit}
+          >
+            Open the board
+          </Button>
+          <p className="mt-3 text-center text-xs text-white/35">
+            One shared passcode for the team — ask Vlad if you don't have it.
+          </p>
+        </div>
+      </div>
     </div>
   );
 }
@@ -545,10 +614,14 @@ function ColumnView({
 }
 
 function DropIndicator() {
-  return (
-    <div className="h-0.5 my-1 rounded-full bg-[oklch(0.75_0.06_80)]" />
-  );
+  return <div className="h-0.5 my-1 rounded-full bg-[oklch(0.75_0.06_80)]" />;
 }
+
+const DUE_CHIP_CLASSES = {
+  overdue: 'bg-red-500/20 text-red-300',
+  today: 'bg-amber-500/20 text-amber-300',
+  upcoming: 'bg-white/10 text-white/60',
+} as const;
 
 interface CardViewProps {
   card: BoardCard;
@@ -567,6 +640,16 @@ function CardView({
   onDragEnd,
   onDragOver,
 }: CardViewProps) {
+  const doneCount = card.checklist.filter((i) => i.done).length;
+  const hasBadges =
+    card.dueDate ||
+    card.checklist.length > 0 ||
+    card.comments.length > 0 ||
+    card.googleDocUrl ||
+    card.loomUrl ||
+    card.attachments.length > 0 ||
+    card.assignees.length > 0;
+
   return (
     <div
       draggable
@@ -578,26 +661,53 @@ function CardView({
       onDragEnd={onDragEnd}
       onDragOver={onDragOver}
       onClick={onClick}
-      className={`group cursor-pointer rounded-md bg-[#1d1d1d] border border-white/10 px-3 py-2 shadow-sm hover:border-white/25 transition-colors ${
+      className={`cursor-pointer rounded-md bg-[#1d1d1d] border border-white/10 px-3 py-2 shadow-sm hover:border-white/25 transition-colors ${
         dragging ? 'opacity-40' : ''
       }`}
     >
-      <div className="flex items-start gap-1.5">
-        <p className="flex-1 text-sm leading-snug break-words">{card.title}</p>
-        <GripVertical className="h-3.5 w-3.5 shrink-0 mt-0.5 text-white/20 group-hover:text-white/40" />
-      </div>
-      {(card.assignee || card.notes) && (
-        <div className="mt-1.5 flex items-center gap-2">
-          {card.assignee && (
-            <Badge
-              variant="outline"
-              className={`text-[10px] px-1.5 py-0 h-4.5 font-medium ${ASSIGNEE_META[card.assignee].className}`}
+      <p className="text-sm leading-snug break-words">{card.title}</p>
+      {hasBadges && (
+        <div className="mt-1.5 flex items-center gap-x-2 gap-y-1 flex-wrap text-white/45">
+          {card.dueDate && (
+            <span
+              className={`inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-[11px] font-medium ${DUE_CHIP_CLASSES[dueStatus(card.dueDate)]}`}
             >
-              {ASSIGNEE_META[card.assignee].label}
-            </Badge>
+              <Calendar className="h-3 w-3" />
+              {formatDue(card.dueDate)}
+            </span>
           )}
-          {card.notes && (
-            <AlignLeft className="h-3.5 w-3.5 text-white/35" aria-label="Has notes" />
+          {card.checklist.length > 0 && (
+            <span
+              className={`inline-flex items-center gap-1 text-[11px] ${
+                doneCount === card.checklist.length
+                  ? 'text-emerald-300'
+                  : ''
+              }`}
+            >
+              <CheckSquare className="h-3 w-3" />
+              {doneCount}/{card.checklist.length}
+            </span>
+          )}
+          {card.comments.length > 0 && (
+            <span className="inline-flex items-center gap-1 text-[11px]">
+              <MessageSquare className="h-3 w-3" />
+              {card.comments.length}
+            </span>
+          )}
+          {card.googleDocUrl && <FileText className="h-3 w-3" />}
+          {card.loomUrl && <Video className="h-3 w-3" />}
+          {card.attachments.length > 0 && (
+            <span className="inline-flex items-center gap-1 text-[11px]">
+              <Paperclip className="h-3 w-3" />
+              {card.attachments.length}
+            </span>
+          )}
+          {card.assignees.length > 0 && (
+            <span className="ml-auto inline-flex -space-x-1">
+              {card.assignees.map((id) => (
+                <MemberAvatar key={id} memberId={id} size="sm" />
+              ))}
+            </span>
           )}
         </div>
       )}
@@ -683,134 +793,5 @@ function NewItemForm({
         </button>
       </div>
     </div>
-  );
-}
-
-function CardDialog({
-  columns,
-  columnId,
-  card,
-  onClose,
-  onSave,
-  onMove,
-  onDelete,
-}: {
-  columns: BoardColumn[];
-  columnId: string;
-  card: BoardCard;
-  onClose: () => void;
-  onSave: (card: BoardCard) => void;
-  onMove: (toColumnId: string) => void;
-  onDelete: () => void;
-}) {
-  const [title, setTitle] = useState(card.title);
-  const [notes, setNotes] = useState(card.notes);
-  const [assignee, setAssignee] = useState<Assignee | null>(card.assignee);
-  const otherColumns = columns.filter((c) => c.id !== columnId);
-
-  return (
-    <Dialog open onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="bg-[#1a1a1a] border-white/15 text-white sm:max-w-md">
-        <DialogHeader>
-          <DialogTitle
-            className="text-white"
-            style={{ fontFamily: "'Sen', sans-serif" }}
-          >
-            Edit card
-          </DialogTitle>
-        </DialogHeader>
-
-        <div className="space-y-4">
-          <div>
-            <label className="text-xs font-medium text-white/50 uppercase tracking-wide">
-              Title
-            </label>
-            <Input
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              className="mt-1 bg-black/30 border-white/20 text-white"
-            />
-          </div>
-
-          <div>
-            <label className="text-xs font-medium text-white/50 uppercase tracking-wide">
-              Notes
-            </label>
-            <Textarea
-              value={notes}
-              onChange={(e) => setNotes(e.target.value)}
-              placeholder="Details, links, next steps…"
-              className="mt-1 min-h-[96px] bg-black/30 border-white/20 text-white placeholder:text-white/30"
-            />
-          </div>
-
-          <div>
-            <label className="text-xs font-medium text-white/50 uppercase tracking-wide">
-              Assigned to
-            </label>
-            <div className="mt-1.5 flex flex-wrap gap-1.5">
-              {(Object.keys(ASSIGNEE_META) as Assignee[]).map((key) => (
-                <button
-                  key={key}
-                  onClick={() =>
-                    setAssignee((current) => (current === key ? null : key))
-                  }
-                  className={`rounded-full border px-3 py-1 text-xs font-medium transition-colors ${
-                    assignee === key
-                      ? ASSIGNEE_META[key].className
-                      : 'border-white/15 text-white/50 hover:text-white hover:border-white/35'
-                  }`}
-                >
-                  {ASSIGNEE_META[key].label}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {otherColumns.length > 0 && (
-            <div>
-              <label className="text-xs font-medium text-white/50 uppercase tracking-wide">
-                Move to
-              </label>
-              <div className="mt-1.5 flex flex-wrap gap-1.5">
-                {otherColumns.map((col) => (
-                  <button
-                    key={col.id}
-                    onClick={() => {
-                      onSave({ ...card, title: title.trim() || card.title, notes, assignee });
-                      onMove(col.id);
-                    }}
-                    className="rounded-md border border-white/15 px-3 py-1 text-xs text-white/70 hover:text-white hover:border-white/35 hover:bg-white/5 transition-colors"
-                  >
-                    {col.title}
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
-
-        <DialogFooter className="flex-row justify-between sm:justify-between">
-          <Button
-            variant="ghost"
-            size="sm"
-            className="text-red-400 hover:text-red-300 hover:bg-red-500/10"
-            onClick={onDelete}
-          >
-            <Trash2 className="h-4 w-4 mr-1.5" />
-            Delete
-          </Button>
-          <Button
-            size="sm"
-            className="bg-[oklch(0.75_0.06_80)] text-black hover:bg-[oklch(0.85_0.04_80)]"
-            onClick={() =>
-              onSave({ ...card, title: title.trim() || card.title, notes, assignee })
-            }
-          >
-            Save
-          </Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
   );
 }
