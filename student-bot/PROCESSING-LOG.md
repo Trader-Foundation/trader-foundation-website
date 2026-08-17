@@ -78,6 +78,7 @@ Then: append a row to the ledger, add new questions to `rulings/open-questions.m
 | Paycheck Collector, how you lose | n/a, coaching | 1 excluded, 2 borderline. Much cleaner | 16 fixed, arithmetic reconciles | 1 | No |
 | thinkorswim setup | **unassigned** | **Clean.** 2 privacy redactions | 9 fixed, 1 unresolved | 1 | No |
 | Live session 2026-08-06 *(SRT)* | n/a, live session | **Clean** | 1 redaction. **368 timestamps** | 3 | **Unblocked** |
+| FB Live #151 to #159 *(9 sessions)* | n/a, coach live | **1 excluded, and it is serious** | 170 redactions. Sequence numbers and dates present | 1 | Pending captions |
 
 Modules 2, 3 and 5 were characterised in the spec before this log existed. Everything from Volume onward was processed here.
 
@@ -169,6 +170,54 @@ And Vlad's answer is the useful part:
 **So this is a known hard edge, not two students being slow.** The recorded modules teach buying throughout and every intuition a student builds is a buyer's intuition. Selling inverts the direction of every one of them, and nothing in the material marks the switch.
 
 **Two things follow.** It is a strong candidate for a dedicated piece of teaching, since Vlad has already diagnosed it precisely. And for the bot it means questions in this area deserve extra care: a student asking about a sold put is very likely to have the direction backwards, so lead with which side of the trade they are on rather than assuming the question means what it says.
+
+### The FB Live library is 554 sessions, and its metadata solves problems the modules could not
+
+Nine processed, #151 to #159. Full write-up in `rulings/fb-live-sessions.md`.
+
+**Every file carries a header the module transcripts never had:** a sequence number (`#151 of 554`), a recording date, a duration, and a **Vimeo URL**.
+
+That is four problems addressed at once. Ordering across the library needs no ruling. Recording date is a schema requirement most module chunks cannot satisfy. And the Vimeo link is the likely route to captions, which is the one remaining structural blocker. **If Vimeo holds auto-generated captions for these, 554 sessions become timestamped and indexable.**
+
+**Keep the header verbatim on every file.** It is worth more than any single session's content.
+
+### Hash on arrival, not eyeball
+
+Five files supplied, four unique: two byte-identical copies of #151, caught before any processing. At 554 in the library and 100 incoming, filename inspection will not hold. The duplicate check is now a hash.
+
+### A coach's method, stated more plainly than any module states it
+
+The scan across nine hours is strikingly consistent, and the coach names the set himself as "the three things I'm always talking about":
+
+1. **Is it the first day?** 21 mentions. The primary filter, and explicitly a time-saver: a no ends the analysis before risk and reward is even discussed, because day two usually means the edge is already deteriorating.
+2. **Perceived edge.** 11 mentions. Candle and volume actually making a case.
+3. **Risk versus reward.** 32 mentions, the most frequent concept in the batch, measured from structure and used to reject.
+
+**All three must check.** This is the module material compressed into something a student can run in seconds, and it exists nowhere in the recorded curriculum.
+
+### The six-strategy map, and the answer to a wall students keep hitting
+
+The batch contains the first full statement of all six option strategies as a system: buy call, bull call, bull put on the bullish side, and their mirrors bearish. Taught with a house analogy that resolves the exact confusion two students hit in the Paycheck Collector calls, and which the coach names as the common mind bender: how can you be bullish with puts.
+
+Buyers work the side that will gain value. Sellers work the side that will lose it. **Third independent sighting of that wall, and the first with a full explanation attached.**
+
+### Compliance across nine unscripted hours: almost nothing, and one thing that matters a lot
+
+Two uses of "guarantee", both saying the opposite of a promise. No dollar figures. No coach performance claims. Consistent with the pattern that sessions without a motivating passage stay clean.
+
+**The exception is the most consequential compliance finding in the project**, because it is not confined to one recording:
+
+> "that's how you're gonna outperform **the 10% a month that marketing has told you**"
+
+A coach referring to 10 percent a month as a figure **marketing has already given students**. It corroborates the Paycheck Collector class intro, which states the same rate and is already a flagged re-record line.
+
+So the number appears in marketing, in a paid class, and in coaching as a shared baseline. **Excluding it protects the bot and nothing else.** That is a business question, not a corpus one, and it is now open question 41.
+
+### Group sessions are the heaviest redaction load in the project
+
+Roughly thirty members named, several submitting trades with entries, exits and outcomes, plus ordinary conversation about locations, birthdays and family. 170 redaction markers across nine sessions.
+
+**At 100 incoming this is the bottleneck**, and it is mechanical rather than judgement, which is what makes it safe at volume. The name list lives in the processing script and grows as new members appear.
 
 ### A third source class, and it carries timestamps
 

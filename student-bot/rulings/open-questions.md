@@ -614,6 +614,26 @@ The more likely reading, and it fits the chart ruling: **neither is a threshold.
 
 ---
 
+## 41. Is "10 percent a month" current marketing language?
+
+**Status:** OPEN. **The most consequential compliance item in the project, and the only one that is not fixable inside the corpus.**
+
+A coach, mid-session, to a live group:
+
+> "that's how you're gonna outperform **the 10% a month that marketing has told you**"
+
+He is not making the claim. He is referring to it as a number **students have already been given**, and coaching them to beat it.
+
+**It corroborates the Paycheck Collector class**, whose scripted intro states a target of about 10 percent of the account per week or month, calls the strategy safe, and runs a compounding projection. That was already flagged as a re-record line.
+
+**So the figure exists on at least three surfaces:** marketing, a paid class, and coaching conversation where it is treated as a baseline.
+
+Excluding it from the corpus protects the bot. It does nothing about a rate-of-return figure circulating through the product, which is a business question rather than a curriculum one.
+
+**Question for Vlad:** is 10 percent a month current marketing language, and who owns changing it?
+
+---
+
 ## 39. "One of our elite members": is that a current term or a retired one?
 
 **Status:** OPEN, flagged rather than edited. **Needs an answer before anything ships.**
