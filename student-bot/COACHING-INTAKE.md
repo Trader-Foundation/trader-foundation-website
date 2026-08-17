@@ -2,7 +2,19 @@
 
 **For processing coaching transcripts at volume.** Vlad has a large library of these and is supplying them in bulk.
 
-The full module pipeline on every session would be slow and would mostly produce duplicate findings, because coaching repeats the same teaching many times over. This is the triage version. It is not a lower standard: the two protective passes run in full every time. What gets shortened is the analysis, because most sessions have little new to say.
+**CORRECTION, and it changes how this file should be read.** An earlier version of this described coaching as "weaker than modules as a source of teaching." That was wrong, and Vlad pushed back on it: *"these sessions im giving you these lives are important."*
+
+He is right, and the evidence was already in front of me:
+
+- **The best-stated version of the method is in a live session, not a module.** First day, perceived edge, risk versus reward, named by the coach as a set and applied dozens of times per session. No module states it that compactly.
+- **The clearest options teaching in the corpus is in a live session.** The full six-strategy map with the house analogy, which resolves the exact confusion that stalled two students in the Paycheck Collector calls.
+- **Only live sessions show a call that failed.** No module contains a setup that did not work. The grading of past calls is unique to this class and it is where the honest teaching is.
+- **Only live sessions show rejections.** Five screener pages dismissed out loud with reasons. A student learns more from why a chart was skipped than from why one was taken.
+- **They are the cleanest material in the project on compliance.** Nine unscripted hours produced one exclusion. The modules produced dozens.
+
+**And they are the closest thing in existence to what the bot is meant to be.** A coach, in front of students, answering the questions students actually ask. That is the product, recorded 554 times.
+
+So what follows is a **throughput** procedure, not a ranking. The full pipeline on 554 sessions is not feasible and much of the content repeats. The triage exists so that volume does not become a reason to process none of it. Nothing here implies a live session is worth less than a module.
 
 ---
 
@@ -46,9 +58,9 @@ Search the usual list, and additionally:
 
 ---
 
-## Then triage: is there anything new here?
+## Then triage: what does this session add?
 
-Most sessions will repeat teaching already in the corpus. Check against `PROCESSING-LOG.md` and answer three questions. **If all three are no, log a one-line ledger row and stop.**
+Most sessions repeat teaching already captured, and repetition is not a fault in a daily show. Check against `PROCESSING-LOG.md` and answer three questions. **If all three come back empty, log a one-line ledger row and move on** — not because the session was low value to the students who attended, but because the corpus already holds what it teaches.
 
 ### Q1. Does it teach something no module teaches?
 
@@ -67,6 +79,20 @@ Record the exact question and what preceded it. Not "the student was confused" b
 At volume this becomes a map of which lessons are not landing, and that is worth more to the curriculum than another paraphrase of a strategy already recorded.
 
 ---
+
+## A fourth thing to capture, and it may be the most valuable
+
+**How the coach actually talks.** These sessions are the tone the bot should have: direct, unhurried, willing to say "I don't know," willing to reject everything on the screen and end with nothing to trade.
+
+> "I'm never here to try to predict."
+>
+> "I don't know. Will it bounce? I don't know."
+>
+> "I wouldn't play a damn thing today."
+
+**That last posture is the hardest thing for a bot to learn and the most important.** A day with no trade is a normal outcome, said plainly and without apology. Anything that reads as manufacturing an opportunity is off-key, and these recordings are the reference for what on-key sounds like.
+
+Worth noting a phrase whenever the register is unusually right, not just when the content is new.
 
 ## What not to spend time on
 
