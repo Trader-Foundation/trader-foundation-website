@@ -678,6 +678,10 @@ This repository is public so transcripts cannot be committed here, and the conta
 | The Bounce Profit Plan *(worksheet)* | `document-bounce-profit-plan-RAW.txt` | `1I-ejvV92yaZdzKpQSv5JeyGclsRIq6sr` |
 | Breakout Strategy *(worksheet)* | `document-breakout-strategy-RAW.txt` | `1INwugRa-afsIWs8l-tP5iAL4oOuofEVO` |
 
+**FB Live sessions are NOT uploaded to Drive, deliberately.** Every one carries a permanent `Video: https://vimeo.com/...` link in its header, so the source is already durable and under Vlad's control. Duplicating 554 transcripts into Drive would add storage and a sync burden while protecting nothing that is not already protected.
+
+What that leaves at risk is nothing: raw is re-derivable from Vimeo, clean is re-derivable from raw by script, and the findings are committed here. **The rule generalises: a source that carries a permanent source URL does not need Drive duplication.** The module transcripts do need it, because they arrived with no pointer back to anything.
+
 **Raw only, with one deliberate exception.** The live session is stored as the timestamp-anchored CLEAN file rather than the raw SRT, because the anchors are the point and chunk-level citation does not need per-cue precision. The original SRT is with Vlad if cue-level timing is ever needed.
 
 **Raw only.** Worksheets need no clean pass at all, since they are typed and carry no transcription errors. For transcripts, clean files are regenerated deterministically from raw plus `glossary/terms.json`, so storing them would create a second thing to keep in sync. Each uploaded file carries a header listing its known errors, module-number evidence, and compliance status, so it is self-describing if opened directly.
