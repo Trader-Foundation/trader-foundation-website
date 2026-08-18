@@ -117,6 +117,9 @@ student-bot/transcripts/**
 !student-bot/transcripts/
 !student-bot/transcripts/*/
 !student-bot/transcripts/**/README.md
+# Built bench page: has the whole corpus inlined. Never commit.
+student-bot/tools/*.build.html
+
 student-bot/corpus/**
 !student-bot/corpus/
 !student-bot/corpus/README.md
