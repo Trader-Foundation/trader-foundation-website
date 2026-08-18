@@ -11,18 +11,24 @@ import CardDetailDialog, {
 import {
   type BoardCard,
   type BoardColumn,
+  type BoardSession,
   type MemberId,
+  API_KEY_SALT,
   BOARD_PASSCODE_SHA256,
   MEMBER_IDS,
   MEMBERS,
-  SESSION_KEY,
   STORAGE_KEY,
+  clearSession,
+  countCards,
   dueStatus,
+  fetchRemoteBoard,
   formatDue,
   loadBoard,
-  loadSessionUser,
+  loadSession,
   newCard,
   normalizeBoard,
+  saveRemoteBoard,
+  saveSession,
   sha256Hex,
 } from '@/components/board/boardModel';
 import { Button } from '@/components/ui/button';
@@ -55,8 +61,15 @@ interface DropTarget {
   index: number;
 }
 
+type SyncStatus = 'local' | 'syncing' | 'synced' | 'error';
+
+const SAVE_DEBOUNCE_MS = 800;
+const POLL_INTERVAL_MS = 8000;
+
 export default function ProjectBoard() {
-  const [user, setUser] = useState<MemberId | null>(loadSessionUser);
+  const [session, setSession] = useState<BoardSession | null>(loadSession);
+  const user = session?.member ?? null;
+  const [syncStatus, setSyncStatus] = useState<SyncStatus>('local');
   const [columns, setColumns] = useState<BoardColumn[]>(loadBoard);
   const [dragCardId, setDragCardId] = useState<string | null>(null);
   const [dropTarget, setDropTarget] = useState<DropTarget | null>(null);
@@ -69,14 +82,136 @@ export default function ProjectBoard() {
   const [addingColumn, setAddingColumn] = useState(false);
   const importInputRef = useRef<HTMLInputElement>(null);
 
-  // Persist every change
+  // --- live sync plumbing ---
+  const sessionRef = useRef(session);
+  sessionRef.current = session;
+  const columnsRef = useRef(columns);
+  columnsRef.current = columns;
+  const apiAvailableRef = useRef(false);
+  const applyingRemoteRef = useRef(false);
+  const dirtyRef = useRef(false);
+  const lastRemoteAtRef = useRef(0);
+  const saveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const applyRemote = (remoteColumns: BoardColumn[]) => {
+    applyingRemoteRef.current = true;
+    setColumns(remoteColumns);
+  };
+
+  const handleAuthFail = () => {
+    apiAvailableRef.current = false;
+    toast.error('The team passcode changed — sign in again');
+    clearSession();
+    setSession(null);
+  };
+
+  const doSave = async () => {
+    const activeSession = sessionRef.current;
+    if (!activeSession || !apiAvailableRef.current) return;
+    dirtyRef.current = false;
+    setSyncStatus('syncing');
+    const result = await saveRemoteBoard(
+      activeSession.key,
+      columnsRef.current,
+      MEMBERS[activeSession.member].name,
+    );
+    if (result.ok) {
+      lastRemoteAtRef.current = result.data;
+      if (!dirtyRef.current) setSyncStatus('synced');
+    } else if (result.status === 401) {
+      handleAuthFail();
+    } else {
+      dirtyRef.current = true; // retried by the next local change or poll
+      setSyncStatus('error');
+    }
+  };
+
+  // Persist every change; push user-made changes to the shared board
   useEffect(() => {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(columns));
     } catch {
       /* storage full or unavailable */
     }
+    if (applyingRemoteRef.current) {
+      applyingRemoteRef.current = false;
+      return;
+    }
+    if (!apiAvailableRef.current || !sessionRef.current) return;
+    dirtyRef.current = true;
+    if (saveTimerRef.current) clearTimeout(saveTimerRef.current);
+    saveTimerRef.current = setTimeout(doSave, SAVE_DEBOUNCE_MS);
   }, [columns]);
+
+  // Initial sync + polling while signed in
+  useEffect(() => {
+    if (!session) return;
+    let cancelled = false;
+
+    const initialSync = async () => {
+      const result = await fetchRemoteBoard(session.key);
+      if (cancelled) return;
+      if (!result.ok) {
+        if (result.status === 401) handleAuthFail();
+        else setSyncStatus('local'); // no storage configured yet
+        return;
+      }
+      apiAvailableRef.current = true;
+      const remote = result.data;
+      if (remote && countCards(remote.columns) > 0) {
+        lastRemoteAtRef.current = remote.updatedAt;
+        const localJson = JSON.stringify(columnsRef.current);
+        if (
+          countCards(columnsRef.current) > 0 &&
+          JSON.stringify(remote.columns) !== localJson
+        ) {
+          // keep a backup of the solo board this replaces
+          try {
+            localStorage.setItem(`${STORAGE_KEY}-backup-${Date.now()}`, localJson);
+          } catch {
+            /* ignore */
+          }
+          toast.info('Loaded the shared team board');
+        }
+        applyRemote(remote.columns);
+        setSyncStatus('synced');
+      } else {
+        // shared board empty or missing: seed it with this browser's board
+        await doSave();
+      }
+    };
+
+    const poll = async () => {
+      const activeSession = sessionRef.current;
+      if (!activeSession || !apiAvailableRef.current) return;
+      if (dirtyRef.current) return; // our own save is about to run
+      const result = await fetchRemoteBoard(activeSession.key);
+      if (cancelled || dirtyRef.current) return;
+      if (!result.ok) {
+        if (result.status === 401) handleAuthFail();
+        else setSyncStatus('error');
+        return;
+      }
+      const remote = result.data;
+      if (remote && remote.updatedAt > lastRemoteAtRef.current) {
+        lastRemoteAtRef.current = remote.updatedAt;
+        if (
+          JSON.stringify(remote.columns) !== JSON.stringify(columnsRef.current)
+        ) {
+          applyRemote(remote.columns);
+        }
+      }
+      setSyncStatus('synced');
+    };
+
+    initialSync();
+    const interval = setInterval(poll, POLL_INTERVAL_MS);
+    return () => {
+      cancelled = true;
+      clearInterval(interval);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [session]);
 
   // Keep multiple open tabs in sync
   useEffect(() => {
@@ -94,12 +229,10 @@ export default function ProjectBoard() {
   }, []);
 
   const signOut = () => {
-    try {
-      localStorage.removeItem(SESSION_KEY);
-    } catch {
-      /* ignore */
-    }
-    setUser(null);
+    clearSession();
+    apiAvailableRef.current = false;
+    setSyncStatus('local');
+    setSession(null);
   };
 
   const addCard = (columnId: string, title: string) => {
@@ -226,8 +359,8 @@ export default function ProjectBoard() {
     setDropTarget(null);
   };
 
-  if (!user) {
-    return <LoginScreen onLogin={setUser} />;
+  if (!session || !user) {
+    return <LoginScreen onLogin={setSession} />;
   }
 
   const editingColumn = editing
@@ -257,7 +390,7 @@ export default function ProjectBoard() {
             Project Board
           </h1>
           <p className="text-xs text-white/50 mt-0.5">
-            Vlad, Erin &amp; Ariana · saved in this browser
+            Vlad, Erin &amp; Ariana · <SyncBadge status={syncStatus} />
           </p>
         </div>
         <div className="ml-auto flex items-center gap-2">
@@ -390,7 +523,42 @@ export default function ProjectBoard() {
   );
 }
 
-function LoginScreen({ onLogin }: { onLogin: (user: MemberId) => void }) {
+function SyncBadge({ status }: { status: SyncStatus }) {
+  const meta: Record<SyncStatus, { dot: string; label: string; title: string }> =
+    {
+      synced: {
+        dot: 'bg-emerald-400',
+        label: 'live team sync',
+        title: 'Everyone sees this board — changes sync automatically',
+      },
+      syncing: {
+        dot: 'bg-amber-400 animate-pulse',
+        label: 'saving…',
+        title: 'Saving your changes to the shared board',
+      },
+      local: {
+        dot: 'bg-white/30',
+        label: 'saved in this browser',
+        title:
+          'Shared storage is not connected yet — this board is only saved on this device',
+      },
+      error: {
+        dot: 'bg-red-400',
+        label: 'sync error — saved locally',
+        title:
+          'Could not reach the shared board; your changes are kept in this browser and will retry',
+      },
+    };
+  const { dot, label, title } = meta[status];
+  return (
+    <span className="inline-flex items-center gap-1.5" title={title}>
+      <span className={`h-1.5 w-1.5 rounded-full ${dot}`} />
+      {label}
+    </span>
+  );
+}
+
+function LoginScreen({ onLogin }: { onLogin: (session: BoardSession) => void }) {
   const [selected, setSelected] = useState<MemberId | null>(null);
   const [passcode, setPasscode] = useState('');
   const [checking, setChecking] = useState(false);
@@ -401,12 +569,10 @@ function LoginScreen({ onLogin }: { onLogin: (user: MemberId) => void }) {
     try {
       const hash = await sha256Hex(passcode);
       if (hash === BOARD_PASSCODE_SHA256) {
-        try {
-          localStorage.setItem(SESSION_KEY, selected);
-        } catch {
-          /* ignore */
-        }
-        onLogin(selected);
+        const key = await sha256Hex(API_KEY_SALT + passcode);
+        const session: BoardSession = { member: selected, key };
+        saveSession(session);
+        onLogin(session);
       } else {
         toast.error('Wrong passcode');
       }

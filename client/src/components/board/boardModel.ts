@@ -219,13 +219,115 @@ export function loadBoard(): BoardColumn[] {
   return defaultColumns();
 }
 
-export function loadSessionUser(): MemberId | null {
+/* Derivation salt for the API key sent to /api/board. The server compares
+   sha256(salt + passcode); only the login-check hash (not this derived key's
+   expected value) ships in the client bundle. */
+export const API_KEY_SALT = 'tfboard|';
+
+export interface BoardSession {
+  member: MemberId;
+  key: string;
+}
+
+export function loadSession(): BoardSession | null {
   try {
     const raw = localStorage.getItem(SESSION_KEY);
-    return isMemberId(raw) ? raw : null;
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (
+      parsed &&
+      isMemberId(parsed.member) &&
+      typeof parsed.key === 'string' &&
+      parsed.key.length > 0
+    ) {
+      return { member: parsed.member, key: parsed.key };
+    }
   } catch {
-    return null;
+    /* legacy plain-string sessions fall through: re-login captures the key */
   }
+  return null;
+}
+
+export function saveSession(session: BoardSession) {
+  try {
+    localStorage.setItem(SESSION_KEY, JSON.stringify(session));
+  } catch {
+    /* ignore */
+  }
+}
+
+export function clearSession() {
+  try {
+    localStorage.removeItem(SESSION_KEY);
+  } catch {
+    /* ignore */
+  }
+}
+
+export interface RemoteBoard {
+  updatedAt: number;
+  savedBy: string | null;
+  columns: BoardColumn[];
+}
+
+export type ApiResult<T> = { ok: true; data: T } | { ok: false; status: number };
+
+/* status 0 = reachable but not our API (e.g. SPA fallback served HTML),
+   status -1 = network failure. Both mean "run in local-only mode". */
+export async function fetchRemoteBoard(
+  key: string,
+): Promise<ApiResult<RemoteBoard | null>> {
+  try {
+    const res = await fetch('/api/board', { headers: { 'x-board-key': key } });
+    const type = res.headers.get('content-type') ?? '';
+    if (!res.ok || !type.includes('application/json')) {
+      return { ok: false, status: res.ok ? 0 : res.status };
+    }
+    const json = await res.json();
+    if (!json.board) return { ok: true, data: null };
+    const columns = normalizeBoard(json.board.columns);
+    if (!columns) return { ok: true, data: null };
+    return {
+      ok: true,
+      data: {
+        updatedAt: Number(json.board.updatedAt) || 0,
+        savedBy:
+          typeof json.board.savedBy === 'string' ? json.board.savedBy : null,
+        columns,
+      },
+    };
+  } catch {
+    return { ok: false, status: -1 };
+  }
+}
+
+export async function saveRemoteBoard(
+  key: string,
+  columns: BoardColumn[],
+  savedBy: string,
+): Promise<ApiResult<number>> {
+  try {
+    const res = await fetch('/api/board', {
+      method: 'PUT',
+      headers: {
+        'x-board-key': key,
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({ columns, savedBy }),
+    });
+    const type = res.headers.get('content-type') ?? '';
+    if (!res.ok || !type.includes('application/json')) {
+      return { ok: false, status: res.ok ? 0 : res.status };
+    }
+    const json = await res.json();
+    return { ok: true, data: Number(json.updatedAt) || Date.now() };
+  } catch {
+    return { ok: false, status: -1 };
+  }
+}
+
+export function countCards(columns: BoardColumn[]): number {
+  return columns.reduce((sum, col) => sum + col.cards.length, 0);
 }
 
 export async function sha256Hex(text: string): Promise<string> {
