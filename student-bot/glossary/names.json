@@ -1,0 +1,65 @@
+{
+ "_comment": "Reviewed person names for redaction. Candidates come from tools/find_names.py; a human decides what lands here. Roles: COACH for Trader Foundation coaches, MEMBER for students and anyone else named. Vlad is never redacted, per CLAUDE.md, because he authors the material and redacting him breaks every citation.",
+ "_reviewed_over": "transcripts/raw/fb-live, 23 sessions, batches 01 and 151-159 plus 0470",
+ "never_redact": [
+  "Vlad"
+ ],
+ "coaches": [
+  "Elliot",
+  "Erin"
+ ],
+ "members": [
+  "Jason",
+  "Aaron",
+  "Kelly",
+  "Mark",
+  "Alex",
+  "Monica",
+  "Christian",
+  "Josh",
+  "Sean",
+  "Chris",
+  "Kevin",
+  "George",
+  "Dina",
+  "John",
+  "Jim",
+  "Ellie",
+  "Felix",
+  "Yuki",
+  "Ron",
+  "Mills",
+  "Derek",
+  "Tyrone",
+  "Elliott",
+  "Jack",
+  "Grace",
+  "Roma",
+  "Roth",
+  "Thomas"
+ ],
+ "_rejected": {
+  "_comment": "Candidates reviewed and judged not to be people. Kept so the same words are not re-litigated on the next batch.",
+  "words": [
+   "Buyers",
+   "Overall",
+   "Care",
+   "Unpredictable",
+   "Approach",
+   "Fine",
+   "Mean",
+   "Personally",
+   "Despite",
+   "High",
+   "Trend",
+   "Zone",
+   "Doc",
+   "Buyers",
+   "Energies",
+   "Oops",
+   "Resistance",
+   "Max"
+  ]
+ },
+ "_procedure": "Redact, then run find_names.py over transcripts/clean/. Anything it still reports is a name the list did not know. Add it, re-run redact.py --force, and repeat until the clean scan is quiet. That loop is how the list grows across 555 sessions."
+}

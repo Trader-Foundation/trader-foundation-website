@@ -1,0 +1,415 @@
+[
+ {
+  "name": "Buyers",
+  "vocative": 1,
+  "midsentence": 3,
+  "files": 1,
+  "confidence": "medium"
+ },
+ {
+  "name": "Care",
+  "vocative": 1,
+  "midsentence": 2,
+  "files": 1,
+  "confidence": "medium"
+ },
+ {
+  "name": "Overall",
+  "vocative": 1,
+  "midsentence": 2,
+  "files": 1,
+  "confidence": "medium"
+ },
+ {
+  "name": "Opex",
+  "vocative": 1,
+  "midsentence": 1,
+  "files": 1,
+  "confidence": "medium"
+ },
+ {
+  "name": "Despite",
+  "vocative": 1,
+  "midsentence": 1,
+  "files": 1,
+  "confidence": "medium"
+ },
+ {
+  "name": "Energies",
+  "vocative": 1,
+  "midsentence": 1,
+  "files": 1,
+  "confidence": "medium"
+ },
+ {
+  "name": "Oops",
+  "vocative": 1,
+  "midsentence": 1,
+  "files": 1,
+  "confidence": "medium"
+ },
+ {
+  "name": "Resistance",
+  "vocative": 1,
+  "midsentence": 1,
+  "files": 1,
+  "confidence": "medium"
+ },
+ {
+  "name": "Mean",
+  "vocative": 1,
+  "midsentence": 1,
+  "files": 1,
+  "confidence": "medium"
+ },
+ {
+  "name": "Unpredictable",
+  "vocative": 1,
+  "midsentence": 1,
+  "files": 1,
+  "confidence": "medium"
+ },
+ {
+  "name": "Fine",
+  "vocative": 1,
+  "midsentence": 1,
+  "files": 1,
+  "confidence": "medium"
+ },
+ {
+  "name": "Approach",
+  "vocative": 1,
+  "midsentence": 1,
+  "files": 1,
+  "confidence": "medium"
+ },
+ {
+  "name": "Ypi",
+  "vocative": 1,
+  "midsentence": 1,
+  "files": 1,
+  "confidence": "medium"
+ },
+ {
+  "name": "Personally",
+  "vocative": 1,
+  "midsentence": 1,
+  "files": 1,
+  "confidence": "medium"
+ },
+ {
+  "name": "Bears",
+  "vocative": 0,
+  "midsentence": 60,
+  "files": 0,
+  "confidence": "low"
+ },
+ {
+  "name": "Spy",
+  "vocative": 0,
+  "midsentence": 58,
+  "files": 0,
+  "confidence": "low"
+ },
+ {
+  "name": "Divergence",
+  "vocative": 0,
+  "midsentence": 45,
+  "files": 0,
+  "confidence": "low"
+ },
+ {
+  "name": "Let",
+  "vocative": 0,
+  "midsentence": 44,
+  "files": 0,
+  "confidence": "low"
+ },
+ {
+  "name": "Market",
+  "vocative": 0,
+  "midsentence": 39,
+  "files": 0,
+  "confidence": "low"
+ },
+ {
+  "name": "Gap",
+  "vocative": 0,
+  "midsentence": 31,
+  "files": 0,
+  "confidence": "low"
+ },
+ {
+  "name": "Leo",
+  "vocative": 0,
+  "midsentence": 28,
+  "files": 0,
+  "confidence": "low"
+ },
+ {
+  "name": "Visa",
+  "vocative": 0,
+  "midsentence": 20,
+  "files": 0,
+  "confidence": "low"
+ },
+ {
+  "name": "Keith",
+  "vocative": 0,
+  "midsentence": 19,
+  "files": 0,
+  "confidence": "low"
+ },
+ {
+  "name": "Trends",
+  "vocative": 0,
+  "midsentence": 19,
+  "files": 0,
+  "confidence": "low"
+ },
+ {
+  "name": "Fair",
+  "vocative": 0,
+  "midsentence": 16,
+  "files": 0,
+  "confidence": "low"
+ },
+ {
+  "name": "Ulta",
+  "vocative": 0,
+  "midsentence": 15,
+  "files": 0,
+  "confidence": "low"
+ },
+ {
+  "name": "Wayfair",
+  "vocative": 0,
+  "midsentence": 14,
+  "files": 0,
+  "confidence": "low"
+ },
+ {
+  "name": "Consolidated",
+  "vocative": 0,
+  "midsentence": 13,
+  "files": 0,
+  "confidence": "low"
+ },
+ {
+  "name": "Breakout",
+  "vocative": 0,
+  "midsentence": 13,
+  "files": 0,
+  "confidence": "low"
+ },
+ {
+  "name": "Schwab",
+  "vocative": 0,
+  "midsentence": 13,
+  "files": 0,
+  "confidence": "low"
+ },
+ {
+  "name": "Gonna",
+  "vocative": 0,
+  "midsentence": 13,
+  "files": 0,
+  "confidence": "low"
+ },
+ {
+  "name": "Catalyst",
+  "vocative": 0,
+  "midsentence": 12,
+  "files": 0,
+  "confidence": "low"
+ },
+ {
+  "name": "Wick",
+  "vocative": 0,
+  "midsentence": 12,
+  "files": 0,
+  "confidence": "low"
+ },
+ {
+  "name": "Candlestick",
+  "vocative": 0,
+  "midsentence": 11,
+  "files": 0,
+  "confidence": "low"
+ },
+ {
+  "name": "Travis",
+  "vocative": 0,
+  "midsentence": 11,
+  "files": 0,
+  "confidence": "low"
+ },
+ {
+  "name": "Powell",
+  "vocative": 0,
+  "midsentence": 11,
+  "files": 0,
+  "confidence": "low"
+ },
+ {
+  "name": "Direction",
+  "vocative": 0,
+  "midsentence": 10,
+  "files": 0,
+  "confidence": "low"
+ },
+ {
+  "name": "Vlad",
+  "vocative": 0,
+  "midsentence": 10,
+  "files": 0,
+  "confidence": "low"
+ },
+ {
+  "name": "Above",
+  "vocative": 0,
+  "midsentence": 9,
+  "files": 0,
+  "confidence": "low"
+ },
+ {
+  "name": "Head",
+  "vocative": 0,
+  "midsentence": 9,
+  "files": 0,
+  "confidence": "low"
+ },
+ {
+  "name": "Bulls",
+  "vocative": 0,
+  "midsentence": 9,
+  "files": 0,
+  "confidence": "low"
+ },
+ {
+  "name": "Daily",
+  "vocative": 0,
+  "midsentence": 9,
+  "files": 0,
+  "confidence": "low"
+ },
+ {
+  "name": "Bob",
+  "vocative": 0,
+  "midsentence": 8,
+  "files": 0,
+  "confidence": "low"
+ },
+ {
+  "name": "See",
+  "vocative": 0,
+  "midsentence": 8,
+  "files": 0,
+  "confidence": "low"
+ },
+ {
+  "name": "Coca",
+  "vocative": 0,
+  "midsentence": 8,
+  "files": 0,
+  "confidence": "low"
+ },
+ {
+  "name": "Time",
+  "vocative": 0,
+  "midsentence": 7,
+  "files": 0,
+  "confidence": "low"
+ },
+ {
+  "name": "Highs",
+  "vocative": 0,
+  "midsentence": 7,
+  "files": 0,
+  "confidence": "low"
+ },
+ {
+  "name": "Can",
+  "vocative": 0,
+  "midsentence": 7,
+  "files": 0,
+  "confidence": "low"
+ },
+ {
+  "name": "One",
+  "vocative": 0,
+  "midsentence": 7,
+  "files": 0,
+  "confidence": "low"
+ },
+ {
+  "name": "New",
+  "vocative": 0,
+  "midsentence": 7,
+  "files": 0,
+  "confidence": "low"
+ },
+ {
+  "name": "Price",
+  "vocative": 0,
+  "midsentence": 7,
+  "files": 0,
+  "confidence": "low"
+ },
+ {
+  "name": "Tech",
+  "vocative": 0,
+  "midsentence": 6,
+  "files": 0,
+  "confidence": "low"
+ },
+ {
+  "name": "Marcus",
+  "vocative": 0,
+  "midsentence": 6,
+  "files": 0,
+  "confidence": "low"
+ },
+ {
+  "name": "Morgan",
+  "vocative": 0,
+  "midsentence": 6,
+  "files": 0,
+  "confidence": "low"
+ },
+ {
+  "name": "Set",
+  "vocative": 0,
+  "midsentence": 6,
+  "files": 0,
+  "confidence": "low"
+ },
+ {
+  "name": "Weekly",
+  "vocative": 0,
+  "midsentence": 6,
+  "files": 0,
+  "confidence": "low"
+ },
+ {
+  "name": "Save",
+  "vocative": 0,
+  "midsentence": 6,
+  "files": 0,
+  "confidence": "low"
+ },
+ {
+  "name": "Point",
+  "vocative": 0,
+  "midsentence": 6,
+  "files": 0,
+  "confidence": "low"
+ },
+ {
+  "name": "Max",
+  "vocative": 0,
+  "midsentence": 6,
+  "files": 0,
+  "confidence": "low"
+ }
+]
