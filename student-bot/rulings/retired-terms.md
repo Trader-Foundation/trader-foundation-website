@@ -33,9 +33,27 @@ release under non-negotiable 8.
 
 ---
 
-## STILL BLOCKED: 10 percent a month
+## CONFIRMED: the monthly return figure stays out
 
-**Vlad said:** *"10% a month can be done if consistent but it averages."*
+**Vlad's ruling:** *"i think you can remove the monthly results bc its a
+marketing thing."*
+
+Excluded from the corpus. He also named what it is, which is the useful part:
+a marketing figure rather than a piece of teaching. That is exactly why it
+comes out without costing the curriculum anything.
+
+**This closes the last item blocking a corpus release.** Both non-negotiable 8
+(retired terms) and non-negotiable 2 (results language) are now satisfied by
+the build rather than by a promise to be careful.
+
+**Open on the business side, and not a corpus question.** The figure still
+sits in marketing, in the Paycheck Collector class intro, and in a coach
+describing it live as something *"marketing has told you."* Removing it from
+the bot protects the bot and touches none of those three.
+
+### The exchange that got here, kept because the distinction matters
+
+**Vlad first said:** *"10% a month can be done if consistent but it averages."*
 
 That answers a question I asked, and I am recording it because it is useful
 context. But it answers **whether the figure is true**, and what the corpus
@@ -65,6 +83,12 @@ figure sits in at least three places: marketing, the Paycheck Collector class
 intro, and a coach describing it live as something *"marketing has told you"*.
 Excluding it from the bot protects the bot. It does not touch the other two.
 
-**What I need from Vlad:** not whether 10 percent is achievable, but whether
-the bot is permitted to state a rate of return at all. If the answer is yes,
-non-negotiable 2 has to change, and that is a decision above this file.
+**How it resolved.** The question I put back was not whether 10 percent is
+achievable but whether the bot may state a rate of return at all. Vlad
+answered by naming the figure as marketing, which settles it without touching
+non-negotiable 2.
+
+**Worth keeping as a pattern.** "Is it true" and "may the bot say it" are
+different questions, and a source can be honest about the first while the
+second still comes back no. Expect this again: 555 unscripted sessions will
+produce more numbers that are accurate in context and unusable in a bot.
