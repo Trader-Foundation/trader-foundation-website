@@ -51,14 +51,29 @@ EXCLUDE = [
     "10 percent a month that marketing",
 ]
 
-# Retired terms. Non-negotiable 8: these must never surface.
+# Retired terms, non-negotiable 8. Vlad ruled: "You can remove the Elite
+# language." So where "elite" is only a qualifier on an ordinary word, strip
+# the qualifier and keep the teaching. Every rewrite leaves a marker, matching
+# the redaction standard in CLAUDE.md: nothing is altered silently.
+RETIRED_REWRITE = [
+    (r"\b(one\s+of\s+)?our\s+elite\s+(members?|students?|traders?)\b",
+     r"\1our \2 [TERM REMOVED]"),
+    (r"\belite\s+(members?|students?|traders?)\b", r"\1 [TERM REMOVED]"),
+]
+
+# Product names with no salvageable form. A chunk naming one is dropped,
+# because removing the name leaves a sentence about a product that no
+# longer exists.
 RETIRED = [
     r"\belite\s+four\b",
+    r"\belite\s+4\b",
     r"\belite\s+12\b",
     r"\belite\s+twelve\b",
-    r"\bour\s+elite\s+members?\b",
-    r"\bone\s+of\s+our\s+elite\b",
 ]
+# No catch-all on the bare word. "elite" is an ordinary English adjective and
+# a blanket rule drops innocent passages: it caught a member describing the
+# Starbucks secret menu as "some elite stuff". The retired terms are the
+# product names, not the word.
 
 # Anything matching these is held back for review rather than indexed.
 SUSPECT = [
@@ -226,6 +241,9 @@ def main():
         running = 0
 
         for i, text in enumerate(pieces):
+            for pat, repl in RETIRED_REWRITE:
+                text = re.sub(pat, repl, text, flags=re.I)
+
             ts, estimated = None, False
             if meta["duration"]:
                 ts = hms(meta["duration"] * (running / total_chars))
