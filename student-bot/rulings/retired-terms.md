@@ -1,7 +1,8 @@
 # Retired terms, and the rate of return question
 
-Two things came up together. One is settled. One is not, and they should not
-be confused with each other.
+Two things came up together and both are now settled. They are kept in one
+file because they arrived in one exchange, not because they are the same
+question. Between them they close the last items blocking a corpus release.
 
 ---
 
