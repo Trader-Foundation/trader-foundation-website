@@ -51,6 +51,17 @@ Disney Verizon Alta Costco Chipotle Boeing Intel Cisco Oracle Adobe Salesforce U
 Pfizer Moderna Exxon Chevron Delta United Southwest Ford Roku Shopify Snap Spotify
 """.split())
 
+# Words already reviewed and rejected, plus names already being redacted, are
+# folded in from glossary/names.json. Without this the same noise is reported
+# on every pass and the loop never goes quiet.
+try:
+    import json as _json
+    _n = _json.loads((ROOT / "glossary/names.json").read_text())
+    NOT_PEOPLE |= set(_n.get("_rejected", {}).get("words", []))
+    NOT_PEOPLE |= set(_n.get("members", [])) | set(_n.get("coaches", []))
+except Exception:
+    pass
+
 # The name class must stay case sensitive. An re.I on the whole pattern makes
 # [A-Z] match lowercase, which scored "know", "again" and "well" as names.
 # Case insensitivity is scoped to the trigger words only.
