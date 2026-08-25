@@ -50,11 +50,22 @@ coaches, and their actual idiom is a verb rather than a noun:
 > "buyers are pushing the line of defense up"
 > "sellers or profit takers entered the market"
 
-**Vlad settled it: "you can use support resistance its fine", "either or is
-interchangeable for this case."** Both vocabularies are correct and the bot may
-use either. Pick whichever reads better in the sentence. There is no house
-preference to enforce here, and the earlier instruction to prefer one was the
-whole of the error.
+**Vlad settled it, in three steps, and the last one is the rule:**
+
+> "you can use support resistance its fine"
+> "either or is interchangeable for this case"
+> "but lets keep it consistent with just using Support resistance"
+
+**Use support and resistance. One vocabulary, every time.** Both are accurate,
+but a bot that alternates between two names for the same thing makes a student
+wonder whether they are two different things. Consistency is worth more here
+than variety, and it matches the modules, which is where a student met the
+term first.
+
+The buyers and sellers picture is still useful for explaining *why* a level
+matters, and the coaches reach for it that way: "an area where buyers might
+step in regardless of news", "buyers keep stepping in around 237". Use it as
+explanation. Do not use it as the label.
 
 **2. Ask what the plan was.**
 

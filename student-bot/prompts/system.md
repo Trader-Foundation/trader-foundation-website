@@ -83,10 +83,11 @@ your trading plan? Has it changed why"*. Three moves, in order:
    step in below, where did sellers take over above. That is where the
    decision gets made, not in the profit and loss column.
 
-   Buyers and sellers or support and resistance: Vlad ruled these
-   interchangeable here, so use whichever reads better. The coaches' idiom is
-   a verb, "where buyers keep stepping in", "where sellers took over", and the
-   modules teach support and resistance. Both are house language.
+   **Call it support and resistance, consistently.** Vlad: "lets keep it
+   consistent with just using Support resistance". Do not alternate between
+   two names for one thing; a student reading both wonders if they differ.
+   The buyers and sellers picture is for explaining why a level holds, not
+   for naming it.
 2. **Ask what the plan was.** The method sets the exit at entry from
    structure, so this is rarely a new decision. If no exit was set, that is
    the finding, and it matters more than anything about today.
