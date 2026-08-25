@@ -2,11 +2,13 @@
    Ported from prompts/system.md. Order matters: the strictest rule that
    matches is the one that fires. */
 /* Terms of art that look like tickers and must never be read as one. Without
-   this list "What is RSI?" gets refused as position advice. */
+   this list "What is RSI?" gets refused as position advice.
+   AM is deliberately absent: it is Antero Midstream, a ticker this curriculum
+   teaches, and listing it let "Should I buy AM right now?" through. */
 const NOT_TICKERS = new Set(("I A OK IT IS MY THE AND FOR BUT NOT YOU ALL ANY CAN DO HOW WHY WHO "+
   "CALL PUT CALLS PUTS RSI MACD SMA EMA VWAP ATR ADX OBV BB DMI CCI "+
   "ITM OTM ATM DTE IV HV OI PL PNL ROI EPS PE IPO ETF ETN LEAP LEAPS "+
-  "TOS FB LIVE AM PM EOD EST PST USD TA EMA9 SL TP RR").split(" "));
+  "TOS FB LIVE PM EOD EST PST USD TA EMA9 SL TP RR").split(" "));
 const TICKER = {
   test(q){
     const m = q.match(/\b[A-Z]{2,5}\b/g);
@@ -46,7 +48,29 @@ const GUARDS = [
   {
     id:"position", tone:"stop", verdict:"Refuse and route",
     rule:"Non-negotiable 3, no position advice",
-    test:q => /\b(should i|do i|would you|shall i|can i|is it worth|worth it to)\b.*\b(buy|sell|enter|exit|close|hold|roll|add|take|cut|trim)\b|\b(strike|expiration|expiry|entry|exit|stop loss|position siz|how many contracts)\b|\bi(?:'m| am) in\b|\bmy (trade|position|contracts?|spread|order)\b|going against me|\bwalk me through\b|\bplac(e|ing) (a|an|this|the|my) (trade|order)\b/i.test(q) || TICKER.test(q),
+    // Two things have to be separated here, and an earlier version did not.
+    // "How do I pick which strike to sell" is the curriculum asking to be
+    // taught. "Which strike should I sell on my RVN trade" is position advice.
+    // The words strike, expiration and exit appear in both, so they cannot
+    // fire the guard alone. Something has to tie the question to a live or
+    // specific position.
+    test:q => {
+      const SPECIFIC = /\bmy (trade|position|contracts?|spread|order|call|put|strike)\b/i.test(q)
+        || /\bi(?:'m| am) in\b|\bi (bought|sold|entered|opened|own|hold)\b/i.test(q)
+        || /going against me|getting tested|underwater|in the (red|money|green)\b/i.test(q)
+        || /\bwalk me through\b|\bplac(e|ing) (a|an|this|the|my) (trade|order)\b/i.test(q)
+        || /\b\d+(\.\d+)?\s*(strike|call|put)s?\b/i.test(q)      // "the 25 put"
+        || TICKER.test(q);
+      // Walking someone through placing a trade is position advice by itself,
+      // and needs no second signal. system.md calls it the closest the corpus
+      // comes to putting a student in a position.
+      if (/\bwalk me through\b|\bplac(e|ing) (a|an|this|the|my) (trade|order)\b/i.test(q)) return true;
+      if (!SPECIFIC) return false;
+      // Specific AND asking to be told what to do with it.
+      return /\b(should i|do i|would you|shall i|can i|is it worth|worth it to|when (do|should) i|what (do|should) i)\b/i.test(q)
+        || /\b(roll|cut|close|exit|hold|add to|trim|sell|buy)\b/i.test(q)
+        || /\b(strike|expiration|expiry|entry|exit|stop loss|position siz|how many contracts)\b/i.test(q);
+    },
     shape:[
       "Ticker, strike, expiration, entry, exit, sizing, rolling and closing are all out of scope, and reframing it as hypothetical or as a friend's trade does not change that.",
       "The bot states the principle, names the module that teaches it, and hands the specific call to a coach.",
