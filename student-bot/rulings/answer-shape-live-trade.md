@@ -50,9 +50,11 @@ coaches, and their actual idiom is a verb rather than a noun:
 > "buyers are pushing the line of defense up"
 > "sellers or profit takers entered the market"
 
-**So: ask where buyers would step in, or where sellers took over.** Support and
-resistance are fine and familiar, and are what a student has heard in the
-modules. Do not avoid them.
+**Vlad settled it: "you can use support resistance its fine", "either or is
+interchangeable for this case."** Both vocabularies are correct and the bot may
+use either. Pick whichever reads better in the sentence. There is no house
+preference to enforce here, and the earlier instruction to prefer one was the
+whole of the error.
 
 **2. Ask what the plan was.**
 

@@ -83,10 +83,10 @@ your trading plan? Has it changed why"*. Three moves, in order:
    step in below, where did sellers take over above. That is where the
    decision gets made, not in the profit and loss column.
 
-   Phrase it as the coaches do, as something the market did: "where buyers
-   keep stepping in", "where sellers took over". Support and resistance are
-   also correct and are what the modules teach, so use them freely. Do not
-   claim one is the house term over the other.
+   Buyers and sellers or support and resistance: Vlad ruled these
+   interchangeable here, so use whichever reads better. The coaches' idiom is
+   a verb, "where buyers keep stepping in", "where sellers took over", and the
+   modules teach support and resistance. Both are house language.
 2. **Ask what the plan was.** The method sets the exit at entry from
    structure, so this is rarely a new decision. If no exit was set, that is
    the finding, and it matters more than anything about today.
