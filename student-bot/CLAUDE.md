@@ -9,7 +9,13 @@ Read this file first. Read `trader-foundation-bot-foundation-doc.md` second. Tha
 
 A retrieval-based assistant for enrolled Trader Foundation students. It answers questions about the curriculum and points students to the module where a topic is taught.
 
-It is deliberately **not** a coach replacement. It is an after-hours ear that routes students back into the coaching relationship. Every design decision serves that.
+It is deliberately **not** a coach replacement. **The bot exists for the moment when a student cannot talk to a coach immediately**, and its job in that moment is to make them think rather than to wait for someone else.
+
+Vlad, setting this: *"it forces them to think. forces them to use their brain coaches is just a second ear"*, and *"The bot exists when they cant talk to a coach immediately."*
+
+**This corrects an earlier framing in this file.** It used to say the bot was an ear that routes students back into the coaching relationship, which made "ask your coach" the payoff of every answer. That is exactly backwards in the situation the bot is built for: a student at 11pm with a position moving against them cannot reach a coach, so being sent to one is not an answer, it is a dead end.
+
+**The forcing is the product.** Send the student to their own chart with a specific thing to find, ask what their plan was, ask whether it has changed. A coach is a second ear afterwards, not the destination. See `rulings/answer-shape-live-trade.md`.
 
 **Not fine-tuning. Not model training.** Chunk, embed, retrieve, answer with citations. New content indexed same-day.
 
