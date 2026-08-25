@@ -225,7 +225,24 @@ const TESTS  = /*__TESTS__*/{};
 const STOP = new Set(("a an the and or but if of to in on at is are was were be been do does did i you it "+
  "my your this that these those for with as from what how when where why which who whom can could should "+
  "would will shall me we they them he she his her its about into over under s t").split(" "));
-const stem = w => w.replace(/(ies)$/,"y").replace(/(sses|shes|ches|xes)$/,"s").replace(/(ing|ed|es|s)$/,"");
+/* Suffix stripping with a four character floor. Without the floor "greed"
+   became "gre", so a student asking about greed never reached the passages
+   where a coach says "don't get greedy". */
+function stem(w){
+  const two = [[/ies$/,"y"],[/(sses|shes|ches|xes)$/,"s"]];
+  for (const [re,rep] of two){
+    const out = w.replace(re,rep);
+    // Fall through rather than return when too short, so "losses" reaches the
+    // simple suffix pass below and becomes "loss". Returning here instead left
+    // it as "losses" and diverged from tools/ask.py, which would mean the
+    // bench answered differently from what the tests exercise.
+    if (out !== w && out.length >= 4) return out;
+  }
+  for (const suf of ["ing","ed","es","s"]){
+    if (w.endsWith(suf) && w.length - suf.length >= 4) return w.slice(0, -suf.length);
+  }
+  return w;
+}
 const toks = s => (s.toLowerCase().match(/[a-z][a-z0-9']+/g)||[]).filter(w=>!STOP.has(w)&&w.length>1).map(stem);
 
 let DF={}, AVG=0, DOCS=[];
@@ -238,8 +255,21 @@ function index(){
   });
   AVG = DOCS.reduce((s,d)=>s+d.len,0)/(DOCS.length||1);
 }
+/* Prefix expansion bridges what the light stemmer cannot: greed and greedy,
+   patience and patient, emotion and emotional. Only for terms of five
+   characters or more, capped so one term cannot dominate the score. */
+const PREFIX_MIN = 5;
+function expand(term){
+  if (DF[term] !== undefined) return [term];
+  if (term.length < PREFIX_MIN) return [];
+  const pre = term.slice(0, PREFIX_MIN);
+  return Object.keys(DF).filter(t => t.startsWith(pre))
+    .sort((a,b) => a.length - b.length || (a < b ? -1 : 1)).slice(0,4);
+}
+
 function search(q, n=6){
-  const qt = [...new Set(toks(q))];
+  const raw = [...new Set(toks(q))];
+  const qt = [...new Set(raw.flatMap(expand))];
   if(!qt.length) return [];
   const N = DOCS.length, k1=1.4, b=0.72;
   const scored = DOCS.map(d=>{
