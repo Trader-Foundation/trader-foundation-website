@@ -223,6 +223,68 @@ def module_for(path, meta):
     return "UNNUMBERED"
 
 
+RULINGS = ROOT / "rulings"
+
+MAINTAINER_SECTIONS = re.compile(
+    r"^(spelling|how this got settled|compliance note|provenance|"
+    r"why this is recorded|status|changelog|open questions?)\b", re.I)
+
+
+def ruling_chunks():
+    """Index the rulings layer.
+
+    This was missing and it was a real hole. prompts/system.md says a ruling
+    beats a transcript wherever they conflict, and CLAUDE.md calls rulings
+    current teaching. But nothing indexed them, so retrieval could never
+    surface one: the bot was told to obey a layer it could not read.
+
+    Chunked by heading like the written documents, and cited by name, for
+    example: rulings/marubozu.md, "The definition the bot teaches".
+    """
+    out = []
+    skip = {"README.md", "open-questions.md", "compliance-log.md"}
+    for path in sorted(RULINGS.glob("*.md")):
+        if path.name in skip:
+            continue
+        title, section, buf, seq = path.stem.replace("-", " "), "Opening", [], 0
+
+        def flush(sec, body, seq):
+            text = "\n\n".join(body).strip()
+            if not text or MAINTAINER_SECTIONS.match(sec):
+                return
+            for i, piece in enumerate(pack(paragraphs(text))):
+                for pat, repl in RETIRED_REWRITE:
+                    piece = re.sub(pat, repl, piece, flags=re.I)
+                verdict, reason = screen(piece)
+                if verdict == "exclude":
+                    dropped_written.append({"source_file": f"rulings/{path.name}",
+                                            "section": sec, "reason": reason,
+                                            "text": piece[:180]})
+                    continue
+                out.append({
+                    "chunk_id": f"ruling:{path.stem}:{seq:02d}{i:02d}",
+                    "course": "ruling", "module": path.stem,
+                    "module_title": title, "timestamp": None,
+                    "timestamp_estimated": False, "section": sec,
+                    "part": sec, "tag": "EVERGREEN", "text": piece,
+                    "recording_date": None, "video": None, "order": None,
+                    "status": "CURRENT", "needs_review": verdict == "review",
+                    "review_reason": reason,
+                    "source_file": f"rulings/{path.name}",
+                })
+
+        for line in path.read_text(encoding="utf-8").splitlines():
+            if line.startswith("# "):
+                title = line[2:].strip()
+            elif line.startswith("## "):
+                flush(section, buf, seq); seq += 1
+                section, buf = line[3:].strip(), []
+            else:
+                buf.append(line)
+        flush(section, buf, seq)
+    return out
+
+
 WRITTEN = ROOT / "transcripts" / "written"
 
 def written_chunks():
@@ -237,7 +299,7 @@ def written_chunks():
 
         def flush(sec, body, seq):
             text = "\n\n".join(body).strip()
-            if not text:
+            if not text or MAINTAINER_SECTIONS.match(sec):
                 return
             for i, piece in enumerate(pack(paragraphs(text))):
                 for pat, repl in RETIRED_REWRITE:
@@ -340,8 +402,8 @@ def main():
                 "source_file": rel,
             })
 
-    w = written_chunks()
-    chunks.extend(w)
+    chunks.extend(written_chunks())
+    chunks.extend(ruling_chunks())
     dropped.extend(dropped_written)
 
     OUT.parent.mkdir(parents=True, exist_ok=True)
