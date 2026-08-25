@@ -267,7 +267,7 @@ function expand(term){
     .sort((a,b) => a.length - b.length || (a < b ? -1 : 1)).slice(0,4);
 }
 
-function search(q, n=6){
+function search(q, n=8){
   const raw = [...new Set(toks(q))];
   const qt = [...new Set(raw.flatMap(expand))];
   if(!qt.length) return [];
@@ -279,6 +279,11 @@ function search(q, n=6){
       const idf = Math.log(1 + (N - DF[w] + 0.5)/(DF[w] + 0.5));
       s += idf * (f*(k1+1))/(f + k1*(1 - b + b*d.len/AVG));
     }
+    /* Rulings are current teaching and override transcripts, per system.md.
+       Retrieval has to reflect that or the rule is empty. Kept modest so a
+       ruling surfaces alongside strong transcript matches. Mirrors
+       RULING_BOOST in tools/ask.py. */
+    if (d.c.course === "ruling") s *= 1.4;
     return {d, s};
   }).filter(x=>x.s>0).sort((a,b)=>b.s-a.s).slice(0,n);
   const top = scored[0]?.s || 1;

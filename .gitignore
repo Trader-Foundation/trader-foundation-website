@@ -120,8 +120,13 @@ student-bot/transcripts/**
 # Built bench page: has the whole corpus inlined. Never commit.
 student-bot/tools/*.build.html
 
+# Python bytecode, never useful in the repo.
+student-bot/tools/__pycache__/
+*.pyc
+
 student-bot/corpus/**
 !student-bot/corpus/
 !student-bot/corpus/README.md
 !student-bot/corpus/schema.md
 !student-bot/corpus/sources.md
+!student-bot/corpus/retrieval-notes.md

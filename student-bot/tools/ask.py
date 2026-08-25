@@ -132,7 +132,22 @@ def expand(term):
     hits = sorted((t for t in DF if t.startswith(pre)), key=lambda t: (len(t), t))
     return hits[:4]
 
-def search(q, n=6, k1=1.4, b=0.72):
+# prompts/system.md: "Where a ruling and a transcript conflict, the ruling
+# wins. The rulings layer is current teaching. Transcripts are recordings that
+# may have been superseded."
+#
+# Retrieval has to reflect that or the instruction is empty. Without this,
+# rulings scored below the transcripts they override: the put seller risk
+# ruling sat at rank 7 behind a live session, and the whole point of that
+# ruling is that the recording is wrong. The boost is modest on purpose, so a
+# ruling surfaces alongside strong transcript matches rather than crowding
+# out the teaching a student actually asked for.
+RULING_BOOST = 1.4
+
+def weight_for(chunk):
+    return RULING_BOOST if chunk.get("course") == "ruling" else 1.0
+
+def search(q, n=8, k1=1.4, b=0.72):
     raw = list(dict.fromkeys(toks(q)))
     qt = list(dict.fromkeys([e for t in raw for e in expand(t)]))
     if not qt:
@@ -148,7 +163,7 @@ def search(q, n=6, k1=1.4, b=0.72):
             idf = math.log(1 + (N - DF[w] + 0.5) / (DF[w] + 0.5))
             s += idf * (f * (k1 + 1)) / (f + k1 * (1 - b + b * ln / AVG))
         if s > 0:
-            scored.append((s, c))
+            scored.append((s * weight_for(c), c))
     scored.sort(key=lambda x: -x[0])
     return scored[:n]
 
@@ -169,6 +184,10 @@ def cite(c):
         base += f", {c['part']}"
     return base
 
+# Eight rather than six. A ruling that refines a module rather than
+# contradicting it sits just below the module's own teaching, which is correct
+# ordering but pushed the stochastics ruling to rank 7 and out of view. Wider
+# retrieval lets a refinement travel with the thing it refines.
 def main():
     args = [a for a in sys.argv[1:] if a != "--json"]
     as_json = "--json" in sys.argv
