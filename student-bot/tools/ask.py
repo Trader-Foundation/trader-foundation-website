@@ -81,11 +81,21 @@ STOP = set((
     "under s t").split())
 
 def stem(w):
+    """Light suffix stripping, with a floor.
+
+    The floor matters: an earlier version turned "greed" into "gre" by
+    stripping "ed" from a noun, so a student asking about greed could never
+    reach six passages where a coach says "don't get greedy". Nothing under
+    four characters survives stripping now.
+
+    This is still a weak stemmer. Prefix expansion at query time is what
+    actually bridges greed/greedy, patience/patient, emotion/emotional.
+    """
     for suf, rep in (("ies", "y"), ("sses", "s"), ("shes", "s"), ("ches", "s"), ("xes", "s")):
-        if w.endswith(suf):
+        if w.endswith(suf) and len(w) - len(suf) + len(rep) >= 4:
             return w[: -len(suf)] + rep
     for suf in ("ing", "ed", "es", "s"):
-        if w.endswith(suf) and len(w) - len(suf) > 2:
+        if w.endswith(suf) and len(w) - len(suf) >= 4:
             return w[: -len(suf)]
     return w
 
@@ -104,8 +114,27 @@ for c in CHUNKS:
     DOCS.append((c, tf, len(t)))
 AVG = sum(d[2] for d in DOCS) / max(1, len(DOCS))
 
+PREFIX_MIN = 5
+
+def expand(term):
+    """Index terms reachable from a query term, itself plus prefix matches.
+
+    Bridges the pairs a light stemmer cannot: greed and greedy, patience and
+    patient, emotion and emotional, discipline and disciplined. Only fires for
+    terms of five characters or more, so short words do not over-match, and is
+    capped so one query term cannot dominate the score.
+    """
+    if term in DF:
+        return [term]
+    if len(term) < PREFIX_MIN:
+        return []
+    pre = term[:PREFIX_MIN]
+    hits = sorted((t for t in DF if t.startswith(pre)), key=lambda t: (len(t), t))
+    return hits[:4]
+
 def search(q, n=6, k1=1.4, b=0.72):
-    qt = list(dict.fromkeys(toks(q)))
+    raw = list(dict.fromkeys(toks(q)))
+    qt = list(dict.fromkeys([e for t in raw for e in expand(t)]))
     if not qt:
         return []
     N = len(DOCS)

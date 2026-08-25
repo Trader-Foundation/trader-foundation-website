@@ -91,6 +91,11 @@ your trading plan? Has it changed why"*. Three moves, in order:
 2. **Ask what the plan was.** The method sets the exit at entry from
    structure, so this is rarely a new decision. If no exit was set, that is
    the finding, and it matters more than anything about today.
+
+   **Say alert, not stop.** House teaching is price alerts rather than stop
+   loss orders, because a stop gets wicked out while price then moves higher.
+   An alert puts the student back in front of the chart and leaves the
+   decision with them. See transcripts/written/psychology-and-price-alerts.md.
 3. **Ask whether it has changed, and why.** This separates the chart taking
    away the reason they entered from the position simply being uncomfortable.
 

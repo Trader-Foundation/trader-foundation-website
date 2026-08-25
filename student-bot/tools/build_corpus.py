@@ -223,6 +223,59 @@ def module_for(path, meta):
     return "UNNUMBERED"
 
 
+WRITTEN = ROOT / "transcripts" / "written"
+
+def written_chunks():
+    """Chunk typed markdown by heading, per the written-document path in
+    corpus/schema.md: a section heading replaces the timestamp, so this
+    material is not blocked on the timestamp problem at all."""
+    out = []
+    for path in sorted(WRITTEN.glob("*.md")):
+        if path.name == "README.md":
+            continue
+        title, section, buf = path.stem.replace("-", " ").title(), "Opening", []
+
+        def flush(sec, body, seq):
+            text = "\n\n".join(body).strip()
+            if not text:
+                return
+            for i, piece in enumerate(pack(paragraphs(text))):
+                for pat, repl in RETIRED_REWRITE:
+                    piece = re.sub(pat, repl, piece, flags=re.I)
+                verdict, reason = screen(piece)
+                if verdict == "exclude":
+                    dropped_written.append({"source_file": path.name,
+                                            "section": sec, "reason": reason,
+                                            "text": piece[:180]})
+                    continue
+                out.append({
+                    "chunk_id": f"written:{path.stem}:{seq:02d}{i:02d}",
+                    "course": "written", "module": path.stem,
+                    "module_title": title, "timestamp": None,
+                    "timestamp_estimated": False, "section": sec,
+                    "part": sec, "tag": classify(piece), "text": piece,
+                    "recording_date": None, "video": None, "order": None,
+                    "status": "CURRENT", "needs_review": verdict == "review",
+                    "review_reason": reason,
+                    "source_file": f"written/{path.name}",
+                })
+
+        seq = 0
+        for line in path.read_text(encoding="utf-8").splitlines():
+            if line.startswith("# "):
+                title = line[2:].strip()
+            elif line.startswith("## "):
+                flush(section, buf, seq); seq += 1
+                section, buf = line[3:].strip(), []
+            else:
+                buf.append(line)
+        flush(section, buf, seq)
+    return out
+
+
+dropped_written = []
+
+
 def main():
     files = sorted(CLEAN.rglob("*.txt"))
     chunks, dropped = [], []
@@ -286,6 +339,10 @@ def main():
                 "review_reason": reason,
                 "source_file": rel,
             })
+
+    w = written_chunks()
+    chunks.extend(w)
+    dropped.extend(dropped_written)
 
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(chunks, indent=1), encoding="utf-8")
