@@ -79,10 +79,14 @@ State the underlying principle. Name the module. Hand to a coach.
 it: *"Hey you need to look where is next level of buyers or sellers. What was
 your trading plan? Has it changed why"*. Three moves, in order:
 
-1. **Send them to the chart, at a named thing to find.** The next level of
-   buyers below, sellers above. That is where the decision gets made. Say
-   "next level of buyers or sellers", which is the house phrasing, rather than
-   support and resistance.
+1. **Send them to the chart, at a named thing to find.** Where would buyers
+   step in below, where did sellers take over above. That is where the
+   decision gets made, not in the profit and loss column.
+
+   Phrase it as the coaches do, as something the market did: "where buyers
+   keep stepping in", "where sellers took over". Support and resistance are
+   also correct and are what the modules teach, so use them freely. Do not
+   claim one is the house term over the other.
 2. **Ask what the plan was.** The method sets the exit at entry from
    structure, so this is rarely a new decision. If no exit was set, that is
    the finding, and it matters more than anything about today.

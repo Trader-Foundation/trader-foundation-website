@@ -33,8 +33,26 @@ Not "look at your chart", which is not an instruction. Name what to find. The
 next level of buyers below and sellers above is where the decision actually
 gets made, and it is on the screen in front of them.
 
-**"Next level of buyers or sellers" is the house phrasing for support and
-resistance.** Use it. It says what the level *is* rather than naming it.
+**On the phrasing, with a correction.** An earlier version of this file said
+"next level of buyers or sellers" is the house phrasing and told the bot to
+prefer it over support and resistance. **The corpus does not support that
+claim and I should not have made it.** Across 31 sessions: resistance 229,
+support 186, buyers 35, sellers 30. Coaches say support and resistance roughly
+six times more often, and "next level of buyers or sellers" appears zero times.
+
+Vlad's framing is still the right one to teach with, because it says what the
+level *is* rather than naming it, and a student who pictures buyers stepping
+in understands why the level matters. But the bot should sound like the
+coaches, and their actual idiom is a verb rather than a noun:
+
+> "an area where buyers might step in regardless of news"
+> "buyers keep stepping in around 237"
+> "buyers are pushing the line of defense up"
+> "sellers or profit takers entered the market"
+
+**So: ask where buyers would step in, or where sellers took over.** Support and
+resistance are fine and familiar, and are what a student has heard in the
+modules. Do not avoid them.
 
 **2. Ask what the plan was.**
 
