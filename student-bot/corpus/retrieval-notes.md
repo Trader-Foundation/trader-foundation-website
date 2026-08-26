@@ -83,6 +83,45 @@ properly. Until then, expect the bot to answer well when a student happens to
 use curriculum vocabulary and to miss when they do not, which is exactly the
 wrong way round for a beginner who does not know the vocabulary yet.
 
+## There is no relevance floor, and a simple one does not work
+
+`prompts/system.md` tells the bot to say so and route on when retrieval returns
+nothing relevant. **Retrieval never tells it when that is the case.** Every
+query returns eight passages, whatever they scored, so the instruction depends
+on the answering model noticing that the passages are unrelated.
+
+The obvious fix is a score threshold, and it was measured rather than assumed.
+Top score for twelve topics the corpus covers, against twelve it does not:
+
+| | min | median | max |
+|---|---|---|---|
+| Covered | 8.0 | 14.5 | 20.8 |
+| Absent | 6.1 | 9.6 | 19.9 |
+
+**The distributions overlap almost completely.** Any cut that catches the weak
+absent queries also throws away real answers, and any cut that keeps all the
+real answers admits nearly every absent one. BM25 scores are not calibrated
+across queries: they depend on how many terms a question has and how rare those
+terms are, so the same number means different things for different questions.
+
+So no threshold is shipped. **Relative** signals are more promising than
+absolute ones, such as the gap between the top hit and the median hit, and
+embeddings would make the question easier because a similarity score is
+comparable across queries in a way a BM25 score is not.
+
+## The ruling boost amplifies noise on weak queries
+
+The 1.4 multiplier does its job when something matches. When **nothing** does,
+it decides the ranking by itself: for "i need a win today" the top four hits
+were all rulings, scoring 8.1 down to 7.4, none of them about the question.
+
+Left in place deliberately. The boost fixes a real failure, rulings ranking
+below the transcripts they override, and tuning it to behave on queries that
+have no good answer would risk the case it exists for. **The right fix is the
+missing relevance floor above, not a weaker boost.** Worth knowing when reading
+bench output: a screen of rulings with single digit scores means nothing
+matched, not that the rulings are relevant.
+
 ## What is checked
 
 `tools/coverage.py` runs a fixed topic list and reports the top score per
