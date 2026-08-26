@@ -1,7 +1,7 @@
 # Ruling: Inverted hammer
 
 **Status:** CONFIRMED
-**Applies to:** Module 3
+**Applies to:** Module 2
 **Source:** Foundation doc section 6.1
 
 ---
@@ -37,7 +37,7 @@ The Moving Averages module restates the house convention independently, and ties
 
 Two things worth noting.
 
-**It supports the ruling rather than contradicting it.** A second module teaching the inverted hammer as bearish makes this a consistent house position, not a Module 3 misstatement.
+**It supports the ruling rather than contradicting it.** A second module teaching the inverted hammer as bearish makes this a consistent house position, not a Module 2 misstatement.
 
 **It reads on the volume, not just the shape.** The instructor does not stop at "inverted hammer, therefore bearish." He checks whether volume agreed, and the reason given for staying out is that volume was bearish. That is the confirmation condition operating in practice, even though the transcript never states it as a rule.
 
@@ -47,6 +47,6 @@ That is useful evidence. The confirmation condition was described as absent from
 
 This is the first confirmed instance of curriculum advancing past the recording. It will not be the last.
 
-Nothing in the Module 3 transcript signals that the rule is incomplete. It reads as a finished, confident statement. The only way this surfaced was someone who teaches it today reading the recording against current practice.
+Nothing in the Module 2 transcript signals that the rule is incomplete. It reads as a finished, confident statement. The only way this surfaced was someone who teaches it today reading the recording against current practice.
 
 That check needs to run against every module, not just the ones where something looks off.

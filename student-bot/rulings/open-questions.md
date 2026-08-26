@@ -10,7 +10,7 @@ One question at a time. Vlad works by voice to text.
 
 ## 1. Piercing line, midpoint direction
 
-**Status:** OPEN, blocks ingestion of the Module 3 piercing line passage
+**Status:** OPEN, blocks ingestion of the Module 2 piercing line passage
 
 The transcript defines the piercing line as closing *below* the midpoint of the prior candle, and dark cloud cover as closing *below* the midpoint of the prior candle. These are meant to be mirror images and cannot both be below.
 
@@ -191,7 +191,7 @@ That is now a confirmed ruling and the standing answer for any indicator questio
 
 Vlad clarified that "context" in the indicator hierarchy means the trend of the stock itself, read off the chart.
 
-This was briefly logged as a curriculum gap on the grounds that "higher high" and "higher low" appear zero times in the supplied material. That was wrong. The phrasing is absent, the concept is taught throughout: Module 2 trades with the trend and screens for the name trending hardest, Module 3 teaches every candlestick pattern relative to the prevailing trend, Module 5 covers channels and structure, and Moving Averages gives the mechanical version, above the 50 and 200 is bullish, below both is bearish.
+This was briefly logged as a curriculum gap on the grounds that "higher high" and "higher low" appear zero times in the supplied material. That was wrong. The phrasing is absent, the concept is taught throughout: Module 1 trades with the trend and screens for the name trending hardest, Module 2 teaches every candlestick pattern relative to the prevailing trend, Module 5 covers channels and structure, and Moving Averages gives the mechanical version, above the 50 and 200 is bullish, below both is bearish.
 
 No module is missing. The bot cites whichever module fits the question rather than one canonical trend lesson.
 
@@ -778,7 +778,7 @@ Options: re-export with timestamps from the transcription tool, or run a pass ag
 
 In the Volume module, on a hammer candle: "The candle's okay, it's a hammer candle. Not something I would trade, and I'll show you why. We learned support resistance. We want to see it break this resistance." Entry then waits for the resistance break.
 
-Module 3 teaches the hammer as bullish, colour irrelevant, meaningful at the bottom of a downtrend, with no confirmation condition attached.
+Module 2 teaches the hammer as bullish, colour irrelevant, meaningful at the bottom of a downtrend, with no confirmation condition attached.
 
 These are not necessarily in conflict. The Volume module may be applying confirmation before entry rather than redefining the pattern. But this is the same shape as the inverted hammer case: a recording teaching a flat rule while current teaching carries a condition the recording never states.
 

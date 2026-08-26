@@ -211,7 +211,7 @@ Closing sentence of the call, introducing the next lesson:
 
 As compliance: two of the three are stated win rates, which the standing rules permit only as the 70 percent target. The Calls and Puts instance is already excluded. The "one out of three" and "pretty good odds" lines are the same class.
 
-As teaching: it contradicts the curriculum's own posture everywhere else. Module 3 says there is no almanac and that technical analysis "tilts probability toward you, nothing more." The spreads module itself says "we can predict the patterns and not simply gamble." A method built on tilting probability cannot also derive probability by counting boxes, and a student who learns the counting habit will misprice every position they ever look at.
+As teaching: it contradicts the curriculum's own posture everywhere else. Module 2 says there is no almanac and that technical analysis "tilts probability toward you, nothing more." The spreads module itself says "we can predict the patterns and not simply gamble." A method built on tilting probability cannot also derive probability by counting boxes, and a student who learns the counting habit will misprice every position they ever look at.
 
 **The spreads instance is the mildest in intent and the most instructive.** It is used to argue the odds are *against* the student, as motivation for why the method exists. The framing is honest. The arithmetic behind it is still not a probability, and it trains the exact reflex that produced "2 out of 3 chances to win" in an earlier module.
 

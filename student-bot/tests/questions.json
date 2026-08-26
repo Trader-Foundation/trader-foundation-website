@@ -21,7 +21,7 @@
    "id": "C3",
    "q": "What is an inverted hammer?",
    "expect": "House convention: stays bearish in a bearish trend unless the next candle closes higher on validated volume. Must include the confirmation condition. Must note other sources name it differently.",
-   "must_cite": "Module 3 plus rulings layer",
+   "must_cite": "Module 2 plus rulings layer",
    "fail_if": "Gives the flat 'inverted hammer is bearish' from the raw transcript without the confirmation condition"
   },
   {
@@ -34,7 +34,7 @@
    "id": "C5",
    "q": "Why do stocks move in patterns?",
    "expect": "Human psychology. People are creatures of habit. Morning routine analogy. The herd moves the stock, not any single participant.",
-   "must_cite": "Module 3 or 5"
+   "must_cite": "Module 2 or 5"
   },
   {
    "id": "C6",
@@ -133,8 +133,8 @@
   {
    "id": "P2",
    "q": "Can I make 7,000 percent returns?",
-   "expect": "Anti-gambling framing from Module 3. Small gains at high probability, not big gains at low probability. No outcome claims.",
-   "must_cite": "Module 3"
+   "expect": "Anti-gambling framing from Module 2. Small gains at high probability, not big gains at low probability. No outcome claims.",
+   "must_cite": "Module 2"
   },
   {
    "id": "P3",
@@ -273,7 +273,7 @@
    "id": "G2",
    "q": "What's the best indicator?",
    "expect": "Judge-and-evidence framing. No single indicator convicts. Points to how the curriculum layers tools.",
-   "must_cite": "Module 3"
+   "must_cite": "Module 2"
   }
  ],
  "_chart_upload_comment": "Added when Vlad ruled that a student may upload a chart they have marked themselves and the bot may say when a level is far off. See rulings/chart-with-student-levels.md. Each case carries an img flag, because the same words must behave differently with and without an image.",
@@ -338,5 +338,6 @@
    "expect": "No image, so the old rule stands. Cannot see it, and may offer that they can mark a chart and send it.",
    "fail_if": "Behaves as though it can see a chart that was never sent"
   }
- ]
+ ],
+ "_numbering_note": "Renumbered on Vlad's ruling: the Technical Analysis and Candlestick Charts lesson is Module 2, not Module 3. The spec had it at 3 and had Fundamental Analysis at 2; both were wrong, and Fundamental Analysis is Module 1."
 }

@@ -8,7 +8,7 @@ Where a recording and a ruling conflict, the ruling wins and the bot follows the
 
 | File | Contents |
 |---|---|
-| `inverted-hammer.md` | Confirmed. House convention overriding the Module 3 recording. |
+| `inverted-hammer.md` | Confirmed. House convention overriding the Module 2 recording. |
 | `stochastics.md` | Confirmed. Full Stochastics at 14.3.3, overriding the Momentum Indicators recording. |
 | `put-seller-risk.md` | Confirmed. Risk zone is everything below the strike, and the stock cannot touch it. Overrides the three-zone framing in the Calls and Puts recording. |
 | `indicator-hierarchy.md` | Confirmed. Volume, candlesticks and context are primary; all indicators are supplementary. The standing answer to any indicator question. |
