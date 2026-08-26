@@ -49,6 +49,12 @@ Remember Notice Watch Listen Think Guys Folks Everyone Everybody Somebody Anybod
 Mondays Tuesdays Wednesdays Thursdays Fridays Saturdays Sundays
 Disney Verizon Alta Costco Chipotle Boeing Intel Cisco Oracle Adobe Salesforce Uber Lyft
 Pfizer Moderna Exxon Chevron Delta United Southwest Ford Roku Shopify Snap Spotify
+Wick Wicks Body Bodies Gap Gaps Spy Bears Bulls Market Markets Daily Weekly Monthly
+Divergence Consolidation Consolidated Candlestick Candlesticks Candle Candles Futures
+Square Star Support Resistance Volume Range Channel Breakout Breakdown Retest Reversal
+Entry Exit Setup Setups Position Positions Contract Contracts Level Levels Target Targets
+Alert Alerts Chart Charts Trade Trades Trading Trader Traders Play Plays Move Moves
+Let Lets Left Right Above Below Over Under First Second Third Next Last Big Small
 """.split())
 
 # Words already reviewed and rejected, plus names already being redacted, are
