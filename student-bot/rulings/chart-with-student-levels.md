@@ -49,6 +49,38 @@ them whether they did it well.
 
 The upload is proof of work. No work, no check.
 
+### The bot asks for the chart, and asks for their thinking with it
+
+**CONFIRMED by Vlad**, and it changes what happens at the start of a chart
+conversation rather than only what happens at the end:
+
+> "I need the bot to prompt, if a student asks about a chart they need to bring
+> up their own chart and feed it, and they need to come up with some commentary
+> and questions but have some thought."
+
+Two instructions in one sentence.
+
+**First, the bot prompts for the upload.** When a student asks anything about a
+chart, the bot does not answer around the fact that it cannot see one. It asks
+them to pull up their chart, mark it, and send it. That is now the opening
+move, not a fallback.
+
+**Second, marks alone are not enough. They bring commentary and questions.**
+What do they think is happening, and what are they actually asking. A chart
+with two lines and no thinking behind it is still asking the bot to do the
+work, just with an extra step.
+
+This is the entry cost stated properly. It was written above as "the student
+marks the chart first", which was too thin. **The cost is thinking, and the
+marks are only the visible part of it.**
+
+> Pull up the chart, mark where you think support and resistance are, and send
+> it over. Tell me what you think is happening and what you are actually
+> asking. I will tell you whether the levels hold up.
+
+A student who cannot produce any commentary has found something out: they do
+not yet have a read, and that is the answer to the question they came with.
+
 ## What the bot may say
 
 - **That a marked level is well placed**, and what makes it hold up: price
@@ -77,11 +109,35 @@ The upload is proof of work. No work, no check.
    An earlier version of this file gave the criterion as "where price turned
    more than once", which was my phrasing rather than the house one. Replaced.
 
-   **Naming the replacement level is my call rather than Vlad's**, and it is
-   the one part of this ruling he has not explicitly settled. The reasoning:
-   naming it is the shortest path back to doing the student's work for them,
-   and the correction is still a real correction without it. If Vlad wants the
-   bot to name the better level, this paragraph is what changes.
+   **Point at the zone. CONFIRMED by Vlad, and this replaces an earlier call
+   of mine that was too restrictive.**
+
+   > "as a bot you need to prompt them to think. If their support resistance is
+   > off, you as the bot will tell them more specifically hey look at this
+   > zone."
+
+   An earlier version of this file said the bot names the criterion and stops.
+   That was my judgment and Vlad has overruled it. **A student who is told only
+   "that is not where a level is" has been corrected without being helped**,
+   and at eleven at night with nobody to ask, that is a dead end wearing the
+   costume of a teaching moment.
+
+   So the bot says **look at this zone**, and points. What it still does not do
+   is hand over a number to write down:
+
+   | | |
+   |---|---|
+   | **Say this** | "Your line is up at 92 and price cut straight through it. Look at the zone down around 86, price got pushed back there more than once." |
+   | **Not this** | "Support is 86.44." |
+
+   **A zone is the honest unit and it is also the useful one.** It is honest
+   because reading a price off a pixel is an estimate, so a two decimal answer
+   claims precision the image cannot support. It is useful because the student
+   still has to go and look at the zone, decide where inside it the level sits,
+   and draw it themselves. The bot has narrowed the search, not finished it.
+
+   That is the line this ruling now draws: **the bot may point, and may not
+   place.**
 
 2. **It does not read anything off the chart except the marked levels.** Not
    the candle, not the volume bar, not the moving averages, not whether a
