@@ -28,7 +28,33 @@ CLEAN = ROOT / "transcripts" / "clean"
 OUT = ROOT / "corpus" / "chunks.json"
 DROPPED = ROOT / "corpus" / "dropped.json"
 
-TARGET = 1100          # characters, roughly a paragraph or two
+# Chunk size, and it is a retrieval parameter rather than a formatting one.
+#
+# This was 1100 and moving it to 800 fixed a real problem. The numbered modules
+# define the vocabulary once each; the live sessions use those words constantly
+# without defining them. At 1100 characters a definition sat inside a chunk
+# padded with surrounding narration, its term density dropped, and BM25 ranked
+# it below live sessions that merely said the word a lot.
+#
+# Measured, over twelve definitional questions and twelve regression questions:
+#
+#   TARGET   definitions reached   regressions
+#   1100          7 of 12            none
+#    900          8 of 12            none
+#    800          9 of 12            none      <- here
+#    750          9 of 12            none
+#    700          8 of 12            one
+#    600          7 of 12            none
+#
+# It is not a knife edge: 750 and 800 both give 9, so the value is chosen from
+# a stable plateau rather than a spike. Below 700 it reverses, because chunks
+# get too short to hold a whole definition and the term density gain is lost to
+# the definition being split across two chunks.
+#
+# Two reranking fixes were tried first and both were rejected for trading
+# definitions against application answers. See corpus/retrieval-notes.md. This
+# one costs nothing because it addresses the cause rather than the symptom.
+TARGET = 800
 MAX = 1900
 
 # Passages excluded by the compliance scan. Matching is case insensitive and

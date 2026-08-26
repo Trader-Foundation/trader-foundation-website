@@ -164,16 +164,51 @@ right idea and it still could not separate the classes: 177 live chunks also
 match the definitional phrasing, since a coach explaining something mid session
 sounds exactly like a module doing it.
 
-**This is the second independent piece of evidence that BM25 is at its ceiling
-here**, the first being the missing relevance floor above. Both problems are
-the same problem in different clothes: **word matching cannot tell what a
-passage is for.** A definition and an application of that definition use
-identical vocabulary, and only meaning separates them.
+### What did work: smaller chunks
+
+Both failed attempts were reranking, which is treating the symptom. The cause
+is **term density**. At 1100 characters a definition sat inside a chunk padded
+with surrounding narration, so the defining sentence was a small fraction of
+the chunk's words and BM25 ranked it below live sessions that merely said the
+term a lot.
+
+Dropping `TARGET` from 1100 to 800 characters in `build_corpus.py`:
+
+| TARGET | Definitions reached | Regressions |
+|---|---|---|
+| 1100 | 7 of 12 | none |
+| 900 | 8 of 12 | none |
+| **800** | **9 of 12** | **none** |
+| 750 | 9 of 12 | none |
+| 700 | 8 of 12 | one |
+| 600 | 7 of 12 | none |
+
+**Two definitions recovered at no cost**, which is what the reranking attempts
+could not do. Swing points and double top went from unreachable to ranks 2 and
+7. It is a plateau rather than a spike, since 750 and 800 both give 9, so the
+value is not tuned to noise.
+
+Below 700 it reverses, and the reason is worth keeping: chunks get too short to
+hold a whole definition, so the definition splits across two chunks and the
+density gain is lost. **There is a floor as well as a ceiling, because a chunk
+has to be big enough to contain a complete thought.**
+
+### The three that still miss, and why they are the hardest three
+
+Trendline, support and resistance, and rising wedge. These are the terms the
+live sessions say most often, so the definition competes with the largest pile
+of applications. No amount of chunking fixes a 100 to 1 ratio.
+
+**This remains evidence that BM25 is at its ceiling**, alongside the missing
+relevance floor above. Both problems are the same problem in different clothes:
+**word matching cannot tell what a passage is for.** A definition and an
+application of that definition use identical vocabulary, and only meaning
+separates them.
 
 Embeddings would separate them, because "what is a trendline" and "here is the
 definition of a trendline" are close in meaning while "the trendline held again
-today" is not. That is the upgrade, and these two measurements are the argument
-for it.
+today" is not. That is the upgrade, and these measurements are the argument for
+it.
 
 **What to do until then.** More live sessions make this worse rather than
 better, because each one adds application chunks competing with the same small
