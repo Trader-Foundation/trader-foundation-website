@@ -530,3 +530,60 @@ positives were coaches disclaiming carefully. That is a good sign about the
 material and a bad sign about the scan: **the word that flags is the word an
 honest speaker uses.** Percentage-per-period matching was the rule that earned
 its keep, and it should lead the remaining pass.
+
+---
+
+## Absurd return figures, removed by rewrite rather than exclusion
+
+**Ruled by Vlad: "remove the 7000 in general."**
+
+Module 3 names 7,000 percent in order to reject it:
+
+> "if you're looking to make these crazy amounts of money and make 7,000 percent
+> returns every day, you're simply gambling. We can't predict that, but we could
+> predict consistent small gains."
+
+Vlad on what the passage means: *"it just means to be realistic, consistency is
+key."*
+
+**Rewritten rather than excluded, and the distinction matters.** Exclusion drops
+the whole chunk, and this chunk also holds the module's cleanest statement of
+base hits: "small gains at a high probability instead of big gains with a small
+probability". That exact cost was paid earlier the same day on the FB Live
+version of the same teaching, and paying it twice for the same lesson would be a
+choice rather than an accident.
+
+The Elite rewrites set the precedent: strip the term, keep the teaching, leave a
+visible marker. The figure becomes `[FIGURE REMOVED]` and the sentence still
+says that chasing crazy returns is gambling.
+
+### It found a second instance nobody had flagged
+
+Making the rule general rather than matching the literal 7,000 caught an
+outcome claim in the options material that had passed every previous scan:
+
+> "that's a 10 point move that could be almost 150 to 200% gain off your money"
+
+That is a stated percentage gain attached to a worked example, which is
+non-negotiable 1. It had survived because every scan until now was looking for
+periodic returns, "percent a week" and the like, and this one attaches to a
+move rather than to a period.
+
+**The lesson: a results claim does not need a timeframe to be a results claim.**
+The scans were shaped around "percent per period" because that is what the known
+hits looked like. A figure attached to a single trade is the same claim with the
+period left implicit.
+
+### A bug worth recording
+
+The first version stripped only the second half of a range, leaving "150 to
+[FIGURE REMOVED] gain", which still states a figure. Ranges are now matched
+first. **A partial redaction is worse than none**, because the marker signals
+the passage was cleaned and the reader stops looking.
+
+### What is deliberately untouched
+
+The pattern requires "returns" or "gains" after the figure, so taught values
+survive: Fibonacci at 38.2 and 61.8, the 50 percent scaling rule, the "10 to
+25%" retracement in the double top definition, and "it's not exactly 100%" in
+the technical analysis intro. Verified after the change.

@@ -121,6 +121,37 @@ RETIRED_REWRITE = [
     (r"\b(one\s+of\s+)?our\s+elite\s+(members?|students?|traders?)\b",
      r"\1our \2 [TERM REMOVED]"),
     (r"\belite\s+(members?|students?|traders?)\b", r"\1 [TERM REMOVED]"),
+
+    # Absurd return figures, removed on Vlad's ruling: "remove the 7000 in
+    # general". Module 3 names 7,000 percent in order to reject it, and the
+    # sentence around it is the house position:
+    #
+    #   "if you're looking to make these crazy amounts of money and make 7,000
+    #    percent returns every day, you're simply gambling. We can't predict
+    #    that, but we could predict consistent small gains."
+    #
+    # Vlad on what it means: "it just means to be realistic consistency is key."
+    #
+    # **Rewritten rather than excluded, on purpose.** Excluding drops the whole
+    # chunk, and this chunk also holds the module's cleanest statement of base
+    # hits, "small gains at a high probability instead of big gains with a small
+    # probability". That exact cost was paid once already today on the FB Live
+    # version of the same teaching. The Elite rewrites above set the precedent:
+    # strip the term, keep the teaching, leave a visible marker.
+    #
+    # The pattern requires "returns" or "gains" after the figure, so taught
+    # values are untouched: Fibonacci 38.2 and 61.8, the 50 percent scaling
+    # rule, "10 to 25%" retracement, and "it's not exactly 100%" all survive.
+    # Ranges first, or the single figure rules eat only the second half and
+    # leave "150 to [FIGURE REMOVED] gain", which still states a figure. That
+    # bug was live for one build and is what surfaced the Moving Averages
+    # instance below.
+    (r"\b\d{1,3}(?:,\s?\d{3})*\s*(?:to|through|[-–])\s*"
+     r"\d{1,3}(?:,\s?\d{3})*\s*(?:%|percent)\s+(returns?|gains?)\b",
+     r"[FIGURE REMOVED] \1"),
+    (r"\b\d{1,3}(?:,\s?\d{3})+\s*(?:%|percent)\s+(returns?|gains?)\b",
+     r"[FIGURE REMOVED] \1"),
+    (r"\b\d{3,}\s*(?:%|percent)\s+(returns?|gains?)\b", r"[FIGURE REMOVED] \1"),
 ]
 
 # Product names with no salvageable form. A chunk naming one is dropped,
