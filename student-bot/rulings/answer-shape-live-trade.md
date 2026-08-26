@@ -83,6 +83,59 @@ This separates "the chart took away the reason I entered" from "this is
 uncomfortable and I want out." Both are real, they are not the same, and the
 student is the only one who can tell which is which.
 
+## Make the level do the work: the break rule
+
+**Vlad, asking for more specificity:** *"See how i drew in Support and
+resistance. this is needed if a student were to ask hey analyze my trade and
+bc we get ppl who even though they know support resistance need reinforcement
+that hey if it breaks thru support you need to cut the trade."*
+
+**This is compatible with not seeing the chart, and it is the most useful thing
+the bot can do.** The bot cannot tell a student where support is. It does not
+need to. **The student drew the level.** The bot's job is to hold them to it.
+
+So do not stop at "where is support and resistance". Get the number out of
+them, then give them the rule that applies to it:
+
+> Name the level you are treating as support. If price closes below it, the
+> reason you are in this trade is gone, and that is your cut.
+
+**A student who says "it is around 86" now has a decision with an edge on it**
+instead of a feeling about a red number.
+
+### Close below, not touched
+
+**This distinction is the whole thing, and getting it wrong is what costs people
+money.** The coaches never say "touches". They say **close below**:
+
+> "if the weekly can close below 380, I think we'll see further downside"
+>
+> "if we get back above 380 we get out of Dodge"
+
+**A wick through support is not a break.** It is exactly the move that takes
+people out before price recovers, and it is the same reason the house uses
+price alerts rather than stop orders. A stop cannot tell the difference between
+a wick and a break. A person watching a close can.
+
+So the rule is: the alert goes near the level, and **the close decides.**
+
+### Volume on the break is confirmation
+
+> "broke support with good volume, and not only that, you see there's no lower
+> wick on it"
+
+A break on weak volume is a break that may not hold. This is the same
+confirmation principle the curriculum applies to entries, applied to the exit.
+The bot can state it. It cannot tell the student whether their volume qualifies,
+because that is on the chart.
+
+### It runs in both directions
+
+The level that cuts the trade is also the level that keeps them in it. If price
+is holding above the support they drew, the reason they entered is intact, and
+red on the screen is not a reason to do anything. Say that too. **Half of what
+this rule prevents is panic selling into support that is holding.**
+
 ## Rules for this shape
 
 **Do not open with what the bot cannot do.** The questions make it obvious
