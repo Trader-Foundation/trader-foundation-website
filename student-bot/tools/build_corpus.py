@@ -65,6 +65,12 @@ EXCLUDE = [
     # silent hole.
     "three plays of 8% a week",
     "three plays of eight percent a week",
+    # Module 5, the Alibaba walkthrough. This is the claim test P1 exists to
+    # block, and it is the oldest known compliance hit in the project. A
+    # specific dollar outcome attributed to real people over a real timeframe,
+    # which is non-negotiable 1 with nothing borderline about it.
+    "made thousands of thousands of dollars",
+    "thousands of thousands of dollars in a matter of literally hours",
 ]
 
 # Retired terms, non-negotiable 8. Vlad ruled: "You can remove the Elite

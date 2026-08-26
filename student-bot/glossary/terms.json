@@ -158,6 +158,32 @@
    "right": "closes lower / closes above / closes below",
    "found_in": "FB Live 0006",
    "note": "Closes heard as clothes. Directly dangerous: the break rule turns on close below rather than touched, and this mangles the word the rule depends on."
+  },
+  {
+   "wrong": [
+    "balling wedge"
+   ],
+   "right": "rising wedge",
+   "found_in": "Trendlines and swing points module",
+   "note": "Said over an Amazon chart the module is explicitly calling a rising wedge. 'Balling' is not a pattern."
+  },
+  {
+   "wrong": [
+    "two top packs of similar highs",
+    "top packs"
+   ],
+   "right": "two top peaks of similar highs",
+   "found_in": "Trendlines and swing points module",
+   "note": "Peaks heard as packs, in the definition of a double top."
+  },
+  {
+   "wrong": [
+    "a little bit of a week",
+    "little bit of a week, but for the most part"
+   ],
+   "right": "a little bit of a wick",
+   "found_in": "Module 3",
+   "note": "Another instance of wick being mis-heard, this time as 'week'. Same class as wig and weight."
   }
  ],
  "numeric_corrections": {
