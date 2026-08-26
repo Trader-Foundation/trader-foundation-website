@@ -57,7 +57,7 @@ Then: append a row to the ledger, add new questions to `rulings/open-questions.m
 
 | Module | Number | Compliance | Numeric errors | Unresolved | Indexed |
 |---|---|---|---|---|---|
-| Fundamental Analysis and Stock Screening | 2 | Clean | none found | 0 | No |
+| Fundamental Analysis and Stock Screening | 2 | Clean, 1 exclusion narrowed | 2 fixed (Antero) | 0 | **Yes** |
 | Technical Analysis and Candlestick Charts | 3 | 1 borderline, kept, see below | none found | 0 | **Yes** |
 | Support and Resistance | 5 | **1 hit, now actually excluded** | none found | 2 | **Yes** |
 | Trendlines, Swing Points and Confluence | **unassigned, 6 or 7** | Clean | none found | 0 | **Yes** |
@@ -789,8 +789,63 @@ the module hedges every one of them:
 That reads as an observation rather than a rule, but the ruling is Vlad's to
 make and the bot still states no rule.
 
-### Module 2 is the remaining hole
+### Module 2 ingested, and a numbering error corrected
 
-Fundamental analysis and stock screening. It supplies the top of the method
-chain, galaxy to solar system to planet, plus news avoidance and the liquidity
-filter. Still not supplied, still the first thing a beginner meets.
+**Module 2 is fundamental analysis and stock screening.** It supplies the top of
+the method chain that every later module assumes: galaxy to solar system to
+planet, the news events to avoid, and the liquidity filter with its reasoning
+rather than only its number.
+
+27 chunks. `tf-core` is now 143 across Modules 2, 3, 5, 8 and one unnumbered.
+
+  what is fundamental analysis  ->  Module 2, 15.9
+  what is the galaxy analogy    ->  Module 2, 14.5
+
+**"Ontario Midstream Partners" is confirmed at its source.** It appears twice
+here, in the walkthrough that screens the ticker AM. Already a known glossary
+error; this is where it originates.
+
+### A renumbering error, made and reverted
+
+The candlestick lesson was briefly renumbered from Module 3 to Module 2 on a
+misreading of Vlad's message. It was reverted in full once this module arrived
+and identified itself as Module 2 in its own opening line.
+
+**Both modules self-identify and the evidence was available before the change
+was made.** Module 2 opens "welcome to module two"; Module 3 opens by calling
+fundamental analysis "our previous lesson". Neither was checked.
+
+`CLAUDE.md` names this as the main failure mode for this project: guessing at a
+curriculum ruling and encoding the guess. The working rule it states, ask
+rather than assume, exists for exactly an ambiguous one-line message. Twelve
+files were rewritten and reverted.
+
+### An exclusion narrowed, for the second time today
+
+The bare phrase `"insider information"` was in `EXCLUDE` and it dropped Module
+2's passage:
+
+> "unless you're working for the company and you have insider information,
+> which would be illegal... Trading off the news is the definition of gambling."
+
+That is the house anti-gambling teaching, and the mention is a disclaimer. The
+genuine hit is the Moving Averages phrasing, "you got to have some sort of
+insider information", which reads as advice once stripped to a chunk. Only that
+shape is excluded now, verified both ways.
+
+**This is the second exclusion today that was matching vocabulary rather than
+claims**, after the "guarantee" scan ran three false positives to one true hit.
+The pattern is now explicit: **the word that flags is the word an honest
+speaker uses.** Every remaining exclusion phrase should be read against it.
+
+### One perishable item worth knowing
+
+The module describes FinViz as costing nothing. `prompts/system.md` already
+bars the bot from stating or confirming third party tool pricing, since it is
+perishable and unverified, so this is covered rather than open. Noted because
+the phrase is now in the corpus and will retrieve.
+
+### What is still missing
+
+Module 4, whatever it covers, and the number of the trendlines module, which
+the evidence places at 6 or 7 and no more precisely.
