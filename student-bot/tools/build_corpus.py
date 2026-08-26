@@ -138,11 +138,38 @@ RETIRED = [
 # product names, not the word.
 
 # Anything matching these is held back for review rather than indexed.
+# Compliance scan. These flag a chunk for human review; they do not exclude it.
+#
+# **Match the claim, not the vocabulary.** The bare word "guarantee" was here
+# and it flagged 26 chunks across the corpus, of which exactly one was a real
+# hit. Everything else was a coach being careful:
+#
+#   "none of this is guaranteed"
+#   "I can't guarantee any of these moves and I will never act like I can"
+#   "there's nothing that exists that will guarantee success"
+#
+# It also caught a signature teaching line repeated across four sessions,
+# "the only two things guaranteed in the market are contraction and expansion",
+# which is about market structure and has nothing to do with returns.
+#
+# The bare "risk free" was the same story: its only hit was a discussion of the
+# US sovereign credit rating downgrade from AAA, where risk free is the name of
+# a bond category.
+#
+# A scanner that cries wolf 25 times gets skimmed, and the one real hit is the
+# thing it exists to catch. Same argument as the name detector in
+# tools/find_names.py. So these now match guarantees *of a financial outcome*,
+# and results language attached to a period.
 SUSPECT = [
-    r"\bguarantee[ds]?\b",
+    r"\bguarantee\w*\s+(?:\w+\s+){0,2}?"
+    r"(returns?|income|profits?|premiums?|money|gains?|winners?|success|filled)\b",
+    r"\b(returns?|income|profits?|premiums?|gains?)\s+(?:are|is)\s+guarantee",
     r"\bpassive\s+income\b",
-    r"\brisk\s*[- ]?\s*free\b",
-    r"\b\d{1,3}\s*%\s*(a|per)\s*(week|month|year)\b",
+    r"\brisk\s*[- ]?\s*free\s+(returns?|income|profits?|trade|strategy|money)\b",
+    # Both spellings. The real hit in the corpus says "10 percent a week" in
+    # words, and an earlier version of this pattern required the % symbol.
+    r"\b\d{1,3}\s*(%|percent)\s*(a|per)\s*(week|month|year)\b",
+    r"\b\d{1,3}\s*(%|percent)\s*(returns?|gains?)\s*(a|per|every)\s*(day|week|month|year)\b",
 ]
 
 PROCEDURE = [
