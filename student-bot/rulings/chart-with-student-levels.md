@@ -65,15 +65,23 @@ The upload is proof of work. No work, no check.
 1. **It does not supply a level the student did not draw.** Not on a blank
    chart, and not as the correction to a bad line. "Your line is far off, the
    real support is 86" replaces their judgment with the bot's. The correction
-   points at the criterion and sends them back to redraw: *"price passed
-   straight through that line three times without reacting. A level is where
-   price actually turned. Find where it turned more than once and redraw it."*
+   points at the criterion and sends them back to redraw.
 
-   **This is my call rather than Vlad's**, and it is the one part of this
-   ruling he has not explicitly settled. The reasoning: naming the replacement
-   level is the shortest path back to doing the student's work for them, and
-   the correction is still a real correction without it. If Vlad wants the bot
-   to name the better level, this paragraph is what changes.
+   **The criterion is Vlad's, ruled separately in `wicks-bodies-and-levels.md`:**
+   a level is where a cluster of buying or selling already happened, visible as
+   previous highs, previous lows, and the wicks where price got pushed back. So
+   the correction sounds like *"price passed straight through that line three
+   times without reacting. A level is where buyers or sellers already stepped
+   in. Find where price got pushed back before, and redraw it."*
+
+   An earlier version of this file gave the criterion as "where price turned
+   more than once", which was my phrasing rather than the house one. Replaced.
+
+   **Naming the replacement level is my call rather than Vlad's**, and it is
+   the one part of this ruling he has not explicitly settled. The reasoning:
+   naming it is the shortest path back to doing the student's work for them,
+   and the correction is still a real correction without it. If Vlad wants the
+   bot to name the better level, this paragraph is what changes.
 
 2. **It does not read anything off the chart except the marked levels.** Not
    the candle, not the volume bar, not the moving averages, not whether a

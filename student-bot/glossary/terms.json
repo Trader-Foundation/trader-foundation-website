@@ -1,623 +1,696 @@
 {
-  "_comment": "Controlled vocabulary for Trader Foundation transcript cleanup. Run find-and-replace against every raw transcript before tagging or indexing. Add every new error found. Case-insensitive matching on 'wrong', preserve sentence casing on replace.",
-  "_version": "0.1",
-  "_source_modules": [
-    2,
-    3,
-    5
-  ],
-  "_written_sources": [
-    "Breakout Strategy",
-    "The Bounce Profit Plan"
-  ],
-  "_note_on_written_sources": "Worksheets are typed, not transcribed, so they carry no mis-hearing errors and are authoritative for numbers and settings. Where a worksheet and a transcript disagree on a value, the worksheet wins. Where they disagree on teaching, that is a ruling for Vlad, not a correction.",
-  "confirmed_corrections": [
-    {
-      "wrong": [
-        "miru bozu",
-        "mirabozu",
-        "mirabozor",
-        "miru bozo"
-      ],
-      "right": "Marubozu",
-      "found_in": "Module 3",
-      "note": "Full-bodied candle. Japanese term. Students searching the transcript spelling find nothing."
-    },
-    {
-      "wrong": [
-        "Ontario Midstream Partners",
-        "Ontario Midstream"
-      ],
-      "right": "Antero Midstream",
-      "found_in": "Module 2",
-      "note": "Ticker AM. Ontario Midstream Partners does not exist. High risk: a bot would cite a fictional company confidently."
-    },
-    {
-      "wrong": [
-        "noose"
-      ],
-      "right": "news",
-      "found_in": "Module 5",
-      "note": "CONTEXT DEPENDENT. Verify each hit manually before replacing. Two occurrences in Module 5, both in the instigating-event passage."
-    },
-    {
-      "wrong": [
-        "time decay is also known as data",
-        "known as data",
-        "The next one is data. Data is your time the case"
-      ],
-      "right": "time decay is also known as theta",
-      "found_in": "Options Factors, and again in Options Greeks in thinkorswim (module numbers unassigned)",
-      "note": "HIGH RISK. Theta is the standard name for time decay and the term a student will meet in any brokerage platform. 'Data' is not a name for anything in options, and unlike a mangled proper noun it is an ordinary English word, so it does not look wrong. The module tells students to look it up in their brokerage system, which fails outright under the wrong name. SECOND RECORDING, CONFIRMED PATTERN. The Greeks module renders it as 'The next one is data. Data is your time the case', where 'time the case' is itself 'time decay' mangled, so the sentence loses the term AND its definition in one line. Two separate recordings mis-hear theta the same way, so this is systematic rather than incidental. Every Greek but theta transcribes correctly, which is the tell: delta, gamma and vega are not English words and theta is close to one."
-    },
-    {
-      "wrong": [
-        "Cause means the stock is going up"
-      ],
-      "right": "Calls means the stock is going up",
-      "found_in": "Options Calls and Puts (module number unassigned)",
-      "note": "Second instance of the term-as-common-word class, after theta rendered as 'data'. Self-confirmed within the same transcript, which later says 'calls means the buyer believes the stock is going to move up'. Sits in the one-line mnemonic students are most likely to memorise, so it is the worst possible place for it."
-    },
-    {
-      "wrong": [
-        "exactly how to cause and puts work"
-      ],
-      "right": "exactly how to calls and puts work",
-      "found_in": "Options thinkorswim walkthrough (module number unassigned)",
-      "note": "STANDING PATTERN, NOT A ONE-OFF. Third instance of the term-as-common-word class and the second time 'calls' specifically becomes 'cause'. Two different recordings, so the tool mis-hears this word reliably rather than occasionally. Treat 'cause' as suspect wherever it sits next to 'puts', 'option', or 'strike', and check it every options module. The word 'cause' is also legitimately present in these transcripts as a clipped 'because' ('you don't want to chase cause it's going to be a problem'), so this cannot run as a blind find-and-replace. Match the phrase, not the word."
-    },
-    {
-      "wrong": [
-        "sell the option stock to the seller as the exercise price"
-      ],
-      "right": "sell the option stock to the seller at the exercise price",
-      "found_in": "Options Calls and Puts (module number unassigned)",
-      "note": "Preposition. Minor, but the sentence is the definition of a put and should read cleanly."
-    },
-    {
-      "wrong": [
-        "the man versus the supply"
-      ],
-      "right": "the demand versus the supply",
-      "found_in": "Volume (module number unassigned)",
-      "note": "CONTEXT DEPENDENT. 'demand' heard as 'the man'. Confirmed by the next sentence, which reads 'That means that demand is higher.' Scoped to this full phrase deliberately: a bare 'the man' to 'the demand' rule would corrupt legitimate uses elsewhere."
-    },
-    {
-      "wrong": [
-        "a stock like DKNG,  uh, draft gains",
-        "draft gains",
-        "draft kings"
-      ],
-      "right": "DraftKings",
-      "found_in": "Coaching call, bull call and bear put spreads",
-      "note": "PROPER NOUN, and the first one found in coaching material. The ticker DKNG is transcribed correctly right beside it, which is what makes the company name recoverable with certainty. Worth noting the shape: where a transcript gives BOTH a ticker and a spoken company name, the ticker is the reliable one and can resolve the name. That is a cheap check and it works in reverse to the usual worry, since tickers are short and letter-by-letter rather than phonetic."
-    },
-    {
-      "wrong": [
-        "Z and G a",
-        "Z and G"
-      ],
-      "right": "ZNGA",
-      "found_in": "Coaching call, bull call and bear put spreads",
-      "note": "Ticker spelled aloud letter by letter and rendered as words. Same class as the DraftKings error and resolved the same way: the student names the company (Zynga) in the same exchange. Expect this shape wherever a ticker is read out rather than typed."
-    }
-  ],
-  "numeric_corrections": {
-    "_comment": "HIGHEST RISK CLASS. The transcription tool mis-hears the numeric values being taught. More dangerous than proper-noun errors: a student who reads 'Mirabozor' can tell something is wrong and search for the right word, but a student who reads a wrong Fibonacci level cannot tell, and the bot would state it confidently as house teaching. Every taught number must be checked against the values established earlier in the same transcript.",
-    "instances": [
-      {
-        "wrong": "the 32. 8",
-        "right": "the 38.2",
-        "found_in": "Module 8, Fibonacci Retracement",
-        "note": "Fibonacci retracement level. The module establishes 38.2, 50, and 61.8 earlier and uses them correctly four times before this. 32.8 is not a Fibonacci level."
-      },
-      {
-        "wrong": "the 60. 8 line",
-        "right": "the 61.8 line",
-        "found_in": "Module 8, Fibonacci Retracement",
-        "note": "Same lesson, second numeric error, in the passage explaining why the instructor would not take the trade. 60.8 is not a Fibonacci level."
-      },
-      {
-        "wrong": "look at the 250 day moving average. They are way below",
-        "right": "look at the 50 and 200 day moving averages. They are way below",
-        "found_in": "Momentum Indicators (module number unassigned, likely 11)",
-        "note": "250 is not a canonical period. Resolved because 'They are' is plural, and 50 plus 200 is the only plural reading in the canonical set. The passage is the background-check step of the method chain, where 50 and 200 are exactly the pair used."
-      },
-      {
-        "wrong": "So here we have the MACD. You could see the MACD represents 80 and 20 right here.",
-        "right": "So here we have the stochastics. You could see the stochastics represents 80 and 20 right here.",
-        "found_in": "Momentum Indicators (module number unassigned, likely 11)",
-        "note": "Indicator mislabel rather than a bare number error. 80 and 20 with a 50 midline are stochastic bands; the MACD is a centered oscillator around zero. Confirmed by the next sentence, 'On the MACD, you got the two lines as well', where 'as well' marks the switch to a different panel. Left uncorrected, the bot would teach the wrong indicator's bands."
-      },
-      {
-        "wrong": "One could be, let's just say, a 12 day moving average. One could be a 25 day moving average",
-        "right": "a 12 day moving average... a 26 day moving average",
-        "found_in": "Momentum Indicators (module number unassigned, likely 11)",
-        "note": "RESOLVED BY WRITTEN SOURCE. The Bounce Profit Plan worksheet specifies MACD parameters as 12.26.9, which is also the standard default. The transcript's '25' is a mis-hearing of 26. The same lesson elsewhere says '13 and 28 day moving averages' while reading a blurry on-screen label, which the worksheet also overrides."
-      },
-      {
-        "wrong": "bouncing off both the 20 day moving average and the 30 day moving average",
-        "right": "bouncing off both the 20 day moving average and the 13 day moving average",
-        "found_in": "Moving Averages (module number unassigned)",
-        "note": "The module teaches exactly four averages: 13, 20, 50, 200. There is no 30 day. Resolved with confidence because 'both' pairs it with the 20, and 13 is the other short-term average. A second '30 day' occurrence in the Zoom walkthrough has no such pairing and is left unresolved."
-      }
-    ],
-    "formatting_artifacts": {
-      "_comment": "The tool splits decimals across a space or a line break, rendering 38.2 as '38. 2'. Cosmetic, but it breaks any numeric check run against the raw text and must be normalised before the values can be audited.",
-      "pattern": "38. 2, 61. 8",
-      "normalise_to": "38.2, 61.8",
-      "also_seen": {
-        "pattern": "1. 30, 1. 41, five, 10 for 5.10, three 30 for 3.30, 3158 for 31.58",
-        "found_in": "Options thinkorswim walkthrough (module number unassigned)",
-        "note": "The artifact has three shapes, not one. A split decimal ('1. 30'), a decimal spoken as two numbers and comma-separated by the tool ('five, 10'), and a decimal dropped entirely so a price reads as an integer ('3158' for 31.58). The third is the dangerous one: it produces a plausible-looking whole number with no punctuation to signal that anything is missing. Options prices and strikes are the place to expect it, because the module reads them off screen at speed."
-      }
-    },
-    "canonical_values": {
-      "fibonacci_retracement_levels": [
-        "38.2",
-        "50",
-        "61.8"
-      ],
-      "moving_averages": [
-        "13",
-        "20",
-        "50",
-        "200"
-      ],
-      "stochastic_bands": [
-        "80 overbought",
-        "20 oversold",
-        "50 midline"
-      ],
-      "indicator_parameters": {
-        "_source": "The Bounce Profit Plan worksheet, which is written and therefore not subject to transcription error. Prefer these over any value read off a transcript.",
-        "MACD": "12.26.9",
-        "Full Stochastics": "14.3.3",
-        "RSI": "14 (supplementary. Not taught by any module, but no longer treated as out of scope: see rulings/indicator-hierarchy.md for the standing answer to any indicator question.)",
-        "note": "RULED: Full Stochastics at 14.3.3, see rulings/stochastics.md. The Momentum video's preference for fast stochastics is superseded. RSI and all other indicators are supplementary to volume, candlesticks and context, see rulings/indicator-hierarchy.md."
-      },
-      "options_conventions": {
-        "_source": "Options Factors module. Market conventions rather than tool settings, but strike increments are set by the exchanges and can change, so treat as verifiable rather than permanent.",
-        "contract_multiplier": "1 contract = 100 shares",
-        "strike_increments": {
-          "stock 5 to 25": "2.50",
-          "stock 25 and above": "5.00",
-          "stock over 200": "10.00"
-        },
-        "six_premium_factors": [
-          "duration",
-          "expiration",
-          "strike price",
-          "current price",
-          "risk and reward",
-          "volatility"
-        ],
-        "_added_from": "Options thinkorswim walkthrough. Market conventions, verifiable rather than permanent.",
-        "standard_expiration": "third Friday of the month",
-        "weekly_expirations": "non-standard dates, shorter dated. Colour-coded separately from standard dates in thinkorswim, so the colour is platform UI and perishable, but the standard-versus-weekly distinction itself is not",
-        "minimum_days_to_expiration": "30 days, stated as a minimum with 'the longer the better'. PENDING VLAD, open question 31. Not yet treated as a house rule"
-      },
-      "screening_filters": {
-        "_source": "Breakout Strategy and The Bounce Profit Plan worksheets, in agreement",
-        "average_volume": "Over 1 Million",
-        "relative_volume": "Over 1 (breakout screen only)",
-        "52_week_high_low": "new high for bullish breakout, new low for bearish breakdown",
-        "moving_average_filters": "Price Above/Below SMA50 and SMA200",
-        "chart_view": "Basic"
-      },
-      "note": "The levels and periods the curriculum teaches. Any other value appearing in a retracement or moving-average passage is a transcription error, not a variant teaching. Two short-term averages (13, 20) and two long-term (50, 200).",
-      "option_greeks": {
-        "_source": "Options Greeks in thinkorswim. The VALUES below are read off one live chain and are examples, not settings. What is canonical is what each Greek measures and the unit it is expressed in.",
-        "delta": "how much the premium moves per 1 dollar move in the stock, per share. 0.45 delta means 45 cents per share, 45 dollars per contract",
-        "gamma": "the acceleration of delta. 0.06 gamma means the next dollar moves delta from 0.45 to 0.51",
-        "theta": "time decay, per day, per share. 0.04 theta means 4 dollars per contract per day leaving the position. Decay accelerates as expiration approaches",
-        "vega": "sensitivity to volatility. 0.15 vega means 15 cents per share per 1 percent change in volatility, in either direction",
-        "instructor_priority": "Delta, gamma and theta are the focus. Vega is watched rather than led with, and flagged as a caution when it is large",
-        "_warning": "The module's return figures are gross of theta. Delta gains and theta decay are both worked correctly and never netted against each other. See rulings/compliance-log.md."
-      },
-      "vertical_spreads": {
-        "_source": "Options Vertical Spreads. FORMULAS, not settings. Every worked example in that module reconciles against these exactly, including all four live platform readings, so they are verified rather than merely transcribed.",
-        "definition": "two options, same expiration date, different strike prices. One bought, one sold. The shared expiration is what makes it vertical",
-        "the_four": [
-          "bull call spread",
-          "bear put spread",
-          "bear call spread",
-          "bull put spread"
-        ],
-        "net_debit": "premium paid minus premium collected",
-        "max_loss": "net debit x 100 x contracts",
-        "max_profit": "(width of the strikes minus net debit) x 100 x contracts",
-        "breakeven_bull_call": "lower bought strike plus net debit",
-        "width_tradeoff": "a wider spread raises the max profit and requires a larger move to reach it",
-        "_warning": "The module twice states the max PROFIT figure as the max loss (1881 for 1119, and 1134 for 866). Both are provably slips against its own arithmetic and it states both correctly elsewhere. Use the formulas, not those two sentences."
-      },
-      "paycheck_collector": {
-        "_source": "The Paycheck Collector class, taught to a student on a call and distributed as a class. FIRST DEFINITION of a Trader Foundation strategy name that was previously protected vocabulary with no content behind it.",
-        "what_it_is": "selling credit spreads for premium, held to expire worthless or closed early",
-        "delta_start": "0.07, described as roughly the chance the option finishes in the money. A STARTING POINT, explicitly not a rule: 'do you have to do 0.07 delta in this area? No. This is where you start off'",
-        "days_to_expiration": "30 to 37. Weeklies were used previously and abandoned as too much risk for the premium. 58 days is called too far out",
-        "spread_width": "NARROW. 5 points on a large-cap name. Wide spreads are the stated biggest risk in the strategy",
-        "capital_staging": "divide the account into four and open one position a week, so income arrives weekly while each position runs its full term",
-        "exit": "close early on a partial credit rather than holding to expiration. A closing order at a set price with GTC duration",
-        "both_sides": "selling a spread on each side at once is named as an iron condor",
-        "_warning_on_returns": "The class states a target of about 10 percent of the account per period and the instructor's own discipline band as 10 to 12 percent, refusing higher credits on purpose. THE RETURN FIGURES ARE EXCLUDED FROM THE CORPUS as outcome claims. The DISCIPLINE is the teachable part: a larger credit means a worse probability, so a credit that looks too good is a warning rather than an opportunity."
-      },
-      "chart_setup": {
-        "_source": "thinkorswim setup module. THE HOUSE CHART CONFIGURATION, stated as a complete list for the first time.",
-        "_why_this_matters": "Every prior module used these values one or two at a time. This one sets all of them up in order and says 'we use four simple moving averages', which independently confirms the canonical set rather than inferring it.",
-        "moving_averages": "SIMPLE, four of them: 13, 20, 50, 200. 13 and 20 are named the short term pair, 50 and 200 the long term pair, which matches the background-check step of the method chain",
-        "ma_colors": "13 green, 20 purple, 50 unnamed colour, 200 red. PERISHABLE, a display preference, not part of the method",
-        "volume": "volume study with green and red colouring, and a separate colour on the crossover",
-        "momentum": "stochastics and MACD",
-        "bollinger_bands": "added for spreads. See open question 40",
-        "_display_vs_method": "Colours, line widths, timeframes and workspace layout are display preferences. The LIST of what to put on the chart is the method. Keep those apart."
-      }
-    }
+ "_comment": "Controlled vocabulary for Trader Foundation transcript cleanup. Run find-and-replace against every raw transcript before tagging or indexing. Add every new error found. Case-insensitive matching on 'wrong', preserve sentence casing on replace.",
+ "_version": "0.1",
+ "_source_modules": [
+  2,
+  3,
+  5
+ ],
+ "_written_sources": [
+  "Breakout Strategy",
+  "The Bounce Profit Plan"
+ ],
+ "_note_on_written_sources": "Worksheets are typed, not transcribed, so they carry no mis-hearing errors and are authoritative for numbers and settings. Where a worksheet and a transcript disagree on a value, the worksheet wins. Where they disagree on teaching, that is a ruling for Vlad, not a correction.",
+ "confirmed_corrections": [
+  {
+   "wrong": [
+    "miru bozu",
+    "mirabozu",
+    "mirabozor",
+    "miru bozo"
+   ],
+   "right": "Marubozu",
+   "found_in": "Module 3",
+   "note": "Full-bodied candle. Japanese term. Students searching the transcript spelling find nothing."
   },
-  "generic_transcription_noise": {
-    "_comment": "Not proper nouns. Systematic mis-hearings and stray words the tool inserts. Fix per hit, do not run as blind find-and-replace. Found in the Volume module, expect the same class across the library.",
-    "instances": [
-      {
-        "wrong": "They people need to be there",
-        "right": "The people need to be there"
-      },
-      {
-        "wrong": "That's the demand You For the sales",
-        "right": "That's the demand for the sales",
-        "note": "Spurious capitalised 'You' inserted mid-sentence"
-      },
-      {
-        "wrong": "the candles very down",
-        "right": "the candle's very down"
-      },
-      {
-        "wrong": "the volumes extremely high",
-        "right": "the volume's extremely high"
-      },
-      {
-        "wrong": "a big, Week in sales",
-        "right": "a big week in sales",
-        "note": "Spurious comma plus mid-sentence capitalisation"
-      },
-      {
-        "wrong": "If the contract expires and the stock price is higher than the strike price, you profit. If the contract expires and the stock price is higher than the strike price, you profit.",
-        "right": "If the contract expires and the stock price is higher than the strike price, you profit.",
-        "note": "Whole-sentence duplication. Second instance of this artifact, after the call-option definition repeated twice in the previous module. Harmless to meaning but it would produce two near-identical chunks competing in retrieval."
-      },
-      {
-        "wrong": "So I'm pretty confident with this plane",
-        "right": "So I'm pretty confident with this plan",
-        "note": "Homophone. 'Plane' is a real word so nothing flags it, but the sentence is about the trade plan."
-      },
-      {
-        "wrong": "for some reason, buy 200 dates where",
-        "right": "for some reason, buy 200 days where",
-        "note": "Dates for days. The module uses 'dates' correctly elsewhere for expirations, which is what makes this one easy to miss."
-      }
-    ]
+  {
+   "wrong": [
+    "Ontario Midstream Partners",
+    "Ontario Midstream"
+   ],
+   "right": "Antero Midstream",
+   "found_in": "Module 2",
+   "note": "Ticker AM. Ontario Midstream Partners does not exist. High risk: a bot would cite a fictional company confidently."
   },
-  "unresolved": [
-    {
-      "text": "the bowels bowels",
-      "found_in": "Module 5",
-      "note": "Garbled. Likely 'bounce, bounce' or 'the bulls'. Needs Vlad or audio check."
-    },
-    {
-      "text": "shift board",
-      "found_in": "Module 5",
-      "note": "Company name in the first four-hour chart walkthrough. Does not match a known ticker with confidence. Needs Vlad."
-    },
-    {
-      "text": "And it's stocked to this random volume.",
-      "found_in": "Volume (module number unassigned)",
-      "note": "Garbled. Likely 'it's stuck in this random volume' or 'the stock's due to this random volume'. Left intact in the clean pass. Needs Vlad or an audio check."
-    },
-    {
-      "text": "the ACC",
-      "found_in": "Module 8, Fibonacci Retracement",
-      "note": "Ticker for the first chart walkthrough. ACC was American Campus Communities, taken private in 2022, so a current lookup returns nothing. Could equally be a mis-hearing. Antero Midstream is the precedent for not guessing at a ticker. Needs Vlad."
-    },
-    {
-      "text": "he was able to buy shares for 100 and right away put them on someone else who agreed to buy them",
-      "found_in": "Options Calls and Puts (module number unassigned)",
-      "note": "Describes how a put buyer profits, but as stated it produces no profit: buying at 100 and putting at 100 nets nothing. The example has the stock falling to 50, so it should be either 'buy shares for 50' or 'sell shares for 100'. Both readings work and they are different sentences, so not guessed. Needs Vlad or an audio check."
-    },
-    {
-      "text": "the lower the stock price the more you go into the money",
-      "found_in": "Options Factors (module number unassigned)",
-      "note": "Reads as a slip for 'the lower the STRIKE price', which is what the surrounding passage is about and what the very next sentence says correctly. Left intact because it could equally be a live misspeak rather than a transcription error, and the two have different fixes. Needs Vlad or an audio check."
-    },
-    {
-      "text": "I'm thinking once it hits this 30 day moving average",
-      "found_in": "Moving Averages (module number unassigned), Zoom walkthrough",
-      "note": "Second '30 day' occurrence. The module teaches only 13, 20, 50, 200. Unlike the first occurrence there is no pairing to resolve it against, so it could be 13 or 20. Left intact in the clean pass. Needs Vlad or an audio check."
-    },
-    {
-      "text": "GTC stands for good to close",
-      "found_in": "Options thinkorswim walkthrough (module number unassigned)",
-      "note": "NOT A TRANSCRIPTION ERROR AND THE MOST IMPORTANT ITEM IN THIS MODULE. GTC is Good Till Cancelled, an industry-standard order duration on every broker. 'Good to close' is not what the acronym stands for anywhere. The expansion is wrong but the BEHAVIOUR described immediately after it is correct: 'this is not going to expire. It's actually going to continue staying there until it gets to a dollar or until you cancel the order.' That is Good Till Cancelled exactly. So the student learns the right mechanic under the wrong name. Third instance of a transcript containing its own fix further down. Not fixed in the clean pass because the acronym could equally be a live misspeak rather than a mis-hearing, and the two have different remedies. Open question 30."
-    },
-    {
-      "text": "the most you could make if the stock goes down is 3056",
-      "found_in": "Options thinkorswim walkthrough (module number unassigned)",
-      "note": "Almost certainly $3,056 as displayed by the platform, not 30.56. Consistent with a put max profit of strike times 100 minus premium. Left intact because it is a read-off-screen figure and guessing at it would be inventing a number. Flagged so it is not silently normalised the way the split decimals were."
-    },
-    {
-      "text": "So if it's at 61, 63 cents that we bought it at",
-      "found_in": "Options thinkorswim walkthrough (module number unassigned)",
-      "note": "Reads as a bid of 61 and an ask of 63 rendered as a list, which would fit the passage since the bid ask spread is the module's own theme. Could equally be a self-correction mid-sentence. The worked example that follows uses 61 cents alone, so nothing downstream depends on resolving it."
-    }
-  ],
-  "protected_vocabulary": {
-    "_comment": "Correct spellings the transcription tool is likely to mangle. Feed as vocabulary hints if re-transcribing. Check every occurrence in existing transcripts.",
-    "candlestick_patterns": [
-      "Marubozu",
-      "Harami",
-      "Doji",
-      "long-legged doji",
-      "dragonfly doji",
-      "gravestone doji",
-      "hammer",
-      "inverted hammer",
-      "shooting star",
-      "bullish engulfing",
-      "bearish engulfing",
-      "piercing line",
-      "dark cloud cover"
-    ],
-    "concepts": [
-      "support",
-      "resistance",
-      "breakout",
-      "breakdown",
-      "bullish",
-      "bearish",
-      "wick",
-      "shadow",
-      "body",
-      "channel",
-      "trend",
-      "volume",
-      "liquidity",
-      "consolidation",
-      "retrace",
-      "momentum play",
-      "swing trader",
-      "above average volume",
-      "falling wedge",
-      "double top",
-      "double bottom",
-      "stretch stock",
-      "scaling",
-      "entry candle",
-      "swing point",
-      "all time high",
-      "pullback",
-      "correction",
-      "overbought",
-      "oversold",
-      "divergence",
-      "positive divergence",
-      "negative divergence",
-      "bullish divergence",
-      "bearish divergence",
-      "crossover",
-      "lagging indicator",
-      "trend structure",
-      "higher high",
-      "higher low",
-      "lower high",
-      "lower low",
-      "breakout",
-      "breakdown",
-      "continuation pattern",
-      "flag",
-      "pennant",
-      "triangle",
-      "relative volume",
-      "swing point",
-      "52 week high",
-      "52 week low",
-      "option contract",
-      "premium",
-      "exercise",
-      "expire",
-      "leverage",
-      "capital",
-      "FOMO",
-      "penny stock",
-      "time decay",
-      "theta",
-      "in the money",
-      "out of the money",
-      "strike price",
-      "expiration",
-      "duration",
-      "volatility",
-      "historical volatility",
-      "contract multiplier",
-      "strike increment",
-      "call option",
-      "put option",
-      "exercise price",
-      "option buyer",
-      "option seller",
-      "cash secured put",
-      "assignment",
-      "assigned"
-    ],
-    "sector_etfs": [
-      "XLF (Financial)",
-      "XLY (Retail Services)",
-      "RTH (Retail Services)",
-      "XLE (Energy)",
-      "XME (Metals)",
-      "XLK (Technology)",
-      "XLV (Health)",
-      "XLB (Basic Materials)",
-      "XLI (Industrial)",
-      "XLU (Utilities)",
-      "SPY (Market)",
-      "VIX (Volatility)"
-    ],
-    "volume_patterns": [
-      "flat pattern",
-      "random pattern",
-      "U pattern",
-      "increasing pattern",
-      "decreasing pattern"
-    ],
-    "trader_foundation_terms": [
-      "Paycheck Collector",
-      "Bounce Profit",
-      "Ready Set Explode",
-      "Stock Predator",
-      "Skool",
-      "Education Coordinator",
-      "Trader Foundation",
-      "bounce formula",
-      "bounce profit formula",
-      "Trade the chart, not your heart"
-    ],
-    "platforms_and_tools": [
-      "FinViz",
-      "StockCharts",
-      "Yahoo Finance",
-      "SPY",
-      "thinkorswim"
-    ],
-    "companies_and_tickers": [
-      "Antero Midstream (AM)",
-      "Alibaba (BABA)",
-      "Johnson & Johnson (JNJ)",
-      "Bank of America (BAC)",
-      "AT&T (T)",
-      "Ventas (VTR)",
-      "Apple (AAPL)",
-      "Tesla (TSLA)",
-      "Peloton (PTON)",
-      "Amazon (AMZN)",
-      "Nikola (NKLA)",
-      "Zoom (ZM)"
-    ],
-    "indicators_and_tools": [
-      "Fibonacci retracement",
-      "Fibonacci levels",
-      "moving averages",
-      "simple moving average",
-      "exponential moving average",
-      "13 day moving average",
-      "20 day moving average",
-      "50 day moving average",
-      "200 day moving average",
-      "watch list",
-      "stochastics",
-      "fast stochastic",
-      "slow stochastic",
-      "full stochastic",
-      "MACD",
-      "MACD histogram",
-      "oscillator",
-      "banded oscillator",
-      "centered oscillator",
-      "RSI",
-      "Simple Moving Avg",
-      "SMA50",
-      "SMA200",
-      "delta",
-      "gamma",
-      "theta",
-      "vega",
-      "open interest",
-      "volume open interest",
-      "risk profile chart",
-      "paper trading",
-      "Bollinger Bands"
-    ],
-    "options_order_terms": {
-      "_comment": "Order mechanics from the thinkorswim walkthrough. The CONCEPTS are EVERGREEN and portable to any broker. The click paths and colour coding around them are PERISHABLE_PROCEDURE. Keep the two apart: a student on a different platform still needs limit versus market.",
-      "evergreen": [
-        "limit order",
-        "market order",
-        "stop order",
-        "bid",
-        "ask",
-        "bid ask spread",
-        "natural price",
-        "mid price",
-        "option chain",
-        "strike price",
-        "premium",
-        "in the money",
-        "at the money",
-        "out of the money",
-        "good till cancelled"
-      ],
-      "platform_specific": [
-        "LMT",
-        "single",
-        "confirm and send",
-        "working",
-        "filled",
-        "POS",
-        "cancel and replace",
-        "create closing order",
-        "GTC",
-        "day"
-      ]
-    },
-    "house_principles": {
-      "_comment": "Vlad's own phrasings for governing principles. Reproduce them as written. These are not slogans the bot may improvise on, and they are not paraphrasable without losing the point.",
-      "trade the chart not your heart": "Every decision comes down to the chart. Governs two failure modes at once: following a rule instead of reading the chart, and following a feeling instead of reading the chart. See rulings/the-chart-decides.md.",
-      "more risky to want more": "Reaching for more upside means taking more risk. The counterweight that must travel with the unbounded upside on a long call. See rulings/max-profit-and-risk.md.",
-      "trading is not black and white": "The method is a weighing, not a formula. Conflicting signals are the normal case rather than an error."
-    },
-    "options_strategies": {
-      "_comment": "Strategy names. The four verticals are taught in detail. The others are named once in passing as things that exist, so the bot names them and does not explain them.",
-      "taught": [
-        "vertical spread",
-        "bull call spread",
-        "bear put spread",
-        "bear call spread",
-        "bull put spread",
-        "directional trade",
-        "credit spread",
-        "iron condor",
-        "legging out"
-      ],
-      "named_only": [
-        "butterfly",
-        "diagonal",
-        "calendar spread"
-      ],
-      "_note_on_covered_calls": "RULED BY VLAD: not taught. 'nothing actually teaches covered calls', 'i doubt we discuss it'. The Vertical Spreads module refers to them as already covered, which is a dangling reference to a lesson that does not exist. The bot says they are not part of the course, does not explain them, and does not promise a coach will cover them. See rulings/open-questions.md item 34.",
-      "not_taught": [
-        "covered call",
-        "cash secured put"
-      ],
-      "_note_on_credit_spreads": "The bear call and bull put are named as two of the four verticals but never demonstrated. Only the bull call and bear put, both debit spreads, are taught. Same 'named but not taught' shape as covered calls, not confirmed with Vlad. The bot names them and does not teach them.",
-      "_note_on_cash_secured_puts": "Used by Vlad to explain assignment in the put seller ruling. Whether they are taught as a strategy is open question 29. Listed as not taught pending that, on the same reasoning as covered calls, and this should be confirmed rather than assumed.",
-      "_note_on_legging_out": "Buying back the short leg to convert a spread into a plain directional option. Taught in coaching material and in no recorded module. Now in scope. Open question 38 asks whether it belongs in the spreads module."
-    },
-    "_note_on_bollinger_bands": "USED IN COACHING, TAUGHT IN NO RECORDED MODULE. Used two ways: to judge whether a target is a realistic distance away, and in a weekly variant where the sold strike goes one step outside the band. A curriculum gap rather than a transcription issue. Open question 40."
+  {
+   "wrong": [
+    "noose"
+   ],
+   "right": "news",
+   "found_in": "Module 5",
+   "note": "CONTEXT DEPENDENT. Verify each hit manually before replacing. Two occurrences in Module 5, both in the instigating-event passage."
   },
-  "forbidden_output_terms": {
-    "_comment": "Must never appear in bot output. Retired program labels and prohibited copy. Separate from transcription errors.",
-    "retired_labels": [
-      "Elite Four",
-      "Elite 12",
-      "Elite Twelve"
-    ],
-    "prohibited_copy": [
-      "free",
-      "closer",
-      "closers",
-      "salesperson",
-      "salespeople"
-    ],
-    "replacements": {
-      "free": "pay nothing / yours to keep",
-      "closer": "Education Coordinator"
-    }
+  {
+   "wrong": [
+    "time decay is also known as data",
+    "known as data",
+    "The next one is data. Data is your time the case"
+   ],
+   "right": "time decay is also known as theta",
+   "found_in": "Options Factors, and again in Options Greeks in thinkorswim (module numbers unassigned)",
+   "note": "HIGH RISK. Theta is the standard name for time decay and the term a student will meet in any brokerage platform. 'Data' is not a name for anything in options, and unlike a mangled proper noun it is an ordinary English word, so it does not look wrong. The module tells students to look it up in their brokerage system, which fails outright under the wrong name. SECOND RECORDING, CONFIRMED PATTERN. The Greeks module renders it as 'The next one is data. Data is your time the case', where 'time the case' is itself 'time decay' mangled, so the sentence loses the term AND its definition in one line. Two separate recordings mis-hear theta the same way, so this is systematic rather than incidental. Every Greek but theta transcribes correctly, which is the tell: delta, gamma and vega are not English words and theta is close to one."
+  },
+  {
+   "wrong": [
+    "Cause means the stock is going up"
+   ],
+   "right": "Calls means the stock is going up",
+   "found_in": "Options Calls and Puts (module number unassigned)",
+   "note": "Second instance of the term-as-common-word class, after theta rendered as 'data'. Self-confirmed within the same transcript, which later says 'calls means the buyer believes the stock is going to move up'. Sits in the one-line mnemonic students are most likely to memorise, so it is the worst possible place for it."
+  },
+  {
+   "wrong": [
+    "exactly how to cause and puts work"
+   ],
+   "right": "exactly how to calls and puts work",
+   "found_in": "Options thinkorswim walkthrough (module number unassigned)",
+   "note": "STANDING PATTERN, NOT A ONE-OFF. Third instance of the term-as-common-word class and the second time 'calls' specifically becomes 'cause'. Two different recordings, so the tool mis-hears this word reliably rather than occasionally. Treat 'cause' as suspect wherever it sits next to 'puts', 'option', or 'strike', and check it every options module. The word 'cause' is also legitimately present in these transcripts as a clipped 'because' ('you don't want to chase cause it's going to be a problem'), so this cannot run as a blind find-and-replace. Match the phrase, not the word."
+  },
+  {
+   "wrong": [
+    "sell the option stock to the seller as the exercise price"
+   ],
+   "right": "sell the option stock to the seller at the exercise price",
+   "found_in": "Options Calls and Puts (module number unassigned)",
+   "note": "Preposition. Minor, but the sentence is the definition of a put and should read cleanly."
+  },
+  {
+   "wrong": [
+    "the man versus the supply"
+   ],
+   "right": "the demand versus the supply",
+   "found_in": "Volume (module number unassigned)",
+   "note": "CONTEXT DEPENDENT. 'demand' heard as 'the man'. Confirmed by the next sentence, which reads 'That means that demand is higher.' Scoped to this full phrase deliberately: a bare 'the man' to 'the demand' rule would corrupt legitimate uses elsewhere."
+  },
+  {
+   "wrong": [
+    "a stock like DKNG,  uh, draft gains",
+    "draft gains",
+    "draft kings"
+   ],
+   "right": "DraftKings",
+   "found_in": "Coaching call, bull call and bear put spreads",
+   "note": "PROPER NOUN, and the first one found in coaching material. The ticker DKNG is transcribed correctly right beside it, which is what makes the company name recoverable with certainty. Worth noting the shape: where a transcript gives BOTH a ticker and a spoken company name, the ticker is the reliable one and can resolve the name. That is a cheap check and it works in reverse to the usual worry, since tickers are short and letter-by-letter rather than phonetic."
+  },
+  {
+   "wrong": [
+    "Z and G a",
+    "Z and G"
+   ],
+   "right": "ZNGA",
+   "found_in": "Coaching call, bull call and bear put spreads",
+   "note": "Ticker spelled aloud letter by letter and rendered as words. Same class as the DraftKings error and resolved the same way: the student names the company (Zynga) in the same exchange. Expect this shape wherever a ticker is read out rather than typed."
+  },
+  {
+   "wrong": [
+    "upper wig",
+    "lower wig",
+    "long lower weight",
+    "long upper weight"
+   ],
+   "right": "wick",
+   "found_in": "FB Live 0010, 0013",
+   "note": "Wick rendered as wig or weight after upper or lower. Central term for candle reading, so the transcript spelling finds nothing."
+  },
+  {
+   "wrong": [
+    "spending top candle",
+    "spending top"
+   ],
+   "right": "spinning top",
+   "found_in": "FB Live 0003",
+   "note": "Long wick both ends, small body. Same passage calls it 'a larger form of indecision', which matches the standard reading."
+  },
+  {
+   "wrong": [
+    "bearish and golfing",
+    "bullish and golfing"
+   ],
+   "right": "bearish engulfing / bullish engulfing",
+   "found_in": "FB Live 0006",
+   "note": "Engulfing heard as 'and golfing'. Matters because engulfing is the load bearing half of the house marubozu definition."
+  },
+  {
+   "wrong": [
+    "bid ask brad"
+   ],
+   "right": "bid ask spread",
+   "found_in": "FB Live 0002",
+   "note": "Spread heard as a first name. The spread is a taught execution step, so this is not cosmetic."
+  },
+  {
+   "wrong": [
+    "wrist to reward",
+    "wrist reward",
+    "wrist verse reward",
+    "wrist rewa"
+   ],
+   "right": "risk to reward",
+   "found_in": "FB Live 0001, 0002",
+   "note": "Risk heard as wrist, repeatedly, inside the risk to reward teaching itself."
+  },
+  {
+   "wrong": [
+    "clothes lower",
+    "clothes above",
+    "clothes below"
+   ],
+   "right": "closes lower / closes above / closes below",
+   "found_in": "FB Live 0006",
+   "note": "Closes heard as clothes. Directly dangerous: the break rule turns on close below rather than touched, and this mangles the word the rule depends on."
   }
+ ],
+ "numeric_corrections": {
+  "_comment": "HIGHEST RISK CLASS. The transcription tool mis-hears the numeric values being taught. More dangerous than proper-noun errors: a student who reads 'Mirabozor' can tell something is wrong and search for the right word, but a student who reads a wrong Fibonacci level cannot tell, and the bot would state it confidently as house teaching. Every taught number must be checked against the values established earlier in the same transcript.",
+  "instances": [
+   {
+    "wrong": "the 32. 8",
+    "right": "the 38.2",
+    "found_in": "Module 8, Fibonacci Retracement",
+    "note": "Fibonacci retracement level. The module establishes 38.2, 50, and 61.8 earlier and uses them correctly four times before this. 32.8 is not a Fibonacci level."
+   },
+   {
+    "wrong": "the 60. 8 line",
+    "right": "the 61.8 line",
+    "found_in": "Module 8, Fibonacci Retracement",
+    "note": "Same lesson, second numeric error, in the passage explaining why the instructor would not take the trade. 60.8 is not a Fibonacci level."
+   },
+   {
+    "wrong": "look at the 250 day moving average. They are way below",
+    "right": "look at the 50 and 200 day moving averages. They are way below",
+    "found_in": "Momentum Indicators (module number unassigned, likely 11)",
+    "note": "250 is not a canonical period. Resolved because 'They are' is plural, and 50 plus 200 is the only plural reading in the canonical set. The passage is the background-check step of the method chain, where 50 and 200 are exactly the pair used."
+   },
+   {
+    "wrong": "So here we have the MACD. You could see the MACD represents 80 and 20 right here.",
+    "right": "So here we have the stochastics. You could see the stochastics represents 80 and 20 right here.",
+    "found_in": "Momentum Indicators (module number unassigned, likely 11)",
+    "note": "Indicator mislabel rather than a bare number error. 80 and 20 with a 50 midline are stochastic bands; the MACD is a centered oscillator around zero. Confirmed by the next sentence, 'On the MACD, you got the two lines as well', where 'as well' marks the switch to a different panel. Left uncorrected, the bot would teach the wrong indicator's bands."
+   },
+   {
+    "wrong": "One could be, let's just say, a 12 day moving average. One could be a 25 day moving average",
+    "right": "a 12 day moving average... a 26 day moving average",
+    "found_in": "Momentum Indicators (module number unassigned, likely 11)",
+    "note": "RESOLVED BY WRITTEN SOURCE. The Bounce Profit Plan worksheet specifies MACD parameters as 12.26.9, which is also the standard default. The transcript's '25' is a mis-hearing of 26. The same lesson elsewhere says '13 and 28 day moving averages' while reading a blurry on-screen label, which the worksheet also overrides."
+   },
+   {
+    "wrong": "bouncing off both the 20 day moving average and the 30 day moving average",
+    "right": "bouncing off both the 20 day moving average and the 13 day moving average",
+    "found_in": "Moving Averages (module number unassigned)",
+    "note": "The module teaches exactly four averages: 13, 20, 50, 200. There is no 30 day. Resolved with confidence because 'both' pairs it with the 20, and 13 is the other short-term average. A second '30 day' occurrence in the Zoom walkthrough has no such pairing and is left unresolved."
+   }
+  ],
+  "formatting_artifacts": {
+   "_comment": "The tool splits decimals across a space or a line break, rendering 38.2 as '38. 2'. Cosmetic, but it breaks any numeric check run against the raw text and must be normalised before the values can be audited.",
+   "pattern": "38. 2, 61. 8",
+   "normalise_to": "38.2, 61.8",
+   "also_seen": {
+    "pattern": "1. 30, 1. 41, five, 10 for 5.10, three 30 for 3.30, 3158 for 31.58",
+    "found_in": "Options thinkorswim walkthrough (module number unassigned)",
+    "note": "The artifact has three shapes, not one. A split decimal ('1. 30'), a decimal spoken as two numbers and comma-separated by the tool ('five, 10'), and a decimal dropped entirely so a price reads as an integer ('3158' for 31.58). The third is the dangerous one: it produces a plausible-looking whole number with no punctuation to signal that anything is missing. Options prices and strikes are the place to expect it, because the module reads them off screen at speed."
+   }
+  },
+  "canonical_values": {
+   "fibonacci_retracement_levels": [
+    "38.2",
+    "50",
+    "61.8"
+   ],
+   "moving_averages": [
+    "13",
+    "20",
+    "50",
+    "200"
+   ],
+   "stochastic_bands": [
+    "80 overbought",
+    "20 oversold",
+    "50 midline"
+   ],
+   "indicator_parameters": {
+    "_source": "The Bounce Profit Plan worksheet, which is written and therefore not subject to transcription error. Prefer these over any value read off a transcript.",
+    "MACD": "12.26.9",
+    "Full Stochastics": "14.3.3",
+    "RSI": "14 (supplementary. Not taught by any module, but no longer treated as out of scope: see rulings/indicator-hierarchy.md for the standing answer to any indicator question.)",
+    "note": "RULED: Full Stochastics at 14.3.3, see rulings/stochastics.md. The Momentum video's preference for fast stochastics is superseded. RSI and all other indicators are supplementary to volume, candlesticks and context, see rulings/indicator-hierarchy.md."
+   },
+   "options_conventions": {
+    "_source": "Options Factors module. Market conventions rather than tool settings, but strike increments are set by the exchanges and can change, so treat as verifiable rather than permanent.",
+    "contract_multiplier": "1 contract = 100 shares",
+    "strike_increments": {
+     "stock 5 to 25": "2.50",
+     "stock 25 and above": "5.00",
+     "stock over 200": "10.00"
+    },
+    "six_premium_factors": [
+     "duration",
+     "expiration",
+     "strike price",
+     "current price",
+     "risk and reward",
+     "volatility"
+    ],
+    "_added_from": "Options thinkorswim walkthrough. Market conventions, verifiable rather than permanent.",
+    "standard_expiration": "third Friday of the month",
+    "weekly_expirations": "non-standard dates, shorter dated. Colour-coded separately from standard dates in thinkorswim, so the colour is platform UI and perishable, but the standard-versus-weekly distinction itself is not",
+    "minimum_days_to_expiration": "30 days, stated as a minimum with 'the longer the better'. PENDING VLAD, open question 31. Not yet treated as a house rule"
+   },
+   "screening_filters": {
+    "_source": "Breakout Strategy and The Bounce Profit Plan worksheets, in agreement",
+    "average_volume": "Over 1 Million",
+    "relative_volume": "Over 1 (breakout screen only)",
+    "52_week_high_low": "new high for bullish breakout, new low for bearish breakdown",
+    "moving_average_filters": "Price Above/Below SMA50 and SMA200",
+    "chart_view": "Basic"
+   },
+   "note": "The levels and periods the curriculum teaches. Any other value appearing in a retracement or moving-average passage is a transcription error, not a variant teaching. Two short-term averages (13, 20) and two long-term (50, 200).",
+   "option_greeks": {
+    "_source": "Options Greeks in thinkorswim. The VALUES below are read off one live chain and are examples, not settings. What is canonical is what each Greek measures and the unit it is expressed in.",
+    "delta": "how much the premium moves per 1 dollar move in the stock, per share. 0.45 delta means 45 cents per share, 45 dollars per contract",
+    "gamma": "the acceleration of delta. 0.06 gamma means the next dollar moves delta from 0.45 to 0.51",
+    "theta": "time decay, per day, per share. 0.04 theta means 4 dollars per contract per day leaving the position. Decay accelerates as expiration approaches",
+    "vega": "sensitivity to volatility. 0.15 vega means 15 cents per share per 1 percent change in volatility, in either direction",
+    "instructor_priority": "Delta, gamma and theta are the focus. Vega is watched rather than led with, and flagged as a caution when it is large",
+    "_warning": "The module's return figures are gross of theta. Delta gains and theta decay are both worked correctly and never netted against each other. See rulings/compliance-log.md."
+   },
+   "vertical_spreads": {
+    "_source": "Options Vertical Spreads. FORMULAS, not settings. Every worked example in that module reconciles against these exactly, including all four live platform readings, so they are verified rather than merely transcribed.",
+    "definition": "two options, same expiration date, different strike prices. One bought, one sold. The shared expiration is what makes it vertical",
+    "the_four": [
+     "bull call spread",
+     "bear put spread",
+     "bear call spread",
+     "bull put spread"
+    ],
+    "net_debit": "premium paid minus premium collected",
+    "max_loss": "net debit x 100 x contracts",
+    "max_profit": "(width of the strikes minus net debit) x 100 x contracts",
+    "breakeven_bull_call": "lower bought strike plus net debit",
+    "width_tradeoff": "a wider spread raises the max profit and requires a larger move to reach it",
+    "_warning": "The module twice states the max PROFIT figure as the max loss (1881 for 1119, and 1134 for 866). Both are provably slips against its own arithmetic and it states both correctly elsewhere. Use the formulas, not those two sentences."
+   },
+   "paycheck_collector": {
+    "_source": "The Paycheck Collector class, taught to a student on a call and distributed as a class. FIRST DEFINITION of a Trader Foundation strategy name that was previously protected vocabulary with no content behind it.",
+    "what_it_is": "selling credit spreads for premium, held to expire worthless or closed early",
+    "delta_start": "0.07, described as roughly the chance the option finishes in the money. A STARTING POINT, explicitly not a rule: 'do you have to do 0.07 delta in this area? No. This is where you start off'",
+    "days_to_expiration": "30 to 37. Weeklies were used previously and abandoned as too much risk for the premium. 58 days is called too far out",
+    "spread_width": "NARROW. 5 points on a large-cap name. Wide spreads are the stated biggest risk in the strategy",
+    "capital_staging": "divide the account into four and open one position a week, so income arrives weekly while each position runs its full term",
+    "exit": "close early on a partial credit rather than holding to expiration. A closing order at a set price with GTC duration",
+    "both_sides": "selling a spread on each side at once is named as an iron condor",
+    "_warning_on_returns": "The class states a target of about 10 percent of the account per period and the instructor's own discipline band as 10 to 12 percent, refusing higher credits on purpose. THE RETURN FIGURES ARE EXCLUDED FROM THE CORPUS as outcome claims. The DISCIPLINE is the teachable part: a larger credit means a worse probability, so a credit that looks too good is a warning rather than an opportunity."
+   },
+   "chart_setup": {
+    "_source": "thinkorswim setup module. THE HOUSE CHART CONFIGURATION, stated as a complete list for the first time.",
+    "_why_this_matters": "Every prior module used these values one or two at a time. This one sets all of them up in order and says 'we use four simple moving averages', which independently confirms the canonical set rather than inferring it.",
+    "moving_averages": "SIMPLE, four of them: 13, 20, 50, 200. 13 and 20 are named the short term pair, 50 and 200 the long term pair, which matches the background-check step of the method chain",
+    "ma_colors": "13 green, 20 purple, 50 unnamed colour, 200 red. PERISHABLE, a display preference, not part of the method",
+    "volume": "volume study with green and red colouring, and a separate colour on the crossover",
+    "momentum": "stochastics and MACD",
+    "bollinger_bands": "added for spreads. See open question 40",
+    "_display_vs_method": "Colours, line widths, timeframes and workspace layout are display preferences. The LIST of what to put on the chart is the method. Keep those apart."
+   }
+  }
+ },
+ "generic_transcription_noise": {
+  "_comment": "Not proper nouns. Systematic mis-hearings and stray words the tool inserts. Fix per hit, do not run as blind find-and-replace. Found in the Volume module, expect the same class across the library.",
+  "instances": [
+   {
+    "wrong": "They people need to be there",
+    "right": "The people need to be there"
+   },
+   {
+    "wrong": "That's the demand You For the sales",
+    "right": "That's the demand for the sales",
+    "note": "Spurious capitalised 'You' inserted mid-sentence"
+   },
+   {
+    "wrong": "the candles very down",
+    "right": "the candle's very down"
+   },
+   {
+    "wrong": "the volumes extremely high",
+    "right": "the volume's extremely high"
+   },
+   {
+    "wrong": "a big, Week in sales",
+    "right": "a big week in sales",
+    "note": "Spurious comma plus mid-sentence capitalisation"
+   },
+   {
+    "wrong": "If the contract expires and the stock price is higher than the strike price, you profit. If the contract expires and the stock price is higher than the strike price, you profit.",
+    "right": "If the contract expires and the stock price is higher than the strike price, you profit.",
+    "note": "Whole-sentence duplication. Second instance of this artifact, after the call-option definition repeated twice in the previous module. Harmless to meaning but it would produce two near-identical chunks competing in retrieval."
+   },
+   {
+    "wrong": "So I'm pretty confident with this plane",
+    "right": "So I'm pretty confident with this plan",
+    "note": "Homophone. 'Plane' is a real word so nothing flags it, but the sentence is about the trade plan."
+   },
+   {
+    "wrong": "for some reason, buy 200 dates where",
+    "right": "for some reason, buy 200 days where",
+    "note": "Dates for days. The module uses 'dates' correctly elsewhere for expirations, which is what makes this one easy to miss."
+   }
+  ]
+ },
+ "unresolved": [
+  {
+   "text": "the bowels bowels",
+   "found_in": "Module 5",
+   "note": "Garbled. Likely 'bounce, bounce' or 'the bulls'. Needs Vlad or audio check."
+  },
+  {
+   "text": "shift board",
+   "found_in": "Module 5",
+   "note": "Company name in the first four-hour chart walkthrough. Does not match a known ticker with confidence. Needs Vlad."
+  },
+  {
+   "text": "And it's stocked to this random volume.",
+   "found_in": "Volume (module number unassigned)",
+   "note": "Garbled. Likely 'it's stuck in this random volume' or 'the stock's due to this random volume'. Left intact in the clean pass. Needs Vlad or an audio check."
+  },
+  {
+   "text": "the ACC",
+   "found_in": "Module 8, Fibonacci Retracement",
+   "note": "Ticker for the first chart walkthrough. ACC was American Campus Communities, taken private in 2022, so a current lookup returns nothing. Could equally be a mis-hearing. Antero Midstream is the precedent for not guessing at a ticker. Needs Vlad."
+  },
+  {
+   "text": "he was able to buy shares for 100 and right away put them on someone else who agreed to buy them",
+   "found_in": "Options Calls and Puts (module number unassigned)",
+   "note": "Describes how a put buyer profits, but as stated it produces no profit: buying at 100 and putting at 100 nets nothing. The example has the stock falling to 50, so it should be either 'buy shares for 50' or 'sell shares for 100'. Both readings work and they are different sentences, so not guessed. Needs Vlad or an audio check."
+  },
+  {
+   "text": "the lower the stock price the more you go into the money",
+   "found_in": "Options Factors (module number unassigned)",
+   "note": "Reads as a slip for 'the lower the STRIKE price', which is what the surrounding passage is about and what the very next sentence says correctly. Left intact because it could equally be a live misspeak rather than a transcription error, and the two have different fixes. Needs Vlad or an audio check."
+  },
+  {
+   "text": "I'm thinking once it hits this 30 day moving average",
+   "found_in": "Moving Averages (module number unassigned), Zoom walkthrough",
+   "note": "Second '30 day' occurrence. The module teaches only 13, 20, 50, 200. Unlike the first occurrence there is no pairing to resolve it against, so it could be 13 or 20. Left intact in the clean pass. Needs Vlad or an audio check."
+  },
+  {
+   "text": "GTC stands for good to close",
+   "found_in": "Options thinkorswim walkthrough (module number unassigned)",
+   "note": "NOT A TRANSCRIPTION ERROR AND THE MOST IMPORTANT ITEM IN THIS MODULE. GTC is Good Till Cancelled, an industry-standard order duration on every broker. 'Good to close' is not what the acronym stands for anywhere. The expansion is wrong but the BEHAVIOUR described immediately after it is correct: 'this is not going to expire. It's actually going to continue staying there until it gets to a dollar or until you cancel the order.' That is Good Till Cancelled exactly. So the student learns the right mechanic under the wrong name. Third instance of a transcript containing its own fix further down. Not fixed in the clean pass because the acronym could equally be a live misspeak rather than a mis-hearing, and the two have different remedies. Open question 30."
+  },
+  {
+   "text": "the most you could make if the stock goes down is 3056",
+   "found_in": "Options thinkorswim walkthrough (module number unassigned)",
+   "note": "Almost certainly $3,056 as displayed by the platform, not 30.56. Consistent with a put max profit of strike times 100 minus premium. Left intact because it is a read-off-screen figure and guessing at it would be inventing a number. Flagged so it is not silently normalised the way the split decimals were."
+  },
+  {
+   "text": "So if it's at 61, 63 cents that we bought it at",
+   "found_in": "Options thinkorswim walkthrough (module number unassigned)",
+   "note": "Reads as a bid of 61 and an ask of 63 rendered as a list, which would fit the passage since the bid ask spread is the module's own theme. Could equally be a self-correction mid-sentence. The worked example that follows uses 61 cents alone, so nothing downstream depends on resolving it."
+  },
+  {
+   "text": "Taylor box",
+   "found_in": "FB Live 0011",
+   "note": "In a passage about cutting a trade after a previous high was knocked out. Possibly a position size or a name. Needs Vlad."
+  },
+  {
+   "text": "true Tardis",
+   "found_in": "FB Live 0001",
+   "note": "Almost certainly 'true trader'. Low risk, unconfirmed."
+  },
+  {
+   "text": "Dal hammer",
+   "found_in": "FB Live 0010",
+   "note": "Either the ticker DAL with a hammer candle, or 'doji hammer'. Surrounding passage compares hammers with long lower shadows, so either reading is plausible. Needs Vlad."
+  }
+ ],
+ "protected_vocabulary": {
+  "_comment": "Correct spellings the transcription tool is likely to mangle. Feed as vocabulary hints if re-transcribing. Check every occurrence in existing transcripts.",
+  "candlestick_patterns": [
+   "Marubozu",
+   "Harami",
+   "Doji",
+   "long-legged doji",
+   "dragonfly doji",
+   "gravestone doji",
+   "hammer",
+   "inverted hammer",
+   "shooting star",
+   "bullish engulfing",
+   "bearish engulfing",
+   "piercing line",
+   "dark cloud cover"
+  ],
+  "concepts": [
+   "support",
+   "resistance",
+   "breakout",
+   "breakdown",
+   "bullish",
+   "bearish",
+   "wick",
+   "shadow",
+   "body",
+   "channel",
+   "trend",
+   "volume",
+   "liquidity",
+   "consolidation",
+   "retrace",
+   "momentum play",
+   "swing trader",
+   "above average volume",
+   "falling wedge",
+   "double top",
+   "double bottom",
+   "stretch stock",
+   "scaling",
+   "entry candle",
+   "swing point",
+   "all time high",
+   "pullback",
+   "correction",
+   "overbought",
+   "oversold",
+   "divergence",
+   "positive divergence",
+   "negative divergence",
+   "bullish divergence",
+   "bearish divergence",
+   "crossover",
+   "lagging indicator",
+   "trend structure",
+   "higher high",
+   "higher low",
+   "lower high",
+   "lower low",
+   "breakout",
+   "breakdown",
+   "continuation pattern",
+   "flag",
+   "pennant",
+   "triangle",
+   "relative volume",
+   "swing point",
+   "52 week high",
+   "52 week low",
+   "option contract",
+   "premium",
+   "exercise",
+   "expire",
+   "leverage",
+   "capital",
+   "FOMO",
+   "penny stock",
+   "time decay",
+   "theta",
+   "in the money",
+   "out of the money",
+   "strike price",
+   "expiration",
+   "duration",
+   "volatility",
+   "historical volatility",
+   "contract multiplier",
+   "strike increment",
+   "call option",
+   "put option",
+   "exercise price",
+   "option buyer",
+   "option seller",
+   "cash secured put",
+   "assignment",
+   "assigned"
+  ],
+  "sector_etfs": [
+   "XLF (Financial)",
+   "XLY (Retail Services)",
+   "RTH (Retail Services)",
+   "XLE (Energy)",
+   "XME (Metals)",
+   "XLK (Technology)",
+   "XLV (Health)",
+   "XLB (Basic Materials)",
+   "XLI (Industrial)",
+   "XLU (Utilities)",
+   "SPY (Market)",
+   "VIX (Volatility)"
+  ],
+  "volume_patterns": [
+   "flat pattern",
+   "random pattern",
+   "U pattern",
+   "increasing pattern",
+   "decreasing pattern"
+  ],
+  "trader_foundation_terms": [
+   "Paycheck Collector",
+   "Bounce Profit",
+   "Ready Set Explode",
+   "Stock Predator",
+   "Skool",
+   "Education Coordinator",
+   "Trader Foundation",
+   "bounce formula",
+   "bounce profit formula",
+   "Trade the chart, not your heart"
+  ],
+  "platforms_and_tools": [
+   "FinViz",
+   "StockCharts",
+   "Yahoo Finance",
+   "SPY",
+   "thinkorswim"
+  ],
+  "companies_and_tickers": [
+   "Antero Midstream (AM)",
+   "Alibaba (BABA)",
+   "Johnson & Johnson (JNJ)",
+   "Bank of America (BAC)",
+   "AT&T (T)",
+   "Ventas (VTR)",
+   "Apple (AAPL)",
+   "Tesla (TSLA)",
+   "Peloton (PTON)",
+   "Amazon (AMZN)",
+   "Nikola (NKLA)",
+   "Zoom (ZM)"
+  ],
+  "indicators_and_tools": [
+   "Fibonacci retracement",
+   "Fibonacci levels",
+   "moving averages",
+   "simple moving average",
+   "exponential moving average",
+   "13 day moving average",
+   "20 day moving average",
+   "50 day moving average",
+   "200 day moving average",
+   "watch list",
+   "stochastics",
+   "fast stochastic",
+   "slow stochastic",
+   "full stochastic",
+   "MACD",
+   "MACD histogram",
+   "oscillator",
+   "banded oscillator",
+   "centered oscillator",
+   "RSI",
+   "Simple Moving Avg",
+   "SMA50",
+   "SMA200",
+   "delta",
+   "gamma",
+   "theta",
+   "vega",
+   "open interest",
+   "volume open interest",
+   "risk profile chart",
+   "paper trading",
+   "Bollinger Bands"
+  ],
+  "options_order_terms": {
+   "_comment": "Order mechanics from the thinkorswim walkthrough. The CONCEPTS are EVERGREEN and portable to any broker. The click paths and colour coding around them are PERISHABLE_PROCEDURE. Keep the two apart: a student on a different platform still needs limit versus market.",
+   "evergreen": [
+    "limit order",
+    "market order",
+    "stop order",
+    "bid",
+    "ask",
+    "bid ask spread",
+    "natural price",
+    "mid price",
+    "option chain",
+    "strike price",
+    "premium",
+    "in the money",
+    "at the money",
+    "out of the money",
+    "good till cancelled"
+   ],
+   "platform_specific": [
+    "LMT",
+    "single",
+    "confirm and send",
+    "working",
+    "filled",
+    "POS",
+    "cancel and replace",
+    "create closing order",
+    "GTC",
+    "day"
+   ]
+  },
+  "house_principles": {
+   "_comment": "Vlad's own phrasings for governing principles. Reproduce them as written. These are not slogans the bot may improvise on, and they are not paraphrasable without losing the point.",
+   "trade the chart not your heart": "Every decision comes down to the chart. Governs two failure modes at once: following a rule instead of reading the chart, and following a feeling instead of reading the chart. See rulings/the-chart-decides.md.",
+   "more risky to want more": "Reaching for more upside means taking more risk. The counterweight that must travel with the unbounded upside on a long call. See rulings/max-profit-and-risk.md.",
+   "trading is not black and white": "The method is a weighing, not a formula. Conflicting signals are the normal case rather than an error."
+  },
+  "options_strategies": {
+   "_comment": "Strategy names. The four verticals are taught in detail. The others are named once in passing as things that exist, so the bot names them and does not explain them.",
+   "taught": [
+    "vertical spread",
+    "bull call spread",
+    "bear put spread",
+    "bear call spread",
+    "bull put spread",
+    "directional trade",
+    "credit spread",
+    "iron condor",
+    "legging out"
+   ],
+   "named_only": [
+    "butterfly",
+    "diagonal",
+    "calendar spread"
+   ],
+   "_note_on_covered_calls": "RULED BY VLAD: not taught. 'nothing actually teaches covered calls', 'i doubt we discuss it'. The Vertical Spreads module refers to them as already covered, which is a dangling reference to a lesson that does not exist. The bot says they are not part of the course, does not explain them, and does not promise a coach will cover them. See rulings/open-questions.md item 34.",
+   "not_taught": [
+    "covered call",
+    "cash secured put"
+   ],
+   "_note_on_credit_spreads": "The bear call and bull put are named as two of the four verticals but never demonstrated. Only the bull call and bear put, both debit spreads, are taught. Same 'named but not taught' shape as covered calls, not confirmed with Vlad. The bot names them and does not teach them.",
+   "_note_on_cash_secured_puts": "Used by Vlad to explain assignment in the put seller ruling. Whether they are taught as a strategy is open question 29. Listed as not taught pending that, on the same reasoning as covered calls, and this should be confirmed rather than assumed.",
+   "_note_on_legging_out": "Buying back the short leg to convert a spread into a plain directional option. Taught in coaching material and in no recorded module. Now in scope. Open question 38 asks whether it belongs in the spreads module."
+  },
+  "_note_on_bollinger_bands": "USED IN COACHING, TAUGHT IN NO RECORDED MODULE. Used two ways: to judge whether a target is a realistic distance away, and in a weekly variant where the sold strike goes one step outside the band. A curriculum gap rather than a transcription issue. Open question 40."
+ },
+ "forbidden_output_terms": {
+  "_comment": "Must never appear in bot output. Retired program labels and prohibited copy. Separate from transcription errors.",
+  "retired_labels": [
+   "Elite Four",
+   "Elite 12",
+   "Elite Twelve"
+  ],
+  "prohibited_copy": [
+   "free",
+   "closer",
+   "closers",
+   "salesperson",
+   "salespeople"
+  ],
+  "replacements": {
+   "free": "pay nothing / yours to keep",
+   "closer": "Education Coordinator"
+  }
+ }
 }
