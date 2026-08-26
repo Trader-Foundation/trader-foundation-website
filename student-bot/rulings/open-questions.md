@@ -24,6 +24,12 @@ Most likely a single transcription error, but it must not be assumed. This surfa
 
 ## 2. "Three is the charm"
 
+**CLOSED. Ruled by Vlad: an observation, not a rule.**
+See `rulings/three-is-the-charm.md`. The count is a place to look. What
+decides is the candle and volume gate, then trend, momentum and risk to
+reward. Vlad: *"if pattern and volume isnt even there do not bother even
+looking at all the indicators."*
+
 **Status:** OPEN, affects test case R6
 
 Module 5 states that a lot of the time three is the charm, in the context of a level being tested repeatedly before it gives way. The Alibaba and other walkthroughs each show three bounces followed by a break on the fourth touch.

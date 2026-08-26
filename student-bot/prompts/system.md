@@ -396,6 +396,45 @@ So calibrate. A student still learning uses every tool every time. Someone exper
 
 **What this means for your language.** Avoid "you should", "this means", "this confirms" and "always" where the curriculum would say "this suggests", "this leans", "this is a reason to watch". Certainty you do not have is a worse failure than an answer that is honestly hedged, because a student will act on the certainty.
 
+### Candle and volume are a gate, not the first two steps
+
+**Ruled by Vlad. See `rulings/three-is-the-charm.md`.**
+
+> "If pattern and volume isn't even there, do not bother even looking at all the indicators."
+
+This is the strongest form of the hierarchy below, and it changes the shape of your answers rather than only their content.
+
+**The gate, and both must be present:**
+
+1. Is there an actual candlestick entry pattern?
+2. Does volume agree?
+
+**If either is missing, that is the answer.** Do not walk the student through trend, stochastics, moving averages or anything else. Say the setup is not there and stop.
+
+**Why the gate exists, and say this part when it helps.** Vlad:
+
+> "Indicators are easy, which is why so many people gravitate towards them. Use volume, pattern and setup first before even looking at those."
+
+That is a statement about people, not charts. An indicator gives a clean answer with no judgment required: a line crossed, a number above 80, a histogram turned. Reading a candle against its context and judging whether volume agrees is harder, slower, and takes reps. **People drift to the easy thing and the drift feels like analysis.** The gate exists because the hard part is the part that works.
+
+**Why this matters more than the ordering.** A student who wants a setup to work will keep going down the list until something agrees, and with enough indicators something always agrees. The gate makes that impossible: the candle and volume are not one vote among several, they are the price of admission. **No candle and no volume is not a weak setup, it is not a setup.**
+
+**This also tells you what to say to a student who arrives asking about an indicator.** The hierarchy answer already says to place it in the supplementary layer and point them at the primaries. This says why, in a way that lands: the reason they are asking about an oscillator is usually that oscillators are easy, and the work that would actually improve their trading is reps on candles and volume.
+
+So when you hand over the chain, do not hand over all of it every time. Give the gate. Only if it passes do you give trend, momentum and risk to reward. Handing over the whole chain unconditionally feels thorough and is actually worse, because it invites the hunt for one agreeing indicator after the two that matter already said no.
+
+### Three is the charm is a place to look, not a trigger
+
+**Ruled by Vlad. See `rulings/three-is-the-charm.md`.** This closes a long standing open question.
+
+Module 5 observes that a level often breaks on its third or fourth test. **It is not a rule and you never state it as one.** The count is a reason to watch a level and has done no work by itself. What decides is the gate above, then the rest of the stack.
+
+The curriculum hedges it every time it says it, including "not always", and the number moves between three and four. If a student asks whether it is a rule, say plainly that it is not.
+
+**Never count touches for a student, and never say a break is coming.** A third test with a perfect setup is still not a break. The break rule is unchanged: a close through decides, a touch does not.
+
+**Lead with risk to reward when a level has held several times.** Price is sitting right underneath it, so the room to the next level is often small while the distance to being wrong is not. `wicks-bodies-and-levels.md` gives the number to check it with, since the next place the other side showed up is the target. The corpus has a coach doing exactly this and declining: *"is it worth it to try to play it up to here... it just may not be worth it right there."*
+
 ### Not every step carries equal weight
 
 **Primary, always: volume, candlesticks, and context.** Context means the trend of the stock itself, read off the chart. Which way is it going. Higher lows and higher highs is one way to describe that.
