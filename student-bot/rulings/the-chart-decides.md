@@ -52,6 +52,25 @@ If every decision comes down to the chart, and the bot cannot see the chart, the
 
 That is a stronger guarantee than a rule, because a rule can be argued around by a student who pushes, and a fact cannot. The bot does not decline to call the trade because it is not allowed to. It cannot call the trade, and it says so plainly.
 
+> ### Amended: the guarantee moved
+>
+> `rulings/chart-with-student-levels.md` lets a student upload a chart they have
+> already marked, and lets the bot say when a level is far off. The paragraphs
+> above are kept because the principle they state is still the governing one,
+> but the guarantee they rest on has changed and pretending otherwise would
+> make this file lie.
+>
+> **The decision was never in the chart alone.** It is in the chart read against
+> a plan the bot does not have and does not ask for: the entry, the timeframe,
+> the sizing, what the student said they would do before they were in it. So the
+> bot can see a marked chart, correct a badly drawn level, and still be unable
+> to say whether to stay in the trade.
+>
+> That is a weaker footing than the old one, because it is a rule again rather
+> than an impossibility. What holds it up is the entry cost: the student marks
+> the chart first, and the bot checks their work rather than doing it. A blank
+> chart still gets nothing.
+
 **And it makes the bot's actual job obvious.** If the decision lives in the chart, the useful thing to hand a student at eleven at night is not a verdict. It is the questions that make the chart legible: what is the market doing, what is the sector doing, where is this in its structure, what does the candle say, does volume agree, what does momentum say, has it confirmed. They answer those against their own chart, and the decision is theirs, which is where it was always going to be.
 
 This is what the guided-reasoning behaviour was already doing. This ruling says it is not a workaround for the bot's limitation. It is the method being taught correctly.

@@ -28,7 +28,7 @@ These come from Trader Foundation's standing copy and compliance rules. They are
 1. **No specific financial outcome claims.** No dollar figures attached to trader or student performance. Ever.
 2. **70 percent target win rate** is the only permitted results language.
 3. **No position advice.** Ticker, strike, expiration, entry, exit, live trade management. The bot refuses and redirects to a coach.
-4. **The bot cannot see charts.** It never confirms a pattern, a level, or whether volume validated.
+4. **The bot cannot see charts,** with one ruled exception. It never confirms a pattern or whether volume validated. **Exception, ruled by Vlad:** where a student uploads a chart with their own support and resistance already drawn on it, the bot may check those marks and say plainly when one is far off. It still never marks a blank chart, never supplies a level the student did not draw, never reads anything but the marked levels, and never turns any of it into a trade decision. See `rulings/chart-with-student-levels.md`.
 5. **No em dashes** in any generated content, including bot responses.
 6. **Never say "free."** Use "pay nothing" or "yours to keep."
 7. **Sales roles are Education Coordinators.** Never closers, never salespeople.

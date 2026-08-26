@@ -29,48 +29,104 @@ NOT_TICKERS = set((
     "I A OK IT IS MY THE AND FOR BUT NOT YOU ALL ANY CAN DO HOW WHY WHO "
     "CALL PUT CALLS PUTS RSI MACD SMA EMA VWAP ATR ADX OBV BB DMI CCI "
     "ITM OTM ATM DTE IV HV OI PL PNL ROI EPS PE IPO ETF ETN LEAP LEAPS "
-    "TOS FB LIVE AM PM EOD EST PST USD TA SL TP RR").split())
+    "TOS FB LIVE PM EOD EST PST USD TA EMA9 SL TP RR").split())
+# AM is deliberately absent: it is Antero Midstream, a ticker this curriculum
+# teaches, and listing it let "Should I buy AM right now?" through as a
+# non-position question. That is test R1.
 
 def has_ticker(q):
     return any(t not in NOT_TICKERS for t in re.findall(r"\b[A-Z]{2,5}\b", q))
 
+# Two things have to be separated here, and an earlier version of this file did
+# not separate them. "How do I pick which strike to sell" is the curriculum
+# asking to be taught. "Which strike should I sell on my RVN trade" is position
+# advice. The words strike, expiration and exit appear in both, so they cannot
+# fire the guard alone. Something has to tie the question to a live position.
+#
+# guards.cjs had this fix and this file did not, so the command line refused two
+# questions the bench answered. A bench that scores differently from the tool
+# makes the testing lie, which is the same failure the stemmer had.
+WALKTHROUGH = re.compile(
+    r"\bwalk me through\b|\bplac(e|ing) (a|an|this|the|my) (trade|order)\b", re.I)
+SPECIFIC = re.compile(
+    r"\bmy (trade|position|contracts?|spread|order|call|put|strike)\b|"
+    r"\bi(?:'m| am) in\b|\bi (bought|sold|entered|opened|own|hold)\b|"
+    r"going against me|getting tested|underwater|in the (red|money|green)\b|"
+    r"\b\d+(\.\d+)?\s*(strike|call|put)s?\b", re.I)
+ASKING_WHAT_TO_DO = re.compile(
+    r"\b(should i|do i|would you|shall i|can i|is it worth|worth it to|"
+    r"when (do|should) i|what (do|should) i)\b|"
+    r"\b(roll|cut|close|exit|hold|add to|trim|sell|buy)\b|"
+    r"\b(strike|expiration|expiry|entry|exit|stop loss|position siz|"
+    r"how many contracts)\b", re.I)
+
+def position_guard(q):
+    # Walking someone through placing a trade needs no second signal. It is the
+    # closest the corpus comes to putting a student in a position.
+    if WALKTHROUGH.search(q):
+        return True
+    if not (SPECIFIC.search(q) or WALKTHROUGH.search(q) or has_ticker(q)):
+        return False
+    return bool(ASKING_WHAT_TO_DO.search(q))
+
+# Has the student marked the chart themselves? The marked chart exception in
+# hard rule 4 turns on this and on nothing else. Colour words are in here
+# because that is how students actually say it: "the blue lines is lines i
+# drew as support resistance".
+MARKED = re.compile(
+    r"\b(?:i|we)\s+(?:drew|drawn|marked|added|put)\b|"
+    r"\b(?:my|the)\s+(?:blue|red|green|yellow|orange|purple|white|black)\s+lines?\b|"
+    r"\bmy\s+(?:support|resistance|levels?|lines?|marks?)\b|"
+    r"\blines?\s+i\s+drew\b|"
+    r"\b(?:drew|marked)\s+(?:in\s+)?(?:my|the)\s+(?:support|resistance|levels?|lines?)\b|"
+    r"\bi(?:'ve| have)\s+(?:drawn|marked)\b", re.I)
+
+# Each test takes (question, ctx). ctx carries what the text cannot, namely
+# whether an image came with the question: {"image": True}.
 GUARDS = [
     ("retired", "Blocked", "non-negotiable 8, retired terms",
-     lambda q: re.search(r"\belite\s*(four|4|12|twelve)\b", q, re.I)),
+     lambda q, c: re.search(r"\belite\s*(four|4|12|twelve)\b", q, re.I)),
     ("outcome", "Refuse and route", "non-negotiables 1 and 2, outcome claims",
-     lambda q: re.search(
+     lambda q, c: re.search(
          r"(how much|how many).*(make|earn|money|profit|return)|win\s*rate|"
          r"average return|per (week|month|year)|realistic(ally)? (make|expect)|"
          r"students? (make|earn)|get rich|replace my (income|job|salary)", q, re.I)),
+    # The two image states come first. An uploaded chart changes the shape of
+    # the answer before any text rule applies. See
+    # rulings/chart-with-student-levels.md.
+    ("chart_marked", "Check their marks",
+     "non-negotiable 4 as amended, chart-with-student-levels ruling",
+     lambda q, c: c.get("image") and MARKED.search(q)),
+    ("chart_unmarked", "Send them to mark it",
+     "chart-with-student-levels ruling, the student marks it first",
+     lambda q, c: c.get("image")),
     ("chart", "Cannot see it", "non-negotiable 4, plus the-chart-decides ruling",
-     lambda q: re.search(
+     lambda q, c: re.search(
          r"(does|is|has) (this|it|that|my)|look(s)? (bullish|bearish|good|weak|strong)|"
          r"confirm|did (the )?volume|is (this|that|it) a (hammer|doji|marubozu|engulfing|"
-         r"breakout|bounce)|on my chart|my (chart|screen|position)", q, re.I)),
+         r"breakout|bounce)|on my chart|"
+         r"\b(this|that|these|those|my)\s+(chart|screenshot|screen|setup|candles?)\b|"
+         r"\bmy (support|resistance|levels?|lines?)\b|"
+         r"my position", q, re.I)),
     ("position", "Refuse and route", "non-negotiable 3, no position advice",
-     lambda q: re.search(
-         r"\b(should i|do i|would you|shall i|can i|is it worth|worth it to)\b.*"
-         r"\b(buy|sell|enter|exit|close|hold|roll|add|take|cut|trim)\b|"
-         r"\b(strike|expiration|expiry|entry|exit|stop loss|position siz|how many contracts)\b|"
-         r"\bi(?:'m| am) in\b|\bmy (trade|position|contracts?|spread|order)\b|"
-         r"going against me|\bwalk me through\b|\bplac(e|ing) (a|an|this|the|my) (trade|order)\b",
-         q, re.I) or has_ticker(q)),
+     lambda q, c: position_guard(q)),
     ("predict", "Refuse and route", "prediction is outside the method",
-     lambda q: re.search(
+     lambda q, c: re.search(
          r"\bwill (it|this|that|the (stock|market|price)|we|prices?)\b|"
          r"\bis (the )?(market|spy|it) (bullish|bearish|going)|what (will|is going to) happen|"
          r"where (is|will) (it|this|the stock|the market) (go|going|head)|"
          r"\b(next week|tomorrow|by friday|end of (the )?week)\b.*\?", q, re.I)),
     ("procedure", "Hand to the video", "perishable procedure layer",
-     lambda q: re.search(
+     lambda q, c: re.search(
          r"\b(where do i click|how do i (set up|setup|install|configure|find the|draw|add|apply)|"
          r"which (tab|menu|button)|thinkorswim|platform setting|chart setup|screener|screening|"
          r"scan(ner)? setting|what (volume )?filter)\b", q, re.I)),
 ]
 
-def guard_for(q):
+def guard_for(q, ctx=None):
+    ctx = ctx or {}
     for gid, verdict, rule, test in GUARDS:
-        if test(q):
+        if test(q, ctx):
             return {"id": gid, "verdict": verdict, "rule": rule}
     return None
 
@@ -189,12 +245,16 @@ def cite(c):
 # ordering but pushed the stochastics ruling to rank 7 and out of view. Wider
 # retrieval lets a refinement travel with the thing it refines.
 def main():
-    args = [a for a in sys.argv[1:] if a != "--json"]
+    flags = {"--json", "--image"}
+    args = [a for a in sys.argv[1:] if a not in flags]
     as_json = "--json" in sys.argv
+    # --image stands in for a student uploading a chart. The guard cannot read
+    # that off the text, and the marked chart exception turns on it.
+    ctx = {"image": "--image" in sys.argv}
     if not args:
-        sys.exit('usage: ask.py "your question"')
+        sys.exit('usage: ask.py [--image] "your question"')
     q = " ".join(args)
-    g = guard_for(q)
+    g = guard_for(q, ctx)
     hits = search(q)
 
     if as_json:

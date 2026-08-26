@@ -15,6 +15,13 @@ const TICKER = {
     return !!m && m.some(t => !NOT_TICKERS.has(t));
   }
 };
+/* Has the student marked the chart themselves? The marked chart exception in
+   hard rule 4 turns on this and on nothing else, so it has to be read from
+   what they said as well as from the image being there.
+   Colour words are included because that is how students actually say it:
+   "the blue lines is lines i drew as support resistance". */
+const MARKED = /\b(?:i|we)\s+(?:drew|drawn|marked|added|put)\b|\b(?:my|the)\s+(?:blue|red|green|yellow|orange|purple|white|black)\s+lines?\b|\bmy\s+(?:support|resistance|levels?|lines?|marks?)\b|\blines?\s+i\s+drew\b|\b(?:drew|marked)\s+(?:in\s+)?(?:my|the)\s+(?:support|resistance|levels?|lines?)\b|\bi(?:'ve| have)\s+(?:drawn|marked)\b/i;
+
 const GUARDS = [
   {
     id:"retired", tone:"stop", verdict:"Blocked",
@@ -35,14 +42,47 @@ const GUARDS = [
       "Anything about your own situation goes to a coach."
     ]
   },
+  /* The two image states come first, because an uploaded chart changes what
+     the answer looks like before any of the text rules apply. Ruled by Vlad:
+     "I am okay with a student showing them a chart to the bot and drew its own
+     levels and YOU correcting them and saying hey this is far off".
+     See rulings/chart-with-student-levels.md. */
+  {
+    id:"chart_marked", tone:"ok", verdict:"Check their marks",
+    rule:"Non-negotiable 4 as amended, chart-with-student-levels ruling",
+    test:(q, ctx) => !!(ctx && ctx.image) && MARKED.test(q),
+    shape:[
+      "They did the work first, so checking it is the point rather than a side door. Say whether each marked level holds up, and say plainly when one is far off.",
+      "Correct by pointing at the criterion, never by naming the replacement level. A level is where price actually turned more than once. Send them back to redraw it.",
+      "Read nothing off the chart except the levels they marked. Not the candle, not volume, not the averages, not whether a pattern is present.",
+      "Approximate prices only. Around 86, not 86.44. Reading a number off a pixel is an estimate and the language has to say so.",
+      "If it is not obvious which lines are theirs, ask. Platforms draw their own markers and colour conventions vary.",
+      "The position rules still bind. If they also asked what to do with the trade, give the three moves from hard rule 3 after checking the marks, anchored to their own level."
+    ]
+  },
+  {
+    id:"chart_unmarked", tone:"warn", verdict:"Send them to mark it",
+    rule:"chart-with-student-levels ruling, the student marks it first",
+    test:(q, ctx) => !!(ctx && ctx.image),
+    shape:[
+      "Never mark a blank chart. Finding the levels for them is doing the work the bot exists to make them do.",
+      "Ask them to mark support and resistance and send it back, and say what to look for: where price actually turned, not where they want the line to be.",
+      "Phrase it as the work, not as a refusal. They uploaded something and are waiting.",
+      "Every other rule still binds. An image does not buy a student past the outcome, position, prediction or retired guards."
+    ]
+  },
   {
     id:"chart", tone:"stop", verdict:"Cannot see it",
     rule:"Non-negotiable 4, plus the-chart-decides ruling",
-    test:q => /(does|is|has) (this|it|that|my)|look(s)? (bullish|bearish|good|weak|strong)|confirm|did (the )?volume|is (this|that|it) a (hammer|doji|marubozu|engulfing|breakout|bounce)|on my chart|my (chart|screen|position)/i.test(q),
+    // "this chart" as well as "my chart". An earlier version matched only the
+    // possessive, so "what do you think of this chart" reached retrieval
+    // unguarded and the bot was free to opine on a chart it cannot see.
+    test:q => /(does|is|has) (this|it|that|my)|look(s)? (bullish|bearish|good|weak|strong)|confirm|did (the )?volume|is (this|that|it) a (hammer|doji|marubozu|engulfing|breakout|bounce)|on my chart|\b(this|that|these|those|my)\s+(chart|screenshot|screen|setup|candles?)\b|\bmy (support|resistance|levels?|lines?)\b|my position/i.test(q),
     shape:[
       "The decision comes down to the chart, and the bot cannot see yours.",
       "It does not ask for the candle or the volume bar in order to rule on it either, because rendering that verdict is the same violation whether or not it was invited.",
-      "What it does instead: name the pattern, say what confirmation would look like, and hand back the questions that make the chart legible."
+      "What it does instead: name the pattern, say what confirmation would look like, and hand back the questions that make the chart legible.",
+      "One exception it may offer: if the question is about their support and resistance specifically, they can mark those levels on a chart and send it, and the bot will say whether they hold up. Offer that rather than dead ending. It offers nothing of the kind for a candle, a volume bar or a pattern."
     ]
   },
   {
@@ -97,4 +137,9 @@ const GUARDS = [
     ]
   }
 ];
-if (typeof module !== 'undefined') module.exports = { GUARDS, TICKER };
+/* ctx carries what the text cannot: whether an image came with the question.
+   { image: true } when the student uploaded a chart. */
+function guardFor(q, ctx) {
+  return GUARDS.find(g => g.test(q, ctx || {})) || null;
+}
+if (typeof module !== 'undefined') module.exports = { GUARDS, TICKER, MARKED, guardFor };
