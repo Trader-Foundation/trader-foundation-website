@@ -93,7 +93,7 @@ This does not contradict the recordings, it ranks them. The Momentum Indicators 
 
 The ruling states as a hierarchy what the modules state one at a time.
 
-It is also the judge-and-evidence framing from Module 2 applied to tooling. No single piece of evidence convicts, and some evidence carries more weight than others.
+It is also the judge-and-evidence framing from Module 3 applied to tooling. No single piece of evidence convicts, and some evidence carries more weight than others.
 
 ## What "context" means
 
@@ -108,7 +108,7 @@ An earlier version of this file claimed trend structure was taught nowhere, on t
 Trend is taught across the curriculum rather than in a lesson of its own:
 
 - **Module 2:** trade with the trend, countertrend carries more risk. The macro to micro screen asks which name inside the leading sector is trending hardest.
-- **Module 2:** every candlestick pattern is taught relative to the prevailing trend. A hammer means something at the bottom of a downtrend and loses its force at the top of an uptrend.
+- **Module 3:** every candlestick pattern is taught relative to the prevailing trend. A hammer means something at the bottom of a downtrend and loses its force at the top of an uptrend.
 - **Module 5:** channels, structure, and the role swap when levels break.
 - **Moving Averages:** above the 50 and the 200 is a strong bullish trend, below both is a strong bearish one. That is the trend read, given as a mechanical check.
 

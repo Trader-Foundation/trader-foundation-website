@@ -1,12 +1,5 @@
 # Processing log
 
-> **Numbering corrected.** Vlad ruled that the Technical Analysis and Candlestick
-> Charts lesson is **Module 2**, not Module 3. Every reference below and
-> throughout the repo has been renumbered. It follows that Fundamental Analysis
-> and Stock Screening is **Module 1**, since this lesson opens by referring back
-> to it as "our previous lesson". The spec had both wrong and is corrected.
-
-
 Running record of every module put through the pipeline. **Append to this on every module. Never rewrite history in it.**
 
 This log is the index that ties the work together, so a session starting cold can read one file and know exactly where things stand. The working container is ephemeral and transcripts cannot be committed to this public repo, so findings live here and raw transcripts live in Drive. See "Transcript store" below.
@@ -64,8 +57,8 @@ Then: append a row to the ledger, add new questions to `rulings/open-questions.m
 
 | Module | Number | Compliance | Numeric errors | Unresolved | Indexed |
 |---|---|---|---|---|---|
-| Fundamental Analysis and Stock Screening | **1** | Clean | none found | 0 | No |
-| Technical Analysis and Candlestick Charts | 2 | 1 borderline, kept, see below | none found | 0 | **Yes** |
+| Fundamental Analysis and Stock Screening | 2 | Clean | none found | 0 | No |
+| Technical Analysis and Candlestick Charts | 3 | 1 borderline, kept, see below | none found | 0 | **Yes** |
 | Support and Resistance | 5 | **1 hit, now actually excluded** | none found | 2 | **Yes** |
 | Trendlines, Swing Points and Confluence | **unassigned, 6 or 7** | Clean | none found | 0 | **Yes** |
 | Volume | **unassigned** | Clean, 2 borderline | none found | 1 | No |
@@ -143,7 +136,7 @@ The most useful thing to come out of processing four modules, and something not 
 
 Assembled macro to micro: market, sector, stock, news to avoid, liquidity, the 50 and 200 day background check, structure, candle, volume, momentum, confirmation.
 
-Module 1 supplies the top (galaxy, solar system, planet, news, liquidity). Module 2 supplies candles and the judge-and-evidence framing that governs how the steps combine. Module 5 supplies structure. Volume supplies the volume check. Moving Averages supplies the background check and demonstrates the whole chain at once on the Amazon walkthrough. Momentum Indicators adds a momentum step before confirmation, states outright that it must never lead, and closes by sending students back to FinViz screening from Module 1, which closes the loop.
+Module 2 supplies the top (galaxy, solar system, planet, news, liquidity). Module 3 supplies candles and the judge-and-evidence framing that governs how the steps combine. Module 5 supplies structure. Volume supplies the volume check. Moving Averages supplies the background check and demonstrates the whole chain at once on the Amazon walkthrough. Momentum Indicators adds a momentum step before confirmation, states outright that it must never lead, and closes by sending students back to FinViz screening from Module 2, which closes the loop.
 
 This is now in `prompts/system.md` as the bot's primary behaviour. When a student asks something the bot cannot answer, it hands over the chain as questions they can answer on their own chart, rather than closing the door. Two guards: the bot never closes the chain with a verdict, and never asks for their answers in order to assess.
 
@@ -398,7 +391,7 @@ Counting outcomes is not a probability. A stock is not equally likely to rise, f
 
 **Why it took three instances to see.** Each one reads as a throwaway framing line in its own module. The first was caught as a compliance hit and excluded, and it looked like a one-off phrasing problem. Only with the third does it become clear that the counting is the *method* by which these numbers are being produced, which means more of them exist in modules not yet scanned.
 
-**It contradicts the curriculum's own best statement of itself.** Module 2: no almanac, technical analysis "tilts probability toward you, nothing more." A method built on tilting probability cannot also derive probability by counting boxes.
+**It contradicts the curriculum's own best statement of itself.** Module 3: no almanac, technical analysis "tilts probability toward you, nothing more." A method built on tilting probability cannot also derive probability by counting boxes.
 
 **Two consequences.** `prompts/system.md` now carries an explicit rule against reproducing the habit, with the compliant replacement for each shape. And the library pass should search for it directly rather than waiting to notice it, because it is a phrasing reflex and reflexes recur.
 
@@ -517,7 +510,7 @@ the options material.
 
 Three rulings now.
 
-**Inverted hammer:** the Module 2 recording teaches a flat rule; current teaching adds a confirmation condition that was never recorded.
+**Inverted hammer:** the Module 3 recording teaches a flat rule; current teaching adds a confirmation condition that was never recorded.
 
 **Stochastics:** the Momentum recording says the instructor prefers fast stochastics; the house setting is Full Stochastics at 14.3.3, and the written worksheet carried the correction.
 
@@ -537,7 +530,7 @@ Flagged by Vlad, and well supported by the material. Every module hedges its own
 - Momentum: "just because it's above 80 does not mean the run is over"
 - The written plan: "this rule may have to be stretched if the market had a very big downturn"
 - The written plan again: "the more experienced you get, the more flexibility you will have with this. But at this time, start using them all"
-- Module 2: no almanac, technical analysis "tilts probability toward you, nothing more"
+- Module 3: no almanac, technical analysis "tilts probability toward you, nothing more"
 
 The risk this creates for the bot is specific. Encoding a method chain, canonical values, and a rulings layer makes the material look more deterministic than it is. A checklist reads as a formula, and a bot is very good at sounding certain.
 
@@ -739,7 +732,7 @@ as pending, not complete.
 
 ### One borderline kept, and it needs Vlad
 
-Module 2 contains a percentage return, and it is used to argue *against* the
+Module 3 contains a percentage return, and it is used to argue *against* the
 thing it names:
 
 > "if you're looking to make these crazy amounts of money and make 7,000
@@ -763,7 +756,7 @@ Three new, all added to `terms.json`:
 |---|---|---|
 | "balling wedge" | rising wedge | Trendlines module, over a chart it calls a rising wedge |
 | "two top packs" | two top peaks | Inside the definition of a double top |
-| "a little bit of a week" | a little bit of a wick | Module 2 |
+| "a little bit of a week" | a little bit of a wick | Module 3 |
 
 **The wick pattern is now a rule rather than a list.** Wick has been heard as
 "wig", "weight" and "week" across four sources. The transcriber cannot hear the

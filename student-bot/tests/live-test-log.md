@@ -37,5 +37,5 @@ immediately.
 Generalised as: prefer branching over a clarifying round trip when both branches are cheap. Ask
 only when branching is impractical, such as which course a module number refers to.
 
-**Still visible as a gap:** citations were "Module 2" and "the options lessons" with no timestamps
+**Still visible as a gap:** citations were "Module 3" and "the options lessons" with no timestamps
 and no module numbers for the options run. Exactly the blocker already tracked.

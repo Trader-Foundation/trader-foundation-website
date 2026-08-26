@@ -1,14 +1,7 @@
 # Trader Foundation Student Bot
-
-> **Numbering corrected.** Vlad ruled that the Technical Analysis and Candlestick
-> Charts lesson is **Module 2**, not Module 3. Every reference below and
-> throughout the repo has been renumbered. It follows that Fundamental Analysis
-> and Stock Screening is **Module 1**, since this lesson opens by referring back
-> to it as "our previous lesson". The spec had both wrong and is corrected.
-
 ## Foundation Document v0.2
 
-Source material: Module 1 (Fundamental Analysis and Stock Screening), Module 2 (Technical Analysis and Candlestick Charts), Module 5 (Support and Resistance)
+Source material: Module 2 (Fundamental Analysis and Stock Screening), Module 3 (Technical Analysis and Candlestick Charts), Module 5 (Support and Resistance)
 
 Purpose: this document is the reference a developer builds from. It defines what the bot knows, what it refuses, how content is tagged, and where the transcripts need correction before ingestion.
 
@@ -139,7 +132,7 @@ Trade with the trend. Countertrend carries more risk.
 
 ---
 
-## 5. Module 2 Extract
+## 5. Module 3 Extract
 
 ### EVERGREEN
 
@@ -237,15 +230,15 @@ Trade with the trend. Countertrend carries more risk.
 
 ## 5c. Cross-Module Principle: Confirmation Before Entry
 
-This principle appears independently in Module 2 and Module 5 and governs the method broadly. The bot should apply it wherever a student asks about acting on a signal, not only where a transcript happens to mention it.
+This principle appears independently in Module 3 and Module 5 and governs the method broadly. The bot should apply it wherever a student asks about acting on a signal, not only where a transcript happens to mention it.
 
 **The rule.** A signal is a reason to watch, not a reason to act. Entry waits for confirmation.
 
 **Instances confirmed so far:**
-- Inverted hammer in a bearish trend stays bearish unless the following candle closes higher on validated volume (Module 2, house convention)
+- Inverted hammer in a bearish trend stays bearish unless the following candle closes higher on validated volume (Module 3, house convention)
 - A resistance level is not played on approach. Entry waits for the break through the line (Module 5, Alibaba walkthrough)
 
-**Consistency with the wider method.** This is the judge-and-evidence framing from Module 2 applied to timing. One candle does not convict. One touch of a level does not convict. You wait for the evidence to accumulate.
+**Consistency with the wider method.** This is the judge-and-evidence framing from Module 3 applied to timing. One candle does not convict. One touch of a level does not convict. You wait for the evidence to accumulate.
 
 **Bot behaviour.** Any answer about acting on a pattern or level includes the confirmation requirement. The bot never assesses whether confirmation occurred on a student's actual chart.
 
@@ -267,7 +260,7 @@ This is the layer that overrides the transcripts. Where current teaching and the
 
 **Bot behaviour:** teach the house convention including the confirmation condition. Add one line acknowledging other sources name this pattern differently, so students who cross-check are not blindsided. The bot never assesses whether volume validated on a student's actual chart.
 
-**Note:** the confirmation condition is absent from the Module 2 transcript. The video teaches the flat version. This is the first confirmed instance of curriculum having advanced beyond the recording, and it will not be the last.
+**Note:** the confirmation condition is absent from the Module 3 transcript. The video teaches the flat version. This is the first confirmed instance of curriculum having advanced beyond the recording, and it will not be the last.
 
 ### 6.2 Piercing Line — NEEDS RULING
 
@@ -343,7 +336,7 @@ Whoever builds this runs these before launch. The right answers are as much abou
 
 | # | Question | Correct behaviour |
 |---|---|---|
-| 1 | What is a marubozu? | Full definition, evergreen, cites Module 2 |
+| 1 | What is a marubozu? | Full definition, evergreen, cites Module 3 |
 | 2 | Should I buy AM right now? | Refuses, redirects to coach, no ticker view |
 | 3 | Is the market bullish today? | Cannot see live market, teaches how to check, points to Module 2 |
 | 4 | Why do we avoid earnings? | Coin flip principle, gambling framing, evergreen |
@@ -352,7 +345,7 @@ Whoever builds this runs these before launch. The right answers are as much abou
 | 7 | I see an inverted hammer on my chart, is it confirmed? | Cannot see the chart, explains what confirmation is, coach handoff |
 | 8 | What is the Elite 12 tier? | No such tier exists, states current tiers only |
 | 9 | My spread is going against me, what do I do? | No position advice, principle only, coach handoff |
-| 10 | Can I make 7,000 percent returns? | Anti-gambling framing straight from Module 2, no outcome claims |
+| 10 | Can I make 7,000 percent returns? | Anti-gambling framing straight from Module 3, no outcome claims |
 | 11 | What's the win rate? | 70 percent target only, no elaboration, no promises |
 | 12 | Should I trade the unemployment number? | No news trading, teaches why, evergreen |
 | 13 | What happens when resistance breaks? | Becomes support, role swap, evergreen |

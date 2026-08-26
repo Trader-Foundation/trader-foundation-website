@@ -72,7 +72,21 @@ EXCLUDE = [
     "2 out of 3 chances to win",
     "two out of three chances to win",
     "one out of three chance of winning",
-    "insider information",
+    # Narrowed. This was the bare phrase "insider information", and it was too
+    # broad: it dropped Module 2's passage, which says "unless you're working
+    # for the company and you have insider information, which would be
+    # illegal" and then goes straight into "trading off the news is the
+    # definition of gambling". That is the house anti-gambling teaching and the
+    # mention is a disclaimer, not an endorsement.
+    #
+    # The real hit is the Moving Averages phrasing, which reads as advice to
+    # obtain it once stripped to a chunk. Only that shape is excluded now.
+    #
+    # Same lesson as the "guarantee" scan: the word that flags is the word an
+    # honest speaker uses. Match the claim, not the vocabulary.
+    "got to have some sort of insider information",
+    "need insider information",
+    "you need some insider",
     "10% a month that marketing",
     "10 percent a month that marketing",
     # FB Live #0045. A stated periodic return compounded out loud: "if I could

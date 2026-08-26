@@ -77,7 +77,7 @@ Expect roughly one proper-noun error per module. Add every new one you find to `
 
 Rule of thumb: concepts do not rot, click paths do.
 
-**4. Advancement check.** Flag anything where current teaching may have moved past the recording. Module 2's inverted hammer is the model case: the video teaches a flat rule, the current teaching includes a confirmation condition that was never recorded. These need Vlad's confirmation and go in `/rulings/`.
+**4. Advancement check.** Flag anything where current teaching may have moved past the recording. Module 3's inverted hammer is the model case: the video teaches a flat rule, the current teaching includes a confirmation condition that was never recorded. These need Vlad's confirmation and go in `/rulings/`.
 
 **5. Chunk and index.** Preserve module number and approximate timestamp on every chunk. Citations are the product, not a nice-to-have.
 
