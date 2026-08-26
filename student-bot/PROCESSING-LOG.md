@@ -59,8 +59,7 @@ Then: append a row to the ledger, add new questions to `rulings/open-questions.m
 |---|---|---|---|---|---|
 | Fundamental Analysis and Stock Screening | 2 | Clean, 1 exclusion narrowed | 2 fixed (Antero) | 0 | **Yes** |
 | Technical Analysis and Candlestick Charts | 3 | 1 borderline, kept, see below | none found | 0 | **Yes** |
-| Support and Resistance | 5 | **1 hit, now actually excluded** | none found | 2 | **Yes** |
-| Trendlines, Swing Points and Confluence | **unassigned, 6 or 7** | Clean | none found | 0 | **Yes** |
+| Support and Resistance *(incl. trendlines, swing points, confluence)* | 5 | **1 hit, now actually excluded** | none found | 2 | **Yes** |
 | Volume | **unassigned** | Clean, 2 borderline | none found | 1 | No |
 | Fibonacci Retracement | 8 | 1 boundary call | 2 | 1 | **Yes** |
 | Moving Averages | **unassigned** | **6 hits, re-record candidate** | 1 fixed, 1 unresolved | 1 | No |
@@ -763,16 +762,25 @@ Three new, all added to `terms.json`:
 word, and it is load bearing in a curriculum built on candles. Search for it
 specifically in every remaining source.
 
-### Module numbering, by evidence
+### Module numbering, ruled closed
 
-The trendlines module never states its number. It opens with *"at this point
-you should have a pretty good idea of what support and resistance are"*, so it
-follows Module 5. Fibonacci closes with *"move to module 9"*, so Fibonacci is 8.
+The trendlines, swing points and confluence material is **the same lesson as
+Module 5**, ruled by Vlad, so the two transcripts are merged into one source and
+the part numbering runs continuously. Module 5 is now 63 chunks.
 
-That places trendlines at **6 or 7 and no more precisely**, so it is indexed
-unnumbered. `prompts/system.md` is explicit that a confident citation pointing
-at the wrong video is worse than no citation, because the student concludes the
-curriculum is inconsistent rather than that the bot erred.
+**Vlad also ruled the general question closed:** *"it doesnt matter which module
+its in, just know that this is info needed for the bot."*
+
+That is a working instruction and it is worth recording as one, because the
+project has spent real effort on numbering twice today, once on a renumbering
+that had to be reverted. **Do not block ingestion on a module number.** Where a
+module states its own number, use it. Where it does not, index the content and
+move on.
+
+This sits alongside rather than against the citation rule in `prompts/system.md`,
+which says a confident citation at the wrong video is worse than none. The
+resolution is that uncertainty about a number is a reason to cite by title, not
+a reason to delay indexing the teaching.
 
 ### "Three is the charm" now has sources
 
@@ -847,5 +855,5 @@ the phrase is now in the corpus and will retrieve.
 
 ### What is still missing
 
-Module 4, whatever it covers, and the number of the trendlines module, which
-the evidence places at 6 or 7 and no more precisely.
+Module 4, whatever it covers. Numbering questions are closed per Vlad: the
+content is what matters.
