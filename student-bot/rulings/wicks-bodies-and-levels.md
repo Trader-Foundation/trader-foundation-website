@@ -216,14 +216,75 @@ is looking for permission to act.
 
 ---
 
-## Open question for Vlad
+## Part three: a wick IS a level, and it is a price target
 
-The corpus says a wick into a level "weakens" it, and separately Module 5 notes
-that levels often break on the third or fourth test, which is still an open
-ruling under "three is the charm."
+**CONFIRMED by Vlad**, answering the question this file previously left open.
+It turned out to be the wrong question: a wick is not mainly a thing that
+weakens a level, it is a thing that **marks** one.
 
-**Does a level being repeatedly wicked change what a student should do, or is it
-only information?** The break rule says the close decides and nothing else, and
-this file has been written that way. But if repeated tests are meant to change
-how a student sizes, or how tight the alert sits, that is a different answer and
-it is not something to guess at.
+> "A upper wick means sellers are still there and you have to be mindful bc
+> that means sellers have been pushing buyers down and they exist. I use them
+> as price targets. Been there once can be there again."
+>
+> "Now lower wick like hammer candle usually means opposite. BUYERS WAITING
+> and took in all the selling pressure. Also use as potential price action
+> too."
+
+### The principle: been there once, can be there again
+
+That sentence is the whole thing, and it should be treated as house vocabulary.
+
+A wick is proof that somebody traded at that price and pushed back. **That is
+not history, it is an address.** The people who defended it are still there, or
+people like them are, and price arriving a second time is likely to meet the
+same resistance or the same support.
+
+**This is what part two was describing without naming.** A level is where a
+cluster of buyers or sellers has been. **The wick is how you see the cluster.**
+The two halves of this ruling are one mechanism.
+
+### Which wick means which
+
+| Wick | Who is there | What it becomes |
+|---|---|---|
+| **Upper** | **Sellers.** They pushed buyers down, and they exist. | Resistance, and an upside price target. |
+| **Lower** | **Buyers waiting.** They took in all the selling pressure. | Support, and a downside reference. |
+
+**"Sellers are still there" and "buyers waiting" are Vlad's words and they are
+better than the abstraction.** A level is not a line on a chart, it is people
+who did something and may do it again. Teach it that way.
+
+**The hammer is the named case of the lower wick.** Long lower wick, buyers
+absorbed the selling, and the curriculum already teaches the candle. This ruling
+says what the wick itself is telling you, which is where the buyers are.
+
+### Wicks give a student their price target
+
+**This is the practical payoff and it is the part to lead with.** A student
+asking how far a move might go does not need a percentage, they need the next
+place where the other side has already shown up. That is a wick above for an
+upside target, and a wick below for where support should be expected.
+
+It closes the loop with the psychology material a third time. Vlad's test for a
+realistic target is whether the move fits the expiration. **A wick gives the
+target a real number**, so the test can actually be run: here is where sellers
+last stopped this, is that reachable in the time you have bought?
+
+### What this does to the three states
+
+The table in part one still holds and is unchanged: closed through is broken,
+wicked through and closed back is held, did not reach is untested. **The close
+still decides and weakened is still not a trigger.**
+
+What changes is the emphasis. A wick was described there mainly as damage to a
+level. It is better understood as the level **announcing itself**, and the
+damage reading is the smaller half. A student watching price wick into their
+support has just been shown where the buyers are, which is information about
+where the level really sits rather than only a warning that it might go.
+
+### Still open, and narrower now
+
+"Three is the charm", whether a level breaking on the third or fourth test is
+taught doctrine or an observation, is untouched by this and remains open. It is
+a question about repeated tests over time. This ruling is about what a single
+wick tells you, and the two do not collide.
