@@ -41,12 +41,41 @@ heart"*.
 Same question, in a student's words rather than the coach's, and the ruling is
 unreachable. BM25 has no idea that *feel* and *heart* are the same thing here.
 
-Two partial mitigations are already in place, and neither solves this:
+Three partial mitigations are in place, and none of them solves this:
 
 - **Prefix expansion** bridges greed and greedy, patience and patient. It
   cannot bridge feel and heart, because they share no letters.
 - **A four character floor on suffix stripping**, after "greed" was being
   reduced to "gre" and matching nothing.
+- **A curated alias list**, student word to house word, added in `ask.py` and
+  mirrored in the bench. See below.
+
+## The alias list, and why it is short on purpose
+
+The psychology material teaches *"you will see red"* at length. A student types
+*"my position is down"* or *"i am losing money"*. No amount of stemming or
+prefix matching connects those, so the teaching was there and unreachable: the
+section ranked outside the top three for the question it was written to answer.
+
+`ALIASES` maps a handful of student words onto the curriculum's, one
+directional, and **adds** rather than replaces, so a query still scores on its
+own words. Measured effect on the question that prompted it:
+
+| Question | Psychology section rank, before | after |
+|---|---|---|
+| "my position is down should i be worried" | not in top 8 | **1** |
+| "i am scared to lose money" | not in top 8 | **1** |
+
+**Every entry must point at teaching that actually exists**, and that is the
+whole discipline of this list. An alias for a topic the corpus does not cover
+does not create an answer, it routes the student to the nearest wrong passage
+instead of letting the bot say it does not have it. A confident answer from the
+wrong section is worse than the gap, so the list stays small and each entry
+names the teaching it reaches.
+
+It is still a hand written list. It does not generalise, and the next student
+phrasing nobody predicted will miss exactly as before. **Embeddings remain the
+real fix**, and this is a stopgap that buys a few high traffic questions.
 
 **The actual fix is embeddings**, which match meaning rather than spelling.
 That is the upgrade to make when someone is ready to build the retrieval layer
@@ -60,3 +89,10 @@ wrong way round for a beginner who does not know the vocabulary yet.
 topic, so a gap shows up as a number rather than a feeling. A ruling audit
 lives in the session history: nine of nine rulings are reachable in the top
 eight for a plain question about their subject.
+
+`tools/test_retrieval_parity.py` runs the bench page's own retrieval block
+headless and compares it to `ask.py`, question by question. **Run it after any
+change to scoring, stemming, or the alias list.** The two implementations have
+silently diverged twice, once on the stemmer and once on the guard rules, and
+both times the failure was the same: the bench is what we test with, so when it
+scores differently from the tool, a passing suite stops meaning anything.

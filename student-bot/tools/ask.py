@@ -172,6 +172,35 @@ AVG = sum(d[2] for d in DOCS) / max(1, len(DOCS))
 
 PREFIX_MIN = 5
 
+# Curated bridges from the words a student uses to the words the curriculum
+# uses. Prefix expansion cannot reach these, because the pairs share no prefix.
+#
+# The case that forced this: the psychology material teaches "you will see red"
+# at length, and a student types "my position is down" or "i am losing money".
+# The teaching was there and unreachable.
+#
+# This list is deliberately short and one directional, student word to house
+# word. Every entry has to point at teaching that actually exists, or it is
+# just noise that dilutes the score. Adding a synonym for a topic the corpus
+# does not cover makes the bot answer from the wrong passage instead of saying
+# it does not have it, which is worse than the gap.
+ALIASES = {
+    # A losing position, in the student's words. Teaching: psychology doc,
+    # "train your mind that you will see red".
+    "down": ["red"], "losing": ["red", "loss"], "lose": ["red", "loss"],
+    "underwater": ["red", "loss"], "negative": ["red", "loss"],
+    # Fear, in the student's words. Teaching: "greed sets in, fear sets in".
+    "scared": ["fear"], "afraid": ["fear"], "nervous": ["fear"],
+    "anxious": ["fear"], "panic": ["fear"], "worried": ["fear"],
+    # The corpus says both, in the same breath: "it says long upper shadow,
+    # that's a wick".
+    "shadow": ["wick"],
+    # Structure, in the student's words.
+    "line": ["support", "resistance", "level"],
+    "zone": ["support", "resistance", "level"],
+}
+ALIASES = {stem(k): [stem(v) for v in vs] for k, vs in ALIASES.items()}
+
 def expand(term):
     """Index terms reachable from a query term, itself plus prefix matches.
 
@@ -179,14 +208,20 @@ def expand(term):
     patient, emotion and emotional, discipline and disciplined. Only fires for
     terms of five characters or more, so short words do not over-match, and is
     capped so one query term cannot dominate the score.
+
+    Aliases are added on top rather than instead. A term that is already in the
+    index keeps scoring on itself and gains its house synonym, so "my position
+    is down" still matches every passage about price going down and also
+    reaches the teaching about seeing red.
     """
+    alias = [a for a in ALIASES.get(term, []) if a in DF]
     if term in DF:
-        return [term]
+        return [term] + alias
     if len(term) < PREFIX_MIN:
-        return []
+        return alias
     pre = term[:PREFIX_MIN]
     hits = sorted((t for t in DF if t.startswith(pre)), key=lambda t: (len(t), t))
-    return hits[:4]
+    return hits[:4] + alias
 
 # prompts/system.md: "Where a ruling and a transcript conflict, the ruling
 # wins. The rulings layer is current teaching. Transcripts are recordings that

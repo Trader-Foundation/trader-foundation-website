@@ -259,12 +259,29 @@ function index(){
    patience and patient, emotion and emotional. Only for terms of five
    characters or more, capped so one term cannot dominate the score. */
 const PREFIX_MIN = 5;
+/* Curated bridges from the student's words to the curriculum's. Kept in step
+   with ask.py. Prefix expansion cannot reach these, the pairs share no prefix.
+   The case that forced it: the psychology material teaches "you will see red"
+   at length and a student types "my position is down". */
+const ALIASES_RAW = {
+  down:["red"], losing:["red","loss"], lose:["red","loss"],
+  underwater:["red","loss"], negative:["red","loss"],
+  scared:["fear"], afraid:["fear"], nervous:["fear"],
+  anxious:["fear"], panic:["fear"], worried:["fear"],
+  shadow:["wick"],
+  line:["support","resistance","level"],
+  zone:["support","resistance","level"],
+};
+const ALIASES = {};
+Object.keys(ALIASES_RAW).forEach(k => ALIASES[stem(k)] = ALIASES_RAW[k].map(stem));
+
 function expand(term){
-  if (DF[term] !== undefined) return [term];
-  if (term.length < PREFIX_MIN) return [];
+  const alias = (ALIASES[term]||[]).filter(a => DF[a] !== undefined);
+  if (DF[term] !== undefined) return [term].concat(alias);
+  if (term.length < PREFIX_MIN) return alias;
   const pre = term.slice(0, PREFIX_MIN);
   return Object.keys(DF).filter(t => t.startsWith(pre))
-    .sort((a,b) => a.length - b.length || (a < b ? -1 : 1)).slice(0,4);
+    .sort((a,b) => a.length - b.length || (a < b ? -1 : 1)).slice(0,4).concat(alias);
 }
 
 function search(q, n=8){
