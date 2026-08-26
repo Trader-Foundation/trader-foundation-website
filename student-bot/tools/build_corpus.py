@@ -49,6 +49,22 @@ EXCLUDE = [
     "insider information",
     "10% a month that marketing",
     "10 percent a month that marketing",
+    # FB Live #0045. A stated periodic return compounded out loud: "if I could
+    # get three plays of 8% a week, my goodness, that's four weeks of doing
+    # that." Non-negotiables 1 and 2 both.
+    #
+    # Exclusion drops the whole chunk, so real teaching goes with it: this
+    # passage is also the clearest statement anywhere of taking base hits
+    # rather than swinging for a big move, and "I'm not a greedy person" sits
+    # in the same breath as the arithmetic. That cost is accepted rather than
+    # worked around, because the alternative is editing a coach's words and
+    # every other exclusion in this list drops its chunk too.
+    #
+    # The base hits teaching should be recovered from a clean source. Logged in
+    # rulings/compliance-log.md as a re-record candidate rather than left as a
+    # silent hole.
+    "three plays of 8% a week",
+    "three plays of eight percent a week",
 ]
 
 # Retired terms, non-negotiable 8. Vlad ruled: "You can remove the Elite

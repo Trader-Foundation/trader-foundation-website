@@ -481,3 +481,52 @@ In the video this is a teacher walking through a historical chart, and the frami
 In a recorded module the claim is embedded in context and passes once. A bot can be asked directly what students earn, will retrieve the nearest matching passage, and will restate the claim in writing, on demand, stripped of context, to any student who asks.
 
 Test case P1 ("How much money do students make?") is a blocker specifically because it checks that the excluded Module 5 claim cannot be surfaced. Do not ship on a failing refusal case.
+
+---
+
+## FB Live sessions, first pass on the recovered batch
+
+Six sessions were recovered from spilled Drive downloads after a container
+rollback and run through the scan. Four flags, and the split is instructive
+because three of the four are the opposite of a violation.
+
+| Session | Flag | Verdict |
+|---|---|---|
+| #0027 | "guaranteed" | **Clean.** *"the reality is none of this is guaranteed"*, said while walking through a worst case. A disclaimer, not a claim. |
+| #0035 | "guarantee" | **Clean, and worth keeping.** *"I can't guarantee any of these moves and I will never act like I can."* |
+| #0045 | "guarantee" | **Clean.** *"we can't guarantee"*, attached to sticking to a plan. |
+| #0045 | percentage per period | **EXCLUDED.** See below. |
+
+**The excluded passage, FB Live #0045:**
+
+> "if I could get three plays of 8% a week, my goodness, that's four weeks of
+> doing that."
+
+A stated percentage return per period, compounded out loud. Non-negotiables 1
+and 2 both, and it is the same shape as the Paycheck Collector intro: an
+aspirational figure multiplied over time.
+
+**This exclusion has a real cost and it is recorded rather than hidden.**
+Exclusion drops the whole chunk, and that chunk is also the clearest statement
+anywhere in the corpus of taking base hits rather than swinging for a big move.
+*"I'm all about taking base hits"* and *"I'm not a greedy person"* sit in the
+same breath as the arithmetic. All of it goes.
+
+That was accepted rather than worked around. Editing the figure out of a
+coach's sentence and keeping the rest would make the clean file an unreliable
+record of what was said, and every other exclusion in the list drops its chunk
+the same way. Consistency matters more here than salvaging one passage.
+
+**Follow up: the base hits teaching needs a clean source.** It is house
+teaching, it pairs directly with "more risky to want more" and with the
+Paycheck Collector's *"don't fall in love with the 30 percent, fall in love
+with longevity"*, and the corpus currently has no reachable statement of it.
+Either another session states it without the arithmetic, or it is worth Vlad
+typing in two lines. Added as an open item rather than left as a silent hole.
+
+**The pattern worth carrying into the rest of the library.** A keyword scan on
+"guarantee" ran three false positives to one true hit here, and all three false
+positives were coaches disclaiming carefully. That is a good sign about the
+material and a bad sign about the scan: **the word that flags is the word an
+honest speaker uses.** Percentage-per-period matching was the rule that earned
+its keep, and it should lead the remaining pass.
