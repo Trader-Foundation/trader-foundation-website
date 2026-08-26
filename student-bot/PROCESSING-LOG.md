@@ -58,10 +58,11 @@ Then: append a row to the ledger, add new questions to `rulings/open-questions.m
 | Module | Number | Compliance | Numeric errors | Unresolved | Indexed |
 |---|---|---|---|---|---|
 | Fundamental Analysis and Stock Screening | 2 | Clean | none found | 0 | No |
-| Technical Analysis and Candlestick Charts | 3 | Clean | none found | 0 | No |
-| Support and Resistance | 5 | 1 hit, excluded | none found | 2 | No |
+| Technical Analysis and Candlestick Charts | 3 | 1 borderline, kept, see below | none found | 0 | **Yes** |
+| Support and Resistance | 5 | **1 hit, now actually excluded** | none found | 2 | **Yes** |
+| Trendlines, Swing Points and Confluence | **unassigned, 6 or 7** | Clean | none found | 0 | **Yes** |
 | Volume | **unassigned** | Clean, 2 borderline | none found | 1 | No |
-| Fibonacci Retracement | 8 | 1 boundary call | 2 | 1 | No |
+| Fibonacci Retracement | 8 | 1 boundary call | 2 | 1 | **Yes** |
 | Moving Averages | **unassigned** | **6 hits, re-record candidate** | 1 fixed, 1 unresolved | 1 | No |
 | Momentum Indicators | **unassigned, likely 11** | Clean | 2 fixed, 1 unresolved | 1 | No |
 | Breakout Strategy *(worksheet)* | n/a, document | Clean | none, written source | 0 | No |
@@ -699,3 +700,97 @@ What that leaves at risk is nothing: raw is re-derivable from Vimeo, clean is re
 Read in this order: `CLAUDE.md`, this file, `rulings/open-questions.md`, `rulings/compliance-log.md`, `glossary/terms.json`.
 
 That is enough to process the next module correctly without the previous transcripts being present.
+
+
+---
+
+## The technical analysis modules, ingested
+
+Vlad supplied Modules 3 and 5 and the trendlines module. Fibonacci was supplied
+again and verified identical to the copy already held.
+
+**`tf-core` went from 10 chunks to 117.** It was one module. It is now four,
+and it is the first time the curriculum's own definitional teaching has been in
+the corpus at all.
+
+### The P1 blocker is finally excluded
+
+Module 5's Alibaba walkthrough contains *"I know people made thousands of
+thousands of dollars in a matter of literally hours."*
+
+This is the oldest known compliance hit in the project. It has been named in
+this log since the first pass and described as excluded, which was true as an
+intention and false as a fact: **the module text was not in the repo, so there
+was nothing to exclude it from.** `tests/questions.json` P1 exists specifically
+to catch it. It is now in the `EXCLUDE` list and verified absent from the built
+corpus.
+
+**The lesson is about the word "excluded" in this log.** It meant "will be
+excluded when ingested" for sources not yet ingested, and that reads as done.
+Any row saying excluded on a source whose Indexed column says No should be read
+as pending, not complete.
+
+### One borderline kept, and it needs Vlad
+
+Module 3 contains a percentage return, and it is used to argue *against* the
+thing it names:
+
+> "if you're looking to make these crazy amounts of money and make 7,000
+> percent returns every day, you're simply gambling. We can't predict that, but
+> we could predict consistent small gains."
+
+**Kept, and flagged.** It is not a claim about what a student will earn, it is
+an absurd figure named in order to reject it, and the sentence immediately
+after is the house position on base hits. Excluding it would drop the chunk and
+take the base hits teaching with it, which is exactly what happened with FB
+Live #0045 earlier.
+
+Vlad's call. The conservative reading is that non-negotiable 1 covers any
+percentage return regardless of framing.
+
+### Transcription errors
+
+Three new, all added to `terms.json`:
+
+| Heard | Correct | Where |
+|---|---|---|
+| "balling wedge" | rising wedge | Trendlines module, over a chart it calls a rising wedge |
+| "two top packs" | two top peaks | Inside the definition of a double top |
+| "a little bit of a week" | a little bit of a wick | Module 3 |
+
+**The wick pattern is now a rule rather than a list.** Wick has been heard as
+"wig", "weight" and "week" across four sources. The transcriber cannot hear the
+word, and it is load bearing in a curriculum built on candles. Search for it
+specifically in every remaining source.
+
+### Module numbering, by evidence
+
+The trendlines module never states its number. It opens with *"at this point
+you should have a pretty good idea of what support and resistance are"*, so it
+follows Module 5. Fibonacci closes with *"move to module 9"*, so Fibonacci is 8.
+
+That places trendlines at **6 or 7 and no more precisely**, so it is indexed
+unnumbered. `prompts/system.md` is explicit that a confident citation pointing
+at the wrong video is worse than no citation, because the student concludes the
+curriculum is inconsistent rather than that the bot erred.
+
+### "Three is the charm" now has sources
+
+Open question, still open, but no longer unsourced. Three direct quotes, and
+the module hedges every one of them:
+
+> "A lot of times you'll see, the three is the charm when it comes to this."
+
+> "Usually the third bounce is the charm. Not always, but in this case it was."
+
+> "Whenever you see something bounce three times, a lot of times, either the
+> third time it'll break through or the fourth time."
+
+That reads as an observation rather than a rule, but the ruling is Vlad's to
+make and the bot still states no rule.
+
+### Module 2 is the remaining hole
+
+Fundamental analysis and stock screening. It supplies the top of the method
+chain, galaxy to solar system to planet, plus news avoidance and the liquidity
+filter. Still not supplied, still the first thing a beginner meets.
