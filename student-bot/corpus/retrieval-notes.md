@@ -122,6 +122,64 @@ missing relevance floor above, not a weaker boost.** Worth knowing when reading
 bench output: a screen of rulings with single digit scores means nothing
 matched, not that the rulings are relevant.
 
+## Definitions lose to applications, and ranking tweaks cannot fix it
+
+The numbered modules define the vocabulary. The live sessions use it constantly
+without ever defining it. So "support and resistance" appears in thousands of
+live chunks and in roughly one module chunk that says what it actually is, and
+term frequency scoring has no way to tell those apart.
+
+Measured after the technical analysis modules were indexed. Of twelve
+definitional questions, the module's own definition reaches the bot's top eight
+for seven of them and misses five: trendline, swing points, double top, support
+and resistance, rising wedge. **Every miss is a term the live sessions say
+constantly while applying it.**
+
+Two fixes were tried and both were rejected, because both traded the same
+currency:
+
+**A source weight on the modules**, the same shape as the ruling boost.
+
+| Module boost | Definitions reached | Application answers intact |
+|---|---|---|
+| 1.0 (none) | 7 of 12 | 6 of 6 |
+| 1.4 | 7 of 12 | 5 of 6 |
+| 2.0 | 8 of 12 | 5 of 6 |
+| 2.5 | 9 of 12 | 5 of 6 |
+
+**A query-type weight**, which is the more surgical idea: detect a "what is X"
+question, and boost chunks that announce themselves as definitions with
+phrases like "is known as", "is called", "what we call".
+
+| Definer boost | Definitions reached | Application answers intact |
+|---|---|---|
+| 1.0 (none) | 7 of 12 | 5 of 5 |
+| 1.5 | 8 of 12 | 4 of 5 |
+| 1.8 | 9 of 12 | 4 of 5 |
+
+**Neither ships.** Buying two definitions by breaking an application answer is
+not an improvement, it is a different set of failures. The second attempt is
+the more interesting failure, because query-type awareness is genuinely the
+right idea and it still could not separate the classes: 177 live chunks also
+match the definitional phrasing, since a coach explaining something mid session
+sounds exactly like a module doing it.
+
+**This is the second independent piece of evidence that BM25 is at its ceiling
+here**, the first being the missing relevance floor above. Both problems are
+the same problem in different clothes: **word matching cannot tell what a
+passage is for.** A definition and an application of that definition use
+identical vocabulary, and only meaning separates them.
+
+Embeddings would separate them, because "what is a trendline" and "here is the
+definition of a trendline" are close in meaning while "the trendline held again
+today" is not. That is the upgrade, and these two measurements are the argument
+for it.
+
+**What to do until then.** More live sessions make this worse rather than
+better, because each one adds application chunks competing with the same small
+set of definitions. More modules and more rulings make it better. That is worth
+knowing before anyone spends effort on the remaining 526 sessions.
+
 ## What is checked
 
 `tools/coverage.py` runs a fixed topic list and reports the top score per
