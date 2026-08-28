@@ -30,15 +30,13 @@ decides is the candle and volume gate, then trend, momentum and risk to
 reward. Vlad: *"if pattern and volume isnt even there do not bother even
 looking at all the indicators."*
 
-**Status:** OPEN, affects test case R6
+**Status:** CLOSED. Kept here as the record of what was asked and why.
 
 Module 5 states that a lot of the time three is the charm, in the context of a level being tested repeatedly before it gives way. The Alibaba and other walkthroughs each show three bounces followed by a break on the fourth touch.
 
 Stated loosely in the video. Students will hear it as a rule and will ask the bot whether a third touch means a break is coming.
 
-The bot's answer differs substantially depending on the ruling. If it is a taught heuristic it has a defined role in the decision. If it is an observation about what those particular charts happened to show, presenting it as a rule teaches students to anticipate breaks that have no basis.
-
-**Question for Vlad:** is "three is the charm" a taught heuristic with a role in the decision, or an observation about those specific charts?
+The answer differed substantially depending on the ruling. A taught heuristic would have a defined role in the decision. An observation about what those particular charts happened to show, presented as a rule, teaches students to anticipate breaks that have no basis. **Vlad ruled it the second.** The count sends you to look; the candle and volume gate is what decides whether there is anything to look at.
 
 ---
 
