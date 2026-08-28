@@ -1031,3 +1031,71 @@ correctly.
 
 Module 4, whatever it covers. Numbering questions stay closed per Vlad: the
 content is what matters.
+
+
+---
+
+## Module 5 was two lessons, and I merged them
+
+Vlad, after supplying the trendlines material more than once and seeing it keep
+landing as Module 5: *"YOU HAD IT SEVERAL TIMES."* He was right, and this is the
+worst citation error found in the project so far.
+
+**The file called Module 5 contained two lessons.** The boundary is unmistakable
+once looked for:
+
+> "...we're going to learn how we incorporate this with all our other tools to
+> make the right decision.  **Thanks guys.**  where we're going to discuss
+> trendlines, swing points, and confluence. So let's begin with trendlines."
+
+"Thanks guys" is the standard sign-off, the same one that closes Module 8. What
+follows starts **mid-sentence**, because the paste lost the front of its opening
+line. The full line would have read something like "welcome to module number N,
+where we're going to discuss trendlines, swing points, and confluence."
+
+**The module number was in the words that got cut off.** That is the whole
+explanation for why this lesson kept arriving without a number and kept being
+absorbed into its neighbour.
+
+### The scale
+
+63 chunks were cited as Module 5. **Only 16 of them are Module 5.** The other 47,
+three quarters of the material, are a different lesson: trendlines, swing points,
+confluence, and the four reversal patterns.
+
+`prompts/system.md` says a confident citation pointing at the wrong video is
+worse than no citation, because the student concludes the curriculum is
+inconsistent rather than that the bot erred. Every trendline, swing point,
+confluence, wedge, double top and double bottom answer was doing exactly that.
+
+### How it happened, and it was not a transcription problem
+
+The merge is recorded earlier in this log as "ruled by Vlad". **It was not.** What
+Vlad said was *"thats all related to trend lines"* and *"it doesnt matter which
+module its in"*. Neither of those is "this is the same lesson as Module 5". I
+turned a remark about topical relatedness into a structural ruling and wrote it
+down as his.
+
+That is the project's named failure mode a second time, after the renumbering:
+guessing at a curriculum decision and encoding the guess as though it were
+given. The renumbering was caught within a day because the real Module 2 arrived
+and contradicted it. This one survived because nothing ever contradicted it: a
+merged file simply looks like a long module.
+
+**What would have caught it:** the sign-off. Every lesson in this corpus ends
+with one, and a sign-off in the middle of a file is a structural signal that
+needs no ruling from anybody. Reading the openings of all 19 transcripts took one
+command and found it immediately.
+
+### What changed
+
+Split into `module-05-support-resistance.txt` (16 chunks) and
+`trendlines-swing-points-confluence-UNNUMBERED.txt` (47 chunks), byte for byte,
+in both raw and clean. The second is registered as `tf-core` and cites by title,
+per Vlad's standing rule: where a lesson states its own number use it, where it
+does not, cite by title and index the content.
+
+**The number is still unknown and is not being guessed.** It sits after support
+and resistance, because it opens by assuming them: *"at this point, you should
+have a pretty good idea of what support and resistance are."* Beyond that,
+nothing in the recording states it.

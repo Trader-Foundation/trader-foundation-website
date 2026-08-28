@@ -385,6 +385,13 @@ TF_CORE_UNNUMBERED = {
     # would be the worst of the set, because volume is the first primary in
     # indicator-hierarchy.md and the gate in three-is-the-charm.md.
     "volume-UNNUMBERED",
+    # Trendlines, swing points and confluence. This was merged into Module 5 on
+    # my inference and it is a separate lesson: Module 5 ends with its "Thanks
+    # guys" sign-off and this one opens mid-sentence, "where we're going to
+    # discuss trendlines, swing points, and confluence", because the paste lost
+    # the front of its opening line. The module number it stated was in the
+    # words that got cut. Cited by title until it states its own number again.
+    "trendlines-swing-points-confluence-UNNUMBERED",
 }
 
 
