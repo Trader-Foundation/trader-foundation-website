@@ -322,14 +322,36 @@ def pack(paras):
     return chunks
 
 
+# Technical analysis modules that arrived without a module number in their
+# filename. They fell through to tf-options because that was the default, which
+# made the bot cite the moving average and momentum teaching as part of the
+# options course.
+#
+# That is a citation integrity bug of the same class as the Module 3 numbering
+# error: prompts/system.md says a confident citation pointing at the wrong video
+# is worse than none, because the student concludes the curriculum is
+# inconsistent rather than that the bot erred. A student sent to the options
+# course to learn about the 13 and 20 day averages will not find them.
+#
+# These three are core technical analysis, and the method chain in system.md
+# cites them as steps in it rather than as options material.
+TF_CORE_UNNUMBERED = {
+    "moving-averages-UNNUMBERED",
+    "momentum-indicators-UNNUMBERED",
+    "thinkorswim-setup-UNNUMBERED",
+}
+
+
 def course_for(path):
     if path.parent.name == "fb-live":
         return "fb-live"
     name = path.stem
-    if name.startswith("module-"):
+    if name.startswith("module-") or name in TF_CORE_UNNUMBERED:
         return "tf-core"
     if name.startswith("paycheck-collector"):
         return "paycheck-collector"
+    if name.startswith("live-session"):
+        return "live-session"
     return "tf-options"
 
 

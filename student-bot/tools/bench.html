@@ -243,7 +243,11 @@ function stem(w){
   }
   return w;
 }
-const toks = s => (s.toLowerCase().match(/[a-z][a-z0-9']+/g)||[]).filter(w=>!STOP.has(w)&&w.length>1).map(stem);
+/* Numbers are indexed. Kept in step with ask.py, where the reasoning lives.
+   This curriculum teaches by number constantly (13 and 20 day averages,
+   Fibonacci 38.2, Full Stochastics 14.3.3, 0.07 delta), and the old pattern
+   produced zero tokens for "what is the 13 and 20 for", so zero results. */
+const toks = s => (s.toLowerCase().match(/[a-z][a-z0-9']+|\d+(?:\.\d+)*/g)||[]).filter(w=>!STOP.has(w)&&w.length>1).map(stem);
 
 let DF={}, AVG=0, DOCS=[];
 function index(){
