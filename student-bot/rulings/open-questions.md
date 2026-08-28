@@ -141,11 +141,13 @@ Antero Midstream is the precedent for not guessing: the transcript said "Ontario
 
 ## 16. Moving averages module
 
-**Status:** OPEN, scoping
+**CLOSED, and it never needed Vlad.** The Moving Averages lesson has been in the
+corpus since before this question was last read: 38 parts, 41 uses of the term,
+and it is one of the three lessons recategorised from `tf-options` to `tf-core`
+because it is technical analysis rather than options material.
 
-Module 8 names moving averages as something the instructor uses in preference to Fibonacci, but no module seen so far teaches them. Same situation as falling wedges and double tops in item 13.
-
-**Question for Vlad:** which module covers moving averages?
+**Status:** CLOSED by evidence. Same stale-question failure as item 13, found in
+the same sweep.
 
 ---
 
@@ -799,13 +801,36 @@ The question asked was whether the hammer carries a confirmation condition the w
 
 ## 13. Prerequisite modules not yet sampled
 
-**Status:** OPEN, scoping
+**CLOSED, and it never needed Vlad.** Module 5 teaches all of them, in a named
+section of its own:
 
-The Volume module refers back to material taught elsewhere and not present in the four transcripts seen so far: falling wedges, double tops, and double bottoms.
+> "we're going to talk about four different reversal patterns the double top
+> double bottom rising wedge and falling wedge now all of these Come from
+> support resistance trend lines and swing points They're just a different
+> version of it. That's actually building off the previous pieces that we
+> learned"
 
-The bot must not answer on these from general knowledge. Until those modules are ingested, questions about them fall to the no-relevant-retrieval path and route to a coach, which is correct but unhelpful if the material exists and simply has not been supplied.
+Ten mentions of double top, nine of double bottom, seven of wedge. It is a
+definitional section, not a passing reference, and it also supplies the
+relationship: these four are derived from support, resistance, trendlines and
+swing points rather than being separate concepts. That is exactly why the Volume
+module can assume them.
 
-**Question for Vlad:** which module covers falling wedges and double top / double bottom?
+**Status:** CLOSED by evidence.
+
+### Why this sat open after it was answered
+
+The question was written when **only the first half of Module 5 had been
+ingested.** The trendlines, swing points and confluence half arrived later and
+was merged into the same source, and the reversal patterns came with it. Nobody
+re-read the open question against the grown source.
+
+**An open question written against a partial source does not re-validate itself
+when the source grows.** Same shape as the log entry that said "excluded" on a
+module whose text was not in the repo: a status recorded once and then trusted.
+
+The cost here was real. It was reported to Vlad twice as material he still owed,
+which is the opposite of the working rule that this file exists to serve.
 
 ---
 

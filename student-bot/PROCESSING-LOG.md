@@ -960,8 +960,8 @@ reading of it:
   resistance. We want to see it break this resistance."* Module 3 teaches the
   hammer as bullish with no confirmation condition. Still needs Vlad.
 - **Open question 13, prerequisites.** The module refers to falling wedges and
-  to double top and double bottom as already taught. Neither is in any
-  transcript here.
+  to double top and double bottom as already taught. **This was recorded as a
+  gap and it is not one.** See the correction below.
 
 ### A retrieval limit, measured not patched
 
@@ -987,7 +987,47 @@ which is the divergence `test_retrieval_parity.py` exists to catch. Recorded
 here and in `corpus/retrieval-notes.md` alongside the relevance floor and the
 three hardest definitions, which are limits held the same way.
 
+### Correction: two open questions were answered and nobody noticed
+
+Prompted by Vlad asking me to read through what was there rather than ask for
+more, and both were my error to find sooner.
+
+**Falling wedges, double tops and double bottoms are taught, in Module 5.** A
+named section of its own:
+
+> "we're going to talk about four different reversal patterns the double top
+> double bottom rising wedge and falling wedge now all of these Come from
+> support resistance trend lines and swing points They're just a different
+> version of it."
+
+Ten mentions of double top, nine of double bottom, seven of wedge. Definitional,
+not passing, and it supplies the relationship that explains why Volume can
+assume them: the four reversal patterns are derived from support, resistance,
+trendlines and swing points rather than being separate material.
+
+**Moving averages are taught too**, in a lesson that has been in the corpus for
+weeks and was recategorised into `tf-core` in this very log.
+
+**Why both sat open after they were answered.** Question 13 was written when only
+the first half of Module 5 had been ingested. The trendlines and swing points
+half arrived later, merged into the same source, and brought the reversal
+patterns with it. Nobody re-read the question against the grown source.
+
+**An open question written against a partial source does not re-validate itself
+when the source grows.** Same shape as the log entry reading "excluded" on a
+module whose text was not in the repo, and the same shape as the walkthrough
+mitigation that was a sentence rather than a rule. Three instances now of one
+failure: **a status recorded once and thereafter trusted.**
+
+The cost was not theoretical. Both were reported to Vlad as material he still
+owed, twice, while the answer sat in a file already indexed. Any question in
+`open-questions.md` phrased as "not seen so far" needs re-checking against the
+corpus whenever a source grows, and the remaining three of that shape were swept
+at the same time. Those three ask whether a *dedicated lesson* exists, and what
+the corpus holds is passing mentions inside other material, so they stay open
+correctly.
+
 ### What is still missing
 
-Module 4, whatever it covers, and whatever teaches falling wedges and double
-tops. Numbering questions stay closed per Vlad: the content is what matters.
+Module 4, whatever it covers. Numbering questions stay closed per Vlad: the
+content is what matters.

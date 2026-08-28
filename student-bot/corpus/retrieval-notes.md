@@ -263,3 +263,30 @@ measured limit of word matching, recorded so it is not rediscovered. An
 embedding index makes it disappear without a special case, since "U pattern"
 and "U shaped volume" land near each other in vector space whether or not the
 letter survives tokenization.
+
+## The hardest-definitions list is five, not three, and one session monopolises
+
+Adding Module 5's reversal-pattern section to the count. **"What is a double
+top" and "what is a double bottom" never reach the module that defines them.**
+
+```
+what is a double top     ->  5 of 5 slots are FB Live, module definition absent
+what is a double bottom  ->  5 of 5 slots are FB Live, 4 of them one session
+what is a falling wedge  ->  Volume 11.7, then Module 5 part 40 at 10.4  (ok)
+```
+
+So the list of definitions that lose to their own applications is now: trendline,
+support and resistance, rising wedge, **double top, double bottom.** Same cause
+throughout, and chunk size has already been spent on it.
+
+**A second effect is visible here that the earlier cases did not show.** FB Live
+#0016 takes four of the five slots on "what is a double bottom", because that one
+session happens to be about double bottoms and says the phrase constantly. The
+student gets five views of one conversation instead of five sources.
+
+That is a **diversity** problem rather than a ranking problem, and it has a
+cheaper fix than reranking: cap how many chunks one source may occupy in the top
+N. It changes no score, so it does not trade definitions against applications the
+way the two rejected reranking attempts did. **Not implemented**, because it
+changes returned results and that is worth measuring before it ships rather than
+asserting. Recorded as the next retrieval change to evaluate.
