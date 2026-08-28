@@ -460,7 +460,7 @@ Outcome-flavoured language carrying no figure. Logged so the pattern is visible 
 | thinkorswim setup (number unassigned) | Scanned | **Clean.** Two privacy redactions, no compliance hits |
 | All others | Not started | |
 
-Five of thirteen scanned modules were clean. Eight were not.
+Six of fifteen scanned modules were clean. Nine were not. (Counted off the table above, which had drifted from the tally under it.)
 
 **The counting-scenarios pattern changes how the remaining pass should be run.** It is a habit rather than a set of sentences, it has appeared in two modules already, and it produces stated win probabilities that read as reassurance. Search for it specifically rather than waiting to notice it.
 
@@ -475,6 +475,26 @@ The Volume module narrates entry and exit decisions against a live Tesla chart r
 In the video this is a teacher walking through a historical chart, and the framing is obvious. Retrieved as a chunk in answer to "when should I get in?", it reads as instruction. The bot has a hard rule against position advice, but that rule protects against the bot *generating* advice, not against it faithfully relaying a retrieved passage that already sounds like advice.
 
 **Mitigation:** these passages are chart-anchored, so they tag `DATED_EXAMPLE`, and the system prompt now carries an explicit rule that walkthrough entry and exit narration is illustration of a past chart, never a rule to apply to a live one. Expect every chart-walkthrough module to carry the same load.
+
+### Half of the mitigation above was not true when it was written
+
+Recorded here rather than edited away, because the failure is the useful part.
+
+**The system prompt half is real.** `prompts/system.md` carries a "Chart walkthrough narration" section that names this exact risk, quotes these exact lines, and tells the bot to extract the principle rather than relay the call. That was built and it holds.
+
+**The tagging half was fiction.** The Volume transcript reached the corpus and **all 22 of its chunks tagged `EVERGREEN`, including the five this entry quotes.** The paragraph above had been read as done for weeks. It was a sentence in a log, not a line of code.
+
+That split is worth keeping in view, because the two halves protect against different things. The system prompt governs how the bot writes an answer. The tag governs what the retrieval layer hands it and how the chunk is presented. Having one and believing you had both is how a chart-anchored passage ends up presented as current teaching.
+
+`DATED` could not have caught them and was never going to. It matches uppercase tickers, dollar figures, years, months, "earnings" and "today", and needs two hits in one chunk. This walkthrough names Tesla, Amazon and Peloton in title case and says "the next day". It matches none of it.
+
+**The signal that a passage is anchored to one historical chart is not that it carries a date. It is that somebody is pointing at a screen.**
+
+`WALKTHROUGH_NARRATION` in `tools/build_corpus.py` now matches the decision being narrated, not the pointing: "your sign to get in", "good time to get out", "we should have been out", "collected your money". One hit retags, where every other rule in `classify` needs two, because a lone date proves little and a sentence telling a student when to get in is already the whole problem.
+
+Six chunks in 2,976 match. Five are Volume. **The sixth was in Moving Averages and had been mistagged since ingestion.**
+
+The general rule this earns: **a mitigation written into a log is not a mitigation.** Any other entry here that claims a corpus-level protection needs the same check against the built corpus.
 
 ## Why the bot changes the exposure profile
 

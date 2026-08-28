@@ -217,6 +217,40 @@ DATED = [
     r"\bearnings\b", r"\btoday\b", r"\bthis\s+week\b",
 ]
 
+# Entry and exit narration inside a chart walkthrough.
+#
+# rulings/compliance-log.md raised this as a risk with the same shape as a
+# compliance hit: material that is fine inside a video and dangerous once a bot
+# can retrieve it on demand. In the video the instructor is walking a historical
+# chart and the framing is obvious. Retrieved as a chunk in answer to "when
+# should I get in?", "that's your sign to get in" reads as instruction.
+#
+# The log records the mitigation as tagging these DATED_EXAMPLE. It was never
+# implemented, and the Volume module proved it: five chunks narrating entries
+# and exits against a Tesla chart, all tagged EVERGREEN.
+#
+# **The DATED list could not have caught them.** It looks for uppercase tickers,
+# dollar figures, years, months, "earnings" and "today", and needs two hits. A
+# walkthrough that says Tesla, Amazon and Peloton in title case and says "the
+# next day" rather than "today" matches none of it. The signal that a passage is
+# anchored to one historical chart is not that it carries a date. It is that
+# somebody is pointing at a screen.
+#
+# Deliberately narrow: matched against the decision being narrated, not against
+# the pointing. "Right here" and "over here" are everywhere in this corpus and
+# most of the time they sit on ordinary teaching. Six chunks in 2,976 match
+# these, all of them in module walkthroughs, which is the intended blast radius.
+WALKTHROUGH_NARRATION = [
+    r"\b(that's|this is|here's)\s+your\s+sign\s+to\s+get\s+in\b",
+    r"\bgood\s+time\s+to\s+get\s+(in|out)\b",
+    r"\bgreat\s+time\s+to\s+get\s+in\b",
+    r"\bwe\s+should\s+have\s+been\s+(out|in)\b",
+    r"\btime\s+for\s+(us\s+)?to\s+get\s+(in|out)\b",
+    r"\byou\s+(would|should|want\s+to)\s+(have\s+)?(collected|taken)\s+your\s+(money|profit)\b",
+    r"\bcollected\s+your\s+money\b",
+    r"\bthis\s+is\s+where\s+(you|we)\s+(get|would\s+get)\s+(in|out)\b",
+]
+
 
 def hms(seconds):
     seconds = max(0, int(seconds))
@@ -268,6 +302,11 @@ def classify(text):
     low = text.lower()
     if sum(1 for p in PROCEDURE if re.search(p, low)) >= 2:
         return "PERISHABLE_PROCEDURE"
+    # One hit is enough. Everything else here needs two signals because a lone
+    # date or ticker proves little, but a sentence telling the student when to
+    # get in is already the whole problem.
+    if any(re.search(p, low) for p in WALKTHROUGH_NARRATION):
+        return "DATED_EXAMPLE"
     if sum(1 for p in DATED if re.search(p, text)) >= 2:
         return "DATED_EXAMPLE"
     return "EVERGREEN"
@@ -333,12 +372,19 @@ def pack(paras):
 # inconsistent rather than that the bot erred. A student sent to the options
 # course to learn about the 13 and 20 day averages will not find them.
 #
-# These three are core technical analysis, and the method chain in system.md
+# These are core technical analysis, and the method chain in system.md
 # cites them as steps in it rather than as options material.
 TF_CORE_UNNUMBERED = {
     "moving-averages-UNNUMBERED",
     "momentum-indicators-UNNUMBERED",
     "thinkorswim-setup-UNNUMBERED",
+    # Volume. The lesson opens "Welcome to Volume" and states no number, and it
+    # sits squarely in the technical analysis chain: it closes by telling
+    # students it is "not just volume, it's about the candles, it's about
+    # support and resistance", and it assumes both. Miscategorising this one
+    # would be the worst of the set, because volume is the first primary in
+    # indicator-hierarchy.md and the gate in three-is-the-charm.md.
+    "volume-UNNUMBERED",
 }
 
 
@@ -363,6 +409,30 @@ def module_for(path, meta):
     if meta.get("order") is not None:
         return f"{meta['order']:04d}"
     return "UNNUMBERED"
+
+
+def slug_for(path, module):
+    """Middle segment of chunk_id. Unique per source, not per module number.
+
+    chunk_id is the identity of a chunk and what a citation resolves to, so it
+    has to be unique. It was not. Every unnumbered lesson got module
+    "UNNUMBERED", so all eight options lessons produced tf-options:UNNUMBERED:0000
+    and collided from the first chunk onward: 244 chunks sharing 97 ids across
+    the corpus, and adding Volume to the unnumbered tf-core set would have
+    widened the collision rather than caused it.
+
+    Nothing was visibly broken because retrieval ranks chunk objects and cites
+    from module_title and part. The id was simply not doing its job, and anything
+    that later keys on it (dedup, feedback, a "show me that chunk again" lookup)
+    would have silently mixed two lessons.
+
+    Numbered modules keep the number, so tf-core:5:0001 is unchanged.
+    corpus/schema.md already documents a slug form for documents, so this
+    follows a shape the schema had rather than inventing one.
+    """
+    if module != "UNNUMBERED":
+        return module
+    return re.sub(r"[-_]?UNNUMBERED$", "", path.stem) or path.stem
 
 
 RULINGS = ROOT / "rulings"
@@ -514,7 +584,7 @@ def main():
                     "duplicate_of": seen_hashes[digest], "text": text[:180],
                 })
                 continue
-            chunk_id = f"{course}:{module}:{i:04d}"
+            chunk_id = f"{course}:{slug_for(path, module)}:{i:04d}"
             seen_hashes[digest] = chunk_id
 
             verdict, reason = screen(text)

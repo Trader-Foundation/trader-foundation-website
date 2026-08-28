@@ -857,3 +857,137 @@ the phrase is now in the corpus and will retrieve.
 
 Module 4, whatever it covers. Numbering questions are closed per Vlad: the
 content is what matters.
+
+---
+
+## Volume ingested, and two defects it exposed
+
+**The Volume module is in the corpus.** 22 chunks, `tf-core`, cited by title as
+"Volume, part N of 22". It is the lesson the indicator hierarchy has been
+pointing at since the hierarchy was written, and the gate in
+`three-is-the-charm.md` now has its source.
+
+The teaching, in its own order: volume is the amount of shares being traded and
+it is the only real time indicator, *"nothing is as live as volume"*. It is the
+gas in the car, and direction of volume dictates direction of price. Above
+average volume accelerates a move; a move on low volume is *"running on fumes"*
+and does not sustain. Four patterns, and they are house vocabulary: **flat, also
+called random, then U, increasing and decreasing.** It closes by refusing to
+stand alone: *"it's not just volume. It's about the candles. It's about support
+and resistance."*
+
+**That closing line is the indicator hierarchy stated by the module itself**,
+which is worth recording because the hierarchy ruling was assembled from
+several sources and could have been an over-reading. It was not.
+
+### Glossary and compliance
+
+One glossary hit, and it was already in `terms.json` from another module:
+"the man versus the supply" for "the demand versus the supply". Redaction pass
+clean, 29 segments, nothing to mark. Name discovery clean.
+
+**The compliance scan is clean.** No exclusions, no rewrites, no suspects. That
+makes Volume the sixth clean module of fifteen scanned.
+
+Read by hand as well, because the automated pass matches claims rather than
+reading them. Two things worth noting and neither is a hit: *"this is a money
+making move"* carries no figure and attaches to no person, and the module says
+volume helps us *"predict which way the stock is going to move"*, a word the bot
+itself must not use. Both are teaching inside a walkthrough, and the walkthrough
+handling below is what covers them.
+
+### Defect 1: the mitigation in the compliance log was never implemented
+
+`rulings/compliance-log.md` raised position-advice density in chart walkthroughs
+and named Volume specifically, quoting *"that's your sign to get in"*, *"this is
+a great time to get in on this stuff"*, *"it's a good time to get out"* and
+*"we should have been out"*. It recorded the mitigation as: these passages are
+chart-anchored, so they tag `DATED_EXAMPLE`.
+
+**They tagged `EVERGREEN`. All 22 of them.**
+
+The `DATED` list could not have caught them. It looks for uppercase tickers,
+dollar figures, years, months, "earnings" and "today", and needs two hits in a
+chunk. The Tesla walkthrough says Tesla, Amazon and Peloton in title case and
+says "the next day" rather than "today", so it matches none of it.
+
+**The signal that a passage is anchored to one historical chart is not that it
+carries a date. It is that somebody is pointing at a screen.** Added
+`WALKTHROUGH_NARRATION` to `build_corpus.py`, matched against the decision being
+narrated rather than against the pointing, because "right here" and "over here"
+are everywhere in this corpus and mostly sit on ordinary teaching.
+
+Six chunks in 2,976 match, which is the intended blast radius. Five are the
+Volume walkthrough. **The sixth had been mistagged in Moving Averages since that
+module was ingested** and nobody had looked.
+
+One hit is enough to retag, where everything else in `classify` needs two. A
+lone date or ticker proves little. A sentence telling the student when to get in
+is already the whole problem.
+
+**The general lesson: a mitigation written into a log is not a mitigation.**
+This one was recorded as done, read as done for weeks, and was a comment.
+
+### Defect 2: chunk ids were not unique
+
+Found while checking whether adding Volume to the unnumbered `tf-core` set would
+collide. It would have, but it was not the cause: **244 chunks were already
+sharing 97 ids.**
+
+Every unnumbered lesson got module `UNNUMBERED`, so all eight options lessons
+produced `tf-options:UNNUMBERED:0000` and collided from the first chunk onward.
+
+`chunk_id` is the identity of a chunk and what a citation resolves to. Nothing
+was visibly broken, because retrieval ranks chunk objects and cites from
+`module_title` and `part`, so the id was simply not doing its job. Anything that
+later keys on it, dedup or feedback or a "show me that chunk again" lookup,
+would have silently mixed two lessons.
+
+Unnumbered sources now use their slug: `tf-core:volume:0013`,
+`tf-options:options-intro:0004`. Numbered modules are unchanged, so
+`tf-core:5:0001` still resolves to what it always did. `corpus/schema.md`
+already documented a slug form for documents, so this follows a shape the schema
+had rather than inventing one. 2,976 chunks, 2,976 unique ids.
+
+### The two open questions Volume was already blocking
+
+Both were raised from this module in an earlier pass and both stay open, but
+they are now sourced against the transcript in the repo rather than against a
+reading of it:
+
+- **Open question 12, the hammer.** *"The candle's okay, it's a hammer candle.
+  Not something I would trade, and I'll show you why. We learned support
+  resistance. We want to see it break this resistance."* Module 3 teaches the
+  hammer as bullish with no confirmation condition. Still needs Vlad.
+- **Open question 13, prerequisites.** The module refers to falling wedges and
+  to double top and double bottom as already taught. Neither is in any
+  transcript here.
+
+### A retrieval limit, measured not patched
+
+**"What is the U pattern in volume" retrieves nothing about the U pattern.**
+
+The tokenizer requires two characters, so the "U" is dropped and the query
+becomes identical to "volume patterns", which loses to the rulings. Those
+rulings say "volume" constantly, and they carry the 1.4 boost.
+
+Confirmed directly: `toks("what is the U pattern in volume")` returns
+`['pattern', 'volume']`.
+
+The teaching is reachable when a query carries the module's distinctive
+vocabulary. "Volume patterns flat random U increasing decreasing" returns the
+right chunk at 20.7, "volume is like gas in a car" and "is volume the amount of
+shares traded" both return the module top. It is single-letter house vocabulary
+that fails.
+
+**Not patched, because every available fix is worse than the limit.** Lowering
+the minimum token length indexes every stray letter. Special-casing "u pattern"
+in the tokenizer has to be mirrored exactly in `bench.html` or parity breaks,
+which is the divergence `test_retrieval_parity.py` exists to catch. Recorded
+here and in `corpus/retrieval-notes.md` alongside the relevance floor and the
+three hardest definitions, which are limits held the same way.
+
+### What is still missing
+
+Module 4, whatever it covers, and whatever teaches falling wedges and double
+tops. Numbering questions stay closed per Vlad: the content is what matters.

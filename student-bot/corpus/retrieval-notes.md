@@ -228,3 +228,38 @@ change to scoring, stemming, or the alias list.** The two implementations have
 silently diverged twice, once on the stemmer and once on the guard rules, and
 both times the failure was the same: the bench is what we test with, so when it
 scores differently from the tool, a passing suite stops meaning anything.
+
+## Single-letter house vocabulary is unreachable
+
+**"What is the U pattern in volume" cannot retrieve the U pattern.**
+
+`TOKEN` requires two characters, so the "U" is dropped and the query reduces to
+`['pattern', 'volume']`, which is identical to "volume patterns". Both lose to
+the rulings, because the rulings say "volume" constantly and carry the 1.4
+boost.
+
+The Volume module names four volume patterns and two of them are ordinary words
+that retrieve fine, increasing and decreasing. Flat retrieves. **U does not, and
+it is the one a student is most likely to ask about by name**, because it is the
+only one whose name is not also its description.
+
+Reachable with distinctive vocabulary:
+
+```
+volume patterns flat random U increasing decreasing  ->  Volume part 10, 20.7
+volume is like gas in a car                          ->  Volume part 1,  13.2
+is volume the amount of shares traded                ->  Volume part 3,  14.4
+what is the U pattern in volume                      ->  rulings only
+```
+
+**Left as a limit rather than patched.** Lowering the minimum token length
+indexes every stray letter across 2,976 chunks. Special-casing the phrase in the
+tokenizer has to be mirrored exactly in `bench.html`, and silent divergence
+between the two is the specific failure `test_retrieval_parity.py` was built
+after. Neither cost is worth one term.
+
+Same category as the relevance floor and the three hardest definitions: a
+measured limit of word matching, recorded so it is not rediscovered. An
+embedding index makes it disappear without a special case, since "U pattern"
+and "U shaped volume" land near each other in vector space whether or not the
+letter survives tokenization.
