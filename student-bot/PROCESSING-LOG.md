@@ -1099,3 +1099,22 @@ does not, cite by title and index the content.
 and resistance, because it opens by assuming them: *"at this point, you should
 have a pretty good idea of what support and resistance are."* Beyond that,
 nothing in the recording states it.
+
+### The same check, run against everything else
+
+Splitting one file is not the fix. The fix is knowing whether it happened
+anywhere else, so the sign-off test was run across all 20 transcripts.
+
+**Nothing else is merged.** Every sign-off in the corpus sits at 98 to 99 percent
+of its file. Zero mid-file boundaries.
+
+Two files needed a manual look because they carry no phrase the pattern
+recognised, and both end properly: the trendlines lesson closes "See you in the
+next module, guys", and Module 3 closes "Alright guys, I really appreciate it.
+Good luck." So the trendlines lesson is complete at both ends. Only its opening
+line was clipped, which is exactly where the module number lived.
+
+**This check belongs in the intake pipeline, ahead of the glossary pass.** It
+costs one command, it needs no ruling from anyone, and it catches a class of
+error that is otherwise invisible: a merged file just looks like a long module,
+and every citation it produces is confidently wrong.
