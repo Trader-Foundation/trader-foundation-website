@@ -778,7 +778,14 @@ Options: re-export with timestamps from the transcription tool, or run a pass ag
 
 ## 12. Hammer, possible advancement past the recording
 
-**Status:** OPEN, needs the advancement check
+**CLOSED. Ruled by Vlad.** See `rulings/hammer-strength.md`. Not a
+confirmation condition and not a gate: a strength ladder on top of a rule that
+was already right. A bare hammer is still a bullish hammer. Hammer with
+validated volume closing green is stronger. **Strongest is a hammer at support
+whose wick sweeps below the level and whose body holds**, which is the same
+candle the break rule already describes from the other side.
+
+**Status:** CLOSED. Kept here as the record of what was asked and why.
 
 In the Volume module, on a hammer candle: "The candle's okay, it's a hammer candle. Not something I would trade, and I'll show you why. We learned support resistance. We want to see it break this resistance." Entry then waits for the resistance break.
 
@@ -786,7 +793,7 @@ Module 3 teaches the hammer as bullish, colour irrelevant, meaningful at the bot
 
 These are not necessarily in conflict. The Volume module may be applying confirmation before entry rather than redefining the pattern. But this is the same shape as the inverted hammer case: a recording teaching a flat rule while current teaching carries a condition the recording never states.
 
-**Question for Vlad:** does the hammer carry a confirmation condition in current teaching, the way the inverted hammer does, or is the Volume passage just confirmation before entry applied to a hammer?
+The question asked was whether the hammer carries a confirmation condition the way the inverted hammer does, or whether the Volume passage was just confirmation before entry applied to a hammer. **Neither.** The inverted hammer inverts without confirmation; the hammer does not. The Volume passage was Vlad looking at the weakest rung of the ladder and wanting more before acting.
 
 ---
 
