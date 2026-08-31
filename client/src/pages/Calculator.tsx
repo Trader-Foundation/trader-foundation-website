@@ -13,7 +13,7 @@ import SEO from '@/components/SEO';
 import Footer from '@/components/Footer';
 
 const VLAD_TEACHING =
-  '/images/vlad.jpg';
+  '/images/vlad-founder.jpg';
 const CALCULATOR_HERO_BG =
   'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/calculator-hero-bg-f3Rq9By3EDjXhzwTJdmpaq.webp';
 

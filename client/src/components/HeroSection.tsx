@@ -9,9 +9,9 @@ import { useEffect, useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import Picture from '@/components/Picture';
 
-const HERO_BG = '/images/vlad.jpg';
-const HERO_BG_WIDTH = 1577;
-const HERO_BG_HEIGHT = 1075;
+const HERO_BG = '/images/vlad-founder.jpg';
+const HERO_BG_WIDTH = 1600;
+const HERO_BG_HEIGHT = 1091;
 
 /* BBB Official Badge - dark blue pill with torch + A+ circle */
 function BBBBadge() {

@@ -13,7 +13,7 @@ import { ArrowRight, ArrowLeft, ChevronRight, Shield, BookOpen, BarChart3, Targe
 
 
 const SIDEBAR_IMG =
-  '/images/vlad.jpg';
+  '/images/vlad-founder.jpg';
 
 /* ── Chapter data ── */
 const CHAPTERS = [
