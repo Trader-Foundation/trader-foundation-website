@@ -14,12 +14,11 @@ import { Quote } from 'lucide-react';
 
 /* ── Photo URLs ── */
 /* Vlad/Elliot/Erin/Leo: local /images/ (webp siblings exist).
-   Steve/Ariana/Jhalil: still legacy Cloudfront until re-hosted. */
+   Steve/Ariana: still legacy Cloudfront until re-hosted. */
 const VLAD_PHOTO = '/images/vlad.jpg';
 const ELLIOT_PHOTO = '/images/elliot.jpg';
 const ERIN_PHOTO = '/images/erin.jpg';
 const LEO_PHOTO = '/images/leo.jpg';
-const JHALIL_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/jhalil-new_9cefdb48.png';
 const STEVE_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/steve-lapa-new_ac25bb0c.png';
 const ARIANA_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/ariana-white-bg_56fc0ce2.png';
 
@@ -38,13 +37,6 @@ const leadership = [
     subtitle: '7+ Years of Experience',
     photo: ARIANA_PHOTO,
     bio: 'Ariana is the first person you\'ll hear from and the one who makes sure no question goes unanswered. She genuinely cares about every student\'s experience, from the moment they join to every milestone along the way. Her mission is simple: make sure everyone in the Trader Foundation community feels supported, valued, and never alone on their journey.',
-  },
-  {
-    name: 'Jhalil Timazee',
-    title: 'Enrollment Specialist',
-    subtitle: '20+ Years of Leadership Experience',
-    photo: JHALIL_PHOTO,
-    bio: 'Two decades of leadership experience across multiple industries taught Jhalil one thing: people come first. He brings that same philosophy to Trader Foundation, taking the time to understand where each person is in their financial journey and helping them take the next step with confidence. His track record of driving record-breaking results comes from one simple approach, genuinely caring about the people he works with.',
   },
 ];
 
@@ -119,7 +111,7 @@ export default function About() {
 
   return (
     <div className="min-h-screen bg-[#faf9f6]">
-      <SEO title="About Us" description="Meet the Trader Foundation Academy team — Vlad Tayman, Steve Lapa, Ariana Tayman, and Jhalil Timazee. Learn about our mission to help traders succeed." path="/about" />
+      <SEO title="About Us" description="Meet the Trader Foundation Academy team — Vlad Tayman, Steve Lapa, and Ariana Tayman. Learn about our mission to help traders succeed." path="/about" />
       <Navigation />
 
       {/* ─── Vlad's Story ─── */}
@@ -321,7 +313,7 @@ export default function About() {
             <div className="w-20 h-[2px] bg-[#c7ab77] mx-auto mt-6" />
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 lg:gap-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 lg:gap-10 max-w-[720px] mx-auto">
             {leadership.map((member, i) => (
               <div
                 key={member.name}
