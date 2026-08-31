@@ -7,7 +7,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { TrustpilotLogo, TrustpilotStars } from './TrustpilotAssets';
 
-const VLAD_FAMILY = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/vlad-family-cropped_bb850345.jpg';
+const VLAD_FAMILY = '/images/vlad-family.jpg';
 
 const trustpilotReviews = [
   {
