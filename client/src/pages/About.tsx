@@ -15,7 +15,7 @@ import { Quote } from 'lucide-react';
 /* ── Photo URLs ── */
 /* Vlad/Elliot/Erin/Leo: local /images/ (webp siblings exist).
    Steve/Ariana: still legacy Cloudfront until re-hosted. */
-const VLAD_PHOTO = '/images/vlad.jpg';
+const VLAD_PHOTO = '/images/vlad-founder.jpg';
 const ELLIOT_PHOTO = '/images/elliot.jpg';
 const ERIN_PHOTO = '/images/erin.jpg';
 const LEO_PHOTO = '/images/leo.jpg';
@@ -122,35 +122,33 @@ export default function About() {
             story.visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-14 items-center">
-            {/* Vlad's photo */}
-            <div className="lg:col-span-2 flex flex-col items-center">
-              <div className="relative w-full max-w-[300px]">
-                <div className="absolute -inset-3 border border-[#c7ab77]/20 rounded-lg" />
-                <Picture
-                  src={VLAD_PHOTO}
-                  alt="Vlad Tayman, founder of Trader Foundation"
-                  width={1577}
-                  height={1075}
-                  loading="eager"
-                  className="w-full aspect-[4/5] object-cover rounded-lg shadow-xl"
-                  style={{ filter: 'brightness(1.1)' }}
-                />
-              </div>
-              <h3 className="text-xl font-extrabold text-[#111] mt-5" style={{ fontFamily: "'Sen', sans-serif" }}>
-                Vlad Tayman
-              </h3>
-              <p className="text-[#c7ab77] text-sm font-medium">Founder & CEO</p>
+          {/* Vlad's headshot, centered above the story */}
+          <div className="flex flex-col items-center mb-12">
+            <div className="relative w-full max-w-[420px]">
+              <div className="absolute -inset-3 border border-[#c7ab77]/20 rounded-lg" />
+              <Picture
+                src={VLAD_PHOTO}
+                alt="Vlad Tayman, founder of Trader Foundation"
+                width={1600}
+                height={1091}
+                loading="eager"
+                className="w-full h-auto object-cover rounded-lg shadow-xl"
+              />
             </div>
+            <h3 className="text-xl font-extrabold text-[#111] mt-6" style={{ fontFamily: "'Sen', sans-serif" }}>
+              Vlad Tayman
+            </h3>
+            <p className="text-[#c7ab77] text-sm font-medium">Founder &amp; CEO</p>
+          </div>
 
-            {/* Story text */}
-            <div className="lg:col-span-3">
-              <p className="text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-3">
-                The Founder
-              </p>
-              <h2 className="text-2xl md:text-3xl font-extrabold text-[#111] leading-tight mb-6" style={{ fontFamily: "'Sen', sans-serif" }}>
-                From $150K in Losses to Building a Trading Academy
-              </h2>
+          {/* Story text — centered under the photo */}
+          <div className="max-w-[720px] mx-auto">
+            <p className="text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-3 text-center">
+              The Founder
+            </p>
+            <h2 className="text-2xl md:text-3xl font-extrabold text-[#111] leading-tight mb-6 text-center" style={{ fontFamily: "'Sen', sans-serif" }}>
+              From $150K in Losses to Building a Trading Academy
+            </h2>
               <p className="text-[#444] text-base leading-relaxed mb-4">
                 Vlad came to America from Ukraine with nothing but a work ethic. He built his career the hard way, spending 20 years as a Director of Training at a Fortune 500 company. He had the six-figure salary and the corner office, but he was burned out, missing his family, and dying inside. Then came the wake-up call: he lost $29,000 in 29 days trading penny stocks.
               </p>
@@ -164,7 +162,6 @@ export default function About() {
                 "Everyone deserves to understand how money really works. Not just the theory, but the real skills to grow wealth on your own terms. The best moment is when a student stops relying on someone else and starts making confident financial decisions on their own. That's the transformation we're building here."
               </p>
             </div>
-          </div>
         </div>
       </section>
 
