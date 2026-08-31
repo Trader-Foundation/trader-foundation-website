@@ -50,13 +50,13 @@ export default function Navigation() {
         }`}
       >
         <div className="max-w-[1320px] mx-auto px-6 lg:px-8">
-          <div className="flex items-center justify-between h-[72px]">
+          <div className="flex items-center justify-between h-[120px]">
             {/* Logo */}
             <a href="/" className="flex items-center gap-3 group">
               <img
                 src={LOGO_URL}
                 alt="Trader Foundation"
-                className="h-11 w-11 object-contain transition-transform duration-300 group-hover:scale-105"
+                className="h-28 w-28 sm:h-32 sm:w-32 lg:h-36 lg:w-36 object-contain transition-transform duration-300 group-hover:scale-105"
               />
               <div className="flex flex-col leading-tight">
                 <span
