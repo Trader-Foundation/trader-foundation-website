@@ -207,18 +207,22 @@ function VimeoEmbed({
                 'radial-gradient(circle, rgba(199,171,119,0.18) 0%, transparent 65%)',
             }}
           />
-          {/* faded TF wordmark, subtle */}
-          <span
-            className="absolute right-4 bottom-3 text-[0.65rem] font-bold tracking-[0.3em] text-[#c7ab77]/40 uppercase"
-            style={{ fontFamily: "'Sen', sans-serif" }}
-          >
-            Trader Foundation
-          </span>
+          {/* TF logo watermark, bottom-right */}
+          <img
+            src="/images/logo.png"
+            alt=""
+            className="absolute right-4 bottom-4 h-12 w-12 sm:h-14 sm:w-14 opacity-70 pointer-events-none"
+          />
 
           <div className="relative flex flex-col items-center text-center px-6">
+            <img
+              src="/images/logo.png"
+              alt=""
+              className="h-16 w-16 sm:h-20 sm:w-20 mb-5 opacity-95"
+            />
             {posterEyebrow && (
               <p
-                className="text-[0.6rem] sm:text-[0.7rem] font-bold tracking-[0.35em] uppercase text-[#c7ab77] mb-4"
+                className="text-[0.6rem] sm:text-[0.7rem] font-bold tracking-[0.35em] uppercase text-[#c7ab77] mb-3"
                 style={{ fontFamily: "'DM Sans', sans-serif" }}
               >
                 {posterEyebrow}
