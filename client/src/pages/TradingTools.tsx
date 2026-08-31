@@ -12,7 +12,7 @@ import { ArrowRight, ArrowLeft, ChevronRight, MonitorSmartphone, BarChart3, Book
 
 
 const SIDEBAR_IMG =
-  'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/vlad-teaching-clean2_08a2b1d6.png';
+  '/images/vlad.jpg';
 
 /* ── Chapter data ── */
 const CHAPTERS = [

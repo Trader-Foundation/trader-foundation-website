@@ -7,8 +7,11 @@
 
 import { useEffect, useState } from 'react';
 import { ArrowRight } from 'lucide-react';
+import Picture from '@/components/Picture';
 
-const HERO_BG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/vlad-teaching-clean2_08a2b1d6.png';
+const HERO_BG = '/images/vlad.jpg';
+const HERO_BG_WIDTH = 1577;
+const HERO_BG_HEIGHT = 1075;
 
 /* BBB Official Badge - dark blue pill with torch + A+ circle */
 function BBBBadge() {
@@ -51,9 +54,12 @@ export default function HeroSection() {
     <section className="relative min-h-screen flex items-center overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0">
-        <img
+        <Picture
           src={HERO_BG}
-          alt=""
+          alt="Vlad Tayman, founder of Trader Foundation"
+          width={HERO_BG_WIDTH}
+          height={HERO_BG_HEIGHT}
+          loading="eager"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a]/85 via-[#0a0a0a]/65 to-[#0a0a0a]/40" />
