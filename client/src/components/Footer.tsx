@@ -5,7 +5,7 @@
 
 import { Link } from 'wouter';
 
-const LOGO_URL = '/images/tf-logo.svg';
+const LOGO_URL = '/images/logo.png';
 
 export default function Footer() {
   return (

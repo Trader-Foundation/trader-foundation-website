@@ -7,7 +7,7 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, ChevronDown } from 'lucide-react';
 
-const LOGO_URL = '/images/tf-logo.svg';
+const LOGO_URL = '/images/logo.png';
 
 /* ── Top utility links (right side) ── */
 const utilityLinks = [
