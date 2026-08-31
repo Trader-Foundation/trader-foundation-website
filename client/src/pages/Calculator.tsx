@@ -13,7 +13,7 @@ import SEO from '@/components/SEO';
 import Footer from '@/components/Footer';
 
 const VLAD_TEACHING =
-  'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/vlad-teaching-clean2_08a2b1d6.png';
+  '/images/vlad.jpg';
 const CALCULATOR_HERO_BG =
   'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/calculator-hero-bg-f3Rq9By3EDjXhzwTJdmpaq.webp';
 

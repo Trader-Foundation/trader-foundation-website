@@ -8,15 +8,17 @@ import { useEffect, useRef, useState } from 'react';
 import Navigation from '@/components/Navigation';
 import SEO from '@/components/SEO';
 import Footer from '@/components/Footer';
+import Picture from '@/components/Picture';
 
 import { Quote } from 'lucide-react';
 
 /* ── Photo URLs ── */
-const VLAD_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/vlad_processed_v2_9073b39a.jpg';
-const ELLIOT_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/elliot-clean_38e2878f.png';
-const ERIN_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/erin_93b42a5c.jpg';
-const LEO_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/leo_professional_b52839af.png';
-const JHALIL_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/jhalil-new_9cefdb48.png';
+/* Vlad/Elliot/Erin/Leo: local /images/ (webp siblings exist).
+   Steve/Ariana: still legacy Cloudfront until re-hosted. */
+const VLAD_PHOTO = '/images/vlad.jpg';
+const ELLIOT_PHOTO = '/images/elliot.jpg';
+const ERIN_PHOTO = '/images/erin.jpg';
+const LEO_PHOTO = '/images/leo.jpg';
 const STEVE_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/steve-lapa-new_ac25bb0c.png';
 const ARIANA_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/ariana-white-bg_56fc0ce2.png';
 
@@ -36,13 +38,6 @@ const leadership = [
     photo: ARIANA_PHOTO,
     bio: 'Ariana is the first person you\'ll hear from and the one who makes sure no question goes unanswered. She genuinely cares about every student\'s experience, from the moment they join to every milestone along the way. Her mission is simple: make sure everyone in the Trader Foundation community feels supported, valued, and never alone on their journey.',
   },
-  {
-    name: 'Jhalil Timazee',
-    title: 'Enrollment Specialist',
-    subtitle: '20+ Years of Leadership Experience',
-    photo: JHALIL_PHOTO,
-    bio: 'Two decades of leadership experience across multiple industries taught Jhalil one thing: people come first. He brings that same philosophy to Trader Foundation, taking the time to understand where each person is in their financial journey and helping them take the next step with confidence. His track record of driving record-breaking results comes from one simple approach, genuinely caring about the people he works with.',
-  },
 ];
 
 /* ── Coach data with philosophies ── */
@@ -52,6 +47,10 @@ const coaches = [
     title: 'Lead Mentor',
     experience: '10+ Years of Market Experience',
     photo: ELLIOT_PHOTO,
+    photoAlt: 'Elliot, trading coach at Trader Foundation',
+    photoWidth: 900,
+    photoHeight: 1200,
+    photoIsLocal: true,
     philosophy: '"I love the markets. Taking something complex and making it simple enough for anyone to understand, that\'s what gets me going."',
     cardQuote: '"Options don\'t have to be complicated. Once you see the pattern, you can\'t unsee it."',
     bio: 'Options used to feel like a foreign language to me. After a decade in the markets, I became the person I wish I had when I was starting out. I specialize in breaking down complex options strategies into plain English so that anyone can trade with confidence. As Lead Mentor, I built the curriculum thousands of students use every day and host daily market meetups where we analyze setups together in real time. But honestly, the reason I show up every day isn\'t the market, it\'s the people. Watching someone go from confused to confident is the most rewarding thing I\'ve ever done.',
@@ -61,6 +60,10 @@ const coaches = [
     title: 'Senior Coach · Head of YouTube Education',
     experience: '11+ Years of Experience',
     photo: ERIN_PHOTO,
+    photoAlt: 'Erin Chawla, trading coach at Trader Foundation',
+    photoWidth: 1200,
+    photoHeight: 675,
+    photoIsLocal: true,
     philosophy: '"Trading is like dating, choose the best and leave the rest."',
     cardQuote: '"Patience isn\'t boring, it\'s profitable. I only need a few great setups a month."',
     bio: 'After years in corporate finance at GE, I made the leap to full-time trading and coaching. My approach is different from most. I only trade off Weekly and Monthly charts. No noise. No chasing. Just patience and precision. What drives me isn\'t just the trades, it\'s the people behind them. I genuinely love helping others build real, lasting wealth through disciplined swing trading. Every free video I create, every question I answer, comes from the same place: I remember what it felt like to figure this out alone, and I don\'t want anyone else to go through that.',
@@ -70,6 +73,10 @@ const coaches = [
     title: 'Senior Coach',
     experience: '13+ Years of Experience',
     photo: LEO_PHOTO,
+    photoAlt: 'Leo, trading coach at Trader Foundation',
+    photoWidth: 1200,
+    photoHeight: 900,
+    photoIsLocal: true,
     philosophy: '"I do this genuinely because I can\'t wait for that moment when someone says, I got this."',
     cardQuote: '"The market pays you like a business when you treat it like one. Consistent income, every single week."',
     bio: 'For years, I watched traders blow up their accounts chasing the next big move. Meanwhile, I was quietly collecting consistent income from the market like clockwork, that\'s how I earned the nickname "The Paycheck Collector." With 13 years of experience, I specialize in building trades designed to pay week after week. But what gets me out of bed isn\'t the income, it\'s knowing that every student I help is one more person who doesn\'t have to depend on a boss, a company, or a paycheck they can\'t control.',
@@ -104,7 +111,7 @@ export default function About() {
 
   return (
     <div className="min-h-screen bg-[#faf9f6]">
-      <SEO title="About Us" description="Meet the Trader Foundation Academy team — Vlad Tayman, Steve Lapa, Ariana Tayman, and Jhalil Timazee. Learn about our mission to help traders succeed." path="/about" />
+      <SEO title="About Us" description="Meet the Trader Foundation Academy team — Vlad Tayman, Steve Lapa, and Ariana Tayman. Learn about our mission to help traders succeed." path="/about" />
       <Navigation />
 
       {/* ─── Vlad's Story ─── */}
@@ -120,9 +127,12 @@ export default function About() {
             <div className="lg:col-span-2 flex flex-col items-center">
               <div className="relative w-full max-w-[300px]">
                 <div className="absolute -inset-3 border border-[#c7ab77]/20 rounded-lg" />
-                <img
+                <Picture
                   src={VLAD_PHOTO}
-                  alt="Vlad Tayman, Founder & CEO of Trader Foundation"
+                  alt="Vlad Tayman, founder of Trader Foundation"
+                  width={1577}
+                  height={1075}
+                  loading="eager"
                   className="w-full aspect-[4/5] object-cover rounded-lg shadow-xl"
                   style={{ filter: 'brightness(1.1)' }}
                 />
@@ -246,9 +256,12 @@ export default function About() {
                 style={{ transitionDelay: `${i * 100}ms` }}
               >
                 <div className="relative overflow-hidden">
-                  <img
+                  <Picture
                     src={coach.photo}
-                    alt={coach.name}
+                    alt={coach.photoAlt}
+                    width={coach.photoWidth}
+                    height={coach.photoHeight}
+                    webp={coach.photoIsLocal ? undefined : null}
                     className="w-full aspect-[4/5] object-cover transition-transform duration-700 group-hover:scale-105"
                     style={{ filter: 'brightness(1.35) contrast(1.05)' }}
                   />
@@ -300,7 +313,7 @@ export default function About() {
             <div className="w-20 h-[2px] bg-[#c7ab77] mx-auto mt-6" />
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 lg:gap-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 lg:gap-10 max-w-[720px] mx-auto">
             {leadership.map((member, i) => (
               <div
                 key={member.name}
