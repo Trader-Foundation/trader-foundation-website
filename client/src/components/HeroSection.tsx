@@ -50,18 +50,18 @@ export default function HeroSection() {
       {/* Background — dark gradient with faded TF wordmark watermark */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="w-full h-full bg-gradient-to-br from-[#1a1a1a] via-[#0a0a0a] to-[#111]" />
-        {/* Faded wordmark, right side, decorative */}
-        <div className="absolute inset-y-0 right-[-8%] flex items-center pointer-events-none select-none">
-          <div className="text-right leading-[0.85]" style={{ fontFamily: "'Sen', sans-serif" }}>
+        {/* Faded wordmark, centered watermark, decorative */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none px-6">
+          <div className="text-center leading-[0.85] w-full max-w-[1400px]" style={{ fontFamily: "'Sen', sans-serif" }}>
             <span
-              className="block text-[6rem] sm:text-[9rem] lg:text-[13rem] font-extrabold tracking-tight text-[#c7ab77]"
-              style={{ opacity: 0.06 }}
+              className="block text-[3.5rem] sm:text-[5.5rem] md:text-[7rem] lg:text-[9rem] xl:text-[10.5rem] font-extrabold tracking-tight text-[#c7ab77]"
+              style={{ opacity: 0.07 }}
             >
               TRADER
             </span>
             <span
-              className="block text-[6rem] sm:text-[9rem] lg:text-[13rem] font-extrabold tracking-tight text-[#c7ab77]"
-              style={{ opacity: 0.08 }}
+              className="block text-[3.5rem] sm:text-[5.5rem] md:text-[7rem] lg:text-[9rem] xl:text-[10.5rem] font-extrabold tracking-tight text-[#c7ab77]"
+              style={{ opacity: 0.09 }}
             >
               FOUNDATION
             </span>
