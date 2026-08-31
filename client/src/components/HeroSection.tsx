@@ -7,11 +7,6 @@
 
 import { useEffect, useState } from 'react';
 import { ArrowRight } from 'lucide-react';
-import Picture from '@/components/Picture';
-
-const HERO_BG = '/images/vlad-founder.jpg';
-const HERO_BG_WIDTH = 1600;
-const HERO_BG_HEIGHT = 1091;
 
 /* BBB Official Badge - dark blue pill with torch + A+ circle */
 function BBBBadge() {
@@ -52,17 +47,33 @@ export default function HeroSection() {
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Background Image */}
-      <div className="absolute inset-0">
-        <Picture
-          src={HERO_BG}
-          alt="Vlad Tayman, founder of Trader Foundation"
-          width={HERO_BG_WIDTH}
-          height={HERO_BG_HEIGHT}
-          loading="eager"
-          className="w-full h-full object-cover"
+      {/* Background — dark gradient with faded TF wordmark watermark */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="w-full h-full bg-gradient-to-br from-[#1a1a1a] via-[#0a0a0a] to-[#111]" />
+        {/* Faded wordmark, right side, decorative */}
+        <div className="absolute inset-y-0 right-[-8%] flex items-center pointer-events-none select-none">
+          <div className="text-right leading-[0.85]" style={{ fontFamily: "'Sen', sans-serif" }}>
+            <span
+              className="block text-[6rem] sm:text-[9rem] lg:text-[13rem] font-extrabold tracking-tight text-[#c7ab77]"
+              style={{ opacity: 0.06 }}
+            >
+              TRADER
+            </span>
+            <span
+              className="block text-[6rem] sm:text-[9rem] lg:text-[13rem] font-extrabold tracking-tight text-[#c7ab77]"
+              style={{ opacity: 0.08 }}
+            >
+              FOUNDATION
+            </span>
+          </div>
+        </div>
+        {/* Subtle gold accent glow, top-right */}
+        <div
+          className="absolute top-0 right-0 w-[600px] h-[600px] pointer-events-none"
+          style={{
+            background: 'radial-gradient(circle, rgba(199,171,119,0.10) 0%, transparent 60%)',
+          }}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a]/85 via-[#0a0a0a]/65 to-[#0a0a0a]/40" />
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#FAF9F6] to-transparent" />
       </div>
 
