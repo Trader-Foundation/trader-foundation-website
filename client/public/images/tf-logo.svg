@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Outer ring -->
+  <circle cx="100" cy="100" r="95" stroke="#c7ab77" stroke-width="4" fill="#0a0a0a"/>
+  <!-- Inner ring -->
+  <circle cx="100" cy="100" r="82" stroke="#c7ab77" stroke-width="2"/>
+  <!-- Geometric TF monogram: stylized T made of angled bars -->
+  <g fill="#c7ab77">
+    <!-- Left angled leg of T -->
+    <polygon points="45,60 75,60 90,80 90,150 75,150 60,130 60,80"/>
+    <!-- Right angled leg (mirror) -->
+    <polygon points="155,60 125,60 110,80 110,150 125,150 140,130 140,80"/>
+    <!-- Center vertical stem -->
+    <polygon points="90,55 110,55 110,150 90,150"/>
+    <!-- Horizontal cross bar with angled ends -->
+    <polygon points="35,55 165,55 155,70 45,70"/>
+  </g>
+</svg>
