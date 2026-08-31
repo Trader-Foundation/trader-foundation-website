@@ -50,29 +50,21 @@ export default function HeroSection() {
       {/* Background — dark gradient with faded TF wordmark watermark */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="w-full h-full bg-gradient-to-br from-[#1a1a1a] via-[#0a0a0a] to-[#111]" />
-        {/* Faded wordmark + gold TF logo, right side, decorative */}
-        <div className="absolute inset-0 flex items-center justify-end pointer-events-none select-none pr-4 sm:pr-8 lg:pr-12">
-          <div className="flex items-center gap-4 sm:gap-6 lg:gap-8">
-            <img
-              src="/images/tf-logo.svg"
-              alt=""
-              className="h-24 sm:h-40 md:h-52 lg:h-64 xl:h-72 w-auto"
-              style={{ opacity: 0.12 }}
-            />
-            <div className="text-right leading-[0.85]" style={{ fontFamily: "'Sen', sans-serif" }}>
-              <span
-                className="block text-[3.5rem] sm:text-[5.5rem] md:text-[7rem] lg:text-[9rem] xl:text-[10.5rem] font-extrabold tracking-tight text-[#c7ab77]"
-                style={{ opacity: 0.07 }}
-              >
-                TRADER
-              </span>
-              <span
-                className="block text-[3.5rem] sm:text-[5.5rem] md:text-[7rem] lg:text-[9rem] xl:text-[10.5rem] font-extrabold tracking-tight text-[#c7ab77]"
-                style={{ opacity: 0.09 }}
-              >
-                FOUNDATION
-              </span>
-            </div>
+        {/* Faded wordmark, centered watermark, decorative */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none px-6">
+          <div className="text-center leading-[0.85] w-full max-w-[1400px]" style={{ fontFamily: "'Sen', sans-serif" }}>
+            <span
+              className="block text-[3.5rem] sm:text-[5.5rem] md:text-[7rem] lg:text-[9rem] xl:text-[10.5rem] font-extrabold tracking-tight text-[#c7ab77]"
+              style={{ opacity: 0.07 }}
+            >
+              TRADER
+            </span>
+            <span
+              className="block text-[3.5rem] sm:text-[5.5rem] md:text-[7rem] lg:text-[9rem] xl:text-[10.5rem] font-extrabold tracking-tight text-[#c7ab77]"
+              style={{ opacity: 0.09 }}
+            >
+              FOUNDATION
+            </span>
           </div>
         </div>
         {/* Subtle gold accent glow, top-right */}

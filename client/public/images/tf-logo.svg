@@ -1,17 +1,24 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
-  <!-- Outer ring -->
-  <circle cx="100" cy="100" r="95" stroke="#c7ab77" stroke-width="4" fill="#0a0a0a"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" fill="none">
+  <!-- Outer circle: dark fill + gold stroke -->
+  <circle cx="120" cy="120" r="115" fill="#0a0a0a" stroke="#c7ab77" stroke-width="5"/>
   <!-- Inner ring -->
-  <circle cx="100" cy="100" r="82" stroke="#c7ab77" stroke-width="2"/>
-  <!-- Geometric TF monogram: stylized T made of angled bars -->
+  <circle cx="120" cy="120" r="100" fill="none" stroke="#c7ab77" stroke-width="2.5"/>
+
+  <!-- TF monogram in gold -->
   <g fill="#c7ab77">
-    <!-- Left angled leg of T -->
-    <polygon points="45,60 75,60 90,80 90,150 75,150 60,130 60,80"/>
-    <!-- Right angled leg (mirror) -->
-    <polygon points="155,60 125,60 110,80 110,150 125,150 140,130 140,80"/>
-    <!-- Center vertical stem -->
-    <polygon points="90,55 110,55 110,150 90,150"/>
-    <!-- Horizontal cross bar with angled ends -->
-    <polygon points="35,55 165,55 155,70 45,70"/>
+    <!-- Top horizontal bar (thicker outside, notch in middle) -->
+    <path d="M 40 60 L 200 60 L 200 82 L 138 82 L 138 74 L 102 74 L 102 82 L 40 82 Z"/>
+
+    <!-- Left angled wing dropping down from bar -->
+    <path d="M 40 82 L 68 82 L 96 118 L 96 175 L 78 175 L 62 158 L 62 108 Z"/>
+
+    <!-- Right angled wing dropping down from bar (mirror) -->
+    <path d="M 200 82 L 172 82 L 144 118 L 144 175 L 162 175 L 178 158 L 178 108 Z"/>
+
+    <!-- Center vertical pillar (the T stem) -->
+    <path d="M 108 82 L 132 82 L 132 190 L 108 190 Z"/>
+
+    <!-- Base cap on center pillar -->
+    <path d="M 96 185 L 144 185 L 144 200 L 96 200 Z"/>
   </g>
 </svg>
