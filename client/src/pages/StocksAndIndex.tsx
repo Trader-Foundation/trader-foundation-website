@@ -14,7 +14,7 @@ import { ArrowRight, ArrowLeft, ChevronRight, BarChart3, Shield, Layers, Trendin
 
 
 const SIDEBAR_IMG =
-  '/images/vlad.jpg';
+  '/images/vlad-founder.jpg';
 
 /* ── Chapter data ── */
 const CHAPTERS = [

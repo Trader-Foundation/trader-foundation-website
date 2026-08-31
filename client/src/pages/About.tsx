@@ -13,14 +13,13 @@ import Picture from '@/components/Picture';
 import { Quote } from 'lucide-react';
 
 /* ── Photo URLs ── */
-/* Vlad/Elliot/Erin/Leo: local /images/ (webp siblings exist).
-   Steve/Ariana: still legacy Cloudfront until re-hosted. */
+/* All photos now local /images/ with webp siblings. */
 const VLAD_PHOTO = '/images/vlad-founder.jpg';
 const ELLIOT_PHOTO = '/images/elliot.jpg';
 const ERIN_PHOTO = '/images/erin.jpg';
 const LEO_PHOTO = '/images/leo.jpg';
-const STEVE_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/steve-lapa-new_ac25bb0c.png';
-const ARIANA_PHOTO = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663123814280/RDBk4MGC92Zcyhd8ppAryH/ariana-white-bg_56fc0ce2.png';
+const STEVE_PHOTO = '/images/steve.jpg';
+const ARIANA_PHOTO = '/images/ariana.jpg';
 
 /* ── Leadership team data ── */
 const leadership = [
@@ -61,8 +60,8 @@ const coaches = [
     experience: '11+ Years of Experience',
     photo: ERIN_PHOTO,
     photoAlt: 'Erin Chawla, trading coach at Trader Foundation',
-    photoWidth: 1200,
-    photoHeight: 675,
+    photoWidth: 960,
+    photoHeight: 1200,
     photoIsLocal: true,
     philosophy: '"Trading is like dating, choose the best and leave the rest."',
     cardQuote: '"Patience isn\'t boring, it\'s profitable. I only need a few great setups a month."',
@@ -74,8 +73,8 @@ const coaches = [
     experience: '13+ Years of Experience',
     photo: LEO_PHOTO,
     photoAlt: 'Leo, trading coach at Trader Foundation',
-    photoWidth: 1200,
-    photoHeight: 900,
+    photoWidth: 959,
+    photoHeight: 1200,
     photoIsLocal: true,
     philosophy: '"I do this genuinely because I can\'t wait for that moment when someone says, I got this."',
     cardQuote: '"The market pays you like a business when you treat it like one. Consistent income, every single week."',
@@ -259,8 +258,7 @@ export default function About() {
                     width={coach.photoWidth}
                     height={coach.photoHeight}
                     webp={coach.photoIsLocal ? undefined : null}
-                    className="w-full aspect-[4/5] object-cover transition-transform duration-700 group-hover:scale-105"
-                    style={{ filter: 'brightness(1.35) contrast(1.05)' }}
+                    className="w-full aspect-[4/5] object-cover object-center transition-transform duration-700 group-hover:scale-105"
                   />
                   <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-white to-transparent" />
                 </div>
@@ -319,11 +317,12 @@ export default function About() {
               >
                 <div className="relative overflow-hidden">
                   {member.photo ? (
-                    <img
+                    <Picture
                       src={member.photo}
                       alt={member.name}
-                      className="w-full aspect-[4/5] object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                      style={{ filter: 'brightness(1.15) contrast(1.05)' }}
+                      width={960}
+                      height={1200}
+                      className="w-full aspect-[4/5] object-cover object-center transition-transform duration-700 group-hover:scale-105"
                     />
                   ) : (
                     <div className="w-full aspect-[4/5] bg-[#1a1a1a] flex items-center justify-center">

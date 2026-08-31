@@ -12,7 +12,7 @@ import { ArrowRight, ArrowLeft, ChevronRight, MonitorSmartphone, BarChart3, Book
 
 
 const SIDEBAR_IMG =
-  '/images/vlad.jpg';
+  '/images/vlad-founder.jpg';
 
 /* ── Chapter data ── */
 const CHAPTERS = [
