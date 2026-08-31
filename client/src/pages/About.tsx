@@ -61,8 +61,8 @@ const coaches = [
     experience: '11+ Years of Experience',
     photo: ERIN_PHOTO,
     photoAlt: 'Erin Chawla, trading coach at Trader Foundation',
-    photoWidth: 1200,
-    photoHeight: 675,
+    photoWidth: 800,
+    photoHeight: 1000,
     photoIsLocal: true,
     philosophy: '"Trading is like dating, choose the best and leave the rest."',
     cardQuote: '"Patience isn\'t boring, it\'s profitable. I only need a few great setups a month."',
@@ -74,8 +74,8 @@ const coaches = [
     experience: '13+ Years of Experience',
     photo: LEO_PHOTO,
     photoAlt: 'Leo, trading coach at Trader Foundation',
-    photoWidth: 1200,
-    photoHeight: 900,
+    photoWidth: 800,
+    photoHeight: 1000,
     photoIsLocal: true,
     philosophy: '"I do this genuinely because I can\'t wait for that moment when someone says, I got this."',
     cardQuote: '"The market pays you like a business when you treat it like one. Consistent income, every single week."',
@@ -259,8 +259,7 @@ export default function About() {
                     width={coach.photoWidth}
                     height={coach.photoHeight}
                     webp={coach.photoIsLocal ? undefined : null}
-                    className="w-full aspect-[4/5] object-cover transition-transform duration-700 group-hover:scale-105"
-                    style={{ filter: 'brightness(1.35) contrast(1.05)' }}
+                    className="w-full aspect-[4/5] object-cover object-center transition-transform duration-700 group-hover:scale-105"
                   />
                   <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-white to-transparent" />
                 </div>
