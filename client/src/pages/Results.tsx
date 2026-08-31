@@ -171,40 +171,76 @@ function useFadeIn(threshold = 0.12) {
   return { ref, visible };
 }
 
-/* ── Video Embed Component ── */
+/* ── Video Embed Component ──
+   Poster art is rendered locally (black + gold brand) instead of pulling
+   Vimeo's default poster frames, which carry older blue branding. */
 function VimeoEmbed({
   vimeoId,
   title,
-  thumbnail,
+  posterName,
+  posterEyebrow,
   className = '',
 }: {
   vimeoId: string;
   title: string;
-  thumbnail?: string;
+  posterName?: string;
+  posterEyebrow?: string;
   className?: string;
 }) {
   const [loaded, setLoaded] = useState(false);
 
   return (
-    <div className={`relative bg-[#0a0a0a] overflow-hidden ${className}`}>
+    <div className={`relative overflow-hidden ${className}`}>
       {!loaded && (
-        <div className="absolute inset-0 flex items-center justify-center z-10">
-          <button
-            onClick={() => setLoaded(true)}
-            className="group flex items-center justify-center w-20 h-20 rounded-full bg-[#c7ab77]/90 hover:bg-[#c7ab77] transition-all duration-300 hover:scale-110 shadow-2xl"
-            aria-label={`Play ${title}`}
+        <div
+          className="absolute inset-0 flex items-center justify-center"
+          style={{
+            background:
+              'radial-gradient(circle at 30% 20%, #1a1a1a 0%, #0a0a0a 55%, #050505 100%)',
+          }}
+        >
+          {/* subtle gold corner glow */}
+          <div
+            className="absolute -top-24 -right-24 w-72 h-72 pointer-events-none"
+            style={{
+              background:
+                'radial-gradient(circle, rgba(199,171,119,0.18) 0%, transparent 65%)',
+            }}
+          />
+          {/* faded TF wordmark, subtle */}
+          <span
+            className="absolute right-4 bottom-3 text-[0.65rem] font-bold tracking-[0.3em] text-[#c7ab77]/40 uppercase"
+            style={{ fontFamily: "'Sen', sans-serif" }}
           >
-            <Play size={28} className="text-[#111] ml-1" fill="#111" />
-          </button>
+            Trader Foundation
+          </span>
+
+          <div className="relative flex flex-col items-center text-center px-6">
+            {posterEyebrow && (
+              <p
+                className="text-[0.6rem] sm:text-[0.7rem] font-bold tracking-[0.35em] uppercase text-[#c7ab77] mb-4"
+                style={{ fontFamily: "'DM Sans', sans-serif" }}
+              >
+                {posterEyebrow}
+              </p>
+            )}
+            {posterName && (
+              <p
+                className="text-white text-2xl sm:text-3xl md:text-4xl font-extrabold leading-tight mb-6 max-w-[80%]"
+                style={{ fontFamily: "'Sen', sans-serif" }}
+              >
+                {posterName}
+              </p>
+            )}
+            <button
+              onClick={() => setLoaded(true)}
+              className="group flex items-center justify-center w-20 h-20 rounded-full bg-[#c7ab77]/90 hover:bg-[#c7ab77] transition-all duration-300 hover:scale-110 shadow-[0_10px_40px_rgba(199,171,119,0.35)]"
+              aria-label={`Play ${title}`}
+            >
+              <Play size={28} className="text-[#111] ml-1" fill="#111" />
+            </button>
+          </div>
         </div>
-      )}
-      {!loaded && (
-        <img
-          src={thumbnail || `https://vumbnail.com/${vimeoId}.jpg`}
-          alt={title}
-          className="w-full h-full object-cover"
-          loading="lazy"
-        />
       )}
       {loaded && (
         <iframe
@@ -349,7 +385,8 @@ export default function Results() {
               <VimeoEmbed
                 vimeoId={featuredVideo.vimeoId}
                 title={featuredVideo.title}
-                thumbnail={featuredVideo.thumbnail}
+                posterEyebrow="Featured Testimonial"
+                posterName={featuredVideo.title}
                 className="aspect-video"
               />
             </div>
@@ -406,7 +443,8 @@ export default function Results() {
                 <VimeoEmbed
                   vimeoId={video.vimeoId}
                   title={`Interview with ${video.name}`}
-                  thumbnail={video.thumbnail}
+                  posterEyebrow={`Interview · ${video.duration}`}
+                  posterName={video.name}
                   className="aspect-video"
                 />
                 <div className="p-6">
