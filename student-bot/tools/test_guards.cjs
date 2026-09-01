@@ -55,13 +55,13 @@ console.log('\n-- spot checks --');
    point. The image is what changes the answer. */
 console.log('\n-- marked chart exception (IMG means an image was uploaded) --');
 const IMG = {image:true};
-[['here is my chart, the blue lines is lines i drew as support resistance', IMG, 'chart_marked'],
- ['can you check my support and resistance', IMG, 'chart_marked'],
- ['i drew my levels on this INTC chart, are they right', IMG, 'chart_marked'],
- ['i marked support around 86, does that hold up', IMG, 'chart_marked'],
- ['what do you think of this chart', IMG, 'chart_unmarked'],
- ['here is my INTC chart', IMG, 'chart_unmarked'],
- ['is this a marubozu', IMG, 'chart_unmarked'],
+[['here is my chart, the blue lines is lines i drew as support resistance', IMG, 'chart_attached'],
+ ['can you check my support and resistance', IMG, 'chart_attached'],
+ ['i drew my levels on this INTC chart, are they right', IMG, 'chart_attached'],
+ ['i marked support around 86, does that hold up', IMG, 'chart_attached'],
+ ['what do you think of this chart', IMG, 'chart_attached'],
+ ['here is my INTC chart', IMG, 'chart_attached'],
+ ['is this a marubozu', IMG, 'chart_attached'],
  // No image, so nothing about the exception applies and the old rules stand.
  ['here is my chart, the blue lines is lines i drew as support resistance', {}, 'chart'],
  ['what do you think of this chart', {}, 'chart'],

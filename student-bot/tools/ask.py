@@ -69,17 +69,19 @@ def position_guard(q):
         return False
     return bool(ASKING_WHAT_TO_DO.search(q))
 
-# Has the student marked the chart themselves? The marked chart exception in
-# hard rule 4 turns on this and on nothing else. Colour words are in here
-# because that is how students actually say it: "the blue lines is lines i
-# drew as support resistance".
-MARKED = re.compile(
-    r"\b(?:i|we)\s+(?:drew|drawn|marked|added|put)\b|"
-    r"\b(?:my|the)\s+(?:blue|red|green|yellow|orange|purple|white|black)\s+lines?\b|"
-    r"\bmy\s+(?:support|resistance|levels?|lines?|marks?)\b|"
-    r"\blines?\s+i\s+drew\b|"
-    r"\b(?:drew|marked)\s+(?:in\s+)?(?:my|the)\s+(?:support|resistance|levels?|lines?)\b|"
-    r"\bi(?:'ve| have)\s+(?:drawn|marked)\b", re.I)
+# MARKED used to live here: a regex asking the QUESTION whether the student had
+# drawn on their chart. It existed because the bot could not see the image, so
+# the student's wording was the only evidence available.
+#
+# It failed in the field. Vlad sent a carefully marked chart and asked whether
+# "my price target 36.85" was realistic. MARKED knew "my support" and "my
+# levels" but not "my price target", so the unmarked branch fired and a student
+# who had done the work was told to go and do it.
+#
+# Extending the phrase list would only ever have helped the student after the
+# next one had already been failed. Whether a chart is marked is a fact about
+# the chart, so the question now goes to the chart. The two image guards below
+# collapsed into one as a result.
 
 # Each test takes (question, ctx). ctx carries what the text cannot, namely
 # whether an image came with the question: {"image": True}.
@@ -91,14 +93,12 @@ GUARDS = [
          r"(how much|how many).*(make|earn|money|profit|return)|win\s*rate|"
          r"average return|per (week|month|year)|realistic(ally)? (make|expect)|"
          r"students? (make|earn)|get rich|replace my (income|job|salary)", q, re.I)),
-    # The two image states come first. An uploaded chart changes the shape of
-    # the answer before any text rule applies. See
+    # The image state comes first. An uploaded chart changes the shape of the
+    # answer before any text rule applies. Marked or not is decided by looking
+    # at the image, not by reading the question. See
     # rulings/chart-with-student-levels.md.
-    ("chart_marked", "Check their marks",
+    ("chart_attached", "Read their chart",
      "non-negotiable 4 as amended, chart-with-student-levels ruling",
-     lambda q, c: c.get("image") and MARKED.search(q)),
-    ("chart_unmarked", "Send them to mark it",
-     "chart-with-student-levels ruling, the student marks it first",
      lambda q, c: c.get("image")),
     ("chart", "Cannot see it", "non-negotiable 4, plus the-chart-decides ruling",
      lambda q, c: re.search(
@@ -129,6 +129,63 @@ def guard_for(q, ctx=None):
         if test(q, ctx):
             return {"id": gid, "verdict": verdict, "rule": rule}
     return None
+
+
+# ---------------------------------------------------------------------------
+# The dynamic layer. Mirrors tools/guards.cjs, which is what
+# tools/test_retrieval_parity.py exists to keep true.
+#
+# Every guard above decides from a regex over the question. That is why "my
+# price target" failed where "my support" would have worked, and it is
+# structural rather than a missing phrase: students do not share a vocabulary.
+#
+# So intent is read by a model before the guards run, and mapped through
+# INTENT_TO_GUARD. Two properties keep that safe:
+#
+#   1. UNION, NEVER SUBTRACTION. The regexes still run and a guard fires if
+#      EITHER layer flags it. The model can add a guard the pattern missed; it
+#      can never talk the bot out of one the pattern caught.
+#
+#   2. FAILURE FALLS BACK. Passing None or [] returns exactly what the regexes
+#      decided, so a classifier that is unavailable or broken changes nothing.
+#
+# The rules themselves did not change. Only the recognition of what is being
+# asked, which is the part that was brittle.
+# ---------------------------------------------------------------------------
+
+INTENT_TO_GUARD = {
+    "position_advice": "position",
+    "outcome_claim": "outcome",
+    "prediction": "predict",
+    "chart_read": "chart",
+    "chart_with_marks": "chart_attached",
+    "procedure": "procedure",
+    "retired_term": "retired",
+}
+
+
+def merge_guards(by_words, intents, has_image=False):
+    """Most severe of the two layers. GUARDS is ordered by severity."""
+    ids = []
+    for intent in (intents or []):
+        gid = INTENT_TO_GUARD.get(intent)
+        if not gid:
+            continue
+        # chart_attached is meaningless without an image, and chart_read must
+        # not fire when the chart is right there to be looked at.
+        if gid == "chart_attached" and not has_image:
+            continue
+        if gid == "chart" and has_image:
+            continue
+        ids.append(gid)
+    if by_words:
+        ids.append(by_words["id"])
+    if not ids:
+        return None
+    for gid, verdict, rule, _ in GUARDS:
+        if gid in ids:
+            return {"id": gid, "verdict": verdict, "rule": rule}
+    return by_words
 
 STOP = set((
     "a an the and or but if of to in on at is are was were be been do does did i you it "

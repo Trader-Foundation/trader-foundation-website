@@ -15,12 +15,19 @@ const TICKER = {
     return !!m && m.some(t => !NOT_TICKERS.has(t));
   }
 };
-/* Has the student marked the chart themselves? The marked chart exception in
-   hard rule 4 turns on this and on nothing else, so it has to be read from
-   what they said as well as from the image being there.
-   Colour words are included because that is how students actually say it:
-   "the blue lines is lines i drew as support resistance". */
-const MARKED = /\b(?:i|we)\s+(?:drew|drawn|marked|added|put)\b|\b(?:my|the)\s+(?:blue|red|green|yellow|orange|purple|white|black)\s+lines?\b|\bmy\s+(?:support|resistance|levels?|lines?|marks?)\b|\blines?\s+i\s+drew\b|\b(?:drew|marked)\s+(?:in\s+)?(?:my|the)\s+(?:support|resistance|levels?|lines?)\b|\bi(?:'ve| have)\s+(?:drawn|marked)\b/i;
+/* MARKED used to live here: a regex asking the QUESTION whether the student
+   had drawn on their chart. It existed because the bot could not see the image,
+   so the student's wording was the only evidence available.
+
+   It failed in the field. Vlad sent a carefully marked chart and asked whether
+   "my price target 36.85" was realistic. MARKED knows "my support" and "my
+   levels" but not "my price target", so the unmarked branch fired and a student
+   who had done the work was told to go and do it.
+
+   Extending the phrase list would only ever have helped the student after the
+   next one had already been failed. Whether a chart is marked is a fact about
+   the chart, so the question now goes to the chart. The two image guards below
+   collapsed into one as a result. */
 
 const GUARDS = [
   {
@@ -48,27 +55,19 @@ const GUARDS = [
      levels and YOU correcting them and saying hey this is far off".
      See rulings/chart-with-student-levels.md. */
   {
-    id:"chart_marked", tone:"ok", verdict:"Check their marks",
+    id:"chart_attached", tone:"ok", verdict:"Read their chart",
     rule:"Non-negotiable 4 as amended, chart-with-student-levels ruling",
-    test:(q, ctx) => !!(ctx && ctx.image) && MARKED.test(q),
-    shape:[
-      "They did the work first, so checking it is the point rather than a side door. Say whether each marked level holds up, and say plainly when one is far off.",
-      "Correct by pointing at the criterion, never by naming the replacement level. A level is where price actually turned more than once. Send them back to redraw it.",
-      "Read nothing off the chart except the levels they marked. Not the candle, not volume, not the averages, not whether a pattern is present.",
-      "Approximate prices only. Around 86, not 86.44. Reading a number off a pixel is an estimate and the language has to say so.",
-      "If it is not obvious which lines are theirs, ask. Platforms draw their own markers and colour conventions vary.",
-      "The position rules still bind. If they also asked what to do with the trade, give the three moves from hard rule 3 after checking the marks, anchored to their own level."
-    ]
-  },
-  {
-    id:"chart_unmarked", tone:"warn", verdict:"Send them to mark it",
-    rule:"chart-with-student-levels ruling, the student marks it first",
     test:(q, ctx) => !!(ctx && ctx.image),
     shape:[
-      "Never mark a blank chart. Finding the levels for them is doing the work the bot exists to make them do.",
-      "Ask them to mark support and resistance and send it back, and say what to look for: where price actually turned, not where they want the line to be.",
-      "Phrase it as the work, not as a refusal. They uploaded something and are waiting.",
-      "Every other rule still binds. An image does not buy a student past the outcome, position, prediction or retired guards."
+      "Decide from the IMAGE, not from their wording, whether they have marked their own levels. They may never say the word 'drew' or 'my line'.",
+      "Their marks are what a person draws on top: horizontal lines and rays, boxes or zones, trendlines, arrows, text notes. The platform's own drawing is NOT theirs, and this distinction is load bearing: moving averages, bands and clouds, the volume panel, the price scale and every indicator overlay are drawn by the software. Never treat a moving average as a level the student drew.",
+      "If they HAVE marked levels: say whether each one holds up, and say plainly when one is far off. Correct by pointing at the criterion, never by naming the replacement level. A level is where price actually turned more than once. Send them back to redraw it.",
+      "If the chart carries no marks of theirs: never mark it for them. Ask them to mark support and resistance and send it back, and say what to look for, which is where price actually turned rather than where they want the line to be. Phrase it as the work, not as a refusal. They uploaded something and are waiting.",
+      "Read nothing off the chart except the levels they marked. Not the candle, not volume, not the averages, not whether a pattern is present.",
+      "Approximate prices only. Around 86, not 86.44. Reading a number off a pixel is an estimate and the language has to say so.",
+      "If it is genuinely ambiguous which lines are theirs, ask rather than guess.",
+      "The position rules still bind. If they also asked what to do with the trade, give the three moves from hard rule 3 after checking the marks, anchored to their own level.",
+      "An image does not buy a student past the outcome, position, prediction or retired guards."
     ]
   },
   {
@@ -142,4 +141,58 @@ const GUARDS = [
 function guardFor(q, ctx) {
   return GUARDS.find(g => g.test(q, ctx || {})) || null;
 }
-if (typeof module !== 'undefined') module.exports = { GUARDS, TICKER, MARKED, guardFor };
+/* ---------------------------------------------------------------------------
+   The dynamic layer.
+
+   Every guard above decides from a regex over the question. That is why "my
+   price target" failed where "my support" would have worked, and it is
+   structural rather than a missing phrase: students do not share a vocabulary.
+
+   So intent is read by a model before the guards run, and mapped through
+   INTENT_TO_GUARD. Two properties keep that safe, and tests/test_guards.cjs
+   pins both:
+
+   1. UNION, NEVER SUBTRACTION. The regexes still run, and a guard fires if
+      EITHER layer flags it. The model can add a guard the pattern missed; it
+      can never talk the bot out of one the pattern caught. Strictly safer than
+      the regexes alone, never looser.
+
+   2. FAILURE FALLS BACK. Passing null or [] for intents returns exactly what
+      the regexes decided, so a classifier that is unavailable, refused or
+      broken leaves behaviour unchanged.
+
+   The rules themselves did not change. Only the recognition of what is being
+   asked, which is the part that was brittle.
+   ------------------------------------------------------------------------- */
+
+const INTENT_TO_GUARD = {
+  position_advice:"position",
+  outcome_claim:"outcome",
+  prediction:"predict",
+  chart_read:"chart",
+  chart_with_marks:"chart_attached",
+  procedure:"procedure",
+  retired_term:"retired",
+};
+
+/* GUARDS is ordered by severity, so the first match wins. */
+function mergeGuards(byWords, intents, hasImage) {
+  const ids = (intents || [])
+    .map(i => INTENT_TO_GUARD[i])
+    .filter(id => {
+      if (!id) return false;
+      // chart_attached is meaningless without an image, and chart_read must not
+      // fire when the chart is right there to be looked at.
+      if (id === "chart_attached") return !!hasImage;
+      if (id === "chart") return !hasImage;
+      return true;
+    });
+  if (byWords) ids.push(byWords.id);
+  if (!ids.length) return null;
+  for (const g of GUARDS) if (ids.includes(g.id)) return g;
+  return byWords || null;
+}
+
+if (typeof module !== 'undefined') {
+  module.exports = { GUARDS, TICKER, guardFor, INTENT_TO_GUARD, mergeGuards };
+}
