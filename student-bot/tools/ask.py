@@ -34,8 +34,27 @@ NOT_TICKERS = set((
 # teaches, and listing it let "Should I buy AM right now?" through as a
 # non-position question. That is test R1.
 
+LOWER_TICKER = re.compile(
+    r"\b(?:buy|sell|short|on|in|into|of|for|trade|trading|play|calls?|puts?)\s+"
+    r"([a-z]{2,5})\b", re.I)
+
+NOT_A_TICKER_WORD = set((
+    "TOO SOON MUCH MORE LESS THIS THAT THEM THEN THAN WHEN WHAT SOME MANY EVER "
+    "EARLY LATE HIGH LOW BIG SMALL GOOD BAD NOW OUT OFF UP DOWN BACK OVER "
+    "HERE THERE LONG SHORT FAST SLOW HARD EASY SAME NEXT LAST BEST WORST"
+).split())
+
 def has_ticker(q):
-    return any(t not in NOT_TICKERS for t in re.findall(r"\b[A-Z]{2,5}\b", q))
+    # Capitals are the easy case.
+    if any(t not in NOT_TICKERS for t in re.findall(r"\b[A-Z]{2,5}\b", q)):
+        return True
+    # Students type "should i buy nvda". A short token sitting after a trade
+    # verb or a preposition is a ticker whatever case it is in, unless it is an
+    # ordinary word. Matching bare lowercase tokens anywhere would make every
+    # question a ticker question, so the anchor is doing the work.
+    return any(m.group(1).upper() not in NOT_TICKERS
+               and m.group(1).upper() not in NOT_A_TICKER_WORD
+               for m in LOWER_TICKER.finditer(q))
 
 # Two things have to be separated here, and an earlier version of this file did
 # not separate them. "How do I pick which strike to sell" is the curriculum
@@ -53,6 +72,25 @@ SPECIFIC = re.compile(
     r"\bi(?:'m| am) in\b|\bi (bought|sold|entered|opened|own|hold)\b|"
     r"going against me|getting tested|underwater|in the (red|money|green)\b|"
     r"\b\d+(\.\d+)?\s*(strike|call|put)s?\b", re.I)
+# Asking to act, which needs no second signal. Kept to trade verbs on purpose:
+# "should i use fibonacci" is a teaching question and must stay one.
+DIRECT_ACTION = re.compile(
+    r"(?<!why\s)(?<!because\s)"
+    r"\b(should|shall|do|would|can|could)\s+(i|we|you)\s+"
+    r"(buy|sell|short|enter|exit|get\s+(in|out)|take|hold|add\s+to|trim|cut|close|roll|"
+    r"average\s+down|double\s+down)\b|"
+    r"\bwould\s+you\s+(buy|sell|take|enter|get\s+in)\b|"
+    r"\b(is|was)\s+(now|this|that|it)\s+a\s+good\s+"
+    r"(entry|exit|time|price|buy|spot|level)\b|"
+    r"\bgood\s+(entry|time)\s+(here|now)\b|"
+    r"\b(buy|sell)\s+or\s+wait\b|"
+    r"\bdo\s+i\s+(buy|sell)\s+(this|that|it)\b|"
+    # Asking permission obliquely, which is how it usually arrives.
+    r"\b(good|bad|smart|dumb|terrible)\s+idea\b|"
+    r"\bthinking\s+(about|of)\s+(buying|selling|getting\s+in(to)?|taking)\b|"
+    r"\b(worth|ok|okay)\s+(getting\s+in|buying|selling|taking\s+this)\b|"
+    r"\bwhat\s+would\s+you\s+do\b", re.I)
+
 ASKING_WHAT_TO_DO = re.compile(
     r"\b(should i|do i|would you|shall i|can i|is it worth|worth it to|"
     r"when (do|should) i|what (do|should) i)\b|"
@@ -64,6 +102,9 @@ def position_guard(q):
     # Walking someone through placing a trade needs no second signal. It is the
     # closest the corpus comes to putting a student in a position.
     if WALKTHROUGH.search(q):
+        return True
+    # Nor does asking to act. See DIRECT_ACTION above.
+    if DIRECT_ACTION.search(q):
         return True
     if not (SPECIFIC.search(q) or WALKTHROUGH.search(q) or has_ticker(q)):
         return False
@@ -92,7 +133,15 @@ GUARDS = [
      lambda q, c: re.search(
          r"(how much|how many).*(make|earn|money|profit|return)|win\s*rate|"
          r"average return|per (week|month|year)|realistic(ally)? (make|expect)|"
-         r"students? (make|earn)|get rich|replace my (income|job|salary)", q, re.I)),
+         r"students? (make|earn)|get rich|replace my (income|job|salary)|"
+         # Phrased as an expectation rather than a quantity. "What kind of
+         # returns should I expect" is the same question as "how much will I
+         # make" and was walking past the guard.
+         r"(realistic|typical|average|expected|normal)\s+\w{0,12}\s*"
+         r"(returns?|gains?|profits?|income)|"
+         r"(returns?|gains?|profits?)\s+(should|can|do|would)\s+i\s+"
+         r"(expect|see|get|make)|"
+         r"what\s+(kind|sort)\s+of\s+(returns?|gains?|profits?|money)", q, re.I)),
     # The image state comes first. An uploaded chart changes the shape of the
     # answer before any text rule applies. Marked or not is decided by looking
     # at the image, not by reading the question. See
@@ -106,8 +155,7 @@ GUARDS = [
          r"confirm|did (the )?volume|is (this|that|it) a (hammer|doji|marubozu|engulfing|"
          r"breakout|bounce)|on my chart|"
          r"\b(this|that|these|those|my)\s+(chart|screenshot|screen|setup|candles?)\b|"
-         r"\bmy (support|resistance|levels?|lines?)\b|"
-         r"my position", q, re.I)),
+         r"\bmy (support|resistance|levels?|lines?)\b", q, re.I)),
     ("position", "Refuse and route", "non-negotiable 3, no position advice",
      lambda q, c: position_guard(q)),
     ("predict", "Refuse and route", "prediction is outside the method",

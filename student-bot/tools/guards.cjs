@@ -9,10 +9,29 @@ const NOT_TICKERS = new Set(("I A OK IT IS MY THE AND FOR BUT NOT YOU ALL ANY CA
   "CALL PUT CALLS PUTS RSI MACD SMA EMA VWAP ATR ADX OBV BB DMI CCI "+
   "ITM OTM ATM DTE IV HV OI PL PNL ROI EPS PE IPO ETF ETN LEAP LEAPS "+
   "TOS FB LIVE PM EOD EST PST USD TA EMA9 SL TP RR").split(" "));
+const NOT_A_TICKER_WORD = new Set((
+  "TOO SOON MUCH MORE LESS THIS THAT THEM THEN THAN WHEN WHAT SOME MANY EVER " +
+  "EARLY LATE HIGH LOW BIG SMALL GOOD BAD NOW OUT OFF UP DOWN BACK OVER " +
+  "HERE THERE LONG SHORT FAST SLOW HARD EASY SAME NEXT LAST BEST WORST").split(" "));
+
+const LOWER_TICKER =
+  /\b(?:buy|sell|short|on|in|into|of|for|trade|trading|play|calls?|puts?)\s+([a-z]{2,5})\b/ig;
+
 const TICKER = {
   test(q){
     const m = q.match(/\b[A-Z]{2,5}\b/g);
-    return !!m && m.some(t => !NOT_TICKERS.has(t));
+    if (m && m.some(t => !NOT_TICKERS.has(t))) return true;
+    // Students type "should i buy nvda". A short token after a trade verb or a
+    // preposition is a ticker whatever case it is in, unless it is an ordinary
+    // word. Matching bare lowercase tokens anywhere would make every question a
+    // ticker question, so the anchor does the work.
+    LOWER_TICKER.lastIndex = 0;
+    let hit;
+    while ((hit = LOWER_TICKER.exec(q)) !== null) {
+      const cand = hit[1].toUpperCase();
+      if (!NOT_TICKERS.has(cand) && !NOT_A_TICKER_WORD.has(cand)) return true;
+    }
+    return false;
   }
 };
 /* MARKED used to live here: a regex asking the QUESTION whether the student
@@ -29,6 +48,21 @@ const TICKER = {
    the chart, so the question now goes to the chart. The two image guards below
    collapsed into one as a result. */
 
+/* Asking to act, which needs no second signal.
+ *
+ * The position guard demanded a named position or a ticker, to separate "how
+ * do I pick a strike" (teaching) from "which strike on my trade" (advice).
+ * That distinction is right and it failed on the most obvious question a
+ * student can ask: "should i buy nvda" names no position, and the ticker test
+ * matched only capitals, so the guard turned on the student's shift key.
+ * Seven of eight real phrasings walked straight past non-negotiable 3.
+ *
+ * Trade verbs only, so "should I use Fibonacci" stays a lesson. "add" has to
+ * be "add to", because adding an indicator is not adding to a position: bare
+ * "add" made "how do i add stochastics" a refusal. */
+const DIRECT_ACTION =
+  /(?<!why\s)(?<!because\s)\b(should|shall|do|would|can|could)\s+(i|we|you)\s+(buy|sell|short|enter|exit|get\s+(in|out)|take|hold|add\s+to|trim|cut|close|roll|average\s+down|double\s+down)\b|\bwould\s+you\s+(buy|sell|take|enter|get\s+in)\b|\b(is|was)\s+(now|this|that|it)\s+a\s+good\s+(entry|exit|time|price|buy|spot|level)\b|\bgood\s+(entry|time)\s+(here|now)\b|\b(buy|sell)\s+or\s+wait\b|\bdo\s+i\s+(buy|sell)\s+(this|that|it)\b|\b(good|bad|smart|dumb|terrible)\s+idea\b|\bthinking\s+(about|of)\s+(buying|selling|getting\s+in(to)?|taking)\b|\b(worth|ok|okay)\s+(getting\s+in|buying|selling|taking\s+this)\b|\bwhat\s+would\s+you\s+do\b/i;
+
 const GUARDS = [
   {
     id:"retired", tone:"stop", verdict:"Blocked",
@@ -42,7 +76,7 @@ const GUARDS = [
   {
     id:"outcome", tone:"stop", verdict:"Refuse and route",
     rule:"Non-negotiables 1 and 2, outcome claims",
-    test:q => /(how much|how many).*(make|earn|money|profit|return)|win\s*rate|average return|per (week|month|year)|realistic(ally)? (make|expect)|students? (make|earn)|get rich|replace my (income|job|salary)/i.test(q),
+    test:q => /(how much|how many).*(make|earn|money|profit|return)|win\s*rate|average return|per (week|month|year)|realistic(ally)? (make|expect)|students? (make|earn)|get rich|replace my (income|job|salary)|(realistic|typical|average|expected|normal)\s+\w{0,12}\s*(returns?|gains?|profits?|income)|(returns?|gains?|profits?)\s+(should|can|do|would)\s+i\s+(expect|see|get|make)|what\s+(kind|sort)\s+of\s+(returns?|gains?|profits?|money)/i.test(q),
     shape:[
       "The curriculum does not attach dollar figures or income projections to what a student will earn, and the bot will not either.",
       "The only results language it uses is the 70 percent target win rate, described as a target the method aims at rather than a promise.",
@@ -76,7 +110,7 @@ const GUARDS = [
     // "this chart" as well as "my chart". An earlier version matched only the
     // possessive, so "what do you think of this chart" reached retrieval
     // unguarded and the bot was free to opine on a chart it cannot see.
-    test:q => /(does|is|has) (this|it|that|my)|look(s)? (bullish|bearish|good|weak|strong)|confirm|did (the )?volume|is (this|that|it) a (hammer|doji|marubozu|engulfing|breakout|bounce)|on my chart|\b(this|that|these|those|my)\s+(chart|screenshot|screen|setup|candles?)\b|\bmy (support|resistance|levels?|lines?)\b|my position/i.test(q),
+    test:q => /(does|is|has) (this|it|that|my)|look(s)? (bullish|bearish|good|weak|strong)|confirm|did (the )?volume|is (this|that|it) a (hammer|doji|marubozu|engulfing|breakout|bounce)|on my chart|\b(this|that|these|those|my)\s+(chart|screenshot|screen|setup|candles?)\b|\bmy (support|resistance|levels?|lines?)\b/i.test(q),
     shape:[
       "The decision comes down to the chart, and the bot cannot see yours.",
       "It does not ask for the candle or the volume bar in order to rule on it either, because rendering that verdict is the same violation whether or not it was invited.",
@@ -104,6 +138,19 @@ const GUARDS = [
       // and needs no second signal. system.md calls it the closest the corpus
       // comes to putting a student in a position.
       if (/\bwalk me through\b|\bplac(e|ing) (a|an|this|the|my) (trade|order)\b/i.test(q)) return true;
+      // Asking to act needs no second signal either.
+      //
+      // SPECIFIC demanded a named position or a ticker, to separate "how do I
+      // pick a strike" (teaching) from "which strike on my trade" (advice).
+      // That is the right distinction and it failed on the most obvious
+      // question a student can ask: "should i buy nvda" names no position, and
+      // the ticker test only matched capitals. Seven of eight real phrasings
+      // walked straight past non-negotiable 3.
+      //
+      // Trade verbs only, so "should I use Fibonacci" stays a lesson, and
+      // "add" must be "add to" because adding an indicator is not adding to a
+      // position.
+      if (DIRECT_ACTION.test(q)) return true;
       if (!SPECIFIC) return false;
       // Specific AND asking to be told what to do with it.
       return /\b(should i|do i|would you|shall i|can i|is it worth|worth it to|when (do|should) i|what (do|should) i)\b/i.test(q)
