@@ -607,3 +607,63 @@ The pattern requires "returns" or "gains" after the figure, so taught values
 survive: Fibonacci at 38.2 and 61.8, the 50 percent scaling rule, the "10 to
 25%" retracement in the double top definition, and "it's not exactly 100%" in
 the technical analysis intro. Verified after the change.
+
+---
+
+## Module 1, Foundation. Four passages held out of the corpus.
+
+Logged 2 September 2026, when the seven missing course modules were finally
+ingested from the Drive slide decks. Module 1 is the only one of the seven that
+carries compliance problems, and it carries four.
+
+**These are held out rather than rewritten.** Three of them are the shape a
+rewrite cannot fix, and the fourth is a factual claim about a third party that
+may simply no longer be true.
+
+### 1. Replicating the instructor's results
+
+> "I MADE SURE TO CREATE IT SO ANYONE CAN UNDERSTAND IT AND REPLICATE THE
+> RESULTS IVE HAD ON THE MARKET FOR THE PAST DECADE."
+
+Non-negotiable 1. It is a performance claim with an implied outcome attached to
+following the course, and the decade makes it a track record rather than a
+figure of speech. There is no version of this sentence that keeps the meaning
+and passes the rule.
+
+### 2. The live portfolio offer
+
+> "I WILL PROVIDE YOU WITH MY TRADES THAT I AM CURRENTLY DOING MYSELF YOU
+> LITERALLY WILL HAVE MY WHOLE PORTFOLIO."
+
+Two problems at once. It is position advice by definition, which is
+non-negotiable 3, and it is an offer the bot has no way to verify is still
+made. **Needs Vlad.** If this is still offered, it belongs in a ruling that
+says so plainly. If it is retired, it belongs in retired-terms.md.
+
+### 3. "Commission free"
+
+> "TRADE COMMISSION FREE!" and "TRADE U.S. EXCHANGE-LISTED STOCKS, ETFS AND
+> OPTIONS (A $.65 PER CONTRACT FEE APPLIES...) COMMISSION-FREE ONLINE"
+
+Non-negotiable 6 says never say free. **The rule was written about Trader
+Foundation's own offer wording and this is a third party's pricing**, so the
+call is genuinely less obvious here than it looks. Held out anyway on two
+grounds: the bot has no way to mark the distinction when it recites a phrase,
+and broker pricing from a 2020 slide is PERISHABLE_PROCEDURE regardless.
+
+### 4. The pattern day trader threshold and the workaround
+
+> "GET 25K IN THE ACCOUNT AND NEVER GO UNDER IT" / "OPEN MULTIPLE ACCOUNTS WITH
+> DIFFERENT BROKERS. SO YOU CAN HAVE 5K IN ONE, 7K IN ONE, AND 4K IN ANOTHER."
+
+Account-size figures attached to what a student should do, and the second is
+advice on structuring around a regulatory rule. Perishable and outside what the
+bot should be reciting either way. The PDT rule itself is a fact a student can
+be told exists; the sums and the workaround are not.
+
+### What survived
+
+The teaching did. The MONEY formula, gambling versus investing, the two
+components, the failure list, and the course outline are all indexed. Module 1
+contributes 5 chunks.
+

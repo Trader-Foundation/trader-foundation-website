@@ -395,11 +395,25 @@ TF_CORE_UNNUMBERED = {
 }
 
 
+# Where the numbered course splits. Modules 1 to 10 are the stock and technical
+# analysis track, 11 to 20 are the options track, and the split is the course's
+# own, taken from the module titles in Drive: 10 is Stochastics and MACD, 11 is
+# Intro To Options.
+#
+# This matters because course_for used to send anything named module-NN to
+# tf-core, which was right while only Modules 2, 3, 5 and 8 existed and would
+# have quietly filed Shorting and Straddles under technical analysis.
+OPTIONS_TRACK_STARTS_AT = 11
+
+
 def course_for(path):
     if path.parent.name == "fb-live":
         return "fb-live"
     name = path.stem
-    if name.startswith("module-") or name in TF_CORE_UNNUMBERED:
+    m = re.match(r"module-(\d+)", name)
+    if m:
+        return "tf-options" if int(m.group(1)) >= OPTIONS_TRACK_STARTS_AT else "tf-core"
+    if name in TF_CORE_UNNUMBERED:
         return "tf-core"
     if name.startswith("paycheck-collector"):
         return "paycheck-collector"
