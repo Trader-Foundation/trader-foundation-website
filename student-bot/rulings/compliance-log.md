@@ -667,3 +667,89 @@ The teaching did. The MONEY formula, gambling versus investing, the two
 components, the failure list, and the course outline are all indexed. Module 1
 contributes 5 chunks.
 
+
+---
+
+## Stated win rates, and a member's results. Found 3 September 2026.
+
+**How this surfaced matters more than the hits.** Vlad re-sent the put credit
+spread coaching call, which the corpus already had as
+`paycheck-collector-losses.txt`. Re-reading it to confirm the duplicate showed
+the last chunk saying **"You'll be right 90 percent of the time"**, live in the
+corpus, tagged EVERGREEN, retrievable.
+
+**A re-send is a free second read of a source, and this one paid for itself.**
+
+### The class, not the phrase
+
+Sweeping for the whole shape rather than that one sentence found two more
+stated win rates and one member's trading results. The scans had never looked
+for a win rate at all: SUSPECT was built around "percent per period", which is
+what every earlier hit looked like.
+
+| Where | What it said |
+|---|---|
+| `paycheck-collector-losses:0030` | "you'll be right 90 percent of the time" |
+| `paycheck-collector-part1:0005` | "you have a 90 percent chance of winning" |
+| `paycheck-collector-part1:0037` | "the 90 over 90 percent chance of win" |
+| `fb-live:0156:0066` | a member's own results, four trades and four wins |
+
+### Win rates rewritten, results excluded
+
+The three win rates are **rewritten**, following the 7,000 percent precedent.
+Two of the three are Vlad arguing against chasing a high win rate: one is a
+member raising the risk and getting the risk lesson back, the other ends "guess
+what, you ain't collecting anything on this". Excluding them would delete the
+teaching that answers the claim while the claim itself lives on elsewhere.
+
+The member's results are **excluded**, because there is no teaching in the
+passage to keep. Every sentence is the claim. It is also a redaction failure:
+that is a student's trading history sitting unmarked while
+`[PERFORMANCE REDACTED]` markers exist a few sessions later in the same corpus.
+
+### Delta is not a win rate
+
+The rules are narrow on purpose. Options mechanics state probabilities
+constantly, and "90% chance it expires out the money" is a fact about a
+contract rather than a promise to a student. Every pattern requires the
+language of winning, or "right" directly in front of the figure. Verified
+untouched: delta probabilities, the 50 percent Fibonacci retracement, the theta
+decay curve, "90 percent lose money", and "80 percent of the time I'm usually
+wrong", which is the opposite of a results claim.
+
+### The partial redaction bug, for the second time
+
+The first build rendered "the 90 over 90 percent chance of win" as "the 90 over
+[FIGURE REMOVED] chance of win", which still states the figure and makes a
+reader stop looking. This log already warned about exactly that, from the
+ranges rule. **A warning in a log did not prevent it**, so it is now
+`tools/test_win_rate_claims.py`, which checks every marker in the built corpus
+for digits left hanging in front of it.
+
+Standing rule: a new figure rule with a compound form goes above its own
+single-figure form, and gets a test.
+
+---
+
+## Module 16, Selling Options. Transcript replaces slides, 3 September 2026.
+
+Vlad sent the real transcript, so the slide export is gone and the module is now
+16 chunks instead of 4.
+
+**One passage excluded.** The key-benefit section says selling options means you
+"literally collect **guaranteed premiums**", and in the same breath that you can
+"write yourself a specific amount like a paycheck and **know exactly how much
+you're going to be making**". Two claims in one passage: a guarantee and a
+knowable income. The existing `guaranteed premiums` rule caught it, and the
+income line went with the chunk, which is the right outcome for once.
+
+**Two passages flagged for Vlad rather than touched.** Also in Module 16:
+
+> "options are a great way to really make some great money"
+> "if you utilize them the right way, it can make you very wealthy"
+
+Neither states a figure, so non-negotiable 1 does not clearly bite. But the
+system prompt requires the bot never sound promotional, and this is the most
+promotional language anywhere in the curriculum. **This is Vlad's call, not
+mine**, so both chunks are indexed and marked `needs_review` rather than
+excluded or rewritten. If he wants them out, one line in EXCLUDE does it.

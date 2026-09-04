@@ -111,6 +111,17 @@ EXCLUDE = [
     # which is non-negotiable 1 with nothing borderline about it.
     "made thousands of thousands of dollars",
     "thousands of thousands of dollars in a matter of literally hours",
+    # FB Live #0156. A member reporting their own trading results out loud:
+    # four trades, four wins, "in three hours I was up 80%", "got out this
+    # morning at 80%". Non-negotiable 1, and also a redaction failure, because
+    # this is a student's trading history sitting in the corpus unmarked while
+    # [PERFORMANCE REDACTED] markers exist a few sessions later.
+    #
+    # Excluded rather than rewritten, unlike the win rate claims above. There is
+    # no teaching in the passage to preserve: it is a member describing a good
+    # fortnight, and every sentence in it is the claim.
+    "i've won all four of them",
+    "in three hours i was up 80",
 ]
 
 # Retired terms, non-negotiable 8. Vlad ruled: "You can remove the Elite
@@ -152,6 +163,36 @@ RETIRED_REWRITE = [
     (r"\b\d{1,3}(?:,\s?\d{3})+\s*(?:%|percent)\s+(returns?|gains?)\b",
      r"[FIGURE REMOVED] \1"),
     (r"\b\d{3,}\s*(?:%|percent)\s+(returns?|gains?)\b", r"[FIGURE REMOVED] \1"),
+
+    # Stated win rates. Non-negotiable 2 makes the 70 percent target win rate
+    # the ONLY permitted results language, and three chunks were live in the
+    # corpus saying otherwise: "you'll be right 90 percent of the time",
+    # "you have a 90 percent chance of winning", and "the 90 over 90 percent
+    # chance of win".
+    #
+    # **Rewritten rather than excluded, following the 7,000 percent precedent.**
+    # Two of the three chunks are Vlad arguing AGAINST chasing a high win rate:
+    # one is a member raising the risk and getting the risk lesson back, and the
+    # other ends "guess what, you ain't collecting anything on this". Dropping
+    # them would delete the teaching that answers the claim and leave the claim
+    # living in the live sessions unchallenged.
+    #
+    # These are deliberately narrow. Delta stated as a probability is options
+    # mechanics, not a results promise, so "90% chance it expires out the money"
+    # and "83% chance" survive: the patterns require winning, or "right" sitting
+    # directly in front of the figure.
+    # The compound form runs FIRST, for the reason recorded above the ranges
+    # rule: "the 90 over 90 percent chance of win" left as "the 90 over
+    # [FIGURE REMOVED] chance of win" still states the figure, and the marker
+    # makes a reader stop looking. That bug was live for exactly one build here,
+    # which is twice this has happened now. Any new figure rule with a compound
+    # form goes above its own single-figure form.
+    (r"\b\d{1,3}\s+over\s+\d{1,3}\s*(?:%|percent)\s+chance\s+of\s+(winning|win)\b",
+     r"[FIGURE REMOVED] chance of \1"),
+    (r"\b(right)\s+\d{1,3}\s*(?:%|percent)\s+of\s+the\s+time\b",
+     r"\1 [FIGURE REMOVED] of the time"),
+    (r"\b\d{1,3}\s*(?:%|percent)\s+chance\s+of\s+(winning|win)\b",
+     r"[FIGURE REMOVED] chance of \1"),
 ]
 
 # Product names with no salvageable form. A chunk naming one is dropped,
@@ -201,6 +242,17 @@ SUSPECT = [
     # words, and an earlier version of this pattern required the % symbol.
     r"\b\d{1,3}\s*(%|percent)\s*(a|per)\s*(week|month|year)\b",
     r"\b\d{1,3}\s*(%|percent)\s*(returns?|gains?)\s*(a|per|every)\s*(day|week|month|year)\b",
+    # Wealth promises with no figure attached. Module 16 says "it can make you
+    # very wealthy" and "options are a great way to really make some great
+    # money". Neither is a specific claim, so non-negotiable 1 does not clearly
+    # bite, but the system prompt requires the bot never sound promotional and
+    # this is the most promotional language in the curriculum.
+    #
+    # Flagged for review rather than excluded or rewritten, deliberately. It is
+    # Vlad's own teaching, the call is genuinely his, and the working rule here
+    # is to raise these rather than quietly fix them.
+    r"\b(make|makes|making)\s+you\s+(very\s+)?(wealthy|rich)\b",
+    r"\bgreat\s+way\s+to\s+(really\s+)?make\s+(some\s+)?(great|good|serious|big)\s+money\b",
 ]
 
 PROCEDURE = [
