@@ -12,7 +12,16 @@ const NOT_TICKERS = new Set(("I A OK IT IS MY THE AND FOR BUT NOT YOU ALL ANY CA
 const NOT_A_TICKER_WORD = new Set((
   "TOO SOON MUCH MORE LESS THIS THAT THEM THEN THAN WHEN WHAT SOME MANY EVER " +
   "EARLY LATE HIGH LOW BIG SMALL GOOD BAD NOW OUT OFF UP DOWN BACK OVER " +
-  "HERE THERE LONG SHORT FAST SLOW HARD EASY SAME NEXT LAST BEST WORST").split(" "));
+  "HERE THERE LONG SHORT FAST SLOW HARD EASY SAME NEXT LAST BEST WORST " +
+  /* The options vocabulary. LOWER_TICKER anchors on trade verbs, and the word
+     after a trade verb is very often the instrument rather than a symbol:
+     "sell naked calls" read NAKED as a ticker, which was enough to make the bot
+     refuse to explain why brokers restrict naked calls. Same failure as TOO in
+     "sell too soon", one lesson later. The anchor finds the slot where a ticker
+     would sit; it cannot tell something is sitting there already. */
+  "NAKED COVERED CALL CALLS PUT PUTS OPTION OPTIONS STOCK STOCKS SHARE SHARES " +
+  "SPREAD SPREADS PREMIUM STRIKE DELTA THETA VEGA GAMMA CONTRACT CONTRACTS " +
+  "WEEKLY MONTHLY LEAP LEAPS BULL BEAR").split(" "));
 
 const LOWER_TICKER =
   /\b(?:buy|sell|short|on|in|into|of|for|trade|trading|play|calls?|puts?)\s+([a-z]{2,5})\b/ig;
@@ -60,8 +69,23 @@ const TICKER = {
  * Trade verbs only, so "should I use Fibonacci" stays a lesson. "add" has to
  * be "add to", because adding an indicator is not adding to a position: bare
  * "add" made "how do i add stochastics" a refusal. */
+/* The bare form, split out of DIRECT_ACTION because it was the one over firing.
+   "Should I buy" tied to nothing is still a position ask and must be refused,
+   but the identical words in front of a strategy name are a lesson request. */
+const BARE_ACTION =
+  /(?<!why\s)(?<!because\s)\b(should|shall|do|would|can|could)\s+(i|we|you)\s+(buy|sell|short|enter|exit|get\s+(in|out)|take|hold|add\s+to|trim|cut|close|roll|average\s+down|double\s+down)\b/i;
+
+/* Objects that make a trade verb conceptual rather than live. "How do I sell a
+   covered call" is the curriculum asking to be taught; "should I sell my NVDA
+   calls" is position advice. Both contain "sell", so the verb cannot decide it.
+   Without this the bot refused to explain what a straddle is, which is the
+   failure Vlad named: "this bot cannot have such specific prompts bc its going
+   to fail for the user." */
+const GENERIC_INSTRUMENT =
+  /\b(a|an|the)?\s*(covered|naked|cash\s+secured)\s+(call|put)s?\b|\b(a|an)\s+(straddle|strangle|spread|diagonal|vertical|butterfly|condor|collar|call\s+option|put\s+option)\b|\b(calls?|puts?|options?|premium)\s+(on|against)\s+(a\s+|the\s+)?(stock|shares|position)\b/i;
+
 const DIRECT_ACTION =
-  /(?<!why\s)(?<!because\s)\b(should|shall|do|would|can|could)\s+(i|we|you)\s+(buy|sell|short|enter|exit|get\s+(in|out)|take|hold|add\s+to|trim|cut|close|roll|average\s+down|double\s+down)\b|\bwould\s+you\s+(buy|sell|take|enter|get\s+in)\b|\b(is|was)\s+(now|this|that|it)\s+a\s+good\s+(entry|exit|time|price|buy|spot|level)\b|\bgood\s+(entry|time)\s+(here|now)\b|\b(buy|sell)\s+or\s+wait\b|\bdo\s+i\s+(buy|sell)\s+(this|that|it)\b|\b(good|bad|smart|dumb|terrible)\s+idea\b|\bthinking\s+(about|of)\s+(buying|selling|getting\s+in(to)?|taking)\b|\b(worth|ok|okay)\s+(getting\s+in|buying|selling|taking\s+this)\b|\bwhat\s+would\s+you\s+do\b/i;
+  /\bwould\s+you\s+(buy|sell|take|enter|get\s+in)\b|\b(is|was)\s+(now|this|that|it)\s+a\s+good\s+(entry|exit|time|price|buy|spot|level)\b|\bgood\s+(entry|time)\s+(here|now)\b|\b(buy|sell)\s+or\s+wait\b|\bdo\s+i\s+(buy|sell)\s+(this|that|it)\b|\b(good|bad|smart|dumb|terrible)\s+idea\b|\bthinking\s+(about|of)\s+(buying|selling|getting\s+in(to)?|taking)\b|\b(worth|ok|okay)\s+(getting\s+in|buying|selling|taking\s+this)\b|\bwhat\s+would\s+you\s+do\b/i;
 
 const GUARDS = [
   {
@@ -151,6 +175,11 @@ const GUARDS = [
       // "add" must be "add to" because adding an indicator is not adding to a
       // position.
       if (DIRECT_ACTION.test(q)) return true;
+      /* The bare "should I buy" form fires unless its object is a strategy
+         rather than a trade. Naming an instrument in the abstract is how a
+         student asks to be taught one, and refusing that teaches them the bot
+         is useless. */
+      if (BARE_ACTION.test(q) && !GENERIC_INSTRUMENT.test(q)) return true;
       if (!SPECIFIC) return false;
       // Specific AND asking to be told what to do with it.
       return /\b(should i|do i|would you|shall i|can i|is it worth|worth it to|when (do|should) i|what (do|should) i)\b/i.test(q)

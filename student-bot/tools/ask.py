@@ -41,8 +41,34 @@ LOWER_TICKER = re.compile(
 NOT_A_TICKER_WORD = set((
     "TOO SOON MUCH MORE LESS THIS THAT THEM THEN THAN WHEN WHAT SOME MANY EVER "
     "EARLY LATE HIGH LOW BIG SMALL GOOD BAD NOW OUT OFF UP DOWN BACK OVER "
-    "HERE THERE LONG SHORT FAST SLOW HARD EASY SAME NEXT LAST BEST WORST"
+    "HERE THERE LONG SHORT FAST SLOW HARD EASY SAME NEXT LAST BEST WORST "
+    # The options vocabulary. LOWER_TICKER anchors on trade verbs, and the word
+    # that follows a trade verb is very often the instrument rather than a
+    # symbol: "sell naked calls" read NAKED as a ticker, which was enough to
+    # make the bot refuse to explain why brokers restrict naked calls.
+    #
+    # Same failure as TOO in "sell too soon", one lesson later. The anchor finds
+    # the position where a ticker would sit; it cannot tell that something is
+    # sitting there already.
+    "NAKED COVERED CALL CALLS PUT PUTS OPTION OPTIONS STOCK STOCKS SHARE SHARES "
+    "SPREAD SPREADS PREMIUM STRIKE DELTA THETA VEGA GAMMA CONTRACT CONTRACTS "
+    "WEEKLY MONTHLY LEAP LEAPS BULL BEAR"
 ).split())
+
+# Objects that make a trade verb conceptual rather than live. "How do I sell a
+# covered call" is the curriculum asking to be taught; "should I sell my NVDA
+# calls" is position advice. Both contain "sell", so the verb cannot decide it.
+#
+# This is the same separation SPECIFIC already makes for strike and expiration,
+# applied to the bare action form. Without it the bot refused to explain what a
+# straddle is, which is the failure Vlad named: "this bot cannot have such
+# specific prompts bc its going to fail for the user."
+GENERIC_INSTRUMENT = re.compile(
+    r"\b(a|an|the)?\s*(covered|naked|cash\s+secured)\s+(call|put)s?\b|"
+    r"\b(a|an)\s+(straddle|strangle|spread|diagonal|vertical|butterfly|condor|"
+    r"collar|call\s+option|put\s+option)\b|"
+    r"\b(calls?|puts?|options?|premium)\s+(on|against)\s+(a\s+|the\s+)?"
+    r"(stock|shares|position)\b", re.I)
 
 def has_ticker(q):
     # Capitals are the easy case.
@@ -74,11 +100,16 @@ SPECIFIC = re.compile(
     r"\b\d+(\.\d+)?\s*(strike|call|put)s?\b", re.I)
 # Asking to act, which needs no second signal. Kept to trade verbs on purpose:
 # "should i use fibonacci" is a teaching question and must stay one.
-DIRECT_ACTION = re.compile(
+# The bare form, split out of DIRECT_ACTION because it was the one over firing.
+# "Should I buy" tied to nothing is still a position ask and must be refused,
+# but the identical words in front of a strategy name are a lesson request.
+BARE_ACTION = re.compile(
     r"(?<!why\s)(?<!because\s)"
     r"\b(should|shall|do|would|can|could)\s+(i|we|you)\s+"
     r"(buy|sell|short|enter|exit|get\s+(in|out)|take|hold|add\s+to|trim|cut|close|roll|"
-    r"average\s+down|double\s+down)\b|"
+    r"average\s+down|double\s+down)\b", re.I)
+
+DIRECT_ACTION = re.compile(
     r"\bwould\s+you\s+(buy|sell|take|enter|get\s+in)\b|"
     r"\b(is|was)\s+(now|this|that|it)\s+a\s+good\s+"
     r"(entry|exit|time|price|buy|spot|level)\b|"
@@ -105,6 +136,11 @@ def position_guard(q):
         return True
     # Nor does asking to act. See DIRECT_ACTION above.
     if DIRECT_ACTION.search(q):
+        return True
+    # The bare "should I buy" form fires unless its object is a strategy rather
+    # than a trade. Naming an instrument in the abstract is how a student asks
+    # to be taught one, and refusing it teaches them the bot is useless.
+    if BARE_ACTION.search(q) and not GENERIC_INSTRUMENT.search(q):
         return True
     if not (SPECIFIC.search(q) or WALKTHROUGH.search(q) or has_ticker(q)):
         return False

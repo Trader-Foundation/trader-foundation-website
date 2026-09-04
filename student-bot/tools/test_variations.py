@@ -76,6 +76,23 @@ BLOCKS = [
         "did volume confirm it",
         "hows my setup look",
     ]),
+    # The mirror of the position block, and the reason it exists. Every question
+    # here contains a trade verb and an "I", which is exactly what the position
+    # guard looks for, and none of them is a trade. The bot refused all of these
+    # until the bare action form was gated on its object: asking what a straddle
+    # is got the same answer as asking whether to buy NVDA.
+    #
+    # Vlad on why that matters: "this bot cannot have such specific prompts bc
+    # its going to fail for the user."
+    ("Asking to be taught a strategy", None, False, [
+        "when would i buy a straddle",
+        "how do i sell a covered call",
+        "why do brokers not let me sell naked calls",
+        "can you sell a put option without owning the stock",
+        "when should i buy a strangle",
+        "how does shorting work",
+        "what is a diagonal spread",
+    ]),
     ("Platform mechanics", "procedure", False, [
         "where do i click to set up thinkorswim",
         "how do i add stochastics",
