@@ -1,0 +1,15 @@
+{
+  "buildCommand": "bash build.sh",
+  "devCommand": null,
+  "installCommand": null,
+  "framework": null,
+  "outputDirectory": "public",
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-cache, must-revalidate" }
+      ]
+    }
+  ]
+}
