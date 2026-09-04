@@ -250,6 +250,7 @@ function stem(w){
 const toks = s => (s.toLowerCase().match(/[a-z][a-z0-9']+|\d+(?:\.\d+)*/g)||[]).filter(w=>!STOP.has(w)&&w.length>1).map(stem);
 
 let DF={}, AVG=0, DOCS=[];
+const TITLE_TOKENS = {};
 function index(){
   DOCS = CHUNKS.map(c=>{
     const t = toks(c.text), tf={};
@@ -258,6 +259,16 @@ function index(){
     return {c, tf, len:t.length};
   });
   AVG = DOCS.reduce((s,d)=>s+d.len,0)/(DOCS.length||1);
+  /* Titles indexed alongside the body, for TITLE_BOOST below. */
+  for (const d of DOCS){
+    const key = d.c.source_file;
+    if (key && !TITLE_TOKENS[key]){
+      const t = String(d.c.module_title || "")
+        .replace(/[-_]?(UNNUMBERED|SLIDES|RAW)\b/ig, " ")
+        .replace(/[-_]/g, " ");
+      TITLE_TOKENS[key] = new Set(toks(t));
+    }
+  }
 }
 /* Prefix expansion bridges what the light stemmer cannot: greed and greedy,
    patience and patient, emotion and emotional. Only for terms of five
@@ -275,6 +286,19 @@ const ALIASES_RAW = {
   shadow:["wick"],
   line:["support","resistance","level"],
   zone:["support","resistance","level"],
+  /* Shorthand. Students type the abbreviation and the corpus says the word,
+     and a term under PREFIX_MIN characters cannot reach it by prefix. "How do
+     I use fib levels" missed the Fibonacci module entirely, in a corpus with a
+     whole module called Fibonacci Retracement. */
+  fib:["fibonacci","retracement"], fibs:["fibonacci","retracement"],
+  vol:["volume"], ma:["moving","average"], sr:["support","resistance"],
+  ta:["technical","analysis"], tos:["thinkorswim"],
+  pt:["target","resistance"], dte:["expiration"],
+  /* Speed words for exiting. "Sell too soon" and "take profit so early" both
+     reached the teaching; "get out way too fast" did not, because the doc says
+     early and the student said fast. */
+  fast:["early","soon"], quick:["early","soon"],
+  quickly:["early","soon"], premature:["early","soon"],
 };
 const ALIASES = {};
 Object.keys(ALIASES_RAW).forEach(k => ALIASES[stem(k)] = ALIASES_RAW[k].map(stem));
@@ -305,6 +329,15 @@ function search(q, n=8){
        ruling surfaces alongside strong transcript matches. Mirrors
        RULING_BOOST in tools/ask.py. */
     if (d.c.course === "ruling") s *= 1.4;
+    /* A lesson's own subject is the one word BM25 cannot see. Ask this corpus
+       about volume and the Volume module did not appear in the top TWENTY, for
+       any phrasing, because "volume" is in thousands of live session chunks and
+       its IDF collapses to nothing. The stronger a term is as a subject, the
+       more the corpus says it, and the less BM25 weights it.
+       So the title is scored separately from the body: a title match is a
+       statement about what the source IS. Mirrors TITLE_BOOST in ask.py. */
+    if (TITLE_TOKENS[d.c.source_file] &&
+        qt.some(t => TITLE_TOKENS[d.c.source_file].has(t))) s *= 2.2;
     return {d, s};
   }).filter(x=>x.s>0).sort((a,b)=>b.s-a.s).slice(0,n);
   const top = scored[0]?.s || 1;

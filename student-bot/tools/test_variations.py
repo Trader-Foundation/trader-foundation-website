@@ -26,11 +26,38 @@ ask = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(ask)
 
 
+# What this measures, and why it changed.
+#
+# It used to gate on the top hit being the same source for every phrasing. That
+# is the right bar for a BM25 only tool and the wrong one for the bot that
+# ships, which retrieves twenty with BM25 and lets the model choose six. What
+# decides whether a student can get the right answer is therefore whether the
+# right source is IN the twenty.
+#
+# So recall is the gate now and the top hit is reported as drift. That is a
+# weaker assertion on paper and a truer one in practice. It is a judgement call
+# rather than a fact, so it is written down here rather than buried.
+#
+# The change was forced by a real finding: the Volume module was not in the top
+# TWENTY for any phrasing of a question about volume. The old test called that
+# "wobble", the same word it used for a source that merely came second, which
+# hid a total failure behind the label of a cosmetic one.
+CANDIDATES = 20   # matches the live bot's BM25 stage
+
+
 def top_source(q):
     hits = ask.search(q, 3)
     if not hits:
         return None
     return hits[0][1]["source_file"]
+
+
+def rank_of(q, want):
+    """Where the wanted source first appears in the candidate set, or None."""
+    for i, (_, c) in enumerate(ask.search(q, CANDIDATES)):
+        if any(w in c["source_file"] for w in want):
+            return i + 1
+    return None
 
 
 # (name, expected guard or None, image?, [phrasings])
@@ -102,29 +129,30 @@ BLOCKS = [
 ]
 
 # Teaching intents: no guard should fire, and the same source should answer.
+# (name, the source that must answer, phrasings)
 TEACHING = [
-    ("What volume tells you", [
+    ("What volume tells you", ["volume-UNNUMBERED"], [
         "what is volume telling me",
         "why does volume matter",
         "whats the point of volume",
         "how do i read volume",
         "volume is confusing to me can you explain",
     ]),
-    ("Cutting winners too early", [
+    ("Cutting winners too early", ["winners-and-losers"], [
         "I keep cutting my winners too early",
         "i always sell too soon",
         "why do i take profit so early",
         "i get out of good trades way too fast",
         "cant hold a winner",
     ]),
-    ("Position sizing", [
+    ("Position sizing", ["position-sizing"], [
         "how much should i risk per trade",
         "what percent of my account per trade",
         "how big should my position be",
         "am i trading too big",
         "how many contracts should i take",
     ]),
-    ("What makes a hammer strong", [
+    ("What makes a hammer strong", ["hammer-strength"], [
         "what makes a hammer candle strong",
         "when is a hammer worth trading",
         "is a hammer always bullish",
@@ -153,28 +181,32 @@ for name, want, img, phrasings in BLOCKS:
 print("\n" + "=" * 78)
 print("TEACHING INTENTS: no guard, and the same source should answer")
 print("=" * 78)
-for name, phrasings in TEACHING:
+for name, want, phrasings in TEACHING:
     rows = []
     for p in phrasings:
         g = (ask.guard_for(p, {}) or {}).get("id")
-        rows.append((p, g, top_source(p)))
-    guards = {g for _, g, _ in rows if g}
-    sources = Counter(s for _, _, s in rows)
-    dominant, hits = sources.most_common(1)[0]
-    consistent = hits == len(rows)
-    ok = not guards and consistent
-    print(f"\n{'ok  ' if ok else 'FAIL'}  {name}")
+        rows.append((p, g, top_source(p), rank_of(p, want)))
+    guards = {g for _, g, _, _ in rows if g}
+    missed = [r for r in rows if r[3] is None]
+    tops = Counter(s for _, _, s, _ in rows)
+    ok = not guards and not missed
+    print(f"\n{'ok  ' if ok else 'FAIL'}  {name}   must reach: {want[0]}")
     if guards:
         fails.append(name + " (unexpected guard)")
-        for p, g, _ in rows:
+        for p, g, _, _ in rows:
             if g:
                 print(f"        guard {g} fired on: {p}")
-    if not consistent:
-        fails.append(name + " (source wobbles)")
-        for p, _, s in rows:
-            print(f"        {str(s)[:44]:<46} {p}")
-    else:
-        print(f"        all {len(rows)} phrasings -> {dominant}")
+    if missed:
+        fails.append(name + " (NOT IN CANDIDATES)")
+        for p, _, s_, _ in missed:
+            print(f"        not in top {CANDIDATES}, reached {str(s_)[:40]} instead: {p}")
+    if not missed:
+        ranks = ", ".join(str(r[3]) for r in rows)
+        print(f"        all {len(rows)} phrasings reach it, at ranks {ranks}")
+    # Drift is reported, not failed. The reranker chooses from the candidates,
+    # so which one BM25 happens to put first does not decide the answer.
+    if len(tops) > 1:
+        print(f"        note: top hit drifts across {len(tops)} sources")
 
 print("\n" + "=" * 78)
 n = len(BLOCKS) + len(TEACHING)

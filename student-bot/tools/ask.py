@@ -68,7 +68,17 @@ GENERIC_INSTRUMENT = re.compile(
     r"\b(a|an)\s+(straddle|strangle|spread|diagonal|vertical|butterfly|condor|"
     r"collar|call\s+option|put\s+option)\b|"
     r"\b(calls?|puts?|options?|premium)\s+(on|against)\s+(a\s+|the\s+)?"
-    r"(stock|shares|position)\b", re.I)
+    r"(stock|shares|position)\b|"
+    # Sizing asked in the abstract. "How many contracts should I take" is the
+    # question position-sizing.md exists to answer, and Vlad's own teaching has
+    # a number for it, so refusing it hands back nothing on a topic the
+    # curriculum is explicit about. Non-negotiable 3 lists ticker, strike,
+    # expiration, entry, exit and live trade management; sizing is not on it.
+    #
+    # Safe because this only exempts the bare action form. "How many contracts
+    # should I take on NVDA" skips this and is caught by the ticker path below,
+    # which is where a sizing question with a live trade attached belongs.
+    r"\b(how many|how much|what percent(age)?|what size|how big)\b", re.I)
 
 def has_ticker(q):
     # Capitals are the easy case.
@@ -94,7 +104,9 @@ def has_ticker(q):
 WALKTHROUGH = re.compile(
     r"\bwalk me through\b|\bplac(e|ing) (a|an|this|the|my) (trade|order)\b", re.I)
 SPECIFIC = re.compile(
-    r"\bmy (trade|position|contracts?|spread|order|call|put|strike)\b|"
+    # "this trade" is as live as "my trade". A student writing "how many
+    # contracts should I take on this trade" is holding one.
+    r"\b(my|this|that) (trade|position|contracts?|spread|order|call|put|strike)\b|"
     r"\bi(?:'m| am) in\b|\bi (bought|sold|entered|opened|own|hold)\b|"
     r"going against me|getting tested|underwater|in the (red|money|green)\b|"
     r"\b\d+(\.\d+)?\s*(strike|call|put)s?\b", re.I)
@@ -363,6 +375,28 @@ ALIASES = {
     # Structure, in the student's words.
     "line": ["support", "resistance", "level"],
     "zone": ["support", "resistance", "level"],
+
+    # Shorthand. Students type the abbreviation and the corpus says the word,
+    # and a term under PREFIX_MIN characters cannot reach it by prefix. "How do
+    # I use fib levels" missed the Fibonacci module entirely, in a corpus that
+    # has a whole module called Fibonacci Retracement.
+    "fib": ["fibonacci", "retracement"],
+    "fibs": ["fibonacci", "retracement"],
+    "vol": ["volume"],
+    "ma": ["moving", "average"],
+    "sr": ["support", "resistance"],
+    "ta": ["technical", "analysis"],
+    "tos": ["thinkorswim"],
+    "pt": ["target", "resistance"],
+    "dte": ["expiration"],
+
+    # Speed words for exiting. "Sell too soon" and "take profit so early" both
+    # reach the teaching; "get out way too fast" did not, because the doc says
+    # early and the student said fast. Same idea, three words for it.
+    "fast": ["early", "soon"],
+    "quick": ["early", "soon"],
+    "quickly": ["early", "soon"],
+    "premature": ["early", "soon"],
 }
 ALIASES = {stem(k): [stem(v) for v in vs] for k, vs in ALIASES.items()}
 
@@ -400,8 +434,46 @@ def expand(term):
 # out the teaching a student actually asked for.
 RULING_BOOST = 1.4
 
-def weight_for(chunk):
-    return RULING_BOOST if chunk.get("course") == "ruling" else 1.0
+# A lesson's own subject is the one word BM25 cannot see.
+#
+# Ask this corpus anything about volume and the Volume module does not appear in
+# the top TWENTY, for any phrasing. That is a recall failure rather than a
+# ranking one, so the reranker in the live bot never gets a chance to fix it: it
+# only reorders what BM25 hands over.
+#
+# The cause is inverse document frequency working exactly as designed. "Volume"
+# appears in thousands of live session chunks, so its IDF collapses to almost
+# nothing, and the 22 chunks of the lesson that exists to define the word get no
+# credit for being about it. The stronger a term is as a subject, the more the
+# corpus talks about it, and the less BM25 weights it. Every teaching module has
+# this problem in proportion to how central its topic is.
+#
+# So the title is scored separately from the body. A chunk whose module title
+# carries a query term is boosted, which is a statement about what the source IS
+# rather than about how often it says a word.
+#
+# Deliberately larger than RULING_BOOST. A ruling is a correction that should sit
+# alongside the teaching; a title match means the student named the lesson.
+TITLE_BOOST = 2.2
+
+# Titles are tokenised here rather than through pretty(), which is defined
+# further down for display. Splitting on the separators is all this needs, and
+# it keeps the index independent of how a citation happens to be formatted.
+TITLE_TOKENS = {}
+for _c in CHUNKS:
+    _key = _c.get("source_file") or _c.get("module_title") or ""
+    if _key not in TITLE_TOKENS:
+        _t = re.sub(r"[-_]?(UNNUMBERED|SLIDES|RAW)\b", " ",
+                    str(_c.get("module_title") or ""), flags=re.I)
+        TITLE_TOKENS[_key] = set(toks(_t.replace("-", " ").replace("_", " ")))
+
+
+def weight_for(chunk, query_tokens=()):
+    w = RULING_BOOST if chunk.get("course") == "ruling" else 1.0
+    title = TITLE_TOKENS.get(chunk.get("source_file") or chunk.get("module_title") or "")
+    if title and any(t in title for t in query_tokens):
+        w *= TITLE_BOOST
+    return w
 
 def search(q, n=8, k1=1.4, b=0.72):
     raw = list(dict.fromkeys(toks(q)))
@@ -419,7 +491,7 @@ def search(q, n=8, k1=1.4, b=0.72):
             idf = math.log(1 + (N - DF[w] + 0.5) / (DF[w] + 0.5))
             s += idf * (f * (k1 + 1)) / (f + k1 * (1 - b + b * ln / AVG))
         if s > 0:
-            scored.append((s * weight_for(c), c))
+            scored.append((s * weight_for(c, qt), c))
     scored.sort(key=lambda x: -x[0])
     return scored[:n]
 

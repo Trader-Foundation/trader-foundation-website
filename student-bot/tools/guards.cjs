@@ -81,8 +81,15 @@ const BARE_ACTION =
    Without this the bot refused to explain what a straddle is, which is the
    failure Vlad named: "this bot cannot have such specific prompts bc its going
    to fail for the user." */
+/* The last clause is sizing asked in the abstract. "How many contracts should I
+   take" is the question position-sizing.md exists to answer and Vlad's own
+   teaching has a number for it, so refusing it hands back nothing on a topic
+   the curriculum is explicit about. Non-negotiable 3 lists ticker, strike,
+   expiration, entry, exit and live trade management; sizing is not on it.
+   Safe because this only exempts the bare action form: "how many contracts
+   should I take on NVDA" is still caught by the ticker path. */
 const GENERIC_INSTRUMENT =
-  /\b(a|an|the)?\s*(covered|naked|cash\s+secured)\s+(call|put)s?\b|\b(a|an)\s+(straddle|strangle|spread|diagonal|vertical|butterfly|condor|collar|call\s+option|put\s+option)\b|\b(calls?|puts?|options?|premium)\s+(on|against)\s+(a\s+|the\s+)?(stock|shares|position)\b/i;
+  /\b(a|an|the)?\s*(covered|naked|cash\s+secured)\s+(call|put)s?\b|\b(a|an)\s+(straddle|strangle|spread|diagonal|vertical|butterfly|condor|collar|call\s+option|put\s+option)\b|\b(calls?|puts?|options?|premium)\s+(on|against)\s+(a\s+|the\s+)?(stock|shares|position)\b|\b(how many|how much|what percent(age)?|what size|how big)\b/i;
 
 const DIRECT_ACTION =
   /\bwould\s+you\s+(buy|sell|take|enter|get\s+in)\b|\b(is|was)\s+(now|this|that|it)\s+a\s+good\s+(entry|exit|time|price|buy|spot|level)\b|\bgood\s+(entry|time)\s+(here|now)\b|\b(buy|sell)\s+or\s+wait\b|\bdo\s+i\s+(buy|sell)\s+(this|that|it)\b|\b(good|bad|smart|dumb|terrible)\s+idea\b|\bthinking\s+(about|of)\s+(buying|selling|getting\s+in(to)?|taking)\b|\b(worth|ok|okay)\s+(getting\s+in|buying|selling|taking\s+this)\b|\bwhat\s+would\s+you\s+do\b/i;
@@ -152,7 +159,7 @@ const GUARDS = [
     // fire the guard alone. Something has to tie the question to a live or
     // specific position.
     test:q => {
-      const SPECIFIC = /\bmy (trade|position|contracts?|spread|order|call|put|strike)\b/i.test(q)
+      const SPECIFIC = /\b(my|this|that) (trade|position|contracts?|spread|order|call|put|strike)\b/i.test(q)
         || /\bi(?:'m| am) in\b|\bi (bought|sold|entered|opened|own|hold)\b/i.test(q)
         || /going against me|getting tested|underwater|in the (red|money|green)\b/i.test(q)
         || /\bwalk me through\b|\bplac(e|ing) (a|an|this|the|my) (trade|order)\b/i.test(q)
