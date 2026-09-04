@@ -106,7 +106,7 @@ function call(handler, { method = "GET", body = null, query = {} } = {}) {
   r = await call(login, { method: "POST", body: { name: "Test Rep", email: "Rep.One@Example.com " } });
   check(r.status === 200 && r.body.email === "rep.one@example.com", "login normalizes email");
   check(!!r.body.exams && !!r.body.exams.setter && !!r.body.exams.ec, "login returns both certifications");
-  check(r.body.exams.setter.total === 45 && r.body.exams.ec.total === 50, "per-exam totals: 45 setter, 50 EC");
+  check(r.body.exams.setter.total === 50 && r.body.exams.ec.total === 54, "per-exam totals: 50 setter, 54 EC");
   check(r.body.exams.setter.attemptCount === 0 && r.body.exams.ec.attemptCount === 0, "fresh login has zero attempts on both");
   check(r.body.exams.setter.bestScore === null && !r.body.exams.setter.passed && !r.body.tester, "fresh login shape");
 
@@ -115,10 +115,10 @@ function call(handler, { method = "GET", body = null, query = {} } = {}) {
   check(r.status === 200, "second login ok");
 
   // submit a passing-auto attempt with written answers
-  const served = {}; for (let i = 0; i < 45; i++) served["q" + i] = i % 2;
-  const perQ = []; for (let i = 0; i < 45; i++) perQ.push({ bi: i, ok: i !== 3 && i !== 7, pick: i === 3 ? 2 : i === 7 ? 1 : 0 });
+  const served = {}; for (let i = 0; i < 50; i++) served["q" + i] = i % 2;
+  const perQ = []; for (let i = 0; i < 50; i++) perQ.push({ bi: i, ok: i !== 3 && i !== 7, pick: i === 3 ? 2 : i === 7 ? 1 : 0 });
   const attempt = {
-    exam: "setter", bn: 69, disc: [{ di: 0, pick: 2 }, { di: 4, pick: 1 }],
+    exam: "setter", bn: 78, disc: [{ di: 0, pick: 2 }, { di: 4, pick: 1 }],
     score: 24, total: 27, sectionScores: { product: 15, setting: 9 }, mins: 21.5, autoPass: true, served, perQ,
   };
   r = await call(submit, { method: "POST", body: { email: "rep.one@example.com", attempt } });
@@ -138,8 +138,8 @@ function call(handler, { method = "GET", body = null, query = {} } = {}) {
   const u = r.body.users[0];
   check(u.attempts[0].finalPass === true, "a passing score certifies immediately, no grading step");
   check(u.attempts[0].written === undefined, "no written answers are stored");
-  check(u.attempts[0].perQ.length === 45, "perQ stored for question analysis");
-  check(u.attempts[0].bn === 69, "bank generation stored with the attempt");
+  check(u.attempts[0].perQ.length === 50, "perQ stored for question analysis");
+  check(u.attempts[0].bn === 78, "bank generation stored with the attempt");
   check(u.attempts[0].perQ[3].pick === 2 && u.attempts[0].perQ[7].pick === 1, "the answer each rep chose round-trips to the dashboard");
   check(JSON.stringify(u.attempts[0].disc) === JSON.stringify([{ di: 0, pick: 2 }, { di: 4, pick: 1 }]), "working style picks round-trip to the dashboard");
 

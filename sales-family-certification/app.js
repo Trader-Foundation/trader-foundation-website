@@ -3,7 +3,7 @@
    Served as a PLAIN TEXT static file on purpose. Earlier builds shipped this
    engine as a compressed binary (app.bin) and the upload path corrupted the
    binary every time. Keep this file plain text. */
-var CERT_VERSION = "2026-08-16-roster-r1";
+var CERT_VERSION = "2026-09-04-frame-r1";
 
 var MAX_ATTEMPTS = 3, PASS_PCT = 0.8, FAST_MINUTES = 12;
 
@@ -600,7 +600,95 @@ opts:[
 {t:"Homework for Trading Analysis and Options Unleashed submitted every week, on time, without exception. Every weekly assessment taken and passed as scheduled. And trades reviewed with the coach during the coaching session.",c:true},
 {t:"Homework can be handed in whenever the student finishes it as long as everything is complete by the end of the program, since adults learning around jobs and families cannot reasonably be held to a school style weekly deadline on material they have already paid for."},
 {t:"Assessments must be attempted but not necessarily passed, because the guarantee is meant to measure effort rather than aptitude, and a student failing a weekly quiz while doing everything else on the list says the teaching needs work rather than the student."},
-{t:"Trade reviews happen automatically as long as the trading log is kept current, because a coach can read a complete log without a meeting, and the review condition exists to catch empty logs rather than to put one more weekly call on anyone's calendar."}]}
+{t:"Trade reviews happen automatically as long as the trading log is kept current, because a coach can read a complete log without a meeting, and the review condition exists to catch empty logs rather than to put one more weekly call on anyone's calendar."}]},
+
+/* Sep 3 team training call: frame control, the confusion principle, the
+   desperation take-away, problem-solution-bridge, and the live webinar.
+   Appended Sep 4. Questions 70 to 74 join the setting call, 75 to 78 the
+   strategy call, because the framing was coached through setting-call
+   reviews and the conditioning and call-out work belongs to the person
+   running the strategy call. */
+
+/* 70 */ {part:1,type:"mc",stems:[
+"What is a frame on a call, and who ends up leading any conversation?",
+"The training leans on the book Pitch Anything. What is its core lesson about who controls a call?"],
+opts:[
+{t:"The frame is who is directing the conversation, and whoever sets it leads the call. A prospect firing questions at you is setting their frame, and if you just keep answering you are following it. Take control early, politely, and keep it.",c:true},
+{t:"A frame is the rapport built in the first two minutes, and the prospect should feel like they are leading the whole way through, because people trust a conversation most when the salesperson stays a step behind and follows wherever the prospect wants to take things."},
+{t:"Frames only matter on the strategy call, where the stakes are high. A setting call is short and friendly, so the job there is simply to answer whatever is asked as completely as possible and get the booking on the calendar before the goodwill runs out."},
+{t:"The frame is the script. As long as every rep delivers the approved wording in the approved order, control of the conversation takes care of itself, and going off the page is where calls get lost."}]},
+
+/* 71 */ {part:1,type:"mc",stems:[
+"A prospect opens with, \"So how has your own trading been going?\" What is the trained answer?",
+"\"Do you trade yourself?\" comes up early on a setting call. How do you handle it?"],
+opts:[
+{t:"Answer broadly, drop one line of intrigue, and take control right at the gate: doing well, and honestly the way we trade, it does not matter if the market is up or down. That line earns a what do you mean, and now you are leading.",c:true},
+{t:"Be fully transparent that you are new and have not started trading yet, because honesty is the brand, and a prospect will respect someone who admits they are two weeks in and still getting set up far more than someone who talks around a direct question."},
+{t:"Walk them through your personal results in detail, month by month if they ask, because specific numbers from the person on the phone are the strongest proof the program works and the fastest way to close the trust gap with a skeptic who has been burned before."},
+{t:"Redirect straight to the calendar, because questions about your own trading are a stalling tactic, and every minute spent on them is booking time leaking away from the call."}]},
+
+/* 72 */ {part:1,type:"mc",stems:[
+"Why does the training say a little confusion is a good thing to create in a prospect?",
+"What does an intrigued, slightly confused prospect give you that an argued-with prospect never will?"],
+opts:[
+{t:"A person cannot be confused and defensive at the same time. Confusion opens the mind, because they want to solve the puzzle, so one intriguing line earns a what do you mean and hands you the lead. Arguing does the opposite: it locks them into defending their belief.",c:true},
+{t:"Confusion creates urgency: a prospect who does not quite follow what the program is will book the next call just to get clarity, which is why the training says to keep the details of what we actually do deliberately vague until a payment is down."},
+{t:"Nothing. A confused prospect is a lost prospect, so the training says to explain the program in full detail right up front, walking carefully through both strategies step by step until every single question has been answered and nothing at all is left unclear anywhere in their mind before you ask for anything."},
+{t:"Confusion is useful only with unqualified leads, as a polite way to end things: leave them a little lost and they stop calling back, which saves the awkwardness of telling someone no directly."}]},
+
+/* 73 */ {part:1,type:"mc",stems:[
+"A prospect admits he has been trading under financial pressure and making desperate decisions. What is the trained move?",
+"Mid-call, the prospect says he keeps making bad trades because he is broke and needs money now. What do you do with that?"],
+opts:[
+{t:"Stop and call it out, caringly: you mentioned trading under pressure, so let me be straight, this may not be for you. We do not trade out of desperation, we trade out of inspiration, and this is not a shortcut. The serious ones talk you into keeping them, and that is the point.",c:true},
+{t:"Let it pass and keep moving toward the booking, because bringing a prospect's money troubles back up in the middle of a call only embarrasses them, and the person running the next call is far better equipped to unpack something that sensitive, with real time set aside to do it properly and privately."},
+{t:"Lean into it as urgency: someone under real financial pressure has every reason to start today, so connect the program to the bills he just described and ask for the commitment while the pain is fresh enough to move him."},
+{t:"Reassure him that the program pays for itself quickly, because a prospect in a tight spot needs to hear that the risk is low and the results come fast, and confidence from you is exactly what gets him over the line."}]},
+
+/* 74 */ {part:1,type:"mc",stems:[
+"What is a setter's actual job on the call, according to the framework?",
+"The training says you do not need to learn the technicals to set well. What do you need instead?"],
+opts:[
+{t:"Know their problem and describe their solution, then give them the bridge: the call with Steve or the live training webinar. Your job is not to know how the trading works. Dig into what is not working, describe the fix in their own words, and make the next step the way to get it.",c:true},
+{t:"Master the technical material first, because you cannot sell what you cannot explain, and a rep who can hold their own on options and charting will out-book one who has to defer every real question to somebody else on a later call."},
+{t:"Deliver the standard pitch about what the company does, because consistency is what scales in a sales team: the same explanation of swing trading and the Paycheck Collector, delivered in the same order, with the same wording, on every single call, no matter who happens to be on the other end of the line that day."},
+{t:"Qualify hard and fast: get to the money question inside the first five minutes, and if the funds are not there, end the call politely, because everything else in the framework only matters once you know the prospect can pay."}]},
+
+/* 75 */ {part:2,type:"mc",stems:[
+"The prospect says options trading is dangerous and he wants nothing to do with it. What is the trained response?",
+"How do you answer \"I have lost money on options, they are too risky\" without losing the call?"],
+opts:[
+{t:"Agree first, then separate us from what hurt him: you are right, the way most people trade options is dangerous, we have seen people lose it all in a day. That is why we trade them differently, with the Paycheck Collector putting guardrails around the trade. Never argue with the belief.",c:true},
+{t:"Correct the record, politely but firmly, because the belief is simply wrong: options are only dangerous for the people who never took the time to understand them, and patiently walking him through exactly why his fear is misplaced is precisely what an educator running a strategy call is there to do."},
+{t:"Show him the mechanics: explain how selling premium works, where theta and delta come in, and why the math favors the seller, because a technical objection deserves a real technical answer from the person running the strategy call rather than a deflection."},
+{t:"Move him off options entirely and pitch the crypto and forex material instead, because there is no reason to fight a preference when the program covers more than one market."}]},
+
+/* 76 */ {part:2,type:"mc",stems:[
+"The prospect says yes, that sounds good. When is a yes actually real?",
+"What does the framework say separates a real yes from a polite one?"],
+opts:[
+{t:"A yes is real when they explain in their own words why they need it. Challenge it gently: are you sure, because a lot of people just want the shortcut. Serious people defend their identity and sell themselves. Then the homework videos, with a named time to watch, prove it.",c:true},
+{t:"A yes is real when it is said twice: confirm the decision out loud at the top of the close and then once again right before the payment link goes out, because repetition is commitment, and almost nobody backs out of something they have clearly agreed to twice on a recorded line."},
+{t:"Every yes counts the same, and questioning one is how deals die: momentum is the whole art of the close, so the moment you hear agreement you move straight to the payment step before doubt has any room to grow back."},
+{t:"A yes is only real with money behind it, so ask for the payment immediately, because everything a prospect says before paying is entertainment and the only commitment that actually exists in sales is a completed transaction."}]},
+
+/* 77 */ {part:2,type:"mc",stems:[
+"\"I just want to make sure you are serious\" usually bounces off a prospect. What makes a call-out actually land?",
+"How do you call a prospect out on commitment in a way that works?"],
+opts:[
+{t:"Anchor it to something specific they said or did, and say it caringly: you mentioned you have been trading under pressure, and what we do is a little different, so if that is where you are, that is okay, I just do not want to waste your time. A specific reference point makes them prove it.",c:true},
+{t:"Raise your certainty, not the specifics: repeat that the program is only for serious people, more firmly each time, because prospects respect strength and the ones who flinch at the third repetition were never going to buy anyway."},
+{t:"Skip call-outs altogether, because challenging a prospect risks offending them, and an offended prospect leaves a bad review; the safer path is to move everyone willing to the next step and let that call sort out who is real."},
+{t:"Put it in writing after the call instead, in a follow-up text that spells out point by point what seriousness requires, because people are more honest over text than they ever are on the phone, and a written checklist creates a durable record of commitment that you can hold them to on every later call."}]},
+
+/* 78 */ {part:2,type:"mc",stems:[
+"What job does the live training webinar do in the sales process?",
+"Why is the webinar run live every week instead of posted as a recording?"],
+opts:[
+{t:"It is the bridge that fixes preparation, the number one reason deals were not closing. A live weekly training at no cost, where Vlad builds trust and conditions leads on psychology, strategy, and accountability before they ever get on a call. It runs live because live is what people show up for.",c:true},
+{t:"It replaces the setting call: once the webinar is running, leads register themselves, watch, and come out ready to buy, so the team's job shifts from booking calls to processing the decisions people have already made on their own."},
+{t:"It is a technical masterclass, deep enough that a lead who watches closely could realistically start trading the strategies entirely on their own, because giving away genuinely real substance is what separates us from the shallow pitch-fest webinars that everybody else in this space keeps running."},
+{t:"It is a paid event for members only, because charging for a seat filters out the tourists, and the revenue funds the advertising that fills the seats for the next one."}]}
 ];
 
 
@@ -1239,7 +1327,16 @@ var COACH = {
   65:"Three courses, all modules, one hundred percent: Trading Analysis, Options Unleashed, Weekly Paycheck Collector. Partial credit does not exist on this condition.",
   66:"Weekly engagement is both, not either: an individual session every week, plus the group session, live or by replay with a Skool message to the coach after finishing it. Have them recite it back.",
   67:"Fifty paper trades per strategy, not fifty total: Bounce Profit, Debit Spreads, Paycheck Collector, each trade by the exact rules and fully executed, open and close, in the provided log.",
-  68:"The weekly rhythm: homework for the two courses on time every week, assessments taken and passed, trades reviewed with the coach. The guarantee is proof of work, and this is the proof."
+  68:"The weekly rhythm: homework for the two courses on time every week, assessments taken and passed, trades reviewed with the coach. The guarantee is proof of work, and this is the proof.",
+  69:"The frame is who is leading. Re-teach it from Pitch Anything: a prospect firing questions is setting their frame, and answering along is following it. Drill taking control early and politely.",
+  70:"The trading question is an invitation to take the frame: answer broadly, drop one line of intrigue, the way we trade the market direction does not matter, and let them chase it. Never confess inexperience, never recite results.",
+  71:"Confusion and defensiveness cannot share a brain. One intriguing line opens the mind and earns a what do you mean. Arguing locks the prospect into their belief. Drill the hook lines until they come out on their own.",
+  72:"Desperation is a stop sign, not a lever. The line, word for word: we do not trade out of desperation, we trade out of inspiration. Take it away caringly and let the serious ones argue their way back in.",
+  73:"The job is problem, solution, bridge. Dig into what is not working, describe the fix in their words, then hand them the bridge: the call with Steve or the live webinar. The technicals are not the job, and the weeds kill sales.",
+  74:"Never argue with a belief. Agree, own the danger, then separate us: that is why we trade options with guardrails, the Paycheck Collector. If the answer drifts into theta and delta, the call is already lost.",
+  75:"A yes is real when they say why in their own words. Coach the challenge: are you sure, because this is not a shortcut. Then the homework videos with a named watch time. People defend their identity; let them.",
+  76:"Generic seriousness checks bounce off. The call-out has to anchor to something specific the prospect said or did, delivered caringly. Have them practice quoting the prospect back before the challenge.",
+  77:"The webinar is the bridge that fixes preparation. No cost, live every week, psychology first, just enough substance to build trust, never a tangent. Every lead they touch should hear about it."
 };
 
 /* What choosing a specific wrong option says about the person, keyed
@@ -1257,7 +1354,15 @@ var TRAITS = {
   "60:1":"chases numbers over quality", "60:3":"ethics risk",
   "61:1":"invents urgency", "61:2":"avoids the ask", "61:3":"overpromises",
   "63:1":"overpromises", "63:2":"dodges hard questions",
-  "64:1":"overpromises", "64:3":"dodges hard questions"
+  "64:1":"overpromises", "64:3":"dodges hard questions",
+  "69:2":"chases the booking",
+  "70:1":"gives up the frame", "70:2":"compliance risk", "70:3":"chases the booking",
+  "71:1":"ethics risk", "71:3":"dodges hard questions",
+  "72:1":"dodges hard questions", "72:2":"ethics risk", "72:3":"overpromises",
+  "73:1":"goes into the weeds", "73:3":"chases numbers over quality",
+  "74:1":"argues with the prospect", "74:2":"goes into the weeds",
+  "75:2":"pressures instead of guides", "75:3":"pressures instead of guides",
+  "76:1":"pressures instead of guides", "76:2":"avoids the ask"
 };
 
 /* Stored results reference questions by bank index, and the bank has been

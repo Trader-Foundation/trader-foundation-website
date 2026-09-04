@@ -22,9 +22,9 @@ const { BANK, buildAttempt, EXAMS, examItems, examTotal, examPassMark, trackOf, 
 let fail = 0;
 const check = (cond, msg) => { if (!cond) { console.log("FAIL: " + msg); fail++; } };
 
-check(BANK.length === 69, "bank has 69 questions, got " + BANK.length);
-check(BANK.filter(q => q.part === 1).length === 47, "47 in part 1, got " + BANK.filter(q => q.part === 1).length);
-check(BANK.filter(q => q.part === 2).length === 22, "22 in part 2, got " + BANK.filter(q => q.part === 2).length);
+check(BANK.length === 78, "bank has 78 questions, got " + BANK.length);
+check(BANK.filter(q => q.part === 1).length === 52, "52 in part 1, got " + BANK.filter(q => q.part === 1).length);
+check(BANK.filter(q => q.part === 2).length === 26, "26 in part 2, got " + BANK.filter(q => q.part === 2).length);
 check(sandbox.WRITTEN === undefined, "written scenarios are gone; every question is multiple choice");
 
 let mc = 0, tf = 0, distractors = 0;
@@ -45,9 +45,9 @@ BANK.forEach((q, i) => {
     check(false, "q" + (i+1) + " unknown type " + q.type);
   }
 });
-check(mc === 61, "61 mc questions, got " + mc);
+check(mc === 70, "70 mc questions, got " + mc);
 check(tf === 8, "8 tf questions, got " + tf);
-check(distractors === 183, "183 distractors, got " + distractors);
+check(distractors === 210, "210 distractors, got " + distractors);
 
 // Style rules: no em dashes anywhere, never the word "free".
 check(!src.includes("—"), "no em dashes in app.js");
@@ -67,9 +67,9 @@ check(longestCorrect >= 4 && longestCorrect <= 20, "correct-is-longest sits near
 const tracks = { product: 0, setting: 0, strategy: 0 };
 BANK.forEach((q, i) => tracks[trackOf(i)]++);
 check(tracks.product === 28, "28 shared product questions, got " + tracks.product);
-check(tracks.setting === 19, "19 setting-call questions, got " + tracks.setting);
-check(tracks.strategy === 22, "22 strategy-call questions, got " + tracks.strategy);
-check(tracks.product + tracks.setting + tracks.strategy === 69, "every question has a track");
+check(tracks.setting === 24, "24 setting-call questions, got " + tracks.setting);
+check(tracks.strategy === 26, "26 strategy-call questions, got " + tracks.strategy);
+check(tracks.product + tracks.setting + tracks.strategy === 78, "every question has a track");
 
 // Part Two is strategy only; product/setting live in Part One.
 BANK.forEach((q, i) => {
@@ -77,10 +77,10 @@ BANK.forEach((q, i) => {
   else check(trackOf(i) !== "strategy", "q" + (i+1) + " in part 1 is not strategy");
 });
 
-check(examTotal("setter") === 45, "setter test is 45 questions (2 retired), got " + examTotal("setter"));
-check(examTotal("ec") === 50, "EC test is 50 questions, got " + examTotal("ec"));
-check(examPassMark("setter") === 36, "setter passes at 36, got " + examPassMark("setter"));
-check(examPassMark("ec") === 40, "EC passes at 40, got " + examPassMark("ec"));
+check(examTotal("setter") === 50, "setter test is 50 questions (2 retired), got " + examTotal("setter"));
+check(examTotal("ec") === 54, "EC test is 54 questions, got " + examTotal("ec"));
+check(examPassMark("setter") === 40, "setter passes at 40, got " + examPassMark("setter"));
+check(examPassMark("ec") === 44, "EC passes at 44, got " + examPassMark("ec"));
 
 // Both exams share the product half, and neither leaks the other's call.
 const sItems = examItems("setter"), eItems = examItems("ec");
@@ -116,7 +116,8 @@ check(Object.keys(TRAITS).every(k => {
   const [bi, pick] = k.split(":").map(Number);
   return bi >= 0 && bi < BANK.length && pick >= 0 && pick <= 3 && BANK[bi].type === "mc" && !BANK[bi].opts[pick].c;
 }), "every TRAITS tag points at a real wrong answer");
-check(decodeBi({bn: 69}, 68) === 68 && decodeBi({bn: 69}, 69) === null, "bn-tagged attempts decode straight through");
+check(decodeBi({bn: 78}, 77) === 77 && decodeBi({bn: 78}, 78) === null, "bn-tagged attempts decode straight through");
+check(decodeBi({bn: 69}, 68) === 68 && decodeBi({bn: 69}, 69) === null, "the 69-bank generation still decodes correctly");
 check(decodeBi({bn: 64}, 63) === 63 && decodeBi({bn: 64}, 64) === null, "the 64-bank generation still decodes correctly");
 check(decodeBi({total: 34}, 26) === 26 && decodeBi({total: 34}, 27) === 35, "45-bank attempts decode with the +8 shift");
 check(decodeBi({total: 35}, 27) === 27 && decodeBi({total: 38}, 53) === 53, "54-bank attempts decode straight through");

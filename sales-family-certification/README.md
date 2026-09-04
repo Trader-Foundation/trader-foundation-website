@@ -19,9 +19,9 @@ each test pairs the shared product half with its own call.
 | | Setter | Education Coordinator |
 | --- | --- | --- |
 | Product and the offer | 28 questions (shared) | 28 questions (shared) |
-| Its own call | 17 (the setting call) | 22 (the strategy call) |
-| Total choice questions | 45 | 50 |
-| Passing | 36 of 45 | 40 of 50 |
+| Its own call | 22 (the setting call) | 26 (the strategy call) |
+| Total choice questions | 50 | 54 |
+| Passing | 40 of 50 | 44 of 54 |
 
 Every question is multiple choice. A result is final the moment it is submitted; there is no grading step.
 
