@@ -18,7 +18,7 @@ export default function Footer() {
           <div className="md:col-span-1">
             <Link href="/">
               <div className="flex items-center gap-3 mb-6 cursor-pointer">
-                <img src={LOGO_URL} alt="Trader Foundation" className="h-20 w-20 object-contain" />
+                <img src={LOGO_URL} alt="Trader Foundation" className="h-14 w-auto object-contain" />
                 <div className="flex flex-col leading-tight">
                   <span
                     className="text-[0.6rem] font-bold tracking-[0.35em] uppercase text-white/70"
