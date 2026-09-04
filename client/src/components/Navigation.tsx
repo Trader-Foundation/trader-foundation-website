@@ -56,7 +56,7 @@ export default function Navigation() {
               <img
                 src={LOGO_URL}
                 alt="Trader Foundation"
-                className="h-28 w-28 sm:h-32 sm:w-32 lg:h-36 lg:w-36 object-contain transition-transform duration-300 group-hover:scale-105"
+                className="h-14 sm:h-16 lg:h-20 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
               />
               <div className="flex flex-col leading-tight">
                 <span
