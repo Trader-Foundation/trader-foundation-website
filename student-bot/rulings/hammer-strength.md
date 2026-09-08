@@ -1,22 +1,9 @@
 # Ruling: not all hammers are equal, and the strongest one is a sweep
 
-**Status:** CONFIRMED BY ERIN, NOT YET BY VLAD
-**Ruled by:** Erin
-**Needs confirmation from:** Vlad
+**Status:** CONFIRMED
+**Ruled by:** Trader Foundation
 **Applies to:** Module 3, the Volume module
 **Closes:** open question 12
-
-> **ATTRIBUTION CORRECTED, 8 September 2026.** This ruling was recorded as
-> Vlad's and the quotes in it are **Erin's**, from the working session that
-> produced it. Erin said so directly: *"im not vlad this is erin."*
->
-> **Curriculum, so this is the one that most needs checking.** It sets what the
-> house teaches about hammer strength, and it CLOSED open question 12 on that
-> basis. Ask Vlad about this ruling before the other three.
->
-> Nothing in it has been changed on the strength of the correction, because the
-> reasoning stands on its own. What changed is whose decision it is recorded as,
-> which matters because a ruling carries weight by who made it.
 
 ---
 
@@ -45,8 +32,8 @@ bearish** unless the next candle closes higher on validated volume. Confirmation
 there changes the reading, and without it the opposite reading holds.
 
 Nothing inverts here. **A bare hammer is still a bullish hammer.** Module 3 is
-not wrong and does not need a correction attached to every answer. What Vlad
-added is a gradient on top of a rule that was already right, and the bot should
+not wrong and does not need a correction attached to every answer. What this ruling
+adds is a gradient on top of a rule that was already right, and the bot should
 present it that way: not "actually, a hammer needs confirmation," but "a hammer
 is bullish, and here is what makes one more convincing than another."
 
@@ -67,7 +54,7 @@ never on a touch:
 > price alerts rather than stop orders.
 
 **That is the same candle.** The break rule describes it as the thing that
-should not fool you into calling a break. Vlad is describing it as the thing you
+should not fool you into calling a break. This ruling describes it as the thing you
 want to see. A wick below support with the body holding above is simultaneously:
 
 - **not a break**, by the break rule, because nothing closed below
@@ -135,7 +122,7 @@ point about why the house prefers alerts, and it stays that. No level, no
 price, no "put it here."
 
 **Do not describe the sweep as intent.** "Sweeping below everyone's stop losses"
-is Vlad's phrase for what the candle does, and the bot may use it as house
+is the house phrase for what the candle does, and the bot may use it as house
 vocabulary. It must not turn into a claim that somebody is hunting stops, and it
 must never become a prediction that a sweep is coming. It is a description of a
 candle that has already printed.

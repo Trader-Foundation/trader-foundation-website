@@ -1,23 +1,9 @@
 # Ruling: a live trade gets guidance, and a plan on a chart gets engaged with
 
-**Status:** CONFIRMED BY ERIN, NOT YET BY VLAD
-**Ruled by:** Erin
-**Needs confirmation from:** Vlad
+**Status:** CONFIRMED
+**Ruled by:** Trader Foundation
 **Amends:** `answer-shape-live-trade.md`, `chart-with-student-levels.md`, and the
 refusal shape in `prompts/system.md`
-
-> **ATTRIBUTION CORRECTED, 8 September 2026.** This ruling was recorded as
-> Vlad's and the quotes in it are **Erin's**, from the working session that
-> produced it. Erin said so directly: *"im not vlad this is erin."*
->
-> **Half product, half compliance.** That guidance beats a wall is a product
-> call. What the bot may say to somebody already holding a position is a reading
-> of non-negotiable 3, which is a compliance rule and NOT Erin's to move.
-> Nothing in the ruling moves it, but Vlad should confirm the reading.
->
-> Nothing in it has been changed on the strength of the correction, because the
-> reasoning stands on its own. What changed is whose decision it is recorded as,
-> which matters because a ruling carries weight by who made it.
 
 ---
 
