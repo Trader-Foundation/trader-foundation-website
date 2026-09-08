@@ -591,7 +591,7 @@ const GENERIC_INSTRUMENT =
   /\b(a|an|the)?\s*(covered|naked|cash\s+secured)\s+(call|put)s?\b|\b(a|an)\s+(straddle|strangle|spread|diagonal|vertical|butterfly|condor|collar|call\s+option|put\s+option)\b|\b(calls?|puts?|options?|premium)\s+(on|against)\s+(a\s+|the\s+)?(stock|shares|position)\b|\b(how many|how much|what percent(age)?|what size|how big)\b/i;
 
 const DIRECT_ACTION =
-  /\bwould\s+you\s+(buy|sell|take|enter|get\s+in)\b|\b(is|was)\s+(now|this|that|it)\s+a\s+good\s+(entry|exit|time|price|buy|spot|level)\b|\bgood\s+(entry|time)\s+(here|now)\b|\b(buy|sell)\s+or\s+wait\b|\bdo\s+i\s+(buy|sell)\s+(this|that|it)\b|\b(good|bad|smart|dumb|terrible)\s+idea\b|\bthinking\s+(about|of)\s+(buying|selling|getting\s+in(to)?|taking)\b|\b(worth|ok|okay)\s+(getting\s+in|buying|selling|taking\s+this)\b|\bwhat\s+would\s+you\s+do\b/i;
+  /\bwould\s+you\s+(buy|sell|take|enter|get\s+in)\b|\b(is|was)\s+(now|this|that|it)\s+a\s+good\s+(entry|exit|time|price|buy|spot|level)\b|\bgood\s+(entry|time)\s+(here|now)\b|\b(buy|sell)\s+or\s+wait\b|\bdo\s+i\s+(buy|sell)\s+(this|that|it)\b|\b(good|bad|smart|dumb|terrible)\s+idea\b|\bthinking\s+(about|of)\s+(buying|selling|getting\s+in(to)?|taking)\b|\b(worth|ok|okay)\s+(getting\s+in|buying|selling|taking\s+this)\b|\bwhat\s+would\s+you\s+do\b|\bgood\s+(long|short|buy|entry|play|setup)\s+(here|now|today)\b|\b(long|short)\s+(here|now)\b/i;
 
 const GUARDS = [
   {
@@ -691,7 +691,7 @@ const GUARDS = [
       // Specific AND asking to be told what to do with it.
       return /\b(should i|do i|would you|shall i|can i|is it worth|worth it to|when (do|should) i|what (do|should) i)\b/i.test(q)
         || /\b(roll|cut|close|exit|hold|add to|trim|sell|buy)\b/i.test(q)
-        || /\b(strike|expiration|expiry|entry|exit|stop loss|position siz|how many contracts)\b/i.test(q);
+        || /\b(strike|expiration|expiry|entry|exit|stop loss|position siz|how many contracts)\b|\blooks?\s+like\s+(a\s+|an\s+)?(long|short|buy|sell|entry|play|setup|trade)\b|\ba\s+(good|solid|clean|decent)\s+(long|short|buy|entry|play|setup|trade)\b|\b(worth|ok|okay)\s+(a\s+)?(long|short|shot|play)\b/i.test(q);
     },
     shape:[
       "FIRST decide which of two situations this is, because they get different answers.",

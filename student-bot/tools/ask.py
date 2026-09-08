@@ -132,14 +132,25 @@ DIRECT_ACTION = re.compile(
     r"\b(good|bad|smart|dumb|terrible)\s+idea\b|"
     r"\bthinking\s+(about|of)\s+(buying|selling|getting\s+in(to)?|taking)\b|"
     r"\b(worth|ok|okay)\s+(getting\s+in|buying|selling|taking\s+this)\b|"
-    r"\bwhat\s+would\s+you\s+do\b", re.I)
+    r"\bwhat\s+would\s+you\s+do\b|"
+    # Needs no ticker: "here" and "now" already point at one chart.
+    r"\bgood\s+(long|short|buy|entry|play|setup)\s+(here|now|today)\b|"
+    r"\b(long|short)\s+(here|now)\b", re.I)
 
 ASKING_WHAT_TO_DO = re.compile(
     r"\b(should i|do i|would you|shall i|can i|is it worth|worth it to|"
     r"when (do|should) i|what (do|should) i)\b|"
     r"\b(roll|cut|close|exit|hold|add to|trim|sell|buy)\b|"
     r"\b(strike|expiration|expiry|entry|exit|stop loss|position siz|"
-    r"how many contracts)\b", re.I)
+    r"how many contracts)\b|"
+    # "Does SOXL look like a long" asks for a direction on a named ticker, which
+    # is non-negotiable 3, and NOTHING fired on it. The verb list wanted
+    # buy/sell/hold and this phrasing carries none of them: the trade is the
+    # noun. Gated on a ticker or a live position like the rest of this list, so
+    # "what makes a valid long setup" stays a lesson.
+    r"\blooks?\s+like\s+(a\s+|an\s+)?(long|short|buy|sell|entry|play|setup|trade)\b|"
+    r"\ba\s+(good|solid|clean|decent)\s+(long|short|buy|entry|play|setup|trade)\b|"
+    r"\b(worth|ok|okay)\s+(a\s+)?(long|short|shot|play)\b", re.I)
 
 def position_guard(q):
     # Walking someone through placing a trade needs no second signal. It is the
