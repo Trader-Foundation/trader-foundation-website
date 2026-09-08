@@ -141,7 +141,7 @@ const GUARDS = [
     // "this chart" as well as "my chart". An earlier version matched only the
     // possessive, so "what do you think of this chart" reached retrieval
     // unguarded and the bot was free to opine on a chart it cannot see.
-    test:q => /(does|is|has) (this|it|that|my)|look(s)? (bullish|bearish|good|weak|strong)|confirm|did (the )?volume|is (this|that|it) a (hammer|doji|marubozu|engulfing|breakout|bounce)|on my chart|\b(this|that|these|those|my)\s+(chart|screenshot|screen|setup|candles?)\b|\bmy (support|resistance|levels?|lines?)\b/i.test(q),
+    test:q => /(does|is|has) (this|it|that|my)(?!\s+mean\b)|look(s)? (bullish|bearish|good|weak|strong)|confirm|did (the )?volume|is (this|that|it) a (hammer|doji|marubozu|engulfing|breakout|bounce)|on my chart|\b(this|that|these|those|my)\s+(chart|screenshot|screen|setup|candles?)\b|\bmy (support|resistance|levels?|lines?)\b/i.test(q),
     shape:[
       "The decision comes down to the chart, and the bot cannot see yours.",
       "It does not ask for the candle or the volume bar in order to rule on it either, because rendering that verdict is the same violation whether or not it was invited.",

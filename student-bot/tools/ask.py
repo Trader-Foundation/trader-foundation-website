@@ -199,7 +199,14 @@ GUARDS = [
      lambda q, c: c.get("image")),
     ("chart", "Cannot see it", "non-negotiable 4, plus the-chart-decides ruling",
      lambda q, c: re.search(
-         r"(does|is|has) (this|it|that|my)|look(s)? (bullish|bearish|good|weak|strong)|"
+         # "What does it mean when a candle is red" is a definition question and the
+         # most common thing a beginner types. The bare pronoun clause was
+         # matching "does it" inside "what does it mean" and answering with "I
+         # cannot see your chart", which is the worst possible first experience
+         # for the audience Vlad just added. Same shape as the position guard's
+         # bare action form: the clause finds the words and not the intent.
+         r"(does|is|has) (this|it|that|my)(?!\s+mean\b)|"
+         r"look(s)? (bullish|bearish|good|weak|strong)|"
          r"confirm|did (the )?volume|is (this|that|it) a (hammer|doji|marubozu|engulfing|"
          r"breakout|bounce)|on my chart|"
          r"\b(this|that|these|those|my)\s+(chart|screenshot|screen|setup|candles?)\b|"
