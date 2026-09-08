@@ -841,3 +841,34 @@ which is the opposite of the working rule that this file exists to serve.
 Student conversations must be logged and visible to coaches. This is what makes the bot an intake layer that strengthens the coaching relationship rather than a parallel channel that quietly erodes it.
 
 If the architecture cannot support coach visibility, that needs raising before any build starts, not after.
+
+---
+
+## Leveraged and inverse ETFs: is there a house position?
+
+**Raised 8 September 2026, by a real question during testing.** Vlad asked the
+bot whether a 20 SMA target was reasonable on GGLL, a 2x leveraged GOOGL
+product, while charting GOOGL itself.
+
+**What the corpus has.** Almost nothing. Zero passages mention 2x, 3x,
+rebalancing, or decay in a leveraged product. Leveraged and inverse ETFs appear
+exactly twice, both in live sessions and both in passing: an inverse
+semiconductor ETF played as a bearish idea, and LABD, where the position taken
+was *"I definitely wouldn't do credit spread on this one, just because it's a
+leveraged ETF biotech."*
+
+That second one is close to a rule and might be the start of one.
+
+**What the bot did, and why it is logged here.** It answered from general
+trading knowledge, saying such products decay differently. Correct, and taught
+nowhere, presented alongside two genuine citations. The grounding rule in
+system.md now names this instance directly.
+
+**The question for Vlad.** Do you teach anything about holding leveraged
+products: whether students should trade them at all, whether the daily rebalance
+matters over a multi-day hold, whether reading the underlying's chart to set a
+target on the leveraged version is sound? Or is the honest answer that the
+curriculum does not cover them and the bot should say so?
+
+Until this is ruled, the bot names the gap and answers only the part it is
+grounded in, which is whether the target is a real level.
