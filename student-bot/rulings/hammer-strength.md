@@ -1,9 +1,22 @@
 # Ruling: not all hammers are equal, and the strongest one is a sweep
 
-**Status:** CONFIRMED
-**Ruled by:** Vlad
+**Status:** CONFIRMED BY ERIN, NOT YET BY VLAD
+**Ruled by:** Erin
+**Needs confirmation from:** Vlad
 **Applies to:** Module 3, the Volume module
 **Closes:** open question 12
+
+> **ATTRIBUTION CORRECTED, 8 September 2026.** This ruling was recorded as
+> Vlad's and the quotes in it are **Erin's**, from the working session that
+> produced it. Erin said so directly: *"im not vlad this is erin."*
+>
+> **Curriculum, so this is the one that most needs checking.** It sets what the
+> house teaches about hammer strength, and it CLOSED open question 12 on that
+> basis. Ask Vlad about this ruling before the other three.
+>
+> Nothing in it has been changed on the strength of the correction, because the
+> reasoning stands on its own. What changed is whose decision it is recorded as,
+> which matters because a ruling carries weight by who made it.
 
 ---
 

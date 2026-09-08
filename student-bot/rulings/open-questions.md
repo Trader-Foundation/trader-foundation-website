@@ -780,7 +780,10 @@ Options: re-export with timestamps from the transcription tool, or run a pass ag
 
 ## 12. Hammer, possible advancement past the recording
 
-**CLOSED. Ruled by Vlad.** See `rulings/hammer-strength.md`. Not a
+**CLOSED BY ERIN, NOT YET BY VLAD.** See `rulings/hammer-strength.md`. This is
+a curriculum ruling and it was recorded as Vlad's in error; the words in it are
+Erin's. It stands as written and it needs Vlad's confirmation before it counts
+as settled. Not a
 confirmation condition and not a gate: a strength ladder on top of a rule that
 was already right. A bare hammer is still a bullish hammer. Hammer with
 validated volume closing green is stronger. **Strongest is a hammer at support
@@ -846,7 +849,7 @@ If the architecture cannot support coach visibility, that needs raising before a
 
 ## Leveraged and inverse ETFs: is there a house position?
 
-**Raised 8 September 2026, by a real question during testing.** Vlad asked the
+**Raised 8 September 2026, by a real question during testing.** Erin asked the
 bot whether a 20 SMA target was reasonable on GGLL, a 2x leveraged GOOGL
 product, while charting GOOGL itself.
 
@@ -872,3 +875,38 @@ curriculum does not cover them and the bot should say so?
 
 Until this is ruled, the bot names the gap and answers only the part it is
 grounded in, which is whether the target is a real level.
+
+---
+
+## Attribution correction, and what it leaves needing Vlad
+
+**Raised 8 September 2026, at the end of the working session that produced the
+four rulings below.** Those rulings were written as Vlad's. The person in the
+session was Erin, who said so directly: *"im not vlad this is erin."* The quotes
+inside them are Erin's words.
+
+Nothing in the four has been changed on the strength of the correction, because
+the reasoning stands on its own and the bot behaves the same either way. What
+changed is whose decision each one is recorded as, which matters because a
+ruling carries weight by who made it, and because `rulings/README.md` says a
+ruling is Vlad's decision or it is not a ruling.
+
+**Needs Vlad, in the order I would ask:**
+
+| | Ruling | Why it needs him |
+|---|---|---|
+| 1 | `hammer-strength.md` | **Curriculum.** It sets what the house teaches about hammer strength, and it CLOSED open question 12 on that basis. If it is wrong, students are taught something Vlad does not teach. Ask this one first |
+| 2 | `live-trade-is-guidance.md` | **Half compliance.** That guidance beats a wall is a product call. What the bot may say to somebody already holding a position is a reading of non-negotiable 3, and non-negotiables are not Erin's to move. Nothing in the ruling moves it; Vlad should confirm the reading |
+| 3 | `beginners-and-traders.md` | **Product.** Who the bot serves. It widens the audience the bot was specified for, which is a business call more than a curriculum one |
+| 4 | `teach-then-hand-back.md` | **Product.** Answer shape: teach first, then hand back. It amends the live-trade shape in `prompts/system.md` |
+
+`prompts/system.md` carries all four and each section there now names Erin and
+says it is not yet confirmed.
+
+**Also open for Vlad, and already logged elsewhere:**
+
+- Leveraged and inverse ETFs, the section directly above.
+- Two outcome-language passages flagged `needs_review` in
+  `compliance-log.md`: *"make you very wealthy"* and *"great way to really make
+  some great money"*, both Module 16.
+- Module 1's *"you will literally have my whole portfolio"*.

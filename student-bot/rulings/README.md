@@ -17,7 +17,11 @@ Where a recording and a ruling conflict, the ruling wins and the bot follows the
 
 ## Adding a ruling
 
-A ruling is Vlad's decision, not an inference from the transcript and not a fallback to standard convention. If it has not been confirmed, it goes in `open-questions.md`, not here.
+A ruling is a decision by someone at Trader Foundation, not an inference from the transcript and not a fallback to standard convention. If it has not been confirmed by a person, it goes in `open-questions.md`, not here.
+
+**Every ruling records who made it, and that is not a formality.** A curriculum ruling says what the house teaches and only Vlad can make one. A product ruling says how the bot answers and Erin can settle it. A ruling that touches a non-negotiable is compliance and needs Vlad regardless of who raised it.
+
+Four rulings currently read **CONFIRMED BY ERIN, NOT YET BY VLAD**: `hammer-strength.md`, `live-trade-is-guidance.md`, `teach-then-hand-back.md`, `beginners-and-traders.md`. They were first written as Vlad's in error. The bot follows them, and the last section of `open-questions.md` lists what Vlad still needs to sign off and in what order.
 
 Every confirmed ruling records:
 

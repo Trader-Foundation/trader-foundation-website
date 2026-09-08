@@ -1,8 +1,21 @@
 # Ruling: the same bot serves a beginner and a trader mid-position
 
-**Status:** CONFIRMED
-**Ruled by:** Vlad
+**Status:** CONFIRMED BY ERIN, NOT YET BY VLAD
+**Ruled by:** Erin
+**Vlad has not seen this**
 **Amends:** the framing in `CLAUDE.md`, and `teach-then-hand-back.md`
+
+> **ATTRIBUTION CORRECTED, 8 September 2026.** This ruling was recorded as
+> Vlad's and the quotes in it are **Erin's**, from the working session that
+> produced it. Erin said so directly: *"im not vlad this is erin."*
+>
+> **Product, and arguably business.** Who the bot serves. Not a curriculum
+> question, but it widens the audience the bot was specified for, which is worth
+> Vlad knowing about even though nothing in it needs his sign-off.
+>
+> Nothing in it has been changed on the strength of the correction, because the
+> reasoning stands on its own. What changed is whose decision it is recorded as,
+> which matters because a ruling carries weight by who made it.
 
 ---
 

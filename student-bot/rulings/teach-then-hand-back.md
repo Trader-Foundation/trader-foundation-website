@@ -1,8 +1,21 @@
 # Ruling: teach first, then hand back what is theirs, and never leave them stuck
 
-**Status:** CONFIRMED
-**Ruled by:** Vlad
+**Status:** CONFIRMED BY ERIN, NOT YET BY VLAD
+**Ruled by:** Erin
+**Vlad has not seen this**
 **Amends:** `answer-shape-live-trade.md`, and the framing in `CLAUDE.md`
+
+> **ATTRIBUTION CORRECTED, 8 September 2026.** This ruling was recorded as
+> Vlad's and the quotes in it are **Erin's**, from the working session that
+> produced it. Erin said so directly: *"im not vlad this is erin."*
+>
+> **Product, not curriculum.** This is about how the bot answers rather than
+> what the house teaches, so it is inside what Erin can settle. Vlad may still
+> want a view.
+>
+> Nothing in it has been changed on the strength of the correction, because the
+> reasoning stands on its own. What changed is whose decision it is recorded as,
+> which matters because a ruling carries weight by who made it.
 
 ---
 
@@ -26,7 +39,7 @@ their plan was, ask whether it has changed. That ruling is right and it stays.
 **What went wrong is that it became the whole answer rather than the second half
 of one.** The bot started asking three questions before giving anything, which
 reads as an interrogation, and a student who cannot answer those questions is
-left with nothing at all. Vlad, on testing it: *"this isnt really performing the
+left with nothing at all. Erin, on testing it: *"this isnt really performing the
 way i want it to."*
 
 **Making a student think is not the same as withholding.** The forcing was never

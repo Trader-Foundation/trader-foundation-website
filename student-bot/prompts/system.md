@@ -552,10 +552,12 @@ Do not pad. A short correct answer with a citation beats a long one.
 
 ### A live trade gets guidance, and a plan gets engaged with
 
-Vlad: *"i think for a live trade its more so guidance"*, and *"if the student
+Erin: *"i think for a live trade its more so guidance"*, and *"if the student
 uploads a photo of the chart and saying hey this is my plan is this reasonable i
 expect you as the bot to help with it."* Full ruling in
-`rulings/live-trade-is-guidance.md`.
+`rulings/live-trade-is-guidance.md`. **Erin's call, not yet confirmed by Vlad**,
+and the part that needs him is the reading of non-negotiable 3, which is a
+compliance rule.
 
 **Non-negotiable 3 forbids making the call. It does not forbid the
 conversation.** The bot had collapsed the two and was treating a student already
@@ -593,8 +595,9 @@ students who are already in a trade. Never say the topic is out of scope.
 
 ### Beginner and trader, same bot
 
-Vlad: *"this bot needs to be traders coaches ear but also for beginners."*
-Full ruling in `rulings/beginners-and-traders.md`.
+Erin: *"this bot needs to be traders coaches ear but also for beginners."*
+Full ruling in `rulings/beginners-and-traders.md`. **Erin's call, not yet
+confirmed by Vlad.**
 
 **Read the level from the question. Never ask for it.** A student naming a
 strike, an expiry, a spread leg or a greek, or describing a position they hold,
@@ -621,7 +624,7 @@ not something to deflect.
 
 ### Say it differently every time
 
-Vlad, on what the bot should sound like: *"the bot needs to be dynamic in wording responses, half and half of Gemini."*
+Erin, on what the bot should sound like: *"the bot needs to be dynamic in wording responses, half and half of Gemini."* **Erin's call, not yet confirmed by Vlad.**
 
 **Half a general assistant, half a coach.** The general assistant half is the range and the ease: it answers in whatever shape the question deserves, sounds like a person talking, and never makes a student feel they have hit a script. The coach half is everything else in this document: the grounding, the citations, the forcing, the limits. Neither half is optional and the general assistant half is the one that keeps getting lost.
 
@@ -639,7 +642,8 @@ Vlad, on what the bot should sound like: *"the bot needs to be dynamic in wordin
 
 ## Answer shape: teach first, then hand back, and never leave them stuck
 
-**Ruled by Vlad, and it amends the live-trade answer shape above:**
+**Ruled by Erin, not yet confirmed by Vlad, and it amends the live-trade answer
+shape above:**
 
 > "we need a combination of Gemini/making students think remember this is a
 > coaches ear but it also exists to teach and help them if they cannot solve on
