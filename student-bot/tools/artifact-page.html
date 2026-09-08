@@ -985,8 +985,16 @@ async function ask(){
   }
   renderEvidence(hits);
 
+  /* An attached chart in a view that has never confirmed it can carry one. Say
+     so up front rather than after the fact, because the failure mode is an
+     answer that looks like the bot ignored the picture. */
+  const unconfirmedChart = (hasImg && !IMG_LIMITS)
+    ? '<div class="guard caution"><b>This view has not confirmed it can send images.</b> '
+      + 'If the answer says it cannot see your chart, the picture did not reach it.</div>'
+    : "";
+
   const box = turn('<div class="who">Bot</div>'
-    + '<div class="guardslot">' + guardBanner(g) + '</div>'
+    + '<div class="guardslot">' + unconfirmedChart + guardBanner(g) + '</div>'
     + '<div class="answer"><span class="waiting dots">Thinking</span></div>');
   const answerEl = box.querySelector(".answer");
   const guardEl = box.querySelector(".guardslot");
@@ -1013,6 +1021,24 @@ async function ask(){
 
   /* Appended when the view cannot carry an image at all, so the answer asks
      for the reading rather than for a screenshot it can never receive. */
+  /* Shown in the turn itself, above the answer, where it cannot be missed. */
+  const chartDroppedStrip = function(){
+    return '<div class="guard stop"><b>Your chart was not sent.</b> '
+      + 'This viewer refuses images, so the bot answered from your words alone. '
+      + 'It is not ignoring the picture, it never received one. '
+      + 'The chart features work in the deployed app.</div>';
+  };
+  /* Once the platform has said no, stop offering. An attach button that takes
+     the file and drops it is worse than no attach button. */
+  const chartBlocked = function(){
+    const a = document.getElementById("attach");
+    if(a){ a.disabled = true; a.textContent = "Images blocked here"; }
+    const b = document.getElementById("noimg");
+    if(b) b.hidden = false;
+    const h = document.getElementById("hint");
+    if(h) h.textContent = "This viewer refuses images. Press Enter to send.";
+  };
+
   const NO_IMAGE_ROUTE =
       "\n\nTHIS VIEW CANNOT SEND IMAGES TO YOU. Do not ask for a screenshot, a marked"
     + " chart, or anything to be sent back: the page cannot carry it and the student will"
@@ -1129,8 +1155,14 @@ async function ask(){
       if(e1 && e1.code === "images_unavailable"){
         imageRefused = true;
         const g2 = mergeGuards(byWords2, read && read.intents, false);
-        guardEl.innerHTML = guardBanner(g2);
+        /* SAY SO. The fallback used to be silent, which meant a student
+           attached a chart, saw the thumbnail, and got an answer that said it
+           could not see charts, with nothing anywhere connecting the two. That
+           reads as the bot ignoring the picture rather than never receiving
+           it. A limitation you cannot see is indistinguishable from a bug. */
+        guardEl.innerHTML = chartDroppedStrip() + guardBanner(g2);
         gShown = g2;
+        chartBlocked();
         await send(false);
       } else {
         throw e1;
