@@ -75,6 +75,15 @@ PERCENT_CASES = [
     ("well, we were up 4%. So that's a big move", "[PERFORMANCE REDACTED]"),
     ("I was up 12% on that one", "[PERFORMANCE REDACTED]"),
     ("she was down 8% by Friday", "[PERFORMANCE REDACTED]"),
+    # Second person direct address, found live in 0088 right next to a
+    # correctly redacted first-person figure for the same trade.
+    ("And you're up 80%. So you must have gotten in early", "[PERFORMANCE REDACTED]"),
+    ("you are down 25% on that position", "[PERFORMANCE REDACTED]"),
+    # Impersonal referent to the position, not a person. Also found live in
+    # 0088, third figure in the same passage as the two above.
+    ("That one's also up 70% now", "[PERFORMANCE REDACTED]"),
+    ("it's up 20% since Monday", "[PERFORMANCE REDACTED]"),
+    ("this one is down 15% today", "[PERFORMANCE REDACTED]"),
 ]
 
 # A pinned regression for the specific passage that surfaced this: the same

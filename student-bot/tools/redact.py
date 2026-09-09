@@ -106,6 +106,34 @@ MONEY = [
                 r"he(?:'s| is| was)?|she(?:'s| is| was)?)\s+"
                 r"(?:up|down)\s+(?:about\s+|around\s+|like\s+)?\$?\d[\d,]*(?:\.\d+)?\s*"
                 r"(?:%|percent\b|dollars\b|bucks\b|k\b)?", re.I), "[PERFORMANCE REDACTED]"),
+    # Second person, direct address: a coach telling a member their own
+    # number back to them. Found live in 0088, in the same passage and same
+    # shape as every leak above: "I'm up 80%" redacted correctly, then "And
+    # you're up 80%" two words later, same figure, printed in full.
+    #
+    # Unlike the first person pattern above, the trailing unit here is
+    # mandatory, not optional, and "it's up 4300" describing an index level
+    # is exactly the kind of ordinary market narration this corpus is full
+    # of; a bare number after "up/down" is not confidently a personal result
+    # the way it is in first person, so this pattern requires an explicit $
+    # or a %/percent/dollars/bucks unit rather than guessing.
+    (re.compile(r"\byou(?:'re| are)\s+"
+                r"(?:up|down)\s+(?:about\s+|around\s+|like\s+)?"
+                r"(?:\$\d[\d,]*(?:\.\d+)?|\d[\d,]*(?:\.\d+)?\s*"
+                r"(?:%|percent\b|dollars\b|bucks\b))", re.I), "[PERFORMANCE REDACTED]"),
+    # Impersonal referent to the position itself rather than to a person:
+    # "it's up X%", "that one's up X%", "this is up X%". None of the pronoun
+    # patterns above catch it because there is no person-pronoun at all, only
+    # a demonstrative standing in for "the trade." Found live in 0088, third
+    # figure in the same passage as the two above: "That one's also up 70%."
+    # Same mandatory-unit reasoning as the second person case just above:
+    # "it's up" and "that's up" precede index and price levels constantly in
+    # this corpus, and only a real unit tells a personal result apart from
+    # ordinary narration.
+    (re.compile(r"\b(?:it|that one|this one|that|this)(?:'s| is)\s+(?:also\s+|still\s+)?"
+                r"(?:up|down)\s+(?:about\s+|around\s+|like\s+)?"
+                r"(?:\$\d[\d,]*(?:\.\d+)?|\d[\d,]*(?:\.\d+)?\s*"
+                r"(?:%|percent\b|dollars\b|bucks\b))", re.I), "[PERFORMANCE REDACTED]"),
     (re.compile(r"\b\d{1,3}\s?%\s?(?:profit|loss|gain|return|down|up)\b", re.I),
      "[PERFORMANCE REDACTED]"),
     (re.compile(r"\b(?:made|lost|profited|banked|pocketed)\s+\$?\d[\d,]*(?:\.\d+)?\s*"
