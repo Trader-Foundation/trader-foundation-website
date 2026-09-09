@@ -753,3 +753,32 @@ system prompt requires the bot never sound promotional, and this is the most
 promotional language anywhere in the curriculum. **This is Vlad's call, not
 mine**, so both chunks are indexed and marked `needs_review` rather than
 excluded or rewritten. If he wants them out, one line in EXCLUDE does it.
+
+## FB Live Q&A extraction pass, 9 September 2026
+
+Reading all 29 ingested FB Live transcripts end to end to extract genuine
+member question-and-answer pairs (`transcripts/fb-live-questions-and-answers.md`)
+surfaced six passages carrying a specific figure attached to performance.
+None of these are in the corpus and none have been excluded here. They are
+flagged, per the standing rule, for review before any of this Q&A document is
+used to build anything the bot could serve.
+
+**Also found: a redaction failure, not just a compliance one.** One of the six,
+below, has a performance figure that was redacted once in the transcript and
+then leaks through unredacted two sentences later in the same passage. That is
+written up on its own, because it is a different and more serious problem than
+a compliance hit: see `redaction-defects-fb-live.md`.
+
+| Source | The passage | Why it is flagged |
+|---|---|---|
+| FB Live #0001 | "getting in now means getting in at 105 for 10%, versus waiting longer meaning moving down for that same 10%" | A specific percentage tied to a live spread setup |
+| FB Live #0003 | "ten percent showed up overnight" on a Netflix debit spread | A specific percentage tied to a real trade outcome |
+| FB Live #0040 | a member describing "losing like 40%" on a live position | A specific loss percentage, member's own words |
+| FB Live #0153 | "Technically yes, that'd be a hundred percent correct... collect all of it" | States 100% of profit is collectable in a specific scenario |
+| FB Live #0154 | a bought-for/sold-at cents walkthrough on a live credit spread close | Specific dollar figures tied to a profit-taking mechanic |
+| FB Live #0159 | "Take your 300%" | States a specific historical return on a member's own trade. **Also the redaction leak, see above.** |
+
+None of these six are corpus content today. They exist only in the new Q&A
+document, which is explicitly not indexed and not retrievable (see that
+document's header). Logged here so the flag travels with the finding rather
+than only living in a document nobody checks against this log later.

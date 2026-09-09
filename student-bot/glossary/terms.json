@@ -184,6 +184,84 @@
    "right": "a little bit of a wick",
    "found_in": "Module 3",
    "note": "Another instance of wick being mis-heard, this time as 'week'. Same class as wig and weight."
+  },
+  {
+   "wrong": [
+    "sarcastics",
+    "catholics"
+   ],
+   "right": "stochastics",
+   "found_in": "FB Live sessions",
+   "note": "Recurring across at least two FB Live files. Stochastics is a taught indicator, this is a high-value fix."
+  },
+  {
+   "wrong": [
+    "hammerkin",
+    "hairy candle"
+   ],
+   "right": "hammer candle",
+   "found_in": "FB Live #0004",
+   "note": "Same sentence garbled it two different ways."
+  },
+  {
+   "wrong": [
+    "finfin vis"
+   ],
+   "right": "FinViz",
+   "found_in": "FB Live #0159",
+   "note": "Screener tool name."
+  },
+  {
+   "wrong": [
+    "weeble",
+    "we both"
+   ],
+   "right": "Webull",
+   "found_in": "FB Live #0019",
+   "note": "Brokerage name."
+  },
+  {
+   "wrong": [
+    "deb is fred"
+   ],
+   "right": "debit spread",
+   "found_in": "FB Live #0010",
+   "note": "Phrase-level garble of a core term."
+  },
+  {
+   "wrong": [
+    "panda w",
+    "pan w"
+   ],
+   "right": "PANW",
+   "found_in": "FB Live #0027",
+   "note": "Ticker, Palo Alto Networks."
+  },
+  {
+   "wrong": [
+    "cute calm",
+    "cucumb",
+    "cue come"
+   ],
+   "right": "QCOM",
+   "found_in": "FB Live #0022, #0013",
+   "note": "Ticker, Qualcomm. Three different garbles for the same ticker."
+  },
+  {
+   "wrong": [
+    "college klu"
+   ],
+   "right": "KALU",
+   "found_in": "FB Live #0045",
+   "note": "Ticker, Kaiser Aluminum. Confirmed when the member spells 'k a l u' moments later in the same session."
+  },
+  {
+   "wrong": [
+    "50 sla"
+   ],
+   "right": "50 SMA",
+   "found_in": "FB Live #0032",
+   "note": "Moving average, single-letter transcription slip."
   }
  ],
  "numeric_corrections": {
@@ -445,6 +523,56 @@
    "text": "Dal hammer",
    "found_in": "FB Live 0010",
    "note": "Either the ticker DAL with a hammer candle, or 'doji hammer'. Surrounding passage compares hammers with long lower shadows, so either reading is plausible. Needs Vlad."
+  },
+  {
+   "text": "Cenex",
+   "found_in": "FB Live #0045",
+   "note": "Spoken alongside the confirmed KALU reference in an aluminum-tickers discussion. Likely Century Aluminum, ticker CENX, but not confirmed the way KALU was. Needs Vlad or an audio check."
+  },
+  {
+   "text": "rco",
+   "found_in": "FB Live #0019",
+   "note": "Possibly RCL (Royal Caribbean), discussed two lines earlier in the same file. Needs Vlad or an audio check."
+  },
+  {
+   "text": "tecom",
+   "found_in": "FB Live #0156",
+   "note": "Unclear ticker, context is consumer discretionary sector. No confident match. Needs Vlad or an audio check."
+  },
+  {
+   "text": "IDE",
+   "found_in": "FB Live #0010",
+   "note": "Used as a ticker but never resolves to a real one on screen. Needs Vlad or an audio check."
+  },
+  {
+   "text": "Ditchy VI",
+   "found_in": "FB Live #0040",
+   "note": "Unidentified ticker, real-estate adjacent context. Needs Vlad or an audio check."
+  },
+  {
+   "text": "DOMA",
+   "found_in": "FB Live #0016",
+   "note": "Unclear, appears at the opening of a lesson segment. Needs Vlad or an audio check."
+  },
+  {
+   "text": "a Democrat",
+   "found_in": "FB Live #0018",
+   "note": "Appears in an implied-volatility context, almost certainly a mis-hearing of a different term entirely. Needs Vlad or an audio check."
+  },
+  {
+   "text": "Canyon elaborate on different ball",
+   "found_in": "FB Live #0016",
+   "note": "Likely 'Can you elaborate on the different Bollinger Bands'. Phrase-level garble, high confidence reading but not confirmed."
+  },
+  {
+   "text": "Undertaker, oh they got a new ticker symbol",
+   "found_in": "FB Live #0002",
+   "note": "Likely 'under a new ticker symbol'. Phrase-level garble."
+  },
+  {
+   "text": "Baraboo Papa Look at me",
+   "found_in": "FB Live #0001",
+   "note": "Opening line of the session. Unclear, no confident reading. Needs Vlad or an audio check."
   }
  ],
  "protected_vocabulary": {
