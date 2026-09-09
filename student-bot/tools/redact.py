@@ -96,7 +96,14 @@ MONEY = [
     # followed by punctuation ("300%."), and the regex backtracks to leaving
     # the % sign behind, unredacted, right after the marker. Found live in
     # 0159: "[PERFORMANCE REDACTED]%." instead of "[PERFORMANCE REDACTED]".
-    (re.compile(r"\b(?:i(?:'m| am)?|we(?:'re| are)?|he(?:'s| is)?|she(?:'s| is)?)\s+"
+    #
+    # Past tense ("was"/"were") is a separate alternative from present tense,
+    # not an afterthought: without it, "we were up 4%" survives untouched
+    # right next to a correctly redacted "we're up X%" two sentences earlier
+    # in the same passage. Found live in 0181, at scale, once the corpus grew
+    # past the handful of files this pattern was originally tuned against.
+    (re.compile(r"\b(?:i(?:'m| am| was)?|we(?:'re| are| were)?|"
+                r"he(?:'s| is| was)?|she(?:'s| is| was)?)\s+"
                 r"(?:up|down)\s+(?:about\s+|around\s+|like\s+)?\$?\d[\d,]*(?:\.\d+)?\s*"
                 r"(?:%|percent\b|dollars\b|bucks\b|k\b)?", re.I), "[PERFORMANCE REDACTED]"),
     (re.compile(r"\b\d{1,3}\s?%\s?(?:profit|loss|gain|return|down|up)\b", re.I),

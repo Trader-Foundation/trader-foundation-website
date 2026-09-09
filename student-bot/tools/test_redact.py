@@ -31,6 +31,16 @@ with one \b placed after the whole group. % is not a word character, so that
 backtracks to excluding % from the match rather than failing outright. No
 digit leaked here, but a dangling % next to a marker is still a symbol the
 redaction was supposed to remove, not scatter beside its own tag.
+
+Case 4: found once the corpus grew from 29 files to 393. "In two weeks, we're
+up about seven point a half percent... Well, we were up 4%." The first "up"
+survived because the figure is spelled out ("seven point a half") rather than
+numeric, which no MONEY pattern reads at all; that gap is real but not fixed
+here, it needs a word-number parser to do safely. The second, "we were up 4%",
+was a plain miss: the first person pattern only recognised present tense
+("I'm up", "we're up"), not past tense, so "we were up 4%" sat unredacted
+right next to a correctly redacted figure in the same passage, same failure
+shape as case 2.
 """
 import importlib.util
 import sys
@@ -62,6 +72,9 @@ PERCENT_CASES = [
     ("Take your 300%. Are you kidding me? It's not even a real question.",
      "[PERFORMANCE REDACTED]"),
     ("keep their 40% and get out", "[PERFORMANCE REDACTED]"),
+    ("well, we were up 4%. So that's a big move", "[PERFORMANCE REDACTED]"),
+    ("I was up 12% on that one", "[PERFORMANCE REDACTED]"),
+    ("she was down 8% by Friday", "[PERFORMANCE REDACTED]"),
 ]
 
 # A pinned regression for the specific passage that surfaced this: the same
@@ -75,6 +88,14 @@ LEAK_CASE = (
 # Pinned regression for case 3, reproducing the real 0159 sentence: no
 # digit AND no stray "%" should survive next to the marker.
 DANGLING_PERCENT_CASE = "Oh my gosh, he, I'm up like 300%. Please, please."
+
+# Pinned regression for case 4's fixable half (past tense), reproducing the
+# real 0181 sentence. The spelled-out "seven point a half percent" earlier in
+# the same real passage is a known, separate gap this does not close.
+PAST_TENSE_CASE = (
+    "That's Monday here. I'm up about 7%. "
+    "Well, we were up 4%. So that's a big move on the spy, right?"
+)
 
 fail = 0
 
@@ -116,6 +137,13 @@ if "300" in out or "%" in out:
 else:
     print(f"ok    no dangling percent sign: {DANGLING_PERCENT_CASE}")
 
-total = len(VERB_CASES) + len(NAME_CASES) + len(PERCENT_CASES) + 2
+out, _ = redact(PAST_TENSE_CASE)
+if out.count("[PERFORMANCE REDACTED]") != 2 or "7%" in out or "4%" in out:
+    fail += 1
+    print(f"FAIL  past tense figure leaked: {PAST_TENSE_CASE!r}\n      -> {out!r}")
+else:
+    print(f"ok    present and past tense both redacted: {PAST_TENSE_CASE}")
+
+total = len(VERB_CASES) + len(NAME_CASES) + len(PERCENT_CASES) + 3
 print(f"\n{total} cases, {fail} wrong")
 sys.exit(1 if fail else 0)
