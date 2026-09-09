@@ -82,11 +82,50 @@ def redact_mark(text):
 
     return MARK_PATTERN.sub(repl, text), n
 
+# Account size stated as "<number>k/g's/grand", e.g. "10 G's" or "10 grand".
+# Handled separately from the MONEY list below, like redact_mark, because it
+# needs a context guard: see redact_account_size_k for why.
+ACCOUNT_SIZE_K = re.compile(r"\b\d[\d,]*\s*(?:k|g'?s?|grand)\b", re.I)
+ACCOUNT_SIZE_VOLUME_GUARD = re.compile(r"volume|\bvol\b", re.I)
+
+
+def redact_account_size_k(text):
+    """Redact '<number>k/g's/grand' as an account size, except where a
+    trading-volume figure happens to take the same shape.
+
+    This pattern used to carry a trailing lookahead meant to require an
+    account-shaped word nearby ("...(?=\\s*(?:account|portfolio|...)?)"),
+    but the whole alternation inside that lookahead was itself wrapped in
+    one more "?", making the entire lookahead optional, i.e. it always
+    succeeded whether or not any of those words followed. That shipped
+    silently until the corpus reached 393 files, when it redacted three
+    unrelated trading-volume figures as account sizes: "the highest volume
+    right now for this industry is six, about 700 K" (0251), "500 K for,
+    um, share buyers" describing overall volume (0240), and "Over 200k less
+    volume" (0023).
+    #
+    # A literal fix, requiring the lookahead's word list to actually match,
+    # is not safe either: real account-size mentions this pattern is meant
+    # to catch use far more phrasings than that short list ("put 10k in a
+    # position", "10k's worth", "make 10k a month"), so enforcing it would
+    # trade three false redactions for dozens of missed ones. What all
+    # three false hits share instead is "volume" nearby, which a personal
+    # account size never is, so that is the guard: not a redefinition of
+    # what counts as an account size, just an exclusion for the one context
+    # reliably not one.
+    """
+    def repl(m):
+        before = text[max(0, m.start() - 80):m.start()]
+        after = text[m.end():m.end() + 20]
+        if ACCOUNT_SIZE_VOLUME_GUARD.search(before) or ACCOUNT_SIZE_VOLUME_GUARD.search(after):
+            return m.group(0)
+        return "[ACCOUNT SIZE REDACTED]"
+
+    out = ACCOUNT_SIZE_K.sub(repl, text)
+    return out, out.count("[ACCOUNT SIZE REDACTED]") - text.count("[ACCOUNT SIZE REDACTED]")
+
+
 MONEY = [
-    # Account size, in any form, including "10 G's" and "10 grand".
-    (re.compile(r"\b\d[\d,]*\s*(?:k|g'?s?|grand)\b(?=\s*(?:account|portfolio|"
-                r"in (?:my|the) account|to (?:trade|work) with|saved|invested)?)", re.I),
-     "[ACCOUNT SIZE REDACTED]"),
     (re.compile(r"\b(?:my|his|her|their|your)\s+account\s+(?:is|was|has|holds|sits at|"
                 r"is at)\s+[^.?!]{0,40}", re.I), "[ACCOUNT SIZE REDACTED]"),
     # Running profit and loss stated as a personal result. The trailing unit
@@ -102,9 +141,17 @@ MONEY = [
     # right next to a correctly redacted "we're up X%" two sentences earlier
     # in the same passage. Found live in 0181, at scale, once the corpus grew
     # past the handful of files this pattern was originally tuned against.
+    #
+    # Two more gaps found live in 0249, same session, two different figures:
+    # "I'm already up like 50%" put a filler word ("already") between the
+    # pronoun and "up", which the pattern required to be adjacent; "We're up
+    # to about 1250" put "to" between "up" and the optional "about/around/
+    # like", same problem one slot over. Both are narrow, found-live
+    # additions, not a general filler-word parser.
     (re.compile(r"\b(?:i(?:'m| am| was)?|we(?:'re| are| were)?|"
                 r"he(?:'s| is| was)?|she(?:'s| is| was)?)\s+"
-                r"(?:up|down)\s+(?:about\s+|around\s+|like\s+)?\$?\d[\d,]*(?:\.\d+)?\s*"
+                r"(?:already\s+|still\s+|now\s+)?"
+                r"(?:up|down)\s+(?:to\s+)?(?:about\s+|around\s+|like\s+)?\$?\d[\d,]*(?:\.\d+)?\s*"
                 r"(?:%|percent\b|dollars\b|bucks\b|k\b)?", re.I), "[PERFORMANCE REDACTED]"),
     # Second person, direct address: a coach telling a member their own
     # number back to them. Found live in 0088, in the same passage and same
@@ -155,13 +202,18 @@ MONEY = [
     # result verb this pattern simply didn't have on its list yet.
     (re.compile(r"\b(?:made|lost|profited|banked|pocketed|took|won)\s+\$?\d[\d,]*(?:\.\d+)?\s*"
                 r"(?:k|dollars|bucks|grand)?\b", re.I), "[PERFORMANCE REDACTED]"),
-    # "took" and "won" added after finding "you took $25 loss on this one"
-    # and "You won 80 on the other one" both survive unredacted in 0190,
-    # right next to a correctly redacted dollar figure two sentences away
-    # in the same recap. Same failure shape as every fix above: a real
-    # result verb this pattern simply didn't have on its list yet.
-    (re.compile(r"\b(?:made|lost|profited|banked|pocketed|took|won)\s+\$?\d[\d,]*(?:\.\d+)?\s*"
-                r"(?:k|dollars|bucks|grand)?\b", re.I), "[PERFORMANCE REDACTED]"),
+    # A recap stated as an entry price and an exit price, both in dollars: "I
+    # came out this morning with $4.50 outta $1.50" (an option premium move)
+    # and "I got $8 out of $10 spread" (same shape, a different session).
+    # Neither figure is glued to a result word like "profit" and neither uses
+    # "up/down", so no pattern above catches it. Found live in 0241 and 0265,
+    # both a dollar figure immediately followed by "outta"/"out of" and a
+    # second dollar figure, a shape ordinary narration essentially never
+    # takes since only a real entry/exit price recap puts two "$" prices on
+    # either side of "out of".
+    (re.compile(r"\$\d[\d,]*(?:\.\d+)?(?:\s+\d+\s*cents?)?\s*(?:outta|out of)\s*"
+                r"\$\d[\d,]*(?:\.\d+)?(?:\s+\d+\s*cents?)?", re.I),
+     "[PERFORMANCE REDACTED]"),
     # An imperative callout of someone else's result: "take your 300%", "keep
     # their 40%". Everything above only catches first person ("I'm up X%") or
     # a figure with a result word stuck to it ("X% profit"). This construction
@@ -215,6 +267,10 @@ def redact(text):
     text, n = redact_mark(text)
     if n:
         bump(ROLES.get(_MARK, "[MEMBER]"), n)
+
+    text, n = redact_account_size_k(text)
+    if n:
+        bump("[ACCOUNT SIZE REDACTED]", n)
 
     for pat, marker in MONEY:
         text, n = pat.subn(marker, text)

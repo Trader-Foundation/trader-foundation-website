@@ -41,6 +41,34 @@ was a plain miss: the first person pattern only recognised present tense
 ("I'm up", "we're up"), not past tense, so "we were up 4%" sat unredacted
 right next to a correctly redacted figure in the same passage, same failure
 shape as case 2.
+
+Case 5: found in the same batch pass across 393 files, in two different
+sessions describing an options entry and exit price as a pair: "I came out
+this morning with $4.50 outta $1.50" (0241) and "I got $8 out of $10 spread"
+(0265). Neither figure is glued to a result word, and neither uses "up" or
+"down", so nothing above reads either one: a straight "$X out of/outta $Y"
+recap is its own shape, not a variant of any case already covered.
+
+Case 6: found in 0249, same session, two different figures. "I'm already up
+like 50%" put a filler word between the pronoun and "up" that the first
+person pattern required to be adjacent, so "already" alone broke a match that
+"I'm up like 50%" would have caught. "We're up to about 1250" did the same
+thing one slot over: "to" sat between "up" and the optional "about", which
+the pattern also required to be adjacent. Same failure shape as every case
+above, not a new mechanism, just two more words the pattern had not met yet.
+
+Case 7: the opposite direction, an over-redaction rather than a leak. The
+account size pattern ("<number>k/g's/grand") carried a lookahead meant to
+require an account-shaped word nearby, but the whole alternation inside it
+was wrapped in one more "?", making the entire lookahead optional, i.e. it
+always matched regardless of what followed. Found live at 393 files: three
+trading-volume figures with no connection to anyone's account got redacted
+as if they were one, e.g. "the highest volume right now for this industry
+is six, about 700 K" (0251). Fixed with a nearby-"volume" guard rather than
+a working version of the original lookahead, because real account-size
+mentions use far more phrasings than that lookahead's word list covered
+("put 10k in a position", "10k's worth") and enforcing it literally would
+have traded three false redactions for dozens of missed ones.
 """
 import importlib.util
 import sys
@@ -92,6 +120,18 @@ PERCENT_CASES = [
     # real trade in two different sessions.
     ("it kicked out like 13% on this little move", "[PERFORMANCE REDACTED]"),
     ("it delivered 13%. I got out.", "[PERFORMANCE REDACTED]"),
+    # Entry/exit price recap, found live in 0241 and 0265 in two different
+    # sessions describing two different trades.
+    ("I came out this morning with like, you know, $4 50 cents outta $1 50 cents",
+     "[PERFORMANCE REDACTED]"),
+    ("I came out today, I got like $8 out of $10 spread, so got it a day",
+     "[PERFORMANCE REDACTED]"),
+    # Filler word between the pronoun and "up"/"down", found live in 0249.
+    ("I'm already up like 50%, you know, in a day", "[PERFORMANCE REDACTED]"),
+    # "to" between "up" and the optional "about", also found live in 0249,
+    # same session as the case just above.
+    ("We're up to about 1250. Those spreads are pretty wide.",
+     "[PERFORMANCE REDACTED]"),
 ]
 
 # Ordinary uses of "took"/"won" that must survive untouched: the verbs are
@@ -101,6 +141,20 @@ VERB_GUARD_CASES = [
     "the bulls won the day today",
     "she took the trade off the table",
     "he took profits early",
+]
+
+ACCOUNT_SIZE_CASES = [
+    ("she bought like 10 G's worth, so nice", "[ACCOUNT SIZE REDACTED]"),
+    ("I usually put 10k in a position, maybe", "[ACCOUNT SIZE REDACTED]"),
+]
+
+# A trading-volume figure that happens to be shaped like an account size
+# ("<number>k") must survive untouched: the number names the stock, not the
+# viewer. All three found live in the same passage shape, "volume" nearby.
+VOLUME_GUARD_CASES = [
+    "with Over 200k less volume. And let's just add to that",
+    "overall volume is not, uh, attractive. You know, 500 K for, um, share buyers",
+    "the highest volume right now for this industry is six, about 700 K. So forget",
 ]
 
 # A pinned regression for the specific passage that surfaced this: the same
@@ -178,6 +232,23 @@ for text in VERB_GUARD_CASES:
     else:
         print(f"ok    kept ordinary verb: {text}")
 
-total = len(VERB_CASES) + len(NAME_CASES) + len(PERCENT_CASES) + len(VERB_GUARD_CASES) + 3
+for text, marker in ACCOUNT_SIZE_CASES:
+    out, _ = redact(text)
+    if marker not in out:
+        fail += 1
+        print(f"FAIL  account size not redacted: {text!r}\n      -> {out!r}")
+    else:
+        print(f"ok    redacted account size: {text}")
+
+for text in VOLUME_GUARD_CASES:
+    out, _ = redact(text)
+    if "[ACCOUNT SIZE REDACTED]" in out:
+        fail += 1
+        print(f"FAIL  volume figure redacted as account size: {text!r}\n      -> {out!r}")
+    else:
+        print(f"ok    kept volume figure: {text}")
+
+total = (len(VERB_CASES) + len(NAME_CASES) + len(PERCENT_CASES) + len(VERB_GUARD_CASES)
+         + len(ACCOUNT_SIZE_CASES) + len(VOLUME_GUARD_CASES) + 3)
 print(f"\n{total} cases, {fail} wrong")
 sys.exit(1 if fail else 0)
