@@ -84,6 +84,23 @@ PERCENT_CASES = [
     ("That one's also up 70% now", "[PERFORMANCE REDACTED]"),
     ("it's up 20% since Monday", "[PERFORMANCE REDACTED]"),
     ("this one is down 15% today", "[PERFORMANCE REDACTED]"),
+    # "took"/"won" as result verbs, found live in 0190 right next to a
+    # correctly redacted dollar figure in the same recap.
+    ("you took $25 loss on this one", "[PERFORMANCE REDACTED]"),
+    ("You won 80 on the other one", "[PERFORMANCE REDACTED]"),
+    # Colloquial result verbs, found live in 0180/0181 describing the same
+    # real trade in two different sessions.
+    ("it kicked out like 13% on this little move", "[PERFORMANCE REDACTED]"),
+    ("it delivered 13%. I got out.", "[PERFORMANCE REDACTED]"),
+]
+
+# Ordinary uses of "took"/"won" that must survive untouched: the verbs are
+# common outside a result context, and only a directly adjacent number
+# should trigger a redaction.
+VERB_GUARD_CASES = [
+    "the bulls won the day today",
+    "she took the trade off the table",
+    "he took profits early",
 ]
 
 # A pinned regression for the specific passage that surfaced this: the same
@@ -153,6 +170,14 @@ if out.count("[PERFORMANCE REDACTED]") != 2 or "7%" in out or "4%" in out:
 else:
     print(f"ok    present and past tense both redacted: {PAST_TENSE_CASE}")
 
-total = len(VERB_CASES) + len(NAME_CASES) + len(PERCENT_CASES) + 3
+for text in VERB_GUARD_CASES:
+    out, _ = redact(text)
+    if out != text:
+        fail += 1
+        print(f"FAIL  ordinary verb usage changed: {text!r}\n      -> {out!r}")
+    else:
+        print(f"ok    kept ordinary verb: {text}")
+
+total = len(VERB_CASES) + len(NAME_CASES) + len(PERCENT_CASES) + len(VERB_GUARD_CASES) + 3
 print(f"\n{total} cases, {fail} wrong")
 sys.exit(1 if fail else 0)

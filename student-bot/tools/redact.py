@@ -136,7 +136,31 @@ MONEY = [
                 r"(?:%|percent\b|dollars\b|bucks\b))", re.I), "[PERFORMANCE REDACTED]"),
     (re.compile(r"\b\d{1,3}\s?%\s?(?:profit|loss|gain|return|down|up)\b", re.I),
      "[PERFORMANCE REDACTED]"),
-    (re.compile(r"\b(?:made|lost|profited|banked|pocketed)\s+\$?\d[\d,]*(?:\.\d+)?\s*"
+    # A trade "kicked out" or "delivered" a percentage: colloquial results
+    # verbs, neither "up/down" (so the impersonal-referent pattern above
+    # doesn't apply) nor "made/lost/..." (so the verb-list pattern below
+    # doesn't either). Found live in 0180 and 0181, describing the same
+    # real FSLR trade from two different sessions: "it kicked out like 13%
+    # on this little move" and "it delivered 13%. I got out." This class of
+    # verb is genuinely open-ended in natural speech (yielded, returned,
+    # gave, printed, netted, scored, hit...) - these two are pinned because
+    # they were found live, not because the list is now exhaustive.
+    (re.compile(r"\b(?:kicked out|delivered)\s+(?:like\s+|about\s+|around\s+)?"
+                r"\$?\d[\d,]*(?:\.\d+)?\s*(?:%|percent\b|dollars\b|bucks\b)?", re.I),
+     "[PERFORMANCE REDACTED]"),
+    # "took" and "won" added after finding "you took $25 loss on this one"
+    # and "You won 80 on the other one" both survive unredacted in 0190,
+    # right next to a correctly redacted dollar figure two sentences away
+    # in the same recap. Same failure shape as every fix above: a real
+    # result verb this pattern simply didn't have on its list yet.
+    (re.compile(r"\b(?:made|lost|profited|banked|pocketed|took|won)\s+\$?\d[\d,]*(?:\.\d+)?\s*"
+                r"(?:k|dollars|bucks|grand)?\b", re.I), "[PERFORMANCE REDACTED]"),
+    # "took" and "won" added after finding "you took $25 loss on this one"
+    # and "You won 80 on the other one" both survive unredacted in 0190,
+    # right next to a correctly redacted dollar figure two sentences away
+    # in the same recap. Same failure shape as every fix above: a real
+    # result verb this pattern simply didn't have on its list yet.
+    (re.compile(r"\b(?:made|lost|profited|banked|pocketed|took|won)\s+\$?\d[\d,]*(?:\.\d+)?\s*"
                 r"(?:k|dollars|bucks|grand)?\b", re.I), "[PERFORMANCE REDACTED]"),
     # An imperative callout of someone else's result: "take your 300%", "keep
     # their 40%". Everything above only catches first person ("I'm up X%") or
