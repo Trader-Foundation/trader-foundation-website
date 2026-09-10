@@ -57,6 +57,17 @@ thing one slot over: "to" sat between "up" and the optional "about", which
 the pattern also required to be adjacent. Same failure shape as every case
 above, not a new mechanism, just two more words the pattern had not met yet.
 
+Case 6b: found in the same file as case 5, 0288. "Imagine if you made 10%
+on 14,000" redacted the "10" but left the "%" dangling right after the
+marker, same defect shape as case 3 but in a pattern case 3's fix never
+touched (the verb-list pattern, "made/lost/took/won"). Fixing it surfaced a
+second, related bug in three patterns at once: the trailing unit's leading
+space sat OUTSIDE its own "?", so a figure with no unit word after it at
+all ("made 10 on it") still consumed the space before failing to match
+anything else, gluing the marker straight onto the next word
+("[PERFORMANCE REDACTED]loss"). Fixed by wrapping the space with the unit
+as one optional group instead of two.
+
 Case 7a: a second name/public-figure collision, same shape as Mark but
 found in the Q&A extraction pass rather than a direct read. A member is
 named John, and John Murphy (J. Murphy) is the real, publicly known author
@@ -79,6 +90,7 @@ mentions use far more phrasings than that lookahead's word list covered
 have traded three false redactions for dozens of missed ones.
 """
 import importlib.util
+import re
 import sys
 from pathlib import Path
 
@@ -190,6 +202,15 @@ LEAK_CASE = (
 # digit AND no stray "%" should survive next to the marker.
 DANGLING_PERCENT_CASE = "Oh my gosh, he, I'm up like 300%. Please, please."
 
+# A figure with no unit word after it at all, so the trailing unit group
+# never matches anything: the marker must not swallow the following space
+# and glue onto the next word. Found live in 0288 and 0190.
+NO_GLUE_CASES = [
+    "Imagine if you made 10 on it. That would be nice.",
+    "you took $25 loss on this one",
+    "it kicked out like 13 on this little move",
+]
+
 # Pinned regression for case 4's fixable half (past tense), reproducing the
 # real 0181 sentence. The spelled-out "seven point a half percent" earlier in
 # the same real passage is a known, separate gap this does not close.
@@ -245,6 +266,14 @@ if out.count("[PERFORMANCE REDACTED]") != 2 or "7%" in out or "4%" in out:
 else:
     print(f"ok    present and past tense both redacted: {PAST_TENSE_CASE}")
 
+for text in NO_GLUE_CASES:
+    out, _ = redact(text)
+    if "]" in out and re.search(r"\]\S", out):
+        fail += 1
+        print(f"FAIL  marker glued to next word: {text!r}\n      -> {out!r}")
+    else:
+        print(f"ok    marker not glued to next word: {text}")
+
 for text in VERB_GUARD_CASES:
     out, _ = redact(text)
     if out != text:
@@ -287,6 +316,6 @@ for text in VOLUME_GUARD_CASES:
 
 total = (len(VERB_CASES) + len(NAME_CASES) + len(PERCENT_CASES) + len(VERB_GUARD_CASES)
          + len(ACCOUNT_SIZE_CASES) + len(VOLUME_GUARD_CASES)
-         + len(JOHN_NAME_CASES) + len(JOHN_MURPHY_GUARD_CASES) + 3)
+         + len(JOHN_NAME_CASES) + len(JOHN_MURPHY_GUARD_CASES) + len(NO_GLUE_CASES) + 3)
 print(f"\n{total} cases, {fail} wrong")
 sys.exit(1 if fail else 0)

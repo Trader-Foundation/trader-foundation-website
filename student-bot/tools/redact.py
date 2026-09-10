@@ -179,11 +179,18 @@ MONEY = [
     # to about 1250" put "to" between "up" and the optional "about/around/
     # like", same problem one slot over. Both are narrow, found-live
     # additions, not a general filler-word parser.
+    #
+    # The trailing unit is wrapped WITH its leading space as one optional
+    # group, not "always eat the space, optionally eat a unit word": with
+    # the space outside the "?", a figure with no unit word after it still
+    # consumes the space before nothing else matches, gluing the marker to
+    # the next word ("[PERFORMANCE REDACTED]loss"). Same bug shape found in
+    # two more patterns below.
     (re.compile(r"\b(?:i(?:'m| am| was)?|we(?:'re| are| were)?|"
                 r"he(?:'s| is| was)?|she(?:'s| is| was)?)\s+"
                 r"(?:already\s+|still\s+|now\s+)?"
-                r"(?:up|down)\s+(?:to\s+)?(?:about\s+|around\s+|like\s+)?\$?\d[\d,]*(?:\.\d+)?\s*"
-                r"(?:%|percent\b|dollars\b|bucks\b|k\b)?", re.I), "[PERFORMANCE REDACTED]"),
+                r"(?:up|down)\s+(?:to\s+)?(?:about\s+|around\s+|like\s+)?\$?\d[\d,]*(?:\.\d+)?"
+                r"(?:\s*(?:%|percent\b|dollars\b|bucks\b|k\b))?", re.I), "[PERFORMANCE REDACTED]"),
     # Second person, direct address: a coach telling a member their own
     # number back to them. Found live in 0088, in the same passage and same
     # shape as every leak above: "I'm up 80%" redacted correctly, then "And
@@ -224,15 +231,23 @@ MONEY = [
     # gave, printed, netted, scored, hit...) - these two are pinned because
     # they were found live, not because the list is now exhaustive.
     (re.compile(r"\b(?:kicked out|delivered)\s+(?:like\s+|about\s+|around\s+)?"
-                r"\$?\d[\d,]*(?:\.\d+)?\s*(?:%|percent\b|dollars\b|bucks\b)?", re.I),
+                r"\$?\d[\d,]*(?:\.\d+)?(?:\s*(?:%|percent\b|dollars\b|bucks\b))?", re.I),
      "[PERFORMANCE REDACTED]"),
     # "took" and "won" added after finding "you took $25 loss on this one"
     # and "You won 80 on the other one" both survive unredacted in 0190,
     # right next to a correctly redacted dollar figure two sentences away
     # in the same recap. Same failure shape as every fix above: a real
     # result verb this pattern simply didn't have on its list yet.
-    (re.compile(r"\b(?:made|lost|profited|banked|pocketed|took|won)\s+\$?\d[\d,]*(?:\.\d+)?\s*"
-                r"(?:k|dollars|bucks|grand)?\b", re.I), "[PERFORMANCE REDACTED]"),
+    #
+    # The trailing unit closed with one \b after the whole optional group,
+    # same bug as case 3 in test_redact.py's docstring but in a pattern that
+    # fix never touched: % is not a word character, so "made 10%" matched
+    # only "made 10" and left the "%" sitting next to the marker. Found live
+    # in 0288: "Imagine if you [PERFORMANCE REDACTED]% on 14,000." Fixed the
+    # same way, % as its own alternative rather than folded into a \b-closed
+    # word list.
+    (re.compile(r"\b(?:made|lost|profited|banked|pocketed|took|won)\s+\$?\d[\d,]*(?:\.\d+)?"
+                r"(?:\s*(?:%|percent\b|k\b|dollars\b|bucks\b|grand\b))?", re.I), "[PERFORMANCE REDACTED]"),
     # A recap stated as an entry price and an exit price, both in dollars: "I
     # came out this morning with $4.50 outta $1.50" (an option premium move)
     # and "I got $8 out of $10 spread" (same shape, a different session).

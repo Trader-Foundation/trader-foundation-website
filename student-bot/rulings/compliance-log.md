@@ -782,3 +782,86 @@ None of these six are corpus content today. They exist only in the new Q&A
 document, which is explicitly not indexed and not retrievable (see that
 document's header). Logged here so the flag travels with the finding rather
 than only living in a document nobody checks against this log later.
+
+## FB Live #0288, excluded from the live corpus. Found 9-10 September 2026.
+
+Scaling the Q&A extraction pass to all 393 sessions surfaced FB Live #0288 as
+a Paycheck Collector pitch delivered live, and it is the densest single-file
+compliance load found anywhere in the FB Live set: roughly half the file, ten
+paragraphs running from a $13-on-$87 worked example through to a specific
+account-growth trajectory, is dollar figures and return percentages rather
+than teaching with an occasional bad sentence in it.
+
+**The single worst line in the corpus outside the original Alibaba hit:**
+
+> "Um, have I seen a thousand dollars going to 10,000 within a week? Two
+> weeks? Yeah, but trading in that, in that manner isn't sustainable."
+
+A witnessed dollar outcome, stated as fact, non-negotiable 1 with nothing
+borderline about it. It happened to be spelled out in words ("a thousand
+dollars") rather than digits, which is also why it was not the same known gap
+that misses "seven point a half percent"-style figures: this one is caught
+because the EXCLUDE phrase is a substring match against the actual words
+said, not a digit-reading regex.
+
+**The stated monthly return target, repeated with variation across three
+separate paragraphs:**
+
+> "Again, I got 10% as a monthly return... you're at 15% a month instead of
+> 10... If you can't do 10%, don't, don't talk about 20, right? If you can't
+> do 5% a month, don't talk about 10."
+
+Non-negotiable 2: the only permitted results language is the 70 percent
+target win rate, and this states a monthly return target instead, several
+times, in several sizes.
+
+**The account-growth arithmetic**, both the small worked example and the
+larger hypothetical walkthrough:
+
+> "$13 on $87 is a damn good return... Imagine if you made 10% on 14,000...
+> Or what if you made 10% on 25,000"
+
+> "They finally reached their 10,000 account goal... $7,000 in profits in two
+> months... 25 goes into 37 over four months"
+
+Ten distinctive phrases, one per affected paragraph, added to `EXCLUDE` in
+`tools/build_corpus.py` so every resulting chunk in the passage has a match
+rather than only the first one. **10 of the file's 29 chunks dropped.**
+Verified after rebuild: none of the ten source phrases, nor the figures they
+carry, survive in any remaining chunk from this file.
+
+**What was left in, on purpose.** The paragraphs either side of the excluded
+run carry no new figure of their own (general encouragement — "you don't
+have that [ACCOUNT SIZE REDACTED] account yet," "if you can't do 2%, go for
+one," "these numbers aren't bs") and were kept rather than swept in with a
+broader cut, following the same "match the claim, not the vicinity" standard
+this log has used throughout.
+
+**Also fixed while reading this file closely: two redaction bugs, not
+compliance ones**, logged in `redaction-defects-fb-live.md` rather than here.
+"Made 10%" left a dangling "%" next to its marker (same defect shape as the
+0159 case above, in a pattern that fix never touched), and three MONEY
+patterns were gluing their marker onto the next word whenever no unit word
+followed a figure ("[PERFORMANCE REDACTED]loss").
+
+### Flagged, not yet excluded: the same shape recurring across newer sessions
+
+The Q&A extraction pass keeps surfacing this exact pattern in other
+Paycheck-Collector-flavoured sessions as it works through the remaining
+batches. None of these are excluded yet. Logged now so the list travels with
+the finding rather than waiting for a single cleanup pass to rediscover it:
+
+| Source | What was flagged |
+|---|---|
+| FB Live #0277/#0278 | A `[PERFORMANCE REDACTED]` marker sitting next to unredacted aspirational percentages, "2%... gimme another 30%" |
+| FB Live #0282 | A "$2,000 turned into [REDACTED] in two weeks" hypothetical; a named testimonial, "Sergio... made a s**t ton of money" |
+| FB Live #0291 | A Domino's Pizza hypothetical stated as $1,000 cost against $2,500 profit |
+| FB Live #0292 | First person, "up 20-25%, targeting 40%, that's a win 100%" |
+| FB Live #0293 | A live order-entry demo with 16%/32%/35% gain figures tied to dollar contract values |
+
+**Same rule as everywhere else in this log applies once these are worked:**
+one distinctive phrase per affected passage, added to `EXCLUDE`, verified
+against the rebuilt corpus before being called done. Not batched into a
+single sweep on the theory that it would be faster, because the 0288 pass
+above only found its true scope (ten paragraphs, not one sentence) by reading
+the whole file rather than reacting to the first flagged line.

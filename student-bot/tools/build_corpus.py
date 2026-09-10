@@ -122,6 +122,31 @@ EXCLUDE = [
     # fortnight, and every sentence in it is the claim.
     "i've won all four of them",
     "in three hours i was up 80",
+    # FB Live #0288. Found scaling the Q&A extraction pass to all 393
+    # sessions: a Paycheck Collector pitch built almost entirely out of
+    # specific return percentages and account-growth dollar figures, dense
+    # enough that most of the file's second half is the violation rather
+    # than teaching with one bad sentence in it. Non-negotiables 1 and 2
+    # both, repeatedly, across a dozen paragraphs: a stated 10% monthly
+    # return target ("I got 10% as a monthly return... 15% a month instead
+    # of 10... if you can't do 5% a month, don't talk about 10"), specific
+    # account-growth arithmetic ("made 10% on 14,000... on 25,000... $7,000
+    # in profits in two months... 25 goes into 37 over four months"), and
+    # the single most concrete claim in the corpus outside the original
+    # Alibaba hit: "have I seen a thousand dollars going to 10,000 within a
+    # week? Two weeks? Yeah." One phrase is taken from each paragraph
+    # carrying a distinct figure, so every resulting chunk in the passage
+    # has a match rather than only the first one.
+    "$13 on $87 is a damn good return",
+    "some of you are at $25,000 accounts",
+    "they finally reached their 10,000 account goal",
+    "$7,000 in profits in two months",
+    "25 goes into 37 over four months",
+    "about four to 5,000. oh yeah, four to 5,000",
+    "i got 10% as a monthly return",
+    "you're at 15% a month instead of 10",
+    "i need to make 20 ka month",
+    "have i seen a thousand dollars going to 10,000",
 ]
 
 # Retired terms, non-negotiable 8. Vlad ruled: "You can remove the Elite
