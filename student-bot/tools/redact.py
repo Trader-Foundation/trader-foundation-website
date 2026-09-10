@@ -278,9 +278,18 @@ MONEY = [
 # have gutted the teaching. A match now also has to carry a position signal:
 # a ticker, contract language, a strike, or a dollar amount. "got" is dropped
 # entirely because it is too common to disambiguate.
+#
+# The trailing span ends with \b, not just a raw {0,60} cap, so the match
+# stops at a word boundary rather than wherever the character count runs
+# out. Found live in 0328 and 0329: "we sold one 20, we bought one 15, and
+# that pretty much acts like a, an at the money credit spread" cut off
+# mid-word at the 60th character and glued the marker straight onto the
+# back half of "an", "[POSITION REDACTED]an at the money credit spread".
+# \b forces the engine to back off to the nearest real boundary at or
+# before the cap instead of stopping arbitrarily inside a word.
 POSITION = re.compile(
     r"\b(?:i|we)\s+(?:bought|sold|own|hold|picked up|entered|am in|'m in)\s+"
-    r"[^.?!]{0,60}", re.I)
+    r"[^.?!]{0,60}\b", re.I)
 
 POSITION_SIGNAL = re.compile(
     r"\b[A-Z]{2,5}\b"                              # a ticker
@@ -291,7 +300,19 @@ POSITION_SIGNAL = re.compile(
 def redact_positions(text):
     """Redact only first person clauses that actually describe a holding."""
     def repl(m):
-        return "[POSITION REDACTED]" if POSITION_SIGNAL.search(m.group(0)) else m.group(0)
+        whole = m.group(0)
+        if not POSITION_SIGNAL.search(whole):
+            return whole
+        # POSITION's trailing \b stops the match at a word boundary rather
+        # than an arbitrary character count, but a word boundary can itself
+        # be the whitespace right before the next word, which the match then
+        # consumes. Replacing the whole span with the marker would swallow
+        # that trailing space too, gluing the marker onto whatever word
+        # comes next ("[POSITION REDACTED]an", found live in 0328). Putting
+        # the trailing whitespace back after the marker is the fix, not
+        # trying to make the regex never capture it.
+        trailing = whole[len(whole.rstrip()):]
+        return "[POSITION REDACTED]" + trailing
     out, n = POSITION.subn(repl, text)
     return out, out.count("[POSITION REDACTED]") - text.count("[POSITION REDACTED]")
 

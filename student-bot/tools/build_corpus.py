@@ -552,7 +552,16 @@ def ruling_chunks():
     example: rulings/marubozu.md, "The definition the bot teaches".
     """
     out = []
-    skip = {"README.md", "open-questions.md", "compliance-log.md"}
+    # redaction-defects-fb-live.md joins compliance-log.md here for the same
+    # reason: found live when this file grew a new section quoting example
+    # leaked figures for illustration ("we were up 4%", "that one's also up
+    # 70%") and test_win_rate_claims.py correctly flagged the resulting
+    # chunk as retrievable performance-claim language. The examples are
+    # about the redaction pipeline, not a real trader's results, but a bot
+    # cannot tell the difference once the sentence is out of this file's
+    # context, so this document is audit trail, not indexed content.
+    skip = {"README.md", "open-questions.md", "compliance-log.md",
+            "redaction-defects-fb-live.md"}
     for path in sorted(RULINGS.glob("*.md")):
         if path.name in skip:
             continue

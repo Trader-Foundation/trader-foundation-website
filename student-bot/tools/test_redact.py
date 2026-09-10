@@ -68,6 +68,19 @@ anything else, gluing the marker straight onto the next word
 ("[PERFORMANCE REDACTED]loss"). Fixed by wrapping the space with the unit
 as one optional group instead of two.
 
+Case 6c: found in the same batch pass, files 0328 and 0329. The POSITION
+pattern's trailing span was a raw {0,60} character cap with no regard for
+word boundaries, so it cut off mid-word: "we sold one 20, we bought one
+15, and that pretty much acts like a, an at the money credit spread" was
+captured up through "a, " and produced "[POSITION REDACTED]an" once the
+marker replaced the whole span. Adding a trailing \b to the pattern moved
+the cut to a real word boundary, but that boundary is often the space
+right before the next word, which the match then swallowed anyway,
+producing the same glued output one layer down: "[POSITION REDACTED]"
+followed immediately by "an" or "made" with no space. Fixed in
+redact_positions itself: put back whatever trailing whitespace the match
+captured, after the marker rather than inside the replaced span.
+
 Case 7a: a second name/public-figure collision, same shape as Mark but
 found in the Q&A extraction pass rather than a direct read. A member is
 named John, and John Murphy (J. Murphy) is the real, publicly known author
@@ -161,6 +174,14 @@ VERB_GUARD_CASES = [
     "the bulls won the day today",
     "she took the trade off the table",
     "he took profits early",
+]
+
+POSITION_GLUE_CASES = [
+    ("Yeah, so we sold one 20, we bought one 15, and that pretty much acts "
+     "like a, an at the money credit spread, right?", "an"),
+    ("You know, you obviously, but I bought it, but it was, obviously it "
+     "was limit price, so I hadn't made any losses, but it was a huge loss "
+     "from yesterday because of that.", "made"),
 ]
 
 ACCOUNT_SIZE_CASES = [
@@ -282,6 +303,15 @@ for text in VERB_GUARD_CASES:
     else:
         print(f"ok    kept ordinary verb: {text}")
 
+for text, next_word in POSITION_GLUE_CASES:
+    out, _ = redact(text)
+    glued = f"]{next_word}" in out
+    if "[POSITION REDACTED]" not in out or glued:
+        fail += 1
+        print(f"FAIL  marker glued or missing: {text!r}\n      -> {out!r}")
+    else:
+        print(f"ok    marker not glued to next word: {text}")
+
 for text, marker in ACCOUNT_SIZE_CASES:
     out, _ = redact(text)
     if marker not in out:
@@ -316,6 +346,7 @@ for text in VOLUME_GUARD_CASES:
 
 total = (len(VERB_CASES) + len(NAME_CASES) + len(PERCENT_CASES) + len(VERB_GUARD_CASES)
          + len(ACCOUNT_SIZE_CASES) + len(VOLUME_GUARD_CASES)
-         + len(JOHN_NAME_CASES) + len(JOHN_MURPHY_GUARD_CASES) + len(NO_GLUE_CASES) + 3)
+         + len(JOHN_NAME_CASES) + len(JOHN_MURPHY_GUARD_CASES) + len(NO_GLUE_CASES)
+         + len(POSITION_GLUE_CASES) + 3)
 print(f"\n{total} cases, {fail} wrong")
 sys.exit(1 if fail else 0)
