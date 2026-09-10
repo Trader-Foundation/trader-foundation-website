@@ -57,7 +57,15 @@ thing one slot over: "to" sat between "up" and the optional "about", which
 the pattern also required to be adjacent. Same failure shape as every case
 above, not a new mechanism, just two more words the pattern had not met yet.
 
-Case 7: the opposite direction, an over-redaction rather than a leak. The
+Case 7a: a second name/public-figure collision, same shape as Mark but
+found in the Q&A extraction pass rather than a direct read. A member is
+named John, and John Murphy (J. Murphy) is the real, publicly known author
+of "Intermarket Analysis," cited by name in two sessions (0131, 0255).
+"reading John Murphy's book" and "who was the author? John J. Murphy" both
+came out "[MEMBER] Murphy," corrupting a book citation the same way "mark"
+corrupted a verb.
+
+Case 7b: the opposite direction, an over-redaction rather than a leak. The
 account size pattern ("<number>k/g's/grand") carried a lookahead meant to
 require an account-shaped word nearby, but the whole alternation inside it
 was wrapped in one more "?", making the entire lookahead optional, i.e. it
@@ -146,6 +154,19 @@ VERB_GUARD_CASES = [
 ACCOUNT_SIZE_CASES = [
     ("she bought like 10 G's worth, so nice", "[ACCOUNT SIZE REDACTED]"),
     ("I usually put 10k in a position, maybe", "[ACCOUNT SIZE REDACTED]"),
+]
+
+JOHN_NAME_CASES = [
+    ("How's it going John? Long time no see.", "[MEMBER]"),
+    ("John just left in the comments", "[MEMBER]"),
+    ("what's going on John what's up and crowd space", "[MEMBER]"),
+]
+
+# "John Murphy" the cited author must survive untouched, both with and
+# without the middle initial found live in the two real passages.
+JOHN_MURPHY_GUARD_CASES = [
+    "when I was reading John Murphy's book and just in general market dynamics",
+    "who was the author? John J. Murphy. Okay. That's all we got for now.",
 ]
 
 # A trading-volume figure that happens to be shaped like an account size
@@ -240,6 +261,22 @@ for text, marker in ACCOUNT_SIZE_CASES:
     else:
         print(f"ok    redacted account size: {text}")
 
+for text, marker in JOHN_NAME_CASES:
+    out, _ = redact(text)
+    if marker not in out or "john" in out.lower().replace(marker.lower(), ""):
+        fail += 1
+        print(f"FAIL  John not redacted: {text!r}\n      -> {out!r}")
+    else:
+        print(f"ok    redacted John: {text}")
+
+for text in JOHN_MURPHY_GUARD_CASES:
+    out, _ = redact(text)
+    if "john" not in out.lower():
+        fail += 1
+        print(f"FAIL  John Murphy citation corrupted: {text!r}\n      -> {out!r}")
+    else:
+        print(f"ok    kept John Murphy citation: {text}")
+
 for text in VOLUME_GUARD_CASES:
     out, _ = redact(text)
     if "[ACCOUNT SIZE REDACTED]" in out:
@@ -249,6 +286,7 @@ for text in VOLUME_GUARD_CASES:
         print(f"ok    kept volume figure: {text}")
 
 total = (len(VERB_CASES) + len(NAME_CASES) + len(PERCENT_CASES) + len(VERB_GUARD_CASES)
-         + len(ACCOUNT_SIZE_CASES) + len(VOLUME_GUARD_CASES) + 3)
+         + len(ACCOUNT_SIZE_CASES) + len(VOLUME_GUARD_CASES)
+         + len(JOHN_NAME_CASES) + len(JOHN_MURPHY_GUARD_CASES) + 3)
 print(f"\n{total} cases, {fail} wrong")
 sys.exit(1 if fail else 0)

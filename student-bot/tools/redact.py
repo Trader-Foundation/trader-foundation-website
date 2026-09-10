@@ -64,6 +64,37 @@ MARK_VERB_AFTER = re.compile(
 MARK_VERB_BEFORE = re.compile(
     r"(?:gonna|going to|let'?s|i'?ll|we'?ll|should i|should you|you|we)\s*$", re.I)
 
+# One member is named John, and John Murphy (J. Murphy) is a real, publicly
+# known author cited by name in the curriculum, "Intermarket Analysis."
+# Found live in two sessions (0131, 0255): "reading John Murphy's book" and
+# "who was the author? John J. Murphy," both redacted to "[MEMBER] Murphy"
+# even though the "John" here is a book citation, not the member. John the
+# member appears in 55 other files and still needs the standard protection,
+# so this excludes only the one surname that collides with a public figure
+# rather than dropping "john" from the name list.
+_JOHN = "john" if "john" in ROLES else None
+if _JOHN:
+    ORDERED = [n for n in ORDERED if n != _JOHN]
+JOHN_PATTERN = re.compile(r"\bjohn(?:'s)?\b", re.I)
+JOHN_MURPHY_AFTER = re.compile(r"^\s*(?:j\.?\s+)?murphy\b", re.I)
+
+
+def redact_john(text):
+    """Redact 'John' the member, leave 'John Murphy' the cited author alone."""
+    if not _JOHN:
+        return text, 0
+    n = 0
+
+    def repl(m):
+        nonlocal n
+        after = text[m.end():m.end() + 20]
+        if JOHN_MURPHY_AFTER.match(after):
+            return m.group(0)
+        n += 1
+        return ROLES[_JOHN]
+
+    return JOHN_PATTERN.sub(repl, text), n
+
 
 def redact_mark(text):
     """Redact 'Mark' the name, leave 'mark' the verb alone."""
@@ -263,10 +294,15 @@ def redact(text):
         if n:
             bump(ROLES[low], n)
 
-    # "Mark" is handled on its own; see redact_mark above.
+    # "Mark" and "John" are handled on their own; see redact_mark and
+    # redact_john above.
     text, n = redact_mark(text)
     if n:
         bump(ROLES.get(_MARK, "[MEMBER]"), n)
+
+    text, n = redact_john(text)
+    if n:
+        bump(ROLES.get(_JOHN, "[MEMBER]"), n)
 
     text, n = redact_account_size_k(text)
     if n:
