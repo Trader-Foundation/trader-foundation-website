@@ -844,24 +844,78 @@ compliance ones**, logged in `redaction-defects-fb-live.md` rather than here.
 patterns were gluing their marker onto the next word whenever no unit word
 followed a figure ("[PERFORMANCE REDACTED]loss").
 
-### Flagged, not yet excluded: the same shape recurring across newer sessions
+### Second sweep, 9-10 September 2026: 24 more sessions excluded
 
-The Q&A extraction pass keeps surfacing this exact pattern in other
-Paycheck-Collector-flavoured sessions as it works through the remaining
-batches. None of these are excluded yet. Logged now so the list travels with
-the finding rather than waiting for a single cleanup pass to rediscover it:
+The Q&A extraction pass finished reading all 393 sessions (batches 049-073,
+FB Live #0276-#0488). Two agents were used to close this out accurately
+rather than fast, per the standing instruction to prioritize accuracy: one
+re-read every batch file and pulled the exact current clean-text wording for
+every compliance flag (not the batch summary, the actual file), rated each
+HIGH/MODERATE/LOW by the same standard as every entry above; a second
+compiled every name still missing from the redaction glossary over the same
+range. Every HIGH and MODERATE item below was independently spot-verified
+against the real transcript file before being excluded, the same as every
+other entry in this log.
 
-| Source | What was flagged |
-|---|---|
-| FB Live #0277/#0278 | A `[PERFORMANCE REDACTED]` marker sitting next to unredacted aspirational percentages, "2%... gimme another 30%" |
-| FB Live #0282 | A "$2,000 turned into [REDACTED] in two weeks" hypothetical; a named testimonial, "Sergio... made a s**t ton of money" |
-| FB Live #0291 | A Domino's Pizza hypothetical stated as $1,000 cost against $2,500 profit |
-| FB Live #0292 | First person, "up 20-25%, targeting 40%, that's a win 100%" |
-| FB Live #0293 | A live order-entry demo with 16%/32%/35% gain figures tied to dollar contract values |
+**#0282 and #0292 from the prior flagged list are now excluded, along with
+22 more.** #0291 (Domino's hypothetical) and #0293 (order-entry demo) were
+also reviewed: #0291's dollar figures are excluded below; #0293's demo reads
+as worked mechanics on an invented position under the same guard Options
+Intro's Pile A gets elsewhere in this log, not excluded. #0277/#0278 was a
+single finding, not two separate sessions; the #0278 half is excluded below,
+#0277 did not carry a distinct new figure on closer reading.
 
-**Same rule as everywhere else in this log applies once these are worked:**
-one distinctive phrase per affected passage, added to `EXCLUDE`, verified
-against the rebuilt corpus before being called done. Not batched into a
-single sweep on the theory that it would be faster, because the 0288 pass
-above only found its true scope (ten paragraphs, not one sentence) by reading
-the whole file rather than reacting to the first flagged line.
+| Source | Exact passage excluded | Shape |
+|---|---|---|
+| #0434 | "it's three for four 75% win rate" | Non-negotiable 2: a stated win rate other than the permitted 70% target |
+| #0345 | "he put like 50 bucks. that shit's like 200 bucks now"; "almost a hundred percent return" | Named member's real crypto outcome, chained return figures |
+| #0308 | "max profit's $2 or two 20"; "that's about 30 something" | Live options position, cost and payout worked in exact cents |
+| #0325 | "it was offering 5% here"; "this thing is down 40%, right"; "up at least 15% overnight" | Real member's SNOW trade, entry-discount and overnight-move percentages |
+| #0336 | "he said it was up 10%. i know by the end of the day"; "it was up to like 20 something percent" | Real trade result, stated twice, no marker either time |
+| #0343 | "mastercard, it was up 30% of the max potential" | Dense recap across three names |
+| #0348 | "1850 minus four 60, that's 1390. it's still a good return"; "that original position is a setup of $650 investment"; "four 60 plus 6 50, 1100 bucks" | Live position built on screen, cost and payout in exact dollars |
+| #0321 | "your odds of profit are like 95%"; "maybe have a 30% chance of profit" | Stated win probabilities, same shape as the counting-scenarios pattern above |
+| #0410 | "i wasn't greedy this week. 86%"; "a little over 85%" | Two real closed-trade percentages, one with no marker nearby at all |
+| #0427 | "it's up, what about 20%"; "up again, about 30, 30% since we last spoke"; "it got up to as much as 18%" | Monthly recap across four names, one figure correctly marked elsewhere in the same file and not here |
+| #0428 | "that would be $150 profit"; "now they're at 70 negative 80%" | Live AAPL strategy comparison |
+| #0433 | "that would be 19%. so $133"; "that's 13.9%" | Live options session, strikes and returns worked aloud |
+| #0445 | "and the next day it was up to 5,000"; "actually it was like 1700" | Vlad's own real silver trade, gain and later loss both in exact dollars |
+| #0349 | "this thing is up 28%" | Real position, stated twice in the same breath |
+| #0317 | "when it's already delivering, you know, 20 plus percent" | Same real trade correctly marked once, restated in plain text two sentences later |
+| #0340 | "could easily go up 200, 150"; "make a lot of money on the upside for planter" | Unhedged specific price-target prediction plus an outcome promise, aimed at a beginner |
+| #0278 | "probably like at least 30% right now off that 1.75" | A percentage move used to derive a percentage return on a leveraged position |
+| #0282 | "made a s**t ton of money" | Named individual's real outcome, no figure but an explicit success claim |
+| #0291 | "it costs you a thousand dollars. you take profit for 2,500" | Real-ticker hypothetical specific enough to read as an outcome claim |
+| #0292 | "i did not lose a single dollar"; "that is a win 100%" | First person narrative closing on an explicit "100% win" framing |
+| #0402 | "they were up 50%"; "it's about 14% for, uh, overall three months" | Vlad's own stated quarterly return, plus a result restated next to its own marker |
+| #0425 | "it was down 30%" | Member's own live trade result |
+| #0318 | "exit paypal today for 11. i see 20%" | Member's reported real outcome on a closed trade |
+| #0488 | "in two days it's up by 24%" | Real, currently open position's percentage move |
+
+Verified after rebuild: none of the 40 excluded phrases, nor the figures
+they carry, survive in any chunk anywhere in the corpus. Corpus went from
+21,885 to 21,839 chunks over this round (redaction fixes plus this exclusion
+pass combined).
+
+### Still flagged, not yet excluded
+
+The same compilation pass surfaced a longer tail of sessions carrying
+possible outcome language that was not independently re-verified against
+the current transcript text this round, per the same discipline: read the
+real file before excluding, don't guess from a summary. Logged so the list
+travels with the finding:
+
+#0293 (order-entry demo, reviewed and kept, see above), #0294, #0297, #0319,
+#0329, #0332, #0337, #0341, #0342, #0347 (the `[PERFORMANCE REDACTED]`/"700
+bucks" back-solve case), #0403, #0409, #0414, #0418, #0419, #0421/#0422
+(duplicate uploads of the same session), #0431, #0436 (the "price target is
+always 50%" leap rule), #0440, #0441, #0444, #0474.
+
+Also still open: a Q&A batch flagged a student's real first name ("Bryce")
+used throughout an entire 1:1 coaching call transcript (#0430) rather than
+redacted to `[STUDENT]` — CLAUDE.md's redaction standard names `[STUDENT]`
+as a distinct marker from `[MEMBER]`, which the current pipeline does not
+implement (everyone who isn't a coach becomes `[MEMBER]`). "Bryce" is now
+protected by that marker in this round's glossary update, but the
+`[STUDENT]` vs `[MEMBER]` distinction itself is unresolved and needs a
+ruling on whether it matters for this bot's purposes.

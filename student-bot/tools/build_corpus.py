@@ -147,6 +147,134 @@ EXCLUDE = [
     "you're at 15% a month instead of 10",
     "i need to make 20 ka month",
     "have i seen a thousand dollars going to 10,000",
+
+    # The Q&A extraction pass's second sweep, reading batches 049-073
+    # (FB Live #0276-#0488), surfaced 24 more sessions carrying the same
+    # class of violation as #0288 above: real percentages and dollar
+    # figures attached to a real trade, a real member, or the instructor's
+    # own results, sitting in plain text in the corpus. Each is one
+    # distinctive phrase taken from the exact current clean-file wording,
+    # not a summary, and verified against the rebuilt corpus afterward.
+    # Several were also redaction failures, not just compliance ones: the
+    # same figure appears once behind a [PERFORMANCE REDACTED] marker and
+    # again in plain text a sentence or two later (#0317, #0325, #0402,
+    # #0321, #0427) - the same partial-redaction shape logged in
+    # redaction-defects-fb-live.md, but the fix here is exclusion, because
+    # a bare percentage restated next to its own marker is a different
+    # failure from a marker that never fired at all.
+
+    # FB Live #0434. Non-negotiable 2 by itself: a stated win rate other
+    # than the permitted 70 percent target, recapping four real calls.
+    "it's three for four 75% win rate",
+
+    # FB Live #0345. A named member's real crypto outcome, plus a chained
+    # run of specific percentage return targets on the same instrument.
+    "he put like 50 bucks. that shit's like 200 bucks now",
+    "16,000 up to around 30,000. so almost a hundred percent return",
+
+    # FB Live #0308. A live position built on screen, its cost and payout
+    # stated in exact dollars and cents throughout.
+    "max profit's $2 or two 20",
+    "that's about 30 something",
+
+    # FB Live #0325. A real member's SNOW trade narrated with specific
+    # entry-discount and overnight-move percentages.
+    "it was offering 5% here",
+    "this thing is down 40%, right",
+    "up at least 15% overnight",
+
+    # FB Live #0336. A real trade's result stated twice, both in plain
+    # text, no marker anywhere near either mention.
+    "he said it was up 10%. i know by the end of the day",
+    "it was up to like 20 something percent",
+
+    # FB Live #0343. A dense recap of specific percentage moves across
+    # three names.
+    "mastercard, it was up 30% of the max potential",
+
+    # FB Live #0348. A live options position built on screen, cost and
+    # projected payout worked out loud in exact dollars.
+    "1850 minus four 60, that's 1390. it's still a good return",
+    "that original position is a setup of $650 investment",
+    "four 60 plus 6 50, 1100 bucks",
+
+    # FB Live #0321. Explicit stated win probabilities ("odds of profit"),
+    # the same shape as the counting-scenarios pattern logged earlier in
+    # this file, plus the dollar/percentage figures they sit beside.
+    "your odds of profit are like 95%",
+    "maybe have a 30% chance of profit",
+
+    # FB Live #0410. Two real closed-trade percentages stated outright,
+    # one of them with no redaction marker anywhere nearby at all.
+    "i wasn't greedy this week. 86%",
+    "a little over 85%",
+
+    # FB Live #0427. A monthly recap of real percentage gains across four
+    # names, one of them the same figure that IS correctly marked earlier
+    # in the same file.
+    "it's up, what about 20%",
+    "up again, about 30, 30% since we last spoke",
+    "it got up to as much as 18%",
+
+    # FB Live #0428. A live AAPL strategy comparison, cost and payout in
+    # exact dollars and percentages on both sides of the comparison.
+    "that would be $150 profit",
+    "now they're at 70 negative 80%",
+
+    # FB Live #0433. A live options session, strike prices and their
+    # percentage returns worked out loud.
+    "that would be 19%. so $133",
+    "that's 13.9%",
+
+    # FB Live #0445. Vlad's own real silver trade, both the gain and the
+    # later loss stated in exact dollars.
+    "and the next day it was up to 5,000",
+    "actually it was like 1700",
+
+    # FB Live #0349. A real position's percentage move stated twice in the
+    # same breath.
+    "this thing is up 28%",
+
+    # FB Live #0317. The same real trade's result correctly marked once and
+    # then restated in plain text two sentences later.
+    "when it's already delivering, you know, 20 plus percent",
+
+    # FB Live #0340. An unhedged, specific price-target prediction and an
+    # outcome promise, both aimed at a beginner.
+    "could easily go up 200, 150",
+    "make a lot of money on the upside for planter",
+
+    # FB Live #0278. A specific percentage move used to derive a specific
+    # percentage return on a leveraged position.
+    "probably like at least 30% right now off that 1.75",
+
+    # FB Live #0282. A named individual's real outcome, no figure but an
+    # explicit success claim, the same shape non-negotiable 1 exists for.
+    "made a s**t ton of money",
+
+    # FB Live #0291. A hypothetical but real-ticker dollar cost and payout,
+    # specific enough to read as an outcome claim rather than mechanics.
+    "it costs you a thousand dollars. you take profit for 2,500",
+
+    # FB Live #0292. A first person trade narrative closing on an explicit
+    # "100% win" framing.
+    "i did not lose a single dollar",
+    "that is a win 100%",
+
+    # FB Live #0402. Vlad's own stated quarterly return, plus a real
+    # position's result restated in plain text next to its own marker.
+    "they were up 50%",
+    "it's about 14% for, uh, overall three months",
+
+    # FB Live #0425. A member's own live trade result, both the drawdown
+    # and the recovery stated as specific percentages.
+    "it was down 30%",
+
+    # FB Live #0318. A member's reported real outcome on a closed trade.
+    "exit paypal today for 11. i see 20%",
+
+    # FB Live #0488. A real, currently open position's percentage move.
+    "in two days it's up by 24%",
 ]
 
 # Retired terms, non-negotiable 8. Vlad ruled: "You can remove the Elite

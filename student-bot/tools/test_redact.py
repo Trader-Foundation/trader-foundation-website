@@ -202,6 +202,17 @@ JOHN_MURPHY_GUARD_CASES = [
     "who was the author? John J. Murphy. Okay. That's all we got for now.",
 ]
 
+JOE_NAME_CASES = [
+    ("Joe, I'm actually gonna close this.", "[MEMBER]"),
+    ("Charity, Joe. I know you were trying to join in earlier.", "[MEMBER]"),
+]
+
+# "Joe Rogan" the public figure must survive untouched, found live in 0436.
+JOE_ROGAN_GUARD_CASES = [
+    "everybody was about Joe Rogan couple months ago and that's what was "
+    "keeping this like pushing higher",
+]
+
 # A trading-volume figure that happens to be shaped like an account size
 # ("<number>k") must survive untouched: the number names the stock, not the
 # viewer. All three found live in the same passage shape, "volume" nearby.
@@ -336,6 +347,22 @@ for text in JOHN_MURPHY_GUARD_CASES:
     else:
         print(f"ok    kept John Murphy citation: {text}")
 
+for text, marker in JOE_NAME_CASES:
+    out, _ = redact(text)
+    if marker not in out or "joe" in out.lower().replace(marker.lower(), ""):
+        fail += 1
+        print(f"FAIL  Joe not redacted: {text!r}\n      -> {out!r}")
+    else:
+        print(f"ok    redacted Joe: {text}")
+
+for text in JOE_ROGAN_GUARD_CASES:
+    out, _ = redact(text)
+    if "joe" not in out.lower():
+        fail += 1
+        print(f"FAIL  Joe Rogan reference corrupted: {text!r}\n      -> {out!r}")
+    else:
+        print(f"ok    kept Joe Rogan reference: {text}")
+
 for text in VOLUME_GUARD_CASES:
     out, _ = redact(text)
     if "[ACCOUNT SIZE REDACTED]" in out:
@@ -347,6 +374,6 @@ for text in VOLUME_GUARD_CASES:
 total = (len(VERB_CASES) + len(NAME_CASES) + len(PERCENT_CASES) + len(VERB_GUARD_CASES)
          + len(ACCOUNT_SIZE_CASES) + len(VOLUME_GUARD_CASES)
          + len(JOHN_NAME_CASES) + len(JOHN_MURPHY_GUARD_CASES) + len(NO_GLUE_CASES)
-         + len(POSITION_GLUE_CASES) + 3)
+         + len(POSITION_GLUE_CASES) + len(JOE_NAME_CASES) + len(JOE_ROGAN_GUARD_CASES) + 3)
 print(f"\n{total} cases, {fail} wrong")
 sys.exit(1 if fail else 0)

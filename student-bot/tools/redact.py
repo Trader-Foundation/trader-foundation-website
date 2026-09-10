@@ -96,6 +96,37 @@ def redact_john(text):
     return JOHN_PATTERN.sub(repl, text), n
 
 
+# One member is named Joe, and Joe Rogan (the podcast host) is a real public
+# figure discussed by name: "everybody was about Joe Rogan couple months ago
+# and that's what was keeping this like pushing higher" (0436, about GME
+# hype). Same shape as John Murphy above, found in the same batch pass:
+# "Joe Rogan" redacted to "[MEMBER] Rogan" even though the "Joe" here names
+# a public figure, not the member. Handled the same way, an exclusion for
+# the one surname rather than dropping "joe" from the name list.
+_JOE = "joe" if "joe" in ROLES else None
+if _JOE:
+    ORDERED = [n for n in ORDERED if n != _JOE]
+JOE_PATTERN = re.compile(r"\bjoe(?:'s)?\b", re.I)
+JOE_ROGAN_AFTER = re.compile(r"^\s*rogan\b", re.I)
+
+
+def redact_joe(text):
+    """Redact 'Joe' the member, leave 'Joe Rogan' the public figure alone."""
+    if not _JOE:
+        return text, 0
+    n = 0
+
+    def repl(m):
+        nonlocal n
+        after = text[m.end():m.end() + 15]
+        if JOE_ROGAN_AFTER.match(after):
+            return m.group(0)
+        n += 1
+        return ROLES[_JOE]
+
+    return JOE_PATTERN.sub(repl, text), n
+
+
 def redact_mark(text):
     """Redact 'Mark' the name, leave 'mark' the verb alone."""
     if not _MARK:
@@ -330,8 +361,8 @@ def redact(text):
         if n:
             bump(ROLES[low], n)
 
-    # "Mark" and "John" are handled on their own; see redact_mark and
-    # redact_john above.
+    # "Mark", "John" and "Joe" are handled on their own; see redact_mark,
+    # redact_john and redact_joe above.
     text, n = redact_mark(text)
     if n:
         bump(ROLES.get(_MARK, "[MEMBER]"), n)
@@ -339,6 +370,10 @@ def redact(text):
     text, n = redact_john(text)
     if n:
         bump(ROLES.get(_JOHN, "[MEMBER]"), n)
+
+    text, n = redact_joe(text)
+    if n:
+        bump(ROLES.get(_JOE, "[MEMBER]"), n)
 
     text, n = redact_account_size_k(text)
     if n:

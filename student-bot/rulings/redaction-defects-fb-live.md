@@ -198,3 +198,43 @@ collisions logged only in `glossary/names.json`'s own note (Rob/rob-the-verb,
 Nick/"fast nick" nickel jargon, Scott/Scotts-Miracle-Gro) rather than given a
 Mark-style guard, because each was rare enough in sampling that the guard
 did not seem worth the complexity yet.
+
+## Update, 9-10 September 2026 continued: the Q&A extraction pass finished all 393 sessions
+
+**A third name/public-figure collision, same shape as John Murphy.** A
+member is named Joe, and Joe Rogan (the podcast host) is discussed by name
+in session 0436: "everybody was about Joe Rogan couple months ago." Redacted
+to "[MEMBER] Rogan" the same way "John Murphy" broke. Fixed the same way,
+`redact_joe` in `tools/redact.py`, an exclusion for the exact surname rather
+than dropping "joe" from the name list.
+
+**A POSITION marker glue bug**, same defect family as the dangling-`%` bug
+above but in a different pattern: the POSITION regex's trailing span was a
+raw character cap with no regard for word boundaries, so a match could cut
+off mid-word ("we sold one 20, we bought one 15... a, an at the money credit
+spread" produced "[POSITION REDACTED]an", found in 0328 and 0329). Fixed in
+`redact_positions`: the matched span's trailing whitespace is put back after
+the marker instead of inside the replaced text.
+
+**The name glossary grew again, 192 to 221.** Finishing the Q&A extraction
+pass (batches 049-073, the second half of the 393 sessions) surfaced 29 more
+real names never protected — "Lisa" alone was flagged as unredacted across
+at least ten separate sessions, by far the most repeated leak found this
+project. Three more candidates were sampled against raw context and dropped
+for the same collision reasons as Cam/Lee/Ben/Lulu above: "Harry" collides
+with a real, isolated transcription garble of "Inverted Hammer" (the
+curriculum's own ruled-upon candlestick pattern, confirmed by checking both
+of the word's only two occurrences in the whole corpus directly), "Sam"
+collides more often with "Sam Altman" (5 of 8 occurrences) than it protects
+a real member (3 of 8), and "Myers" collides repeatedly with "Bristol
+Myers" (BMY), a real, frequently-discussed stock, confirmed across 5
+separate sessions. Unlike John and Joe, none of these three had enough
+legitimate member-protection value to justify building a dedicated guard,
+so they were left out rather than added-with-exception.
+
+**Compliance work for this same closing pass is logged in
+`compliance-log.md`, not here**, per this project's existing split: this
+document is redaction (protecting people), that one is compliance
+(protecting the bot from outcome claims). The two intersected constantly in
+this pass — several of the newly excluded compliance passages were also the
+reason a name got added to this glossary in the first place.
