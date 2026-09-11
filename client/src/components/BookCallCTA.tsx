@@ -1,5 +1,5 @@
 /*
- * Reusable Book a Call CTA Strip
+ * Reusable Live Webinar CTA Strip
  * Placed between major sections to drive conversions
  */
 
@@ -61,7 +61,7 @@ export default function BookCallCTA({
         {!headline && !subtext && <div className="mb-0" />}
 
         <a
-          href="https://start.traderfoundation.co/trade-yt"
+          href="https://live.traderfoundation.com/"
           target="_blank"
           rel="noopener noreferrer"
           className={`group inline-flex items-center gap-3 px-10 py-4 text-[0.85rem] font-bold tracking-wide rounded-sm transition-all duration-300 ${
@@ -71,7 +71,7 @@ export default function BookCallCTA({
           }`}
           style={{ fontFamily: "'DM Sans', sans-serif" }}
         >
-          Book a Call
+          Live Webinar
           <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
         </a>
       </div>

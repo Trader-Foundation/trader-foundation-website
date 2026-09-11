@@ -1,5 +1,5 @@
 /*
- * Book a Call Page, Trader Foundation Academy
+ * Live Webinar Page, Trader Foundation Academy
  * Redirects to the Fillout booking form
  * Fonts: Sen (headings), DM Sans (body)
  * Palette: #111 (dark), #faf9f6 (ivory), #c7ab77 (gold)
@@ -10,7 +10,7 @@ import Navigation from '@/components/Navigation';
 import SEO from '@/components/SEO';
 import Footer from '@/components/Footer';
 
-const FILLOUT_URL = 'https://start.traderfoundation.co/trade-yt';
+const FILLOUT_URL = 'https://live.traderfoundation.com/';
 
 export default function BookACall() {
   useEffect(() => {

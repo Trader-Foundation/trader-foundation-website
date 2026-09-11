@@ -358,7 +358,7 @@ export default function About() {
             ))}
           </div>
 
-          {/* Book a Call CTA after leadership team */}
+          {/* Live Webinar CTA after leadership team */}
           <div className="text-center mt-14">
             <p
               className="text-[#555] text-[0.9rem] leading-relaxed mb-5"
@@ -367,13 +367,13 @@ export default function About() {
               Interested in learning more? Have a conversation with our team.
             </p>
             <a
-              href="https://start.traderfoundation.co/trade-yt"
+              href="https://live.traderfoundation.com/"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-8 py-3.5 bg-[#c7ab77] text-[#111] text-[0.85rem] font-bold tracking-wide rounded-sm transition-all duration-300 hover:bg-[#b89a66] hover:shadow-lg"
               style={{ fontFamily: "'DM Sans', sans-serif" }}
             >
-              Book a Call
+              Live Webinar
             </a>
           </div>
         </div>

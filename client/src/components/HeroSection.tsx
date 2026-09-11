@@ -2,7 +2,7 @@
  * Hero Section, Trader Foundation
  * Fonts: Sen (bold headline), DM Sans (body)
  * Copy: Vlad-face reversal — original Vlad-teaching background,
- * "Take Control of Your Financial Future" headline, Book a Call CTA.
+ * "Take Control of Your Financial Future" headline, Live Webinar CTA.
  */
 
 import { useEffect, useState } from 'react';
@@ -121,13 +121,13 @@ export default function HeroSection() {
             }`}
           >
             <a
-              href="https://start.traderfoundation.co/trade-yt"
+              href="https://live.traderfoundation.com/"
               target="_blank"
               rel="noopener noreferrer"
               className="group inline-flex items-center gap-3 px-8 py-4 bg-[#c7ab77] text-[#111] text-[0.85rem] font-bold tracking-wide rounded-sm transition-all duration-300 hover:bg-[#b89a66] hover:shadow-[0_8px_30px_rgba(199,171,119,0.3)]"
               style={{ fontFamily: "'DM Sans', sans-serif" }}
             >
-              Book a Call
+              Live Webinar
               <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
             </a>
             <p

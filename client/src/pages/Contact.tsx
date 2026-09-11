@@ -206,7 +206,7 @@ export default function Contact() {
         </div>
       </section>
 
-      {/* ─── Book a Call Section ─── */}
+      {/* ─── Live Webinar Section ─── */}
       <section className="py-16 bg-[#111]">
         <div className="max-w-[800px] mx-auto px-6 lg:px-8">
           <div className="text-center mb-8">
@@ -231,7 +231,7 @@ export default function Contact() {
           </div>
           <div className="text-center">
             <a
-              href="https://start.traderfoundation.co/trade-yt"
+              href="https://live.traderfoundation.com/"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-8 py-3.5 bg-[#c7ab77] text-[#111] text-[0.85rem] font-bold tracking-wide rounded-sm transition-all duration-300 hover:bg-[#b89a66] hover:shadow-lg"
