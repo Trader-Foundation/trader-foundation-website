@@ -95,7 +95,7 @@ export default function Navigation() {
                 href="https://live.traderfoundation.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 border border-[#c7ab77]/60 text-[#c7ab77] text-[0.78rem] font-bold tracking-wide rounded-sm transition-all duration-300 hover:border-[#c7ab77] hover:bg-[#c7ab77]/10"
+                className="inline-flex items-center gap-2 px-5 py-2 bg-[#c7ab77] text-[#111] text-[0.78rem] font-bold tracking-wide rounded-sm transition-all duration-300 hover:bg-[#b89a66] hover:shadow-lg"
                 style={{ fontFamily: "'DM Sans', sans-serif" }}
               >
                 <span className="relative flex items-center justify-center h-2 w-2">
@@ -103,16 +103,6 @@ export default function Navigation() {
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-[#e05252]" />
                 </span>
                 Live Webinar
-              </a>
-
-              <a
-                href="https://start.traderfoundation.co/trade-yt"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-2 bg-[#c7ab77] text-[#111] text-[0.78rem] font-bold tracking-wide rounded-sm transition-all duration-300 hover:bg-[#b89a66] hover:shadow-lg"
-                style={{ fontFamily: "'DM Sans', sans-serif" }}
-              >
-                Book a Call
               </a>
 
 
@@ -250,7 +240,7 @@ export default function Navigation() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setMobileOpen(false)}
-              className="flex items-center justify-center gap-2 px-6 py-3 border border-[#c7ab77]/60 text-[#c7ab77] text-[0.8rem] font-bold tracking-wide rounded-sm"
+              className="flex items-center justify-center gap-2 px-6 py-3 bg-[#c7ab77] text-[#111] text-[0.8rem] font-bold tracking-wide rounded-sm"
               style={{ fontFamily: "'DM Sans', sans-serif" }}
             >
               <span className="relative flex items-center justify-center h-2 w-2">
@@ -258,16 +248,6 @@ export default function Navigation() {
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-[#e05252]" />
               </span>
               Live Webinar
-            </a>
-            <a
-              href="https://start.traderfoundation.co/trade-yt"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => setMobileOpen(false)}
-              className="block text-center px-6 py-3 bg-[#c7ab77] text-[#111] text-[0.8rem] font-bold tracking-wide rounded-sm"
-              style={{ fontFamily: "'DM Sans', sans-serif" }}
-            >
-              Book a Call
             </a>
 
           </div>

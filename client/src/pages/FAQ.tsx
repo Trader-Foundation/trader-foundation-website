@@ -1,7 +1,7 @@
 /*
  * FAQ Page, Trader Foundation Academy
  * Design: Black & Gold Luxe style
- * Sections: Hero → FAQ Toggles → Book a Call CTA → Footer
+ * Sections: Hero → FAQ Toggles → Live Webinar CTA → Footer
  * Fonts: Sen (headings), DM Sans (body)
  * Palette: #0a0a0a (black), #c7ab77 (gold), white text
  */
@@ -314,7 +314,7 @@ export default function FAQ() {
             </div>
           </div>
 
-          {/* Book a Call CTA */}
+          {/* Live Webinar CTA */}
           <div className={`mt-16 text-center transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
             <p
               className="text-white/50 text-sm mb-4"
@@ -323,13 +323,13 @@ export default function FAQ() {
               Still have questions? Let's talk.
             </p>
             <a
-              href="https://start.traderfoundation.co/trade-yt"
+              href="https://live.traderfoundation.com/"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block px-10 py-4 bg-[#c7ab77] text-black font-bold text-sm tracking-wide uppercase hover:bg-[#d4bc8e] transition-all duration-300"
               style={{ fontFamily: "'Sen', sans-serif" }}
             >
-              Book a Call
+              Live Webinar
             </a>
           </div>
         </div>

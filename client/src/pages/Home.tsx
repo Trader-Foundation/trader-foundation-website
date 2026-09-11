@@ -228,7 +228,7 @@ export default function Home() {
 
       <PodcastSection />
 
-      {/* Final CTA - Book a Call */}
+      {/* Final CTA - Live Webinar */}
       <section className="py-16 bg-[#111]">
         <div className="max-w-[800px] mx-auto px-6 lg:px-8 text-center">
           <p
@@ -250,7 +250,7 @@ export default function Home() {
             No pressure, no sales pitch. Just a transparent conversation with one of our team members to see if Trader Foundation is the right fit for you.
           </p>
           <a
-            href="https://start.traderfoundation.co/trade-yt"
+            href="https://live.traderfoundation.com/"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-8 py-3.5 bg-[#c7ab77] text-[#111] text-[0.85rem] font-bold tracking-wide rounded-sm transition-all duration-300 hover:bg-[#b89a66] hover:shadow-lg"
