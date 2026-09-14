@@ -37,14 +37,14 @@ export default function BookCallCTA({
 
       <div className="max-w-[800px] mx-auto px-6 lg:px-8 text-center">
         {headline && (
-          <h3
+          <h2
             className={`text-[1.4rem] sm:text-[1.75rem] font-extrabold leading-tight mb-3 ${
               isDark ? 'text-white' : 'text-[#1a1a1a]'
             }`}
             style={{ fontFamily: "'Sen', sans-serif" }}
           >
             {headline}
-          </h3>
+          </h2>
         )}
 
         {subtext && (

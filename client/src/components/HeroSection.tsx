@@ -31,13 +31,13 @@ function BBBBadge() {
           <span className="text-white text-[0.5rem] font-bold tracking-wider" style={{ fontFamily: "'DM Sans', sans-serif" }}>BETTER</span>
           <span className="text-white text-[0.5rem] font-bold tracking-wider" style={{ fontFamily: "'DM Sans', sans-serif" }}>BUSINESS</span>
           <span className="text-white text-[0.5rem] font-bold tracking-wider" style={{ fontFamily: "'DM Sans', sans-serif" }}>BUREAU</span>
-          <span className="text-white/50 text-[0.3rem] mt-0.5" style={{ fontFamily: "'DM Sans', sans-serif" }}>ACCREDITED BUSINESS</span>
+          <span className="text-white/70 text-[0.3rem] mt-0.5" style={{ fontFamily: "'DM Sans', sans-serif" }}>ACCREDITED BUSINESS</span>
         </div>
       </div>
       <div className="-ml-3 flex items-center justify-center w-10 h-10 rounded-full bg-[#1a5ca8] border-2 border-white/20 z-10">
         <div className="text-center leading-none">
           <span className="text-white text-[0.95rem] font-extrabold" style={{ fontFamily: "'Sen', sans-serif" }}>A+</span>
-          <span className="block text-white/70 text-[0.3rem] font-bold tracking-wide" style={{ fontFamily: "'DM Sans', sans-serif" }}>RATING</span>
+          <span className="block text-white/90 text-[0.3rem] font-bold tracking-wide" style={{ fontFamily: "'DM Sans', sans-serif" }}>RATING</span>
         </div>
       </div>
     </div>

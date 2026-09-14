@@ -146,7 +146,7 @@ export default function MeetVladSection() {
                     Vlad Tayman
                   </p>
                   <p
-                    className="text-[#888] text-sm mt-1"
+                    className="text-[#666] text-sm mt-1"
                     style={{ fontFamily: "'DM Sans', sans-serif" }}
                   >
                     Founder, Trader Foundation Academy
@@ -199,7 +199,7 @@ export default function MeetVladSection() {
                   "{review.text}"
                 </p>
                 <p
-                  className="text-[#888] font-semibold text-xs uppercase tracking-wide"
+                  className="text-[#666] font-semibold text-xs uppercase tracking-wide"
                   style={{ fontFamily: "'DM Sans', sans-serif" }}
                 >
                   {review.name}
@@ -211,7 +211,7 @@ export default function MeetVladSection() {
           <div className="text-center mt-10 space-y-3">
             <a
               href="/results"
-              className="inline-flex items-center gap-2 text-[#c7ab77] font-semibold text-sm hover:text-[#b09a6a] transition-colors"
+              className="inline-flex items-center gap-2 text-[#876b38] font-semibold text-sm hover:text-[#111] transition-colors"
               style={{ fontFamily: "'DM Sans', sans-serif" }}
             >
               Click here for more Student Reviews on Trader Foundation
@@ -224,7 +224,7 @@ export default function MeetVladSection() {
                 href="https://www.trustpilot.com/review/traderfoundation.net"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-[#888] text-xs hover:text-[#00b67a] transition-colors"
+                className="inline-flex items-center gap-1.5 text-[#666] text-xs hover:text-[#111] transition-colors"
                 style={{ fontFamily: "'DM Sans', sans-serif" }}
               >
                 <TrustpilotStars className="h-3" />
