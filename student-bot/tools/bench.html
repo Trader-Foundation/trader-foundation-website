@@ -1,0 +1,446 @@
+<title>Student Bot Bench</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@500;600&display=swap">
+
+<style>
+:root{
+  --ground:#F5F6F9; --surface:#FFFFFF; --sunk:#EEF0F4;
+  --ink:#1A1D23; --muted:#5F6673; --faint:#8A909C;
+  --line:#E1E4EA; --line-firm:#CDD2DB;
+  --accent:#1C5C48; --accent-soft:#E3F0EA;
+  --ok:#1F6F52; --ok-soft:#E4F1EA;
+  --warn:#8A5A10; --warn-soft:#F7EEDC;
+  --stop:#9B2F2A; --stop-soft:#F7E5E3;
+  --shadow:0 1px 2px rgba(20,25,35,.05), 0 8px 24px rgba(20,25,35,.05);
+  --sans:"IBM Plex Sans",ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  --serif:"IBM Plex Serif",Georgia,"Times New Roman",serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#121419; --surface:#191C22; --sunk:#101317;
+    --ink:#E7EAEF; --muted:#9BA2AF; --faint:#79808D;
+    --line:#282C34; --line-firm:#393F49;
+    --accent:#4FBE94; --accent-soft:#163026;
+    --ok:#54BE92; --ok-soft:#142C22;
+    --warn:#D6A24E; --warn-soft:#2E2517;
+    --stop:#DE7C74; --stop-soft:#331D1B;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.3);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#121419; --surface:#191C22; --sunk:#101317;
+  --ink:#E7EAEF; --muted:#9BA2AF; --faint:#79808D;
+  --line:#282C34; --line-firm:#393F49;
+  --accent:#4FBE94; --accent-soft:#163026;
+  --ok:#54BE92; --ok-soft:#142C22;
+  --warn:#D6A24E; --warn-soft:#2E2517;
+  --stop:#DE7C74; --stop-soft:#331D1B;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.3);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:var(--sans); font-size:15px; line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1220px; margin:0 auto; padding:28px 20px 72px}
+
+/* ---- masthead ---- */
+header.top{
+  display:flex; flex-wrap:wrap; align-items:flex-end; gap:16px 28px;
+  padding-bottom:18px; margin-bottom:24px; border-bottom:2px solid var(--ink);
+}
+.brand{display:flex; flex-direction:column; gap:2px}
+.eyebrow{
+  font-family:var(--mono); font-size:11px; letter-spacing:.13em;
+  text-transform:uppercase; color:var(--muted);
+}
+h1{
+  font-family:var(--serif); font-weight:600; font-size:30px;
+  margin:0; letter-spacing:-.015em; text-wrap:balance;
+}
+.figures{display:flex; gap:26px; margin-left:auto; flex-wrap:wrap}
+.fig{display:flex; flex-direction:column}
+.fig b{font-family:var(--mono); font-size:20px; font-weight:500; font-variant-numeric:tabular-nums}
+.fig span{font-family:var(--mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--faint)}
+
+/* ---- layout ---- */
+.cols{display:grid; grid-template-columns:minmax(0,1fr) 316px; gap:26px; align-items:start}
+@media (max-width:930px){.cols{grid-template-columns:minmax(0,1fr)}}
+
+/* ---- ask ---- */
+.ask{
+  background:var(--surface); border:1px solid var(--line); border-radius:10px;
+  box-shadow:var(--shadow); padding:16px; display:flex; flex-direction:column; gap:10px;
+}
+.ask label{font-family:var(--mono); font-size:11px; letter-spacing:.11em; text-transform:uppercase; color:var(--muted)}
+.row{display:flex; gap:8px}
+input[type=text]{
+  flex:1; min-width:0; font-family:var(--sans); font-size:16px; color:var(--ink);
+  background:var(--sunk); border:1px solid var(--line-firm); border-radius:7px; padding:11px 13px;
+}
+input[type=text]:focus-visible, button:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+button.go{
+  font-family:var(--sans); font-weight:600; font-size:15px; color:#fff; background:var(--accent);
+  border:1px solid var(--accent); border-radius:7px; padding:11px 20px; cursor:pointer;
+}
+button.go:hover{filter:brightness(1.08)}
+
+/* ---- verdict ---- */
+.verdict{
+  margin-top:22px; background:var(--surface); border:1px solid var(--line);
+  border-left:4px solid var(--tone,var(--accent)); border-radius:10px;
+  box-shadow:var(--shadow); overflow:hidden;
+}
+.verdict .vhead{display:flex; align-items:center; gap:11px; flex-wrap:wrap; padding:14px 16px 0}
+.chip{
+  font-family:var(--mono); font-size:11px; font-weight:500; letter-spacing:.09em; text-transform:uppercase;
+  padding:4px 9px; border-radius:4px; background:var(--tone-soft,var(--accent-soft)); color:var(--tone,var(--accent));
+  border:1px solid color-mix(in srgb, var(--tone,var(--accent)) 28%, transparent);
+}
+.vhead .rule{font-family:var(--mono); font-size:11.5px; color:var(--muted)}
+.verdict .vbody{padding:12px 16px 16px}
+.shape{
+  font-size:15.5px; line-height:1.62; margin:0; padding:13px 15px;
+  background:var(--sunk); border-radius:8px; border:1px solid var(--line);
+}
+.shape p{margin:0 0 9px} .shape p:last-child{margin:0}
+.note{font-size:13px; color:var(--muted); margin:10px 0 0}
+
+/* ---- results ---- */
+h2.sec{
+  font-family:var(--mono); font-size:11px; letter-spacing:.13em; text-transform:uppercase;
+  color:var(--muted); margin:28px 0 11px; padding-bottom:7px; border-bottom:1px solid var(--line);
+  display:flex; justify-content:space-between; gap:12px;
+}
+.hit{
+  background:var(--surface); border:1px solid var(--line); border-radius:10px;
+  padding:14px 15px; margin-bottom:11px; box-shadow:var(--shadow);
+}
+.cite{display:flex; align-items:center; gap:9px; flex-wrap:wrap; margin-bottom:9px}
+.cite .src{font-family:var(--sans); font-weight:600; font-size:14px}
+.cite .at{font-family:var(--mono); font-size:12px; color:var(--muted); font-variant-numeric:tabular-nums}
+.pill{
+  font-family:var(--mono); font-size:9.5px; letter-spacing:.09em; text-transform:uppercase;
+  padding:3px 7px; border-radius:3px; border:1px solid var(--line-firm); color:var(--muted);
+}
+.pill.ever{color:var(--ok); background:var(--ok-soft); border-color:color-mix(in srgb,var(--ok) 26%,transparent)}
+.pill.dated{color:var(--warn); background:var(--warn-soft); border-color:color-mix(in srgb,var(--warn) 26%,transparent)}
+.pill.proc{color:var(--stop); background:var(--stop-soft); border-color:color-mix(in srgb,var(--stop) 26%,transparent)}
+.score{margin-left:auto; display:flex; align-items:center; gap:7px}
+.bar{width:54px; height:5px; border-radius:3px; background:var(--sunk); overflow:hidden}
+.bar i{display:block; height:100%; background:var(--accent)}
+.score b{font-family:var(--mono); font-size:11px; font-weight:500; color:var(--muted); font-variant-numeric:tabular-nums}
+.hit p.txt{margin:0; font-size:14.5px; line-height:1.62; color:var(--ink)}
+.hit p.txt mark{background:var(--accent-soft); color:inherit; padding:0 1px; border-radius:2px}
+.empty{padding:22px; text-align:center; color:var(--muted); background:var(--surface);
+  border:1px dashed var(--line-firm); border-radius:10px}
+
+/* ---- sidebar ---- */
+aside{display:flex; flex-direction:column; gap:18px}
+.card{background:var(--surface); border:1px solid var(--line); border-radius:10px; box-shadow:var(--shadow); overflow:hidden}
+.card h3{
+  font-family:var(--mono); font-size:10.5px; letter-spacing:.13em; text-transform:uppercase;
+  color:var(--muted); margin:0; padding:12px 14px 9px; border-bottom:1px solid var(--line);
+}
+.card .inner{padding:11px 14px 14px}
+.kv{display:flex; justify-content:space-between; gap:10px; font-size:13px; padding:4px 0}
+.kv span{color:var(--muted)}
+.kv b{font-family:var(--mono); font-weight:500; font-variant-numeric:tabular-nums}
+.tgroup{margin-bottom:13px}
+.tgroup:last-child{margin-bottom:0}
+.tgroup h4{
+  font-family:var(--mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--faint); margin:0 0 6px;
+}
+.tq{
+  display:block; width:100%; text-align:left; font-family:var(--sans); font-size:13px; line-height:1.45;
+  color:var(--ink); background:transparent; border:1px solid var(--line); border-radius:6px;
+  padding:7px 9px; margin-bottom:5px; cursor:pointer;
+}
+.tq:hover{border-color:var(--accent); background:var(--accent-soft)}
+.tq code{font-family:var(--mono); font-size:10px; color:var(--faint); margin-right:5px}
+footer{margin-top:34px; padding-top:16px; border-top:1px solid var(--line); font-size:12.5px; color:var(--faint)}
+</style>
+
+<div class="wrap">
+<header class="top">
+  <div class="brand">
+    <div class="eyebrow">Trader Foundation</div>
+    <h1>Student Bot Bench</h1>
+  </div>
+  <div class="figures">
+    <div class="fig"><b id="f-chunks">0</b><span>chunks</span></div>
+    <div class="fig"><b id="f-sources">0</b><span>sources</span></div>
+    <div class="fig"><b id="f-stamped">0</b><span>timestamped</span></div>
+    <div class="fig"><b id="f-tests">0</b><span>test cases</span></div>
+  </div>
+</header>
+
+<div class="cols">
+  <main>
+    <div class="ask">
+      <label for="q">Ask the way a student would</label>
+      <div class="row">
+        <input type="text" id="q" autocomplete="off" spellcheck="false"
+               placeholder="What is a marubozu?">
+        <button class="go" id="go">Ask</button>
+      </div>
+    </div>
+    <div id="out"></div>
+  </main>
+
+  <aside>
+    <div class="card">
+      <h3>What the bench does</h3>
+      <div class="inner" style="font-size:13px;line-height:1.55;color:var(--muted)">
+        <p style="margin:0 0 8px">This runs the two layers that decide whether an answer is safe: the guard rules, then retrieval over the indexed corpus.</p>
+        <p style="margin:0">It does not write prose. It shows you what the bot would be grounded on and whether it refuses correctly, which is the part that can be wrong in ways that matter.</p>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Corpus</h3>
+      <div class="inner" id="stats"></div>
+    </div>
+    <div class="card">
+      <h3>Test set</h3>
+      <div class="inner" id="tests"></div>
+    </div>
+  </aside>
+</div>
+
+<footer>Retrieval and guard rules run locally in this page. Course transcripts stay in the corpus and are never sent anywhere.</footer>
+</div>
+
+<script>
+const CHUNKS = /*__CHUNKS__*/[];
+const TESTS  = /*__TESTS__*/{};
+
+/*__GUARDS__*/
+
+/* ---------------- retrieval ---------------- */
+const STOP = new Set(("a an the and or but if of to in on at is are was were be been do does did i you it "+
+ "my your this that these those for with as from what how when where why which who whom can could should "+
+ "would will shall me we they them he she his her its about into over under s t").split(" "));
+/* Suffix stripping with a four character floor. Without the floor "greed"
+   became "gre", so a student asking about greed never reached the passages
+   where a coach says "don't get greedy". */
+function stem(w){
+  const two = [[/ies$/,"y"],[/(sses|shes|ches|xes)$/,"s"]];
+  for (const [re,rep] of two){
+    const out = w.replace(re,rep);
+    // Fall through rather than return when too short, so "losses" reaches the
+    // simple suffix pass below and becomes "loss". Returning here instead left
+    // it as "losses" and diverged from tools/ask.py, which would mean the
+    // bench answered differently from what the tests exercise.
+    if (out !== w && out.length >= 4) return out;
+  }
+  for (const suf of ["ing","ed","es","s"]){
+    if (w.endsWith(suf) && w.length - suf.length >= 4) return w.slice(0, -suf.length);
+  }
+  return w;
+}
+/* Numbers are indexed. Kept in step with ask.py, where the reasoning lives.
+   This curriculum teaches by number constantly (13 and 20 day averages,
+   Fibonacci 38.2, Full Stochastics 14.3.3, 0.07 delta), and the old pattern
+   produced zero tokens for "what is the 13 and 20 for", so zero results. */
+const toks = s => (s.toLowerCase().match(/[a-z][a-z0-9']+|\d+(?:\.\d+)*/g)||[]).filter(w=>!STOP.has(w)&&w.length>1).map(stem);
+
+let DF={}, AVG=0, DOCS=[];
+const TITLE_TOKENS = {};
+function index(){
+  DOCS = CHUNKS.map(c=>{
+    const t = toks(c.text), tf={};
+    t.forEach(w=>tf[w]=(tf[w]||0)+1);
+    Object.keys(tf).forEach(w=>DF[w]=(DF[w]||0)+1);
+    return {c, tf, len:t.length};
+  });
+  AVG = DOCS.reduce((s,d)=>s+d.len,0)/(DOCS.length||1);
+  /* Titles indexed alongside the body, for TITLE_BOOST below. */
+  for (const d of DOCS){
+    const key = d.c.source_file;
+    if (key && !TITLE_TOKENS[key]){
+      const t = String(d.c.module_title || "")
+        .replace(/[-_]?(UNNUMBERED|SLIDES|RAW)\b/ig, " ")
+        .replace(/[-_]/g, " ");
+      TITLE_TOKENS[key] = new Set(toks(t));
+    }
+  }
+}
+/* Prefix expansion bridges what the light stemmer cannot: greed and greedy,
+   patience and patient, emotion and emotional. Only for terms of five
+   characters or more, capped so one term cannot dominate the score. */
+const PREFIX_MIN = 5;
+/* Curated bridges from the student's words to the curriculum's. Kept in step
+   with ask.py. Prefix expansion cannot reach these, the pairs share no prefix.
+   The case that forced it: the psychology material teaches "you will see red"
+   at length and a student types "my position is down". */
+const ALIASES_RAW = {
+  down:["red"], losing:["red","loss"], lose:["red","loss"],
+  underwater:["red","loss"], negative:["red","loss"],
+  scared:["fear"], afraid:["fear"], nervous:["fear"],
+  anxious:["fear"], panic:["fear"], worried:["fear"],
+  shadow:["wick"],
+  line:["support","resistance","level"],
+  zone:["support","resistance","level"],
+  /* Shorthand. Students type the abbreviation and the corpus says the word,
+     and a term under PREFIX_MIN characters cannot reach it by prefix. "How do
+     I use fib levels" missed the Fibonacci module entirely, in a corpus with a
+     whole module called Fibonacci Retracement. */
+  fib:["fibonacci","retracement"], fibs:["fibonacci","retracement"],
+  vol:["volume"], ma:["moving","average"], sr:["support","resistance"],
+  ta:["technical","analysis"], tos:["thinkorswim"],
+  pt:["target","resistance"], dte:["expiration"],
+  /* Speed words for exiting. "Sell too soon" and "take profit so early" both
+     reached the teaching; "get out way too fast" did not, because the doc says
+     early and the student said fast. */
+  fast:["early","soon"], quick:["early","soon"],
+  quickly:["early","soon"], premature:["early","soon"],
+};
+const ALIASES = {};
+Object.keys(ALIASES_RAW).forEach(k => ALIASES[stem(k)] = ALIASES_RAW[k].map(stem));
+
+function expand(term){
+  const alias = (ALIASES[term]||[]).filter(a => DF[a] !== undefined);
+  if (DF[term] !== undefined) return [term].concat(alias);
+  if (term.length < PREFIX_MIN) return alias;
+  const pre = term.slice(0, PREFIX_MIN);
+  return Object.keys(DF).filter(t => t.startsWith(pre))
+    .sort((a,b) => a.length - b.length || (a < b ? -1 : 1)).slice(0,4).concat(alias);
+}
+
+function search(q, n=8){
+  const raw = [...new Set(toks(q))];
+  const qt = [...new Set(raw.flatMap(expand))];
+  if(!qt.length) return [];
+  const N = DOCS.length, k1=1.4, b=0.72;
+  const scored = DOCS.map(d=>{
+    let s=0;
+    for(const w of qt){
+      const f = d.tf[w]; if(!f) continue;
+      const idf = Math.log(1 + (N - DF[w] + 0.5)/(DF[w] + 0.5));
+      s += idf * (f*(k1+1))/(f + k1*(1 - b + b*d.len/AVG));
+    }
+    /* Rulings are current teaching and override transcripts, per system.md.
+       Retrieval has to reflect that or the rule is empty. Kept modest so a
+       ruling surfaces alongside strong transcript matches. Mirrors
+       RULING_BOOST in tools/ask.py. */
+    if (d.c.course === "ruling") s *= 1.4;
+    /* A lesson's own subject is the one word BM25 cannot see. Ask this corpus
+       about volume and the Volume module did not appear in the top TWENTY, for
+       any phrasing, because "volume" is in thousands of live session chunks and
+       its IDF collapses to nothing. The stronger a term is as a subject, the
+       more the corpus says it, and the less BM25 weights it.
+       So the title is scored separately from the body: a title match is a
+       statement about what the source IS. Mirrors TITLE_BOOST in ask.py. */
+    if (TITLE_TOKENS[d.c.source_file] &&
+        qt.some(t => TITLE_TOKENS[d.c.source_file].has(t))) s *= 2.2;
+    return {d, s};
+  }).filter(x=>x.s>0).sort((a,b)=>b.s-a.s).slice(0,n);
+  const top = scored[0]?.s || 1;
+  return scored.map(x=>({chunk:x.d.c, score:x.s, rel:x.s/top, terms:qt}));
+}
+
+/* ---------------- rendering ---------------- */
+const esc = s => s.replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
+function highlight(text, terms){
+  let out = esc(text);
+  const uniq = [...new Set(terms)].filter(t=>t.length>2).sort((a,b)=>b.length-a.length).slice(0,8);
+  for(const t of uniq){
+    out = out.replace(new RegExp("\\b("+t.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"[a-z]{0,3})\\b","gi"), "<mark>$1</mark>");
+  }
+  return out;
+}
+function cite(c){
+  const course = {"tf-core":"Module","fb-live":"FB Live","paycheck-collector":"Paycheck Collector","tf-options":"Options track"}[c.course]||c.course;
+  let s = c.course==="tf-core" ? `Module ${c.module}`
+        : c.course==="fb-live" ? `FB Live #${c.module}`
+        : `${course}, ${c.module_title}`;
+  if(c.course==="fb-live" && c.recording_date) s += ` (${c.recording_date})`;
+  return s;
+}
+const TONE = {stop:["var(--stop)","var(--stop-soft)"], warn:["var(--warn)","var(--warn-soft)"], ok:["var(--ok)","var(--ok-soft)"]};
+
+function ask(q){
+  const out = document.getElementById("out");
+  if(!q.trim()){ out.innerHTML=""; return; }
+  const g = GUARDS.find(g=>g.test(q));
+  const hits = search(q);
+  let html = "";
+
+  const tone = g ? TONE[g.tone] : TONE.ok;
+  const verdict = g ? g.verdict : "Answer from the corpus";
+  const rule = g ? g.rule : "No guard fired, retrieval decides";
+  const body = g ? g.shape : [
+    "This one is answerable. The bot answers from the passages below and cites every substantive claim.",
+    "If the passages do not actually cover it, the bot says so and routes to a coach rather than filling the gap from general trading knowledge."
+  ];
+  html += `<div class="verdict" style="--tone:${tone[0]};--tone-soft:${tone[1]}">
+    <div class="vhead"><span class="chip">${esc(verdict)}</span><span class="rule">${esc(rule)}</span></div>
+    <div class="vbody"><div class="shape">${body.map(p=>`<p>${esc(p)}</p>`).join("")}</div>
+    ${g ? `<p class="note">A guard fired, so the passages below are context for the hand off, not an answer to read out.</p>` : ""}
+    </div></div>`;
+
+  html += `<h2 class="sec"><span>Retrieved passages</span><span>${hits.length} of ${CHUNKS.length}</span></h2>`;
+  if(!hits.length){
+    html += `<div class="empty">Nothing in the corpus matches. The bot says it does not have this and routes to a coach. It never fills the gap from general knowledge.</div>`;
+  }
+  for(const h of hits){
+    const c = h.chunk;
+    const pill = c.tag==="EVERGREEN"?"ever":c.tag==="DATED_EXAMPLE"?"dated":"proc";
+    const at = c.timestamp ? `around ${c.timestamp.replace(/^00:/,"")}${c.timestamp_estimated?" (est)":""}` : c.part;
+    html += `<article class="hit">
+      <div class="cite">
+        <span class="src">${esc(cite(c))}</span>
+        <span class="at">${esc(at)}</span>
+        <span class="pill ${pill}">${esc(c.tag.replace("_"," "))}</span>
+        <span class="score"><span class="bar"><i style="width:${Math.round(h.rel*100)}%"></i></span><b>${h.score.toFixed(1)}</b></span>
+      </div>
+      <p class="txt">${highlight(c.text, h.terms)}</p>
+    </article>`;
+  }
+  out.innerHTML = html;
+  out.scrollIntoView({behavior:"smooth", block:"start"});
+}
+
+/* ---------------- boot ---------------- */
+index();
+document.getElementById("f-chunks").textContent = CHUNKS.length;
+document.getElementById("f-sources").textContent = new Set(CHUNKS.map(c=>c.source_file)).size;
+document.getElementById("f-stamped").textContent = CHUNKS.filter(c=>c.timestamp).length;
+
+const byCourse = {};
+CHUNKS.forEach(c=>byCourse[c.course]=(byCourse[c.course]||0)+1);
+const byTag = {};
+CHUNKS.forEach(c=>byTag[c.tag]=(byTag[c.tag]||0)+1);
+const NAMES = {"tf-core":"Numbered modules","fb-live":"FB Live sessions","paycheck-collector":"Paycheck Collector","tf-options":"Options track"};
+document.getElementById("stats").innerHTML =
+  Object.entries(byCourse).sort((a,b)=>b[1]-a[1]).map(([k,v])=>
+    `<div class="kv"><span>${esc(NAMES[k]||k)}</span><b>${v}</b></div>`).join("")
+  + `<div class="kv" style="margin-top:7px;padding-top:8px;border-top:1px solid var(--line)"><span>Evergreen</span><b>${byTag.EVERGREEN||0}</b></div>`
+  + `<div class="kv"><span>Dated example</span><b>${byTag.DATED_EXAMPLE||0}</b></div>`
+  + `<div class="kv"><span>Perishable</span><b>${byTag.PERISHABLE_PROCEDURE||0}</b></div>`;
+
+const LABELS = {content_tests:"Content", refusal_tests:"Refusal", compliance_tests:"Compliance",
+                procedure_tests:"Procedure", guidance_tests:"Guidance", grounding_tests:"Grounding"};
+let tHtml = "", tCount = 0;
+for(const [key,label] of Object.entries(LABELS)){
+  const arr = TESTS[key]; if(!Array.isArray(arr)) continue;
+  tCount += arr.length;
+  tHtml += `<div class="tgroup"><h4>${esc(label)}</h4>` + arr.map(t=>
+    `<button class="tq" data-q="${esc(t.q)}"><code>${esc(t.id||"")}</code>${esc(t.q)}</button>`).join("") + `</div>`;
+}
+document.getElementById("tests").innerHTML = tHtml;
+document.getElementById("f-tests").textContent = tCount;
+
+const input = document.getElementById("q");
+document.getElementById("go").addEventListener("click", ()=>ask(input.value));
+input.addEventListener("keydown", e=>{ if(e.key==="Enter") ask(input.value); });
+document.getElementById("tests").addEventListener("click", e=>{
+  const b = e.target.closest(".tq"); if(!b) return;
+  input.value = b.dataset.q; ask(b.dataset.q);
+});
+</script>
