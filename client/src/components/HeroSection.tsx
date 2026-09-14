@@ -1,12 +1,19 @@
 /*
  * Hero Section, Trader Foundation
  * Fonts: Sen (bold headline), DM Sans (body)
- * Copy: Vlad-face reversal — original Vlad-teaching background,
- * "Take Control of Your Financial Future" headline, Live Webinar CTA.
+ * Photo: Vlad Tayman (founder). Desktop: photo panel on the right fading into the
+ * dark left column that holds the headline. Mobile: full-bleed photo with the
+ * copy anchored low over a dark gradient so Vlad's face stays visible.
+ * Copy: "Take Control of Your Financial Future" headline, Live Webinar CTA.
  */
 
 import { useEffect, useState } from 'react';
 import { ArrowRight } from 'lucide-react';
+import Picture from '@/components/Picture';
+
+const HERO_PHOTO = '/images/vlad-founder.jpg';
+const HERO_PHOTO_WIDTH = 1600;
+const HERO_PHOTO_HEIGHT = 1091;
 
 /* BBB Official Badge - dark blue pill with torch + A+ circle */
 function BBBBadge() {
@@ -46,40 +53,34 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Background — dark gradient with faded TF wordmark watermark */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="w-full h-full bg-gradient-to-br from-[#1a1a1a] via-[#0a0a0a] to-[#111]" />
-        {/* Faded wordmark, centered watermark, decorative */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none px-6">
-          <div className="text-center leading-[0.85] w-full max-w-[1400px]" style={{ fontFamily: "'Sen', sans-serif" }}>
-            <span
-              className="block text-[3.5rem] sm:text-[5.5rem] md:text-[7rem] lg:text-[9rem] xl:text-[10.5rem] font-extrabold tracking-tight text-[#c7ab77]"
-              style={{ opacity: 0.07 }}
-            >
-              TRADER
-            </span>
-            <span
-              className="block text-[3.5rem] sm:text-[5.5rem] md:text-[7rem] lg:text-[9rem] xl:text-[10.5rem] font-extrabold tracking-tight text-[#c7ab77]"
-              style={{ opacity: 0.09 }}
-            >
-              FOUNDATION
-            </span>
-          </div>
+    <section className="relative flex flex-col lg:flex-row lg:items-center lg:min-h-screen overflow-hidden bg-[#0a0a0a]">
+      {/* Vlad's photo: top band on mobile/tablet (below the nav), right-hand panel on desktop */}
+      <div className="relative w-full h-[62svh] min-h-[360px] lg:absolute lg:inset-y-0 lg:right-0 lg:w-[62%] lg:h-auto lg:min-h-0">
+        <div className="absolute inset-x-0 bottom-0 top-20 lg:top-0">
+          <Picture
+            src={HERO_PHOTO}
+            alt="Vlad Tayman, founder of Trader Foundation"
+            width={HERO_PHOTO_WIDTH}
+            height={HERO_PHOTO_HEIGHT}
+            loading="eager"
+            fetchPriority="high"
+            className="w-full h-full object-cover object-center"
+          />
+          {/* Tone the bright room down to sit with the dark brand palette */}
+          <div className="absolute inset-0 bg-[#0a0a0a]/20" />
+          {/* Desktop: fade the photo's left edge into the dark headline column */}
+          <div className="hidden lg:block absolute inset-y-0 left-0 w-2/5 bg-gradient-to-r from-[#0a0a0a] to-transparent" />
+          {/* Mobile/tablet: fade the photo's bottom edge into the copy below */}
+          <div className="lg:hidden absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#0a0a0a] to-transparent" />
         </div>
-        {/* Subtle gold accent glow, top-right */}
-        <div
-          className="absolute top-0 right-0 w-[600px] h-[600px] pointer-events-none"
-          style={{
-            background: 'radial-gradient(circle, rgba(199,171,119,0.10) 0%, transparent 60%)',
-          }}
-        />
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#FAF9F6] to-transparent" />
       </div>
+      {/* Keep the transparent nav legible over the bright photo */}
+      <div className="absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-[#0a0a0a]/85 to-transparent pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#FAF9F6] to-transparent pointer-events-none" />
 
       {/* Content */}
-      <div className="relative z-10 max-w-[1320px] mx-auto px-6 lg:px-8 w-full pt-32 pb-24">
-        <div className="max-w-2xl">
+      <div className="relative z-10 max-w-[1320px] mx-auto px-6 lg:px-8 w-full -mt-24 pb-40 lg:mt-0 lg:pt-32 lg:pb-24">
+        <div className="max-w-2xl lg:max-w-[50%]">
           {/* Main Headline */}
           <h1
             className={`transition-all duration-1000 delay-200 ${

@@ -16,6 +16,8 @@ type PictureProps = {
   className?: string;
   style?: CSSProperties;
   loading?: 'lazy' | 'eager';
+  /** Set to 'high' only on the page's LCP image (usually the hero). */
+  fetchPriority?: 'high' | 'low' | 'auto';
   webp?: string | null;
 };
 
@@ -27,6 +29,7 @@ export default function Picture({
   className,
   style,
   loading = 'lazy',
+  fetchPriority,
   webp,
 }: PictureProps) {
   const webpSrc = webp === null ? null : webp ?? src.replace(/\.(jpe?g|png)$/i, '.webp');
@@ -39,6 +42,7 @@ export default function Picture({
         width={width}
         height={height}
         loading={loading}
+        fetchPriority={fetchPriority}
         className={className}
         style={style}
       />
