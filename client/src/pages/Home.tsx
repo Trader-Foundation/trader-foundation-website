@@ -122,7 +122,7 @@ export default function Home() {
       <section className="py-20 sm:py-24 bg-[#faf9f6]">
         <div className="max-w-[1000px] mx-auto px-6 lg:px-8 text-center">
           <p
-            className="text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-3"
+            className="text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#876b38] mb-3"
             style={{ fontFamily: "'DM Sans', sans-serif" }}
           >
             Real Results
@@ -152,10 +152,10 @@ export default function Home() {
                 />
               </div>
               <p
-                className="text-[#888] text-xs font-semibold uppercase tracking-wider mt-3"
+                className="text-[#666] text-xs font-semibold uppercase tracking-wider mt-3"
                 style={{ fontFamily: "'DM Sans', sans-serif" }}
               >
-                Roth IRA &middot; <span className="text-[#c7ab77]">+142%</span>
+                Roth IRA &middot; <span className="text-[#876b38]">+142%</span>
               </p>
             </div>
             <div>
@@ -167,15 +167,15 @@ export default function Home() {
                 />
               </div>
               <p
-                className="text-[#888] text-xs font-semibold uppercase tracking-wider mt-3"
+                className="text-[#666] text-xs font-semibold uppercase tracking-wider mt-3"
                 style={{ fontFamily: "'DM Sans', sans-serif" }}
               >
-                HSA &middot; <span className="text-[#c7ab77]">+83%</span>
+                HSA &middot; <span className="text-[#876b38]">+83%</span>
               </p>
             </div>
           </div>
           <p
-            className="text-[#999] text-xs leading-relaxed mt-6 max-w-xl mx-auto"
+            className="text-[#666] text-xs leading-relaxed mt-6 max-w-xl mx-auto"
             style={{ fontFamily: "'DM Sans', sans-serif" }}
           >
             Real Fidelity account results. Individual results vary; past performance does not guarantee future results.
@@ -188,7 +188,7 @@ export default function Home() {
         <div className="max-w-[850px] mx-auto px-6 lg:px-8 text-center">
           <ShieldCheck className="h-12 w-12 text-[#c7ab77] mx-auto mb-5" strokeWidth={1.5} />
           <p
-            className="text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-3"
+            className="text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#876b38] mb-3"
             style={{ fontFamily: "'DM Sans', sans-serif" }}
           >
             Our Guarantee
@@ -210,14 +210,14 @@ export default function Home() {
           </p>
           <div className="inline-flex flex-wrap items-center justify-center gap-x-3 gap-y-2 px-6 py-3 bg-white border border-[#c7ab77]/30 rounded-full">
             <span
-              className="text-[#c7ab77] text-sm font-semibold"
+              className="text-[#876b38] text-sm font-semibold"
               style={{ fontFamily: "'DM Sans', sans-serif" }}
             >
               90 Days of One-on-One Coaching
             </span>
-            <span className="text-[#c7ab77]/50">·</span>
+            <span className="text-[#c7ab77]" aria-hidden="true">·</span>
             <span
-              className="text-[#c7ab77] text-sm font-semibold"
+              className="text-[#876b38] text-sm font-semibold"
               style={{ fontFamily: "'DM Sans', sans-serif" }}
             >
               Pay When You're Profitable
