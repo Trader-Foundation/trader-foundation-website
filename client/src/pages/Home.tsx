@@ -22,8 +22,8 @@ import {
   ShieldCheck,
 } from 'lucide-react';
 
-const RESULTS_IMG = 'https://lh3.googleusercontent.com/d/1skCb7MH9xMEaZ_A7Kyz7hTbj-lH9Lgoh=s2000';
-const RESULTS_IMG_HSA = 'https://lh3.googleusercontent.com/d/1sPTy9s67vLGy7muQNYocEKCElrUrqBPU=s2000';
+const RESULTS_IMG = '/images/results-roth-ira.png';
+const RESULTS_IMG_HSA = '/images/results-hsa.png';
 
 const methodFeatures = [
   {
