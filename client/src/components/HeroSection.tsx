@@ -79,7 +79,8 @@ export default function HeroSection() {
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#FAF9F6] to-transparent pointer-events-none" />
 
       {/* Content */}
-      <div className="relative z-10 max-w-[1320px] mx-auto px-6 lg:px-8 w-full -mt-24 pb-40 lg:mt-0 lg:pt-32 lg:pb-24">
+      {/* lg:pt-48 clears the two-row desktop nav when the narrower column wraps the headline to five lines (1024px) */}
+      <div className="relative z-10 max-w-[1320px] mx-auto px-6 lg:px-8 w-full -mt-24 pb-40 lg:mt-0 lg:pt-48 lg:pb-24">
         <div className="max-w-2xl lg:max-w-[50%]">
           {/* Main Headline */}
           <h1
