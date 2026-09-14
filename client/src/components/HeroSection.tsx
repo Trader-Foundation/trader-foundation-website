@@ -1,9 +1,10 @@
 /*
  * Hero Section, Trader Foundation
  * Fonts: Sen (bold headline), DM Sans (body)
- * Photo: Vlad Tayman (founder). Desktop: photo panel on the right fading into the
- * dark left column that holds the headline. Mobile: full-bleed photo with the
- * copy anchored low over a dark gradient so Vlad's face stays visible.
+ * Photo: "Vlad hero photo" (Vlad teaching at a projected stock chart; Vlad on the left third,
+ * student seated on the right). Desktop: full-bleed photo anchored left with a dark gradient
+ * from the right, headline column on the right. Mobile/tablet: photo band under the nav cropped
+ * to Vlad and his pointing arm, copy below on dark.
  * Copy: "Take Control of Your Financial Future" headline, Live Webinar CTA.
  */
 
@@ -11,9 +12,9 @@ import { useEffect, useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import Picture from '@/components/Picture';
 
-const HERO_PHOTO = '/images/vlad-founder.jpg';
+const HERO_PHOTO = '/images/vlad-hero.jpg';
 const HERO_PHOTO_WIDTH = 1600;
-const HERO_PHOTO_HEIGHT = 1091;
+const HERO_PHOTO_HEIGHT = 926;
 
 /* BBB Official Badge - dark blue pill with torch + A+ circle */
 function BBBBadge() {
@@ -54,22 +55,22 @@ export default function HeroSection() {
 
   return (
     <section className="relative flex flex-col lg:flex-row lg:items-center lg:min-h-screen overflow-hidden bg-[#0a0a0a]">
-      {/* Vlad's photo: top band on mobile/tablet (below the nav), right-hand panel on desktop */}
-      <div className="relative w-full h-[62svh] min-h-[360px] lg:absolute lg:inset-y-0 lg:right-0 lg:w-[62%] lg:h-auto lg:min-h-0">
+      {/* Vlad's photo: top band on mobile/tablet (below the nav), full-bleed on desktop */}
+      <div className="relative w-full h-[62svh] min-h-[360px] lg:absolute lg:inset-0 lg:h-auto lg:min-h-0">
         <div className="absolute inset-x-0 bottom-0 top-20 lg:top-0">
           <Picture
             src={HERO_PHOTO}
-            alt="Vlad Tayman, founder of Trader Foundation"
+            alt="Vlad Tayman teaching a student how to read a stock chart"
             width={HERO_PHOTO_WIDTH}
             height={HERO_PHOTO_HEIGHT}
             loading="eager"
             fetchPriority="high"
-            className="w-full h-full object-cover object-center"
+            className="w-full h-full object-cover object-[8%_center] lg:object-left"
           />
           {/* Tone the bright room down to sit with the dark brand palette */}
           <div className="absolute inset-0 bg-[#0a0a0a]/20" />
-          {/* Desktop: fade the photo's left edge into the dark headline column */}
-          <div className="hidden lg:block absolute inset-y-0 left-0 w-2/5 bg-gradient-to-r from-[#0a0a0a] to-transparent" />
+          {/* Desktop: darken the right side (chart and student) under the headline, keep Vlad clear on the left */}
+          <div className="hidden lg:block absolute inset-0 bg-gradient-to-l from-[#0a0a0a]/95 from-0% via-[#0a0a0a]/80 via-45% to-transparent to-65%" />
           {/* Mobile/tablet: fade the photo's bottom edge into the copy below */}
           <div className="lg:hidden absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#0a0a0a] to-transparent" />
         </div>
@@ -81,7 +82,7 @@ export default function HeroSection() {
       {/* Content */}
       {/* lg:pt-48 clears the two-row desktop nav when the narrower column wraps the headline to five lines (1024px) */}
       <div className="relative z-10 max-w-[1320px] mx-auto px-6 lg:px-8 w-full -mt-24 pb-40 lg:mt-0 lg:pt-48 lg:pb-24">
-        <div className="max-w-2xl lg:max-w-[50%]">
+        <div className="max-w-2xl lg:max-w-[48%] lg:ml-auto">
           {/* Main Headline */}
           <h1
             className={`transition-all duration-1000 delay-200 ${
