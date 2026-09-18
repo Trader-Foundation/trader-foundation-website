@@ -1,13 +1,14 @@
 /*
  * Home Page, Trader Foundation Academy
  * Design: "The Academy", Ivy League Digital Campus
- * Sections flow: Nav → Hero → Stats → CTA → Meet Vlad → Method → Real Results → Guarantee → Podcast → CTA → Footer
+ * Sections flow: Nav → Hero → Stats → CTA → Meet Vlad → Method → What You Actually Get → Real Results → Guarantee → Podcast → CTA → Footer
  */
 
 import Navigation from '@/components/Navigation';
 import HeroSection from '@/components/HeroSection';
 import StatsSection from '@/components/StatsSection';
 import MeetVladSection from '@/components/MeetVladSection';
+import FrameworkSection from '@/components/FrameworkSection';
 import BookCallCTA from '@/components/BookCallCTA';
 import PodcastSection from '@/components/PodcastSection';
 import Footer from '@/components/Footer';
@@ -117,6 +118,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <FrameworkSection />
 
       {/* ─── Real Results ─── */}
       <section className="py-20 sm:py-24 bg-[#faf9f6]">
