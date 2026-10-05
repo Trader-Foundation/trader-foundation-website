@@ -63,8 +63,8 @@ export default function Footer() {
               </span>
             </Link>
             <p className="text-white/65 text-[0.9375rem] leading-[1.65] max-w-[36ch]">
-              A trading education academy dedicated to building confident, independent traders
-              through personalized mentorship.
+              An online school for stock and options trading. Every student gets their own
+              coach.
             </p>
           </div>
 
