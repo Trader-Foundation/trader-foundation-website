@@ -107,3 +107,6 @@ temp/
 
 # Webdev artifacts (checkpoint zips, migrations, etc.)
 .webdev/
+
+# Impeccable QA captures are regenerated; keep them out of the repo
+.impeccable/review/
