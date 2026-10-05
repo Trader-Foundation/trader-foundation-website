@@ -18,8 +18,13 @@ import Footer from '@/components/Footer';
 
 import SEO from '@/components/SEO';
 
-const RESULTS_IMG = '/images/results-roth-ira.png';
-const RESULTS_IMG_HSA = '/images/results-hsa.png';
+/* Display crops of the two Fidelity captures, framed on the balance and the
+ * three-year curve. The originals (results-roth-ira.png, results-hsa.png) stay
+ * in the repo untouched as the record; they are never cropped or re-edited in
+ * place. The crops exist because the full captures end mid-row and carry a
+ * redaction bar and a stray "Text" artifact that are conspicuous at full size. */
+const RESULTS_IMG = '/images/results-roth-ira-display.png';
+const RESULTS_IMG_HSA = '/images/results-hsa-display.png';
 
 const methodFeatures = [
   {
@@ -67,40 +72,39 @@ export default function Home() {
             </div>
           </div>
 
-          {/* The proof at a size it can actually be read. The files are the
-              originals, untouched; only the display width changes. */}
-          <div className="mt-12 space-y-12">
+          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-10 items-start">
             <figure>
               <img
                 src={RESULTS_IMG}
-                alt="Trading results in a Fidelity Roth IRA account"
-                className="w-full h-auto border border-[#e3ded4]"
+                alt="Fidelity Roth IRA balance of $83,587.33, up 142.54% over three years"
+                width={507}
+                height={500}
+                className="w-full max-w-[507px] h-auto border border-[#e3ded4]"
               />
               <figcaption className="mt-3 text-[0.875rem] text-[#55534e] tf-nums">
                 Figure 1. Roth IRA, +142% over three years
               </figcaption>
             </figure>
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-              <figure className="lg:col-span-5">
-                <img
-                  src={RESULTS_IMG_HSA}
-                  alt="Trading results in a Fidelity HSA account"
-                  className="w-full max-w-[506px] h-auto border border-[#e3ded4]"
-                />
-                <figcaption className="mt-3 text-[0.875rem] text-[#55534e] tf-nums">
-                  Figure 2. HSA, +83% over three years
-                </figcaption>
-              </figure>
-
-              <div className="lg:col-span-7 lg:pt-2">
-                <p className="pt-6 border-t border-[#ece8e0] text-[0.875rem] text-[#767269] leading-[1.6] max-w-[52ch]">
-                  Real Fidelity account results. Individual results vary; past performance does
-                  not guarantee future results.
-                </p>
-              </div>
-            </div>
+            <figure>
+              <img
+                src={RESULTS_IMG_HSA}
+                alt="Fidelity HSA balance of $32,025.42, up 83.61% over three years"
+                width={478}
+                height={450}
+                className="w-full max-w-[478px] h-auto border border-[#e3ded4]"
+              />
+              <figcaption className="mt-3 text-[0.875rem] text-[#55534e] tf-nums">
+                Figure 2. HSA, +83% over three years
+              </figcaption>
+            </figure>
           </div>
+
+          <p className="mt-10 pt-6 border-t border-[#ece8e0] text-[0.875rem] text-[#767269] leading-[1.6] max-w-[64ch]">
+            Real Fidelity account results, shown as captured from the accounts and cropped only
+            to the balance and performance panels. Individual results vary; past performance
+            does not guarantee future results.
+          </p>
         </div>
       </section>
 
