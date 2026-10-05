@@ -80,22 +80,27 @@ export default function Home() {
                 Figure 1. Roth IRA, +142% over three years
               </figcaption>
             </figure>
-            <figure>
-              <img
-                src={RESULTS_IMG_HSA}
-                alt="Trading results in a Fidelity HSA account"
-                className="w-full max-w-[506px] h-auto border border-[#e3ded4]"
-              />
-              <figcaption className="mt-3 text-[0.875rem] text-[#55534e] tf-nums">
-                Figure 2. HSA, +83% over three years
-              </figcaption>
-            </figure>
-          </div>
 
-          <p className="mt-10 pt-6 border-t border-[#ece8e0] text-[0.875rem] text-[#767269] leading-[1.6] max-w-[60ch]">
-            Real Fidelity account results. Individual results vary; past performance does not
-            guarantee future results.
-          </p>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+              <figure className="lg:col-span-5">
+                <img
+                  src={RESULTS_IMG_HSA}
+                  alt="Trading results in a Fidelity HSA account"
+                  className="w-full max-w-[506px] h-auto border border-[#e3ded4]"
+                />
+                <figcaption className="mt-3 text-[0.875rem] text-[#55534e] tf-nums">
+                  Figure 2. HSA, +83% over three years
+                </figcaption>
+              </figure>
+
+              <div className="lg:col-span-7 lg:pt-2">
+                <p className="pt-6 border-t border-[#ece8e0] text-[0.875rem] text-[#767269] leading-[1.6] max-w-[52ch]">
+                  Real Fidelity account results. Individual results vary; past performance does
+                  not guarantee future results.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
