@@ -37,7 +37,7 @@ export default function MeetVladSection() {
     <>
       <section className="bg-[#faf9f6] py-16 sm:py-20">
         <div className="max-w-[1320px] mx-auto px-6 lg:px-8">
-          <h2 className="tf-display text-[#1a1a1a] text-[2.25rem] sm:text-[3rem] lg:text-[3.5rem] max-w-[18ch]">
+          <h2 className="tf-display text-[#1a1a1a] text-[2.5rem] sm:text-[3.25rem] lg:text-[4rem] max-w-[18ch]">
             Who is Vlad Tayman?
           </h2>
 
@@ -92,7 +92,7 @@ export default function MeetVladSection() {
       </section>
 
       {/* Trustpilot, as quotations rather than cards */}
-      <section className="bg-[#ffffff] py-16 sm:py-20 border-t border-[#e3ded4]">
+      <section className="bg-[#faf9f6] py-16 sm:py-20 border-t border-[#e3ded4]">
         <div className="max-w-[1320px] mx-auto px-6 lg:px-8">
           <div className="flex flex-wrap items-center gap-x-4 gap-y-3">
             <TrustpilotLogo className="h-6" />
@@ -104,7 +104,7 @@ export default function MeetVladSection() {
 
           <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-10">
             {trustpilotReviews.map((review) => (
-              <figure key={review.name} className="border-t border-[#e3ded4] pt-6">
+              <figure key={review.name} className="border-t border-[#ece8e0] pt-6">
                 <figcaption className="text-[0.9375rem] font-semibold text-[#1a1a1a]">
                   {review.title}
                 </figcaption>

@@ -170,12 +170,8 @@ export default function LiveChatWidget() {
         onClick={handleToggle}
         className="group relative flex h-14 w-14 items-center justify-center rounded-full shadow-lg transition-all duration-200 hover:scale-105"
         style={{
-          background: isOpen
-            ? 'linear-gradient(135deg, #555 0%, #333 100%)'
-            : 'linear-gradient(135deg, #c7ab77 0%, #a08a5c 100%)',
-          boxShadow: isOpen
-            ? '0 4px 20px rgba(0,0,0,0.3)'
-            : '0 4px 20px rgba(199, 171, 119, 0.3)',
+          background: isOpen ? '#3a3834' : '#1a1a1a',
+          boxShadow: '0 6px 18px rgba(26, 26, 26, 0.22)',
         }}
         aria-label={isOpen ? 'Close chat' : 'Open chat'}
       >
@@ -185,7 +181,7 @@ export default function LiveChatWidget() {
             className="absolute inset-0 rounded-full"
             style={{
               animation: 'chatPulse 2s ease-out infinite',
-              backgroundColor: 'rgba(199, 171, 119, 0.3)',
+              backgroundColor: 'rgba(26, 26, 26, 0.18)',
             }}
           />
         )}
@@ -193,7 +189,7 @@ export default function LiveChatWidget() {
         {isOpen ? (
           <X className="h-6 w-6" style={{ color: '#fff' }} />
         ) : (
-          <MessageCircle className="h-6 w-6" style={{ color: '#111' }} />
+          <MessageCircle className="h-6 w-6" style={{ color: '#faf9f6' }} />
         )}
       </button>
 
