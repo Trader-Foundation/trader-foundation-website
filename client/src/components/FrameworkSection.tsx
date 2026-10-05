@@ -20,9 +20,9 @@ const running = [
   'Homework reviewed and handed back',
   'Assessments, so you know what you know',
   'An accountability partner from day one',
-  'The room, live five days a week',
+  'A live trading room, open five days a week',
   'A community to ask anything, any time',
-  'Stocks To Buy And Why, wins and losses',
+  'Stocks To Buy And Why, daily, losses included',
   'Trade ideas, once you have the foundation',
   'A financial professional for the wider picture',
 ];

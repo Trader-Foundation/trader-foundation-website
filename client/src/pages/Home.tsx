@@ -28,20 +28,20 @@ const RESULTS_IMG_HSA = '/images/results-hsa-display.png';
 
 const methodFeatures = [
   {
-    title: 'Defined risk',
-    desc: 'You know your maximum loss before the trade is ever placed. No surprises, no margin calls.',
+    title: 'Known risk',
+    desc: 'You know the most you can lose before you place the trade. No margin calls.',
   },
   {
     title: 'Monthly income',
-    desc: 'Collect premium on a predictable cycle. Like a paycheck, hence the name.',
+    desc: 'The fees arrive on a cycle, the way a paycheck does. Hence the name.',
   },
   {
-    title: 'Bull or bear markets',
-    desc: 'Premium gets paid regardless of direction. You profit from selling time, not from predicting where the market goes.',
+    title: 'Rising or falling markets',
+    desc: 'You are paid whether the market rises or falls. The money comes from time passing, not from guessing direction.',
   },
   {
     title: 'Buy discounts in downturns',
-    desc: 'When markets drop, the system positions you to acquire quality stocks at discount prices, getting paid premium while you wait for your buy levels.',
+    desc: 'When markets fall, you buy good stocks lower, and you are paid while you wait for your price.',
   },
 ];
 
@@ -63,11 +63,10 @@ export default function Home() {
             </div>
             <div className="lg:col-span-5">
               <p className="text-[#3a3834] text-[1.0625rem] leading-[1.7] max-w-[46ch]">
-                Actual Fidelity accounts. Roth IRA up{' '}
-                <strong className="font-semibold text-[#1a1a1a] tf-nums">142%</strong>. HSA up{' '}
-                <strong className="font-semibold text-[#1a1a1a] tf-nums">83%</strong>. Both over
-                three years, both passively managed around a full-time career. This is what
-                compounded growth looks like when you follow a system.
+                Two Fidelity accounts. Roth IRA up{' '}
+                <strong className="font-semibold text-[#1a1a1a] tf-nums">142%</strong>, HSA up{' '}
+                <strong className="font-semibold text-[#1a1a1a] tf-nums">83%</strong>, both over
+                three years, both run around a full-time job.
               </p>
             </div>
           </div>
@@ -121,11 +120,11 @@ export default function Home() {
             </div>
             <div className="lg:col-span-7">
               <p className="text-[#3a3834] text-[1.0625rem] sm:text-[1.125rem] leading-[1.7] max-w-[62ch]">
-                We don't teach a trade. We teach a discipline. The core method is the{' '}
-                <strong className="font-semibold text-[#1a1a1a]">Paycheck Collector</strong>, selling
-                options on liquid stocks and indices for a defined-risk premium every month.
-                Around it, you'll learn the risk management, position sizing, and long-term
-                discipline that turn a single strategy into a real, compounding portfolio.
+                We teach a discipline, not a trade. The core method is the{' '}
+                <strong className="font-semibold text-[#1a1a1a]">Paycheck Collector</strong>: sell
+                options on large, widely traded stocks and collect a fee up front. Your
+                maximum loss is known before you place the trade. Around it you learn what to
+                risk, how big each position should be, and how to keep going for years.
               </p>
 
               <dl className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-8">
@@ -170,8 +169,8 @@ export default function Home() {
 
       <BookCallCTA
         variant="light"
-        headline="See how busy professionals are learning to trade"
-        subtext="A live session with our team on how a proven swing trading strategy fits into a working week."
+        headline="See the method taught live"
+        subtext="A live session on how the method works, and how students fit it around a job."
       />
 
       <PodcastSection />

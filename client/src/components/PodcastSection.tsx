@@ -71,7 +71,7 @@ export default function PodcastSection() {
               The Trader Foundation Podcast
             </h2>
             <p className="mt-4 text-[#55534e] text-[1.0625rem] leading-[1.65] max-w-[56ch]">
-              Hosted by Vlad Tayman. Real market insights, trading education, and the mindset
+              Hosted by Vlad Tayman. Market insights, trading education, and the mindset
               behind consistent results.
             </p>
 

@@ -28,8 +28,8 @@ export default function HeroSection() {
             </h1>
 
             <p className="mt-7 text-[#3a3834] text-[1.375rem] sm:text-[1.5rem] leading-[1.45] tracking-[-0.015em] max-w-[26ch]">
-              Take control of your financial future. Learn to swing trade from the
-              beginning, taught by Vlad Tayman and coached one on one.
+              An online school for stock and options trading, taught from the beginning.
+              Founded by Vlad Tayman. Every student gets their own coach.
             </p>
 
             <div className="mt-9">
@@ -46,9 +46,8 @@ export default function HeroSection() {
             <div className="mt-12 pt-6 border-t border-[#e3ded4] max-w-[34rem]">
               <p className="text-[0.9375rem] font-semibold text-[#1a1a1a]">Vlad Tayman</p>
               <p className="mt-1.5 text-[0.9375rem] leading-[1.6] text-[#55534e]">
-                Founder. Came to America from Ukraine, built a career the hard way, and
-                learned to trade the same way. He teaches the method he wishes someone had
-                taught him.
+                Founder. Came to America from Ukraine, built a corporate career, then
+                learned to trade. He teaches the method he wishes he had been taught.
               </p>
             </div>
           </div>
