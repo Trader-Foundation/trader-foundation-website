@@ -128,7 +128,7 @@ export default function Navigation() {
               href={WEBINAR_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center px-5 py-2.5 bg-[#c7ab77] text-[#1a1a1a] text-[0.8125rem] font-semibold transition-colors duration-200 hover:bg-[#b89a66]"
+              className="inline-flex items-center px-5 py-2.5 bg-[#1a1a1a] text-[#faf9f6] text-[0.8125rem] font-semibold transition-colors duration-200 hover:bg-[#333]"
             >
               Live Webinar
             </a>
@@ -209,7 +209,7 @@ export default function Navigation() {
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setMobileOpen(false)}
-            className="mt-3 flex items-center justify-center px-6 py-3 bg-[#c7ab77] text-[#1a1a1a] text-[0.875rem] font-semibold"
+            className="mt-3 flex items-center justify-center px-6 py-3 bg-[#1a1a1a] text-[#faf9f6] text-[0.875rem] font-semibold"
           >
             Live Webinar
           </a>

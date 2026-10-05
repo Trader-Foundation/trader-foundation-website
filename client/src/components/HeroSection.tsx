@@ -27,7 +27,7 @@ export default function HeroSection() {
               Academy
             </h1>
 
-            <p className="mt-7 text-[#55534e] text-[1.0625rem] sm:text-[1.125rem] leading-[1.6] max-w-[34ch]">
+            <p className="mt-7 text-[#3a3834] text-[1.375rem] sm:text-[1.5rem] leading-[1.45] tracking-[-0.015em] max-w-[26ch]">
               Take control of your financial future. Learn to swing trade from the
               beginning, taught by Vlad Tayman and coached one on one.
             </p>

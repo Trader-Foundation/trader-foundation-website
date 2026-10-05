@@ -47,6 +47,58 @@ export default function Home() {
       <Navigation />
       <HeroSection />
       <StatsSection />
+      {/* ─── Real results ─── */}
+      <section className="bg-[#faf9f6] py-16 sm:py-20">
+        <div className="max-w-[1320px] mx-auto px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-end">
+            <div className="lg:col-span-7">
+              <h2 className="tf-display text-[#1a1a1a] text-[2.5rem] sm:text-[3.25rem] lg:text-[4rem] max-w-[14ch]">
+                Real accounts, real results
+              </h2>
+            </div>
+            <div className="lg:col-span-5">
+              <p className="text-[#3a3834] text-[1.0625rem] leading-[1.7] max-w-[46ch]">
+                Actual Fidelity accounts. Roth IRA up{' '}
+                <strong className="font-semibold text-[#1a1a1a] tf-nums">142%</strong>. HSA up{' '}
+                <strong className="font-semibold text-[#1a1a1a] tf-nums">83%</strong>. Both over
+                three years, both passively managed around a full-time career. This is what
+                compounded growth looks like when you follow a system.
+              </p>
+            </div>
+          </div>
+
+          {/* The proof at a size it can actually be read. The files are the
+              originals, untouched; only the display width changes. */}
+          <div className="mt-12 space-y-12">
+            <figure>
+              <img
+                src={RESULTS_IMG}
+                alt="Trading results in a Fidelity Roth IRA account"
+                className="w-full h-auto border border-[#e3ded4]"
+              />
+              <figcaption className="mt-3 text-[0.875rem] text-[#55534e] tf-nums">
+                Figure 1. Roth IRA, +142% over three years
+              </figcaption>
+            </figure>
+            <figure>
+              <img
+                src={RESULTS_IMG_HSA}
+                alt="Trading results in a Fidelity HSA account"
+                className="w-full max-w-[506px] h-auto border border-[#e3ded4]"
+              />
+              <figcaption className="mt-3 text-[0.875rem] text-[#55534e] tf-nums">
+                Figure 2. HSA, +83% over three years
+              </figcaption>
+            </figure>
+          </div>
+
+          <p className="mt-10 pt-6 border-t border-[#ece8e0] text-[0.875rem] text-[#767269] leading-[1.6] max-w-[60ch]">
+            Real Fidelity account results. Individual results vary; past performance does not
+            guarantee future results.
+          </p>
+        </div>
+      </section>
+
       <MeetVladSection />
 
       {/* ─── What we teach ─── */}
@@ -54,7 +106,7 @@ export default function Home() {
         <div className="max-w-[1320px] mx-auto px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
             <div className="lg:col-span-5">
-              <h2 className="tf-display text-[#1a1a1a] text-[2.25rem] sm:text-[3rem] lg:text-[3.5rem] max-w-[14ch]">
+              <h2 className="tf-display text-[#1a1a1a] text-[2.5rem] sm:text-[3.25rem] lg:text-[4rem] max-w-[14ch]">
                 How to build real wealth
               </h2>
             </div>
@@ -84,59 +136,12 @@ export default function Home() {
 
       <FrameworkSection />
 
-      {/* ─── Real results ─── */}
-      <section className="bg-[#faf9f6] py-16 sm:py-20">
-        <div className="max-w-[1320px] mx-auto px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
-            <div className="lg:col-span-5">
-              <h2 className="tf-display text-[#1a1a1a] text-[2.25rem] sm:text-[3rem] lg:text-[3.5rem] max-w-[14ch]">
-                Real accounts, real results
-              </h2>
-              <p className="mt-6 text-[#3a3834] text-[1.0625rem] leading-[1.7] max-w-[46ch]">
-                Actual Fidelity accounts. Roth IRA up{' '}
-                <strong className="font-semibold text-[#1a1a1a] tf-nums">142%</strong>. HSA up{' '}
-                <strong className="font-semibold text-[#1a1a1a] tf-nums">83%</strong>. Both over
-                three years, both passively managed around a full-time career. This is what
-                compounded growth looks like when you follow a system.
-              </p>
-              <p className="mt-6 text-[0.875rem] text-[#767269] leading-[1.6] max-w-[46ch]">
-                Real Fidelity account results. Individual results vary; past performance does
-                not guarantee future results.
-              </p>
-            </div>
-
-            <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-8 items-start">
-              <figure>
-                <img
-                  src={RESULTS_IMG}
-                  alt="Trading results in a Fidelity Roth IRA account"
-                  className="w-full h-auto border border-[#e3ded4]"
-                />
-                <figcaption className="mt-3 text-[0.875rem] text-[#55534e] tf-nums">
-                  Roth IRA, +142%
-                </figcaption>
-              </figure>
-              <figure>
-                <img
-                  src={RESULTS_IMG_HSA}
-                  alt="Trading results in a Fidelity HSA account"
-                  className="w-full h-auto border border-[#e3ded4]"
-                />
-                <figcaption className="mt-3 text-[0.875rem] text-[#55534e] tf-nums">
-                  HSA, +83%
-                </figcaption>
-              </figure>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* ─── Guarantee ─── */}
-      <section className="bg-[#ffffff] py-16 sm:py-20 border-t border-[#e3ded4]">
+      <section className="bg-[#faf9f6] py-16 sm:py-20 border-t border-[#e3ded4]">
         <div className="max-w-[1320px] mx-auto px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
             <div className="lg:col-span-5">
-              <h2 className="tf-display text-[#1a1a1a] text-[2.25rem] sm:text-[3rem] lg:text-[3.5rem] max-w-[14ch]">
+              <h2 className="tf-display text-[#1a1a1a] text-[2.5rem] sm:text-[3.25rem] lg:text-[4rem] max-w-[14ch]">
                 You do the work. We get you there.
               </h2>
             </div>

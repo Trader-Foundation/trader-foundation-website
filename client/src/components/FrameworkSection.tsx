@@ -35,21 +35,21 @@ const outcomes = [
 
 export default function FrameworkSection() {
   return (
-    <section className="bg-[#ffffff] py-16 sm:py-20 border-t border-[#e3ded4]">
+    <section className="bg-[#faf9f6] py-16 sm:py-20 border-t border-[#e3ded4]">
       <div className="max-w-[1320px] mx-auto px-6 lg:px-8">
-        <h2 className="tf-display text-[#1a1a1a] text-[2.25rem] sm:text-[3rem] lg:text-[3.5rem] max-w-[16ch]">
+        <h2 className="tf-display text-[#1a1a1a] text-[2.5rem] sm:text-[3.25rem] lg:text-[4rem] max-w-[16ch]">
           What you actually get
         </h2>
 
         <div className="mt-12 sm:mt-16 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
           {/* The road */}
           <div className="lg:col-span-7">
-            <h3 className="text-[1.0625rem] font-semibold text-[#1a1a1a]">The road</h3>
+            <h3 className="text-[1.0625rem] font-semibold text-[#1a1a1a] pb-3 border-b-2 border-[#1a1a1a]">The road</h3>
             <ol className="mt-6">
               {road.map((step, i) => (
                 <li
                   key={step.title}
-                  className="grid grid-cols-[2.5rem_1fr] gap-x-4 border-t border-[#e3ded4] py-5"
+                  className="grid grid-cols-[2.5rem_1fr] gap-x-4 border-t border-[#ece8e0] py-5"
                 >
                   <span className="tf-nums text-[0.9375rem] text-[#767269] pt-0.5" aria-hidden="true">
                     {String(i + 1).padStart(2, '0')}
@@ -69,12 +69,12 @@ export default function FrameworkSection() {
 
           {/* Running the whole time */}
           <div className="lg:col-span-5">
-            <h3 className="text-[1.0625rem] font-semibold text-[#1a1a1a]">Running the whole time</h3>
+            <h3 className="text-[1.0625rem] font-semibold text-[#1a1a1a] pb-3 border-b-2 border-[#1a1a1a]">Running the whole time</h3>
             <ul className="mt-6">
               {running.map((item) => (
                 <li
                   key={item}
-                  className="border-t border-[#e3ded4] py-3 text-[#55534e] text-[0.9375rem] leading-[1.5]"
+                  className="border-t border-[#ece8e0] py-3 text-[#55534e] text-[0.9375rem] leading-[1.5]"
                 >
                   {item}
                 </li>

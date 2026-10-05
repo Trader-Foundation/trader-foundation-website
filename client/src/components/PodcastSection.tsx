@@ -55,7 +55,7 @@ const platforms = [
 
 export default function PodcastSection() {
   return (
-    <section className="bg-[#ffffff] py-16 sm:py-20 border-t border-[#e3ded4]">
+    <section className="bg-[#faf9f6] py-16 sm:py-20 border-t border-[#e3ded4]">
       <div className="max-w-[1320px] mx-auto px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
           <div className="lg:col-span-4">

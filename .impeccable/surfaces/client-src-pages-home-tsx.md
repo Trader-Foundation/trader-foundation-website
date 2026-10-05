@@ -33,4 +33,4 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 
 ## Unresolved
 
-Whether the 1,200+ / 14 years / 5 years stats are verified figures; they are published today and kept, but their provenance is unrecorded.
+The published stats are 1,200+ students, 15+ years experience, 6+ years in business. An earlier note in this brief said 14 and 5: that was a full-page capture catching the old count-up animation mid-flight, not the published figures. The numbers are unchanged by the restyle. Their provenance is still unrecorded, and vladt83 has not confirmed them. Also open: the BBB mark on the page is a hand-drawn reconstruction of the trademark; vladt83 said on 2026-10-04 that he will send the official seal, and it stays as-is until he does.
