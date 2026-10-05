@@ -40,8 +40,8 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-  --font-sans: 'DM Sans', sans-serif;
-  --font-heading: 'Sen', sans-serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-heading: 'Inter', system-ui, sans-serif;
   --color-gold: oklch(0.75 0.06 80);
   --color-gold-light: oklch(0.85 0.04 80);
   --color-gold-dark: oklch(0.60 0.07 80);
@@ -91,11 +91,13 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
   }
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Sen', sans-serif;
-    font-weight: 700;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.03em;
   }
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),
@@ -163,4 +165,57 @@ html {
 @keyframes countUp {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ──────────────────────────────────────────────────────────────
+ * Editorial world (2026-10, clean restyle)
+ * Near-monochrome ground and ink; brand gold is reserved for the
+ * primary action. Tokens are consumed by the homepage components.
+ * ────────────────────────────────────────────────────────────── */
+:root {
+  --tf-ground: #faf9f6;
+  --tf-panel: #ffffff;
+  --tf-band: #141414;
+  --tf-ink: #1a1a1a;
+  --tf-ink-soft: #55534e;
+  --tf-ink-faint: #767269;
+  --tf-rule: #e3ded4;
+  --tf-rule-dark: #2c2c2c;
+  --tf-gold: #c7ab77;
+  --tf-gold-ink: #876b38;
+}
+
+/* Display type: one face, separated by weight and scale */
+.tf-display {
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 0.98;
+  text-wrap: balance;
+}
+.tf-measure { max-width: 68ch; }
+.tf-nums { font-variant-numeric: tabular-nums; }
+
+/* Browser surfaces inherit the palette rather than the browser's defaults */
+::selection {
+  background: #1a1a1a;
+  color: #faf9f6;
+}
+html { caret-color: var(--tf-gold-ink); }
+:focus-visible {
+  outline: 2px solid var(--tf-gold-ink);
+  outline-offset: 3px;
+}
+a { text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
+* { scrollbar-color: #c9c4b8 var(--tf-ground); scrollbar-width: thin; }
+
+/* The page's single authored entrance: content starts visible and settles. */
+@media (prefers-reduced-motion: no-preference) {
+  .tf-rise {
+    animation: tf-rise 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+}
+@keyframes tf-rise {
+  from { transform: translateY(14px); opacity: 0.55; }
+  to { transform: translateY(0); opacity: 1; }
 }
