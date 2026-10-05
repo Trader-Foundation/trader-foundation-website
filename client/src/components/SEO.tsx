@@ -8,8 +8,8 @@ interface SEOProps {
 
 const DEFAULT_TITLE = "Trader Foundation Academy | Learn to Trade Stocks & Options";
 const DEFAULT_DESCRIPTION = "Trader Foundation Academy offers 1-on-1 coaching to help you master stock and options trading. Join our proven program and take control of your financial future.";
-const BASE_URL = "https://www.trader.foundation";
-const OG_IMAGE = `${BASE_URL}/images/vlad-founder.jpg`;
+const BASE_URL = "https://www.traderfoundation.com";
+const OG_IMAGE = `${BASE_URL}/images/og-webinar.png`;
 
 export default function SEO({ title, description, path = "/" }: SEOProps) {
   const fullTitle = title ? `${title} | Trader Foundation Academy` : DEFAULT_TITLE;
@@ -25,6 +25,8 @@ export default function SEO({ title, description, path = "/" }: SEOProps) {
       <meta property="og:description" content={fullDescription} />
       <meta property="og:url" content={fullUrl} />
       <meta property="og:image" content={OG_IMAGE} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={fullDescription} />
       <meta name="twitter:image" content={OG_IMAGE} />
