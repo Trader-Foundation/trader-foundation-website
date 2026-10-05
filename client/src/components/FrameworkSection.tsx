@@ -24,7 +24,6 @@ const running = [
   'A community to ask anything, any time',
   'Stocks To Buy And Why, daily, losses included',
   'Trade ideas, once you have the foundation',
-  'Someone to talk to about the wider financial picture, not just trading',
 ];
 
 const outcomes = [
