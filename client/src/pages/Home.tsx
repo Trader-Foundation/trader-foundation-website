@@ -155,12 +155,16 @@ export default function Home() {
             </div>
             <div className="lg:col-span-7">
               <p className="text-[#3a3834] text-[1.0625rem] sm:text-[1.125rem] leading-[1.7] max-w-[56ch]">
-                You follow the system. You show up to the coaching. And if you're not
-                profitable, <strong className="font-semibold text-[#1a1a1a]">you don't pay</strong>, and we
-                keep coaching you until you are.
+                You follow the system, do the homework, and show up to your coaching sessions.
+                If you are not winning at least{' '}
+                <strong className="font-semibold text-[#1a1a1a] tf-nums">70%</strong> of your trades
+                within 90 days, you get{' '}
+                <strong className="font-semibold text-[#1a1a1a]">every penny back</strong>. And we
+                keep coaching you until you are profitable.
               </p>
               <p className="mt-8 pt-6 border-t border-[#e3ded4] text-[1rem] text-[#55534e] leading-[1.7] max-w-[56ch]">
-                90 days of one-on-one coaching. Pay when you're profitable.
+                90 days of one-on-one coaching. The conditions are the ones above: commit to the
+                work, and we commit to you.
               </p>
             </div>
           </div>
