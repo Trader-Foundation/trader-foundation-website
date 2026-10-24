@@ -109,6 +109,11 @@ export default function Footer() {
                   Compound Wealth Calculator
                 </a>
               </li>
+              <li>
+                <a href="/paycheck-calculator" className={linkClass}>
+                  Paycheck Collector Calculator
+                </a>
+              </li>
             </ul>
           </div>
 
