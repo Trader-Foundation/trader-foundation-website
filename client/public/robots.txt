@@ -2,5 +2,6 @@ User-agent: *
 Allow: /
 Disallow: /weeklycheckin
 Disallow: /yt-thank-you-page
+Disallow: /board
 
 Sitemap: https://www.trader.foundation/sitemap.xml
