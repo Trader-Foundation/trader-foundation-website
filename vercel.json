@@ -1,11 +1,4 @@
 {
-  "buildCommand": "pnpm build",
-  "installCommand": "pnpm install",
-  "outputDirectory": "dist",
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
-  ]
+  "installCommand": "corepack enable && cd dashboard && pnpm install --frozen-lockfile",
+  "buildCommand": "cd dashboard && bash scripts/build-vercel.sh && mkdir -p ../.vercel && rm -rf ../.vercel/output && mv .vercel/output ../.vercel/"
 }
