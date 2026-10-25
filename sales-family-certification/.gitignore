@@ -1,0 +1,2 @@
+# Build output. build.sh assembles this on Vercel; never commit it.
+public/
