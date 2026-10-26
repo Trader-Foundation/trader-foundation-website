@@ -1,0 +1,172 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-04T00:00:00Z",
+  "title": "Design System: Trader Foundation Academy",
+  "extensions": {
+    "colorMeta": {
+      "ground": { "role": "neutral", "displayName": "Warm Paper", "canonical": "#faf9f6", "tonalRamp": ["#232220", "#3a3834", "#55534e", "#767269", "#a8a39a", "#c9c4b8", "#e3ded4", "#faf9f6"] },
+      "band": { "role": "neutral", "displayName": "Near-Black Band", "canonical": "#141414", "tonalRamp": ["#0a0a0a", "#141414", "#2c2c2c", "#4a4a4a", "#6e6e6e", "#9a9a9a", "#c7c7c7", "#f0f0f0"] },
+      "ink": { "role": "neutral", "displayName": "Ink", "canonical": "#1a1a1a", "tonalRamp": ["#0d0d0d", "#1a1a1a", "#333333", "#55534e", "#767269", "#a8a39a", "#d8d3c8", "#f2f0ea"] },
+      "ink-prose": { "role": "neutral", "displayName": "Reading Ink", "canonical": "#3a3834", "tonalRamp": ["#1a1a1a", "#2a2825", "#3a3834", "#55534e", "#767269", "#a8a39a", "#d8d3c8", "#f2f0ea"] },
+      "ink-soft": { "role": "neutral", "displayName": "Soft Ink", "canonical": "#55534e", "tonalRamp": ["#1a1a1a", "#3a3834", "#55534e", "#767269", "#949086", "#bdb8ad", "#e3ded4", "#faf9f6"] },
+      "ink-faint": { "role": "neutral", "displayName": "Faint Ink", "canonical": "#767269", "tonalRamp": ["#1a1a1a", "#3a3834", "#55534e", "#767269", "#9a9589", "#c2bdb1", "#e3ded4", "#faf9f6"] },
+      "rule-ink": { "role": "neutral", "displayName": "Ink Rule", "canonical": "#1a1a1a", "tonalRamp": ["#0d0d0d", "#1a1a1a", "#333333", "#55534e", "#767269", "#a8a39a", "#d8d3c8", "#f2f0ea"] },
+      "rule": { "role": "neutral", "displayName": "Standard Hairline", "canonical": "#e3ded4", "tonalRamp": ["#302e29", "#4c4942", "#6b675d", "#8d887c", "#b0aa9c", "#cdc7bb", "#e3ded4", "#f6f3ed"] },
+      "rule-light": { "role": "neutral", "displayName": "Light Hairline", "canonical": "#ece8e0", "tonalRamp": ["#33302a", "#504c44", "#6f6a60", "#918b7f", "#b4ada0", "#d2cbbf", "#ece8e0", "#f8f6f1"] },
+      "rule-on-band": { "role": "neutral", "displayName": "Band Hairline", "canonical": "#2c2c2c", "tonalRamp": ["#0a0a0a", "#171717", "#2c2c2c", "#454545", "#6b6b6b", "#979797", "#c4c4c4", "#efefef"] },
+      "underline": { "role": "neutral", "displayName": "Underline Grey", "canonical": "#c9c4b8", "tonalRamp": ["#2a2823", "#45423a", "#625e53", "#827d70", "#a39d8e", "#c9c4b8", "#e0dcd2", "#f4f2ec"] },
+      "gold": { "role": "primary", "displayName": "Brand Gold", "canonical": "#c7ab77", "tonalRamp": ["#30260f", "#4b3b1b", "#6a5428", "#876b38", "#a68a52", "#c7ab77", "#ddc9a3", "#f1e8d6"] },
+      "gold-hover": { "role": "primary", "displayName": "Brand Gold, Pressed", "canonical": "#b89a66", "tonalRamp": ["#2b2210", "#45371a", "#604d26", "#7c6536", "#9a804e", "#b89a66", "#d4bd93", "#eee2cb"] },
+      "gold-ink": { "role": "primary", "displayName": "Accessible Gold", "canonical": "#876b38", "tonalRamp": ["#221a0b", "#382c13", "#50401c", "#6a5427", "#876b38", "#a6894f", "#c9b185", "#ead9bd"] }
+    },
+    "typographyMeta": {
+      "display-hero": { "displayName": "Display, Hero", "purpose": "The academy name in the first viewport. One per page, left-aligned, text-wrap balance." },
+      "display-section": { "displayName": "Display, Section", "purpose": "Section openers, held to a 14-18ch measure so they stack to two or three short lines." },
+      "deck": { "displayName": "Deck", "purpose": "The positioning sentence under the hero heading, in reading ink at a 26ch measure. One per page." },
+      "title": { "displayName": "Title", "purpose": "Column heads, feature names, road-step names, figure titles. Always ink." },
+      "body": { "displayName": "Body", "purpose": "Prose at a 46-68ch measure; steps to 1.125rem on explanatory sections at sm and above." },
+      "label": { "displayName": "Label", "purpose": "Buttons, names, attributions, dark-band stat labels." },
+      "micro": { "displayName": "Micro", "purpose": "Figure captions, disclaimers, legal links. The compliance disclaimer runs here at 1.7 leading and a 90ch measure." },
+      "figure": { "displayName": "Figure", "purpose": "Trust-band statistics on the dark band, tabular numerals." }
+    },
+    "shadows": [],
+    "motion": [
+      { "name": "tf-rise", "value": "translateY(14px) opacity(0.55) -> rest, 900ms cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "The page's single authored entrance, on the hero copy column only. Starts from legible opacity; wrapped in @media (prefers-reduced-motion: no-preference)." },
+      { "name": "ease-state", "value": "200ms linear colour transition", "purpose": "The only other motion: button, link, and icon colour change, plus the Learn chevron's 180-degree rotation." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "container-max", "value": "1320px" }
+    ],
+    "focusRing": { "value": "outline: 2px solid var(--tf-gold-ink); outline-offset: 3px", "purpose": "Global :focus-visible. Never removed, never overridden per component." },
+    "browserSurfaces": {
+      "selection": "background #1a1a1a, color #faf9f6",
+      "caretColor": "var(--tf-gold-ink)",
+      "scrollbar": "scrollbar-color: #c9c4b8 var(--tf-ground); scrollbar-width: thin",
+      "linkUnderline": "text-underline-offset: 0.18em; text-decoration-thickness: 1px",
+      "numerals": "font-variant-numeric: tabular-nums on every number that is a record"
+    },
+    "stack": {
+      "framework": "Vite + React SPA with Tailwind 4 utility classes. Not Astro, no CSS modules.",
+      "tokenHome": "client/src/index.css, :root, --tf-* custom properties",
+      "coverage": "Shipped on client/src/pages/Home.tsx plus the shared Navigation and Footer. Roughly nineteen other routes still carry the previous system (gold throughout, Sen and DM Sans, rounded cards). This system is their target, not a description of them.",
+      "accessibility": "WCAG 2.2 AA floor; Lighthouse accessibility 100 with zero failing audits."
+    }
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The single gold action. One per viewport, on the webinar registration only.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\">Join the live webinar</a>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; background: var(--tf-gold, #c7ab77); color: var(--tf-ink, #1a1a1a); font-family: 'Inter', system-ui, sans-serif; font-size: 0.9375rem; font-weight: 600; padding: 16px 32px; border: none; border-radius: 0; text-decoration: none; transition: background-color 200ms; } .ds-btn-primary:hover { background: #b89a66; } .ds-btn-primary:focus-visible { outline: 2px solid var(--tf-gold-ink, #876b38); outline-offset: 3px; }"
+    },
+    {
+      "name": "Header Action Button",
+      "kind": "button",
+      "refersTo": "button-header",
+      "description": "The header's webinar button. Ink, not gold, so the in-page primary stays the only gold element on screen.",
+      "html": "<a class=\"ds-btn-header\" href=\"#\">Live Webinar</a>",
+      "css": ".ds-btn-header { display: inline-flex; align-items: center; background: var(--tf-ink, #1a1a1a); color: var(--tf-ground, #faf9f6); font-family: 'Inter', system-ui, sans-serif; font-size: 0.8125rem; font-weight: 600; padding: 10px 20px; border: none; border-radius: 0; text-decoration: none; transition: background-color 200ms; } .ds-btn-header:hover { background: #333; } .ds-btn-header:focus-visible { outline: 2px solid var(--tf-gold-ink, #876b38); outline-offset: 3px; }"
+    },
+    {
+      "name": "Header",
+      "kind": "nav",
+      "refersTo": "header",
+      "description": "Fixed 72px single row on the warm-paper ground, closed by one standard hairline. Wordmark left, links and the ink action right.",
+      "html": "<header class=\"ds-nav\"><a class=\"ds-nav-mark\" href=\"#\"><span class=\"ds-nav-mark-a\">Trader</span><span class=\"ds-nav-mark-b\">Foundation</span></a><nav class=\"ds-nav-links\"><a class=\"ds-nav-link ds-nav-link--active\" href=\"#\">Learn<svg class=\"ds-nav-chev\" width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"m6 9 6 6 6-6\"/></svg></a><a class=\"ds-nav-link\" href=\"#\">About</a><a class=\"ds-nav-link\" href=\"#\">Results</a><a class=\"ds-nav-link\" href=\"#\">FAQ</a><a class=\"ds-nav-cta\" href=\"#\">Live Webinar</a></nav></header>",
+      "css": ".ds-nav { display: flex; align-items: center; justify-content: space-between; height: 72px; padding: 0 24px; background: var(--tf-ground, #faf9f6); border-bottom: 1px solid var(--tf-rule, #e3ded4); font-family: 'Inter', system-ui, sans-serif; } .ds-nav-mark { font-size: 1.05rem; letter-spacing: -0.02em; line-height: 1; color: var(--tf-ink, #1a1a1a); text-decoration: none; } .ds-nav-mark-a { font-weight: 500; } .ds-nav-mark-b { font-weight: 800; } .ds-nav-links { display: flex; align-items: center; gap: 28px; } .ds-nav-link { display: inline-flex; align-items: center; gap: 6px; font-size: 0.875rem; color: var(--tf-ink-soft, #55534e); text-decoration: none; transition: color 200ms; } .ds-nav-link:hover { color: var(--tf-ink, #1a1a1a); } .ds-nav-link--active { color: var(--tf-ink, #1a1a1a); font-weight: 600; } .ds-nav-chev { transition: transform 200ms; } .ds-nav-link:hover .ds-nav-chev { transform: rotate(180deg); } .ds-nav-cta { display: inline-flex; align-items: center; background: var(--tf-ink, #1a1a1a); color: var(--tf-ground, #faf9f6); font-size: 0.8125rem; font-weight: 600; padding: 10px 20px; border-radius: 0; text-decoration: none; transition: background-color 200ms; } .ds-nav-cta:hover { background: #333; } .ds-nav a:focus-visible { outline: 2px solid var(--tf-gold-ink, #876b38); outline-offset: 3px; }"
+    },
+    {
+      "name": "Editorial Table",
+      "kind": "custom",
+      "refersTo": "list-row",
+      "description": "The signature component. A curriculum set as rows under an ink-ruled column head: fixed numeral column in faint tabular numerals, light hairlines between rows, no cards and no bullets.",
+      "html": "<div class=\"ds-table\"><h3 class=\"ds-table-head\">The road</h3><ol class=\"ds-table-list\"><li class=\"ds-table-row\"><span class=\"ds-table-num\" aria-hidden=\"true\">01</span><div><h4 class=\"ds-table-title\">Onboarding</h4><p class=\"ds-table-desc\">Clarity on the whole road, and a person beside you from day one.</p></div></li><li class=\"ds-table-row\"><span class=\"ds-table-num\" aria-hidden=\"true\">02</span><div><h4 class=\"ds-table-title\">Foundation &amp; Psychology</h4><p class=\"ds-table-desc\">Chapter one, not chapter nine. Built to hold up in any market.</p></div></li></ol></div>",
+      "css": ".ds-table { font-family: 'Inter', system-ui, sans-serif; background: var(--tf-ground, #faf9f6); } .ds-table-head { font-size: 1.0625rem; font-weight: 600; color: var(--tf-ink, #1a1a1a); margin: 0; padding-bottom: 12px; border-bottom: 2px solid var(--tf-ink, #1a1a1a); } .ds-table-list { list-style: none; margin: 24px 0 0; padding: 0; } .ds-table-row { display: grid; grid-template-columns: 2.5rem 1fr; column-gap: 16px; border-top: 1px solid var(--tf-rule-light, #ece8e0); padding: 20px 0; } .ds-table-num { font-size: 0.9375rem; color: var(--tf-ink-faint, #767269); font-variant-numeric: tabular-nums; padding-top: 2px; } .ds-table-title { font-size: 1.125rem; font-weight: 600; letter-spacing: -0.01em; color: var(--tf-ink, #1a1a1a); margin: 0; } .ds-table-desc { margin: 6px 0 0; font-size: 1rem; line-height: 1.65; color: var(--tf-ink-soft, #55534e); max-width: 48ch; }"
+    },
+    {
+      "name": "Dark Band",
+      "kind": "custom",
+      "refersTo": "band",
+      "description": "The one dark surface, used at most twice per page. Figures in white at display weight with tabular numerals, labels at 65% white, one band hairline.",
+      "html": "<section class=\"ds-band\"><div class=\"ds-band-grid\"><div><p class=\"ds-band-figure\">1,200+</p><p class=\"ds-band-label\">Students</p></div><div><p class=\"ds-band-figure\">15+</p><p class=\"ds-band-label\">Years experience</p></div><div><p class=\"ds-band-figure\">6+</p><p class=\"ds-band-label\">Years in business</p></div></div><div class=\"ds-band-rule\"></div></section>",
+      "css": ".ds-band { background: var(--tf-band, #141414); padding: 56px 24px; font-family: 'Inter', system-ui, sans-serif; } .ds-band-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; } .ds-band-figure { margin: 0; color: #fff; font-size: 3rem; font-weight: 800; line-height: 1; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; } .ds-band-label { margin: 8px 0 0; color: rgba(255,255,255,0.65); font-size: 0.9375rem; } .ds-band-rule { margin-top: 48px; border-top: 1px solid var(--tf-rule-on-band, #2c2c2c); }"
+    },
+    {
+      "name": "Evidence Figure",
+      "kind": "card",
+      "refersTo": "figure-image",
+      "description": "A photograph or screenshot as a plain rectangle with its caption beneath. Evidence images carry a standard hairline; narrative photographs carry none.",
+      "html": "<figure class=\"ds-figure\"><div class=\"ds-figure-img ds-figure-img--evidence\" role=\"img\" aria-label=\"Fidelity Roth IRA balance\"></div><figcaption class=\"ds-figure-cap\">Figure 1. Roth IRA, +142% over three years</figcaption></figure>",
+      "css": ".ds-figure { margin: 0; font-family: 'Inter', system-ui, sans-serif; } .ds-figure-img { display: block; width: 100%; height: 220px; background: #ddd8cf; border-radius: 0; box-shadow: none; } .ds-figure-img--evidence { border: 1px solid var(--tf-rule, #e3ded4); } .ds-figure-cap { margin-top: 12px; font-size: 0.875rem; color: var(--tf-ink-soft, #55534e); font-variant-numeric: tabular-nums; }"
+    },
+    {
+      "name": "Inline Link",
+      "kind": "custom",
+      "refersTo": "nav-link",
+      "description": "Body and footer links: ink or soft ink text with a grey underline that resolves to ink on hover. No colour change to gold.",
+      "html": "<p class=\"ds-link-wrap\"><a class=\"ds-link\" href=\"#\">More student reviews and results</a></p>",
+      "css": ".ds-link-wrap { font-family: 'Inter', system-ui, sans-serif; margin: 0; } .ds-link { font-size: 0.9375rem; font-weight: 600; color: var(--tf-ink, #1a1a1a); text-decoration: underline; text-decoration-color: #c9c4b8; text-decoration-thickness: 1px; text-underline-offset: 0.18em; } .ds-link:hover { text-decoration-color: var(--tf-ink, #1a1a1a); } .ds-link:focus-visible { outline: 2px solid var(--tf-gold-ink, #876b38); outline-offset: 3px; }"
+    },
+    {
+      "name": "Section Opener",
+      "kind": "custom",
+      "refersTo": "display-section",
+      "description": "The standard section head: display type left-aligned on the grid's left edge over a 14-18ch measure, with its explanation in the opposite column.",
+      "html": "<section class=\"ds-open\"><h2 class=\"ds-open-h\">What you actually get</h2><p class=\"ds-open-p\">We teach a discipline, not a trade. Your maximum loss is known before you place the trade.</p></section>",
+      "css": ".ds-open { background: var(--tf-ground, #faf9f6); border-top: 1px solid var(--tf-rule, #e3ded4); padding: 64px 24px; font-family: 'Inter', system-ui, sans-serif; } .ds-open-h { margin: 0; color: var(--tf-ink, #1a1a1a); font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 800; line-height: 0.98; letter-spacing: -0.035em; text-wrap: balance; max-width: 16ch; } .ds-open-p { margin: 32px 0 0; color: #3a3834; font-size: 1.0625rem; line-height: 1.7; max-width: 62ch; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The School Prospectus",
+    "overview": "This is the visual world of a school that publishes its curriculum, not a trading service that sells a feeling. Everything is set on one off-white ground in one typeface, with rules instead of containers and photographs instead of imagery. Authority comes from order: a 12-column field, a left edge every heading obeys, a graded hierarchy of hairlines, and figures set in tabular numerals so they read as records rather than claims. Nothing is centred, nothing floats, nothing glows.\n\nThe density is editorial rather than marketing: long measures (46-68ch), generous leading (1.65-1.75 on prose), and display type pulled tight (-0.035em, 0.98 line-height) so headings read as a mass against the open space beside them. Depth is entirely tonal. A single near-black band interrupts the ground as punctuation, at most twice, and brand gold appears once per viewport on one action. The restraint is the proof: a school that has real Fidelity statements to show does not need a gradient.\n\nThe world is confirmed against one anti-reference, which is the system it replaced on this same site: a dark photo hero under gradient scrims, gold on every element, centred card stacks, rounded corners, and two display faces. Every rule exists because that version shipped and was removed.",
+    "keyCharacteristics": [
+      "One ground (#faf9f6) and one interrupting band (#141414); no third surface",
+      "One typeface, Inter, separated only by weight and scale",
+      "Rules graded to three weights; no cards, no shadows, no radius",
+      "Photographs as plain rectangles: no radius, no overlay, no gradient",
+      "Brand gold once per viewport, on the primary action, nowhere else",
+      "Exactly one authored motion moment on the whole page"
+    ],
+    "rules": [
+      { "name": "The One Gold Rule", "body": "Brand gold appears exactly once in any viewport, on the primary webinar action. A second gold element anywhere on screen is a defect, not a variant. The header's own webinar button is ink, specifically so the hero's gold stays alone.", "section": "colors" },
+      { "name": "The Single Ground Rule", "body": "There is one light surface, #faf9f6. No white panel, no tinted card, no 2% luminance step to suggest a container. A previous build added a #ffffff panel and it cut nine visible seams into the page; section separation is done with hairlines and vertical space, never with a surface change.", "section": "colors" },
+      { "name": "The Twice-Dark Rule", "body": "The #141414 band appears at most twice per page. On the homepage it is the trust figures and the footer. A third dark band turns punctuation into a pattern.", "section": "colors" },
+      { "name": "The One Face Rule", "body": "Inter is the only typeface. Hierarchy is weight (400 / 600 / 800) and scale. A second family, including a system display stack, is a defect.", "section": "typography" },
+      { "name": "The Left Edge Rule", "body": "Display and heading type is left-aligned on the grid's left edge. Nothing in this system is centre-set, and the empty space is placed deliberately below and beside headings rather than balanced around them.", "section": "typography" },
+      { "name": "The Tabular Numbers Rule", "body": "Every number that is a record - account percentages, student counts, step numerals, ratings - carries font-variant-numeric: tabular-nums (.tf-nums). Figures that shift width while reading read as marketing.", "section": "typography" },
+      { "name": "The Rule-Not-Box Rule", "body": "Sections are separated by a hairline and vertical space. A section is never given a background, a border on all four sides, or inner padding that implies a card.", "section": "layout" },
+      { "name": "The Deliberate Void Rule", "body": "Short columns are left short. The hero's left column ends well above the photograph's lower edge and that space stays empty; filler is not added to balance a row.", "section": "layout" },
+      { "name": "The No-Shadow Rule", "body": "Surfaces are flat at every state, including hover and focus. Hover is a colour change; focus is a 2px #876b38 outline at 3px offset. Elevation is never simulated.", "section": "elevation" },
+      { "name": "The Graded Rule Rule", "body": "Rules carry three weights on the light ground, and the weight is the information: ink 2px (#1a1a1a) under a column head and above a concluding block; standard 1px (#e3ded4) for section boundaries, column dividers, the header's lower edge and evidence image borders; light 1px (#ece8e0) for repeated rows inside a list or review grid. On the dark band there is one weight only, #2c2c2c.", "section": "elevation" },
+      { "name": "The Plain Rectangle Rule", "body": "Photographs ship unmodified: no radius, no shadow, no border on the ground, no overlay, no gradient, no duotone, no text set on top of them. The two Fidelity captures are the only images that carry a border, a standard hairline, because they are evidence being framed.", "section": "shapes" }
+    ],
+    "dos": [
+      "Do set every light surface on #faf9f6 and separate sections with a graded hairline plus vertical space.",
+      "Do grade rules to the three weights: ink 2px under column heads, standard 1px for sections and columns, light 1px for repeated rows.",
+      "Do keep Inter as the only typeface and build hierarchy from weight (400 / 600 / 800) and scale alone.",
+      "Do set display type left-aligned at 800 weight, -0.035em tracking, 0.98 line-height, capped at a 14-18ch measure.",
+      "Do place exactly one gold action per viewport and make every other action ink or a plain link.",
+      "Do ship photographs as plain rectangles cropped to their column, with the caption beneath.",
+      "Do give every number that is a record tabular numerals (.tf-nums).",
+      "Do keep the global :focus-visible ring (2px #876b38, 3px offset) on every interactive element, and hold WCAG 2.2 AA with Lighthouse accessibility at 100 and zero failing audits.",
+      "Do guard any new motion behind prefers-reduced-motion and start it from a legible state.",
+      "Do write new surfaces in Tailwind 4 utilities against the --tf-* custom properties in client/src/index.css; this is a Vite + React SPA, not Astro, and there are no CSS modules."
+    ],
+    "donts": [
+      "Don't introduce a second light surface, including a #ffffff panel. The 2% step reads as nine unintended seams, which is why the panel token was abandoned.",
+      "Don't use the #141414 band more than twice on a page.",
+      "Don't put gold on anything but the single primary action: no gold rules, gold icons, gold headings, or gold emphasis in prose.",
+      "Don't add a radius, a shadow, a gradient, a scrim, or an overlay. Not on buttons, not on images, not on the header at scroll.",
+      "Don't set text over a photograph.",
+      "Don't add an eyebrow, kicker, or letterspaced small-caps label above a heading. The build ships none and the heading carries its own context.",
+      "Don't centre display type or balance a row with filler to fill a short column.",
+      "Don't rebuild a list as cards. Rows separated by light hairlines are the pattern.",
+      "Don't add a second typeface, including a system display stack, or reach for the legacy Sen / DM Sans pairing still present on unconverted routes."
+    ]
+  }
+}
