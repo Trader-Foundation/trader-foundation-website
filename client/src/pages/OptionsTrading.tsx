@@ -2,7 +2,7 @@
  * Options Trading Page - Trader Foundation
  * Chapter-based navigation: TOC on left, selected chapter content on right
  * Design: GOAT Academy style - clean, editorial, three-column layout
- * Content: 100% original - focused on Trader Foundation's safe options approach
+ * Content: 100% original - focused on Trader Foundation's defined-risk options approach
  */
 
 import React, { useState } from 'react';
@@ -34,7 +34,7 @@ const CHAPTERS = [
   },
   {
     id: 'safe-strategies',
-    label: 'Safe Options Strategies for Steady Income',
+    label: 'Defined-Risk Options Strategies for Steady Income',
     icon: Shield,
   },
   {
@@ -194,7 +194,7 @@ function ChapterWhyOptionsMatter() {
         Income Generation Without Owning Shares
       </h3>
       <p className="text-[1.05rem] leading-relaxed text-[#444] mb-4">
-        Most people think of options as something you buy. But you can also <strong>sell</strong> options, and that is where consistent income enters the picture. When you sell a contract, you collect the premium upfront. If the stock stays within your predicted range, you keep that premium as profit. Strategies like covered calls and credit spreads are built on this principle, and they form the backbone of what we teach at Trader Foundation.
+        Most people think of options as something you buy. But you can also <strong>sell</strong> options, and that is where consistent income enters the picture. When you sell a contract, you collect the premium upfront. If the stock stays within your predicted range, you keep that premium as profit. Credit spreads are built on this principle, and they are the backbone of what we teach at Trader Foundation, in the strategy we call the Paycheck Collector.
       </p>
 
       <div className="bg-[#fdf6e9] border border-[#e8d5a8] rounded-lg p-6 my-8">
@@ -218,24 +218,24 @@ function ChapterSafeStrategies() {
   return (
     <>
       <p className="text-[1.05rem] leading-relaxed text-[#444] mb-4">
-        The word "safe" and "options" rarely appear in the same sentence online. That is because most content about options focuses on high-risk, high-reward plays, buying cheap contracts that expire worthless 80% of the time. We take the opposite approach. Our strategies are designed to produce <strong>consistent, repeatable income</strong> with clearly defined risk on every trade.
+        Most content about options focuses on high-risk, high-reward plays: buying cheap contracts that expire worthless most of the time. We take the opposite approach. We do not call our strategies safe, because no strategy is. We call them <strong>defined risk</strong>, which means something precise: you know the most a trade can cost you before you place it.
       </p>
 
       <div className="space-y-6 my-8">
         <div className="bg-white rounded-lg border border-[#e8e4dc] p-6 shadow-sm">
           <h4 className="text-lg font-bold text-[#111] mb-3" style={{ fontFamily: "'Sen', sans-serif" }}>
-            Covered Calls, Earning Rent on Stocks You Own
+            The Paycheck Collector, Getting Paid to Wait
           </h4>
           <p className="text-[0.95rem] leading-relaxed text-[#555] mb-3">
-            If you own 100 shares of a stock, you can sell a call option against those shares and collect the premium. If the stock stays below the strike price, you keep the premium and your shares. If it rises above the strike, you sell your shares at a profit and still keep the premium.
+            You pick a stock and draw a line well below where it trades today, then sell a spread against that line. The premium lands in your account the moment you place the trade. If the stock stays above your line, you keep it.
           </p>
           <p className="text-[0.95rem] leading-relaxed text-[#555] mb-3">
-            Think of it as renting out a property you own. The stock is the property, and the premium is the rent check. Whether the tenant stays or moves out, you collected the rent. This strategy works best on stable, blue-chip stocks that you are comfortable holding long-term.
+            It works the way insurance does. The insurer is paid up front and stays safe by being picky about who it covers. You are picky about where the line sits: the farther below the stock, the better the odds and the smaller the premium, and that trade-off is a deliberate choice.
           </p>
           <div className="bg-[#faf8f4] border-l-4 border-[#c7ab77] rounded-r-lg p-5 mt-4">
-            <h5 className="text-[0.95rem] font-bold text-[#111] mb-2" style={{ fontFamily: "'Sen', sans-serif" }}>Where We Take It Further: Charting Your Covered Calls</h5>
+            <h5 className="text-[0.95rem] font-bold text-[#111] mb-2" style={{ fontFamily: "'Sen', sans-serif" }}>Where We Take It Further: Charting the Line</h5>
             <p className="text-[0.88rem] leading-relaxed text-[#555]">
-              Most programs teach covered calls as a mechanical strategy, own 100 shares, sell a call, collect the premium, repeat. At Trader Foundation, we take it to another level by layering <strong>technical analysis and charting</strong> into every covered call decision. Before selling a call, our coaches teach you to read the chart: identify support and resistance levels, analyze the trend direction, and evaluate where the stock is within its current range. This means you are not blindly picking strike prices, you are selecting strikes based on where the chart tells you the stock is likely to stall or reverse. The result is higher-quality premium collection, better strike selection, and fewer situations where your shares get called away at the wrong time. Charting transforms covered calls from a passive income strategy into a <strong>precision income engine</strong>.
+              Most programs teach premium selling as a mechanical exercise: pick a delta, sell the spread, repeat. At Trader Foundation we layer <strong>technical analysis and charting</strong> into the decision. Before selling anything, our coaches teach you to read the chart: identify support and resistance, analyze the trend, and evaluate where the stock sits in its range. You are not blindly picking a strike, you are putting your line where the chart says the stock is likely to hold. The spread is kept narrow, and positions are staged so one opens at a time rather than committing the whole account at once.
             </p>
           </div>
         </div>
@@ -248,7 +248,7 @@ function ChapterSafeStrategies() {
             A credit spread involves selling one option and buying another at a different strike price. The premium you collect from the sold option is greater than the cost of the bought option, so you receive a net credit. Your maximum loss is the difference between the two strikes minus the credit received.
           </p>
           <p className="text-[0.95rem] leading-relaxed text-[#555]">
-            This is one of the most popular strategies among our students because it requires less capital than covered calls, defines your maximum risk upfront, and profits when the stock stays within a predictable range. You do not need the stock to make a big move, you just need it to <em>not</em> move against you past your short strike.
+            This is the strategy our students use most, because it requires far less capital than owning the shares outright, defines your maximum risk upfront, and profits when the stock stays within a predictable range. You do not need the stock to make a big move, you just need it to <em>not</em> move against you past your short strike.
           </p>
         </div>
 
@@ -263,7 +263,7 @@ function ChapterSafeStrategies() {
       </div>
 
       <p className="text-[1.05rem] leading-relaxed text-[#444]">
-        Notice the pattern: every strategy above has a <strong>defined maximum loss</strong>. There are no open-ended risks, no hoping and praying. Each trade is structured before you enter it, with a clear plan for what happens if the market moves against you. That is the foundation of what we mean by "safe options", not that you cannot lose, but that you always know exactly how much you can lose before you commit a single dollar.
+        Notice the pattern: every strategy above has a <strong>defined maximum loss</strong>. There are no open-ended risks, no hoping and praying. Each trade is structured before you enter it, with a clear plan for what happens if the market moves against you. That is what defined risk means, and it is the honest version of the claim: not that you cannot lose, but that you know exactly how much you can lose before you commit a single dollar.
       </p>
     </>
   );
@@ -442,7 +442,7 @@ function ChapterGettingStarted() {
           {[
             { week: 'Week 1', title: 'Foundation & Setup', desc: 'Meet your personal coach. Set up your brokerage account. Learn the basics of reading charts and identifying swing trade setups. Begin paper trading with the Time Machine, our structured practice system that uses real historical data.' },
             { week: 'Week 2', title: 'Options Fundamentals', desc: 'Understand calls, puts, strike selection, and expiration timing. Practice reading options chains. Submit your first paper trade plans to your coach for review. Learn position sizing based on your account.' },
-            { week: 'Week 3', title: 'Strategy Application', desc: 'Apply covered calls or credit spreads in paper trading. Review your trade journal with your coach. Identify patterns in your decision-making. Begin to develop your personal trading rules.' },
+            { week: 'Week 3', title: 'Strategy Application', desc: 'Apply the Paycheck Collector in paper trading. Review your trade journal with your coach. Identify patterns in your decision-making. Begin to develop your personal trading rules.' },
             { week: 'Week 4', title: 'Transition to Live Trading', desc: 'With your coach\'s approval, place your first live trade with real capital, small position, defined risk, full trade plan reviewed beforehand. Continue daily practice with the Time Machine alongside live positions.' },
           ].map((item, i) => (
             <div key={i} className="flex gap-5">
