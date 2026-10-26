@@ -13,6 +13,7 @@ import TradingDisclaimer from "./pages/TradingDisclaimer";
 import About from "./pages/About";
 import Results from "./pages/Results";
 import Calculator from "./pages/Calculator";
+import PaycheckCollector from "./pages/PaycheckCollector";
 import Investing101 from "./pages/Investing101";
 import ComingSoon from "./pages/ComingSoon";
 import StocksAndIndex from "./pages/StocksAndIndex";
@@ -36,6 +37,7 @@ function Router() {
       <Route path={"/contact"} component={Contact} />
       <Route path={"/book-a-call"} component={BookACall} />
       <Route path={"/calculator"} component={Calculator} />
+      <Route path={"/paycheck-collector"} component={PaycheckCollector} />
       <Route path={"/investing-101"} component={Investing101} />
       <Route path={"/stocks-and-index"} component={StocksAndIndex} />
       <Route path={"/trading-tools"} component={TradingTools} />

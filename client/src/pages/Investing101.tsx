@@ -59,7 +59,7 @@ function ChapterWhyInvest() {
         Investing breaks that cycle. When you put capital into assets that appreciate, whether stocks, index funds, or options, your money starts working on your behalf, even while you sleep. The goal is not to get rich overnight. The goal is to build a financial foundation that gives you choices: the choice to retire when you want, to weather emergencies without panic, or to leave something meaningful for the next generation.
       </p>
       <p className="text-[1.05rem] leading-relaxed text-[#444]">
-        At Trader Foundation, we teach a specific approach: <strong>swing trading combined with safe options strategies</strong>. It is designed for people with full-time jobs, families, and limited screen time. You do not need to quit your day job or stare at charts for eight hours. You need a system, discipline, and the willingness to learn.
+        At Trader Foundation, we teach a specific approach: <strong>swing trading combined with defined-risk options strategies</strong>. It is designed for people with full-time jobs, families, and limited screen time. You do not need to quit your day job or stare at charts for eight hours. You need a system, discipline, and the willingness to learn.
       </p>
     </>
   );
@@ -160,7 +160,7 @@ function ChapterAssetClasses() {
 
       <h3 className="text-xl font-bold text-[#111] mt-8 mb-3" style={{ fontFamily: "'Sen', sans-serif" }}>Options Contracts</h3>
       <p className="text-[1.05rem] leading-relaxed text-[#444] mb-4">
-        Options give you the right to buy or sell a stock at a specific price within a set timeframe. They can be used conservatively, to protect your portfolio or generate income, or more aggressively for leveraged bets. Our program emphasizes <strong>safe options strategies</strong> that are designed to manage risk, not amplify it. If you are curious about how options fit into a disciplined trading plan, we cover that extensively in our curriculum.{' '}
+        Options give you the right to buy or sell a stock at a specific price within a set timeframe. They can be used conservatively, to protect your portfolio or generate income, or more aggressively for leveraged bets. Our program emphasizes <strong>defined-risk options strategies</strong>, where the most a trade can cost you is known before you place it. If you are curious about how options fit into a disciplined trading plan, we cover that extensively in our curriculum.{' '}
         <a href="/options-trading" className="text-[#c7ab77] font-semibold hover:underline">Read our Options Trading overview →</a>
       </p>
 

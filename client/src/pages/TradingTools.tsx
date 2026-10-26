@@ -172,8 +172,8 @@ function ChapterOptionsChain() {
             { title: 'Bid & Ask', desc: 'The bid is what buyers are willing to pay; the ask is what sellers want. The difference between them, the spread, tells you how liquid that contract is. Tighter spreads mean better fills.' },
             { title: 'Open Interest', desc: 'The total number of outstanding contracts at a given strike. Higher open interest means more participants and more liquidity. We generally avoid strikes with open interest below 100.' },
             { title: 'Implied Volatility (IV)', desc: 'A measure of how much the market expects the stock to move. Higher IV means higher premiums, which can be advantageous when you are selling options, as we often do in our credit spread strategies.' },
-            { title: 'Delta', desc: 'Tells you the probability that the option will expire in the money. A delta of 0.30 means roughly a 30% chance. For our strategies, we typically look for deltas between 0.15 and 0.30 on the short leg, keeping the probability of profit firmly in our favor.' },
-            { title: 'Days to Expiration (DTE)', desc: 'How many days until the contract expires. Swing traders and premium sellers tend to work in the 30 to 45 DTE range, where time decay accelerates and works in your favor.' },
+            { title: 'Delta', desc: 'Tells you the probability that the option will expire in the money. A delta of 0.30 means roughly a 30% chance. For the Paycheck Collector we start much further out than most, around 0.07 delta on the short leg, which is a starting point rather than a rule. The farther out the line, the better the odds and the smaller the premium.' },
+            { title: 'Days to Expiration (DTE)', desc: 'How many days until the contract expires. We work in the 30 to 37 day range. Weeklies were tried and dropped, because the premium does not justify the risk, and much beyond 37 days leaves too much time for something to happen.' },
           ].map((item, i) => (
             <div key={i} className="flex items-start gap-4">
               <span className="w-8 h-8 rounded-full bg-[#111] flex items-center justify-center shrink-0 mt-0.5">

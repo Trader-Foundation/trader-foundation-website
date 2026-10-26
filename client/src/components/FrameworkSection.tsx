@@ -96,8 +96,7 @@ export default function FrameworkSection() {
             ))}
           </div>
           <p className="mt-10 text-[0.9375rem] text-[#767269] max-w-[60ch]">
-            Sixteen students a month, because every one of them gets a coach. Conditional
-            90-day guarantee.
+            Every student gets their own coach. Conditional 90-day guarantee.
           </p>
         </div>
       </div>

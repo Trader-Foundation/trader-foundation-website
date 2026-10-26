@@ -20,7 +20,7 @@ Success for the website: the visitor registers for the live webinar at live.trad
 
 ## Positioning
 
-Every student gets their own named coach, and intake is capped at sixteen students a month because of it. Weekly one-on-one check-ins, homework that is reviewed and handed back, assessments, and an accountability partner are part of the programme rather than upsells. The guarantee is conditional and stated publicly: follow the system, do the homework, attend the coaching sessions, and if you are not winning at least 70% of your trades within 90 days, you get your money back.
+Every student gets their own named coach, and intake is capped because of it. The published figure is disputed: the homepage said sixteen a month, the sales certification says fifteen twice and warns against inventing the number. vladt83 had it removed from the site on 2026-10-26 pending confirmation; do not republish a cap figure until he states which is correct. Weekly one-on-one check-ins, homework that is reviewed and handed back, assessments, and an accountability partner are part of the programme rather than upsells. The guarantee is conditional and stated publicly: follow the system, do the homework, attend the coaching sessions, and if you are not winning at least 70% of your trades within 90 days, you get your money back.
 
 ## Operating Context
 

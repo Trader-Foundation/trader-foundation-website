@@ -3,7 +3,7 @@
  * Design: editorial, near-monochrome. Off-white ground, near-black ink, one
  * typeface, photographs as plain rectangles, brand gold reserved for the
  * single action. Sections flow: Nav → Hero → Trust band → Who is Vlad →
- * Reviews → What we teach → What you actually get → Results → Guarantee →
+ * Reviews → The Paycheck Collector → What you actually get → Results → Guarantee →
  * Webinar → Podcast → Footer.
  */
 
@@ -26,24 +26,25 @@ import SEO from '@/components/SEO';
 const RESULTS_IMG = '/images/results-roth-ira-display.png';
 const RESULTS_IMG_HSA = '/images/results-hsa-display.png';
 
-const methodFeatures = [
+const mechanism = [
   {
-    title: 'Known risk',
-    desc: 'You know the most you can lose before you place the trade. No margin calls.',
+    title: 'You get paid first',
+    desc: 'The money is in your account the moment you place the trade, not when it closes. That is the paycheck.',
   },
   {
-    title: 'Monthly income',
-    desc: 'The fees arrive on a cycle, the way a paycheck does. Hence the name.',
+    title: 'You draw a line',
+    desc: 'You pick a stock and draw a line well below where it trades today. While it stays above that line, you keep the paycheck.',
   },
   {
-    title: 'Rising or falling markets',
-    desc: 'You are paid whether the market rises or falls. The money comes from time passing, not from guessing direction.',
+    title: 'Protection is built in',
+    desc: 'One piece of the trade pays you, the other caps what can go wrong, so your worst case is known before you click.',
   },
   {
-    title: 'Buy discounts in downturns',
-    desc: 'When markets fall, you buy good stocks lower, and you are paid while you wait for your price.',
+    title: 'The odds are on screen',
+    desc: 'Trades are set up with roughly 80 to 93 percent odds in your favour, shown by the broker before you commit. That describes the trade, not anyone\'s results.',
   },
 ];
+
 
 export default function Home() {
   return (
@@ -109,26 +110,27 @@ export default function Home() {
 
       <MeetVladSection />
 
-      {/* ─── What we teach ─── */}
+      {/* ─── The mechanism ─── */}
       <section className="bg-[#faf9f6] py-16 sm:py-20">
         <div className="max-w-[1320px] mx-auto px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
             <div className="lg:col-span-5">
-              <h2 className="tf-display text-[#1a1a1a] text-[2.5rem] sm:text-[3.25rem] lg:text-[4rem] max-w-[14ch]">
-                How to build real wealth
+              <h2 className="tf-display text-[#1a1a1a] text-[2.5rem] sm:text-[3.25rem] lg:text-[4rem] max-w-[12ch]">
+                The Paycheck Collector
               </h2>
             </div>
             <div className="lg:col-span-7">
               <p className="text-[#3a3834] text-[1.0625rem] sm:text-[1.125rem] leading-[1.7] max-w-[62ch]">
-                We teach a discipline, not a trade. The core method is the{' '}
-                <strong className="font-semibold text-[#1a1a1a]">Paycheck Collector</strong>: sell
-                options on large, widely traded stocks and collect a fee up front. Your
-                maximum loss is known before you place the trade. Around it you learn what to
-                risk, how big each position should be, and how to keep going for years.
+                Most trading asks you to be right, far and fast: right about the direction, far
+                enough that the stock really moves, and fast, before time runs out. Miss one and
+                you lose, which is how people are right about a stock and still lose money on the
+                option. The Paycheck Collector needs one thing instead. The stock stays above
+                your line. It works the way an insurer does: paid up front, and picky about what
+                it covers.
               </p>
 
               <dl className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-8">
-                {methodFeatures.map(({ title, desc }) => (
+                {mechanism.map(({ title, desc }) => (
                   <div key={title} className="border-t border-[#e3ded4] pt-5">
                     <dt className="text-[1.0625rem] font-semibold text-[#1a1a1a] tracking-[-0.01em]">
                       {title}
@@ -137,6 +139,24 @@ export default function Home() {
                   </div>
                 ))}
               </dl>
+
+              <p className="mt-10 pt-6 border-t border-[#ece8e0] text-[1rem] text-[#55534e] leading-[1.7] max-w-[62ch]">
+                The method calls for about{' '}
+                <strong className="font-semibold text-[#1a1a1a] tf-nums">$15,000</strong> in
+                trading capital to run properly, in your own brokerage account and separate from
+                the cost of the programme. You can start learning with less. It is one of three
+                strategies you learn: Bounce Profit for trending markets, the Paycheck Collector
+                for markets going sideways, Ready, Set, Explode for volatile ones.
+              </p>
+
+              <p className="mt-8">
+                <a
+                  href="/paycheck-collector"
+                  className="text-[1.0625rem] font-semibold text-[#1a1a1a] underline decoration-[#c9c4b8] hover:decoration-[#1a1a1a]"
+                >
+                  How the Paycheck Collector works
+                </a>
+              </p>
             </div>
           </div>
         </div>
