@@ -404,9 +404,7 @@ export default function PaycheckCalculator() {
               Your first paycheck is about{" "}
               <strong className="text-[#876b38]">{usd(firstPremium)}</strong>. Leave every paycheck in,
               and by month {months} one month of premium is about{" "}
-              <strong className="text-[#876b38]">{usd(lastPremium)}</strong>. That&rsquo;s like{" "}
-              <strong className="text-[#876b38]">{usd(lastPremium / 160, 2)} an hour</strong> on a
-              40-hour week, from money that was sitting in the bank.
+              <strong className="text-[#876b38]">{usd(lastPremium)}</strong>. All from money that was sitting in the bank.
             </p>
 
             {warning && (
@@ -499,14 +497,14 @@ export default function PaycheckCalculator() {
           <div className="flex flex-wrap items-end justify-between gap-2">
             <h2 className="text-2xl font-bold">Month by month</h2>
             <p className="text-[13px] text-[#6b6658]">
-              Shaded rows mark each year. Per hour is that month&rsquo;s premium over a 160-hour work month.
+              Shaded rows mark each year.
             </p>
           </div>
           <div className="overflow-x-auto rounded-lg border border-[#e6e1d3] bg-white">
-            <table className="w-full min-w-[760px] border-collapse text-[14px] tabular-nums">
+            <table className="w-full min-w-[680px] border-collapse text-[14px] tabular-nums">
               <thead>
                 <tr className="text-[11px] uppercase tracking-[0.12em] text-[#6b6658]">
-                  {["Month", "Start", "Premium collected", "Taken out", "Added", "End of month", "Per hour", "Left alone"].map(
+                  {["Month", "Start", "Premium collected", "Taken out", "Added", "End of month", "Left alone"].map(
                     (h, i) => (
                       <th
                         key={h}
@@ -535,7 +533,6 @@ export default function PaycheckCalculator() {
                         {r.deposit ? `+${usd(r.deposit, 2)}` : "-"}
                       </td>
                       <td className="border-b border-[#e6e1d3] px-3 py-2 text-right font-semibold">{usd(r.end, 2)}</td>
-                      <td className="border-b border-[#e6e1d3] px-3 py-2 text-right">{usd(r.premium / 160, 2)}</td>
                       <td className="border-b border-[#e6e1d3] px-3 py-2 text-right">{usd(alone.rows[i].end, 2)}</td>
                     </tr>
                   );
