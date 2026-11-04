@@ -4,6 +4,10 @@
   "outputDirectory": "dist",
   "rewrites": [
     {
+      "source": "/calculator",
+      "destination": "/calculator.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
