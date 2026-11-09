@@ -16,11 +16,6 @@ const trustpilotReviews = [
     text: 'I have been learning a lot, and I have come a long way since I started my classes. Having access to a live person or persons has been incredibly encouraging. Elliot, Leo, and Erin have been great. Vlad is very smart, so pay attention.',
   },
   {
-    name: 'Fred Nicora',
-    title: 'A Great Experience from Ground Zero',
-    text: 'Starting at ground zero with my options trading journey, I examined several programs ranging from group chats to educational programs. Trader Foundation has enabled me to feel confident to dive into the deep end with strategies to succeed. The investment has paid off... big time!',
-  },
-  {
     name: 'Pranjul Srivastava',
     title: 'Exceeded Expectations!',
     text: 'I\'ve been trading options for quite some time and thought I knew a lot. Vlad and Elliot\'s knowledge and mentorship far exceeded anything I had imagined. Their strategies, especially the paycheck collector, is a game changer. I\'m less stressed about finances than I have ever been in my life.',
@@ -49,25 +44,21 @@ export default function MeetVladSection() {
                   the degree, the corporate ladder, the six-figure salary. And I still remember the moment
                   everything clicked. I was sitting at my desk after another 14-hour day, watching my 401(k)
                   statement show the same mediocre returns year after year. I had done everything "right", but
-                  I realized <strong className="font-semibold text-[#1a1a1a]">nobody had ever taught me how to actually grow my wealth</strong>.
+                  I realized <strong className="font-semibold text-[#1a1a1a]">nobody had ever taught me how to put my own capital to work</strong>.
                 </p>
                 <p>
-                  That frustration led me down a path most professionals know too well. I tried the stock
-                  signals. I tried the AI bots. I even tried day trading for a while, waking up at 4 AM,
-                  staring at candles, losing money I couldn't afford to lose. Every shortcut led to the
-                  same place: <strong className="font-semibold text-[#1a1a1a]">back to square one</strong>.
-                </p>
-                <p>
-                  It wasn't until I discovered swing trading, and more importantly, learned to{' '}
-                  <strong className="font-semibold text-[#1a1a1a]">build a real foundation</strong>, that things changed. Not overnight. Not through
-                  some magic formula. Through discipline, proper education, and having someone hold me
-                  accountable every step of the way.
+                  What changed was learning the other side of the trade. Instead of buying an option
+                  and hoping the market moved my way, I learned to{' '}
+                  <strong className="font-semibold text-[#1a1a1a]">sell the option and collect the premium up front</strong>, with
+                  protection on the position and my worst case known before I committed a dollar. Not
+                  overnight, and not through a magic formula. Through discipline, a process, and
+                  someone holding me to it.
                 </p>
                 <p>
                   That's why I built <strong className="font-semibold text-[#1a1a1a]">Trader Foundation</strong>. Not as another course you
-                  watch and forget. As a real academy where busy professionals get{' '}
-                  <strong className="font-semibold text-[#1a1a1a]">truly individual 1-on-1 coaching</strong>, learn a proven swing trading strategy,
-                  and build the skills to manage their own wealth, on their own terms.
+                  watch and forget. As a place where professionals with capital get{' '}
+                  <strong className="font-semibold text-[#1a1a1a]">truly individual 1-on-1 coaching</strong>, one strategy taught start to
+                  finish, and the skills to manage their own money on their own terms.
                 </p>
                 <p>
                   Over <strong className="font-semibold text-[#1a1a1a]">1,200 students</strong> and <strong className="font-semibold text-[#1a1a1a]">6+ years</strong> later, with a{' '}
@@ -102,7 +93,7 @@ export default function MeetVladSection() {
             </span>
           </div>
 
-          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-10">
+          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-10">
             {trustpilotReviews.map((review) => (
               <figure key={review.name} className="border-t border-[#ece8e0] pt-6">
                 <figcaption className="text-[0.9375rem] font-semibold text-[#1a1a1a]">

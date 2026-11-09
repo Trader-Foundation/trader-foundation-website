@@ -22,12 +22,11 @@ const running = [
   'An accountability partner from day one',
   'A live trading room, open five days a week',
   'A community to ask anything, any time',
-  'Stocks To Buy And Why, daily, losses included',
-  'Trade ideas, once you have the foundation',
+  'The trades our coaches place, shared while you learn',
 ];
 
 const outcomes = [
-  'Swing trading on your own schedule',
+  'Managing your own money on your own schedule',
   'A plan you wrote, that you can run alone',
   'Something to do in every kind of market',
 ];
@@ -96,7 +95,9 @@ export default function FrameworkSection() {
             ))}
           </div>
           <p className="mt-10 text-[0.9375rem] text-[#767269] max-w-[60ch]">
-            Every student gets their own coach. Conditional 90-day guarantee.
+            You copy the coaches' trades exactly at first, then place your own. By the end,
+            you don't need us to pick anything for you. Every student gets their own coach, and
+            every enrollment comes with a conditional guarantee.
           </p>
         </div>
       </div>

@@ -5,11 +5,10 @@
  * stock, protection on every trade, odds visible at setup.
  *
  * Claims discipline, agreed with vladt83 on 2026-10-26:
- * - The 80 to 93 figure is the probability shown at setup, never a record of
- *   results. It is labelled as such everywhere it appears.
+ * - No win rates, no probability figures, no percentages of any kind.
  * - No rate of return, no per-trade dollar figures, no compounding projection.
  * - "Defined risk", never "safe".
- * - $15,000 is the capital the method calls for, not an entry requirement.
+ * - Capital is stated as a qualifier without a figure: the buyer already has it.
  */
 
 import Navigation from '@/components/Navigation';
@@ -36,8 +35,8 @@ const steps = [
     body: 'Every trade has protection built into it. One piece pays you, the other caps what can go wrong, so your worst case is known before you click. It is also why this needs less capital than the wheel, which ties up a lot of money and leaves you stuck in a crash.',
   },
   {
-    title: 'The odds are on the screen before you commit',
-    body: 'Trades are set up with roughly 80 to 93 percent odds in your favour at the moment you place them. You see that number before you click. The farther away your line, the better the odds and the smaller the paycheck, and that trade-off is a choice you make deliberately.',
+    title: 'You decide where the odds sit',
+    body: 'The farther below the stock you draw your line, the safer the position and the smaller the premium. That trade-off is a choice you make deliberately, before you commit, and the discipline is refusing the trades that pay too well.',
   },
   {
     title: 'Time works for you',
@@ -125,11 +124,6 @@ export default function PaycheckCollector() {
               </li>
             ))}
           </ol>
-          <p className="mt-8 text-[0.875rem] text-[#767269] leading-[1.6] max-w-[72ch]">
-            The 80 to 93 percent figure is the probability of profit shown by the broker at the
-            moment a trade is set up. It describes how the trade is structured, not results any
-            student achieved, and it is not a prediction of your outcome.
-          </p>
         </div>
       </section>
 
@@ -169,13 +163,12 @@ export default function PaycheckCollector() {
               <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-8">
                 <div className="border-t border-[#e3ded4] pt-5">
                   <dt className="text-[1.0625rem] font-semibold text-[#1a1a1a]">
-                    About <span className="tf-nums">$15,000</span> in trading capital
+                    Capital you have already built
                   </dt>
                   <dd className="mt-2 text-[#55534e] text-[1rem] leading-[1.65]">
-                    That is what the method calls for to run properly, with the protection in
-                    place and the risk controlled. It is your money in your own brokerage
-                    account, separate from the cost of the programme. You can start learning
-                    with less.
+                    The method is built for people whose capital already exists. It is your
+                    money, in your own brokerage account, separate from the cost of the program,
+                    and it stays under your control throughout.
                   </dd>
                 </div>
                 <div className="border-t border-[#e3ded4] pt-5">
@@ -183,8 +176,8 @@ export default function PaycheckCollector() {
                     One to three trades a month
                   </dt>
                   <dd className="mt-2 text-[#55534e] text-[1rem] leading-[1.65]">
-                    Sessions of about thirty minutes. This is swing trading, not day trading,
-                    and not the same-day options that blow accounts up.
+                    Sessions of about thirty minutes. This is not day trading, and not the
+                    same-day options that blow accounts up.
                   </dd>
                 </div>
                 <div className="border-t border-[#e3ded4] pt-5">
@@ -236,49 +229,6 @@ export default function PaycheckCollector() {
                 It is also not a rate of return. We do not publish one, and you should be wary
                 of anyone who does.
               </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Where it sits */}
-      <section className="bg-[#faf9f6] py-16 sm:py-20 border-t border-[#e3ded4]">
-        <div className="max-w-[1320px] mx-auto px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
-            <div className="lg:col-span-5">
-              <h2 className="tf-display text-[#1a1a1a] text-[2.5rem] sm:text-[3.25rem] lg:text-[4rem] max-w-[14ch]">
-                One of three, not one trick
-              </h2>
-            </div>
-            <div className="lg:col-span-7">
-              <p className="text-[#3a3834] text-[1.0625rem] sm:text-[1.125rem] leading-[1.7] max-w-[60ch]">
-                You do not get to choose which market shows up, so you learn three strategies and
-                when each one applies.
-              </p>
-              <dl className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-x-10 gap-y-8">
-                <div className="border-t border-[#1a1a1a] pt-5">
-                  <dt className="text-[1.0625rem] font-semibold text-[#1a1a1a]">Bounce Profit</dt>
-                  <dd className="mt-2 text-[#55534e] text-[1rem] leading-[1.6]">
-                    For a market that is trending.
-                  </dd>
-                </div>
-                <div className="border-t border-[#1a1a1a] pt-5">
-                  <dt className="text-[1.0625rem] font-semibold text-[#1a1a1a]">
-                    The Paycheck Collector
-                  </dt>
-                  <dd className="mt-2 text-[#55534e] text-[1rem] leading-[1.6]">
-                    For a market going sideways and nowhere.
-                  </dd>
-                </div>
-                <div className="border-t border-[#1a1a1a] pt-5">
-                  <dt className="text-[1.0625rem] font-semibold text-[#1a1a1a]">
-                    Ready, Set, Explode
-                  </dt>
-                  <dd className="mt-2 text-[#55534e] text-[1rem] leading-[1.6]">
-                    For when things get volatile.
-                  </dd>
-                </div>
-              </dl>
             </div>
           </div>
         </div>
