@@ -9,21 +9,24 @@ import { TrustpilotLogo, TrustpilotStars } from './TrustpilotAssets';
 
 const VLAD_FAMILY = '/images/vlad-family.jpg';
 
+/* Two reviews, both five stars, both checked word for word against Trustpilot
+ * on 2026-11-09.
+ * Pranjul Srivastava: 5 stars, 12 Apr 2024. Trimmed at the end and otherwise
+ *   verbatim, including his own spelling of Vlad's name.
+ * Ronnie Peaches: 5 stars, 3 Jun 2026. A contiguous excerpt from the second
+ *   sentence on; the opening line about teaching the basics was left out as it
+ *   speaks to a beginner.
+ * Removed: a quote attributed to "Jonas", which appears on none of the six
+ *   pages of the listing, and a Bobby Colucci quote that is real but four stars.
+ * Never publish a quote here that has not been read at source. */
 const trustpilotReviews = [
   {
-    name: 'Bobby Colucci',
-    title: 'I Have Been Learning a Lot',
-    text: 'I have been learning a lot, and I have come a long way since I started my classes. Having access to a live person or persons has been incredibly encouraging. Elliot, Leo, and Erin have been great. Vlad is very smart, so pay attention.',
-  },
-  {
     name: 'Pranjul Srivastava',
-    title: 'Exceeded Expectations!',
-    text: 'I\'ve been trading options for quite some time and thought I knew a lot. Vlad and Elliot\'s knowledge and mentorship far exceeded anything I had imagined. Their strategies, especially the paycheck collector, is a game changer. I\'m less stressed about finances than I have ever been in my life.',
+    text: "I've been trading options for quite some time now and thought I knew a lot regarding the stock market. So when I joined Trader Foundation, I didn't know what to expect...in short Vald and Elliot's knowledge and mentorship far exceeded anything I had imagined. Their strategies, especially the paycheck collector is a game changer.",
   },
   {
-    name: 'Jonas',
-    title: 'Well-Structured Training with Excellent Coaching Support',
-    text: 'The learning flow is clear and logical, which makes it much easier to understand concepts that are usually complex and intimidating for beginners. The company offers daily live sessions with coaches where stocks are reviewed in real time. Students are also encouraged to schedule one-on-one sessions with coaches for personalized guidance.',
+    name: 'Ronnie Peaches',
+    text: 'The staff is there every step of the way whenever I need help. The experience is second to none, unlike several trading programs that didn\'t fulfill their promise. I would recommend this fine program if you are serious about trading.',
   },
 ];
 
@@ -93,16 +96,15 @@ export default function MeetVladSection() {
             </span>
           </div>
 
-          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-10">
+          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-x-14 gap-y-10">
             {trustpilotReviews.map((review) => (
-              <figure key={review.name} className="border-t border-[#ece8e0] pt-6">
-                <figcaption className="text-[0.9375rem] font-semibold text-[#1a1a1a]">
-                  {review.title}
-                </figcaption>
-                <blockquote className="mt-3 text-[#55534e] text-[0.9375rem] leading-[1.65]">
+              <figure key={review.name} className="border-t border-[#1a1a1a] pt-6">
+                <blockquote className="text-[#3a3834] text-[1.0625rem] leading-[1.7]">
                   {review.text}
                 </blockquote>
-                <p className="mt-4 text-[0.8125rem] text-[#767269]">{review.name}</p>
+                <figcaption className="mt-4 text-[0.875rem] text-[#767269]">
+                  {review.name}, on Trustpilot
+                </figcaption>
               </figure>
             ))}
           </div>
@@ -120,7 +122,7 @@ export default function MeetVladSection() {
               rel="noopener noreferrer"
               className="text-[0.9375rem] text-[#55534e] underline decoration-[#c9c4b8] hover:text-[#1a1a1a] hover:decoration-[#1a1a1a]"
             >
-              Verify our 111 reviews on Trustpilot
+              Read all of our reviews on Trustpilot
             </a>
           </div>
         </div>
