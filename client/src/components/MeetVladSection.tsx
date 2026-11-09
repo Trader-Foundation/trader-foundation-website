@@ -9,24 +9,30 @@ import { TrustpilotLogo, TrustpilotStars } from './TrustpilotAssets';
 
 const VLAD_FAMILY = '/images/vlad-family.jpg';
 
-/* Two reviews, both five stars, both checked word for word against Trustpilot
- * on 2026-11-09.
- * Pranjul Srivastava: 5 stars, 12 Apr 2024. Trimmed at the end and otherwise
- *   verbatim, including his own spelling of Vlad's name.
- * Ronnie Peaches: 5 stars, 3 Jun 2026. A contiguous excerpt from the second
- *   sentence on; the opening line about teaching the basics was left out as it
- *   speaks to a beginner.
- * Removed: a quote attributed to "Jonas", which appears on none of the six
- *   pages of the listing, and a Bobby Colucci quote that is real but four stars.
- * Never publish a quote here that has not been read at source. */
+/* Three reviews, all five stars, all read at source on Trustpilot 2026-11-09
+ * and quoted exactly as written, typos and all. Trimmed only at sentence
+ * boundaries, never reworded, never retitled.
+ * Pranjul Srivastava: 12 Apr 2024. Trimmed after "game changer".
+ * Patrizio Angeletti: 16 Oct 2026. First paragraph; the postscript about
+ *   following the course in English is left out as it is not about the method.
+ * Bobby Colucci: verbatim and complete. He has two Trader Foundation reviews;
+ *   vladt83 confirms this one now carries five stars.
+ * Removed earlier: a quote attributed to "Jonas", which appears on none of the
+ *   six pages of the listing. Never publish a quote that has not been read at
+ *   source. Ronnie Peaches ("unlike several trading programs that didn't
+ *   fulfill their promise", 5 stars, 3 Jun 2026) is verified and available. */
 const trustpilotReviews = [
   {
     name: 'Pranjul Srivastava',
     text: "I've been trading options for quite some time now and thought I knew a lot regarding the stock market. So when I joined Trader Foundation, I didn't know what to expect...in short Vald and Elliot's knowledge and mentorship far exceeded anything I had imagined. Their strategies, especially the paycheck collector is a game changer.",
   },
   {
-    name: 'Ronnie Peaches',
-    text: 'The staff is there every step of the way whenever I need help. The experience is second to none, unlike several trading programs that didn\'t fulfill their promise. I would recommend this fine program if you are serious about trading.',
+    name: 'Patrizio Angeletti',
+    text: "I found in Trade Foundation the trading school that I was looking for years. They are 100% legit which, nowadays, is the hardest thing to find in a world where we are literally bombed with information of any kind. Vlad, Elliot, Erin and Leo are just sensational teachers. I strongly recommend it to anybody who's tired of wondering around and that wants to change their financial status!",
+  },
+  {
+    name: 'Bobby Colucci',
+    text: 'I have been learning a lot, and I have come a long way since I started my classes. Having access to a live person or persons has been incredibly encouraging. Elliot, Leo, and Erin have been great. Vlad is very smart, so pay attention.',
   },
 ];
 
@@ -96,10 +102,10 @@ export default function MeetVladSection() {
             </span>
           </div>
 
-          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-x-14 gap-y-10">
+          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-10">
             {trustpilotReviews.map((review) => (
               <figure key={review.name} className="border-t border-[#1a1a1a] pt-6">
-                <blockquote className="text-[#3a3834] text-[1.0625rem] leading-[1.7]">
+                <blockquote className="text-[#3a3834] text-[1rem] leading-[1.7]">
                   {review.text}
                 </blockquote>
                 <figcaption className="mt-4 text-[0.875rem] text-[#767269]">
