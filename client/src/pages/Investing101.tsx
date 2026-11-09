@@ -1,65 +1,53 @@
+import React from 'react';
+import ChapterLayout, { type Chapter } from '@/components/ChapterLayout';
+
 /*
- * Investing 101 Page - Trader Foundation
- * Chapter-based navigation: TOC on left, selected chapter content on right
- * Design: GOAT Academy style - clean, editorial, three-column layout
+ * Investing 101, Trader Foundation
+ *
+ * Register, per vladt83's brief of 2026-11-09: the reader is a successful
+ * professional in their 40s to 60s with capital they earned and want to manage
+ * themselves, not a beginner with nothing saved. No dollar figures, no
+ * percentages, no win rates, no income claims. Nothing is called easy, nothing
+ * is called free, and no sentence promises a result the market decides.
  */
 
-import React, { useState } from 'react';
-import Navigation from '@/components/Navigation';
-import SEO from '@/components/SEO';
-import Footer from '@/components/Footer';
-
-import { ArrowRight, ArrowLeft, ChevronRight, Landmark, Layers, LineChart, PiggyBank, Compass, GraduationCap } from 'lucide-react';
-
-const SIDEBAR_IMG =
-  '/images/vlad-teaching-card.jpg';
-
-/* ── Chapter data ── */
-const CHAPTERS = [
-  {
-    id: 'why-invest',
-    label: 'Why Investing Matters for Your Future',
-    icon: Landmark,
-  },
-  {
-    id: 'how-money-grows',
-    label: 'How Your Money Actually Grows',
-    icon: PiggyBank,
-  },
-  {
-    id: 'inflation-trap',
-    label: 'The Inflation Trap Most People Ignore',
-    icon: Layers,
-  },
-  {
-    id: 'asset-classes',
-    label: 'Breaking Down the Major Asset Classes',
-    icon: LineChart,
-  },
-  {
-    id: 'your-roadmap',
-    label: 'Your Personal Investing Roadmap',
-    icon: Compass,
-  },
-  {
-    id: 'common-mistakes',
-    label: 'Mistakes That Cost New Investors Thousands',
-    icon: GraduationCap,
-  },
+/* Chapter data. Labels double as the contents list and each chapter's h2. */
+const CHAPTERS: Chapter[] = [
+  { id: 'why-invest', label: 'Why This Matters Once You Have Capital' },
+  { id: 'how-money-grows', label: 'How Capital Actually Compounds' },
+  { id: 'inflation-trap', label: 'What Inflation Quietly Takes' },
+  { id: 'asset-classes', label: 'The Major Asset Classes, Plainly' },
+  { id: 'your-roadmap', label: 'Building a Process You Will Follow' },
+  { id: 'common-mistakes', label: 'The Mistakes We See Most Often' },
 ];
 
 /* ── Chapter Content Components ── */
 function ChapterWhyInvest() {
   return (
     <>
-      <p className="text-[1.05rem] leading-relaxed text-[#444] mb-4">
-        Most people spend decades trading their time for a paycheck. The money comes in, covers expenses, and whatever is left sits in a checking account earning next to nothing. That cycle works until it does not, a job loss, an unexpected expense, or retirement arrives and the safety net is thinner than expected.
+      <p className="text-[1.0625rem] leading-[1.7] text-[#3a3834] max-w-[68ch] mb-5">
+        You have already done the hard part. You built a career, you earned the money, and you
+        have capital that should be doing something other than sitting in a checking account.
+        The question is no longer whether to invest. It is who decides.
       </p>
-      <p className="text-[1.05rem] leading-relaxed text-[#444] mb-4">
-        Investing breaks that cycle. When you put capital into assets that appreciate, whether stocks, index funds, or options, your money starts working on your behalf, even while you sleep. The goal is not to get rich overnight. The goal is to build a financial foundation that gives you choices: the choice to retire when you want, to weather emergencies without panic, or to leave something meaningful for the next generation.
+      <p className="text-[1.0625rem] leading-[1.7] text-[#3a3834] max-w-[68ch] mb-5">
+        For most people the answer is somebody else. A fund, an advisor, a model portfolio
+        picked years ago and never revisited since. That is a legitimate choice. But it means
+        the person with the most at stake is the one furthest from the decision, and closing
+        that gap is what this page is about.
       </p>
-      <p className="text-[1.05rem] leading-relaxed text-[#444]">
-        At Trader Foundation, we teach a specific approach: <strong>swing trading combined with defined-risk options strategies</strong>. It is designed for people with full-time jobs, families, and limited screen time. You do not need to quit your day job or stare at charts for eight hours. You need a system, discipline, and the willingness to learn.
+      <p className="text-[1.0625rem] leading-[1.7] text-[#3a3834] max-w-[68ch]">
+        Trader Foundation teaches one strategy, start to finish:{' '}
+        <a
+          href="/paycheck-collector"
+          className="font-semibold text-[#1a1a1a] underline decoration-[#c9c4b8] hover:decoration-[#1a1a1a]"
+        >
+          the Paycheck Collector
+        </a>
+        . You sell options, you are paid the premium when you place the trade, and every
+        position has protection built into it so your worst case is known before you click. It
+        is built to be run around a career, not instead of one. Every student gets their own
+        coach.
       </p>
     </>
   );
@@ -68,43 +56,70 @@ function ChapterWhyInvest() {
 function ChapterHowMoneyGrows() {
   return (
     <>
-      <p className="text-[1.05rem] leading-relaxed text-[#444] mb-4">
-        There is a reason experienced investors talk about "letting your money work for you." When you invest, your returns can generate their own returns, a process called compounding. It is not magic, but over a long enough timeline, the results can feel like it.
+      <p className="text-[1.0625rem] leading-[1.7] text-[#3a3834] max-w-[68ch] mb-5">
+        Compounding is the one piece of this that needs no persuasion. When returns are left in
+        place, they generate returns of their own. It is arithmetic rather than a strategy, and
+        the variable that matters most is the one you cannot buy back: time already spent.
       </p>
-      <p className="text-[1.05rem] leading-relaxed text-[#444] mb-4">
-        Think of it this way: you plant a tree. In year one, it produces a handful of seeds. You plant those seeds too. By year ten, you do not have one tree, you have a small forest. That is compounding in action. The earlier you start, the larger that forest becomes.
+      <p className="text-[1.0625rem] leading-[1.7] text-[#3a3834] max-w-[68ch] mb-5">
+        What follows is how that arithmetic tends to feel from the inside, not a projection. The
+        early years look like nothing is happening, because at that stage what you add matters
+        more than what the account earns. That is the stretch where most people stop.
       </p>
 
-      <div className="bg-[#111] rounded-lg p-8 my-8">
-        <h3 className="text-lg font-bold text-white mb-6" style={{ fontFamily: "'Sen', sans-serif" }}>
-          The Compounding Timeline:
+      <div className="bg-[#141414] p-8 my-10">
+        <h3 className="text-[1.125rem] font-semibold text-white tracking-[-0.015em] mb-2">
+          How the stretches tend to feel
         </h3>
-        <div className="space-y-4">
+        <p className="text-white/50 text-[0.9375rem] mb-7 max-w-[56ch]">
+          A description of the arithmetic, not a forecast. What any particular account does
+          depends on the market and on what you put into it.
+        </p>
+        <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-0">
           {[
-            { year: 'Year 1–5', title: 'The Foundation Phase', desc: 'Growth feels slow. Your contributions matter more than your returns. This is where most people give up, and where the disciplined separate themselves.' },
-            { year: 'Year 5–15', title: 'The Momentum Phase', desc: 'Returns start compounding noticeably. Your portfolio begins growing faster than your contributions alone could achieve.' },
-            { year: 'Year 15–25', title: 'The Acceleration Phase', desc: 'This is where patience pays off. Your gains are now generating significant gains of their own. The snowball is rolling.' },
-            { year: 'Year 25+', title: 'The Harvest Phase', desc: 'Your portfolio can potentially sustain your lifestyle. The choices you made decades ago are now funding your freedom.' },
+            {
+              year: 'The first stretch',
+              title: 'Contributions do the work',
+              desc: 'Growth feels slow because it is. What you put in matters more than what the account earns. Discipline is the only thing separating people here.',
+            },
+            {
+              year: 'The middle stretch',
+              title: 'Returns start to show',
+              desc: 'The account begins moving on its own rather than only on what you add. Nothing dramatic happens; the arithmetic simply becomes visible.',
+            },
+            {
+              year: 'The long stretch',
+              title: 'Gains compound on gains',
+              desc: 'Earlier returns are now generating returns themselves. This is the part people picture at the start, and the part that requires having stayed.',
+            },
+            {
+              year: 'Later',
+              title: 'Capital you can draw on',
+              desc: 'Decisions made decades earlier are what give you options now. Which options, and how many, is not something anyone can promise you in advance.',
+            },
           ].map((item) => (
-            <div key={item.year} className="flex items-start gap-4 p-4 rounded-md bg-white/[0.04] border border-white/[0.06]">
-              <span className="text-[#c7ab77] font-bold text-[0.78rem] shrink-0 mt-0.5 w-16">{item.year}</span>
-              <div>
-                <span className="font-semibold text-white text-[0.95rem]">{item.title}</span>
-                <p className="text-white/60 text-[0.88rem] mt-1 mb-0">{item.desc}</p>
-              </div>
+            <div key={item.year} className="border-t border-white/15 py-5">
+              <dt className="text-white/50 text-[0.8125rem] uppercase tracking-[0.08em]">
+                {item.year}
+              </dt>
+              <p className="font-semibold text-white text-[1rem] mt-2 mb-0">{item.title}</p>
+              <dd className="text-white/60 text-[0.9375rem] mt-1.5 leading-[1.6]">{item.desc}</dd>
             </div>
           ))}
-        </div>
+        </dl>
       </div>
 
-      <div className="bg-[#c7ab77]/[0.08] border-l-4 border-[#c7ab77] p-6 rounded-r-lg my-8">
-        <p className="text-[1rem] leading-relaxed text-[#333] m-0">
-          <strong>Run the numbers yourself:</strong> Plug in your own starting amount, monthly contribution, and expected return rate to see exactly how your wealth could grow over time.{' '}
-          <a href="/calculator" className="text-[#c7ab77] font-semibold hover:underline">
-            Open the Compound Interest Calculator →
-          </a>
-        </p>
-      </div>
+      <p className="text-[1.0625rem] leading-[1.7] text-[#3a3834] max-w-[68ch]">
+        <strong>Run it with your own numbers.</strong> Put in your own starting capital,
+        contribution and assumed rate, and see what the arithmetic does with them. The
+        assumptions are yours, and so is what you conclude from them.{' '}
+        <a
+          href="/calculator"
+          className="font-semibold text-[#1a1a1a] underline decoration-[#c9c4b8] hover:decoration-[#1a1a1a]"
+        >
+          Open the compound interest calculator
+        </a>
+      </p>
     </>
   );
 }
@@ -112,29 +127,48 @@ function ChapterHowMoneyGrows() {
 function ChapterInflationTrap() {
   return (
     <>
-      <p className="text-[1.05rem] leading-relaxed text-[#444] mb-4">
-        Here is an uncomfortable truth: if your money is sitting in a standard savings account, you are losing purchasing power every single year. Inflation, the gradual increase in the cost of goods and services, quietly eats away at the value of every dollar you hold.
+      <p className="text-[1.0625rem] leading-[1.7] text-[#3a3834] max-w-[68ch] mb-5">
+        Capital held in cash loses purchasing power. Not dramatically, and not in a way that
+        shows up on a statement, which is exactly why it goes unnoticed. The balance stays the
+        same while what it buys shrinks.
       </p>
-      <p className="text-[1.05rem] leading-relaxed text-[#444] mb-4">
-        A cup of coffee that cost $2.00 a decade ago might cost $3.50 today. Your salary may have increased, but has it kept up? For most people, the answer is no. The only reliable way to stay ahead of inflation is to put your capital into assets that grow faster than prices rise.
+      <p className="text-[1.0625rem] leading-[1.7] text-[#3a3834] max-w-[68ch] mb-5">
+        You have watched this happen across a working lifetime. The things you bought early in
+        your career cost more now. Your income probably kept pace. The cash you set aside did
+        not, and the gap between those two is quiet, steady and permanent.
       </p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-8">
-        {[
-          { label: 'Cash in Savings', rate: '0.01–0.5%', note: 'Falling behind every year', color: 'text-red-500' },
-          { label: 'Government Bonds', rate: '3–5%', note: 'Roughly keeps pace', color: 'text-yellow-600' },
-          { label: 'Equity Markets', rate: '7–10%', note: 'Historically outperforms', color: 'text-emerald-600' },
-        ].map((item) => (
-          <div key={item.label} className="bg-white rounded-lg border border-[#e8e4dc] p-5 text-center shadow-sm">
-            <p className="text-[0.78rem] uppercase tracking-wider text-[#888] font-medium mb-1">{item.label}</p>
-            <p className="text-2xl font-bold text-[#111]" style={{ fontFamily: "'Sen', sans-serif" }}>{item.rate}</p>
-            <p className={`text-[0.82rem] font-semibold ${item.color} mt-1`}>{item.note}</p>
-          </div>
-        ))}
+      <div className="border-t-2 border-[#1a1a1a] pt-6 my-8">
+        <dl className="grid grid-cols-1 sm:grid-cols-3 gap-x-8 gap-y-0">
+          {[
+            {
+              label: 'Cash and savings',
+              note: 'Nominally safe. Loses purchasing power whenever prices rise faster than the rate it pays, which is most of the time.',
+            },
+            {
+              label: 'Government bonds',
+              note: 'Lower risk and lower return than equities. Usually discussed as the thing that roughly keeps pace with prices.',
+            },
+            {
+              label: 'Equities',
+              note: 'Carry a real risk of loss, and historically the asset class that has outpaced prices over long periods.',
+            },
+          ].map((item) => (
+            <div key={item.label} className="border-t border-[#ece8e0] py-5 sm:border-t-0 sm:pt-0">
+              <dt className="text-[1rem] font-semibold text-[#1a1a1a] tracking-[-0.01em]">
+                {item.label}
+              </dt>
+              <dd className="text-[#55534e] text-[0.9375rem] leading-[1.6] mt-2">{item.note}</dd>
+            </div>
+          ))}
+        </dl>
       </div>
 
-      <p className="text-[1.05rem] leading-relaxed text-[#444]">
-        This does not mean you should throw every dollar into the stock market tomorrow. It means that <strong>doing nothing with your money is itself a decision</strong>, and it is one that costs you more each year. A thoughtful, diversified investment approach is how you protect what you have earned and give it room to grow.
+      <p className="text-[1.0625rem] leading-[1.7] text-[#3a3834] max-w-[68ch]">
+        None of that is an argument for moving everything into the market tomorrow. It is an
+        argument that <strong>leaving capital where it is, is itself a decision</strong>, and
+        one worth making deliberately rather than by default. How any asset class has behaved
+        before is not a guide to what it will do next.
       </p>
     </>
   );
@@ -143,30 +177,64 @@ function ChapterInflationTrap() {
 function ChapterAssetClasses() {
   return (
     <>
-      <p className="text-[1.05rem] leading-relaxed text-[#444] mb-6">
-        Before you allocate a single dollar, it helps to understand what you are actually buying. Here are the primary categories most investors work with:
+      <p className="text-[1.0625rem] leading-[1.7] text-[#3a3834] max-w-[68ch] mb-6">
+        Before you put capital anywhere it is worth being precise about what you are actually
+        buying. These are the categories most of the decision lives in.
       </p>
 
-      <h3 className="text-xl font-bold text-[#111] mt-8 mb-3" style={{ fontFamily: "'Sen', sans-serif" }}>Individual Stocks</h3>
-      <p className="text-[1.05rem] leading-relaxed text-[#444] mb-4">
-        When you buy a share of stock, you own a small piece of that company. If the company grows and becomes more profitable, the value of your share typically increases. Stocks carry more risk than some other assets because individual companies can underperform, but they also offer the highest potential for long-term growth. At Trader Foundation, our swing trading approach focuses on identifying high-probability stock setups using technical analysis, not guesswork.
+      <h3 className="text-[1.25rem] font-semibold text-[#1a1a1a] tracking-[-0.015em] mt-12 mb-3 pt-5 border-t border-[#e3ded4]">
+        Individual stocks
+      </h3>
+      <p className="text-[1.0625rem] leading-[1.7] text-[#3a3834] max-w-[68ch] mb-5">
+        A share is a piece of a business. If the business becomes more valuable, so does the
+        share; if it struggles, the share follows it down. Single companies carry more risk than
+        a basket of them, which is the trade you make in exchange for the chance of more. What
+        we teach uses stocks as the thing an option is written against, chosen on technical
+        criteria rather than on a view about the company.
       </p>
 
-      <h3 className="text-xl font-bold text-[#111] mt-8 mb-3" style={{ fontFamily: "'Sen', sans-serif" }}>Index Funds & ETFs</h3>
-      <p className="text-[1.05rem] leading-relaxed text-[#444] mb-4">
-        Rather than picking individual companies, index funds let you invest in a broad basket of stocks at once. An S&P 500 index fund, for example, gives you exposure to 500 of the largest U.S. companies in a single purchase. ETFs (Exchange-Traded Funds) work similarly but trade throughout the day like individual stocks. Both are excellent for building a diversified foundation without needing to research hundreds of companies.{' '}
-        <a href="/stocks-and-index" className="text-[#c7ab77] font-semibold hover:underline">Dive deeper into Stocks & Index strategies →</a>
+      <h3 className="text-[1.25rem] font-semibold text-[#1a1a1a] tracking-[-0.015em] mt-12 mb-3 pt-5 border-t border-[#e3ded4]">
+        Index funds and ETFs
+      </h3>
+      <p className="text-[1.0625rem] leading-[1.7] text-[#3a3834] max-w-[68ch] mb-5">
+        Instead of choosing companies, you buy the whole basket. An S&amp;P 500 fund gives you a
+        position in 500 of the largest US companies in one purchase. ETFs work much the same way
+        but trade through the day like a share. Both are ordinary ways to hold a long-term core
+        without researching hundreds of businesses.{' '}
+        <a
+          href="/stocks-and-index"
+          className="font-semibold text-[#1a1a1a] underline decoration-[#c9c4b8] hover:decoration-[#1a1a1a]"
+        >
+          More on stocks and index funds
+        </a>
       </p>
 
-      <h3 className="text-xl font-bold text-[#111] mt-8 mb-3" style={{ fontFamily: "'Sen', sans-serif" }}>Options Contracts</h3>
-      <p className="text-[1.05rem] leading-relaxed text-[#444] mb-4">
-        Options give you the right to buy or sell a stock at a specific price within a set timeframe. They can be used conservatively, to protect your portfolio or generate income, or more aggressively for leveraged bets. Our program emphasizes <strong>defined-risk options strategies</strong>, where the most a trade can cost you is known before you place it. If you are curious about how options fit into a disciplined trading plan, we cover that extensively in our curriculum.{' '}
-        <a href="/options-trading" className="text-[#c7ab77] font-semibold hover:underline">Read our Options Trading overview →</a>
+      <h3 className="text-[1.25rem] font-semibold text-[#1a1a1a] tracking-[-0.015em] mt-12 mb-3 pt-5 border-t border-[#e3ded4]">
+        Options
+      </h3>
+      <p className="text-[1.0625rem] leading-[1.7] text-[#3a3834] max-w-[68ch] mb-5">
+        An option is a contract giving the right to buy or sell at a set price before a set
+        date. Used one way it is a leveraged bet. Used another it is a way to be paid for taking
+        on a defined, capped obligation. What we teach is the second kind,{' '}
+        <strong>defined-risk option selling</strong>, where the most a position can cost you is
+        known before you place it. Defined risk is not the same thing as safe, and these pages
+        say so wherever it matters.{' '}
+        <a
+          href="/options-trading"
+          className="font-semibold text-[#1a1a1a] underline decoration-[#c9c4b8] hover:decoration-[#1a1a1a]"
+        >
+          How options actually work
+        </a>
       </p>
 
-      <h3 className="text-xl font-bold text-[#111] mt-8 mb-3" style={{ fontFamily: "'Sen', sans-serif" }}>Bonds & Fixed Income</h3>
-      <p className="text-[1.05rem] leading-relaxed text-[#444]">
-        Bonds are essentially loans you make to a government or corporation in exchange for regular interest payments. They are generally lower risk and lower return than stocks, making them useful for balancing a portfolio, especially as you get closer to retirement or want to reduce volatility. They are not the focus of what we teach, but understanding where they fit helps you see the full picture.
+      <h3 className="text-[1.25rem] font-semibold text-[#1a1a1a] tracking-[-0.015em] mt-12 mb-3 pt-5 border-t border-[#e3ded4]">
+        Bonds and fixed income
+      </h3>
+      <p className="text-[1.0625rem] leading-[1.7] text-[#3a3834] max-w-[68ch]">
+        A bond is a loan to a government or a company in exchange for interest. Lower risk and
+        lower return than equities, which makes it the usual counterweight in a portfolio as a
+        timeline shortens. It is not what we teach, but knowing where it sits is part of seeing
+        the whole picture.
       </p>
     </>
   );
@@ -175,30 +243,53 @@ function ChapterAssetClasses() {
 function ChapterRoadmap() {
   return (
     <>
-      <p className="text-[1.05rem] leading-relaxed text-[#444] mb-6">
-        Knowing what to invest in is only half the equation. The other half is building a process you can actually follow. Here is a practical framework:
+      <p className="text-[1.0625rem] leading-[1.7] text-[#3a3834] max-w-[68ch] mb-6">
+        Knowing what to buy is the smaller half. The larger half is a process you will still be
+        following in a year, once it has stopped being interesting.
       </p>
 
-      <div className="bg-white rounded-lg border border-[#e8e4dc] p-8 my-4 shadow-sm">
-        <div className="space-y-5">
+      <div className="border-t-2 border-[#1a1a1a] pt-2 my-8">
+        <ol>
           {[
-            { title: 'Get Clear on Your Timeline', desc: 'Are you investing for a goal five years away or thirty? Short timelines call for more conservative allocations. Longer timelines give you room to ride out market dips and benefit from growth.' },
-            { title: 'Open the Right Account', desc: 'A 401(k) or IRA offers tax advantages for retirement savings. A standard brokerage account gives you flexibility to invest and withdraw on your own schedule. Many people use both.' },
-            { title: 'Automate Your Contributions', desc: 'Set up recurring transfers so investing happens automatically. Removing the decision from each paycheck eliminates the temptation to skip months or time the market.' },
-            { title: 'Learn Before You Leverage', desc: 'Paper trade or start with small positions before committing significant capital. At Trader Foundation, every student practices with our Time Machine review process before risking real money.' },
-            { title: 'Review, Do Not React', desc: 'Check your portfolio periodically, monthly or quarterly, but resist the urge to make changes based on daily headlines. Emotional decisions are the number one wealth destroyer for individual investors.' },
+            {
+              title: 'Be honest about the timeline',
+              desc: 'Capital you need in five years and capital you need in thirty are not the same capital, and should not be treated as though they are.',
+            },
+            {
+              title: 'Put it in the right account',
+              desc: 'A 401(k) or IRA carries tax advantages for retirement. A brokerage account gives you control over when you act and when you take money out. Most people in this position use both.',
+            },
+            {
+              title: 'Make the contributions automatic',
+              desc: 'Recurring transfers remove the monthly decision, and with it the temptation to wait for a better moment. There is rarely an obviously better moment.',
+            },
+            {
+              title: 'Practise before you commit capital',
+              desc: 'Paper trade the full process first. Every student here places paper trades and reviews them with a coach before any real money is at risk.',
+            },
+            {
+              title: 'Review on a schedule, not on the news',
+              desc: 'Look at it monthly or quarterly. Reacting to headlines is the most expensive habit an individual investor can have, and the hardest one to notice in yourself.',
+            },
           ].map((item, i) => (
-            <div key={i} className="flex items-start gap-4">
-              <span className="w-8 h-8 rounded-full bg-[#111] flex items-center justify-center shrink-0 mt-0.5">
-                <span className="text-[#c7ab77] text-xs font-bold">{i + 1}</span>
+            <li
+              key={item.title}
+              className="grid grid-cols-[2rem_1fr] gap-x-4 border-t border-[#ece8e0] py-5"
+            >
+              <span className="tf-nums text-[0.9375rem] text-[#767269] pt-0.5" aria-hidden="true">
+                {String(i + 1).padStart(2, '0')}
               </span>
               <div>
-                <span className="font-semibold text-[#111] text-[0.95rem]">{item.title}</span>
-                <p className="text-[#666] text-[0.9rem] mt-1 mb-0 leading-relaxed">{item.desc}</p>
+                <h3 className="font-semibold text-[#1a1a1a] text-[1.0625rem] tracking-[-0.01em]">
+                  {item.title}
+                </h3>
+                <p className="text-[#55534e] text-[0.9375rem] mt-1.5 mb-0 leading-[1.6] max-w-[58ch]">
+                  {item.desc}
+                </p>
               </div>
-            </div>
+            </li>
           ))}
-        </div>
+        </ol>
       </div>
     </>
   );
@@ -207,33 +298,56 @@ function ChapterRoadmap() {
 function ChapterMistakes() {
   return (
     <>
-      <p className="text-[1.05rem] leading-relaxed text-[#444] mb-6">
-        We have coached over 1,200 students, and we see the same patterns repeat. Avoiding these pitfalls will put you ahead of most beginners before you even place your first trade:
+      <p className="text-[1.0625rem] leading-[1.7] text-[#3a3834] max-w-[68ch] mb-6">
+        We have coached over 1,200 students. The same handful of mistakes comes up again and
+        again, and none of them are about intelligence.
       </p>
 
-      <div className="space-y-4 mb-8">
+      <div className="mb-8">
         {[
-          { mistake: 'Chasing hot tips from social media', fix: 'By the time a stock is trending on Twitter or TikTok, the move has usually already happened. A disciplined system based on technical analysis beats hype every time.' },
-          { mistake: 'Investing money you cannot afford to lose', fix: 'Build an emergency fund first, three to six months of expenses in cash. Only invest capital you will not need in the near term.' },
-          { mistake: 'Trying to time the market perfectly', fix: 'Nobody consistently buys at the bottom and sells at the top. Consistent contributions over time outperform market timing in virtually every study.' },
-          { mistake: 'Ignoring risk management', fix: 'Every trade should have a plan for what happens if it goes wrong. Position sizing, stop losses, and defined-risk options strategies are not optional, they are essential.' },
-          { mistake: 'Going it alone without a mentor', fix: 'Self-taught traders often develop bad habits that take years to unlearn. A structured program with 1-on-1 coaching accelerates your learning curve dramatically.' },
-        ].map((item, i) => (
-          <div key={i} className="bg-white rounded-lg border border-[#e8e4dc] p-6 shadow-sm">
-            <p className="font-semibold text-[#111] text-[0.95rem] mb-2 flex items-start gap-2">
-              <span className="text-red-400 shrink-0">✕</span>
+          {
+            mistake: 'Acting on something you read on social media',
+            fix: 'By the time a ticker is trending, the move it is trending for has usually already happened. A rule you wrote down beforehand is worth more than a reason you found afterwards.',
+          },
+          {
+            mistake: 'Putting in capital you actually need',
+            fix: 'Cash for several months of expenses sits outside all of this. What you trade with is money whose absence would not change any decision you have to make this year.',
+          },
+          {
+            mistake: 'Waiting for the right moment to start',
+            fix: 'Nobody buys the bottom twice. Contributing on a schedule has held up better than timing in study after study, and it asks far less of you.',
+          },
+          {
+            mistake: 'Treating risk management as the optional part',
+            fix: 'Every position needs an answer to what happens if it goes against you, decided before you place it. Position sizing and defined risk are the method, not an add-on to it.',
+          },
+          {
+            mistake: 'Learning it alone',
+            fix: 'Self-taught traders tend to build habits that take years to notice and longer to unlearn. Having someone review your actual trades shortens that considerably.',
+          },
+        ].map((item) => (
+          <div key={item.mistake} className="border-t border-[#1a1a1a] pt-5 pb-6">
+            <h3 className="font-semibold text-[#1a1a1a] text-[1.0625rem] tracking-[-0.01em] mb-2">
               {item.mistake}
-            </p>
-            <p className="text-[#666] text-[0.9rem] leading-relaxed mb-0 ml-6">
-              <span className="text-emerald-600 font-semibold">Instead:</span> {item.fix}
+            </h3>
+            <p className="text-[#55534e] text-[0.9375rem] leading-[1.65] mb-0 max-w-[62ch]">
+              <span className="font-semibold text-[#3a3834]">Instead.</span> {item.fix}
             </p>
           </div>
         ))}
       </div>
 
-      <p className="text-[1.05rem] leading-relaxed text-[#444]">
-        The common thread in all of these mistakes? <strong>Lack of education and lack of accountability.</strong> That is exactly what Trader Foundation was built to solve. Our program pairs you with a personal coach who reviews your trades, corrects your approach in real time, and keeps you on track when emotions run high.{' '}
-        <a href="/trading-tools" className="text-[#c7ab77] font-semibold hover:underline">See the tools our students use →</a>
+      <p className="text-[1.0625rem] leading-[1.7] text-[#3a3834] max-w-[68ch]">
+        What these have in common is not a knowledge gap. It is that nobody was watching. That
+        is what the coaching is for: someone who sees your actual trades, tells you when your
+        approach has drifted, and is there in the stretch where you would otherwise talk
+        yourself into something.{' '}
+        <a
+          href="/trading-tools"
+          className="font-semibold text-[#1a1a1a] underline decoration-[#c9c4b8] hover:decoration-[#1a1a1a]"
+        >
+          The tools our students use
+        </a>
       </p>
     </>
   );
@@ -250,199 +364,19 @@ const CHAPTER_CONTENT: Record<string, React.FC> = {
 };
 
 export default function Investing101() {
-  const [activeChapter, setActiveChapter] = useState(CHAPTERS[0].id);
-
-  const currentIndex = CHAPTERS.findIndex((c) => c.id === activeChapter);
-  const ActiveContent = CHAPTER_CONTENT[activeChapter];
-  const activeData = CHAPTERS[currentIndex];
-  const Icon = activeData.icon;
-
-  const goTo = (id: string) => {
-    setActiveChapter(id);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   return (
-    <div className="min-h-screen bg-[#faf9f6]">
-      <SEO title="Investing 101" description="Learn the fundamentals of investing with Trader Foundation Academy." path="/investing-101" />
-      <Navigation />
-
-      {/* ── Breadcrumb ── */}
-      <div className="pt-[130px] pb-4 bg-[#111]">
-        <div className="max-w-[1320px] mx-auto px-6 lg:px-8">
-          <div className="flex items-center gap-2 text-[0.78rem] text-white/50" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-            <a href="/" className="hover:text-[#c7ab77] transition-colors">Home</a>
-            <span>/</span>
-            <span className="text-[#c7ab77]">Investing 101</span>
-          </div>
-        </div>
-      </div>
-
-      {/* ── Page Title Banner ── */}
-      <div className="bg-[#111] pb-12">
-        <div className="max-w-[1320px] mx-auto px-6 lg:px-8">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-white tracking-tight" style={{ fontFamily: "'Sen', sans-serif" }}>
-            Investing <span className="text-[#c7ab77]">101</span>
-          </h1>
-          <p className="mt-3 text-white/60 text-lg max-w-2xl" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-            A practical, no-nonsense introduction to growing your wealth, written by traders, for future traders.
-          </p>
-        </div>
-      </div>
-
-      {/* ── Main Content: TOC Left | Chapter Right | CTA Far Right ── */}
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-8 py-12">
-        <div className="flex flex-col lg:flex-row gap-10">
-
-          {/* ── LEFT: Table of Contents (sticky, always visible) ── */}
-          <nav className="hidden lg:block w-[220px] shrink-0">
-            <div className="sticky top-[100px]">
-              <h2
-                className="text-sm font-bold text-[#333] mb-5 uppercase tracking-wider"
-                style={{ fontFamily: "'DM Sans', sans-serif" }}
-              >
-                Table of Contents
-              </h2>
-              <ul className="space-y-0.5">
-                {CHAPTERS.map(({ id, label }, i) => (
-                  <li key={id}>
-                    <button
-                      onClick={() => goTo(id)}
-                      className={`block text-left w-full py-2.5 px-4 rounded-md transition-all duration-200 text-[0.84rem] leading-snug ${
-                        activeChapter === id
-                          ? 'bg-[#c7ab77]/10 text-[#c7ab77] font-semibold border-l-3 border-[#c7ab77]'
-                          : 'text-[#555] hover:bg-[#f0ede8] hover:text-[#333]'
-                      }`}
-                      style={{ fontFamily: "'DM Sans', sans-serif" }}
-                    >
-                      <span className="text-[0.7rem] opacity-50 mr-2">{String(i + 1).padStart(2, '0')}</span>
-                      {label}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </nav>
-
-          {/* ── MOBILE: Chapter selector dropdown ── */}
-          <nav className="lg:hidden bg-white rounded-lg border border-[#e8e4dc] p-4 mb-4 shadow-sm">
-            <h2 className="text-sm font-bold text-[#111] mb-3 uppercase tracking-wider" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-              Chapters
-            </h2>
-            <div className="space-y-1">
-              {CHAPTERS.map(({ id, label }, i) => (
-                <button
-                  key={id}
-                  onClick={() => goTo(id)}
-                  className={`flex items-center gap-2 text-left w-full py-2 px-3 rounded transition-colors text-[0.88rem] ${
-                    activeChapter === id ? 'bg-[#c7ab77]/10 text-[#c7ab77] font-semibold' : 'text-[#555] hover:text-[#c7ab77]'
-                  }`}
-                >
-                  <ChevronRight size={14} className={activeChapter === id ? 'text-[#c7ab77]' : 'text-[#ccc]'} />
-                  <span className="text-[0.7rem] opacity-50">{String(i + 1).padStart(2, '0')}</span>
-                  {label}
-                </button>
-              ))}
-            </div>
-          </nav>
-
-          {/* ── CENTER: Active Chapter Content ── */}
-          <article className="flex-1 min-w-0">
-            <div style={{ fontFamily: "'DM Sans', sans-serif" }}>
-
-              {/* Chapter header */}
-              <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 rounded-full bg-[#c7ab77]/10 flex items-center justify-center">
-                  <Icon size={20} className="text-[#c7ab77]" />
-                </div>
-                <div>
-                  <p className="text-[0.75rem] text-[#999] uppercase tracking-wider font-medium mb-0.5" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-                    Chapter {currentIndex + 1} of {CHAPTERS.length}
-                  </p>
-                  <h2 className="text-2xl md:text-3xl font-bold text-[#111] m-0" style={{ fontFamily: "'Sen', sans-serif" }}>
-                    {activeData.label}
-                  </h2>
-                </div>
-              </div>
-
-              {/* Chapter body */}
-              <ActiveContent />
-
-              {/* ── Prev / Next Navigation ── */}
-              <div className="flex items-center justify-between mt-12 pt-8 border-t border-[#e8e4dc]">
-                {currentIndex > 0 ? (
-                  <button
-                    onClick={() => goTo(CHAPTERS[currentIndex - 1].id)}
-                    className="flex items-center gap-2 text-[0.88rem] text-[#666] hover:text-[#c7ab77] transition-colors font-medium"
-                    style={{ fontFamily: "'DM Sans', sans-serif" }}
-                  >
-                    <ArrowLeft size={16} />
-                    {CHAPTERS[currentIndex - 1].label}
-                  </button>
-                ) : (
-                  <div />
-                )}
-                {currentIndex < CHAPTERS.length - 1 ? (
-                  <button
-                    onClick={() => goTo(CHAPTERS[currentIndex + 1].id)}
-                    className="flex items-center gap-2 text-[0.88rem] text-[#c7ab77] hover:text-[#b89a66] transition-colors font-semibold"
-                    style={{ fontFamily: "'DM Sans', sans-serif" }}
-                  >
-                    {CHAPTERS[currentIndex + 1].label}
-                    <ArrowRight size={16} />
-                  </button>
-                ) : (
-                  <a
-                    href="https://live.traderfoundation.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-[0.88rem] text-[#c7ab77] hover:text-[#b89a66] transition-colors font-semibold"
-                    style={{ fontFamily: "'DM Sans', sans-serif" }}
-                  >
-                    Live Webinar
-                    <ArrowRight size={16} />
-                  </a>
-                )}
-              </div>
-            </div>
-          </article>
-
-          {/* ── RIGHT: CTA Sidebar (sticky, always visible) ── */}
-          <aside className="hidden lg:block w-[280px] shrink-0">
-            <div className="sticky top-[100px]">
-              <div className="bg-[#111] rounded-lg overflow-hidden shadow-xl">
-                <img
-                  src={SIDEBAR_IMG}
-                  alt="Vlad Tayman teaching at Trader Foundation Academy"
-                  className="w-full h-44 object-cover object-top"
-                />
-                <div className="p-5 text-center">
-                  <p className="text-[#c7ab77] font-bold text-[0.78rem] uppercase tracking-wider mb-2" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-                    Free Strategy Call!
-                  </p>
-                  <h3 className="text-lg font-bold text-white leading-tight mb-3" style={{ fontFamily: "'Sen', sans-serif" }}>
-                    Wall Street Secrets for Financial Freedom
-                  </h3>
-                  <p className="text-white/50 text-[0.82rem] mb-5 leading-relaxed" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-                    This proven trading system can help beginners, busy professionals, retirees, and students achieve the financial freedom they deserve.
-                  </p>
-                  <a
-                    href="https://live.traderfoundation.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block w-full py-3 bg-[#c7ab77] text-[#111] font-bold text-[0.85rem] tracking-wide rounded-sm transition-all duration-300 hover:bg-[#b89a66]"
-                    style={{ fontFamily: "'DM Sans', sans-serif" }}
-                  >
-                    BOOK MY CALL &raquo;
-                  </a>
-                </div>
-              </div>
-            </div>
-          </aside>
-        </div>
-      </div>
-
-      <Footer />
-    </div>
+    <ChapterLayout
+      title={'Investing 101'}
+      heading={'Investing 101'}
+      deck={
+        'The groundwork, written for someone who already has capital to put to work. What compounding does over time, what inflation quietly takes, and where the major asset classes actually differ.'
+      }
+      description={
+        'Investing fundamentals for people with capital to manage: how compounding works, what inflation costs you, and how the major asset classes differ.'
+      }
+      path={'/investing-101'}
+      chapters={CHAPTERS}
+      content={CHAPTER_CONTENT}
+    />
   );
 }
