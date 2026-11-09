@@ -56,7 +56,7 @@ const faqItems: FaqItem[] = [
     answer: 'Because we don\'t sell shortcuts. Our curriculum was built over a decade by our founder, Vlad Tayman, and is delivered by Vlad and our full coaching team. AI bots, signals, and YouTube courses fail because they skip the foundation. We teach you the "why" behind the market, give you a proven system, and coach you 1-on-1 until you get it. We don\'t stop until you do.',
     quotes: [
       {
-        text: 'My trading is completely turned around. I\'m more on the 10% side now, not the 90%. I\'ve won an overwhelming number of trades compared to my losers — maybe a few losses compared to nearly a hundred wins. It\'s made a huge difference to me.',
+        text: 'My trading is completely turned around. I\'m more on the 10% side now, not the 90%. I\'ve won an overwhelming number of trades compared to my losers, maybe a few losses compared to nearly a hundred wins. It\'s made a huge difference to me.',
         name: 'Charles Brey',
         source: 'Student Testimonial',
       },
@@ -67,7 +67,7 @@ const faqItems: FaqItem[] = [
     answer: 'That\'s exactly why accountability is built into this program. Your coach holds you accountable with weekly check-ins, homework reviews, and 1-on-1 sessions. Over 300 students renew with us every year because they know we won\'t let them quit.',
     quotes: [
       {
-        text: 'I started trading during the pandemic. Got lucky on NIO, then lost a lot of money — at my worst, down 66% all time. After joining the program and clearing out my bad buys, I started this year with about $25k. I\'m up $16k, a little over 60% YTD. I have no doubt I\'ll make that $30k loss up this year.',
+        text: 'I started trading during the pandemic. Got lucky on NIO, then lost a lot of money, at my worst, down 66% all time. After joining the program and clearing out my bad buys, I started this year with about $25k. I\'m up $16k, a little over 60% YTD. I have no doubt I\'ll make that $30k loss up this year.',
         name: 'Kelly Myers',
         source: 'Student Community',
       },
@@ -83,22 +83,15 @@ const faqItems: FaqItem[] = [
   },
   {
     question: 'How often will I talk to my coach?',
-    answer: 'You\'ll have regular 1-on-1 sessions with your dedicated coach, plus access to daily live market sessions. The frequency is tailored to your learning pace and schedule — most students connect with their coach multiple times per week.',
+    answer: 'You\'ll have regular 1-on-1 sessions with your dedicated coach, plus access to daily live market sessions. The frequency is tailored to your learning pace and schedule, most students connect with their coach multiple times per week.',
   },
   {
     question: 'Is this group coaching or 1-on-1?',
     answer: 'This is genuine 1-on-1 coaching. You get a dedicated coach who works with you individually. We also offer daily group live sessions for real-time market analysis, but your core learning experience is completely personalized.',
-    quotes: [
-      {
-        text: 'The company offers daily live sessions with coaches where stocks are reviewed in real time. Students are also encouraged to schedule one-on-one sessions with coaches for personalized guidance.',
-        name: 'Jonas',
-        source: 'Verified Student Review',
-      },
-    ],
   },
   {
     question: 'Why is this better than AI bots, signals, or YouTube education?',
-    answer: 'AI bots and signals give you fish — we teach you how to fish. YouTube education is fragmented and lacks accountability. Our program gives you a proven system, a dedicated coach, and a structured path from beginner to confident trader. You build a real skill that lasts a lifetime.',
+    answer: 'AI bots and signals give you fish, we teach you how to fish. YouTube education is fragmented and lacks accountability. Our program gives you a proven system, a dedicated coach, and a structured path from beginner to confident trader. You build a real skill that lasts a lifetime.',
     quotes: [
       {
         text: 'The Skool platform they use is interactive and really breaks down trading concepts with tutorials and live examples. Vlad leads weekly calls to discuss the market, provide trading insight, and offer live trading opportunities to participate in that he is taking positions with himself in his own portfolio. If you are looking for a group that will not only provide you with a few fish but also teach you how to fish, this is the group!',
@@ -106,7 +99,7 @@ const faqItems: FaqItem[] = [
         source: 'Student Community',
       },
       {
-        text: 'I was calculating my Think or Swim account today. As of today, I\'m up just over 40% in this account. I am amazed at what I\'ve learned and how far I\'ve come from just joining this trading team. I\'m a seasoned options trader — 19 years — and the pieces I was missing from the puzzle were in the training.',
+        text: 'I was calculating my Think or Swim account today. As of today, I\'m up just over 40% in this account. I am amazed at what I\'ve learned and how far I\'ve come from just joining this trading team. I\'m a seasoned options trader, 19 years, and the pieces I was missing from the puzzle were in the training.',
         name: 'Isaac Rorholm',
         source: 'Student Community',
       },
@@ -114,14 +107,7 @@ const faqItems: FaqItem[] = [
   },
   {
     question: 'What\'s your guarantee?',
-    answer: 'If you\'re not winning at least 70% of your trades within 90 days, you get every penny back. The condition: you follow the system, do the homework, attend your coaching sessions, and follow the rules. You commit, we commit.',
-    quotes: [
-      {
-        text: 'I\'ve won an overwhelming number of trades compared to my losers. The ones I\'ve lost, maybe a few — compared to nearly a hundred that I won. It\'s made a huge difference to me.',
-        name: 'Charles Brey',
-        source: 'Student Testimonial',
-      },
-    ],
+    answer: 'Every enrollment comes with a conditional guarantee. Complete the program: attend your coaching sessions, finish the coursework, and place your paper trades through the full process we teach. If you\'ve done all of that and you haven\'t collected your first premium, paper or live, by the end of the program, we keep working with you at no additional cost until you do. We don\'t promise what the market will do. We promise the process, and we don\'t let you fail at learning it.',
   },
   {
     question: 'Do I need my own money to trade with?',
@@ -255,7 +241,7 @@ export default function FAQ() {
                           className="mt-2 text-[#c7ab77] text-[0.7rem] font-semibold tracking-[0.15em] uppercase"
                           style={{ fontFamily: "'DM Sans', sans-serif" }}
                         >
-                          — {q.name} · {q.source}
+                         , {q.name} · {q.source}
                         </p>
                       </div>
                     ))}
@@ -265,7 +251,7 @@ export default function FAQ() {
             ))}
           </div>
 
-          {/* Video Testimonials — quick student reactions, portrait/mobile-shot */}
+          {/* Video Testimonials, quick student reactions, portrait/mobile-shot */}
           <div className="mt-16">
             <p
               className="text-[0.7rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-3 text-center"
