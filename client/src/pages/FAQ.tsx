@@ -111,7 +111,7 @@ const faqItems: FaqItem[] = [
   },
   {
     question: 'Do I need my own money to trade with?',
-    answer: 'Yes. To get the most out of the program, we ask that you have at least $15,000+ in starting trading capital. This is the money you\'ll trade with in your own account, it\'s separate from the cost of the program itself. The Paycheck Collector method relies on selling defined-risk options, and $15,000+ gives you enough room to apply the strategy properly while keeping your risk controlled.',
+    answer: 'Yes. The method calls for capital you have already built, held in your own brokerage account and separate from the cost of the program. The Paycheck Collector works by selling defined-risk options, which needs enough room in the account to size positions properly rather than betting the whole thing on one trade. What that figure is depends on your situation, and it is one of the first things your coach works through with you against your own numbers. It is not money we hold, and it is not money you should need for anything else.',
   },
   {
     question: 'How much does this cost?',

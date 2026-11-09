@@ -1,7 +1,12 @@
 /*
- * About Page, Trader Foundation Academy
- * Sections: Vlad Story → Our Academy → Our Philosophy → Meet the Coaches → Meet the Team → Footer
- * Fonts: Sen (headings), DM Sans (body)
+ * About Page, Trader Foundation
+ * Sections: the founder's story, who we are, the philosophy, the coaches, the
+ * team, footer.
+ *
+ * Visual system per DESIGN.md; register and claims per vladt83's brief of
+ * 2026-11-09. No dollar figures, no percentages, no income claims, including
+ * inside a coach's own quote: a bio promising "consistent income, every single
+ * week" publishes that promise whoever is credited with saying it.
  */
 
 import { useEffect, useRef, useState } from 'react';
@@ -52,7 +57,7 @@ const coaches = [
     photoIsLocal: true,
     philosophy: '"I love the markets. Taking something complex and making it simple enough for anyone to understand, that\'s what gets me going."',
     cardQuote: '"Options don\'t have to be complicated. Once you see the pattern, you can\'t unsee it."',
-    bio: 'Options used to feel like a foreign language to me. After a decade in the markets, I became the person I wish I had when I was starting out. I specialize in breaking down complex options strategies into plain English so that anyone can trade with confidence. As Lead Mentor, I built the curriculum thousands of students use every day and host daily market meetups where we analyze setups together in real time. But honestly, the reason I show up every day isn\'t the market, it\'s the people. Watching someone go from confused to confident is the most rewarding thing I\'ve ever done.',
+    bio: 'Options used to feel like a foreign language to me. After a decade in the markets, I became the person I wish I had when I was starting out. I specialise in breaking complex options strategies down into plain English. As Lead Mentor I built the curriculum our students work through, and I host the daily market meetups where we go through setups together. But honestly, the reason I show up every day isn\'t the market, it\'s the people. Watching someone go from confused to confident is the most rewarding thing I\'ve ever done.',
   },
   {
     name: 'Erin Chawla',
@@ -64,8 +69,8 @@ const coaches = [
     photoHeight: 1200,
     photoIsLocal: true,
     philosophy: '"Trading is like dating, choose the best and leave the rest."',
-    cardQuote: '"Patience isn\'t boring, it\'s profitable. I only need a few great setups a month."',
-    bio: 'After years in corporate finance at GE, I made the leap to full-time trading and coaching. My approach is different from most. I only trade off Weekly and Monthly charts. No noise. No chasing. Just patience and precision. What drives me isn\'t just the trades, it\'s the people behind them. I genuinely love helping others build real, lasting wealth through disciplined swing trading. Every free video I create, every question I answer, comes from the same place: I remember what it felt like to figure this out alone, and I don\'t want anyone else to go through that.',
+    cardQuote: '"Patience is not boring. I only need a few good setups a month."',
+    bio: 'After years in corporate finance at GE, I made the leap to full-time trading and coaching. My approach is different from most. I only trade off Weekly and Monthly charts. No noise. No chasing. Just patience and precision. What drives me isn\'t just the trades, it\'s the people behind them. What I care about is helping people manage their own capital with some discipline behind it. Every video I put out and every question I answer comes from the same place: I remember figuring this out alone, and I would not wish it on anyone.',
   },
   {
     name: 'Leo Gonzalez',
@@ -77,8 +82,8 @@ const coaches = [
     photoHeight: 1200,
     photoIsLocal: true,
     philosophy: '"I do this genuinely because I can\'t wait for that moment when someone says, I got this."',
-    cardQuote: '"The market pays you like a business when you treat it like one. Consistent income, every single week."',
-    bio: 'For years, I watched traders blow up their accounts chasing the next big move. Meanwhile, I was quietly collecting consistent income from the market like clockwork, that\'s how I earned the nickname "The Paycheck Collector." With 13 years of experience, I specialize in building trades designed to pay week after week. But what gets me out of bed isn\'t the income, it\'s knowing that every student I help is one more person who doesn\'t have to depend on a boss, a company, or a paycheck they can\'t control.',
+    cardQuote: '"Treat it like a business and it behaves like one. That starts with refusing the trades that pay too well."',
+    bio: 'For years I watched traders blow up their accounts chasing the next big move, while I was quietly doing the unglamorous version: getting paid up front, capping the downside, and passing on anything that did not qualify. That is how I ended up with the nickname "The Paycheck Collector," which is now the name of what we teach. Thirteen years in, what keeps me here is not the trading. It is that every student I work with is one more person who is not relying on somebody else to make their financial decisions for them.',
   },
 ];
 
@@ -110,7 +115,7 @@ export default function About() {
 
   return (
     <div className="min-h-screen bg-[#faf9f6]">
-      <SEO title="About Us" description="Meet the Trader Foundation Academy team — Vlad Tayman, Steve Lapa, and Ariana Tayman. Learn about our mission to help traders succeed." path="/about" />
+      <SEO title="About" description="Who teaches at Trader Foundation, where they came from, and what the program is built to do." path="/about" />
       <Navigation />
 
       {/* ─── Vlad's Story ─── */}
@@ -124,40 +129,37 @@ export default function About() {
           {/* Vlad's headshot, centered above the story */}
           <div className="flex flex-col items-center mb-12">
             <div className="relative w-full max-w-[420px]">
-              <div className="absolute -inset-3 border border-[#c7ab77]/20 rounded-lg" />
+              <div className="absolute -inset-3 border border-[#c7ab77]/20" />
               <Picture
                 src={VLAD_PHOTO}
                 alt="Vlad Tayman, founder of Trader Foundation"
                 width={1600}
                 height={1091}
                 loading="eager"
-                className="w-full h-auto object-cover rounded-lg shadow-xl"
+                className="w-full h-auto object-cover"
               />
             </div>
-            <h3 className="text-xl font-extrabold text-[#111] mt-6" style={{ fontFamily: "'Sen', sans-serif" }}>
+            <h3 className="text-xl font-semibold text-[#1a1a1a] mt-6" >
               Vlad Tayman
             </h3>
             <p className="text-[#c7ab77] text-sm font-medium">Founder &amp; CEO</p>
           </div>
 
-          {/* Story text — centered under the photo */}
+          {/* Story text, centered under the photo */}
           <div className="max-w-[720px] mx-auto">
-            <p className="text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-3 text-center">
-              The Founder
-            </p>
-            <h2 className="text-2xl md:text-3xl font-extrabold text-[#111] leading-tight mb-6 text-center" style={{ fontFamily: "'Sen', sans-serif" }}>
-              From $150K in Losses to Building a Trading Academy
+            <h2 className="tf-display text-[#1a1a1a] text-[1.875rem] md:text-[2.5rem] mb-6 text-center mx-auto max-w-[24ch]">
+              The founder
             </h2>
-              <p className="text-[#444] text-base leading-relaxed mb-4">
-                Vlad came to America from Ukraine with nothing but a work ethic. He built his career the hard way, spending 20 years as a Director of Training at a Fortune 500 company. He had the six-figure salary and the corner office, but he was burned out, missing his family, and dying inside. Then came the wake-up call: he lost $29,000 in 29 days trading penny stocks.
+              <p className="text-[#3a3834] text-base leading-relaxed mb-4">
+                Vlad came to America from Ukraine with nothing but a work ethic. He built his career the hard way, spending 20 years as a Director of Training at a Fortune 500 company. He had the salary and the title, and he was burned out, away from his family, and running out of reasons to stay. Then came the part he tells every new student about: he lost a serious amount of money, fast, trading penny stocks.
               </p>
-              <p className="text-[#444] text-base leading-relaxed mb-4">
-                That failure became fuel. Vlad tried every method until he found what actually works. And here's what makes him different from every other trading educator: <strong>two decades teaching Fortune 500 executives</strong>. Great traders don't always make great teachers. Vlad mastered both, and gives away more free education than most programs charge for because he believes everyone deserves access to real financial knowledge.
+              <p className="text-[#3a3834] text-base leading-relaxed mb-4">
+                That is where the method came from. Vlad worked through approach after approach until he had one he would actually run with his own money. What makes him unusual is not the trading: it is <strong>two decades spent teaching Fortune 500 executives</strong>. Good traders are not automatically good teachers. He publishes a great deal of his teaching at no charge, because he thinks the information itself should not be the expensive part.
               </p>
-              <p className="text-[#444] text-base leading-relaxed mb-4">
-                That mission runs deeper than one person. The coaches on this team aren't people who came here because they had no other options. They're <strong>smart, successful professionals</strong>. <strong>Elliot</strong> spent a decade in the options markets. <strong>Erin</strong> built her career in corporate finance at GE, reading P&amp;Ls and analyzing risk for a living. <strong>Leo</strong> tried every trading method out there and lost a lot of money before he figured out why nothing worked. He found Trader Foundation, stuck with the Paycheck Collector, and eventually earned the nickname for himself. And even they needed people. Each of them joined Trader Foundation as a student, because being smart isn't the same as having a system, and being successful isn't the same as having a team. They mastered the system, then came back to teach it. Every coach on this team is living proof that what we teach works, and that even the sharpest people don't have to do it alone.
+              <p className="text-[#3a3834] text-base leading-relaxed mb-4">
+                That mission runs deeper than one person. The coaches on this team aren't people who came here because they had no other options. They're <strong>smart, successful professionals</strong>. <strong>Elliot</strong> spent a decade in the options markets. <strong>Erin</strong> built her career in corporate finance at GE, reading P&amp;Ls and analyzing risk for a living. <strong>Leo</strong> tried every trading method out there and lost a lot of money before he figured out why nothing worked. He found Trader Foundation, stuck with the Paycheck Collector, and eventually earned the nickname for himself. And even they needed people. Each of them joined Trader Foundation as a student, because being smart isn't the same as having a system, and being successful isn't the same as having a team. They learned the method, then came back to teach it. Not one of them arrived here already knowing it, which is rather the point: being capable is not the same as having a system, and being successful is not the same as having a team.
               </p>
-              <p className="text-[#555] text-sm leading-relaxed italic border-l-2 border-[#c7ab77]/40 pl-4">
+              <p className="text-[#55534e] text-sm leading-relaxed italic border-l-2 border-[#c7ab77]/40 pl-4">
                 "Everyone deserves to understand how money really works. Not just the theory, but the real skills to grow wealth on your own terms. The best moment is when a student stops relying on someone else and starts making confident financial decisions on their own. That's the transformation we're building here."
               </p>
             </div>
@@ -167,24 +169,23 @@ export default function About() {
       {/* ─── Our Academy ─── */}
       <section className="py-14 bg-[#faf9f6]">
         <div className="max-w-[900px] mx-auto px-6 lg:px-8">
-          <p className="text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-3 text-center">Our Academy</p>
-          <h2 className="text-2xl md:text-3xl font-extrabold text-[#1a1a1a] leading-tight mb-6 text-center" style={{ fontFamily: "'Sen', sans-serif" }}>
-            A Boutique Trading Academy Built for Professionals
+          <h2 className="tf-display text-[#1a1a1a] text-[1.875rem] md:text-[2.5rem] mb-6 text-center mx-auto max-w-[24ch]">
+            Built for professionals
           </h2>
-          <p className="text-[#444] text-base leading-relaxed mb-4 text-center">
-            We teach busy professionals how to trade stocks and options with confidence, using proven strategies that fit around a full-time career. Our mission is to make real financial education accessible to everyone, and to build a community where students don't just learn to trade, they learn to build lasting wealth.
+          <p className="text-[#3a3834] text-base leading-relaxed mb-4 text-center">
+            We teach people with careers and capital how to manage that capital themselves, using one strategy that fits around a full working week. The aim is that a student leaves able to make their own decisions rather than needing ours.
           </p>
-          <p className="text-[#444] text-base leading-relaxed mb-4 text-center">
-            Our coaches aren't hired instructors. They're former students who took the same course you're about to take, mastered the strategies, and came back to help others do the same. They are proof that it works. They've been exactly where you are. They know the challenges, the doubts, and the breakthroughs because they lived them.
+          <p className="text-[#3a3834] text-base leading-relaxed mb-4 text-center">
+            Our coaches are not hired instructors. Every one of them came through this course as a student first, learned the method, and came back to teach it. They have sat where you are sitting, with the same doubts, which is why they are difficult to impress and easy to talk to.
           </p>
-          <p className="text-[#444] text-base leading-relaxed text-center">
-            We're a boutique academy by design. Every student gets 1:1 coaching, plus small live sessions where mentors know your name. Direct access to coaches who genuinely care. When you join Trader Foundation, you're not joining a program. You're joining a family.
+          <p className="text-[#3a3834] text-base leading-relaxed text-center">
+            We are deliberately small. Every student gets their own coach and live sessions where the people running them know your name. You are not joining a mailing list.
           </p>
         </div>
       </section>
 
       {/* ─── Our Philosophy ─── */}
-      <section className="py-16 bg-[#111]">
+      <section className="py-16 bg-[#141414]">
         <div
           ref={philosophy.ref}
           className={`max-w-[900px] mx-auto px-6 lg:px-8 transition-all duration-700 ${
@@ -195,7 +196,7 @@ export default function About() {
             <p className="text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-3">
               What We Believe
             </p>
-            <h2 className="text-2xl md:text-3xl font-extrabold text-white leading-tight mb-4" style={{ fontFamily: "'Sen', sans-serif" }}>
+            <h2 className="text-2xl md:text-3xl font-semibold text-white leading-tight mb-4" >
               Building Wealth Doesn't Need to Be Scary
             </h2>
             <p className="text-white/50 text-base leading-relaxed max-w-2xl mx-auto">
@@ -207,7 +208,7 @@ export default function About() {
             {coaches.map((coach) => (
               <div
                 key={coach.name}
-                className="rounded-lg px-5 py-5 text-center"
+                className="px-5 py-5 text-center"
                 style={{
                   backgroundColor: 'rgba(199, 171, 119, 0.04)',
                   border: '1px solid rgba(199, 171, 119, 0.1)',
@@ -238,7 +239,7 @@ export default function About() {
             <p className="text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-3">
               Your Coaching Team
             </p>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-[#111] leading-tight" style={{ fontFamily: "'Sen', sans-serif" }}>
+            <h2 className="text-3xl md:text-4xl font-semibold text-[#1a1a1a] leading-tight" >
               Meet the Coaches
             </h2>
             <div className="w-20 h-[2px] bg-[#c7ab77] mx-auto mt-6" />
@@ -248,7 +249,7 @@ export default function About() {
             {coaches.map((coach, i) => (
               <div
                 key={coach.name}
-                className="group bg-white border border-[#e8e4dc] rounded-lg overflow-hidden transition-all duration-500 hover:border-[#c7ab77]/40 hover:shadow-[0_8px_40px_rgba(199,171,119,0.1)]"
+                className="group bg-white border border-[#e3ded4] overflow-hidden transition-all duration-500 hover:border-[#c7ab77]/40"
                 style={{ transitionDelay: `${i * 100}ms` }}
               >
                 <div className="relative overflow-hidden">
@@ -264,13 +265,13 @@ export default function About() {
                 </div>
 
                 <div className="px-6 pb-6 -mt-4 relative">
-                  <h3 className="text-xl font-extrabold text-[#111] mb-1" style={{ fontFamily: "'Sen', sans-serif" }}>
+                  <h3 className="text-xl font-semibold text-[#1a1a1a] mb-1" >
                     {coach.name}
                   </h3>
-                  <p className="text-[#c7ab77] text-sm font-semibold mb-1">
+                  <p className="text-[#55534e] text-sm font-semibold mb-1">
                     {coach.title}
                   </p>
-                  <p className="text-[#888] text-xs font-medium tracking-wide mb-4">
+                  <p className="text-[#767269] text-xs font-medium tracking-wide mb-4">
                     {coach.experience}
                   </p>
 
@@ -278,14 +279,14 @@ export default function About() {
                     className="rounded px-4 py-3 mb-4"
                     style={{ backgroundColor: 'rgba(199, 171, 119, 0.06)', border: '1px solid rgba(199, 171, 119, 0.12)' }}
                   >
-                    <p className="text-[#555] text-[0.78rem] leading-relaxed italic">
+                    <p className="text-[#55534e] text-[0.78rem] leading-relaxed italic">
                       {coach.cardQuote}
                     </p>
                   </div>
 
                   <div className="w-10 h-[1.5px] bg-[#c7ab77]/40 mb-4" />
 
-                  <p className="text-[#555] text-[0.8rem] leading-relaxed">
+                  <p className="text-[#55534e] text-[0.8rem] leading-relaxed">
                     {coach.bio}
                   </p>
                 </div>
@@ -299,20 +300,17 @@ export default function About() {
       <section className="py-20 bg-[#faf9f6]">
         <div className="max-w-[1100px] mx-auto px-6 lg:px-8">
           <div className="text-center mb-14">
-            <p className="text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-3">
-              The Team Behind the Mission
-            </p>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-[#111] leading-tight" style={{ fontFamily: "'Sen', sans-serif" }}>
-              Meet the Team
+            <h2 className="tf-display text-[#1a1a1a] text-[1.875rem] md:text-[2.5rem]">
+              The team
             </h2>
-            <div className="w-20 h-[2px] bg-[#c7ab77] mx-auto mt-6" />
+            <div className="w-20 h-[2px] bg-[#1a1a1a] mx-auto mt-6" />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 lg:gap-10 max-w-[720px] mx-auto">
             {leadership.map((member, i) => (
               <div
                 key={member.name}
-                className="group bg-white border border-[#e8e4dc] rounded-lg overflow-hidden transition-all duration-500 hover:border-[#c7ab77]/40 hover:shadow-[0_8px_40px_rgba(199,171,119,0.1)]"
+                className="group bg-white border border-[#e3ded4] overflow-hidden transition-all duration-500 hover:border-[#c7ab77]/40"
                 style={{ transitionDelay: `${i * 100}ms` }}
               >
                 <div className="relative overflow-hidden">
@@ -326,7 +324,7 @@ export default function About() {
                     />
                   ) : (
                     <div className="w-full aspect-[4/5] bg-[#1a1a1a] flex items-center justify-center">
-                      <span className="text-5xl font-extrabold text-[#c7ab77]/60" style={{ fontFamily: "'Sen', sans-serif" }}>
+                      <span className="text-5xl font-semibold text-[#c7ab77]/60" >
                         {member.name.split(' ').map((n: string) => n[0]).join('')}
                       </span>
                     </div>
@@ -334,21 +332,21 @@ export default function About() {
                   <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-white to-transparent" />
                 </div>
                 <div className="px-6 pb-6 -mt-4 relative">
-                  <h3 className="text-xl font-extrabold text-[#111] mb-1" style={{ fontFamily: "'Sen', sans-serif" }}>
+                  <h3 className="text-xl font-semibold text-[#1a1a1a] mb-1" >
                     {member.name}
                   </h3>
-                  <p className="text-[#c7ab77] text-sm font-semibold mb-1">
+                  <p className="text-[#55534e] text-sm font-semibold mb-1">
                     {member.title}
                   </p>
                   {'subtitle' in member && member.subtitle && (
-                    <p className="text-[#888] text-xs font-medium tracking-wide mb-3">
+                    <p className="text-[#767269] text-xs font-medium tracking-wide mb-3">
                       {member.subtitle}
                     </p>
                   )}
                   {member.bio && (
                     <>
                       <div className="w-10 h-[1.5px] bg-[#c7ab77]/40 mb-4 mt-3" />
-                      <p className="text-[#555] text-[0.8rem] leading-relaxed">
+                      <p className="text-[#55534e] text-[0.8rem] leading-relaxed">
                         {member.bio}
                       </p>
                     </>
@@ -361,19 +359,19 @@ export default function About() {
           {/* Live Webinar CTA after leadership team */}
           <div className="text-center mt-14">
             <p
-              className="text-[#555] text-[0.9rem] leading-relaxed mb-5"
-              style={{ fontFamily: "'DM Sans', sans-serif" }}
+              className="text-[#55534e] text-[0.9rem] leading-relaxed mb-5"
+
             >
-              Interested in learning more? Have a conversation with our team.
+Want to see how it actually works? The live session walks through the method as it is taught. Pay nothing to attend.
             </p>
             <a
               href="https://live.traderfoundation.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-3.5 bg-[#c7ab77] text-[#111] text-[0.85rem] font-bold tracking-wide rounded-sm transition-all duration-300 hover:bg-[#b89a66] hover:shadow-lg"
-              style={{ fontFamily: "'DM Sans', sans-serif" }}
+              className="inline-flex items-center gap-2 px-8 py-3.5 bg-[#c7ab77] text-[#1a1a1a] text-[0.85rem] font-bold tracking-wide transition-all duration-300 hover:bg-[#b89a66]"
+
             >
-              Live Webinar
+              See the method taught live
             </a>
           </div>
         </div>

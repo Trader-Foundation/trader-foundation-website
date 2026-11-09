@@ -293,7 +293,12 @@ function ChapterAlerts() {
       </div>
 
       <p className="text-[1.0625rem] leading-[1.7] text-[#3a3834] max-w-[68ch]">
-        Alerts and conditional orders together are what make this compatible with a full-time career. You do the analysis once, set your parameters, and let the system work. When your phone buzzes during a meeting, it usually means a trade has closed at your target, and you made money while doing your job. That is the workflow our students build toward from day one. When that consistent income starts compounding, the results can be life-changing, <a href="/calculator" className="text-[#c7ab77] font-semibold hover:underline">see for yourself with our Compound Interest Calculator</a>.
+        Alerts and conditional orders together are what make this compatible with a full-time
+        career. You do the analysis once, set the parameters, and leave it alone. When your phone
+        buzzes during a meeting, it is usually a position closing at the level you chose when you
+        placed it, rather than something you need to go and deal with. That is the workflow
+        students build toward from the first week.{' '}
+        <a href="/calculator" className="font-semibold text-[#1a1a1a] underline decoration-[#c9c4b8] hover:decoration-[#1a1a1a]">Run your own assumptions through the calculator</a>
       </p>
     </>
   );

@@ -783,10 +783,11 @@ export default function Calculator() {
                 className="text-[#444] text-base leading-relaxed"
                 style={{ fontFamily: "'DM Sans', sans-serif" }}
               >
-                At Trader Foundation, we teach you how to combine the power of
-                compound growth with smart options strategies. Our students learn
-                to generate consistent income from the market, then reinvest
-                those gains to accelerate their wealth-building journey.
+                At Trader Foundation we teach one strategy for putting capital you
+                have already built to work: selling defined-risk options, where the
+                premium is paid to you up front and the worst case is known before
+                you place the trade. What any account does from there is decided by
+                the market, not by us.
               </p>
               <p
                 className="text-[#444] text-base leading-relaxed"

@@ -25,7 +25,7 @@ function ChapterWhatAreOptions() {
         Think of it like putting a deposit on a house. You pay a small amount to lock in the purchase price for a set period. If the market moves in your favor, you exercise that right and profit from the difference. If it does not, you walk away and your loss is limited to the deposit you paid. That deposit is called the <strong>premium</strong>.
       </p>
       <p className="text-[1.0625rem] leading-[1.7] text-[#3a3834] max-w-[68ch] mb-5">
-        Options exist on virtually every major stock and index. They were originally created as hedging instruments, tools for large institutions to protect their portfolios against sudden drops. Over time, individual traders discovered that options could also be used to generate consistent income, amplify returns on smaller accounts, and define risk with precision.
+        Options exist on virtually every major stock and index. They were originally created as hedging instruments, tools for large institutions to protect their portfolios against sudden drops. Individual traders later took them up for other reasons: to be paid for taking on a defined obligation, to control a larger position with less capital, and to cap a loss at a number known in advance.
       </p>
 
       <div className="bg-[#141414] p-8 my-10">
