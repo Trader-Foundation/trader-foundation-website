@@ -59,8 +59,8 @@ export default function Footer() {
                   src={LOGO_URL}
                   alt=""
                   aria-hidden="true"
-                  width={97}
-                  height={98}
+                  width={256}
+                  height={256}
                   className="h-10 w-10 object-contain"
                 />
                 <span className="text-[1.05rem] tracking-[-0.02em] text-white leading-none">
