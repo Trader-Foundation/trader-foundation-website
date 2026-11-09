@@ -1,5 +1,5 @@
 /*
- * Home Page, Trader Foundation Academy
+ * Home Page, Trader Foundation
  * Design: editorial, near-monochrome. Off-white ground, near-black ink, one
  * typeface, photographs as plain rectangles, brand gold reserved for the
  * single action. Sections flow: Nav → Hero → Trust band → Who is Vlad →
@@ -39,10 +39,6 @@ const mechanism = [
     title: 'Protection is built in',
     desc: 'One piece of the trade pays you, the other caps what can go wrong, so your worst case is known before you click.',
   },
-  {
-    title: 'The odds are on screen',
-    desc: 'Trades are set up with roughly 80 to 93 percent odds in your favour, shown by the broker before you commit. That describes the trade, not anyone\'s results.',
-  },
 ];
 
 
@@ -64,10 +60,8 @@ export default function Home() {
             </div>
             <div className="lg:col-span-5">
               <p className="text-[#3a3834] text-[1.0625rem] leading-[1.7] max-w-[46ch]">
-                Two Fidelity accounts. Roth IRA up{' '}
-                <strong className="font-semibold text-[#1a1a1a] tf-nums">142%</strong>, HSA up{' '}
-                <strong className="font-semibold text-[#1a1a1a] tf-nums">83%</strong>, both over
-                three years, both run around a full-time job.
+                Two Fidelity accounts, both over three years, both run around a full-time
+                career. Real accounts, not a model.
               </p>
             </div>
           </div>
@@ -141,12 +135,9 @@ export default function Home() {
               </dl>
 
               <p className="mt-10 pt-6 border-t border-[#ece8e0] text-[1rem] text-[#55534e] leading-[1.7] max-w-[62ch]">
-                The method calls for about{' '}
-                <strong className="font-semibold text-[#1a1a1a] tf-nums">$15,000</strong> in
-                trading capital to run properly, in your own brokerage account and separate from
-                the cost of the programme. You can start learning with less. It is one of three
-                strategies you learn: Bounce Profit for trending markets, the Paycheck Collector
-                for markets going sideways, Ready, Set, Explode for volatile ones.
+                The method calls for capital you have already built, in your own brokerage
+                account and separate from the cost of the program. One strategy, taught start to
+                finish, with a coach beside you the whole way.
               </p>
 
               <p className="mt-8">
@@ -170,21 +161,20 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
             <div className="lg:col-span-5">
               <h2 className="tf-display text-[#1a1a1a] text-[2.5rem] sm:text-[3.25rem] lg:text-[4rem] max-w-[14ch]">
-                You do the work. We get you there.
+                We promise the process.
               </h2>
             </div>
             <div className="lg:col-span-7">
               <p className="text-[#3a3834] text-[1.0625rem] sm:text-[1.125rem] leading-[1.7] max-w-[56ch]">
-                You follow the system, do the homework, and show up to your coaching sessions.
-                If you are not winning at least{' '}
-                <strong className="font-semibold text-[#1a1a1a] tf-nums">70%</strong> of your trades
-                within 90 days, you get{' '}
-                <strong className="font-semibold text-[#1a1a1a]">every penny back</strong>. And we
-                keep coaching you until you are profitable.
+                Every enrollment comes with a conditional guarantee. Complete the program: attend
+                your coaching sessions, finish the coursework, and place your paper trades through
+                the full process we teach. If you've done all of that and you haven't collected
+                your first premium, paper or live, by the end of the program, we keep working with
+                you at no additional cost until you do.
               </p>
               <p className="mt-8 pt-6 border-t border-[#e3ded4] text-[1rem] text-[#55534e] leading-[1.7] max-w-[56ch]">
-                90 days of one-on-one coaching. The conditions are the ones above: commit to the
-                work, and we commit to you.
+                We don't promise what the market will do. We promise the process, and we don't let
+                you fail at learning it.
               </p>
             </div>
           </div>

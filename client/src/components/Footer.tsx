@@ -63,8 +63,8 @@ export default function Footer() {
               </span>
             </Link>
             <p className="text-white/65 text-[0.9375rem] leading-[1.65] max-w-[36ch]">
-              An online school for stock and options trading. Every student gets their own
-              coach.
+              Trader Foundation teaches professionals with capital to sell options and collect
+              the premium up front. Every student gets their own coach.
             </p>
           </div>
 
@@ -91,7 +91,7 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   className={linkClass}
                 >
-                  Free Skool Community
+                  Skool Community
                 </a>
               </li>
               <li>

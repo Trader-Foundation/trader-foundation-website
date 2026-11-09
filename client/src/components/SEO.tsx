@@ -6,13 +6,13 @@ interface SEOProps {
   path?: string;
 }
 
-const DEFAULT_TITLE = "Trader Foundation Academy | Learn to Trade Stocks & Options";
-const DEFAULT_DESCRIPTION = "Trader Foundation Academy offers 1-on-1 coaching to help you master stock and options trading. Join our proven program and take control of your financial future.";
+const DEFAULT_TITLE = "Trader Foundation | Sell Options. Collect the Premium Up Front.";
+const DEFAULT_DESCRIPTION = "Trader Foundation teaches professionals with capital to sell options and collect premium up front, with a coach beside them the whole way.";
 const BASE_URL = "https://www.traderfoundation.com";
 const OG_IMAGE = `${BASE_URL}/images/og-webinar.png`;
 
 export default function SEO({ title, description, path = "/" }: SEOProps) {
-  const fullTitle = title ? `${title} | Trader Foundation Academy` : DEFAULT_TITLE;
+  const fullTitle = title ? `${title} | Trader Foundation` : DEFAULT_TITLE;
   const fullDescription = description || DEFAULT_DESCRIPTION;
   const fullUrl = `${BASE_URL}${path}`;
 

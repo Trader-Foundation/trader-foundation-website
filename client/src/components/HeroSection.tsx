@@ -19,17 +19,16 @@ export default function HeroSection() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start pt-12 pb-16 sm:pt-16 sm:pb-20 lg:pt-20 lg:pb-24">
           {/* Copy */}
           <div className="lg:col-span-6 tf-rise">
-            <h1 className="tf-display text-[#1a1a1a] text-[2.75rem] sm:text-[3.75rem] lg:text-[4.5rem]">
-              Trader
+            <h1 className="tf-display text-[#1a1a1a] text-[2.25rem] sm:text-[2.75rem] lg:text-[3.375rem] max-w-[16ch]">
+              You earned your money.
               <br />
-              Foundation
-              <br />
-              Academy
+              You should be the one managing it.
             </h1>
 
-            <p className="mt-7 text-[#3a3834] text-[1.375rem] sm:text-[1.5rem] leading-[1.45] tracking-[-0.015em] max-w-[26ch]">
-              An online school for stock and options trading, taught from the beginning.
-              Founded by Vlad Tayman. Every student gets their own coach.
+            <p className="mt-7 text-[#3a3834] text-[1.25rem] sm:text-[1.375rem] leading-[1.5] tracking-[-0.012em] max-w-[44ch]">
+              Trader Foundation teaches professionals with capital to sell options, collect
+              the premium up front, and know their worst case before they ever click. One
+              strategy, taught start to finish. Every student gets their own coach.
             </p>
 
             <div className="mt-9">
@@ -39,15 +38,15 @@ export default function HeroSection() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center px-8 py-4 bg-[#c7ab77] text-[#1a1a1a] text-[0.9375rem] font-semibold transition-colors duration-200 hover:bg-[#b89a66]"
               >
-                Join the live webinar
+                See the method taught live
               </a>
             </div>
 
             <div className="mt-12 pt-6 border-t border-[#e3ded4] max-w-[34rem]">
               <p className="text-[0.9375rem] font-semibold text-[#1a1a1a]">Vlad Tayman</p>
               <p className="mt-1.5 text-[0.9375rem] leading-[1.6] text-[#55534e]">
-                Founder. Came to America from Ukraine, built a corporate career, then
-                learned to trade. He teaches the method he wishes he had been taught.
+                Founder. Built a corporate career, managed his own capital ever since, and
+                teaches the method he uses himself.
               </p>
             </div>
           </div>
