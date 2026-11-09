@@ -319,9 +319,9 @@ export default function Results() {
           <p
             className="text-white/55 text-sm sm:text-base leading-relaxed"
           >
-            Trader Foundation has been changing lives for over six years, led by our founder{' '}
+            Trader Foundation has been teaching this for over six years, led by our founder{' '}
             <strong className="text-white/80">Vlad Tayman</strong>, alongside coaches{' '}
-            <strong className="text-white/80">Elliot, Erin, and Leo</strong> &mdash; every one of them a working trader teaching the same system every day.
+            <strong className="text-white/80">Elliot, Erin, and Leo</strong>. Every one of them works the same method they teach.
           </p>
         </div>
       </section>
@@ -351,7 +351,6 @@ export default function Results() {
               <VimeoEmbed
                 vimeoId={featuredVideo.vimeoId}
                 title={featuredVideo.title}
-                posterEyebrow="Featured Testimonial"
                 posterName={featuredVideo.title}
                 className="aspect-video"
               />
@@ -402,7 +401,7 @@ export default function Results() {
                 <VimeoEmbed
                   vimeoId={video.vimeoId}
                   title={`Interview with ${video.name}`}
-                  posterEyebrow={`Interview · ${video.duration}`}
+                  posterEyebrow={video.duration}
                   posterName={video.name}
                   className="aspect-video"
                 />
@@ -455,14 +454,11 @@ export default function Results() {
       <section className="py-24 bg-white border-t border-[#e3ded4]">
         <div className="max-w-[1200px] mx-auto px-6 lg:px-8">
           <div className="text-center mb-14">
-            <p className="text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-3">
-              From their own brokerages
-            </p>
             <h2 className="text-3xl md:text-4xl font-semibold text-[#1a1a1a] leading-tight">
               Screens from their own accounts
             </h2>
             <p className="text-[#55534e] text-sm sm:text-base leading-relaxed max-w-xl mx-auto mt-5">
-              Most people share individual wins, not full accounts &mdash; account balances are private. Here's a mix of both, shared with permission.
+              Most people share individual trades rather than whole accounts, because balances are private. Here's a mix of both, shared with permission.
             </p>
             <div className="w-20 h-[2px] bg-[#c7ab77] mx-auto mt-6" />
           </div>
@@ -487,7 +483,7 @@ export default function Results() {
                     <p className="text-[#1a1a1a] text-sm font-bold">
                       {shot.name}
                     </p>
-                    <p className="text-[#c7ab77] text-[0.65rem] font-bold tracking-[0.15em] uppercase">
+                    <p className="text-[#55534e] text-[0.75rem]">
                       {shot.role}
                     </p>
                   </div>
@@ -509,14 +505,11 @@ export default function Results() {
       <section className="py-24 bg-[#faf9f6]">
         <div className="max-w-[1200px] mx-auto px-6 lg:px-8">
           <div className="text-center mb-14">
-            <p className="text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-3">
-              Posted by students
-            </p>
             <h2 className="text-3xl md:text-4xl font-semibold text-[#1a1a1a] leading-tight">
               Posted inside the community
             </h2>
             <p className="text-[#55534e] text-sm sm:text-base leading-relaxed max-w-xl mx-auto mt-5">
-              Real Skool posts &mdash; students and coaches sharing trades, wins, and lessons with each other every day.
+              Posts from inside the community, where students and coaches share trades and what they learned from them.
             </p>
             <div className="w-20 h-[2px] bg-[#c7ab77] mx-auto mt-6" />
           </div>
@@ -540,7 +533,7 @@ export default function Results() {
                     <p className="text-[#1a1a1a] text-sm font-bold">
                       {post.name}
                     </p>
-                    <p className="text-[#c7ab77] text-[0.65rem] font-bold tracking-[0.15em] uppercase">
+                    <p className="text-[#55534e] text-[0.75rem]">
                       {post.source}
                     </p>
                   </div>
@@ -630,8 +623,7 @@ export default function Results() {
           <h2
             className="text-3xl md:text-4xl font-semibold text-[#1a1a1a] leading-tight mb-4"
           >
-            Ready to Write Your Own{' '}
-            <span className="text-[#c7ab77]">Success Story</span>?
+            See the method taught live
           </h2>
           <p
             className="text-[#55534e] text-base leading-relaxed mb-8 max-w-lg mx-auto"

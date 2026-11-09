@@ -139,10 +139,10 @@ export default function About() {
                 className="w-full h-auto object-cover"
               />
             </div>
-            <h3 className="text-xl font-semibold text-[#1a1a1a] mt-6" >
+            <h3 className="text-xl font-semibold text-[#1a1a1a] mt-6">
               Vlad Tayman
             </h3>
-            <p className="text-[#c7ab77] text-sm font-medium">Founder &amp; CEO</p>
+            <p className="text-[#876b38] text-sm font-medium">Founder &amp; CEO</p>
           </div>
 
           {/* Story text, centered under the photo */}
@@ -166,7 +166,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* ─── Our Academy ─── */}
+      {/* ─── Who we are ─── */}
       <section className="py-14 bg-[#faf9f6]">
         <div className="max-w-[900px] mx-auto px-6 lg:px-8">
           <h2 className="tf-display text-[#1a1a1a] text-[1.875rem] md:text-[2.5rem] mb-6 text-center mx-auto max-w-[24ch]">
@@ -193,11 +193,8 @@ export default function About() {
           }`}
         >
           <div className="text-center mb-10">
-            <p className="text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-3">
-              What We Believe
-            </p>
-            <h2 className="text-2xl md:text-3xl font-semibold text-white leading-tight mb-4" >
-              Building Wealth Doesn't Need to Be Scary
+            <h2 className="text-2xl md:text-3xl font-semibold text-white leading-tight mb-4">
+              What we believe
             </h2>
             <p className="text-white/50 text-base leading-relaxed max-w-2xl mx-auto">
               It can be exciting. It can be fun. And we welcome the process. Each of us brings something different to the table, but at the end of the day we all share the same goal, helping everyone build generational wealth. We genuinely love what we do, and that's what makes this community different.
@@ -220,7 +217,7 @@ export default function About() {
                 </p>
                 <div className="w-8 h-[1px] bg-[#c7ab77]/20 mx-auto mb-2" />
                 <p className="text-white text-sm font-semibold">{coach.name}</p>
-                <p className="text-[#c7ab77] text-xs">{coach.title}</p>
+                <p className="text-[#876b38] text-xs">{coach.title}</p>
               </div>
             ))}
           </div>
@@ -236,11 +233,8 @@ export default function About() {
           }`}
         >
           <div className="text-center mb-14">
-            <p className="text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-3">
-              Your Coaching Team
-            </p>
-            <h2 className="text-3xl md:text-4xl font-semibold text-[#1a1a1a] leading-tight" >
-              Meet the Coaches
+            <h2 className="text-3xl md:text-4xl font-semibold text-[#1a1a1a] leading-tight">
+              The coaches
             </h2>
             <div className="w-20 h-[2px] bg-[#c7ab77] mx-auto mt-6" />
           </div>
@@ -265,7 +259,7 @@ export default function About() {
                 </div>
 
                 <div className="px-6 pb-6 -mt-4 relative">
-                  <h3 className="text-xl font-semibold text-[#1a1a1a] mb-1" >
+                  <h3 className="text-xl font-semibold text-[#1a1a1a] mb-1">
                     {coach.name}
                   </h3>
                   <p className="text-[#55534e] text-sm font-semibold mb-1">
@@ -324,7 +318,7 @@ export default function About() {
                     />
                   ) : (
                     <div className="w-full aspect-[4/5] bg-[#1a1a1a] flex items-center justify-center">
-                      <span className="text-5xl font-semibold text-[#c7ab77]/60" >
+                      <span className="text-5xl font-semibold text-[#c7ab77]/60">
                         {member.name.split(' ').map((n: string) => n[0]).join('')}
                       </span>
                     </div>
@@ -332,7 +326,7 @@ export default function About() {
                   <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-white to-transparent" />
                 </div>
                 <div className="px-6 pb-6 -mt-4 relative">
-                  <h3 className="text-xl font-semibold text-[#1a1a1a] mb-1" >
+                  <h3 className="text-xl font-semibold text-[#1a1a1a] mb-1">
                     {member.name}
                   </h3>
                   <p className="text-[#55534e] text-sm font-semibold mb-1">

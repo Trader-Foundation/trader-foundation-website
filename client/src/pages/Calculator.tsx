@@ -734,7 +734,7 @@ export default function Calculator() {
               <div className="absolute -inset-4 border border-[#c7ab77]/20 rounded-xl" />
               <img
                 src={VLAD_TEACHING}
-                alt="Vlad Tayman teaching compound interest growth at Trader Foundation Academy"
+                alt="Vlad Tayman teaching compound interest growth at Trader Foundation"
                 className="w-full rounded-xl shadow-2xl"
               />
               <div className="absolute bottom-4 left-4 right-4 bg-[#111]/90 backdrop-blur-sm rounded-lg p-4 border border-[#c7ab77]/20">

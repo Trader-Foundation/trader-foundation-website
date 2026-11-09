@@ -100,7 +100,7 @@ export default function LegalPageLayout({ title, breadcrumb, children }: LegalPa
               className="text-white/30 text-xs"
               style={{ fontFamily: "'DM Sans', sans-serif" }}
             >
-              &copy; {new Date().getFullYear()} Trader Foundation Academy. All rights reserved.
+              &copy; {new Date().getFullYear()} Trader Foundation. All rights reserved.
             </p>
             <div className="flex items-center gap-6 flex-wrap justify-center">
               <Link href="/privacy-policy">

@@ -97,13 +97,17 @@ function ChapterHowMoneyGrows() {
               title: 'Capital you can draw on',
               desc: 'Decisions made decades earlier are what give you options now. Which options, and how many, is not something anyone can promise you in advance.',
             },
-          ].map((item) => (
+          ].map((item, i) => (
             <div key={item.year} className="border-t border-white/15 py-5">
-              <dt className="text-white/50 text-[0.8125rem] uppercase tracking-[0.08em]">
-                {item.year}
+              <dt className="font-semibold text-white text-[1rem]">
+                <span className="tf-nums text-white/40 font-normal mr-2.5" aria-hidden="true">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                {item.title}
               </dt>
-              <p className="font-semibold text-white text-[1rem] mt-2 mb-0">{item.title}</p>
-              <dd className="text-white/60 text-[0.9375rem] mt-1.5 leading-[1.6]">{item.desc}</dd>
+              <dd className="text-white/60 text-[0.9375rem] mt-2 leading-[1.6]">
+                {item.year}. {item.desc}
+              </dd>
             </div>
           ))}
         </dl>

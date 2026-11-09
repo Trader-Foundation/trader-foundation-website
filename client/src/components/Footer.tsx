@@ -154,7 +154,7 @@ export default function Footer() {
 
         <div className="mt-8 pt-6 border-t border-[#2c2c2c] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <p className="text-white/65 text-[0.8125rem]">
-            &copy; {new Date().getFullYear()} Trader Foundation Academy. All rights reserved.
+            &copy; {new Date().getFullYear()} Trader Foundation. All rights reserved.
           </p>
           <ul className="flex flex-wrap items-center gap-x-5 gap-y-2">
             {legalLinks.map((link) => (

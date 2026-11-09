@@ -9,7 +9,7 @@ import SEO from '@/components/SEO';
 export default function EarningsDisclaimer() {
   return (
     <>
-    <SEO title="Earnings Disclaimer" description="Earnings Disclaimer for Trader Foundation Academy." path="/earnings-disclaimer" />
+    <SEO title="Earnings Disclaimer" description="Earnings Disclaimer for Trader Foundation." path="/earnings-disclaimer" />
     <LegalPageLayout title="Earnings Disclaimer" breadcrumb="Earnings Disclaimer">
 
       <p>

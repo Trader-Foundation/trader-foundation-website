@@ -197,9 +197,9 @@ export default function ChapterLayout({
                 <button
                   type="button"
                   onClick={() => goTo(chapters[currentIndex - 1].id)}
-                  className="group flex items-start gap-2 text-left text-[0.9375rem] text-[#55534e] hover:text-[#1a1a1a] max-w-[20ch]"
+                  className="group flex items-center gap-2 text-left text-[0.9375rem] text-[#55534e] hover:text-[#1a1a1a] max-w-[22ch]"
                 >
-                  <ArrowLeft size={16} className="mt-[3px] shrink-0" aria-hidden="true" />
+                  <ArrowLeft size={16} className="shrink-0" aria-hidden="true" />
                   <span className="underline decoration-[#c9c4b8] group-hover:decoration-[#1a1a1a]">
                     {chapters[currentIndex - 1].label}
                   </span>
@@ -211,24 +211,24 @@ export default function ChapterLayout({
                 <button
                   type="button"
                   onClick={() => goTo(chapters[currentIndex + 1].id)}
-                  className="group flex items-start gap-2 text-right text-[0.9375rem] font-semibold text-[#1a1a1a] ml-auto max-w-[20ch]"
+                  className="group flex items-center gap-2 text-right text-[0.9375rem] font-semibold text-[#1a1a1a] ml-auto max-w-[22ch]"
                 >
                   <span className="underline decoration-[#c9c4b8] group-hover:decoration-[#1a1a1a]">
                     {chapters[currentIndex + 1].label}
                   </span>
-                  <ArrowRight size={16} className="mt-[3px] shrink-0" aria-hidden="true" />
+                  <ArrowRight size={16} className="shrink-0" aria-hidden="true" />
                 </button>
               ) : (
                 <a
                   href={WEBINAR_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-start gap-2 text-right text-[0.9375rem] font-semibold text-[#1a1a1a] ml-auto"
+                  className="group flex items-center gap-2 text-right text-[0.9375rem] font-semibold text-[#1a1a1a] ml-auto"
                 >
                   <span className="underline decoration-[#c9c4b8] group-hover:decoration-[#1a1a1a]">
                     See the method taught live
                   </span>
-                  <ArrowRight size={16} className="mt-[3px] shrink-0" aria-hidden="true" />
+                  <ArrowRight size={16} className="shrink-0" aria-hidden="true" />
                 </a>
               )}
             </div>

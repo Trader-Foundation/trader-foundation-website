@@ -167,7 +167,7 @@ export default function FAQ() {
 
   return (
     <div className="min-h-screen bg-[#0a0a0a]">
-      <SEO title="FAQ" description="Answers to the most common questions about Trader Foundation Academy's trading program." path="/faq" />
+      <SEO title="FAQ" description="Answers to the most common questions about Trader Foundation's trading program." path="/faq" />
       <Navigation />
 
       {/* ─── Hero ─── */}
