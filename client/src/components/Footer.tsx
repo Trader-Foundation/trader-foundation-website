@@ -6,7 +6,7 @@
 
 import { Link } from 'wouter';
 
-const LOGO_URL = '/images/logo-light.png';
+const LOGO_URL = '/images/logo.png';
 
 const exploreLinks = [
   { label: 'About', href: '/about' },
