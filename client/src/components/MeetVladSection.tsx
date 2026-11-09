@@ -85,7 +85,7 @@ export default function MeetVladSection() {
                 className="w-full h-auto"
               />
               <p className="mt-4 text-[0.9375rem] font-semibold text-[#1a1a1a]">Vlad Tayman</p>
-              <p className="mt-1 text-[0.9375rem] text-[#55534e]">Founder, Trader Foundation Academy</p>
+              <p className="mt-1 text-[0.9375rem] text-[#55534e]">Founder, Trader Foundation</p>
             </div>
           </div>
         </div>

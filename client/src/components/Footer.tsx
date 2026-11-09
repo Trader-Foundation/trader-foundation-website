@@ -55,7 +55,14 @@ export default function Footer() {
           <div>
             <Link href="/">
               <span className="flex items-center gap-3 mb-5 cursor-pointer">
-                <img src={LOGO_URL} alt="" aria-hidden="true" className="h-10 w-auto object-contain" />
+                <img
+                  src={LOGO_URL}
+                  alt=""
+                  aria-hidden="true"
+                  width={97}
+                  height={98}
+                  className="h-10 w-10 object-contain"
+                />
                 <span className="text-[1.05rem] tracking-[-0.02em] text-white leading-none">
                   <span className="font-medium">Trader</span>
                   <span className="font-extrabold">Foundation</span>
@@ -154,7 +161,7 @@ export default function Footer() {
 
         <div className="mt-8 pt-6 border-t border-[#2c2c2c] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <p className="text-white/65 text-[0.8125rem]">
-            &copy; {new Date().getFullYear()} Trader Foundation Academy. All rights reserved.
+            &copy; {new Date().getFullYear()} Trader Foundation. All rights reserved.
           </p>
           <ul className="flex flex-wrap items-center gap-x-5 gap-y-2">
             {legalLinks.map((link) => (

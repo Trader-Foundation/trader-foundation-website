@@ -734,7 +734,7 @@ export default function Calculator() {
               <div className="absolute -inset-4 border border-[#c7ab77]/20 rounded-xl" />
               <img
                 src={VLAD_TEACHING}
-                alt="Vlad Tayman teaching compound interest growth at Trader Foundation Academy"
+                alt="Vlad Tayman teaching compound interest growth at Trader Foundation"
                 className="w-full rounded-xl shadow-2xl"
               />
               <div className="absolute bottom-4 left-4 right-4 bg-[#111]/90 backdrop-blur-sm rounded-lg p-4 border border-[#c7ab77]/20">
@@ -783,10 +783,11 @@ export default function Calculator() {
                 className="text-[#444] text-base leading-relaxed"
                 style={{ fontFamily: "'DM Sans', sans-serif" }}
               >
-                At Trader Foundation, we teach you how to combine the power of
-                compound growth with smart options strategies. Our students learn
-                to generate consistent income from the market, then reinvest
-                those gains to accelerate their wealth-building journey.
+                At Trader Foundation we teach one strategy for putting capital you
+                have already built to work: selling defined-risk options, where the
+                premium is paid to you up front and the worst case is known before
+                you place the trade. What any account does from there is decided by
+                the market, not by us.
               </p>
               <p
                 className="text-[#444] text-base leading-relaxed"

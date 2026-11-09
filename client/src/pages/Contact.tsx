@@ -29,7 +29,7 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen bg-[#faf9f6]">
-      <SEO title="Contact Us" description="Get in touch with the Trader Foundation Academy team." path="/contact" />
+      <SEO title="Contact Us" description="Get in touch with the Trader Foundation team." path="/contact" />
       <Navigation />
 
       {/* ─── Hero ─── */}
@@ -220,7 +220,7 @@ export default function Contact() {
               className="text-2xl md:text-3xl font-extrabold text-white leading-tight mb-3"
               style={{ fontFamily: "'Sen', sans-serif" }}
             >
-              Book a Free Strategy Call
+              Book a strategy call
             </h2>
             <p
               className="text-white/60 text-base leading-relaxed max-w-xl mx-auto"
@@ -237,7 +237,7 @@ export default function Contact() {
               className="inline-flex items-center gap-2 px-8 py-3.5 bg-[#c7ab77] text-[#111] text-[0.85rem] font-bold tracking-wide rounded-sm transition-all duration-300 hover:bg-[#b89a66] hover:shadow-lg"
               style={{ fontFamily: "'DM Sans', sans-serif" }}
             >
-              Book a Free Strategy Call
+              Book a strategy call
             </a>
           </div>
         </div>

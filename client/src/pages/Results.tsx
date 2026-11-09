@@ -1,9 +1,16 @@
 /*
- * Results Page, Trader Foundation Academy
- * Design: "The Academy", Ivy League Digital Campus
- * Sections: Hero → Featured Video → Video Grid → Student Experiences → CTA → Footer
- * Fonts: Sen (headings), DM Sans (body)
- * Palette: #111 (dark), #faf9f6 (ivory), #c7ab77 (gold), #1a1a1a (near-black)
+ * Results Page, Trader Foundation
+ * Sections: Hero, featured video, video grid, accounts, community, written
+ * experiences, CTA, footer.
+ *
+ * Visual system per DESIGN.md: one ground (#faf9f6), the dark band (#141414),
+ * Inter only, graded rules in place of cards, brand gold once per viewport on
+ * the single action.
+ *
+ * Claims discipline per vladt83's brief of 2026-11-09: no dollar figures, no
+ * percentages, no win rates and no income claims, including inside quotes. A
+ * testimonial that carries a performance claim publishes that claim, so such
+ * quotes are removed rather than reworded. Nothing here is called easy or free.
  */
 
 import { useEffect, useRef, useState } from 'react';
@@ -31,13 +38,13 @@ const accountTiles = [
     id: '1Tbc4f26qRvGhjUU4pfn51Xh782SMz9AY',
     name: 'Kelly Myers',
     role: 'Student · Robinhood',
-    caption: 'Kelly\'s Robinhood account after joining',
+    caption: 'Kelly\'s own brokerage account',
   },
   {
     id: '120XYWJJNE-dllOMQ3gLFc_0dfnTnCdPe',
     name: 'Doug Birnie',
-    role: 'Student · Gains Message',
-    caption: 'Doug sharing his gains',
+    role: 'Student',
+    caption: 'Doug, posting from his own account',
   },
 ];
 
@@ -71,83 +78,65 @@ const featuredVideo = {
   vimeoId: '1171149705',
   title: 'What People Have to Say About Us',
   description:
-    'Hear directly from our students about how Trader Foundation transformed their approach to the markets and their lives.',
+    'Students on what the program is actually like, in their own words.',
 };
 
 const videoTestimonials = [
   {
     vimeoId: '936212402',
     name: 'Zeke',
-    tagline: 'From Stressed to Blessed',
-    highlight: 'First day yielded $12,000, left retail to be a full-time dad',
+    tagline: 'Leaving retail behind',
+    highlight: 'Left a retail job to be at home with his kids',
     duration: '21:14',
   },
   {
     vimeoId: '936218776',
     name: 'Jason',
-    tagline: 'From Beginner to Professional',
-    highlight: 'Built a complete trading plan and now trades with confidence',
+    tagline: 'Working to a written plan',
+    highlight: 'Built a complete trading plan and works to it',
     duration: '30:51',
   },
   {
     vimeoId: '936211466',
     name: 'Shrey',
-    tagline: 'Turning Doubt Into Confidence',
-    highlight: 'Went from inconsistent trades to a reliable weekly income',
+    tagline: 'From guesswork to a process',
+    highlight: 'Replaced ad hoc trades with a process he follows',
     duration: '16:05',
   },
   {
     vimeoId: '949813014',
     name: 'Lev',
-    tagline: 'Simplifying Trading for Real Results',
-    highlight: 'Found clarity after years of trying different approaches',
+    tagline: 'After years of trying other things',
+    highlight: 'Found clarity after years of different approaches',
     duration: '2:24',
   },
 ];
 
-/* ── Text testimonials (student experiences) - all real TrustPilot reviews ── */
+/* ── Written experiences ──
+   Taken from the public Trustpilot profile at traderfoundation.net. Reviewer
+   names appear as Trustpilot shows them. Trustpilot display names carry no
+   employer or job title, so no role is attributed here: the "CFO",
+   "IT Director" and similar lines that used to sit under these names were not
+   supported by the source. Quotes carrying a performance or income claim are
+   removed rather than reworded, because quoting a claim still publishes it. */
 const studentExperiences = [
   {
     quote:
       'The program provides an excellent foundation for understanding options, strategy and pattern recognition. The real value is the access to the coaches. Erin, Elliot and Leo all have different trading styles, and patterns that they personally follow. My trading has improved dramatically as a result.',
     name: 'Doug B.',
-    role: 'CFO',
     initials: 'DB',
   },
   {
     quote:
       'My experience with Vlad and his team has been nothing short of incredible! This is a high level organization. Coaches Elliot, Erin, and Leo genuinely want to see you succeed and work with you one on one. It is the type of personal touch that you can only find with this group.',
     name: 'Matt Couch',
-    role: 'Healthcare Sales Director',
     initials: 'MC',
-  },
-  {
-    quote:
-      'A whole new world is opened up to me! I was stuck in the 9-to-5 prison of wage slavery. Trader Foundation helped me to find success on my terms. TF helped to hone my talents to grow those blessings to better provide for my family and our future.',
-    name: 'Chase Brey',
-    role: 'IT Director',
-    initials: 'CB',
   },
   {
     quote:
       'This course introduces you to the fundamentals before guiding you into real trading. The coaches really want you to succeed. They answer every question and meet with you as needed. They continually encourage you to practice until you feel comfortable trading with real money.',
     name: 'Lisa',
-    role: 'IT Director',
     initials: 'LI',
-  },
-  {
-    quote:
-      'I joined Trader Foundation with no prior trading experience. Through the structured training, weekly coaching sessions, and daily live sessions, I gradually built both technical skills and confidence. By July 2025, I had grown my initial capital by three times.',
-    name: 'Esther Kamau',
-    role: 'Global Program Director',
-    initials: 'EK',
-  },
-  {
-    quote:
-      'Coaching hours are not capped, community goes live daily to evaluate the market, and you get access to multiple, highly skilled coaches who trade profitably in their own ways. Between private coaching, the structured course, and the daily live streams, it\'s possible to get 15-20 hours of guidance every week.',
-    name: 'Alick Yu',
-    role: 'Engineer',
-    initials: 'AY',
   },
 ];
 
@@ -210,7 +199,6 @@ function VimeoEmbed({
           {/* faded TF wordmark, subtle */}
           <span
             className="absolute right-4 bottom-3 text-[0.65rem] font-bold tracking-[0.3em] text-[#c7ab77]/40 uppercase"
-            style={{ fontFamily: "'Sen', sans-serif" }}
           >
             Trader Foundation
           </span>
@@ -219,25 +207,23 @@ function VimeoEmbed({
             {posterEyebrow && (
               <p
                 className="text-[0.6rem] sm:text-[0.7rem] font-bold tracking-[0.35em] uppercase text-[#c7ab77] mb-4"
-                style={{ fontFamily: "'DM Sans', sans-serif" }}
               >
                 {posterEyebrow}
               </p>
             )}
             {posterName && (
               <p
-                className="text-white text-2xl sm:text-3xl md:text-4xl font-extrabold leading-tight mb-6 max-w-[80%]"
-                style={{ fontFamily: "'Sen', sans-serif" }}
+                className="text-white text-2xl sm:text-3xl md:text-4xl font-semibold leading-tight mb-6 max-w-[80%]"
               >
                 {posterName}
               </p>
             )}
             <button
               onClick={() => setLoaded(true)}
-              className="group flex items-center justify-center w-20 h-20 rounded-full bg-[#c7ab77]/90 hover:bg-[#c7ab77] transition-all duration-300 hover:scale-110 shadow-[0_10px_40px_rgba(199,171,119,0.35)]"
+              className="group flex items-center justify-center w-20 h-20 rounded-full bg-[#c7ab77]/90 hover:bg-[#c7ab77] transition-colors duration-200"
               aria-label={`Play ${title}`}
             >
-              <Play size={28} className="text-[#111] ml-1" fill="#111" />
+              <Play size={28} className="text-[#1a1a1a] ml-1" fill="#1a1a1a" />
             </button>
           </div>
         </div>
@@ -263,7 +249,7 @@ export default function Results() {
 
   return (
     <div className="min-h-screen bg-[#faf9f6]">
-      <SEO title="Student Results" description="See real results from Trader Foundation Academy students. Real trades, real profits, real transformations." path="/results" />
+      <SEO title="Results" description="Students and coaches of Trader Foundation on what the program is actually like, in their own words and their own accounts." path="/results" />
       <Navigation />
 
       {/* ─── Hero Banner ─── */}
@@ -272,27 +258,16 @@ export default function Results() {
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${RESULTS_HERO_BG})` }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-[#111]/90 to-[#111]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-[#141414]/90 to-[#111]" />
 
         <div className="relative max-w-[1320px] mx-auto px-6 lg:px-8 text-center">
-          <p
-            className="text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-4"
-            style={{ fontFamily: "'DM Sans', sans-serif" }}
-          >
-            Real Stories, Real Freedom
-          </p>
-          <h1
-            className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6"
-            style={{ fontFamily: "'Sen', sans-serif" }}
-          >
-            Our Students <span className="text-[#c7ab77]">Results</span>
+          <h1 className="tf-display text-white text-[2.5rem] sm:text-[3.25rem] lg:text-[4rem] mb-6 mx-auto max-w-[20ch]">
+            In their own words
           </h1>
-          <p
-            className="text-white/60 text-base md:text-lg max-w-2xl mx-auto leading-relaxed"
-            style={{ fontFamily: "'DM Sans', sans-serif" }}
-          >
-            Over 1,200 traders have transformed their financial future with
-            Trader Foundation. Watch their stories and decide for yourself.
+          <p className="text-white/60 text-[1.0625rem] md:text-[1.125rem] max-w-[52ch] mx-auto leading-[1.7]">
+            We have coached over 1,200 students. These are their accounts of what the program
+            is like, alongside screens from their own brokerages. Individual results vary, and
+            nothing here is a guide to what any student will earn.
           </p>
 
           {/* Trust badges */}
@@ -302,7 +277,6 @@ export default function Results() {
               <TrustpilotStars className="h-4" />
               <span
                 className="text-white/80 text-sm"
-                style={{ fontFamily: "'DM Sans', sans-serif" }}
               >
                 <strong className="text-white">4.6</strong>/5
               </span>
@@ -318,21 +292,20 @@ export default function Results() {
                   <rect x="13" y="31.5" width="14" height="2.5" rx="0.5" fill="#4A9FD9" />
                 </svg>
                 <div className="flex flex-col leading-none">
-                  <span className="text-white text-[0.4rem] font-bold tracking-wider" style={{ fontFamily: "'DM Sans', sans-serif" }}>BETTER</span>
-                  <span className="text-white text-[0.4rem] font-bold tracking-wider" style={{ fontFamily: "'DM Sans', sans-serif" }}>BUSINESS</span>
-                  <span className="text-white text-[0.4rem] font-bold tracking-wider" style={{ fontFamily: "'DM Sans', sans-serif" }}>BUREAU</span>
+                  <span className="text-white text-[0.4rem] font-bold tracking-wider">BETTER</span>
+                  <span className="text-white text-[0.4rem] font-bold tracking-wider">BUSINESS</span>
+                  <span className="text-white text-[0.4rem] font-bold tracking-wider">BUREAU</span>
                 </div>
               </div>
               <div className="-ml-2.5 flex items-center justify-center w-8 h-8 rounded-full bg-[#1a5ca8] border-2 border-white/20 z-10">
                 <div className="text-center leading-none">
-                  <span className="text-white text-[0.75rem] font-extrabold" style={{ fontFamily: "'Sen', sans-serif" }}>A+</span>
+                  <span className="text-white text-[0.75rem] font-semibold">A+</span>
                 </div>
               </div>
             </div>
             <span className="text-white/20">|</span>
             <span
               className="text-white/60 text-sm"
-              style={{ fontFamily: "'DM Sans', sans-serif" }}
             >
               6+ Years in Business
             </span>
@@ -341,21 +314,20 @@ export default function Results() {
       </section>
 
       {/* ─── Founder Bridge Intro ─── */}
-      <section className="pt-12 pb-2 bg-[#111]">
+      <section className="pt-12 pb-2 bg-[#141414]">
         <div className="max-w-[760px] mx-auto px-6 lg:px-8 text-center">
           <p
             className="text-white/55 text-sm sm:text-base leading-relaxed"
-            style={{ fontFamily: "'DM Sans', sans-serif" }}
           >
-            Trader Foundation has been changing lives for over six years, led by our founder{' '}
+            Trader Foundation has been teaching this for over six years, led by our founder{' '}
             <strong className="text-white/80">Vlad Tayman</strong>, alongside coaches{' '}
-            <strong className="text-white/80">Elliot, Erin, and Leo</strong> &mdash; every one of them a working trader teaching the same system every day.
+            <strong className="text-white/80">Elliot, Erin, and Leo</strong>. Every one of them works the same method they teach.
           </p>
         </div>
       </section>
 
       {/* ─── Featured Video ─── */}
-      <section className="py-20 bg-[#111]">
+      <section className="py-20 bg-[#141414]">
         <div
           ref={featured.ref}
           className={`max-w-[1320px] mx-auto px-6 lg:px-8 transition-all duration-700 ${
@@ -365,15 +337,9 @@ export default function Results() {
           }`}
         >
           <div className="text-center mb-12">
-            <p
-              className="text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-3"
-              style={{ fontFamily: "'DM Sans', sans-serif" }}
-            >
-              Featured Testimonial
-            </p>
+
             <h2
-              className="text-3xl md:text-4xl font-extrabold text-white leading-tight"
-              style={{ fontFamily: "'Sen', sans-serif" }}
+              className="text-3xl md:text-4xl font-semibold text-white leading-tight"
             >
               {featuredVideo.title}
             </h2>
@@ -381,18 +347,16 @@ export default function Results() {
           </div>
 
           <div className="max-w-4xl mx-auto">
-            <div className="relative rounded-lg overflow-hidden border border-white/10 shadow-2xl">
+            <div className="relative overflow-hidden border border-white/10">
               <VimeoEmbed
                 vimeoId={featuredVideo.vimeoId}
                 title={featuredVideo.title}
-                posterEyebrow="Featured Testimonial"
                 posterName={featuredVideo.title}
                 className="aspect-video"
               />
             </div>
             <p
               className="text-white/50 text-sm text-center mt-6 max-w-xl mx-auto leading-relaxed"
-              style={{ fontFamily: "'DM Sans', sans-serif" }}
             >
               {featuredVideo.description}
             </p>
@@ -411,15 +375,9 @@ export default function Results() {
           }`}
         >
           <div className="text-center mb-16">
-            <p
-              className="text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-3"
-              style={{ fontFamily: "'DM Sans', sans-serif" }}
-            >
-              In-Depth Interviews
-            </p>
+
             <h2
-              className="text-3xl md:text-4xl font-extrabold text-[#111] leading-tight"
-              style={{ fontFamily: "'Sen', sans-serif" }}
+              className="text-3xl md:text-4xl font-semibold text-[#1a1a1a] leading-tight"
             >
               Hear Their Full Stories
             </h2>
@@ -430,7 +388,7 @@ export default function Results() {
             {videoTestimonials.map((video, i) => (
               <div
                 key={video.vimeoId}
-                className="group bg-white border border-[#e8e4dc] rounded-lg overflow-hidden transition-all duration-500 hover:shadow-[0_8px_40px_rgba(0,0,0,0.08)] hover:border-[#c7ab77]/30"
+                className="group bg-white border border-[#e3ded4] overflow-hidden transition-all duration-500  hover:border-[#c7ab77]/30"
                 style={{
                   transitionDelay: `${i * 100}ms`,
                   opacity: grid.visible ? 1 : 0,
@@ -443,7 +401,7 @@ export default function Results() {
                 <VimeoEmbed
                   vimeoId={video.vimeoId}
                   title={`Interview with ${video.name}`}
-                  posterEyebrow={`Interview · ${video.duration}`}
+                  posterEyebrow={video.duration}
                   posterName={video.name}
                   className="aspect-video"
                 />
@@ -451,26 +409,22 @@ export default function Results() {
                   <div className="flex items-center justify-between mb-2">
                     <p
                       className="text-[0.7rem] font-bold tracking-[0.15em] uppercase text-[#c7ab77]"
-                      style={{ fontFamily: "'DM Sans', sans-serif" }}
                     >
                       {video.tagline}
                     </p>
                     <span
-                      className="text-[#999] text-xs"
-                      style={{ fontFamily: "'DM Sans', sans-serif" }}
+                      className="text-[#767269] text-xs"
                     >
                       {video.duration}
                     </span>
                   </div>
                   <h3
-                    className="text-xl font-extrabold text-[#111] mb-2"
-                    style={{ fontFamily: "'Sen', sans-serif" }}
+                    className="text-xl font-semibold text-[#1a1a1a] mb-2"
                   >
                     Interview with {video.name}
                   </h3>
                   <p
-                    className="text-[#555] text-sm leading-relaxed"
-                    style={{ fontFamily: "'DM Sans', sans-serif" }}
+                    className="text-[#55534e] text-sm leading-relaxed"
                   >
                     {video.highlight}
                   </p>
@@ -485,7 +439,6 @@ export default function Results() {
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 text-[#c7ab77] hover:text-[#dfc48a] transition-colors duration-300 group"
-              style={{ fontFamily: "'DM Sans', sans-serif" }}
             >
               <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
@@ -498,17 +451,14 @@ export default function Results() {
       </section>
 
       {/* ─── Real Accounts & Wins (hero + phone tiles) ─── */}
-      <section className="py-24 bg-white border-t border-[#e8e4dc]">
+      <section className="py-24 bg-white border-t border-[#e3ded4]">
         <div className="max-w-[1200px] mx-auto px-6 lg:px-8">
           <div className="text-center mb-14">
-            <p className="text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-3" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-              Real Accounts &amp; Wins
-            </p>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-[#111] leading-tight" style={{ fontFamily: "'Sen', sans-serif" }}>
-              What Actual Results Look Like
+            <h2 className="text-3xl md:text-4xl font-semibold text-[#1a1a1a] leading-tight">
+              Screens from their own accounts
             </h2>
-            <p className="text-[#555] text-sm sm:text-base leading-relaxed max-w-xl mx-auto mt-5" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-              Most people share individual wins, not full accounts &mdash; account balances are private. Here's a mix of both, shared with permission.
+            <p className="text-[#55534e] text-sm sm:text-base leading-relaxed max-w-xl mx-auto mt-5">
+              Most people share individual trades rather than whole accounts, because balances are private. Here's a mix of both, shared with permission.
             </p>
             <div className="w-20 h-[2px] bg-[#c7ab77] mx-auto mt-6" />
           </div>
@@ -518,26 +468,26 @@ export default function Results() {
             {accountTiles.map((shot) => (
               <div
                 key={shot.id}
-                className="bg-[#faf9f6] border border-[#e8e4dc] rounded-lg overflow-hidden hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] hover:border-[#c7ab77]/40 transition-all duration-300"
+                className="bg-[#faf9f6] border border-[#e3ded4] overflow-hidden  hover:border-[#c7ab77]/40 transition-all duration-300"
               >
                 <div className="p-4 bg-white flex items-center justify-center min-h-[420px]">
                   <img
                     src={`https://lh3.googleusercontent.com/d/${shot.id}=s1600`}
-                    alt={`${shot.name} — ${shot.role}`}
-                    className="max-h-[520px] w-auto h-auto rounded"
+                    alt={`${shot.name}, ${shot.role}`}
+                    className="max-h-[520px] w-auto h-auto"
                     loading="lazy"
                   />
                 </div>
-                <div className="px-5 py-4 border-t border-[#e8e4dc]">
+                <div className="px-5 py-4 border-t border-[#e3ded4]">
                   <div className="flex items-center justify-between mb-1">
-                    <p className="text-[#111] text-sm font-bold" style={{ fontFamily: "'Sen', sans-serif" }}>
+                    <p className="text-[#1a1a1a] text-sm font-bold">
                       {shot.name}
                     </p>
-                    <p className="text-[#c7ab77] text-[0.65rem] font-bold tracking-[0.15em] uppercase" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    <p className="text-[#55534e] text-[0.75rem]">
                       {shot.role}
                     </p>
                   </div>
-                  <p className="text-[#555] text-xs leading-relaxed" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                  <p className="text-[#55534e] text-xs leading-relaxed">
                     {shot.caption}
                   </p>
                 </div>
@@ -545,7 +495,7 @@ export default function Results() {
             ))}
           </div>
 
-          <p className="text-center text-[#888] text-[11px] leading-relaxed max-w-2xl mx-auto mt-10" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+          <p className="text-center text-[#767269] text-[11px] leading-relaxed max-w-2xl mx-auto mt-10">
             Individual accounts and messages, shared with permission. Personal results are not typical, are not a guarantee of future performance, and do not represent what any student will earn. Trading involves risk of loss.
           </p>
         </div>
@@ -555,14 +505,11 @@ export default function Results() {
       <section className="py-24 bg-[#faf9f6]">
         <div className="max-w-[1200px] mx-auto px-6 lg:px-8">
           <div className="text-center mb-14">
-            <p className="text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-3" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-              Straight From the Community
-            </p>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-[#111] leading-tight" style={{ fontFamily: "'Sen', sans-serif" }}>
-              Posts From Inside the Program
+            <h2 className="text-3xl md:text-4xl font-semibold text-[#1a1a1a] leading-tight">
+              Posted inside the community
             </h2>
-            <p className="text-[#555] text-sm sm:text-base leading-relaxed max-w-xl mx-auto mt-5" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-              Real Skool posts &mdash; students and coaches sharing trades, wins, and lessons with each other every day.
+            <p className="text-[#55534e] text-sm sm:text-base leading-relaxed max-w-xl mx-auto mt-5">
+              Posts from inside the community, where students and coaches share trades and what they learned from them.
             </p>
             <div className="w-20 h-[2px] bg-[#c7ab77] mx-auto mt-6" />
           </div>
@@ -571,26 +518,26 @@ export default function Results() {
             {skoolPosts.map((post) => (
               <div
                 key={post.id}
-                className="bg-white border border-[#e8e4dc] rounded-lg overflow-hidden hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] hover:border-[#c7ab77]/30 transition-all duration-300 w-full sm:w-[calc(50%-1.25rem)] max-w-[560px]"
+                className="bg-white border border-[#e3ded4] overflow-hidden  hover:border-[#c7ab77]/30 transition-all duration-300 w-full sm:w-[calc(50%-1.25rem)] max-w-[560px]"
               >
                 <div className="p-4">
                   <img
                     src={`https://lh3.googleusercontent.com/d/${post.id}=s2000`}
-                    alt={`${post.name} — ${post.source}`}
-                    className="w-full h-auto rounded"
+                    alt={`${post.name}, ${post.source}`}
+                    className="w-full h-auto"
                     loading="lazy"
                   />
                 </div>
-                <div className="px-5 py-4 border-t border-[#e8e4dc]">
+                <div className="px-5 py-4 border-t border-[#e3ded4]">
                   <div className="flex items-center justify-between mb-1">
-                    <p className="text-[#111] text-sm font-bold" style={{ fontFamily: "'Sen', sans-serif" }}>
+                    <p className="text-[#1a1a1a] text-sm font-bold">
                       {post.name}
                     </p>
-                    <p className="text-[#c7ab77] text-[0.65rem] font-bold tracking-[0.15em] uppercase" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    <p className="text-[#55534e] text-[0.75rem]">
                       {post.source}
                     </p>
                   </div>
-                  <p className="text-[#555] text-xs leading-relaxed" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                  <p className="text-[#55534e] text-xs leading-relaxed">
                     {post.caption}
                   </p>
                 </div>
@@ -601,7 +548,7 @@ export default function Results() {
       </section>
 
       {/* ─── Student Experiences (Text Testimonials) ─── */}
-      <section className="py-24 bg-[#111]">
+      <section className="py-24 bg-[#141414]">
         <div
           ref={experiences.ref}
           className={`max-w-[1320px] mx-auto px-6 lg:px-8 transition-all duration-700 ${
@@ -611,15 +558,9 @@ export default function Results() {
           }`}
         >
           <div className="text-center mb-16">
-            <p
-              className="text-[0.75rem] font-bold tracking-[0.25em] uppercase text-[#c7ab77] mb-3"
-              style={{ fontFamily: "'DM Sans', sans-serif" }}
-            >
-              Student Experiences
-            </p>
+
             <h2
-              className="text-3xl md:text-4xl font-extrabold text-white leading-tight"
-              style={{ fontFamily: "'Sen', sans-serif" }}
+              className="text-3xl md:text-4xl font-semibold text-white leading-tight"
             >
               Professionals Who{' '}
               <span className="text-[#c7ab77]">Took the Leap</span>
@@ -631,7 +572,7 @@ export default function Results() {
             {studentExperiences.map((testimonial, index) => (
               <div
                 key={testimonial.name}
-                className="group relative bg-[#1a1a1a] p-8 sm:p-10 border border-white/5 rounded-lg transition-all duration-500 hover:shadow-[0_8px_40px_rgba(199,171,119,0.08)] hover:border-[#c7ab77]/30"
+                className="group relative bg-[#1a1a1a] p-8 sm:p-10 border border-white/5 transition-all duration-500  hover:border-[#c7ab77]/30"
                 style={{
                   transitionDelay: `${300 + index * 150}ms`,
                   opacity: experiences.visible ? 1 : 0,
@@ -651,31 +592,23 @@ export default function Results() {
 
                 <p
                   className="text-white/70 text-[0.9rem] leading-[1.8] mb-8"
-                  style={{ fontFamily: "'DM Sans', sans-serif" }}
                 >
                   &ldquo;{testimonial.quote}&rdquo;
                 </p>
 
                 <div className="flex items-center gap-4 pt-6 border-t border-white/10">
                   <div
-                    className="w-10 h-10 flex items-center justify-center bg-[#c7ab77] text-[#111] text-xs font-bold tracking-wider rounded-sm"
-                    style={{ fontFamily: "'Sen', sans-serif" }}
+                    className="w-10 h-10 flex items-center justify-center bg-[#c7ab77] text-[#1a1a1a] text-xs font-bold tracking-wider"
                   >
                     {testimonial.initials}
                   </div>
                   <div>
                     <p
                       className="text-white text-[0.85rem] font-bold"
-                      style={{ fontFamily: "'DM Sans', sans-serif" }}
                     >
                       {testimonial.name}
                     </p>
-                    <p
-                      className="text-white/40 text-[0.75rem]"
-                      style={{ fontFamily: "'DM Sans', sans-serif" }}
-                    >
-                      {testimonial.role}
-                    </p>
+                    <p className="text-white/40 text-[0.75rem]">on Trustpilot</p>
                   </div>
                 </div>
               </div>
@@ -688,15 +621,12 @@ export default function Results() {
       <section className="py-20 bg-[#faf9f6]">
         <div className="max-w-[800px] mx-auto px-6 lg:px-8 text-center">
           <h2
-            className="text-3xl md:text-4xl font-extrabold text-[#111] leading-tight mb-4"
-            style={{ fontFamily: "'Sen', sans-serif" }}
+            className="text-3xl md:text-4xl font-semibold text-[#1a1a1a] leading-tight mb-4"
           >
-            Ready to Write Your Own{' '}
-            <span className="text-[#c7ab77]">Success Story</span>?
+            See the method taught live
           </h2>
           <p
-            className="text-[#555] text-base leading-relaxed mb-8 max-w-lg mx-auto"
-            style={{ fontFamily: "'DM Sans', sans-serif" }}
+            className="text-[#55534e] text-base leading-relaxed mb-8 max-w-lg mx-auto"
           >
             Join over 1,200 students who have transformed their trading and
             their lives with personalized coaching from our experienced team.
@@ -705,16 +635,14 @@ export default function Results() {
             href="https://live.traderfoundation.com/"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 px-10 py-4 bg-[#c7ab77] text-[#111] text-[0.85rem] font-bold tracking-wide rounded-sm transition-all duration-300 hover:bg-[#b89a66] hover:shadow-[0_8px_30px_rgba(199,171,119,0.3)]"
-            style={{ fontFamily: "'DM Sans', sans-serif" }}
+            className="inline-flex items-center gap-3 px-10 py-4 bg-[#c7ab77] text-[#1a1a1a] text-[0.85rem] font-bold tracking-wide transition-all duration-300 hover:bg-[#b89a66]"
           >
             Live Webinar
           </a>
           <p
-            className="mt-4 text-[#888] text-xs sm:text-[0.78rem]"
-            style={{ fontFamily: "'DM Sans', sans-serif" }}
+            className="mt-4 text-[#767269] text-xs sm:text-[0.78rem]"
           >
-            For professionals ready to trade with $15,000+. Application required.
+            For professionals putting capital they have already built to work. Application required.
           </p>
         </div>
       </section>

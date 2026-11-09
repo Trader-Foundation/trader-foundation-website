@@ -19,7 +19,7 @@ export default function BookACall() {
 
   return (
     <div className="min-h-screen bg-[#111]">
-      <SEO title="Book a Strategy Call" description="Book a free strategy call with the Trader Foundation Academy team." path="/book-a-call" />
+      <SEO title="Book a Strategy Call" description="Book a strategy call with the Trader Foundation team. Pay nothing for the call." path="/book-a-call" />
       <Navigation />
 
       {/* Hero */}
@@ -41,7 +41,7 @@ export default function BookACall() {
             className="text-white/60 text-base leading-relaxed max-w-xl mx-auto mb-10"
             style={{ fontFamily: "'DM Sans', sans-serif" }}
           >
-            Book a free strategy call with one of our experienced team members. No pressure, no sales pitch, just a transparent conversation to see if Trader Foundation is the right fit for you.
+            Book a strategy call with one of our team. You pay nothing for the call. No pressure, no sales pitch, just a transparent conversation to see if Trader Foundation is the right fit for you.
           </p>
           <a
             href={FILLOUT_URL}
@@ -50,7 +50,7 @@ export default function BookACall() {
             className="inline-flex items-center gap-2 px-10 py-4 bg-[#c7ab77] text-[#111] text-[0.9rem] font-bold tracking-wide rounded-sm transition-all duration-300 hover:bg-[#b89a66] hover:shadow-[0_8px_30px_rgba(199,171,119,0.3)]"
             style={{ fontFamily: "'DM Sans', sans-serif" }}
           >
-            Book a Free Strategy Call
+            Book a strategy call
           </a>
         </div>
       </section>
