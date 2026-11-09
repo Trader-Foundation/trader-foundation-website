@@ -62,7 +62,14 @@ export default function Navigation() {
         <div className="flex items-center justify-between h-[72px]">
           {/* Wordmark */}
           <a href="/" className="flex items-center gap-3 shrink-0">
-            <img src={LOGO_URL} alt="" aria-hidden="true" className="h-9 w-auto object-contain" />
+            <img
+              src={LOGO_URL}
+              alt=""
+              aria-hidden="true"
+              width={97}
+              height={98}
+              className="h-9 w-9 object-contain"
+            />
             <span className="text-[1.05rem] tracking-[-0.02em] text-[#1a1a1a] leading-none">
               <span className="font-medium">Trader</span>
               <span className="font-extrabold">Foundation</span>

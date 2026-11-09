@@ -55,7 +55,14 @@ export default function Footer() {
           <div>
             <Link href="/">
               <span className="flex items-center gap-3 mb-5 cursor-pointer">
-                <img src={LOGO_URL} alt="" aria-hidden="true" className="h-10 w-auto object-contain" />
+                <img
+                  src={LOGO_URL}
+                  alt=""
+                  aria-hidden="true"
+                  width={97}
+                  height={98}
+                  className="h-10 w-10 object-contain"
+                />
                 <span className="text-[1.05rem] tracking-[-0.02em] text-white leading-none">
                   <span className="font-medium">Trader</span>
                   <span className="font-extrabold">Foundation</span>
