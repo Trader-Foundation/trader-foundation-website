@@ -4,6 +4,10 @@
   "outputDirectory": "dist",
   "rewrites": [
     {
+      "source": "/paycheck-calculator",
+      "destination": "/paycheck-calculator.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
